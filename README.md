@@ -1,8 +1,8 @@
-# Petstore Python API library
+# Twopir Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/twopir.svg)](https://pypi.org/project/twopir/)
 
-The Petstore Python library provides convenient access to the Petstore REST API from any Python 3.7+
+The Twopir Python library provides convenient access to the Twopir REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [app.stainlessapi.com](https://app.stainlessapi.com/docs). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.2pir.ai](https://docs.2pir.ai). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -28,48 +28,44 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from twopir import Petstore
+from twopir import Twopir
 
-client = Petstore(
+client = Twopir(
     # This is the default and can be omitted
-    api_key=os.environ.get("PETSTORE_API_KEY"),
+    api_key=os.environ.get("API_KEY"),
 )
 
-order = client.store.create_order(
-    pet_id=1,
-    quantity=1,
-    status="placed",
+score_bundle = client.score.execute(
+    scorer_id="scorer_id",
 )
-print(order.id)
+print(score_bundle.scores)
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `PETSTORE_API_KEY="My API Key"` to your `.env` file
+to add `API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncPetstore` instead of `Petstore` and use `await` with each API call:
+Simply import `AsyncTwopir` instead of `Twopir` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from twopir import AsyncPetstore
+from twopir import AsyncTwopir
 
-client = AsyncPetstore(
+client = AsyncTwopir(
     # This is the default and can be omitted
-    api_key=os.environ.get("PETSTORE_API_KEY"),
+    api_key=os.environ.get("API_KEY"),
 )
 
 
 async def main() -> None:
-    order = await client.store.create_order(
-        pet_id=1,
-        quantity=1,
-        status="placed",
+    score_bundle = await client.score.execute(
+        scorer_id="scorer_id",
     )
-    print(order.id)
+    print(score_bundle.scores)
 
 
 asyncio.run(main())
@@ -97,12 +93,14 @@ All errors inherit from `twopir.APIError`.
 
 ```python
 import twopir
-from twopir import Petstore
+from twopir import Twopir
 
-client = Petstore()
+client = Twopir()
 
 try:
-    client.store.inventory()
+    client.score.execute(
+        scorer_id="scorer_id",
+    )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -136,16 +134,18 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from twopir import Petstore
+from twopir import Twopir
 
 # Configure the default for all requests:
-client = Petstore(
+client = Twopir(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).store.inventory()
+client.with_options(max_retries=5).score.execute(
+    scorer_id="scorer_id",
+)
 ```
 
 ### Timeouts
@@ -154,21 +154,23 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from twopir import Petstore
+from twopir import Twopir
 
 # Configure the default for all requests:
-client = Petstore(
+client = Twopir(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = Petstore(
+client = Twopir(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).store.inventory()
+client.with_options(timeout=5.0).score.execute(
+    scorer_id="scorer_id",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -181,10 +183,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `PETSTORE_LOG` to `debug`.
+You can enable logging by setting the environment variable `TWOPIR_LOG` to `debug`.
 
 ```shell
-$ export PETSTORE_LOG=debug
+$ export TWOPIR_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -204,14 +206,16 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from twopir import Petstore
+from twopir import Twopir
 
-client = Petstore()
-response = client.store.with_raw_response.inventory()
+client = Twopir()
+response = client.score.with_raw_response.execute(
+    scorer_id="scorer_id",
+)
 print(response.headers.get('X-My-Header'))
 
-store = response.parse()  # get the object that `store.inventory()` would have returned
-print(store)
+score = response.parse()  # get the object that `score.execute()` would have returned
+print(score.scores)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/twopir-python/tree/main/src/twopir/_response.py) object.
@@ -225,7 +229,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.store.with_streaming_response.inventory() as response:
+with client.score.with_streaming_response.execute(
+    scorer_id="scorer_id",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -278,10 +284,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from twopir import Petstore, DefaultHttpxClient
+from twopir import Twopir, DefaultHttpxClient
 
-client = Petstore(
-    # Or use the `PETSTORE_BASE_URL` env var
+client = Twopir(
+    # Or use the `TWOPIR_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",

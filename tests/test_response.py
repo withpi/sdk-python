@@ -6,7 +6,7 @@ import httpx
 import pytest
 import pydantic
 
-from twopir import Petstore, BaseModel, AsyncPetstore
+from twopir import Twopir, BaseModel, AsyncTwopir
 from twopir._response import (
     APIResponse,
     BaseAPIResponse,
@@ -56,7 +56,7 @@ def test_extract_response_type_binary_response() -> None:
 class PydanticModel(pydantic.BaseModel): ...
 
 
-def test_response_parse_mismatched_basemodel(client: Petstore) -> None:
+def test_response_parse_mismatched_basemodel(client: Twopir) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -74,7 +74,7 @@ def test_response_parse_mismatched_basemodel(client: Petstore) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_mismatched_basemodel(async_client: AsyncPetstore) -> None:
+async def test_async_response_parse_mismatched_basemodel(async_client: AsyncTwopir) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -91,7 +91,7 @@ async def test_async_response_parse_mismatched_basemodel(async_client: AsyncPets
         await response.parse(to=PydanticModel)
 
 
-def test_response_parse_custom_stream(client: Petstore) -> None:
+def test_response_parse_custom_stream(client: Twopir) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -106,7 +106,7 @@ def test_response_parse_custom_stream(client: Petstore) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_stream(async_client: AsyncPetstore) -> None:
+async def test_async_response_parse_custom_stream(async_client: AsyncTwopir) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -125,7 +125,7 @@ class CustomModel(BaseModel):
     bar: int
 
 
-def test_response_parse_custom_model(client: Petstore) -> None:
+def test_response_parse_custom_model(client: Twopir) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -141,7 +141,7 @@ def test_response_parse_custom_model(client: Petstore) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_model(async_client: AsyncPetstore) -> None:
+async def test_async_response_parse_custom_model(async_client: AsyncTwopir) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -156,7 +156,7 @@ async def test_async_response_parse_custom_model(async_client: AsyncPetstore) ->
     assert obj.bar == 2
 
 
-def test_response_parse_annotated_type(client: Petstore) -> None:
+def test_response_parse_annotated_type(client: Twopir) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -173,7 +173,7 @@ def test_response_parse_annotated_type(client: Petstore) -> None:
     assert obj.bar == 2
 
 
-async def test_async_response_parse_annotated_type(async_client: AsyncPetstore) -> None:
+async def test_async_response_parse_annotated_type(async_client: AsyncTwopir) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -201,7 +201,7 @@ async def test_async_response_parse_annotated_type(async_client: AsyncPetstore) 
         ("FalSe", False),
     ],
 )
-def test_response_parse_bool(client: Petstore, content: str, expected: bool) -> None:
+def test_response_parse_bool(client: Twopir, content: str, expected: bool) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -226,7 +226,7 @@ def test_response_parse_bool(client: Petstore, content: str, expected: bool) -> 
         ("FalSe", False),
     ],
 )
-async def test_async_response_parse_bool(client: AsyncPetstore, content: str, expected: bool) -> None:
+async def test_async_response_parse_bool(client: AsyncTwopir, content: str, expected: bool) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -245,7 +245,7 @@ class OtherModel(BaseModel):
 
 
 @pytest.mark.parametrize("client", [False], indirect=True)  # loose validation
-def test_response_parse_expect_model_union_non_json_content(client: Petstore) -> None:
+def test_response_parse_expect_model_union_non_json_content(client: Twopir) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=client,
@@ -262,7 +262,7 @@ def test_response_parse_expect_model_union_non_json_content(client: Petstore) ->
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("async_client", [False], indirect=True)  # loose validation
-async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncPetstore) -> None:
+async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncTwopir) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=async_client,

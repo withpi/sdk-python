@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class PetstoreError(Exception):
+class TwopirError(Exception):
     pass
 
 
-class APIError(PetstoreError):
+class APIError(TwopirError):
     message: str
     request: httpx.Request
 

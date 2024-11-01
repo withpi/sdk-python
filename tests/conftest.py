@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 import pytest
 from pytest_asyncio import is_async_test
 
-from twopir import Petstore, AsyncPetstore
+from twopir import Twopir, AsyncTwopir
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
@@ -32,20 +32,20 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[Petstore]:
+def client(request: FixtureRequest) -> Iterator[Twopir]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Petstore(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Twopir(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncPetstore]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncTwopir]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncPetstore(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    async with AsyncTwopir(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client

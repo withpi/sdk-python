@@ -25,7 +25,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import PetstoreError, APIStatusError
+from ._exceptions import TwopirError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -38,19 +38,17 @@ __all__ = [
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "Petstore",
-    "AsyncPetstore",
+    "Twopir",
+    "AsyncTwopir",
     "Client",
     "AsyncClient",
 ]
 
 
-class Petstore(SyncAPIClient):
-    pets: resources.PetsResource
-    store: resources.StoreResource
-    user: resources.UserResource
-    with_raw_response: PetstoreWithRawResponse
-    with_streaming_response: PetstoreWithStreamedResponse
+class Twopir(SyncAPIClient):
+    score: resources.ScoreResource
+    with_raw_response: TwopirWithRawResponse
+    with_streaming_response: TwopirWithStreamedResponse
 
     # client options
     api_key: str
@@ -78,22 +76,22 @@ class Petstore(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous petstore client instance.
+        """Construct a new synchronous twopir client instance.
 
-        This automatically infers the `api_key` argument from the `PETSTORE_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("PETSTORE_API_KEY")
+            api_key = os.environ.get("API_KEY")
         if api_key is None:
-            raise PetstoreError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the PETSTORE_API_KEY environment variable"
+            raise TwopirError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("PETSTORE_BASE_URL")
+            base_url = os.environ.get("TWOPIR_BASE_URL")
         if base_url is None:
-            base_url = f"https://petstore3.swagger.io/api/v3"
+            base_url = f"https://api.2pir.ai/v1"
 
         super().__init__(
             version=__version__,
@@ -106,11 +104,9 @@ class Petstore(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = resources.PetsResource(self)
-        self.store = resources.StoreResource(self)
-        self.user = resources.UserResource(self)
-        self.with_raw_response = PetstoreWithRawResponse(self)
-        self.with_streaming_response = PetstoreWithStreamedResponse(self)
+        self.score = resources.ScoreResource(self)
+        self.with_raw_response = TwopirWithRawResponse(self)
+        self.with_streaming_response = TwopirWithStreamedResponse(self)
 
     @property
     @override
@@ -217,12 +213,10 @@ class Petstore(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncPetstore(AsyncAPIClient):
-    pets: resources.AsyncPetsResource
-    store: resources.AsyncStoreResource
-    user: resources.AsyncUserResource
-    with_raw_response: AsyncPetstoreWithRawResponse
-    with_streaming_response: AsyncPetstoreWithStreamedResponse
+class AsyncTwopir(AsyncAPIClient):
+    score: resources.AsyncScoreResource
+    with_raw_response: AsyncTwopirWithRawResponse
+    with_streaming_response: AsyncTwopirWithStreamedResponse
 
     # client options
     api_key: str
@@ -250,22 +244,22 @@ class AsyncPetstore(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async petstore client instance.
+        """Construct a new async twopir client instance.
 
-        This automatically infers the `api_key` argument from the `PETSTORE_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("PETSTORE_API_KEY")
+            api_key = os.environ.get("API_KEY")
         if api_key is None:
-            raise PetstoreError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the PETSTORE_API_KEY environment variable"
+            raise TwopirError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("PETSTORE_BASE_URL")
+            base_url = os.environ.get("TWOPIR_BASE_URL")
         if base_url is None:
-            base_url = f"https://petstore3.swagger.io/api/v3"
+            base_url = f"https://api.2pir.ai/v1"
 
         super().__init__(
             version=__version__,
@@ -278,11 +272,9 @@ class AsyncPetstore(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = resources.AsyncPetsResource(self)
-        self.store = resources.AsyncStoreResource(self)
-        self.user = resources.AsyncUserResource(self)
-        self.with_raw_response = AsyncPetstoreWithRawResponse(self)
-        self.with_streaming_response = AsyncPetstoreWithStreamedResponse(self)
+        self.score = resources.AsyncScoreResource(self)
+        self.with_raw_response = AsyncTwopirWithRawResponse(self)
+        self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
     @property
     @override
@@ -389,34 +381,26 @@ class AsyncPetstore(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class PetstoreWithRawResponse:
-    def __init__(self, client: Petstore) -> None:
-        self.pets = resources.PetsResourceWithRawResponse(client.pets)
-        self.store = resources.StoreResourceWithRawResponse(client.store)
-        self.user = resources.UserResourceWithRawResponse(client.user)
+class TwopirWithRawResponse:
+    def __init__(self, client: Twopir) -> None:
+        self.score = resources.ScoreResourceWithRawResponse(client.score)
 
 
-class AsyncPetstoreWithRawResponse:
-    def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = resources.AsyncPetsResourceWithRawResponse(client.pets)
-        self.store = resources.AsyncStoreResourceWithRawResponse(client.store)
-        self.user = resources.AsyncUserResourceWithRawResponse(client.user)
+class AsyncTwopirWithRawResponse:
+    def __init__(self, client: AsyncTwopir) -> None:
+        self.score = resources.AsyncScoreResourceWithRawResponse(client.score)
 
 
-class PetstoreWithStreamedResponse:
-    def __init__(self, client: Petstore) -> None:
-        self.pets = resources.PetsResourceWithStreamingResponse(client.pets)
-        self.store = resources.StoreResourceWithStreamingResponse(client.store)
-        self.user = resources.UserResourceWithStreamingResponse(client.user)
+class TwopirWithStreamedResponse:
+    def __init__(self, client: Twopir) -> None:
+        self.score = resources.ScoreResourceWithStreamingResponse(client.score)
 
 
-class AsyncPetstoreWithStreamedResponse:
-    def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = resources.AsyncPetsResourceWithStreamingResponse(client.pets)
-        self.store = resources.AsyncStoreResourceWithStreamingResponse(client.store)
-        self.user = resources.AsyncUserResourceWithStreamingResponse(client.user)
+class AsyncTwopirWithStreamedResponse:
+    def __init__(self, client: AsyncTwopir) -> None:
+        self.score = resources.AsyncScoreResourceWithStreamingResponse(client.score)
 
 
-Client = Petstore
+Client = Twopir
 
-AsyncClient = AsyncPetstore
+AsyncClient = AsyncTwopir
