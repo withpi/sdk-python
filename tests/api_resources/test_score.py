@@ -20,14 +20,14 @@ class TestScore:
     @parametrize
     def test_method_execute(self, client: Twopir) -> None:
         score = client.score.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         )
         assert_matches_type(ScoreBundle, score, path=["response"])
 
     @parametrize
     def test_method_execute_with_all_params(self, client: Twopir) -> None:
         score = client.score.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
             input="Please help me with this problem.",
             response="I am happy to help you with that.",
         )
@@ -36,7 +36,7 @@ class TestScore:
     @parametrize
     def test_raw_response_execute(self, client: Twopir) -> None:
         response = client.score.with_raw_response.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         )
 
         assert response.is_closed is True
@@ -47,7 +47,7 @@ class TestScore:
     @parametrize
     def test_streaming_response_execute(self, client: Twopir) -> None:
         with client.score.with_streaming_response.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -57,13 +57,6 @@ class TestScore:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_execute(self, client: Twopir) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `scorer_id` but received ''"):
-            client.score.with_raw_response.execute(
-                scorer_id="",
-            )
-
 
 class TestAsyncScore:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -71,14 +64,14 @@ class TestAsyncScore:
     @parametrize
     async def test_method_execute(self, async_client: AsyncTwopir) -> None:
         score = await async_client.score.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         )
         assert_matches_type(ScoreBundle, score, path=["response"])
 
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncTwopir) -> None:
         score = await async_client.score.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
             input="Please help me with this problem.",
             response="I am happy to help you with that.",
         )
@@ -87,7 +80,7 @@ class TestAsyncScore:
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncTwopir) -> None:
         response = await async_client.score.with_raw_response.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         )
 
         assert response.is_closed is True
@@ -98,7 +91,7 @@ class TestAsyncScore:
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncTwopir) -> None:
         async with async_client.score.with_streaming_response.execute(
-            scorer_id="scorer_id",
+            scorer_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -107,10 +100,3 @@ class TestAsyncScore:
             assert_matches_type(ScoreBundle, score, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_execute(self, async_client: AsyncTwopir) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `scorer_id` but received ''"):
-            await async_client.score.with_raw_response.execute(
-                scorer_id="",
-            )
