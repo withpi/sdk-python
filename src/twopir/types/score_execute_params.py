@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import TypedDict
 
-__all__ = ["PetFindByTagsParams"]
+__all__ = ["ScoreExecuteParams"]
 
 
-class PetFindByTagsParams(TypedDict, total=False):
-    tags: List[str]
-    """Tags to filter by"""
+class ScoreExecuteParams(TypedDict, total=False):
+    input: str
+
+    response: str

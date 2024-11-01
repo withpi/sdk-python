@@ -1,11 +1,11 @@
 [project]
 name = "twopir"
 version = "0.0.1-alpha.0"
-description = "The official Python library for the petstore API"
+description = "The official Python library for the twopir API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Petstore", email = "example@example.com" },
+{ name = "Twopir", email = "dev-feedback@2pir.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
