@@ -3,4 +3,4 @@
 from __future__ import annotations
 
 from .score_bundle import ScoreBundle as ScoreBundle
-from .score_execute_params import ScoreExecuteParams as ScoreExecuteParams
+from .scorer_score_params import ScorerScoreParams as ScorerScoreParams

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["ScoreExecuteParams"]
+__all__ = ["ScorerScoreParams"]
 
 
-class ScoreExecuteParams(TypedDict, total=False):
+class ScorerScoreParams(TypedDict, total=False):
     input: str
 
     response: str
