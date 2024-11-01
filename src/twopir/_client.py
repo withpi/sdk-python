@@ -46,7 +46,7 @@ __all__ = [
 
 
 class Twopir(SyncAPIClient):
-    score: resources.ScoreResource
+    scorers: resources.ScorersResource
     with_raw_response: TwopirWithRawResponse
     with_streaming_response: TwopirWithStreamedResponse
 
@@ -104,7 +104,7 @@ class Twopir(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.score = resources.ScoreResource(self)
+        self.scorers = resources.ScorersResource(self)
         self.with_raw_response = TwopirWithRawResponse(self)
         self.with_streaming_response = TwopirWithStreamedResponse(self)
 
@@ -214,7 +214,7 @@ class Twopir(SyncAPIClient):
 
 
 class AsyncTwopir(AsyncAPIClient):
-    score: resources.AsyncScoreResource
+    scorers: resources.AsyncScorersResource
     with_raw_response: AsyncTwopirWithRawResponse
     with_streaming_response: AsyncTwopirWithStreamedResponse
 
@@ -272,7 +272,7 @@ class AsyncTwopir(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.score = resources.AsyncScoreResource(self)
+        self.scorers = resources.AsyncScorersResource(self)
         self.with_raw_response = AsyncTwopirWithRawResponse(self)
         self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
@@ -383,22 +383,22 @@ class AsyncTwopir(AsyncAPIClient):
 
 class TwopirWithRawResponse:
     def __init__(self, client: Twopir) -> None:
-        self.score = resources.ScoreResourceWithRawResponse(client.score)
+        self.scorers = resources.ScorersResourceWithRawResponse(client.scorers)
 
 
 class AsyncTwopirWithRawResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.score = resources.AsyncScoreResourceWithRawResponse(client.score)
+        self.scorers = resources.AsyncScorersResourceWithRawResponse(client.scorers)
 
 
 class TwopirWithStreamedResponse:
     def __init__(self, client: Twopir) -> None:
-        self.score = resources.ScoreResourceWithStreamingResponse(client.score)
+        self.scorers = resources.ScorersResourceWithStreamingResponse(client.scorers)
 
 
 class AsyncTwopirWithStreamedResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.score = resources.AsyncScoreResourceWithStreamingResponse(client.score)
+        self.scorers = resources.AsyncScorersResourceWithStreamingResponse(client.scorers)
 
 
 Client = Twopir

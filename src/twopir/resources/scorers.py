@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import score_execute_params
+from ..types import scorer_score_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -21,30 +21,30 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.score_bundle import ScoreBundle
 
-__all__ = ["ScoreResource", "AsyncScoreResource"]
+__all__ = ["ScorersResource", "AsyncScorersResource"]
 
 
-class ScoreResource(SyncAPIResource):
+class ScorersResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ScoreResourceWithRawResponse:
+    def with_raw_response(self) -> ScorersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return ScoreResourceWithRawResponse(self)
+        return ScorersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScoreResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ScorersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return ScoreResourceWithStreamingResponse(self)
+        return ScorersResourceWithStreamingResponse(self)
 
-    def execute(
+    def score(
         self,
         scorer_id: int,
         *,
@@ -70,13 +70,13 @@ class ScoreResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/score/{scorer_id}",
+            f"/scorers/{scorer_id}",
             body=maybe_transform(
                 {
                     "input": input,
                     "response": response,
                 },
-                score_execute_params.ScoreExecuteParams,
+                scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -85,27 +85,27 @@ class ScoreResource(SyncAPIResource):
         )
 
 
-class AsyncScoreResource(AsyncAPIResource):
+class AsyncScorersResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncScoreResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncScorersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncScoreResourceWithRawResponse(self)
+        return AsyncScorersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScoreResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncScorersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return AsyncScoreResourceWithStreamingResponse(self)
+        return AsyncScorersResourceWithStreamingResponse(self)
 
-    async def execute(
+    async def score(
         self,
         scorer_id: int,
         *,
@@ -131,13 +131,13 @@ class AsyncScoreResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/score/{scorer_id}",
+            f"/scorers/{scorer_id}",
             body=await async_maybe_transform(
                 {
                     "input": input,
                     "response": response,
                 },
-                score_execute_params.ScoreExecuteParams,
+                scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -146,37 +146,37 @@ class AsyncScoreResource(AsyncAPIResource):
         )
 
 
-class ScoreResourceWithRawResponse:
-    def __init__(self, score: ScoreResource) -> None:
-        self._score = score
+class ScorersResourceWithRawResponse:
+    def __init__(self, scorers: ScorersResource) -> None:
+        self._scorers = scorers
 
-        self.execute = to_raw_response_wrapper(
-            score.execute,
+        self.score = to_raw_response_wrapper(
+            scorers.score,
         )
 
 
-class AsyncScoreResourceWithRawResponse:
-    def __init__(self, score: AsyncScoreResource) -> None:
-        self._score = score
+class AsyncScorersResourceWithRawResponse:
+    def __init__(self, scorers: AsyncScorersResource) -> None:
+        self._scorers = scorers
 
-        self.execute = async_to_raw_response_wrapper(
-            score.execute,
+        self.score = async_to_raw_response_wrapper(
+            scorers.score,
         )
 
 
-class ScoreResourceWithStreamingResponse:
-    def __init__(self, score: ScoreResource) -> None:
-        self._score = score
+class ScorersResourceWithStreamingResponse:
+    def __init__(self, scorers: ScorersResource) -> None:
+        self._scorers = scorers
 
-        self.execute = to_streamed_response_wrapper(
-            score.execute,
+        self.score = to_streamed_response_wrapper(
+            scorers.score,
         )
 
 
-class AsyncScoreResourceWithStreamingResponse:
-    def __init__(self, score: AsyncScoreResource) -> None:
-        self._score = score
+class AsyncScorersResourceWithStreamingResponse:
+    def __init__(self, scorers: AsyncScorersResource) -> None:
+        self._scorers = scorers
 
-        self.execute = async_to_streamed_response_wrapper(
-            score.execute,
+        self.score = async_to_streamed_response_wrapper(
+            scorers.score,
         )

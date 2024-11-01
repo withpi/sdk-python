@@ -1,19 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .score import (
-    ScoreResource,
-    AsyncScoreResource,
-    ScoreResourceWithRawResponse,
-    AsyncScoreResourceWithRawResponse,
-    ScoreResourceWithStreamingResponse,
-    AsyncScoreResourceWithStreamingResponse,
+from .scorers import (
+    ScorersResource,
+    AsyncScorersResource,
+    ScorersResourceWithRawResponse,
+    AsyncScorersResourceWithRawResponse,
+    ScorersResourceWithStreamingResponse,
+    AsyncScorersResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "ScoreResource",
-    "AsyncScoreResource",
-    "ScoreResourceWithRawResponse",
-    "AsyncScoreResourceWithRawResponse",
-    "ScoreResourceWithStreamingResponse",
-    "AsyncScoreResourceWithStreamingResponse",
+    "ScorersResource",
+    "AsyncScorersResource",
+    "ScorersResourceWithRawResponse",
+    "AsyncScorersResourceWithRawResponse",
+    "ScorersResourceWithStreamingResponse",
+    "AsyncScorersResourceWithStreamingResponse",
 ]
