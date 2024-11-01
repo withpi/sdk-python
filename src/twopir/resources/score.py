@@ -46,7 +46,7 @@ class ScoreResource(SyncAPIResource):
 
     def execute(
         self,
-        scorer_id: str,
+        scorer_id: int,
         *,
         input: str | NotGiven = NOT_GIVEN,
         response: str | NotGiven = NOT_GIVEN,
@@ -69,8 +69,6 @@ class ScoreResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not scorer_id:
-            raise ValueError(f"Expected a non-empty value for `scorer_id` but received {scorer_id!r}")
         return self._post(
             f"/score/{scorer_id}",
             body=maybe_transform(
@@ -109,7 +107,7 @@ class AsyncScoreResource(AsyncAPIResource):
 
     async def execute(
         self,
-        scorer_id: str,
+        scorer_id: int,
         *,
         input: str | NotGiven = NOT_GIVEN,
         response: str | NotGiven = NOT_GIVEN,
@@ -132,8 +130,6 @@ class AsyncScoreResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not scorer_id:
-            raise ValueError(f"Expected a non-empty value for `scorer_id` but received {scorer_id!r}")
         return await self._post(
             f"/score/{scorer_id}",
             body=await async_maybe_transform(

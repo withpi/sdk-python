@@ -10,7 +10,7 @@ __all__ = ["ScoreBundle", "Score"]
 class Score(BaseModel):
     dimension: Optional[str] = None
 
-    score: Optional[object] = None
+    score: Optional[float] = None
 
 
 class ScoreBundle(BaseModel):

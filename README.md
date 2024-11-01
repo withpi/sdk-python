@@ -36,7 +36,7 @@ client = Twopir(
 )
 
 score_bundle = client.score.execute(
-    scorer_id="scorer_id",
+    scorer_id=0,
 )
 print(score_bundle.scores)
 ```
@@ -63,7 +63,7 @@ client = AsyncTwopir(
 
 async def main() -> None:
     score_bundle = await client.score.execute(
-        scorer_id="scorer_id",
+        scorer_id=0,
     )
     print(score_bundle.scores)
 
@@ -99,7 +99,7 @@ client = Twopir()
 
 try:
     client.score.execute(
-        scorer_id="scorer_id",
+        scorer_id=0,
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -144,7 +144,7 @@ client = Twopir(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).score.execute(
-    scorer_id="scorer_id",
+    scorer_id=0,
 )
 ```
 
@@ -169,7 +169,7 @@ client = Twopir(
 
 # Override per-request:
 client.with_options(timeout=5.0).score.execute(
-    scorer_id="scorer_id",
+    scorer_id=0,
 )
 ```
 
@@ -210,7 +210,7 @@ from twopir import Twopir
 
 client = Twopir()
 response = client.score.with_raw_response.execute(
-    scorer_id="scorer_id",
+    scorer_id=0,
 )
 print(response.headers.get('X-My-Header'))
 
@@ -230,7 +230,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.score.with_streaming_response.execute(
-    scorer_id="scorer_id",
+    scorer_id=0,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
