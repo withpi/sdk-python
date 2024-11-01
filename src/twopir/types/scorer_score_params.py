@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
+from .example_param import ExampleParam
 
 __all__ = ["ScorerScoreParams"]
 
 
 class ScorerScoreParams(TypedDict, total=False):
-    input: str
-
-    response: str
+    example: Required[Annotated[ExampleParam, PropertyInfo(alias="Example")]]

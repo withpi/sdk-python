@@ -21,6 +21,7 @@ class TestScorers:
     def test_method_score(self, client: Twopir) -> None:
         scorer = client.scorers.score(
             scorer_id=0,
+            example={},
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
 
@@ -28,8 +29,10 @@ class TestScorers:
     def test_method_score_with_all_params(self, client: Twopir) -> None:
         scorer = client.scorers.score(
             scorer_id=0,
-            input="Please help me with this problem.",
-            response="I am happy to help you with that.",
+            example={
+                "input": "Please help me with this problem.",
+                "response": "I am happy to help you with that.",
+            },
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
 
@@ -37,6 +40,7 @@ class TestScorers:
     def test_raw_response_score(self, client: Twopir) -> None:
         response = client.scorers.with_raw_response.score(
             scorer_id=0,
+            example={},
         )
 
         assert response.is_closed is True
@@ -48,6 +52,7 @@ class TestScorers:
     def test_streaming_response_score(self, client: Twopir) -> None:
         with client.scorers.with_streaming_response.score(
             scorer_id=0,
+            example={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -65,6 +70,7 @@ class TestAsyncScorers:
     async def test_method_score(self, async_client: AsyncTwopir) -> None:
         scorer = await async_client.scorers.score(
             scorer_id=0,
+            example={},
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
 
@@ -72,8 +78,10 @@ class TestAsyncScorers:
     async def test_method_score_with_all_params(self, async_client: AsyncTwopir) -> None:
         scorer = await async_client.scorers.score(
             scorer_id=0,
-            input="Please help me with this problem.",
-            response="I am happy to help you with that.",
+            example={
+                "input": "Please help me with this problem.",
+                "response": "I am happy to help you with that.",
+            },
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
 
@@ -81,6 +89,7 @@ class TestAsyncScorers:
     async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
         response = await async_client.scorers.with_raw_response.score(
             scorer_id=0,
+            example={},
         )
 
         assert response.is_closed is True
@@ -92,6 +101,7 @@ class TestAsyncScorers:
     async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
         async with async_client.scorers.with_streaming_response.score(
             scorer_id=0,
+            example={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
