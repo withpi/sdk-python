@@ -329,7 +329,7 @@ class TestTwopir:
         assert request.headers.get("api_key") == api_key
 
         with pytest.raises(TwopirError):
-            with update_env(**{"API_KEY": Omit()}):
+            with update_env(**{"TWOPIR_API_KEY": Omit()}):
                 client2 = Twopir(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -706,7 +706,7 @@ class TestTwopir:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/scorers/0",
-                body=cast(object, dict()),
+                body=cast(object, dict(example={})),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -721,7 +721,7 @@ class TestTwopir:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/scorers/0",
-                body=cast(object, dict()),
+                body=cast(object, dict(example={})),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -754,7 +754,7 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(scorer_id=0)
+        response = client.scorers.with_raw_response.score(scorer_id=0, example={})
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -779,7 +779,7 @@ class TestTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = client.scorers.with_raw_response.score(
-            scorer_id=0, extra_headers={"x-stainless-retry-count": Omit()}
+            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -803,7 +803,9 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(scorer_id=0, extra_headers={"x-stainless-retry-count": "42"})
+        response = client.scorers.with_raw_response.score(
+            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1093,7 +1095,7 @@ class TestAsyncTwopir:
         assert request.headers.get("api_key") == api_key
 
         with pytest.raises(TwopirError):
-            with update_env(**{"API_KEY": Omit()}):
+            with update_env(**{"TWOPIR_API_KEY": Omit()}):
                 client2 = AsyncTwopir(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1484,7 +1486,7 @@ class TestAsyncTwopir:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/scorers/0",
-                body=cast(object, dict()),
+                body=cast(object, dict(example={})),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1499,7 +1501,7 @@ class TestAsyncTwopir:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/scorers/0",
-                body=cast(object, dict()),
+                body=cast(object, dict(example={})),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1533,7 +1535,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = await client.scorers.with_raw_response.score(scorer_id=0)
+        response = await client.scorers.with_raw_response.score(scorer_id=0, example={})
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1559,7 +1561,7 @@ class TestAsyncTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = await client.scorers.with_raw_response.score(
-            scorer_id=0, extra_headers={"x-stainless-retry-count": Omit()}
+            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1585,7 +1587,7 @@ class TestAsyncTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = await client.scorers.with_raw_response.score(
-            scorer_id=0, extra_headers={"x-stainless-retry-count": "42"}
+            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

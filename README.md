@@ -32,18 +32,19 @@ from twopir import Twopir
 
 client = Twopir(
     # This is the default and can be omitted
-    api_key=os.environ.get("API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
 score_bundle = client.scorers.score(
-    scorer_id=0,
+    scorer_id=10,
+    example={},
 )
 print(score_bundle.scores)
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `API_KEY="My API Key"` to your `.env` file
+to add `TWOPIR_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -57,13 +58,14 @@ from twopir import AsyncTwopir
 
 client = AsyncTwopir(
     # This is the default and can be omitted
-    api_key=os.environ.get("API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
 
 async def main() -> None:
     score_bundle = await client.scorers.score(
-        scorer_id=0,
+        scorer_id=10,
+        example={},
     )
     print(score_bundle.scores)
 
@@ -99,7 +101,8 @@ client = Twopir()
 
 try:
     client.scorers.score(
-        scorer_id=0,
+        scorer_id=99,
+        example={},
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -144,7 +147,8 @@ client = Twopir(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).scorers.score(
-    scorer_id=0,
+    scorer_id=99,
+    example={},
 )
 ```
 
@@ -169,7 +173,8 @@ client = Twopir(
 
 # Override per-request:
 client.with_options(timeout=5.0).scorers.score(
-    scorer_id=0,
+    scorer_id=99,
+    example={},
 )
 ```
 
@@ -210,7 +215,8 @@ from twopir import Twopir
 
 client = Twopir()
 response = client.scorers.with_raw_response.score(
-    scorer_id=0,
+    scorer_id=99,
+    example={},
 )
 print(response.headers.get('X-My-Header'))
 
@@ -230,7 +236,8 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.scorers.with_streaming_response.score(
-    scorer_id=0,
+    scorer_id=99,
+    example={},
 ) as response:
     print(response.headers.get("X-My-Header"))
 
