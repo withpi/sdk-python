@@ -2,13 +2,29 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Iterable
+from typing_extensions import Required, TypedDict
 
-from .._utils import PropertyInfo
 from .example_param import ExampleParam
 
-__all__ = ["ScorerScoreParams"]
+__all__ = ["ScorerScoreParams", "Contract", "ContractDimension"]
 
 
 class ScorerScoreParams(TypedDict, total=False):
-    example: Required[Annotated[ExampleParam, PropertyInfo(alias="Example")]]
+    contract: Required[Contract]
+
+    example: Required[ExampleParam]
+
+
+class ContractDimension(TypedDict, total=False):
+    description: Required[str]
+
+    label: Required[str]
+
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+
+    dimensions: Required[Iterable[ContractDimension]]
+
+    name: Required[str]

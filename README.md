@@ -37,6 +37,24 @@ client = Twopir(
 
 score_bundle = client.scorers.score(
     scorer_id=10,
+    contract={
+        "description": "Answer questions honestly and succinctly",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+        ],
+        "name": "My application",
+    },
     example={},
 )
 print(score_bundle.scores)
@@ -65,6 +83,24 @@ client = AsyncTwopir(
 async def main() -> None:
     score_bundle = await client.scorers.score(
         scorer_id=10,
+        contract={
+            "description": "Answer questions honestly and succinctly",
+            "dimensions": [
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+            ],
+            "name": "My application",
+        },
         example={},
     )
     print(score_bundle.scores)
@@ -102,7 +138,28 @@ client = Twopir()
 try:
     client.scorers.score(
         scorer_id=99,
-        example={},
+        contract={
+            "description": "Answer questions honestly and succinctly",
+            "dimensions": [
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+            ],
+            "name": "My application",
+        },
+        example={
+            "input": "Can you help me with this problem?",
+            "response": "Of course I can",
+        },
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -148,7 +205,28 @@ client = Twopir(
 # Or, configure per-request:
 client.with_options(max_retries=5).scorers.score(
     scorer_id=99,
-    example={},
+    contract={
+        "description": "Answer questions honestly and succinctly",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+        ],
+        "name": "My application",
+    },
+    example={
+        "input": "Can you help me with this problem?",
+        "response": "Of course I can",
+    },
 )
 ```
 
@@ -174,7 +252,28 @@ client = Twopir(
 # Override per-request:
 client.with_options(timeout=5.0).scorers.score(
     scorer_id=99,
-    example={},
+    contract={
+        "description": "Answer questions honestly and succinctly",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+        ],
+        "name": "My application",
+    },
+    example={
+        "input": "Can you help me with this problem?",
+        "response": "Of course I can",
+    },
 )
 ```
 
@@ -216,7 +315,24 @@ from twopir import Twopir
 client = Twopir()
 response = client.scorers.with_raw_response.score(
     scorer_id=99,
-    example={},
+    contract={
+        "description": "Answer questions honestly and succinctly",
+        "dimensions": [{
+            "description": "Test whether the LLM follows instructions.",
+            "label": "Instruction Following",
+        }, {
+            "description": "Test whether the LLM follows instructions.",
+            "label": "Instruction Following",
+        }, {
+            "description": "Test whether the LLM follows instructions.",
+            "label": "Instruction Following",
+        }],
+        "name": "My application",
+    },
+    example={
+        "input": "Can you help me with this problem?",
+        "response": "Of course I can",
+    },
 )
 print(response.headers.get('X-My-Header'))
 
@@ -237,7 +353,28 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.scorers.with_streaming_response.score(
     scorer_id=99,
-    example={},
+    contract={
+        "description": "Answer questions honestly and succinctly",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+        ],
+        "name": "My application",
+    },
+    example={
+        "input": "Can you help me with this problem?",
+        "response": "Of course I can",
+    },
 ) as response:
     print(response.headers.get("X-My-Header"))
 

@@ -49,6 +49,7 @@ class ScorersResource(SyncAPIResource):
         self,
         scorer_id: int,
         *,
+        contract: scorer_score_params.Contract,
         example: ExampleParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -71,7 +72,13 @@ class ScorersResource(SyncAPIResource):
         """
         return self._post(
             f"/scorers/{scorer_id}",
-            body=maybe_transform(example, scorer_score_params.ScorerScoreParams),
+            body=maybe_transform(
+                {
+                    "contract": contract,
+                    "example": example,
+                },
+                scorer_score_params.ScorerScoreParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -103,6 +110,7 @@ class AsyncScorersResource(AsyncAPIResource):
         self,
         scorer_id: int,
         *,
+        contract: scorer_score_params.Contract,
         example: ExampleParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -125,7 +133,13 @@ class AsyncScorersResource(AsyncAPIResource):
         """
         return await self._post(
             f"/scorers/{scorer_id}",
-            body=await async_maybe_transform(example, scorer_score_params.ScorerScoreParams),
+            body=await async_maybe_transform(
+                {
+                    "contract": contract,
+                    "example": example,
+                },
+                scorer_score_params.ScorerScoreParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
