@@ -706,7 +706,33 @@ class TestTwopir:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/scorers/0",
-                body=cast(object, dict(example={})),
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "Answer questions honestly and succinctly",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        example={
+                            "input": "Can you help me with this problem?",
+                            "response": "Of course I can",
+                        },
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -721,7 +747,33 @@ class TestTwopir:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/scorers/0",
-                body=cast(object, dict(example={})),
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "Answer questions honestly and succinctly",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        example={
+                            "input": "Can you help me with this problem?",
+                            "response": "Of course I can",
+                        },
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -754,7 +806,28 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(scorer_id=0, example={})
+        response = client.scorers.with_raw_response.score(
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -779,7 +852,27 @@ class TestTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = client.scorers.with_raw_response.score(
-            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": Omit()}
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -804,7 +897,27 @@ class TestTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = client.scorers.with_raw_response.score(
-            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": "42"}
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1486,7 +1599,33 @@ class TestAsyncTwopir:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/scorers/0",
-                body=cast(object, dict(example={})),
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "Answer questions honestly and succinctly",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        example={
+                            "input": "Can you help me with this problem?",
+                            "response": "Of course I can",
+                        },
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1501,7 +1640,33 @@ class TestAsyncTwopir:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/scorers/0",
-                body=cast(object, dict(example={})),
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "Answer questions honestly and succinctly",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        example={
+                            "input": "Can you help me with this problem?",
+                            "response": "Of course I can",
+                        },
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1535,7 +1700,28 @@ class TestAsyncTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = await client.scorers.with_raw_response.score(scorer_id=0, example={})
+        response = await client.scorers.with_raw_response.score(
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1561,7 +1747,27 @@ class TestAsyncTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = await client.scorers.with_raw_response.score(
-            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": Omit()}
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1587,7 +1793,27 @@ class TestAsyncTwopir:
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
         response = await client.scorers.with_raw_response.score(
-            scorer_id=0, example={}, extra_headers={"x-stainless-retry-count": "42"}
+            scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            example={},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

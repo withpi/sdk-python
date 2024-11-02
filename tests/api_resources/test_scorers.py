@@ -21,6 +21,24 @@ class TestScorers:
     def test_method_score(self, client: Twopir) -> None:
         scorer = client.scorers.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
@@ -29,6 +47,24 @@ class TestScorers:
     def test_method_score_with_all_params(self, client: Twopir) -> None:
         scorer = client.scorers.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={
                 "input": "Please help me with this problem.",
                 "response": "I am happy to help you with that.",
@@ -40,6 +76,24 @@ class TestScorers:
     def test_raw_response_score(self, client: Twopir) -> None:
         response = client.scorers.with_raw_response.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         )
 
@@ -52,6 +106,24 @@ class TestScorers:
     def test_streaming_response_score(self, client: Twopir) -> None:
         with client.scorers.with_streaming_response.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         ) as response:
             assert not response.is_closed
@@ -70,6 +142,24 @@ class TestAsyncScorers:
     async def test_method_score(self, async_client: AsyncTwopir) -> None:
         scorer = await async_client.scorers.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         )
         assert_matches_type(ScoreBundle, scorer, path=["response"])
@@ -78,6 +168,24 @@ class TestAsyncScorers:
     async def test_method_score_with_all_params(self, async_client: AsyncTwopir) -> None:
         scorer = await async_client.scorers.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={
                 "input": "Please help me with this problem.",
                 "response": "I am happy to help you with that.",
@@ -89,6 +197,24 @@ class TestAsyncScorers:
     async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
         response = await async_client.scorers.with_raw_response.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         )
 
@@ -101,6 +227,24 @@ class TestAsyncScorers:
     async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
         async with async_client.scorers.with_streaming_response.score(
             scorer_id=0,
+            contract={
+                "description": "Answer questions honestly and succinctly",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
             example={},
         ) as response:
             assert not response.is_closed
