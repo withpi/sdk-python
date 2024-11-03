@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Iterable
 
 import httpx
 
-from ..types import scorer_score_params
+from ..types import calibration_calibrate_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -21,57 +21,51 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.response_metrics import ResponseMetrics
+from ..types.calibration_result import CalibrationResult
 from ..types.shared_params.contract import Contract
-from ..types.shared_params.llm_response import LlmResponse
 
-__all__ = ["ScorerResource", "AsyncScorerResource"]
+__all__ = ["CalibrationResource", "AsyncCalibrationResource"]
 
 
-class ScorerResource(SyncAPIResource):
+class CalibrationResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ScorerResourceWithRawResponse:
+    def with_raw_response(self) -> CalibrationResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return ScorerResourceWithRawResponse(self)
+        return CalibrationResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScorerResourceWithStreamingResponse:
+    def with_streaming_response(self) -> CalibrationResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return ScorerResourceWithStreamingResponse(self)
+        return CalibrationResourceWithStreamingResponse(self)
 
-    def score(
+    def calibrate(
         self,
-        scorer_id: int,
         *,
         contract: Contract,
-        llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponse,
+        feedbacks: Iterable[calibration_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> CalibrationResult:
         """
-        Executes the provided scorer.
+        Calibrates a contract
 
         Args:
           contract: A collection of dimensions an LLM response must adhere to
 
-          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
-              "query"
-
-          llm_response: The response from the LLM
+          feedbacks: The list of Feedbacks to use for calibration
 
           extra_headers: Send extra headers
 
@@ -82,66 +76,60 @@ class ScorerResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/scorers/{scorer_id}",
+            "/calibration",
             body=maybe_transform(
                 {
                     "contract": contract,
-                    "llm_input": llm_input,
-                    "llm_response": llm_response,
+                    "feedbacks": feedbacks,
                 },
-                scorer_score_params.ScorerScoreParams,
+                calibration_calibrate_params.CalibrationCalibrateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=CalibrationResult,
         )
 
 
-class AsyncScorerResource(AsyncAPIResource):
+class AsyncCalibrationResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncScorerResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncCalibrationResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncScorerResourceWithRawResponse(self)
+        return AsyncCalibrationResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScorerResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncCalibrationResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return AsyncScorerResourceWithStreamingResponse(self)
+        return AsyncCalibrationResourceWithStreamingResponse(self)
 
-    async def score(
+    async def calibrate(
         self,
-        scorer_id: int,
         *,
         contract: Contract,
-        llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponse,
+        feedbacks: Iterable[calibration_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> CalibrationResult:
         """
-        Executes the provided scorer.
+        Calibrates a contract
 
         Args:
           contract: A collection of dimensions an LLM response must adhere to
 
-          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
-              "query"
-
-          llm_response: The response from the LLM
+          feedbacks: The list of Feedbacks to use for calibration
 
           extra_headers: Send extra headers
 
@@ -152,53 +140,52 @@ class AsyncScorerResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/scorers/{scorer_id}",
+            "/calibration",
             body=await async_maybe_transform(
                 {
                     "contract": contract,
-                    "llm_input": llm_input,
-                    "llm_response": llm_response,
+                    "feedbacks": feedbacks,
                 },
-                scorer_score_params.ScorerScoreParams,
+                calibration_calibrate_params.CalibrationCalibrateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=CalibrationResult,
         )
 
 
-class ScorerResourceWithRawResponse:
-    def __init__(self, scorer: ScorerResource) -> None:
-        self._scorer = scorer
+class CalibrationResourceWithRawResponse:
+    def __init__(self, calibration: CalibrationResource) -> None:
+        self._calibration = calibration
 
-        self.score = to_raw_response_wrapper(
-            scorer.score,
+        self.calibrate = to_raw_response_wrapper(
+            calibration.calibrate,
         )
 
 
-class AsyncScorerResourceWithRawResponse:
-    def __init__(self, scorer: AsyncScorerResource) -> None:
-        self._scorer = scorer
+class AsyncCalibrationResourceWithRawResponse:
+    def __init__(self, calibration: AsyncCalibrationResource) -> None:
+        self._calibration = calibration
 
-        self.score = async_to_raw_response_wrapper(
-            scorer.score,
+        self.calibrate = async_to_raw_response_wrapper(
+            calibration.calibrate,
         )
 
 
-class ScorerResourceWithStreamingResponse:
-    def __init__(self, scorer: ScorerResource) -> None:
-        self._scorer = scorer
+class CalibrationResourceWithStreamingResponse:
+    def __init__(self, calibration: CalibrationResource) -> None:
+        self._calibration = calibration
 
-        self.score = to_streamed_response_wrapper(
-            scorer.score,
+        self.calibrate = to_streamed_response_wrapper(
+            calibration.calibrate,
         )
 
 
-class AsyncScorerResourceWithStreamingResponse:
-    def __init__(self, scorer: AsyncScorerResource) -> None:
-        self._scorer = scorer
+class AsyncCalibrationResourceWithStreamingResponse:
+    def __init__(self, calibration: AsyncCalibrationResource) -> None:
+        self._calibration = calibration
 
-        self.score = async_to_streamed_response_wrapper(
-            scorer.score,
+        self.calibrate = async_to_streamed_response_wrapper(
+            calibration.calibrate,
         )

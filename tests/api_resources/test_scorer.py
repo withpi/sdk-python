@@ -9,7 +9,7 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types import ResponseMetric
+from twopir.types import ResponseMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -42,7 +42,7 @@ class TestScorer:
             llm_input={"query": "Help me with my problem"},
             llm_response={"text": "I am happy to help you with that."},
         )
-        assert_matches_type(ResponseMetric, scorer, path=["response"])
+        assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
     @parametrize
     def test_raw_response_score(self, client: Twopir) -> None:
@@ -73,7 +73,7 @@ class TestScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = response.parse()
-        assert_matches_type(ResponseMetric, scorer, path=["response"])
+        assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
     @parametrize
     def test_streaming_response_score(self, client: Twopir) -> None:
@@ -104,7 +104,7 @@ class TestScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = response.parse()
-            assert_matches_type(ResponseMetric, scorer, path=["response"])
+            assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -137,7 +137,7 @@ class TestAsyncScorer:
             llm_input={"query": "Help me with my problem"},
             llm_response={"text": "I am happy to help you with that."},
         )
-        assert_matches_type(ResponseMetric, scorer, path=["response"])
+        assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
@@ -168,7 +168,7 @@ class TestAsyncScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = await response.parse()
-        assert_matches_type(ResponseMetric, scorer, path=["response"])
+        assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
@@ -199,6 +199,6 @@ class TestAsyncScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = await response.parse()
-            assert_matches_type(ResponseMetric, scorer, path=["response"])
+            assert_matches_type(ResponseMetrics, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True

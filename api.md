@@ -4,6 +4,18 @@
 from twopir.types import Contract, Dimension, LlmResponse
 ```
 
+# Calibration
+
+Types:
+
+```python
+from twopir.types import CalibrationResult
+```
+
+Methods:
+
+- <code title="post /calibration">client.calibration.<a href="./src/twopir/resources/calibration.py">calibrate</a>(\*\*<a href="src/twopir/types/calibration_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/calibration_result.py">CalibrationResult</a></code>
+
 # PromptOptimizationJob
 
 Types:
@@ -35,9 +47,9 @@ Methods:
 Types:
 
 ```python
-from twopir.types import ResponseMetric
+from twopir.types import ResponseMetrics
 ```
 
 Methods:
 
-- <code title="post /scorers/{scorer_id}">client.scorer.<a href="./src/twopir/resources/scorer.py">score</a>(scorer_id, \*\*<a href="src/twopir/types/scorer_score_params.py">params</a>) -> <a href="./src/twopir/types/response_metric.py">ResponseMetric</a></code>
+- <code title="post /scorers/{scorer_id}">client.scorer.<a href="./src/twopir/resources/scorer.py">score</a>(scorer_id, \*\*<a href="src/twopir/types/scorer_score_params.py">params</a>) -> <a href="./src/twopir/types/response_metrics.py">ResponseMetrics</a></code>

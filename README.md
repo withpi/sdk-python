@@ -35,7 +35,7 @@ client = Twopir(
     api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
-response_metric = client.scorer.score(
+response_metrics = client.scorer.score(
     scorer_id=0,
     contract={
         "name": "My Application",
@@ -54,7 +54,7 @@ response_metric = client.scorer.score(
     llm_input={"query": "Help me with my problem"},
     llm_response={"text": "Of course I can help with that"},
 )
-print(response_metric.scores)
+print(response_metrics.scores)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -78,7 +78,7 @@ client = AsyncTwopir(
 
 
 async def main() -> None:
-    response_metric = await client.scorer.score(
+    response_metrics = await client.scorer.score(
         scorer_id=0,
         contract={
             "name": "My Application",
@@ -97,7 +97,7 @@ async def main() -> None:
         llm_input={"query": "Help me with my problem"},
         llm_response={"text": "Of course I can help with that"},
     )
-    print(response_metric.scores)
+    print(response_metrics.scores)
 
 
 asyncio.run(main())
