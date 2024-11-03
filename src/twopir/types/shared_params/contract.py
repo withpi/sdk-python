@@ -5,16 +5,16 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from .dimension_param import DimensionParam
+from .dimension import Dimension
 
-__all__ = ["ContractParam"]
+__all__ = ["Contract"]
 
 
-class ContractParam(TypedDict, total=False):
+class Contract(TypedDict, total=False):
     description: Required[str]
     """The full description of the contract, which may be the system prompt."""
 
-    dimensions: Required[Iterable[DimensionParam]]
+    dimensions: Required[Iterable[Dimension]]
     """The dimensions associated with this contract"""
 
     name: Required[str]

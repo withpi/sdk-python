@@ -35,7 +35,7 @@ client = Twopir(
     api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
-response_metric = client.scorers.score(
+response_metric = client.scorer.score(
     scorer_id=0,
     contract={
         "name": "My Application",
@@ -78,7 +78,7 @@ client = AsyncTwopir(
 
 
 async def main() -> None:
-    response_metric = await client.scorers.score(
+    response_metric = await client.scorer.score(
         scorer_id=0,
         contract={
             "name": "My Application",
@@ -130,7 +130,7 @@ from twopir import Twopir
 client = Twopir()
 
 try:
-    client.scorers.score(
+    client.scorer.score(
         scorer_id=0,
         contract={
             "description": "You are a helpful AI assistant",
@@ -195,7 +195,7 @@ client = Twopir(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).scorers.score(
+client.with_options(max_retries=5).scorer.score(
     scorer_id=0,
     contract={
         "description": "You are a helpful AI assistant",
@@ -240,7 +240,7 @@ client = Twopir(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).scorers.score(
+client.with_options(timeout=5.0).scorer.score(
     scorer_id=0,
     contract={
         "description": "You are a helpful AI assistant",
@@ -301,7 +301,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from twopir import Twopir
 
 client = Twopir()
-response = client.scorers.with_raw_response.score(
+response = client.scorer.with_raw_response.score(
     scorer_id=0,
     contract={
         "description": "You are a helpful AI assistant",
@@ -326,7 +326,7 @@ response = client.scorers.with_raw_response.score(
 )
 print(response.headers.get('X-My-Header'))
 
-scorer = response.parse()  # get the object that `scorers.score()` would have returned
+scorer = response.parse()  # get the object that `scorer.score()` would have returned
 print(scorer.cost)
 ```
 
@@ -341,7 +341,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.scorers.with_streaming_response.score(
+with client.scorer.with_streaming_response.score(
     scorer_id=0,
     contract={
         "description": "You are a helpful AI assistant",

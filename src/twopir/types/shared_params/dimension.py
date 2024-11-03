@@ -5,15 +5,15 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-__all__ = ["DimensionParam"]
+__all__ = ["Dimension"]
 
 
-class DimensionParam(TypedDict, total=False):
+class Dimension(TypedDict, total=False):
     description: Required[str]
     """Human readable description of what the dimension is testing"""
 
     label: Required[str]
     """Human readable label for the dimension"""
 
-    sub_dimension: Iterable[DimensionParam]
+    sub_dimension: Iterable[Dimension]
     """Nested dimensions to be tested as part of this one"""

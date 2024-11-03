@@ -802,7 +802,7 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(
+        response = client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
@@ -848,7 +848,7 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(
+        response = client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
@@ -894,7 +894,7 @@ class TestTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = client.scorers.with_raw_response.score(
+        response = client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
@@ -1695,7 +1695,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = await client.scorers.with_raw_response.score(
+        response = await client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
@@ -1742,7 +1742,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = await client.scorers.with_raw_response.score(
+        response = await client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
@@ -1789,7 +1789,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
 
-        response = await client.scorers.with_raw_response.score(
+        response = await client.scorer.with_raw_response.score(
             scorer_id=0,
             contract={
                 "description": "You are a helpful AI assistant",
