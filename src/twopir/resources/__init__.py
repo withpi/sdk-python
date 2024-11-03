@@ -1,19 +1,47 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .scorers import (
-    ScorersResource,
-    AsyncScorersResource,
-    ScorersResourceWithRawResponse,
-    AsyncScorersResourceWithRawResponse,
-    ScorersResourceWithStreamingResponse,
-    AsyncScorersResourceWithStreamingResponse,
+from .scorer import (
+    ScorerResource,
+    AsyncScorerResource,
+    ScorerResourceWithRawResponse,
+    AsyncScorerResourceWithRawResponse,
+    ScorerResourceWithStreamingResponse,
+    AsyncScorerResourceWithStreamingResponse,
+)
+from .experiment import (
+    ExperimentResource,
+    AsyncExperimentResource,
+    ExperimentResourceWithRawResponse,
+    AsyncExperimentResourceWithRawResponse,
+    ExperimentResourceWithStreamingResponse,
+    AsyncExperimentResourceWithStreamingResponse,
+)
+from .prompt_optimization_job import (
+    PromptOptimizationJobResource,
+    AsyncPromptOptimizationJobResource,
+    PromptOptimizationJobResourceWithRawResponse,
+    AsyncPromptOptimizationJobResourceWithRawResponse,
+    PromptOptimizationJobResourceWithStreamingResponse,
+    AsyncPromptOptimizationJobResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "ScorersResource",
-    "AsyncScorersResource",
-    "ScorersResourceWithRawResponse",
-    "AsyncScorersResourceWithRawResponse",
-    "ScorersResourceWithStreamingResponse",
-    "AsyncScorersResourceWithStreamingResponse",
+    "PromptOptimizationJobResource",
+    "AsyncPromptOptimizationJobResource",
+    "PromptOptimizationJobResourceWithRawResponse",
+    "AsyncPromptOptimizationJobResourceWithRawResponse",
+    "PromptOptimizationJobResourceWithStreamingResponse",
+    "AsyncPromptOptimizationJobResourceWithStreamingResponse",
+    "ExperimentResource",
+    "AsyncExperimentResource",
+    "ExperimentResourceWithRawResponse",
+    "AsyncExperimentResourceWithRawResponse",
+    "ExperimentResourceWithStreamingResponse",
+    "AsyncExperimentResourceWithStreamingResponse",
+    "ScorerResource",
+    "AsyncScorerResource",
+    "ScorerResourceWithRawResponse",
+    "AsyncScorerResourceWithRawResponse",
+    "ScorerResourceWithStreamingResponse",
+    "AsyncScorerResourceWithStreamingResponse",
 ]

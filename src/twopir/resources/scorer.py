@@ -21,40 +21,40 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.contract_param import ContractParam
 from ..types.response_metric import ResponseMetric
-from ..types.llm_response_param import LlmResponseParam
+from ..types.shared_params.contract import Contract
+from ..types.shared_params.llm_response import LlmResponse
 
-__all__ = ["ScorersResource", "AsyncScorersResource"]
+__all__ = ["ScorerResource", "AsyncScorerResource"]
 
 
-class ScorersResource(SyncAPIResource):
+class ScorerResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ScorersResourceWithRawResponse:
+    def with_raw_response(self) -> ScorerResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return ScorersResourceWithRawResponse(self)
+        return ScorerResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScorersResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ScorerResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return ScorersResourceWithStreamingResponse(self)
+        return ScorerResourceWithStreamingResponse(self)
 
     def score(
         self,
         scorer_id: int,
         *,
-        contract: ContractParam,
+        contract: Contract,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,33 +98,33 @@ class ScorersResource(SyncAPIResource):
         )
 
 
-class AsyncScorersResource(AsyncAPIResource):
+class AsyncScorerResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncScorersResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncScorerResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncScorersResourceWithRawResponse(self)
+        return AsyncScorerResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScorersResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncScorerResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return AsyncScorersResourceWithStreamingResponse(self)
+        return AsyncScorerResourceWithStreamingResponse(self)
 
     async def score(
         self,
         scorer_id: int,
         *,
-        contract: ContractParam,
+        contract: Contract,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -168,37 +168,37 @@ class AsyncScorersResource(AsyncAPIResource):
         )
 
 
-class ScorersResourceWithRawResponse:
-    def __init__(self, scorers: ScorersResource) -> None:
-        self._scorers = scorers
+class ScorerResourceWithRawResponse:
+    def __init__(self, scorer: ScorerResource) -> None:
+        self._scorer = scorer
 
         self.score = to_raw_response_wrapper(
-            scorers.score,
+            scorer.score,
         )
 
 
-class AsyncScorersResourceWithRawResponse:
-    def __init__(self, scorers: AsyncScorersResource) -> None:
-        self._scorers = scorers
+class AsyncScorerResourceWithRawResponse:
+    def __init__(self, scorer: AsyncScorerResource) -> None:
+        self._scorer = scorer
 
         self.score = async_to_raw_response_wrapper(
-            scorers.score,
+            scorer.score,
         )
 
 
-class ScorersResourceWithStreamingResponse:
-    def __init__(self, scorers: ScorersResource) -> None:
-        self._scorers = scorers
+class ScorerResourceWithStreamingResponse:
+    def __init__(self, scorer: ScorerResource) -> None:
+        self._scorer = scorer
 
         self.score = to_streamed_response_wrapper(
-            scorers.score,
+            scorer.score,
         )
 
 
-class AsyncScorersResourceWithStreamingResponse:
-    def __init__(self, scorers: AsyncScorersResource) -> None:
-        self._scorers = scorers
+class AsyncScorerResourceWithStreamingResponse:
+    def __init__(self, scorer: AsyncScorerResource) -> None:
+        self._scorer = scorer
 
         self.score = async_to_streamed_response_wrapper(
-            scorers.score,
+            scorer.score,
         )
