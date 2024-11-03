@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Dict, Union
+
 import httpx
 
 from ..types import scorer_score_params
@@ -19,8 +21,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.score_bundle import ScoreBundle
-from ..types.example_param import ExampleParam
+from ..types.contract_param import ContractParam
+from ..types.response_metric import ResponseMetric
+from ..types.llm_response_param import LlmResponseParam
 
 __all__ = ["ScorersResource", "AsyncScorersResource"]
 
@@ -49,19 +52,27 @@ class ScorersResource(SyncAPIResource):
         self,
         scorer_id: int,
         *,
-        contract: scorer_score_params.Contract,
-        example: ExampleParam,
+        contract: ContractParam,
+        llm_input: Dict[str, Union[str, float]],
+        llm_response: LlmResponseParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoreBundle:
+    ) -> ResponseMetric:
         """
         Executes the provided scorer.
 
         Args:
+          contract: A collection of dimensions an LLM response must adhere to
+
+          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
+              "query"
+
+          llm_response: The response from the LLM
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -75,14 +86,15 @@ class ScorersResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
-                    "example": example,
+                    "llm_input": llm_input,
+                    "llm_response": llm_response,
                 },
                 scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoreBundle,
+            cast_to=ResponseMetric,
         )
 
 
@@ -110,19 +122,27 @@ class AsyncScorersResource(AsyncAPIResource):
         self,
         scorer_id: int,
         *,
-        contract: scorer_score_params.Contract,
-        example: ExampleParam,
+        contract: ContractParam,
+        llm_input: Dict[str, Union[str, float]],
+        llm_response: LlmResponseParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoreBundle:
+    ) -> ResponseMetric:
         """
         Executes the provided scorer.
 
         Args:
+          contract: A collection of dimensions an LLM response must adhere to
+
+          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
+              "query"
+
+          llm_response: The response from the LLM
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -136,14 +156,15 @@ class AsyncScorersResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
-                    "example": example,
+                    "llm_input": llm_input,
+                    "llm_response": llm_response,
                 },
                 scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoreBundle,
+            cast_to=ResponseMetric,
         )
 
 
