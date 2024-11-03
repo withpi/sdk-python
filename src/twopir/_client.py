@@ -46,6 +46,7 @@ __all__ = [
 
 
 class Twopir(SyncAPIClient):
+    calibration: resources.CalibrationResource
     prompt_optimization_job: resources.PromptOptimizationJobResource
     experiment: resources.ExperimentResource
     scorer: resources.ScorerResource
@@ -106,6 +107,7 @@ class Twopir(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.calibration = resources.CalibrationResource(self)
         self.prompt_optimization_job = resources.PromptOptimizationJobResource(self)
         self.experiment = resources.ExperimentResource(self)
         self.scorer = resources.ScorerResource(self)
@@ -218,6 +220,7 @@ class Twopir(SyncAPIClient):
 
 
 class AsyncTwopir(AsyncAPIClient):
+    calibration: resources.AsyncCalibrationResource
     prompt_optimization_job: resources.AsyncPromptOptimizationJobResource
     experiment: resources.AsyncExperimentResource
     scorer: resources.AsyncScorerResource
@@ -278,6 +281,7 @@ class AsyncTwopir(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.calibration = resources.AsyncCalibrationResource(self)
         self.prompt_optimization_job = resources.AsyncPromptOptimizationJobResource(self)
         self.experiment = resources.AsyncExperimentResource(self)
         self.scorer = resources.AsyncScorerResource(self)
@@ -391,6 +395,7 @@ class AsyncTwopir(AsyncAPIClient):
 
 class TwopirWithRawResponse:
     def __init__(self, client: Twopir) -> None:
+        self.calibration = resources.CalibrationResourceWithRawResponse(client.calibration)
         self.prompt_optimization_job = resources.PromptOptimizationJobResourceWithRawResponse(
             client.prompt_optimization_job
         )
@@ -400,6 +405,7 @@ class TwopirWithRawResponse:
 
 class AsyncTwopirWithRawResponse:
     def __init__(self, client: AsyncTwopir) -> None:
+        self.calibration = resources.AsyncCalibrationResourceWithRawResponse(client.calibration)
         self.prompt_optimization_job = resources.AsyncPromptOptimizationJobResourceWithRawResponse(
             client.prompt_optimization_job
         )
@@ -409,6 +415,7 @@ class AsyncTwopirWithRawResponse:
 
 class TwopirWithStreamedResponse:
     def __init__(self, client: Twopir) -> None:
+        self.calibration = resources.CalibrationResourceWithStreamingResponse(client.calibration)
         self.prompt_optimization_job = resources.PromptOptimizationJobResourceWithStreamingResponse(
             client.prompt_optimization_job
         )
@@ -418,6 +425,7 @@ class TwopirWithStreamedResponse:
 
 class AsyncTwopirWithStreamedResponse:
     def __init__(self, client: AsyncTwopir) -> None:
+        self.calibration = resources.AsyncCalibrationResourceWithStreamingResponse(client.calibration)
         self.prompt_optimization_job = resources.AsyncPromptOptimizationJobResourceWithStreamingResponse(
             client.prompt_optimization_job
         )
