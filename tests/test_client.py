@@ -701,11 +701,11 @@ class TestTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/scorers/0").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/experiments/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/scorers/0",
+                "/experiments/",
                 body=cast(
                     object,
                     dict(
@@ -727,8 +727,21 @@ class TestTwopir:
                             ],
                             "name": "My application",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        examples=[
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                        ],
+                        scorer_id=0,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -740,11 +753,11 @@ class TestTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/scorers/0").mock(return_value=httpx.Response(500))
+        respx_mock.post("/experiments/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/scorers/0",
+                "/experiments/",
                 body=cast(
                     object,
                     dict(
@@ -766,8 +779,21 @@ class TestTwopir:
                             ],
                             "name": "My application",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        examples=[
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                        ],
+                        scorer_id=0,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -800,10 +826,9 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -822,8 +847,21 @@ class TestTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
         )
 
         assert response.retries_taken == failures_before_success
@@ -846,10 +884,9 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -868,8 +905,21 @@ class TestTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -892,10 +942,9 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -914,8 +963,21 @@ class TestTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1593,11 +1655,11 @@ class TestAsyncTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/scorers/0").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/experiments/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/scorers/0",
+                "/experiments/",
                 body=cast(
                     object,
                     dict(
@@ -1619,8 +1681,21 @@ class TestAsyncTwopir:
                             ],
                             "name": "My application",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        examples=[
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                        ],
+                        scorer_id=0,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1632,11 +1707,11 @@ class TestAsyncTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/scorers/0").mock(return_value=httpx.Response(500))
+        respx_mock.post("/experiments/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/scorers/0",
+                "/experiments/",
                 body=cast(
                     object,
                     dict(
@@ -1658,8 +1733,21 @@ class TestAsyncTwopir:
                             ],
                             "name": "My application",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        examples=[
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                            {
+                                "llm_input": {"query": "Help me with my problem"},
+                                "llm_response": {"text": "I am happy to help you with that."},
+                            },
+                        ],
+                        scorer_id=0,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1693,10 +1781,9 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = await client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = await client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -1715,8 +1802,21 @@ class TestAsyncTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
         )
 
         assert response.retries_taken == failures_before_success
@@ -1740,10 +1840,9 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = await client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = await client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -1762,8 +1861,21 @@ class TestAsyncTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1787,10 +1899,9 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/scorers/0").mock(side_effect=retry_handler)
+        respx_mock.post("/experiments/").mock(side_effect=retry_handler)
 
-        response = await client.scorer.with_raw_response.score(
-            scorer_id=0,
+        response = await client.experiment.with_raw_response.create(
             contract={
                 "description": "You are a helpful AI assistant",
                 "dimensions": [
@@ -1809,8 +1920,21 @@ class TestAsyncTwopir:
                 ],
                 "name": "My application",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            examples=[
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+                {
+                    "llm_input": {"query": "Help me with my problem"},
+                    "llm_response": {"text": "I am happy to help you with that."},
+                },
+            ],
+            scorer_id=0,
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
