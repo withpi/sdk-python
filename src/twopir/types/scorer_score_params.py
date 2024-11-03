@@ -2,29 +2,24 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Dict, Union
 from typing_extensions import Required, TypedDict
 
-from .example_param import ExampleParam
+from .contract_param import ContractParam
+from .llm_response_param import LlmResponseParam
 
-__all__ = ["ScorerScoreParams", "Contract", "ContractDimension"]
+__all__ = ["ScorerScoreParams"]
 
 
 class ScorerScoreParams(TypedDict, total=False):
-    contract: Required[Contract]
+    contract: Required[ContractParam]
+    """A collection of dimensions an LLM response must adhere to"""
 
-    example: Required[ExampleParam]
+    llm_input: Required[Dict[str, Union[str, float]]]
+    """Key/Value pairs constituting the input.
 
+    If the input is just text, use the key "query"
+    """
 
-class ContractDimension(TypedDict, total=False):
-    description: Required[str]
-
-    label: Required[str]
-
-
-class Contract(TypedDict, total=False):
-    description: Required[str]
-
-    dimensions: Required[Iterable[ContractDimension]]
-
-    name: Required[str]
+    llm_response: Required[LlmResponseParam]
+    """The response from the LLM"""
