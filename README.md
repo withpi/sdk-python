@@ -35,26 +35,42 @@ client = Twopir(
     api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
-response_metrics = client.scorer.score(
-    scorer_id=0,
+experiment_status = client.experiment.create(
     contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
+        "description": "You are a helpful AI assistant",
         "dimensions": [
             {
-                "description": "Test whether the LLM follows instructions",
+                "description": "Test whether the LLM follows instructions.",
                 "label": "Instruction Following",
             },
             {
-                "description": "Test whether the LLM responds to the query",
-                "label": "Topicality",
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM follows instructions.",
+                "label": "Instruction Following",
             },
         ],
+        "name": "My application",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "Of course I can help with that"},
+    examples=[
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+    ],
+    scorer_id=0,
 )
-print(response_metrics.scores)
+print(experiment_status.job_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -78,26 +94,42 @@ client = AsyncTwopir(
 
 
 async def main() -> None:
-    response_metrics = await client.scorer.score(
-        scorer_id=0,
+    experiment_status = await client.experiment.create(
         contract={
-            "name": "My Application",
-            "description": "You are a helpful assistant",
+            "description": "You are a helpful AI assistant",
             "dimensions": [
                 {
-                    "description": "Test whether the LLM follows instructions",
+                    "description": "Test whether the LLM follows instructions.",
                     "label": "Instruction Following",
                 },
                 {
-                    "description": "Test whether the LLM responds to the query",
-                    "label": "Topicality",
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM follows instructions.",
+                    "label": "Instruction Following",
                 },
             ],
+            "name": "My application",
         },
-        llm_input={"query": "Help me with my problem"},
-        llm_response={"text": "Of course I can help with that"},
+        examples=[
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+        ],
+        scorer_id=0,
     )
-    print(response_metrics.scores)
+    print(experiment_status.job_id)
 
 
 asyncio.run(main())
@@ -130,8 +162,7 @@ from twopir import Twopir
 client = Twopir()
 
 try:
-    client.scorer.score(
-        scorer_id=0,
+    client.experiment.create(
         contract={
             "description": "You are a helpful AI assistant",
             "dimensions": [
@@ -150,8 +181,21 @@ try:
             ],
             "name": "My application",
         },
-        llm_input={"query": "Help me with my problem"},
-        llm_response={"text": "I am happy to help you with that."},
+        examples=[
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+            {
+                "llm_input": {"query": "Help me with my problem"},
+                "llm_response": {"text": "I am happy to help you with that."},
+            },
+        ],
+        scorer_id=0,
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -195,8 +239,7 @@ client = Twopir(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).scorer.score(
-    scorer_id=0,
+client.with_options(max_retries=5).experiment.create(
     contract={
         "description": "You are a helpful AI assistant",
         "dimensions": [
@@ -215,8 +258,21 @@ client.with_options(max_retries=5).scorer.score(
         ],
         "name": "My application",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    examples=[
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+    ],
+    scorer_id=0,
 )
 ```
 
@@ -240,8 +296,7 @@ client = Twopir(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).scorer.score(
-    scorer_id=0,
+client.with_options(timeout=5.0).experiment.create(
     contract={
         "description": "You are a helpful AI assistant",
         "dimensions": [
@@ -260,8 +315,21 @@ client.with_options(timeout=5.0).scorer.score(
         ],
         "name": "My application",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    examples=[
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+    ],
+    scorer_id=0,
 )
 ```
 
@@ -301,8 +369,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from twopir import Twopir
 
 client = Twopir()
-response = client.scorer.with_raw_response.score(
-    scorer_id=0,
+response = client.experiment.with_raw_response.create(
     contract={
         "description": "You are a helpful AI assistant",
         "dimensions": [{
@@ -317,17 +384,34 @@ response = client.scorer.with_raw_response.score(
         }],
         "name": "My application",
     },
-    llm_input={
-        "query": "Help me with my problem"
-    },
-    llm_response={
-        "text": "I am happy to help you with that."
-    },
+    examples=[{
+        "llm_input": {
+            "query": "Help me with my problem"
+        },
+        "llm_response": {
+            "text": "I am happy to help you with that."
+        },
+    }, {
+        "llm_input": {
+            "query": "Help me with my problem"
+        },
+        "llm_response": {
+            "text": "I am happy to help you with that."
+        },
+    }, {
+        "llm_input": {
+            "query": "Help me with my problem"
+        },
+        "llm_response": {
+            "text": "I am happy to help you with that."
+        },
+    }],
+    scorer_id=0,
 )
 print(response.headers.get('X-My-Header'))
 
-scorer = response.parse()  # get the object that `scorer.score()` would have returned
-print(scorer.cost)
+experiment = response.parse()  # get the object that `experiment.create()` would have returned
+print(experiment.job_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/twopir-python/tree/main/src/twopir/_response.py) object.
@@ -341,8 +425,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.scorer.with_streaming_response.score(
-    scorer_id=0,
+with client.experiment.with_streaming_response.create(
     contract={
         "description": "You are a helpful AI assistant",
         "dimensions": [
@@ -361,8 +444,21 @@ with client.scorer.with_streaming_response.score(
         ],
         "name": "My application",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    examples=[
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+        {
+            "llm_input": {"query": "Help me with my problem"},
+            "llm_response": {"text": "I am happy to help you with that."},
+        },
+    ],
+    scorer_id=0,
 ) as response:
     print(response.headers.get("X-My-Header"))
 
