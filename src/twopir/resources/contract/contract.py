@@ -33,10 +33,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.response_param import ResponseParam
 from ...types.shared.contract import Contract as SharedContract
 from ...types.response_metrics import ResponseMetrics
 from ...types.shared_params.contract import Contract as SharedParamsContract
+from ...types.shared_params.llm_response import LlmResponse
 
 __all__ = ["ContractResource", "AsyncContractResource"]
 
@@ -149,7 +149,7 @@ class ContractResource(SyncAPIResource):
         *,
         contract: SharedParamsContract,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: ResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -301,7 +301,7 @@ class AsyncContractResource(AsyncAPIResource):
         *,
         contract: SharedParamsContract,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: ResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Dict, Union
 from typing_extensions import Required, TypedDict
 
-from ..response_param import ResponseParam
 from ..shared_params.dimension import Dimension
+from ..shared_params.llm_response import LlmResponse
 
 __all__ = ["DimensionScoreParams"]
 
@@ -21,5 +21,5 @@ class DimensionScoreParams(TypedDict, total=False):
     If the input is just text, use the key "query"
     """
 
-    llm_response: Required[ResponseParam]
+    llm_response: Required[LlmResponse]
     """The response from the LLM"""

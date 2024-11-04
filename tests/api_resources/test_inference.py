@@ -8,6 +8,8 @@ from typing import Any, cast
 import pytest
 
 from twopir import Twopir, AsyncTwopir
+from tests.utils import assert_matches_type
+from twopir.types.shared import LlmResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -20,7 +22,7 @@ class TestInference:
         inference = client.inference.run(
             llm_input={"query": "Help me with my problem"},
         )
-        assert inference is None
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_raw_response_run(self, client: Twopir) -> None:
@@ -31,7 +33,7 @@ class TestInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = response.parse()
-        assert inference is None
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_streaming_response_run(self, client: Twopir) -> None:
@@ -42,7 +44,7 @@ class TestInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = response.parse()
-            assert inference is None
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -55,7 +57,7 @@ class TestAsyncInference:
         inference = await async_client.inference.run(
             llm_input={"query": "Help me with my problem"},
         )
-        assert inference is None
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncTwopir) -> None:
@@ -66,7 +68,7 @@ class TestAsyncInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = await response.parse()
-        assert inference is None
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncTwopir) -> None:
@@ -77,6 +79,6 @@ class TestAsyncInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = await response.parse()
-            assert inference is None
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True

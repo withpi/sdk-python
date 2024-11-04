@@ -7,7 +7,7 @@ from typing import Dict, Union
 import httpx
 
 from ..types import inference_run_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
     async_maybe_transform,
@@ -21,6 +21,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.shared.llm_response import LlmResponse
 
 __all__ = ["InferenceResource", "AsyncInferenceResource"]
 
@@ -55,7 +56,7 @@ class InferenceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -71,14 +72,13 @@ class InferenceResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             "/inference/run",
             body=maybe_transform({"llm_input": llm_input}, inference_run_params.InferenceRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=LlmResponse,
         )
 
 
@@ -112,7 +112,7 @@ class AsyncInferenceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -128,14 +128,13 @@ class AsyncInferenceResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             "/inference/run",
             body=await async_maybe_transform({"llm_input": llm_input}, inference_run_params.InferenceRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=LlmResponse,
         )
 
 
