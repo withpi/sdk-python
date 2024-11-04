@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["LlmResponse"]
+__all__ = ["ResponseParam"]
 
 
-class LlmResponse(TypedDict, total=False):
+class ResponseParam(TypedDict, total=False):
     text: Required[str]
     """The literal text returned from the LLM."""

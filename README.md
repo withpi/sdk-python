@@ -35,42 +35,9 @@ client = Twopir(
     api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
-experiment_status = client.experiment.create(
-    contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
-    },
-    examples=[
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-    ],
-    scorer_id=0,
+client.inference.run(
+    llm_input={"query": "Help me with my problem"},
 )
-print(experiment_status.job_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -94,42 +61,9 @@ client = AsyncTwopir(
 
 
 async def main() -> None:
-    experiment_status = await client.experiment.create(
-        contract={
-            "description": "You are a helpful AI assistant",
-            "dimensions": [
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-            ],
-            "name": "My application",
-        },
-        examples=[
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-        ],
-        scorer_id=0,
+    await client.inference.run(
+        llm_input={"query": "Help me with my problem"},
     )
-    print(experiment_status.job_id)
 
 
 asyncio.run(main())
@@ -162,40 +96,8 @@ from twopir import Twopir
 client = Twopir()
 
 try:
-    client.experiment.create(
-        contract={
-            "description": "You are a helpful AI assistant",
-            "dimensions": [
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-            ],
-            "name": "My application",
-        },
-        examples=[
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-            {
-                "llm_input": {"query": "Help me with my problem"},
-                "llm_response": {"text": "I am happy to help you with that."},
-            },
-        ],
-        scorer_id=0,
+    client.inference.run(
+        llm_input={"query": "Help me with my problem"},
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -239,40 +141,8 @@ client = Twopir(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).experiment.create(
-    contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
-    },
-    examples=[
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-    ],
-    scorer_id=0,
+client.with_options(max_retries=5).inference.run(
+    llm_input={"query": "Help me with my problem"},
 )
 ```
 
@@ -296,40 +166,8 @@ client = Twopir(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).experiment.create(
-    contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
-    },
-    examples=[
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-    ],
-    scorer_id=0,
+client.with_options(timeout=5.0).inference.run(
+    llm_input={"query": "Help me with my problem"},
 )
 ```
 
@@ -369,49 +207,15 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from twopir import Twopir
 
 client = Twopir()
-response = client.experiment.with_raw_response.create(
-    contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [{
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }, {
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }, {
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }],
-        "name": "My application",
+response = client.inference.with_raw_response.run(
+    llm_input={
+        "query": "Help me with my problem"
     },
-    examples=[{
-        "llm_input": {
-            "query": "Help me with my problem"
-        },
-        "llm_response": {
-            "text": "I am happy to help you with that."
-        },
-    }, {
-        "llm_input": {
-            "query": "Help me with my problem"
-        },
-        "llm_response": {
-            "text": "I am happy to help you with that."
-        },
-    }, {
-        "llm_input": {
-            "query": "Help me with my problem"
-        },
-        "llm_response": {
-            "text": "I am happy to help you with that."
-        },
-    }],
-    scorer_id=0,
 )
 print(response.headers.get('X-My-Header'))
 
-experiment = response.parse()  # get the object that `experiment.create()` would have returned
-print(experiment.job_id)
+inference = response.parse()  # get the object that `inference.run()` would have returned
+print(inference)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/twopir-python/tree/main/src/twopir/_response.py) object.
@@ -425,40 +229,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.experiment.with_streaming_response.create(
-    contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
-    },
-    examples=[
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-        {
-            "llm_input": {"query": "Help me with my problem"},
-            "llm_response": {"text": "I am happy to help you with that."},
-        },
-    ],
-    scorer_id=0,
+with client.inference.with_streaming_response.run(
+    llm_input={"query": "Help me with my problem"},
 ) as response:
     print(response.headers.get("X-My-Header"))
 

@@ -2,73 +2,65 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-
 import httpx
 
-from ..types import experiment_create_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.experiment_status import ExperimentStatus
-from ..types.shared_params.contract import Contract
+from ...types.data import input_generate_params
+from ..._base_client import make_request_options
+from ...types.data_generation_status import DataGenerationStatus
+from ...types.shared_params.contract import Contract
 
-__all__ = ["ExperimentResource", "AsyncExperimentResource"]
+__all__ = ["InputsResource", "AsyncInputsResource"]
 
 
-class ExperimentResource(SyncAPIResource):
+class InputsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ExperimentResourceWithRawResponse:
+    def with_raw_response(self) -> InputsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return ExperimentResourceWithRawResponse(self)
+        return InputsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ExperimentResourceWithStreamingResponse:
+    def with_streaming_response(self) -> InputsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return ExperimentResourceWithStreamingResponse(self)
+        return InputsResourceWithStreamingResponse(self)
 
-    def create(
+    def generate(
         self,
         *,
         contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> DataGenerationStatus:
         """
-        Launches an experiment
+        Start an input data generation job
 
         Args:
           contract: A collection of dimensions an LLM response must adhere to
-
-          examples: List of examples that should be scored
-
-          scorer_id: The ID of the scorer to apply
 
           extra_headers: Send extra headers
 
@@ -79,24 +71,17 @@ class ExperimentResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/experiments",
-            body=maybe_transform(
-                {
-                    "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
-                },
-                experiment_create_params.ExperimentCreateParams,
-            ),
+            "/data/input",
+            body=maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=DataGenerationStatus,
         )
 
     def get(
         self,
-        exp_id: int,
+        job_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -104,9 +89,9 @@ class ExperimentResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> DataGenerationStatus:
         """
-        Checks on a running or finished experiment
+        Checks on an input data generation job
 
         Args:
           extra_headers: Send extra headers
@@ -118,56 +103,50 @@ class ExperimentResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/experiments/{exp_id}",
+            f"/data/input/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=DataGenerationStatus,
         )
 
 
-class AsyncExperimentResource(AsyncAPIResource):
+class AsyncInputsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncExperimentResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncInputsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncExperimentResourceWithRawResponse(self)
+        return AsyncInputsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncExperimentResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncInputsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return AsyncExperimentResourceWithStreamingResponse(self)
+        return AsyncInputsResourceWithStreamingResponse(self)
 
-    async def create(
+    async def generate(
         self,
         *,
         contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> DataGenerationStatus:
         """
-        Launches an experiment
+        Start an input data generation job
 
         Args:
           contract: A collection of dimensions an LLM response must adhere to
-
-          examples: List of examples that should be scored
-
-          scorer_id: The ID of the scorer to apply
 
           extra_headers: Send extra headers
 
@@ -178,24 +157,17 @@ class AsyncExperimentResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/experiments",
-            body=await async_maybe_transform(
-                {
-                    "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
-                },
-                experiment_create_params.ExperimentCreateParams,
-            ),
+            "/data/input",
+            body=await async_maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=DataGenerationStatus,
         )
 
     async def get(
         self,
-        exp_id: int,
+        job_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -203,9 +175,9 @@ class AsyncExperimentResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> DataGenerationStatus:
         """
-        Checks on a running or finished experiment
+        Checks on an input data generation job
 
         Args:
           extra_headers: Send extra headers
@@ -217,57 +189,57 @@ class AsyncExperimentResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/experiments/{exp_id}",
+            f"/data/input/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=DataGenerationStatus,
         )
 
 
-class ExperimentResourceWithRawResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class InputsResourceWithRawResponse:
+    def __init__(self, inputs: InputsResource) -> None:
+        self._inputs = inputs
 
-        self.create = to_raw_response_wrapper(
-            experiment.create,
+        self.generate = to_raw_response_wrapper(
+            inputs.generate,
         )
         self.get = to_raw_response_wrapper(
-            experiment.get,
+            inputs.get,
         )
 
 
-class AsyncExperimentResourceWithRawResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
+class AsyncInputsResourceWithRawResponse:
+    def __init__(self, inputs: AsyncInputsResource) -> None:
+        self._inputs = inputs
 
-        self.create = async_to_raw_response_wrapper(
-            experiment.create,
+        self.generate = async_to_raw_response_wrapper(
+            inputs.generate,
         )
         self.get = async_to_raw_response_wrapper(
-            experiment.get,
+            inputs.get,
         )
 
 
-class ExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class InputsResourceWithStreamingResponse:
+    def __init__(self, inputs: InputsResource) -> None:
+        self._inputs = inputs
 
-        self.create = to_streamed_response_wrapper(
-            experiment.create,
+        self.generate = to_streamed_response_wrapper(
+            inputs.generate,
         )
         self.get = to_streamed_response_wrapper(
-            experiment.get,
+            inputs.get,
         )
 
 
-class AsyncExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
+class AsyncInputsResourceWithStreamingResponse:
+    def __init__(self, inputs: AsyncInputsResource) -> None:
+        self._inputs = inputs
 
-        self.create = async_to_streamed_response_wrapper(
-            experiment.create,
+        self.generate = async_to_streamed_response_wrapper(
+            inputs.generate,
         )
         self.get = async_to_streamed_response_wrapper(
-            experiment.get,
+            inputs.get,
         )

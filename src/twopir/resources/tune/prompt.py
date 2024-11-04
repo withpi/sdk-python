@@ -2,101 +2,52 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-
 import httpx
 
-from ..types import experiment_create_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.experiment_status import ExperimentStatus
-from ..types.shared_params.contract import Contract
+from ...types.tune import prompt_optimize_params
+from ..._base_client import make_request_options
+from ...types.optimization_status import OptimizationStatus
+from ...types.shared_params.contract import Contract
 
-__all__ = ["ExperimentResource", "AsyncExperimentResource"]
+__all__ = ["PromptResource", "AsyncPromptResource"]
 
 
-class ExperimentResource(SyncAPIResource):
+class PromptResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ExperimentResourceWithRawResponse:
+    def with_raw_response(self) -> PromptResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
-        return ExperimentResourceWithRawResponse(self)
+        return PromptResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ExperimentResourceWithStreamingResponse:
+    def with_streaming_response(self) -> PromptResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
-        return ExperimentResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
-        """
-        Launches an experiment
-
-        Args:
-          contract: A collection of dimensions an LLM response must adhere to
-
-          examples: List of examples that should be scored
-
-          scorer_id: The ID of the scorer to apply
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/experiments",
-            body=maybe_transform(
-                {
-                    "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
-                },
-                experiment_create_params.ExperimentCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ExperimentStatus,
-        )
+        return PromptResourceWithStreamingResponse(self)
 
     def get(
         self,
-        exp_id: int,
+        job_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -104,9 +55,9 @@ class ExperimentResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> OptimizationStatus:
         """
-        Checks on a running or finished experiment
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -118,56 +69,32 @@ class ExperimentResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/experiments/{exp_id}",
+            f"/tune/prompt/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=OptimizationStatus,
         )
 
-
-class AsyncExperimentResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncExperimentResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return the
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncExperimentResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncExperimentResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
-        """
-        return AsyncExperimentResourceWithStreamingResponse(self)
-
-    async def create(
+    def optimize(
         self,
         *,
         contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
+        experiment_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> OptimizationStatus:
         """
-        Launches an experiment
+        Starts a prompt optimization job
 
         Args:
           contract: A collection of dimensions an LLM response must adhere to
 
-          examples: List of examples that should be scored
-
-          scorer_id: The ID of the scorer to apply
+          experiment_id: The ID of a completed experiment to use for optimization
 
           extra_headers: Send extra headers
 
@@ -177,25 +104,45 @@ class AsyncExperimentResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
-            "/experiments",
-            body=await async_maybe_transform(
+        return self._post(
+            "/tune/prompt",
+            body=maybe_transform(
                 {
                     "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
+                    "experiment_id": experiment_id,
                 },
-                experiment_create_params.ExperimentCreateParams,
+                prompt_optimize_params.PromptOptimizeParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=OptimizationStatus,
         )
+
+
+class AsyncPromptResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncPromptResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncPromptResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncPromptResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
+        """
+        return AsyncPromptResourceWithStreamingResponse(self)
 
     async def get(
         self,
-        exp_id: int,
+        job_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -203,9 +150,9 @@ class AsyncExperimentResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> OptimizationStatus:
         """
-        Checks on a running or finished experiment
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -217,57 +164,100 @@ class AsyncExperimentResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/experiments/{exp_id}",
+            f"/tune/prompt/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=OptimizationStatus,
+        )
+
+    async def optimize(
+        self,
+        *,
+        contract: Contract,
+        experiment_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OptimizationStatus:
+        """
+        Starts a prompt optimization job
+
+        Args:
+          contract: A collection of dimensions an LLM response must adhere to
+
+          experiment_id: The ID of a completed experiment to use for optimization
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/tune/prompt",
+            body=await async_maybe_transform(
+                {
+                    "contract": contract,
+                    "experiment_id": experiment_id,
+                },
+                prompt_optimize_params.PromptOptimizeParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OptimizationStatus,
         )
 
 
-class ExperimentResourceWithRawResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class PromptResourceWithRawResponse:
+    def __init__(self, prompt: PromptResource) -> None:
+        self._prompt = prompt
 
-        self.create = to_raw_response_wrapper(
-            experiment.create,
-        )
         self.get = to_raw_response_wrapper(
-            experiment.get,
+            prompt.get,
+        )
+        self.optimize = to_raw_response_wrapper(
+            prompt.optimize,
         )
 
 
-class AsyncExperimentResourceWithRawResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
+class AsyncPromptResourceWithRawResponse:
+    def __init__(self, prompt: AsyncPromptResource) -> None:
+        self._prompt = prompt
 
-        self.create = async_to_raw_response_wrapper(
-            experiment.create,
-        )
         self.get = async_to_raw_response_wrapper(
-            experiment.get,
+            prompt.get,
+        )
+        self.optimize = async_to_raw_response_wrapper(
+            prompt.optimize,
         )
 
 
-class ExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class PromptResourceWithStreamingResponse:
+    def __init__(self, prompt: PromptResource) -> None:
+        self._prompt = prompt
 
-        self.create = to_streamed_response_wrapper(
-            experiment.create,
-        )
         self.get = to_streamed_response_wrapper(
-            experiment.get,
+            prompt.get,
+        )
+        self.optimize = to_streamed_response_wrapper(
+            prompt.optimize,
         )
 
 
-class AsyncExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
+class AsyncPromptResourceWithStreamingResponse:
+    def __init__(self, prompt: AsyncPromptResource) -> None:
+        self._prompt = prompt
 
-        self.create = async_to_streamed_response_wrapper(
-            experiment.create,
-        )
         self.get = async_to_streamed_response_wrapper(
-            experiment.get,
+            prompt.get,
+        )
+        self.optimize = async_to_streamed_response_wrapper(
+            prompt.optimize,
         )
