@@ -8,21 +8,21 @@ from typing_extensions import Required, TypedDict
 from .response_param import ResponseParam
 from .shared_params.contract import Contract
 
-__all__ = ["ExperimentCreateParams", "Example"]
+__all__ = ["ContractCalibrateParams", "Feedback"]
 
 
-class ExperimentCreateParams(TypedDict, total=False):
+class ContractCalibrateParams(TypedDict, total=False):
     contract: Required[Contract]
     """A collection of dimensions an LLM response must adhere to"""
 
-    examples: Required[Iterable[Example]]
-    """List of examples that should be scored"""
-
-    scorer_id: Required[int]
-    """The ID of the scorer to apply"""
+    feedbacks: Required[Iterable[Feedback]]
+    """The list of Feedbacks to use for calibration"""
 
 
-class Example(TypedDict, total=False):
+class Feedback(TypedDict, total=False):
+    labels: Required[Dict[str, float]]
+    """The human-applied labels associated with the example"""
+
     llm_input: Required[Dict[str, Union[str, float]]]
     """Key/Value pairs constituting the input.
 
@@ -31,3 +31,6 @@ class Example(TypedDict, total=False):
 
     llm_response: Required[ResponseParam]
     """The response from the LLM"""
+
+    scores: Required[Dict[str, float]]
+    """Previous scores associated with the example"""

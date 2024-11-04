@@ -46,7 +46,11 @@ __all__ = [
 
 
 class Twopir(SyncAPIClient):
+    inference: resources.InferenceResource
+    data: resources.DataResource
+    tune: resources.TuneResource
     experiment: resources.ExperimentResource
+    contract: resources.ContractResource
     with_raw_response: TwopirWithRawResponse
     with_streaming_response: TwopirWithStreamedResponse
 
@@ -104,7 +108,11 @@ class Twopir(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.inference = resources.InferenceResource(self)
+        self.data = resources.DataResource(self)
+        self.tune = resources.TuneResource(self)
         self.experiment = resources.ExperimentResource(self)
+        self.contract = resources.ContractResource(self)
         self.with_raw_response = TwopirWithRawResponse(self)
         self.with_streaming_response = TwopirWithStreamedResponse(self)
 
@@ -214,7 +222,11 @@ class Twopir(SyncAPIClient):
 
 
 class AsyncTwopir(AsyncAPIClient):
+    inference: resources.AsyncInferenceResource
+    data: resources.AsyncDataResource
+    tune: resources.AsyncTuneResource
     experiment: resources.AsyncExperimentResource
+    contract: resources.AsyncContractResource
     with_raw_response: AsyncTwopirWithRawResponse
     with_streaming_response: AsyncTwopirWithStreamedResponse
 
@@ -272,7 +284,11 @@ class AsyncTwopir(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.inference = resources.AsyncInferenceResource(self)
+        self.data = resources.AsyncDataResource(self)
+        self.tune = resources.AsyncTuneResource(self)
         self.experiment = resources.AsyncExperimentResource(self)
+        self.contract = resources.AsyncContractResource(self)
         self.with_raw_response = AsyncTwopirWithRawResponse(self)
         self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
@@ -383,22 +399,38 @@ class AsyncTwopir(AsyncAPIClient):
 
 class TwopirWithRawResponse:
     def __init__(self, client: Twopir) -> None:
+        self.inference = resources.InferenceResourceWithRawResponse(client.inference)
+        self.data = resources.DataResourceWithRawResponse(client.data)
+        self.tune = resources.TuneResourceWithRawResponse(client.tune)
         self.experiment = resources.ExperimentResourceWithRawResponse(client.experiment)
+        self.contract = resources.ContractResourceWithRawResponse(client.contract)
 
 
 class AsyncTwopirWithRawResponse:
     def __init__(self, client: AsyncTwopir) -> None:
+        self.inference = resources.AsyncInferenceResourceWithRawResponse(client.inference)
+        self.data = resources.AsyncDataResourceWithRawResponse(client.data)
+        self.tune = resources.AsyncTuneResourceWithRawResponse(client.tune)
         self.experiment = resources.AsyncExperimentResourceWithRawResponse(client.experiment)
+        self.contract = resources.AsyncContractResourceWithRawResponse(client.contract)
 
 
 class TwopirWithStreamedResponse:
     def __init__(self, client: Twopir) -> None:
+        self.inference = resources.InferenceResourceWithStreamingResponse(client.inference)
+        self.data = resources.DataResourceWithStreamingResponse(client.data)
+        self.tune = resources.TuneResourceWithStreamingResponse(client.tune)
         self.experiment = resources.ExperimentResourceWithStreamingResponse(client.experiment)
+        self.contract = resources.ContractResourceWithStreamingResponse(client.contract)
 
 
 class AsyncTwopirWithStreamedResponse:
     def __init__(self, client: AsyncTwopir) -> None:
+        self.inference = resources.AsyncInferenceResourceWithStreamingResponse(client.inference)
+        self.data = resources.AsyncDataResourceWithStreamingResponse(client.data)
+        self.tune = resources.AsyncTuneResourceWithStreamingResponse(client.tune)
         self.experiment = resources.AsyncExperimentResourceWithStreamingResponse(client.experiment)
+        self.contract = resources.AsyncContractResourceWithStreamingResponse(client.contract)
 
 
 Client = Twopir
