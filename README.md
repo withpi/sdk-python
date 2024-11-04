@@ -35,9 +35,10 @@ client = Twopir(
     api_key=os.environ.get("TWOPIR_API_KEY"),
 )
 
-client.inference.run(
+llm_response = client.inference.run(
     llm_input={"query": "Help me with my problem"},
 )
+print(llm_response.text)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -61,9 +62,10 @@ client = AsyncTwopir(
 
 
 async def main() -> None:
-    await client.inference.run(
+    llm_response = await client.inference.run(
         llm_input={"query": "Help me with my problem"},
     )
+    print(llm_response.text)
 
 
 asyncio.run(main())
@@ -215,7 +217,7 @@ response = client.inference.with_raw_response.run(
 print(response.headers.get('X-My-Header'))
 
 inference = response.parse()  # get the object that `inference.run()` would have returned
-print(inference)
+print(inference.text)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/twopir-python/tree/main/src/twopir/_response.py) object.

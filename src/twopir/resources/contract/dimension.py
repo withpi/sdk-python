@@ -21,10 +21,10 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.contract import dimension_score_params, dimension_generate_params
-from ...types.response_param import ResponseParam
 from ...types.response_metrics import ResponseMetrics
 from ...types.shared.dimension import Dimension as SharedDimension
 from ...types.shared_params.dimension import Dimension as SharedParamsDimension
+from ...types.shared_params.llm_response import LlmResponse
 
 __all__ = ["DimensionResource", "AsyncDimensionResource"]
 
@@ -88,7 +88,7 @@ class DimensionResource(SyncAPIResource):
         *,
         dimension: SharedParamsDimension,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: ResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,7 +193,7 @@ class AsyncDimensionResource(AsyncAPIResource):
         *,
         dimension: SharedParamsDimension,
         llm_input: Dict[str, Union[str, float]],
-        llm_response: ResponseParam,
+        llm_response: LlmResponse,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

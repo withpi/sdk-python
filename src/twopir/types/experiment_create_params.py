@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from .response_param import ResponseParam
 from .shared_params.contract import Contract
+from .shared_params.llm_response import LlmResponse
 
 __all__ = ["ExperimentCreateParams", "Example"]
 
@@ -29,5 +29,5 @@ class Example(TypedDict, total=False):
     If the input is just text, use the key "query"
     """
 
-    llm_response: Required[ResponseParam]
+    llm_response: Required[LlmResponse]
     """The response from the LLM"""
