@@ -701,12 +701,36 @@ class TestTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/inference/run").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/contracts/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/inference/run",
-                body=cast(object, dict(llm_input={"query": "Help me with my problem"})),
+                "/contracts/score",
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "You are a helpful AI assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        llm_input={"query": "Help me with my problem"},
+                        llm_response={"text": "I am happy to help you with that."},
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -716,12 +740,36 @@ class TestTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/inference/run").mock(return_value=httpx.Response(500))
+        respx_mock.post("/contracts/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/inference/run",
-                body=cast(object, dict(llm_input={"query": "Help me with my problem"})),
+                "/contracts/score",
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "You are a helpful AI assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        llm_input={"query": "Help me with my problem"},
+                        llm_response={"text": "I am happy to help you with that."},
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -752,9 +800,30 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.inference.with_raw_response.run(llm_input={"query": "Help me with my problem"})
+        response = client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -776,10 +845,30 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.inference.with_raw_response.run(
-            llm_input={"query": "Help me with my problem"}, extra_headers={"x-stainless-retry-count": Omit()}
+        response = client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -801,10 +890,30 @@ class TestTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.inference.with_raw_response.run(
-            llm_input={"query": "Help me with my problem"}, extra_headers={"x-stainless-retry-count": "42"}
+        response = client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1481,12 +1590,36 @@ class TestAsyncTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/inference/run").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/contracts/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/inference/run",
-                body=cast(object, dict(llm_input={"query": "Help me with my problem"})),
+                "/contracts/score",
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "You are a helpful AI assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        llm_input={"query": "Help me with my problem"},
+                        llm_response={"text": "I am happy to help you with that."},
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1496,12 +1629,36 @@ class TestAsyncTwopir:
     @mock.patch("twopir._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/inference/run").mock(return_value=httpx.Response(500))
+        respx_mock.post("/contracts/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/inference/run",
-                body=cast(object, dict(llm_input={"query": "Help me with my problem"})),
+                "/contracts/score",
+                body=cast(
+                    object,
+                    dict(
+                        contract={
+                            "description": "You are a helpful AI assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM follows instructions.",
+                                    "label": "Instruction Following",
+                                },
+                            ],
+                            "name": "My application",
+                        },
+                        llm_input={"query": "Help me with my problem"},
+                        llm_response={"text": "I am happy to help you with that."},
+                    ),
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1533,9 +1690,30 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.inference.with_raw_response.run(llm_input={"query": "Help me with my problem"})
+        response = await client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1558,10 +1736,30 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.inference.with_raw_response.run(
-            llm_input={"query": "Help me with my problem"}, extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1584,10 +1782,30 @@ class TestAsyncTwopir:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/inference/run").mock(side_effect=retry_handler)
+        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.inference.with_raw_response.run(
-            llm_input={"query": "Help me with my problem"}, extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.contract.with_raw_response.score(
+            contract={
+                "description": "You are a helpful AI assistant",
+                "dimensions": [
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                    {
+                        "description": "Test whether the LLM follows instructions.",
+                        "label": "Instruction Following",
+                    },
+                ],
+                "name": "My application",
+            },
+            llm_input={"query": "Help me with my problem"},
+            llm_response={"text": "I am happy to help you with that."},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
