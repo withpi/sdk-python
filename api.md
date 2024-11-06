@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from twopir.types import Contract, Dimension, LlmResponse
+from twopir.types import Contract, Dimension, LlmResponse, ResponseMetrics
 ```
 
 # Inference
@@ -22,8 +22,9 @@ from twopir.types import DataGenerationStatus
 
 Methods:
 
-- <code title="post /data/input">client.data.inputs.<a href="./src/twopir/resources/data/inputs.py">generate</a>(\*\*<a href="src/twopir/types/data/input_generate_params.py">params</a>) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/{job_id}">client.data.inputs.<a href="./src/twopir/resources/data/inputs.py">get</a>(job_id) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="post /data/input/evaluate">client.data.inputs.<a href="./src/twopir/resources/data/inputs.py">evaluate</a>(\*\*<a href="src/twopir/types/data/input_evaluate_params.py">params</a>) -> <a href="./src/twopir/types/shared/response_metrics.py">ResponseMetrics</a></code>
+- <code title="post /data/input/generate">client.data.inputs.<a href="./src/twopir/resources/data/inputs.py">generate</a>(\*\*<a href="src/twopir/types/data/input_generate_params.py">params</a>) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate/{job_id}">client.data.inputs.<a href="./src/twopir/resources/data/inputs.py">get</a>(job_id) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
 
 # Tune
 
@@ -55,21 +56,15 @@ Methods:
 
 # Contract
 
-Types:
-
-```python
-from twopir.types import ResponseMetrics
-```
-
 Methods:
 
 - <code title="post /contracts/calibrate">client.contract.<a href="./src/twopir/resources/contract/contract.py">calibrate</a>(\*\*<a href="src/twopir/types/contract_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/generate_dimensions">client.contract.<a href="./src/twopir/resources/contract/contract.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
-- <code title="post /contracts/score">client.contract.<a href="./src/twopir/resources/contract/contract.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/response_metrics.py">ResponseMetrics</a></code>
+- <code title="post /contracts/score">client.contract.<a href="./src/twopir/resources/contract/contract.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/shared/response_metrics.py">ResponseMetrics</a></code>
 
 ## Dimension
 
 Methods:
 
 - <code title="post /contracts/dimensions/generate">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">generate</a>(\*\*<a href="src/twopir/types/contract/dimension_generate_params.py">params</a>) -> <a href="./src/twopir/types/shared/dimension.py">Dimension</a></code>
-- <code title="post /contracts/dimensions/score">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">score</a>(\*\*<a href="src/twopir/types/contract/dimension_score_params.py">params</a>) -> <a href="./src/twopir/types/response_metrics.py">ResponseMetrics</a></code>
+- <code title="post /contracts/dimensions/score">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">score</a>(\*\*<a href="src/twopir/types/contract/dimension_score_params.py">params</a>) -> <a href="./src/twopir/types/shared/response_metrics.py">ResponseMetrics</a></code>

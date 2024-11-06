@@ -21,8 +21,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.contract import dimension_score_params, dimension_generate_params
-from ...types.response_metrics import ResponseMetrics
 from ...types.shared.dimension import Dimension as SharedDimension
+from ...types.shared.response_metrics import ResponseMetrics
 from ...types.shared_params.dimension import Dimension as SharedParamsDimension
 from ...types.shared_params.llm_response import LlmResponse
 
