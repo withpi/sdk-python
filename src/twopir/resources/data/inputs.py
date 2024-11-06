@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Dict, Union
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -17,10 +19,11 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import input_generate_params
+from ...types.data import input_evaluate_params, input_generate_params
 from ..._base_client import make_request_options
 from ...types.data_generation_status import DataGenerationStatus
 from ...types.shared_params.contract import Contract
+from ...types.shared.response_metrics import ResponseMetrics
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 
@@ -44,6 +47,42 @@ class InputsResource(SyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
         return InputsResourceWithStreamingResponse(self)
+
+    def evaluate(
+        self,
+        *,
+        llm_input: Dict[str, Union[str, float]],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ResponseMetrics:
+        """Evaluate an input
+
+        Args:
+          llm_input: Key/Value pairs constituting the input.
+
+        If the input is just text, use the key
+              "query"
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/data/input/evaluate",
+            body=maybe_transform({"llm_input": llm_input}, input_evaluate_params.InputEvaluateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ResponseMetrics,
+        )
 
     def generate(
         self,
@@ -71,7 +110,7 @@ class InputsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/data/input",
+            "/data/input/generate",
             body=maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -103,7 +142,7 @@ class InputsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/data/input/{job_id}",
+            f"/data/input/generate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -131,6 +170,42 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         return AsyncInputsResourceWithStreamingResponse(self)
 
+    async def evaluate(
+        self,
+        *,
+        llm_input: Dict[str, Union[str, float]],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ResponseMetrics:
+        """Evaluate an input
+
+        Args:
+          llm_input: Key/Value pairs constituting the input.
+
+        If the input is just text, use the key
+              "query"
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/data/input/evaluate",
+            body=await async_maybe_transform({"llm_input": llm_input}, input_evaluate_params.InputEvaluateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ResponseMetrics,
+        )
+
     async def generate(
         self,
         *,
@@ -157,7 +232,7 @@ class AsyncInputsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/data/input",
+            "/data/input/generate",
             body=await async_maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -189,7 +264,7 @@ class AsyncInputsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/data/input/{job_id}",
+            f"/data/input/generate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -201,6 +276,9 @@ class InputsResourceWithRawResponse:
     def __init__(self, inputs: InputsResource) -> None:
         self._inputs = inputs
 
+        self.evaluate = to_raw_response_wrapper(
+            inputs.evaluate,
+        )
         self.generate = to_raw_response_wrapper(
             inputs.generate,
         )
@@ -213,6 +291,9 @@ class AsyncInputsResourceWithRawResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
         self._inputs = inputs
 
+        self.evaluate = async_to_raw_response_wrapper(
+            inputs.evaluate,
+        )
         self.generate = async_to_raw_response_wrapper(
             inputs.generate,
         )
@@ -225,6 +306,9 @@ class InputsResourceWithStreamingResponse:
     def __init__(self, inputs: InputsResource) -> None:
         self._inputs = inputs
 
+        self.evaluate = to_streamed_response_wrapper(
+            inputs.evaluate,
+        )
         self.generate = to_streamed_response_wrapper(
             inputs.generate,
         )
@@ -237,6 +321,9 @@ class AsyncInputsResourceWithStreamingResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
         self._inputs = inputs
 
+        self.evaluate = async_to_streamed_response_wrapper(
+            inputs.evaluate,
+        )
         self.generate = async_to_streamed_response_wrapper(
             inputs.generate,
         )

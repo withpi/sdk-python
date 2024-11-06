@@ -34,8 +34,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.shared.contract import Contract as SharedContract
-from ...types.response_metrics import ResponseMetrics
 from ...types.shared_params.contract import Contract as SharedParamsContract
+from ...types.shared.response_metrics import ResponseMetrics
 from ...types.shared_params.llm_response import LlmResponse
 
 __all__ = ["ContractResource", "AsyncContractResource"]

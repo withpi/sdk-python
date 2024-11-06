@@ -9,8 +9,7 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types import ResponseMetrics
-from twopir.types.shared import Dimension
+from twopir.types.shared import Dimension, ResponseMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
