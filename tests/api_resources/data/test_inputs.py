@@ -9,8 +9,7 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types import DataGenerationStatus
-from twopir.types.shared import ResponseMetrics
+from twopir.types import DataGenerationStatus, InputEvaluationMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +22,7 @@ class TestInputs:
         input = client.data.inputs.evaluate(
             llm_input={"query": "Help me with my problem"},
         )
-        assert_matches_type(ResponseMetrics, input, path=["response"])
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     def test_raw_response_evaluate(self, client: Twopir) -> None:
@@ -34,7 +33,7 @@ class TestInputs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         input = response.parse()
-        assert_matches_type(ResponseMetrics, input, path=["response"])
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     def test_streaming_response_evaluate(self, client: Twopir) -> None:
@@ -45,7 +44,7 @@ class TestInputs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             input = response.parse()
-            assert_matches_type(ResponseMetrics, input, path=["response"])
+            assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -171,7 +170,7 @@ class TestAsyncInputs:
         input = await async_client.data.inputs.evaluate(
             llm_input={"query": "Help me with my problem"},
         )
-        assert_matches_type(ResponseMetrics, input, path=["response"])
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     async def test_raw_response_evaluate(self, async_client: AsyncTwopir) -> None:
@@ -182,7 +181,7 @@ class TestAsyncInputs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         input = await response.parse()
-        assert_matches_type(ResponseMetrics, input, path=["response"])
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     async def test_streaming_response_evaluate(self, async_client: AsyncTwopir) -> None:
@@ -193,7 +192,7 @@ class TestAsyncInputs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             input = await response.parse()
-            assert_matches_type(ResponseMetrics, input, path=["response"])
+            assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

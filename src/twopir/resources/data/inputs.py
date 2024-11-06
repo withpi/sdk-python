@@ -23,7 +23,7 @@ from ...types.data import input_evaluate_params, input_generate_params
 from ..._base_client import make_request_options
 from ...types.data_generation_status import DataGenerationStatus
 from ...types.shared_params.contract import Contract
-from ...types.shared.response_metrics import ResponseMetrics
+from ...types.input_evaluation_metrics import InputEvaluationMetrics
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 
@@ -58,7 +58,7 @@ class InputsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> InputEvaluationMetrics:
         """Evaluate an input
 
         Args:
@@ -81,7 +81,7 @@ class InputsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=InputEvaluationMetrics,
         )
 
     def generate(
@@ -180,7 +180,7 @@ class AsyncInputsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> InputEvaluationMetrics:
         """Evaluate an input
 
         Args:
@@ -203,7 +203,7 @@ class AsyncInputsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=InputEvaluationMetrics,
         )
 
     async def generate(

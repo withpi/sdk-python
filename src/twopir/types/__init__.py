@@ -14,5 +14,6 @@ from .inference_run_params import InferenceRunParams as InferenceRunParams
 from .contract_score_params import ContractScoreParams as ContractScoreParams
 from .data_generation_status import DataGenerationStatus as DataGenerationStatus
 from .experiment_create_params import ExperimentCreateParams as ExperimentCreateParams
+from .input_evaluation_metrics import InputEvaluationMetrics as InputEvaluationMetrics
 from .contract_calibrate_params import ContractCalibrateParams as ContractCalibrateParams
 from .contract_generate_dimensions_params import ContractGenerateDimensionsParams as ContractGenerateDimensionsParams
