@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ExperimentCreateParams", "Contract", "Example"]
+from .shared_params.contract import Contract
+
+__all__ = ["ExperimentCreateParams", "Example"]
 
 
 class ExperimentCreateParams(TypedDict, total=False):
@@ -17,14 +19,6 @@ class ExperimentCreateParams(TypedDict, total=False):
 
     scorer_id: Required[int]
     """The scorer id to use"""
-
-
-class Contract(TypedDict, total=False):
-    description: Required[str]
-    """The description of the contract"""
-
-    name: Required[str]
-    """The name of the contract"""
 
 
 class Example(TypedDict, total=False):

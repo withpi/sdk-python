@@ -22,6 +22,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.experiment_status import ExperimentStatus
+from ..types.shared_params.contract import Contract
 
 __all__ = ["ExperimentResource", "AsyncExperimentResource"]
 
@@ -49,7 +50,7 @@ class ExperimentResource(SyncAPIResource):
     def create(
         self,
         *,
-        contract: experiment_create_params.Contract,
+        contract: Contract,
         examples: Iterable[experiment_create_params.Example],
         scorer_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -93,6 +94,37 @@ class ExperimentResource(SyncAPIResource):
             cast_to=ExperimentStatus,
         )
 
+    def get(
+        self,
+        job_id: int,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExperimentStatus:
+        """
+        Checks on an experiment job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/experiments/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExperimentStatus,
+        )
+
 
 class AsyncExperimentResource(AsyncAPIResource):
     @cached_property
@@ -117,7 +149,7 @@ class AsyncExperimentResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        contract: experiment_create_params.Contract,
+        contract: Contract,
         examples: Iterable[experiment_create_params.Example],
         scorer_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -161,6 +193,37 @@ class AsyncExperimentResource(AsyncAPIResource):
             cast_to=ExperimentStatus,
         )
 
+    async def get(
+        self,
+        job_id: int,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ExperimentStatus:
+        """
+        Checks on an experiment job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/experiments/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExperimentStatus,
+        )
+
 
 class ExperimentResourceWithRawResponse:
     def __init__(self, experiment: ExperimentResource) -> None:
@@ -168,6 +231,9 @@ class ExperimentResourceWithRawResponse:
 
         self.create = to_raw_response_wrapper(
             experiment.create,
+        )
+        self.get = to_raw_response_wrapper(
+            experiment.get,
         )
 
 
@@ -178,6 +244,9 @@ class AsyncExperimentResourceWithRawResponse:
         self.create = async_to_raw_response_wrapper(
             experiment.create,
         )
+        self.get = async_to_raw_response_wrapper(
+            experiment.get,
+        )
 
 
 class ExperimentResourceWithStreamingResponse:
@@ -187,6 +256,9 @@ class ExperimentResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             experiment.create,
         )
+        self.get = to_streamed_response_wrapper(
+            experiment.get,
+        )
 
 
 class AsyncExperimentResourceWithStreamingResponse:
@@ -195,4 +267,7 @@ class AsyncExperimentResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             experiment.create,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            experiment.get,
         )

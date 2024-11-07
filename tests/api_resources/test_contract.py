@@ -11,9 +11,8 @@ from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
 from twopir.types import (
     ContractScoreResponse,
-    ContractCalibrateResponse,
-    ContractGenerateDimensionsResponse,
 )
+from twopir.types.shared import Contract
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -49,7 +48,7 @@ class TestContract:
                 },
             ],
         )
-        assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_raw_response_calibrate(self, client: Twopir) -> None:
@@ -83,7 +82,7 @@ class TestContract:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_streaming_response_calibrate(self, client: Twopir) -> None:
@@ -117,7 +116,7 @@ class TestContract:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+            assert_matches_type(Contract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -127,7 +126,7 @@ class TestContract:
             description="description",
             name="name",
         )
-        assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_raw_response_generate_dimensions(self, client: Twopir) -> None:
@@ -139,7 +138,7 @@ class TestContract:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_streaming_response_generate_dimensions(self, client: Twopir) -> None:
@@ -151,7 +150,7 @@ class TestContract:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+            assert_matches_type(Contract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -233,7 +232,7 @@ class TestAsyncContract:
                 },
             ],
         )
-        assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_calibrate(self, async_client: AsyncTwopir) -> None:
@@ -267,7 +266,7 @@ class TestAsyncContract:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_streaming_response_calibrate(self, async_client: AsyncTwopir) -> None:
@@ -301,7 +300,7 @@ class TestAsyncContract:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(ContractCalibrateResponse, contract, path=["response"])
+            assert_matches_type(Contract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -311,7 +310,7 @@ class TestAsyncContract:
             description="description",
             name="name",
         )
-        assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
@@ -323,7 +322,7 @@ class TestAsyncContract:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+        assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_streaming_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
@@ -335,7 +334,7 @@ class TestAsyncContract:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(ContractGenerateDimensionsResponse, contract, path=["response"])
+            assert_matches_type(Contract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
