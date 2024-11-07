@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from twopir.types import Contract, Dimension, LlmResponse
+from twopir.types import Contract, Dimension, LlmResponse, SubDimension
 ```
 
 # Inference
