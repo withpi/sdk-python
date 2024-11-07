@@ -22,6 +22,7 @@ from ..._response import (
 from ...types.data import input_evaluate_params, input_generate_params
 from ..._base_client import make_request_options
 from ...types.data_generation_status import DataGenerationStatus
+from ...types.shared_params.contract import Contract
 from ...types.input_evaluation_metrics import InputEvaluationMetrics
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
@@ -50,7 +51,7 @@ class InputsResource(SyncAPIResource):
     def evaluate(
         self,
         *,
-        contract: input_evaluate_params.Contract,
+        contract: Contract,
         llm_input: Union[str, Dict[str, str]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -63,6 +64,10 @@ class InputsResource(SyncAPIResource):
         Evaluate an input
 
         Args:
+          contract: The contract the input is intended to drive
+
+          llm_input: The input to evaluate
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -89,8 +94,7 @@ class InputsResource(SyncAPIResource):
     def generate(
         self,
         *,
-        description: str,
-        name: str,
+        contract: Contract,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,10 +106,6 @@ class InputsResource(SyncAPIResource):
         Start an input data generation job
 
         Args:
-          description: The description of the contract
-
-          name: The name of the contract
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -116,13 +116,7 @@ class InputsResource(SyncAPIResource):
         """
         return self._post(
             "/data/input/generate",
-            body=maybe_transform(
-                {
-                    "description": description,
-                    "name": name,
-                },
-                input_generate_params.InputGenerateParams,
-            ),
+            body=maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -184,7 +178,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def evaluate(
         self,
         *,
-        contract: input_evaluate_params.Contract,
+        contract: Contract,
         llm_input: Union[str, Dict[str, str]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -197,6 +191,10 @@ class AsyncInputsResource(AsyncAPIResource):
         Evaluate an input
 
         Args:
+          contract: The contract the input is intended to drive
+
+          llm_input: The input to evaluate
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -223,8 +221,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def generate(
         self,
         *,
-        description: str,
-        name: str,
+        contract: Contract,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -236,10 +233,6 @@ class AsyncInputsResource(AsyncAPIResource):
         Start an input data generation job
 
         Args:
-          description: The description of the contract
-
-          name: The name of the contract
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -250,13 +243,7 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         return await self._post(
             "/data/input/generate",
-            body=await async_maybe_transform(
-                {
-                    "description": description,
-                    "name": name,
-                },
-                input_generate_params.InputGenerateParams,
-            ),
+            body=await async_maybe_transform({"contract": contract}, input_generate_params.InputGenerateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

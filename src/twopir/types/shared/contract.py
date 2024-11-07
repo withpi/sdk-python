@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["ContractCalibrateResponse"]
+__all__ = ["Contract"]
 
 
-class ContractCalibrateResponse(BaseModel):
+class Contract(BaseModel):
     description: str
     """The description of the contract"""
 

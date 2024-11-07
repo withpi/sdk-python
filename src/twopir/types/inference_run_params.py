@@ -3,17 +3,10 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing_extensions import Required, TypedDict
 
-__all__ = ["InferenceRunParams", "Variant0", "Variant1"]
-
-
-class Variant0(TypedDict, total=False):
-    body: Required[str]
+__all__ = ["InferenceRunParams"]
 
 
-class Variant1(TypedDict, total=False):
-    body: Required[Dict[str, str]]
-
-
-InferenceRunParams: TypeAlias = Union[Variant0, Variant1]
+class InferenceRunParams(TypedDict, total=False):
+    llm_input: Required[Union[str, Dict[str, str]]]

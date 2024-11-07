@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from twopir.types import LlmResponse
+from twopir.types import Contract, Dimension, LlmResponse
 ```
 
 # Inference
@@ -52,34 +52,25 @@ from twopir.types import ExperimentStatus
 Methods:
 
 - <code title="post /experiments">client.experiment.<a href="./src/twopir/resources/experiment.py">create</a>(\*\*<a href="src/twopir/types/experiment_create_params.py">params</a>) -> <a href="./src/twopir/types/experiment_status.py">ExperimentStatus</a></code>
+- <code title="get /experiments/{job_id}">client.experiment.<a href="./src/twopir/resources/experiment.py">get</a>(job_id) -> <a href="./src/twopir/types/experiment_status.py">ExperimentStatus</a></code>
 
 # Contract
 
 Types:
 
 ```python
-from twopir.types import (
-    ContractCalibrateResponse,
-    ContractGenerateDimensionsResponse,
-    ContractScoreResponse,
-)
+from twopir.types import ContractsScoreMetrics
 ```
 
 Methods:
 
-- <code title="post /contracts/calibrate">client.contract.<a href="./src/twopir/resources/contract/contract.py">calibrate</a>(\*\*<a href="src/twopir/types/contract_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/contract_calibrate_response.py">ContractCalibrateResponse</a></code>
-- <code title="post /contracts/generate_dimensions">client.contract.<a href="./src/twopir/resources/contract/contract.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/contract_generate_dimensions_response.py">ContractGenerateDimensionsResponse</a></code>
-- <code title="post /contracts/score">client.contract.<a href="./src/twopir/resources/contract/contract.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/contract_score_response.py">ContractScoreResponse</a></code>
+- <code title="post /contracts/calibrate">client.contract.<a href="./src/twopir/resources/contract/contract.py">calibrate</a>(\*\*<a href="src/twopir/types/contract_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
+- <code title="post /contracts/generate_dimensions">client.contract.<a href="./src/twopir/resources/contract/contract.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
+- <code title="post /contracts/score">client.contract.<a href="./src/twopir/resources/contract/contract.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
 
 ## Dimension
 
-Types:
-
-```python
-from twopir.types.contract import DimensionGenerateResponse, DimensionScoreResponse
-```
-
 Methods:
 
-- <code title="post /contracts/dimensions/generate">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">generate</a>(\*\*<a href="src/twopir/types/contract/dimension_generate_params.py">params</a>) -> <a href="./src/twopir/types/contract/dimension_generate_response.py">DimensionGenerateResponse</a></code>
-- <code title="post /contracts/dimensions/score">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">score</a>(\*\*<a href="src/twopir/types/contract/dimension_score_params.py">params</a>) -> <a href="./src/twopir/types/contract/dimension_score_response.py">DimensionScoreResponse</a></code>
+- <code title="post /contracts/dimensions/generate">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">generate</a>(\*\*<a href="src/twopir/types/contract/dimension_generate_params.py">params</a>) -> <a href="./src/twopir/types/shared/dimension.py">Dimension</a></code>
+- <code title="post /contracts/dimensions/score">client.contract.dimension.<a href="./src/twopir/resources/contract/dimension.py">score</a>(\*\*<a href="src/twopir/types/contract/dimension_score_params.py">params</a>) -> <a href="./src/twopir/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
