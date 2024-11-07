@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.dimension import Dimension
-
-__all__ = ["DimensionScoreParams"]
+__all__ = ["DimensionScoreParams", "Dimension", "DimensionSubDimension"]
 
 
 class DimensionScoreParams(TypedDict, total=False):
@@ -19,3 +17,22 @@ class DimensionScoreParams(TypedDict, total=False):
 
     llm_output: Required[str]
     """The output to score"""
+
+
+class DimensionSubDimension(TypedDict, total=False):
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""
+
+
+class Dimension(TypedDict, total=False):
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""
+
+    sub_dimensions: Required[Iterable[DimensionSubDimension]]
+    """The sub dimensions of the dimension"""

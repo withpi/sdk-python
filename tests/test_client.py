@@ -21,7 +21,7 @@ from twopir import Twopir, AsyncTwopir, APIResponseValidationError
 from twopir._types import Omit
 from twopir._models import BaseModel, FinalRequestOptions
 from twopir._constants import RAW_RESPONSE_HEADER
-from twopir._exceptions import TwopirError, APIStatusError, APITimeoutError, APIResponseValidationError
+from twopir._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from twopir._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
@@ -322,16 +322,6 @@ class TestTwopir:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = Twopir(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("x-api-key") == api_key
-
-        with pytest.raises(TwopirError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
-                client2 = Twopir(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Twopir(
@@ -1127,16 +1117,6 @@ class TestAsyncTwopir:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = AsyncTwopir(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("x-api-key") == api_key
-
-        with pytest.raises(TwopirError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
-                client2 = AsyncTwopir(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncTwopir(

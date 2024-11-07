@@ -5,9 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from .shared_params.contract import Contract
-
-__all__ = ["ContractCalibrateParams", "Feedback"]
+__all__ = ["ContractCalibrateParams", "Contract", "Feedback"]
 
 
 class ContractCalibrateParams(TypedDict, total=False):
@@ -16,6 +14,14 @@ class ContractCalibrateParams(TypedDict, total=False):
 
     feedbacks: Required[Iterable[Feedback]]
     """The feedbacks to use for calibration"""
+
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""
 
 
 class Feedback(TypedDict, total=False):

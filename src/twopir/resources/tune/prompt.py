@@ -20,7 +20,6 @@ from ..._response import (
 from ...types.tune import prompt_optimize_params
 from ..._base_client import make_request_options
 from ...types.optimization_status import OptimizationStatus
-from ...types.shared_params.contract import Contract
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 
@@ -79,7 +78,7 @@ class PromptResource(SyncAPIResource):
     def optimize(
         self,
         *,
-        contract: Contract,
+        contract: prompt_optimize_params.Contract,
         experiment_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -174,7 +173,7 @@ class AsyncPromptResource(AsyncAPIResource):
     async def optimize(
         self,
         *,
-        contract: Contract,
+        contract: prompt_optimize_params.Contract,
         experiment_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

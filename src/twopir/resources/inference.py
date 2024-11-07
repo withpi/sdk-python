@@ -23,7 +23,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.inference_run_response import InferenceRunResponse
+from ..types.shared.llm_response import LlmResponse
 
 __all__ = ["InferenceResource", "AsyncInferenceResource"]
 
@@ -59,7 +59,7 @@ class InferenceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -85,7 +85,7 @@ class InferenceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -111,14 +111,14 @@ class InferenceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         return self._post(
             "/inference/run",
             body=maybe_transform(body, inference_run_params.InferenceRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=InferenceRunResponse,
+            cast_to=LlmResponse,
         )
 
 
@@ -153,7 +153,7 @@ class AsyncInferenceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -179,7 +179,7 @@ class AsyncInferenceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         """
         Runs inference, returning a response
 
@@ -205,14 +205,14 @@ class AsyncInferenceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InferenceRunResponse:
+    ) -> LlmResponse:
         return await self._post(
             "/inference/run",
             body=await async_maybe_transform(body, inference_run_params.InferenceRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=InferenceRunResponse,
+            cast_to=LlmResponse,
         )
 
 

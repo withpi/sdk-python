@@ -4,7 +4,7 @@ from typing import List
 
 from ..._models import BaseModel
 
-__all__ = ["Dimension", "SubDimension"]
+__all__ = ["DimensionGenerateResponse", "SubDimension"]
 
 
 class SubDimension(BaseModel):
@@ -15,7 +15,7 @@ class SubDimension(BaseModel):
     """The label of the dimension"""
 
 
-class Dimension(BaseModel):
+class DimensionGenerateResponse(BaseModel):
     description: str
     """The description of the dimension"""
 

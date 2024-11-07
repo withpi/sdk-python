@@ -22,7 +22,6 @@ from ..._response import (
 from ...types.data import input_evaluate_params, input_generate_params
 from ..._base_client import make_request_options
 from ...types.data_generation_status import DataGenerationStatus
-from ...types.shared_params.contract import Contract
 from ...types.input_evaluation_metrics import InputEvaluationMetrics
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
@@ -51,7 +50,7 @@ class InputsResource(SyncAPIResource):
     def evaluate(
         self,
         *,
-        contract: Contract,
+        contract: input_evaluate_params.Contract,
         llm_input: Union[str, Dict[str, str]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -185,7 +184,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def evaluate(
         self,
         *,
-        contract: Contract,
+        contract: input_evaluate_params.Contract,
         llm_input: Union[str, Dict[str, str]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
