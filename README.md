@@ -27,12 +27,10 @@ pip install git+ssh://git@github.com/stainless-sdks/twopir-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from twopir import Twopir
 
 client = Twopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key="My API Key",
 )
 
 response = client.contract.score(
@@ -56,23 +54,16 @@ response = client.contract.score(
 print(response.scores)
 ```
 
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `TWOPIR_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
-
 ## Async usage
 
 Simply import `AsyncTwopir` instead of `Twopir` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from twopir import AsyncTwopir
 
 client = AsyncTwopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key="My API Key",
 )
 
 
@@ -125,7 +116,9 @@ All errors inherit from `twopir.APIError`.
 import twopir
 from twopir import Twopir
 
-client = Twopir()
+client = Twopir(
+    api_key="My API Key",
+)
 
 try:
     client.contract.score(
@@ -175,6 +168,7 @@ from twopir import Twopir
 client = Twopir(
     # default is 2
     max_retries=0,
+    api_key="My API Key",
 )
 
 # Or, configure per-request:
@@ -200,11 +194,13 @@ from twopir import Twopir
 client = Twopir(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
+    api_key="My API Key",
 )
 
 # More granular control:
 client = Twopir(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    api_key="My API Key",
 )
 
 # Override per-request:
@@ -253,7 +249,9 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from twopir import Twopir
 
-client = Twopir()
+client = Twopir(
+    api_key="My API Key",
+)
 response = client.contract.with_raw_response.score(
     contract={
         "description": "description",
@@ -348,6 +346,7 @@ client = Twopir(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
+    api_key="My API Key",
 )
 ```
 

@@ -9,7 +9,7 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types import InferenceRunResponse
+from twopir.types.shared import LlmResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestInference:
         inference = client.inference.run(
             body="body",
         )
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_raw_response_run_overload_1(self, client: Twopir) -> None:
@@ -33,7 +33,7 @@ class TestInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = response.parse()
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_streaming_response_run_overload_1(self, client: Twopir) -> None:
@@ -44,7 +44,7 @@ class TestInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = response.parse()
-            assert_matches_type(InferenceRunResponse, inference, path=["response"])
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -53,7 +53,7 @@ class TestInference:
         inference = client.inference.run(
             body={"foo": "string"},
         )
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_raw_response_run_overload_2(self, client: Twopir) -> None:
@@ -64,7 +64,7 @@ class TestInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = response.parse()
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     def test_streaming_response_run_overload_2(self, client: Twopir) -> None:
@@ -75,7 +75,7 @@ class TestInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = response.parse()
-            assert_matches_type(InferenceRunResponse, inference, path=["response"])
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -88,7 +88,7 @@ class TestAsyncInference:
         inference = await async_client.inference.run(
             body="body",
         )
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_raw_response_run_overload_1(self, async_client: AsyncTwopir) -> None:
@@ -99,7 +99,7 @@ class TestAsyncInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = await response.parse()
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_streaming_response_run_overload_1(self, async_client: AsyncTwopir) -> None:
@@ -110,7 +110,7 @@ class TestAsyncInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = await response.parse()
-            assert_matches_type(InferenceRunResponse, inference, path=["response"])
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -119,7 +119,7 @@ class TestAsyncInference:
         inference = await async_client.inference.run(
             body={"foo": "string"},
         )
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_raw_response_run_overload_2(self, async_client: AsyncTwopir) -> None:
@@ -130,7 +130,7 @@ class TestAsyncInference:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         inference = await response.parse()
-        assert_matches_type(InferenceRunResponse, inference, path=["response"])
+        assert_matches_type(LlmResponse, inference, path=["response"])
 
     @parametrize
     async def test_streaming_response_run_overload_2(self, async_client: AsyncTwopir) -> None:
@@ -141,6 +141,6 @@ class TestAsyncInference:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             inference = await response.parse()
-            assert_matches_type(InferenceRunResponse, inference, path=["response"])
+            assert_matches_type(LlmResponse, inference, path=["response"])
 
         assert cast(Any, response.is_closed) is True

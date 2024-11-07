@@ -4,9 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.contract import Contract
-
-__all__ = ["PromptOptimizeParams"]
+__all__ = ["PromptOptimizeParams", "Contract"]
 
 
 class PromptOptimizeParams(TypedDict, total=False):
@@ -15,3 +13,11 @@ class PromptOptimizeParams(TypedDict, total=False):
 
     experiment_id: Required[int]
     """The experiment id"""
+
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""

@@ -9,8 +9,10 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types.shared import Dimension
-from twopir.types.contract import DimensionScoreResponse
+from twopir.types.contract import (
+    DimensionScoreResponse,
+    DimensionGenerateResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -38,7 +40,7 @@ class TestDimension:
                 },
             ],
         )
-        assert_matches_type(Dimension, dimension, path=["response"])
+        assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
     @parametrize
     def test_raw_response_generate(self, client: Twopir) -> None:
@@ -64,7 +66,7 @@ class TestDimension:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dimension = response.parse()
-        assert_matches_type(Dimension, dimension, path=["response"])
+        assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
     @parametrize
     def test_streaming_response_generate(self, client: Twopir) -> None:
@@ -90,7 +92,7 @@ class TestDimension:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dimension = response.parse()
-            assert_matches_type(Dimension, dimension, path=["response"])
+            assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -206,7 +208,7 @@ class TestAsyncDimension:
                 },
             ],
         )
-        assert_matches_type(Dimension, dimension, path=["response"])
+        assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncTwopir) -> None:
@@ -232,7 +234,7 @@ class TestAsyncDimension:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dimension = await response.parse()
-        assert_matches_type(Dimension, dimension, path=["response"])
+        assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncTwopir) -> None:
@@ -258,7 +260,7 @@ class TestAsyncDimension:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             dimension = await response.parse()
-            assert_matches_type(Dimension, dimension, path=["response"])
+            assert_matches_type(DimensionGenerateResponse, dimension, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

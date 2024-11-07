@@ -21,9 +21,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.contract import dimension_score_params, dimension_generate_params
-from ...types.shared.dimension import Dimension as SharedDimension
-from ...types.shared_params.dimension import Dimension as SharedParamsDimension
 from ...types.contract.dimension_score_response import DimensionScoreResponse
+from ...types.contract.dimension_generate_response import DimensionGenerateResponse
 
 __all__ = ["DimensionResource", "AsyncDimensionResource"]
 
@@ -60,7 +59,7 @@ class DimensionResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedDimension:
+    ) -> DimensionGenerateResponse:
         """
         Generates subdimension within a dimension
 
@@ -92,13 +91,13 @@ class DimensionResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedDimension,
+            cast_to=DimensionGenerateResponse,
         )
 
     def score(
         self,
         *,
-        dimension: SharedParamsDimension,
+        dimension: dimension_score_params.Dimension,
         llm_input: Union[str, Dict[str, str]],
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -175,7 +174,7 @@ class AsyncDimensionResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedDimension:
+    ) -> DimensionGenerateResponse:
         """
         Generates subdimension within a dimension
 
@@ -207,13 +206,13 @@ class AsyncDimensionResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedDimension,
+            cast_to=DimensionGenerateResponse,
         )
 
     async def score(
         self,
         *,
-        dimension: SharedParamsDimension,
+        dimension: dimension_score_params.Dimension,
         llm_input: Union[str, Dict[str, str]],
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
