@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from .shared import Contract as Contract, Dimension as Dimension, LlmResponse as LlmResponse
+from .shared import (
+    Contract as Contract,
+    Dimension as Dimension,
+    LlmResponse as LlmResponse,
+    SubDimension as SubDimension,
+)
 from .experiment_status import ExperimentStatus as ExperimentStatus
 from .optimization_status import OptimizationStatus as OptimizationStatus
 from .inference_run_params import InferenceRunParams as InferenceRunParams

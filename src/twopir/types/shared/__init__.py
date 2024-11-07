@@ -3,3 +3,4 @@
 from .contract import Contract as Contract
 from .dimension import Dimension as Dimension
 from .llm_response import LlmResponse as LlmResponse
+from .sub_dimension import SubDimension as SubDimension
