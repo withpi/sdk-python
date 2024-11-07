@@ -5,21 +5,23 @@ from __future__ import annotations
 from typing import Dict, Union
 from typing_extensions import Required, TypedDict
 
-from .shared_params.contract import Contract
-from .shared_params.llm_response import LlmResponse
-
-__all__ = ["ContractScoreParams"]
+__all__ = ["ContractScoreParams", "Contract"]
 
 
 class ContractScoreParams(TypedDict, total=False):
     contract: Required[Contract]
-    """A collection of dimensions an LLM response must adhere to"""
+    """The contract to score"""
 
-    llm_input: Required[Dict[str, Union[str, float]]]
-    """Key/Value pairs constituting the input.
+    llm_input: Required[Union[str, Dict[str, str]]]
+    """The input to score"""
 
-    If the input is just text, use the key "query"
-    """
+    llm_output: Required[str]
+    """The output to score"""
 
-    llm_response: Required[LlmResponse]
-    """The response from the LLM"""
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""

@@ -8,4 +8,4 @@ __all__ = ["LlmResponse"]
 
 class LlmResponse(BaseModel):
     text: str
-    """The literal text returned from the LLM."""
+    """The generated text"""

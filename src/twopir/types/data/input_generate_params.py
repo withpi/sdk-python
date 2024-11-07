@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.contract import Contract
-
 __all__ = ["InputGenerateParams"]
 
 
 class InputGenerateParams(TypedDict, total=False):
-    contract: Required[Contract]
-    """A collection of dimensions an LLM response must adhere to"""
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""

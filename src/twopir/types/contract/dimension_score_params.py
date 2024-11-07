@@ -2,24 +2,37 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.dimension import Dimension
-from ..shared_params.llm_response import LlmResponse
-
-__all__ = ["DimensionScoreParams"]
+__all__ = ["DimensionScoreParams", "Dimension", "DimensionSubDimension"]
 
 
 class DimensionScoreParams(TypedDict, total=False):
     dimension: Required[Dimension]
-    """A single dimension along which an LLM response will be scored"""
+    """The dimension to score"""
 
-    llm_input: Required[Dict[str, Union[str, float]]]
-    """Key/Value pairs constituting the input.
+    llm_input: Required[Union[str, Dict[str, str]]]
+    """The input to score"""
 
-    If the input is just text, use the key "query"
-    """
+    llm_output: Required[str]
+    """The output to score"""
 
-    llm_response: Required[LlmResponse]
-    """The response from the LLM"""
+
+class DimensionSubDimension(TypedDict, total=False):
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""
+
+
+class Dimension(TypedDict, total=False):
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""
+
+    sub_dimensions: Required[Iterable[DimensionSubDimension]]
+    """The sub dimensions of the dimension"""

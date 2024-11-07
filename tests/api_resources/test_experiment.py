@@ -21,35 +21,21 @@ class TestExperiment:
     def test_method_create(self, client: Twopir) -> None:
         experiment = client.experiment.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
@@ -60,35 +46,21 @@ class TestExperiment:
     def test_raw_response_create(self, client: Twopir) -> None:
         response = client.experiment.with_raw_response.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
@@ -103,69 +75,24 @@ class TestExperiment:
     def test_streaming_response_create(self, client: Twopir) -> None:
         with client.experiment.with_streaming_response.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            experiment = response.parse()
-            assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_get(self, client: Twopir) -> None:
-        experiment = client.experiment.get(
-            0,
-        )
-        assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-    @parametrize
-    def test_raw_response_get(self, client: Twopir) -> None:
-        response = client.experiment.with_raw_response.get(
-            0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        experiment = response.parse()
-        assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-    @parametrize
-    def test_streaming_response_get(self, client: Twopir) -> None:
-        with client.experiment.with_streaming_response.get(
-            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -183,35 +110,21 @@ class TestAsyncExperiment:
     async def test_method_create(self, async_client: AsyncTwopir) -> None:
         experiment = await async_client.experiment.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
@@ -222,35 +135,21 @@ class TestAsyncExperiment:
     async def test_raw_response_create(self, async_client: AsyncTwopir) -> None:
         response = await async_client.experiment.with_raw_response.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
@@ -265,69 +164,24 @@ class TestAsyncExperiment:
     async def test_streaming_response_create(self, async_client: AsyncTwopir) -> None:
         async with async_client.experiment.with_streaming_response.create(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             examples=[
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
                 {
-                    "llm_input": {"query": "Help me with my problem"},
-                    "llm_response": {"text": "I am happy to help you with that."},
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
                 },
             ],
             scorer_id=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            experiment = await response.parse()
-            assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_get(self, async_client: AsyncTwopir) -> None:
-        experiment = await async_client.experiment.get(
-            0,
-        )
-        assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-    @parametrize
-    async def test_raw_response_get(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.experiment.with_raw_response.get(
-            0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        experiment = await response.parse()
-        assert_matches_type(ExperimentStatus, experiment, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_get(self, async_client: AsyncTwopir) -> None:
-        async with async_client.experiment.with_streaming_response.get(
-            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

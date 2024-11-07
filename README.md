@@ -27,15 +27,13 @@ pip install git+ssh://git@github.com/stainless-sdks/twopir-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from twopir import Twopir
 
 client = Twopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key="My API Key",
 )
 
-response_metrics = client.contract.score(
+response = client.contract.score(
     contract={
         "name": "My Application",
         "description": "You are a helpful assistant",
@@ -51,33 +49,26 @@ response_metrics = client.contract.score(
         ],
     },
     llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "Of course I can help with that"},
+    llm_output="llm_output",
 )
-print(response_metrics.scores)
+print(response.scores)
 ```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `TWOPIR_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
 ## Async usage
 
 Simply import `AsyncTwopir` instead of `Twopir` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from twopir import AsyncTwopir
 
 client = AsyncTwopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key="My API Key",
 )
 
 
 async def main() -> None:
-    response_metrics = await client.contract.score(
+    response = await client.contract.score(
         contract={
             "name": "My Application",
             "description": "You are a helpful assistant",
@@ -93,9 +84,9 @@ async def main() -> None:
             ],
         },
         llm_input={"query": "Help me with my problem"},
-        llm_response={"text": "Of course I can help with that"},
+        llm_output="llm_output",
     )
-    print(response_metrics.scores)
+    print(response.scores)
 
 
 asyncio.run(main())
@@ -125,30 +116,18 @@ All errors inherit from `twopir.APIError`.
 import twopir
 from twopir import Twopir
 
-client = Twopir()
+client = Twopir(
+    api_key="My API Key",
+)
 
 try:
     client.contract.score(
         contract={
-            "description": "You are a helpful AI assistant",
-            "dimensions": [
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-                {
-                    "description": "Test whether the LLM follows instructions.",
-                    "label": "Instruction Following",
-                },
-            ],
-            "name": "My application",
+            "description": "description",
+            "name": "name",
         },
-        llm_input={"query": "Help me with my problem"},
-        llm_response={"text": "I am happy to help you with that."},
+        llm_input="string",
+        llm_output="llm_output",
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -189,30 +168,17 @@ from twopir import Twopir
 client = Twopir(
     # default is 2
     max_retries=0,
+    api_key="My API Key",
 )
 
 # Or, configure per-request:
 client.with_options(max_retries=5).contract.score(
     contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
+        "description": "description",
+        "name": "name",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    llm_input="string",
+    llm_output="llm_output",
 )
 ```
 
@@ -228,35 +194,23 @@ from twopir import Twopir
 client = Twopir(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
+    api_key="My API Key",
 )
 
 # More granular control:
 client = Twopir(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    api_key="My API Key",
 )
 
 # Override per-request:
 client.with_options(timeout=5.0).contract.score(
     contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
+        "description": "description",
+        "name": "name",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    llm_input="string",
+    llm_output="llm_output",
 )
 ```
 
@@ -295,33 +249,21 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from twopir import Twopir
 
-client = Twopir()
+client = Twopir(
+    api_key="My API Key",
+)
 response = client.contract.with_raw_response.score(
     contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [{
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }, {
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }, {
-            "description": "Test whether the LLM follows instructions.",
-            "label": "Instruction Following",
-        }],
-        "name": "My application",
+        "description": "description",
+        "name": "name",
     },
-    llm_input={
-        "query": "Help me with my problem"
-    },
-    llm_response={
-        "text": "I am happy to help you with that."
-    },
+    llm_input="string",
+    llm_output="llm_output",
 )
 print(response.headers.get('X-My-Header'))
 
 contract = response.parse()  # get the object that `contract.score()` would have returned
-print(contract.cost)
+print(contract.scores)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/twopir-python/tree/main/src/twopir/_response.py) object.
@@ -337,25 +279,11 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.contract.with_streaming_response.score(
     contract={
-        "description": "You are a helpful AI assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-            {
-                "description": "Test whether the LLM follows instructions.",
-                "label": "Instruction Following",
-            },
-        ],
-        "name": "My application",
+        "description": "description",
+        "name": "name",
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_response={"text": "I am happy to help you with that."},
+    llm_input="string",
+    llm_output="llm_output",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -418,6 +346,7 @@ client = Twopir(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
+    api_key="My API Key",
 )
 ```
 

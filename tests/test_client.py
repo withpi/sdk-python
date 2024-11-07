@@ -21,7 +21,7 @@ from twopir import Twopir, AsyncTwopir, APIResponseValidationError
 from twopir._types import Omit
 from twopir._models import BaseModel, FinalRequestOptions
 from twopir._constants import RAW_RESPONSE_HEADER
-from twopir._exceptions import TwopirError, APIStatusError, APITimeoutError, APIResponseValidationError
+from twopir._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from twopir._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
@@ -322,16 +322,6 @@ class TestTwopir:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = Twopir(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("api_key") == api_key
-
-        with pytest.raises(TwopirError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
-                client2 = Twopir(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Twopir(
@@ -710,25 +700,11 @@ class TestTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "You are a helpful AI assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                            ],
-                            "name": "My application",
+                            "description": "description",
+                            "name": "name",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        llm_input="string",
+                        llm_output="llm_output",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -749,25 +725,11 @@ class TestTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "You are a helpful AI assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                            ],
-                            "name": "My application",
+                            "description": "description",
+                            "name": "name",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        llm_input="string",
+                        llm_output="llm_output",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -804,25 +766,11 @@ class TestTwopir:
 
         response = client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
         )
 
         assert response.retries_taken == failures_before_success
@@ -849,25 +797,11 @@ class TestTwopir:
 
         response = client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -894,25 +828,11 @@ class TestTwopir:
 
         response = client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1197,16 +1117,6 @@ class TestAsyncTwopir:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = AsyncTwopir(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("api_key") == api_key
-
-        with pytest.raises(TwopirError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
-                client2 = AsyncTwopir(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncTwopir(
@@ -1599,25 +1509,11 @@ class TestAsyncTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "You are a helpful AI assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                            ],
-                            "name": "My application",
+                            "description": "description",
+                            "name": "name",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        llm_input="string",
+                        llm_output="llm_output",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1638,25 +1534,11 @@ class TestAsyncTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "You are a helpful AI assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                                {
-                                    "description": "Test whether the LLM follows instructions.",
-                                    "label": "Instruction Following",
-                                },
-                            ],
-                            "name": "My application",
+                            "description": "description",
+                            "name": "name",
                         },
-                        llm_input={"query": "Help me with my problem"},
-                        llm_response={"text": "I am happy to help you with that."},
+                        llm_input="string",
+                        llm_output="llm_output",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1694,25 +1576,11 @@ class TestAsyncTwopir:
 
         response = await client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
         )
 
         assert response.retries_taken == failures_before_success
@@ -1740,25 +1608,11 @@ class TestAsyncTwopir:
 
         response = await client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1786,25 +1640,11 @@ class TestAsyncTwopir:
 
         response = await client.contract.with_raw_response.score(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
-            llm_input={"query": "Help me with my problem"},
-            llm_response={"text": "I am happy to help you with that."},
+            llm_input="string",
+            llm_output="llm_output",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
