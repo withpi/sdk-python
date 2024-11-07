@@ -4,16 +4,9 @@ from typing import Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .shared.contract import Contract
 
-__all__ = ["OptimizationStatus", "Contract"]
-
-
-class Contract(BaseModel):
-    description: str
-    """The description of the contract"""
-
-    name: str
-    """The name of the contract"""
+__all__ = ["OptimizationStatus"]
 
 
 class OptimizationStatus(BaseModel):

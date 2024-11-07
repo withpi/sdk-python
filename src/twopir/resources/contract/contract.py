@@ -33,9 +33,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.shared.contract import Contract as SharedContract
+from ...types.shared_params.contract import Contract as SharedParamsContract
 from ...types.contract_score_response import ContractScoreResponse
-from ...types.contract_calibrate_response import ContractCalibrateResponse
-from ...types.contract_generate_dimensions_response import ContractGenerateDimensionsResponse
 
 __all__ = ["ContractResource", "AsyncContractResource"]
 
@@ -67,7 +67,7 @@ class ContractResource(SyncAPIResource):
     def calibrate(
         self,
         *,
-        contract: contract_calibrate_params.Contract,
+        contract: SharedParamsContract,
         feedbacks: Iterable[contract_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -75,7 +75,7 @@ class ContractResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractCalibrateResponse:
+    ) -> SharedContract:
         """
         Calibrates a contract
 
@@ -104,7 +104,7 @@ class ContractResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractCalibrateResponse,
+            cast_to=SharedContract,
         )
 
     def generate_dimensions(
@@ -118,7 +118,7 @@ class ContractResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractGenerateDimensionsResponse:
+    ) -> SharedContract:
         """
         Genrate dimensions for a contract
 
@@ -147,13 +147,13 @@ class ContractResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractGenerateDimensionsResponse,
+            cast_to=SharedContract,
         )
 
     def score(
         self,
         *,
-        contract: contract_score_params.Contract,
+        contract: SharedParamsContract,
         llm_input: Union[str, Dict[str, str]],
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -225,7 +225,7 @@ class AsyncContractResource(AsyncAPIResource):
     async def calibrate(
         self,
         *,
-        contract: contract_calibrate_params.Contract,
+        contract: SharedParamsContract,
         feedbacks: Iterable[contract_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -233,7 +233,7 @@ class AsyncContractResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractCalibrateResponse:
+    ) -> SharedContract:
         """
         Calibrates a contract
 
@@ -262,7 +262,7 @@ class AsyncContractResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractCalibrateResponse,
+            cast_to=SharedContract,
         )
 
     async def generate_dimensions(
@@ -276,7 +276,7 @@ class AsyncContractResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractGenerateDimensionsResponse:
+    ) -> SharedContract:
         """
         Genrate dimensions for a contract
 
@@ -305,13 +305,13 @@ class AsyncContractResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractGenerateDimensionsResponse,
+            cast_to=SharedContract,
         )
 
     async def score(
         self,
         *,
-        contract: contract_score_params.Contract,
+        contract: SharedParamsContract,
         llm_input: Union[str, Dict[str, str]],
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
