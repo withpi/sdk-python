@@ -33,10 +33,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.contract import Contract as SharedContract
-from ...types.shared_params.contract import Contract as SharedParamsContract
-from ...types.shared.response_metrics import ResponseMetrics
-from ...types.shared_params.llm_response import LlmResponse
+from ...types.contract_score_response import ContractScoreResponse
+from ...types.contract_calibrate_response import ContractCalibrateResponse
+from ...types.contract_generate_dimensions_response import ContractGenerateDimensionsResponse
 
 __all__ = ["ContractResource", "AsyncContractResource"]
 
@@ -68,7 +67,7 @@ class ContractResource(SyncAPIResource):
     def calibrate(
         self,
         *,
-        contract: SharedParamsContract,
+        contract: contract_calibrate_params.Contract,
         feedbacks: Iterable[contract_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -76,14 +75,14 @@ class ContractResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> ContractCalibrateResponse:
         """
         Calibrates a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          contract: The contract to calibrate
 
-          feedbacks: The list of Feedbacks to use for calibration
+          feedbacks: The feedbacks to use for calibration
 
           extra_headers: Send extra headers
 
@@ -105,25 +104,28 @@ class ContractResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=ContractCalibrateResponse,
         )
 
     def generate_dimensions(
         self,
         *,
-        contract: SharedParamsContract,
+        description: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> ContractGenerateDimensionsResponse:
         """
-        Generates more dimensions for a given contract
+        Genrate dimensions for a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          description: The description of the contract
+
+          name: The name of the contract
 
           extra_headers: Send extra headers
 
@@ -136,37 +138,40 @@ class ContractResource(SyncAPIResource):
         return self._post(
             "/contracts/generate_dimensions",
             body=maybe_transform(
-                {"contract": contract}, contract_generate_dimensions_params.ContractGenerateDimensionsParams
+                {
+                    "description": description,
+                    "name": name,
+                },
+                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=ContractGenerateDimensionsResponse,
         )
 
     def score(
         self,
         *,
-        contract: SharedParamsContract,
-        llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponse,
+        contract: contract_score_params.Contract,
+        llm_input: Union[str, Dict[str, str]],
+        llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> ContractScoreResponse:
         """
         Scores a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          contract: The contract to score
 
-          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
-              "query"
+          llm_input: The input to score
 
-          llm_response: The response from the LLM
+          llm_output: The output to score
 
           extra_headers: Send extra headers
 
@@ -182,14 +187,14 @@ class ContractResource(SyncAPIResource):
                 {
                     "contract": contract,
                     "llm_input": llm_input,
-                    "llm_response": llm_response,
+                    "llm_output": llm_output,
                 },
                 contract_score_params.ContractScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=ContractScoreResponse,
         )
 
 
@@ -220,7 +225,7 @@ class AsyncContractResource(AsyncAPIResource):
     async def calibrate(
         self,
         *,
-        contract: SharedParamsContract,
+        contract: contract_calibrate_params.Contract,
         feedbacks: Iterable[contract_calibrate_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -228,14 +233,14 @@ class AsyncContractResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> ContractCalibrateResponse:
         """
         Calibrates a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          contract: The contract to calibrate
 
-          feedbacks: The list of Feedbacks to use for calibration
+          feedbacks: The feedbacks to use for calibration
 
           extra_headers: Send extra headers
 
@@ -257,25 +262,28 @@ class AsyncContractResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=ContractCalibrateResponse,
         )
 
     async def generate_dimensions(
         self,
         *,
-        contract: SharedParamsContract,
+        description: str,
+        name: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> ContractGenerateDimensionsResponse:
         """
-        Generates more dimensions for a given contract
+        Genrate dimensions for a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          description: The description of the contract
+
+          name: The name of the contract
 
           extra_headers: Send extra headers
 
@@ -288,37 +296,40 @@ class AsyncContractResource(AsyncAPIResource):
         return await self._post(
             "/contracts/generate_dimensions",
             body=await async_maybe_transform(
-                {"contract": contract}, contract_generate_dimensions_params.ContractGenerateDimensionsParams
+                {
+                    "description": description,
+                    "name": name,
+                },
+                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=ContractGenerateDimensionsResponse,
         )
 
     async def score(
         self,
         *,
-        contract: SharedParamsContract,
-        llm_input: Dict[str, Union[str, float]],
-        llm_response: LlmResponse,
+        contract: contract_score_params.Contract,
+        llm_input: Union[str, Dict[str, str]],
+        llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ResponseMetrics:
+    ) -> ContractScoreResponse:
         """
         Scores a contract
 
         Args:
-          contract: A collection of dimensions an LLM response must adhere to
+          contract: The contract to score
 
-          llm_input: Key/Value pairs constituting the input. If the input is just text, use the key
-              "query"
+          llm_input: The input to score
 
-          llm_response: The response from the LLM
+          llm_output: The output to score
 
           extra_headers: Send extra headers
 
@@ -334,14 +345,14 @@ class AsyncContractResource(AsyncAPIResource):
                 {
                     "contract": contract,
                     "llm_input": llm_input,
-                    "llm_response": llm_response,
+                    "llm_output": llm_output,
                 },
                 contract_score_params.ContractScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ResponseMetrics,
+            cast_to=ContractScoreResponse,
         )
 
 

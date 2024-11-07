@@ -5,32 +5,34 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from .shared_params.contract import Contract
-from .shared_params.llm_response import LlmResponse
-
-__all__ = ["ContractCalibrateParams", "Feedback"]
+__all__ = ["ContractCalibrateParams", "Contract", "Feedback"]
 
 
 class ContractCalibrateParams(TypedDict, total=False):
     contract: Required[Contract]
-    """A collection of dimensions an LLM response must adhere to"""
+    """The contract to calibrate"""
 
     feedbacks: Required[Iterable[Feedback]]
-    """The list of Feedbacks to use for calibration"""
+    """The feedbacks to use for calibration"""
+
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""
 
 
 class Feedback(TypedDict, total=False):
-    labels: Required[Dict[str, float]]
-    """The human-applied labels associated with the example"""
+    labels: Required[Dict[str, str]]
+    """The labels for each dimension"""
 
-    llm_input: Required[Dict[str, Union[str, float]]]
-    """Key/Value pairs constituting the input.
+    llm_input: Required[Union[str, Dict[str, str]]]
+    """The input to evaluate"""
 
-    If the input is just text, use the key "query"
-    """
-
-    llm_response: Required[LlmResponse]
-    """The response from the LLM"""
+    llm_output: Required[str]
+    """The output to evaluate"""
 
     scores: Required[Dict[str, float]]
-    """Previous scores associated with the example"""
+    """The scores for each dimension"""

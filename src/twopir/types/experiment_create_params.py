@@ -5,29 +5,31 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-from .shared_params.contract import Contract
-from .shared_params.llm_response import LlmResponse
-
-__all__ = ["ExperimentCreateParams", "Example"]
+__all__ = ["ExperimentCreateParams", "Contract", "Example"]
 
 
 class ExperimentCreateParams(TypedDict, total=False):
     contract: Required[Contract]
-    """A collection of dimensions an LLM response must adhere to"""
+    """The contract to evaluate against"""
 
     examples: Required[Iterable[Example]]
-    """List of examples that should be scored"""
+    """The examples to evaluate"""
 
     scorer_id: Required[int]
-    """The ID of the scorer to apply"""
+    """The scorer id to use"""
+
+
+class Contract(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""
 
 
 class Example(TypedDict, total=False):
-    llm_input: Required[Dict[str, Union[str, float]]]
-    """Key/Value pairs constituting the input.
+    llm_input: Required[Union[str, Dict[str, str]]]
+    """The input to evaluate"""
 
-    If the input is just text, use the key "query"
-    """
-
-    llm_response: Required[LlmResponse]
-    """The response from the LLM"""
+    llm_output: Required[str]
+    """The output to evaluate"""

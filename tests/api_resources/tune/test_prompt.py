@@ -52,22 +52,8 @@ class TestPrompt:
     def test_method_optimize(self, client: Twopir) -> None:
         prompt = client.tune.prompt.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         )
@@ -77,22 +63,8 @@ class TestPrompt:
     def test_raw_response_optimize(self, client: Twopir) -> None:
         response = client.tune.prompt.with_raw_response.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         )
@@ -106,22 +78,8 @@ class TestPrompt:
     def test_streaming_response_optimize(self, client: Twopir) -> None:
         with client.tune.prompt.with_streaming_response.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         ) as response:
@@ -172,22 +130,8 @@ class TestAsyncPrompt:
     async def test_method_optimize(self, async_client: AsyncTwopir) -> None:
         prompt = await async_client.tune.prompt.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         )
@@ -197,22 +141,8 @@ class TestAsyncPrompt:
     async def test_raw_response_optimize(self, async_client: AsyncTwopir) -> None:
         response = await async_client.tune.prompt.with_raw_response.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         )
@@ -226,22 +156,8 @@ class TestAsyncPrompt:
     async def test_streaming_response_optimize(self, async_client: AsyncTwopir) -> None:
         async with async_client.tune.prompt.with_streaming_response.optimize(
             contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
+                "description": "description",
+                "name": "name",
             },
             experiment_id=0,
         ) as response:

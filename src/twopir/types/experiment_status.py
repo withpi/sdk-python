@@ -9,7 +9,7 @@ __all__ = ["ExperimentStatus"]
 
 class ExperimentStatus(BaseModel):
     job_id: int
-    """The unique identifier of this job"""
+    """The job id"""
 
     state: Literal["running", "done", "error"]
-    """Current status of the job"""
+    """Current state of the job"""

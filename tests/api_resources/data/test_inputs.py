@@ -20,14 +20,22 @@ class TestInputs:
     @parametrize
     def test_method_evaluate(self, client: Twopir) -> None:
         input = client.data.inputs.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     def test_raw_response_evaluate(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         )
 
         assert response.is_closed is True
@@ -38,7 +46,11 @@ class TestInputs:
     @parametrize
     def test_streaming_response_evaluate(self, client: Twopir) -> None:
         with client.data.inputs.with_streaming_response.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -51,48 +63,16 @@ class TestInputs:
     @parametrize
     def test_method_generate(self, client: Twopir) -> None:
         input = client.data.inputs.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
     @parametrize
     def test_raw_response_generate(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -103,24 +83,8 @@ class TestInputs:
     @parametrize
     def test_streaming_response_generate(self, client: Twopir) -> None:
         with client.data.inputs.with_streaming_response.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -168,14 +132,22 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_evaluate(self, async_client: AsyncTwopir) -> None:
         input = await async_client.data.inputs.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
     async def test_raw_response_evaluate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         )
 
         assert response.is_closed is True
@@ -186,7 +158,11 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_evaluate(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.with_streaming_response.evaluate(
-            llm_input={"query": "Help me with my problem"},
+            contract={
+                "description": "description",
+                "name": "name",
+            },
+            llm_input="string",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -199,48 +175,16 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_generate(self, async_client: AsyncTwopir) -> None:
         input = await async_client.data.inputs.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -251,24 +195,8 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.with_streaming_response.generate(
-            contract={
-                "description": "You are a helpful AI assistant",
-                "dimensions": [
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                    {
-                        "description": "Test whether the LLM follows instructions.",
-                        "label": "Instruction Following",
-                    },
-                ],
-                "name": "My application",
-            },
+            description="description",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

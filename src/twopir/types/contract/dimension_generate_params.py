@@ -2,13 +2,26 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.dimension import Dimension
-
-__all__ = ["DimensionGenerateParams"]
+__all__ = ["DimensionGenerateParams", "SubDimension"]
 
 
 class DimensionGenerateParams(TypedDict, total=False):
-    dimension: Required[Dimension]
-    """A single dimension along which an LLM response will be scored"""
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""
+
+    sub_dimensions: Required[Iterable[SubDimension]]
+    """The sub dimensions of the dimension"""
+
+
+class SubDimension(TypedDict, total=False):
+    description: Required[str]
+    """The description of the dimension"""
+
+    label: Required[str]
+    """The label of the dimension"""

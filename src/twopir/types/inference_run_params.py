@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, TypeAlias, TypedDict
 
-__all__ = ["InferenceRunParams"]
+__all__ = ["InferenceRunParams", "Variant0", "Variant1"]
 
 
-class InferenceRunParams(TypedDict, total=False):
-    llm_input: Required[Dict[str, Union[str, float]]]
-    """Key/Value pairs constituting the input.
+class Variant0(TypedDict, total=False):
+    body: Required[str]
 
-    If the input is just text, use the key "query"
-    """
+
+class Variant1(TypedDict, total=False):
+    body: Required[Dict[str, str]]
+
+
+InferenceRunParams: TypeAlias = Union[Variant0, Variant1]
