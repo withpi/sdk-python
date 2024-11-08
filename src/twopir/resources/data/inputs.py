@@ -35,7 +35,7 @@ class InputsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
         return InputsResourceWithRawResponse(self)
 
@@ -44,7 +44,7 @@ class InputsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
         return InputsResourceWithStreamingResponse(self)
 
@@ -162,7 +162,7 @@ class AsyncInputsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#accessing-raw-response-data-eg-headers
         """
         return AsyncInputsResourceWithRawResponse(self)
 
@@ -171,7 +171,7 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/twopir-python#with_streaming_response
         """
         return AsyncInputsResourceWithStreamingResponse(self)
 
