@@ -1,0 +1,37 @@
+# Changelog
+
+## 0.1.0-alpha.1 (2024-11-08)
+
+Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/2pir-ai/sdk-python/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
+
+### Features
+
+* **api:** api update ([a15a4f2](https://github.com/2pir-ai/sdk-python/commit/a15a4f2df1558d31109ec6fd55e3dfbf8e29eb81))
+* **api:** api update ([0db4a22](https://github.com/2pir-ai/sdk-python/commit/0db4a22d1e626b18ef83ca220e4ab3219d21d0f1))
+* **api:** api update ([e4e599b](https://github.com/2pir-ai/sdk-python/commit/e4e599b8b7e9559fb90215f3b6340c49be9830a4))
+* **api:** api update ([bae8102](https://github.com/2pir-ai/sdk-python/commit/bae8102d25fdc9202237b9bf7d33766e1e8e5975))
+* **api:** api update ([8ad5e68](https://github.com/2pir-ai/sdk-python/commit/8ad5e68cc6ce27c2a9cbb946ffc86981c8101f18))
+* **api:** manual updates to align models again ([d676b7c](https://github.com/2pir-ai/sdk-python/commit/d676b7cac6a5a06c2ac446102c29d6f9588be8cd))
+* **api:** update via SDK Studio ([e6ac3e7](https://github.com/2pir-ai/sdk-python/commit/e6ac3e720be188e49787b133c52fa0fcc322ff64))
+* **api:** update via SDK Studio ([9329115](https://github.com/2pir-ai/sdk-python/commit/9329115444b57654d56960cb09575b3288fadb5d))
+* **api:** update via SDK Studio ([5a42a42](https://github.com/2pir-ai/sdk-python/commit/5a42a42779a6d958fb85746e2715579ce5a7b8ac))
+* **api:** update via SDK Studio ([99aca25](https://github.com/2pir-ai/sdk-python/commit/99aca25f01ef2547582bb494dd2cad33a504c591))
+* **api:** update via SDK Studio ([820fd47](https://github.com/2pir-ai/sdk-python/commit/820fd47eb6f793902a48837dd83899bb7e9c7be2))
+* **api:** update via SDK Studio ([a72a402](https://github.com/2pir-ai/sdk-python/commit/a72a402ce2db250c9e3c5ddb1f24cf9409cc0634))
+* **api:** update via SDK Studio ([3b2942b](https://github.com/2pir-ai/sdk-python/commit/3b2942b35f1538247b386f089c0232b928cd82ab))
+* **api:** update via SDK Studio ([156b362](https://github.com/2pir-ai/sdk-python/commit/156b3620f9aaa4c30dc2bd9b834150fe16e98449))
+* **api:** update via SDK Studio ([f466f19](https://github.com/2pir-ai/sdk-python/commit/f466f192d42ffcb59d6566ab0e302c6297c0e550))
+* **api:** update via SDK Studio ([6e92308](https://github.com/2pir-ai/sdk-python/commit/6e9230862e8b448c3997bd3136c9996f91e7f36f))
+* **api:** update via SDK Studio ([93d9b98](https://github.com/2pir-ai/sdk-python/commit/93d9b98cd489150a9fb2fff7118cff99d4d987e0))
+* **api:** update via SDK Studio ([89afef7](https://github.com/2pir-ai/sdk-python/commit/89afef719519e7548d1b58d168ac754df76ade0e))
+* **api:** update via SDK Studio ([7cf2de3](https://github.com/2pir-ai/sdk-python/commit/7cf2de3751fd61c802d1b3961b023859715330c6))
+* **api:** update via SDK Studio ([d4f2af5](https://github.com/2pir-ai/sdk-python/commit/d4f2af5312f194fdc5d98813eea5b1d913422d9b))
+
+
+### Chores
+
+* configure new SDK language ([07c5ad0](https://github.com/2pir-ai/sdk-python/commit/07c5ad04f3938fb9ae0ab815edcca3240649c5f1))
+* go live ([#1](https://github.com/2pir-ai/sdk-python/issues/1)) ([14c8a32](https://github.com/2pir-ai/sdk-python/commit/14c8a32ae182ef8823296c745772797bcaf79412))
+* go live ([#3](https://github.com/2pir-ai/sdk-python/issues/3)) ([bf1a184](https://github.com/2pir-ai/sdk-python/commit/bf1a1844f38908c3f50045296111add0d1180629))
+* rebuild project due to codegen change ([8f16dfd](https://github.com/2pir-ai/sdk-python/commit/8f16dfda7f1f83a784291201149f2b6d93c99572))
+* rebuild project due to codegen change ([6b40270](https://github.com/2pir-ai/sdk-python/commit/6b4027038a8d9569c7c8f5f89765e889dbcff810))
