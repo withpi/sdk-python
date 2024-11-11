@@ -43,6 +43,88 @@ class TestExperiment:
         assert_matches_type(ExperimentStatus, experiment, path=["response"])
 
     @parametrize
+    def test_method_create_with_all_params(self, client: Twopir) -> None:
+        experiment = client.experiment.create(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            scorer_id=0,
+        )
+        assert_matches_type(ExperimentStatus, experiment, path=["response"])
+
+    @parametrize
     def test_raw_response_create(self, client: Twopir) -> None:
         response = client.experiment.with_raw_response.create(
             contract={
@@ -143,6 +225,88 @@ class TestAsyncExperiment:
             contract={
                 "description": "description",
                 "name": "name",
+            },
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            scorer_id=0,
+        )
+        assert_matches_type(ExperimentStatus, experiment, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncTwopir) -> None:
+        experiment = await async_client.experiment.create(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
             },
             examples=[
                 {

@@ -60,6 +60,74 @@ class TestPrompt:
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
+    def test_method_optimize_with_all_params(self, client: Twopir) -> None:
+        prompt = client.tune.prompt.optimize(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            experiment_id=0,
+        )
+        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+
+    @parametrize
     def test_raw_response_optimize(self, client: Twopir) -> None:
         response = client.tune.prompt.with_raw_response.optimize(
             contract={
@@ -132,6 +200,74 @@ class TestAsyncPrompt:
             contract={
                 "description": "description",
                 "name": "name",
+            },
+            experiment_id=0,
+        )
+        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+
+    @parametrize
+    async def test_method_optimize_with_all_params(self, async_client: AsyncTwopir) -> None:
+        prompt = await async_client.tune.prompt.optimize(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                    {
+                        "description": "description",
+                        "label": "label",
+                        "sub_dimensions": [
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                            {
+                                "description": "description",
+                                "label": "label",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
             },
             experiment_id=0,
         )
