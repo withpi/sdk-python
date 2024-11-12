@@ -31,8 +31,7 @@ import os
 from twopir import Twopir
 
 client = Twopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
 contracts_score_metrics = client.contract.score(
@@ -71,8 +70,7 @@ import asyncio
 from twopir import AsyncTwopir
 
 client = AsyncTwopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
 
