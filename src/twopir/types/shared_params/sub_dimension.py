@@ -8,8 +8,8 @@ __all__ = ["SubDimension"]
 
 
 class SubDimension(TypedDict, total=False):
+    id: Required[str]
+    """The label of the dimension"""
+
     description: Required[str]
     """The description of the dimension"""
-
-    label: Required[str]
-    """The label of the dimension"""

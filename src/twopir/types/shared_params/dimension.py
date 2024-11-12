@@ -11,11 +11,11 @@ __all__ = ["Dimension"]
 
 
 class Dimension(TypedDict, total=False):
+    id: Required[str]
+    """The label of the dimension"""
+
     description: Required[str]
     """The description of the dimension"""
-
-    label: Required[str]
-    """The label of the dimension"""
 
     sub_dimensions: Required[Iterable[SubDimension]]
     """The sub dimensions of the dimension"""
