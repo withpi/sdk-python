@@ -7,8 +7,8 @@ __all__ = ["SubDimension"]
 
 
 class SubDimension(BaseModel):
+    id: str
+    """The label of the dimension"""
+
     description: str
     """The description of the dimension"""
-
-    label: str
-    """The label of the dimension"""

@@ -67,56 +67,56 @@ class TestPrompt:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -213,56 +213,56 @@ class TestAsyncPrompt:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },

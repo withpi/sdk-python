@@ -58,56 +58,56 @@ class TestContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -225,56 +225,56 @@ class TestContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -334,56 +334,56 @@ class TestContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -471,56 +471,56 @@ class TestAsyncContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -638,56 +638,56 @@ class TestAsyncContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -747,56 +747,56 @@ class TestAsyncContract:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
