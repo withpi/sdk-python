@@ -50,56 +50,56 @@ class TestExperiment:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
@@ -252,56 +252,56 @@ class TestAsyncExperiment:
                 "name": "name",
                 "dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                         "sub_dimensions": [
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                             {
+                                "id": "id",
                                 "description": "description",
-                                "label": "label",
                             },
                         ],
                     },
