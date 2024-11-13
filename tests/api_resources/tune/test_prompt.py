@@ -20,14 +20,14 @@ class TestPrompt:
     @parametrize
     def test_method_get(self, client: Twopir) -> None:
         prompt = client.tune.prompt.get(
-            0,
+            "job_id",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Twopir) -> None:
         response = client.tune.prompt.with_raw_response.get(
-            0,
+            "job_id",
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestPrompt:
     @parametrize
     def test_streaming_response_get(self, client: Twopir) -> None:
         with client.tune.prompt.with_streaming_response.get(
-            0,
+            "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -49,13 +49,34 @@ class TestPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_path_params_get(self, client: Twopir) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.tune.prompt.with_raw_response.get(
+                "",
+            )
+
+    @parametrize
     def test_method_optimize(self, client: Twopir) -> None:
         prompt = client.tune.prompt.optimize(
             contract={
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -123,7 +144,21 @@ class TestPrompt:
                 ],
                 "scorer_ast": "string",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -134,7 +169,21 @@ class TestPrompt:
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
 
         assert response.is_closed is True
@@ -149,7 +198,21 @@ class TestPrompt:
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -166,14 +229,14 @@ class TestAsyncPrompt:
     @parametrize
     async def test_method_get(self, async_client: AsyncTwopir) -> None:
         prompt = await async_client.tune.prompt.get(
-            0,
+            "job_id",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncTwopir) -> None:
         response = await async_client.tune.prompt.with_raw_response.get(
-            0,
+            "job_id",
         )
 
         assert response.is_closed is True
@@ -184,7 +247,7 @@ class TestAsyncPrompt:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncTwopir) -> None:
         async with async_client.tune.prompt.with_streaming_response.get(
-            0,
+            "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -195,13 +258,34 @@ class TestAsyncPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_path_params_get(self, async_client: AsyncTwopir) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.tune.prompt.with_raw_response.get(
+                "",
+            )
+
+    @parametrize
     async def test_method_optimize(self, async_client: AsyncTwopir) -> None:
         prompt = await async_client.tune.prompt.optimize(
             contract={
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -269,7 +353,21 @@ class TestAsyncPrompt:
                 ],
                 "scorer_ast": "string",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -280,7 +378,21 @@ class TestAsyncPrompt:
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         )
 
         assert response.is_closed is True
@@ -295,7 +407,21 @@ class TestAsyncPrompt:
                 "description": "description",
                 "name": "name",
             },
-            experiment_id=0,
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            model_id="gpt-4o-mini",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

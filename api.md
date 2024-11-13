@@ -38,8 +38,14 @@ from twopir.types import OptimizationStatus
 
 Methods:
 
-- <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/twopir/resources/tune/prompt.py">get</a>(job_id) -> <a href="./src/twopir/types/optimization_status.py">OptimizationStatus</a></code>
-- <code title="post /tune/prompt">client.tune.prompt.<a href="./src/twopir/resources/tune/prompt.py">optimize</a>(\*\*<a href="src/twopir/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/twopir/types/optimization_status.py">OptimizationStatus</a></code>
+- <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/twopir/resources/tune/prompt/prompt.py">get</a>(job_id) -> <a href="./src/twopir/types/optimization_status.py">OptimizationStatus</a></code>
+- <code title="post /tune/prompt">client.tune.prompt.<a href="./src/twopir/resources/tune/prompt/prompt.py">optimize</a>(\*\*<a href="src/twopir/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/twopir/types/optimization_status.py">OptimizationStatus</a></code>
+
+### Messages
+
+Methods:
+
+- <code title="get /tune/prompt/{job_id}/messages">client.tune.prompt.messages.<a href="./src/twopir/resources/tune/prompt/messages.py">retrieve</a>(job_id) -> None</code>
 
 # Experiment
 
