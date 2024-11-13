@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+from typing_extensions import Literal
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -45,9 +48,9 @@ class PromptResource(SyncAPIResource):
         """
         return PromptResourceWithStreamingResponse(self)
 
-    def get(
+    def get_detailed_messages(
         self,
-        job_id: int,
+        job_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -55,9 +58,11 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
-        """
-        Checks on a prompt optimization job
+    ) -> str:
+        """Streams messages from a prompt optimization job, separated by newlines.
+
+        The full
+        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -68,6 +73,42 @@ class PromptResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/tune/prompt/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    def get_status(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OptimizationStatus:
+        """
+        Polls the status of a prompt optimization job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
             f"/tune/prompt/{job_id}",
             options=make_request_options(
@@ -80,7 +121,8 @@ class PromptResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        experiment_id: int,
+        examples: Iterable[prompt_optimize_params.Example],
+        model_id: Literal["gpt-4o-mini", "mock-llm"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -89,12 +131,14 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Start a prompt optimization job
+        Do Pi Prompt optimization.
 
         Args:
           contract: The contract to optimize
 
-          experiment_id: The experiment id
+          examples: The examples to train and validate on
+
+          model_id: The model to use for generating responses
 
           extra_headers: Send extra headers
 
@@ -109,7 +153,8 @@ class PromptResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
-                    "experiment_id": experiment_id,
+                    "examples": examples,
+                    "model_id": model_id,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -140,9 +185,9 @@ class AsyncPromptResource(AsyncAPIResource):
         """
         return AsyncPromptResourceWithStreamingResponse(self)
 
-    async def get(
+    async def get_detailed_messages(
         self,
-        job_id: int,
+        job_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -150,9 +195,11 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
-        """
-        Checks on a prompt optimization job
+    ) -> str:
+        """Streams messages from a prompt optimization job, separated by newlines.
+
+        The full
+        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -163,6 +210,42 @@ class AsyncPromptResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/tune/prompt/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    async def get_status(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OptimizationStatus:
+        """
+        Polls the status of a prompt optimization job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
             f"/tune/prompt/{job_id}",
             options=make_request_options(
@@ -175,7 +258,8 @@ class AsyncPromptResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        experiment_id: int,
+        examples: Iterable[prompt_optimize_params.Example],
+        model_id: Literal["gpt-4o-mini", "mock-llm"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -184,12 +268,14 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Start a prompt optimization job
+        Do Pi Prompt optimization.
 
         Args:
           contract: The contract to optimize
 
-          experiment_id: The experiment id
+          examples: The examples to train and validate on
+
+          model_id: The model to use for generating responses
 
           extra_headers: Send extra headers
 
@@ -204,7 +290,8 @@ class AsyncPromptResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
-                    "experiment_id": experiment_id,
+                    "examples": examples,
+                    "model_id": model_id,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -219,8 +306,11 @@ class PromptResourceWithRawResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get = to_raw_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = to_raw_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = to_raw_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = to_raw_response_wrapper(
             prompt.optimize,
@@ -231,8 +321,11 @@ class AsyncPromptResourceWithRawResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get = async_to_raw_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = async_to_raw_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = async_to_raw_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = async_to_raw_response_wrapper(
             prompt.optimize,
@@ -243,8 +336,11 @@ class PromptResourceWithStreamingResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get = to_streamed_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = to_streamed_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = to_streamed_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = to_streamed_response_wrapper(
             prompt.optimize,
@@ -255,8 +351,11 @@ class AsyncPromptResourceWithStreamingResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get = async_to_streamed_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = async_to_streamed_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = async_to_streamed_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = async_to_streamed_response_wrapper(
             prompt.optimize,

@@ -2,73 +2,106 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Dict, Union
 
 import httpx
 
-from ..types import experiment_create_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.experiment_status import ExperimentStatus
-from ..types.shared_params.contract import Contract
+from ..._base_client import make_request_options
+from ...types.contracts import dimension_score_params, dimension_generate_params
+from ...types.shared.dimension import Dimension as SharedDimension
+from ...types.contracts_score_metrics import ContractsScoreMetrics
+from ...types.shared_params.dimension import Dimension as SharedParamsDimension
 
-__all__ = ["ExperimentResource", "AsyncExperimentResource"]
+__all__ = ["DimensionResource", "AsyncDimensionResource"]
 
 
-class ExperimentResource(SyncAPIResource):
+class DimensionResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ExperimentResourceWithRawResponse:
+    def with_raw_response(self) -> DimensionResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ExperimentResourceWithRawResponse(self)
+        return DimensionResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ExperimentResourceWithStreamingResponse:
+    def with_streaming_response(self) -> DimensionResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
         """
-        return ExperimentResourceWithStreamingResponse(self)
+        return DimensionResourceWithStreamingResponse(self)
 
-    def create(
+    def generate(
         self,
         *,
-        contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
+        dimension: SharedParamsDimension,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> SharedDimension:
         """
-        Launches an experiment on a set of data
+        Generates subdimension within a dimension
 
         Args:
-          contract: The contract to evaluate against
+          extra_headers: Send extra headers
 
-          examples: The examples to evaluate
+          extra_query: Add additional query parameters to the request
 
-          scorer_id: The scorer id to use
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/contracts/dimensions/generate",
+            body=maybe_transform({"dimension": dimension}, dimension_generate_params.DimensionGenerateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SharedDimension,
+        )
+
+    def score(
+        self,
+        *,
+        dimension: SharedParamsDimension,
+        llm_input: Union[str, Dict[str, str]],
+        llm_output: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ContractsScoreMetrics:
+        """
+        Scores a dimension
+
+        Args:
+          dimension: The dimension to score
+
+          llm_input: The input to score
+
+          llm_output: The output to score
 
           extra_headers: Send extra headers
 
@@ -79,34 +112,55 @@ class ExperimentResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/experiments",
+            "/contracts/dimensions/score",
             body=maybe_transform(
                 {
-                    "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
+                    "dimension": dimension,
+                    "llm_input": llm_input,
+                    "llm_output": llm_output,
                 },
-                experiment_create_params.ExperimentCreateParams,
+                dimension_score_params.DimensionScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=ContractsScoreMetrics,
         )
 
-    def get(
+
+class AsyncDimensionResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncDimensionResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncDimensionResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDimensionResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
+        """
+        return AsyncDimensionResourceWithStreamingResponse(self)
+
+    async def generate(
         self,
-        job_id: int,
         *,
+        dimension: SharedParamsDimension,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> SharedDimension:
         """
-        Checks on an experiment job
+        Generates subdimension within a dimension
 
         Args:
           extra_headers: Send extra headers
@@ -117,57 +171,39 @@ class ExperimentResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
-            f"/experiments/{job_id}",
+        return await self._post(
+            "/contracts/dimensions/generate",
+            body=await async_maybe_transform(
+                {"dimension": dimension}, dimension_generate_params.DimensionGenerateParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
+            cast_to=SharedDimension,
         )
 
-
-class AsyncExperimentResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncExperimentResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return the
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncExperimentResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncExperimentResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
-        """
-        return AsyncExperimentResourceWithStreamingResponse(self)
-
-    async def create(
+    async def score(
         self,
         *,
-        contract: Contract,
-        examples: Iterable[experiment_create_params.Example],
-        scorer_id: int,
+        dimension: SharedParamsDimension,
+        llm_input: Union[str, Dict[str, str]],
+        llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
+    ) -> ContractsScoreMetrics:
         """
-        Launches an experiment on a set of data
+        Scores a dimension
 
         Args:
-          contract: The contract to evaluate against
+          dimension: The dimension to score
 
-          examples: The examples to evaluate
+          llm_input: The input to score
 
-          scorer_id: The scorer id to use
+          llm_output: The output to score
 
           extra_headers: Send extra headers
 
@@ -178,96 +214,65 @@ class AsyncExperimentResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/experiments",
+            "/contracts/dimensions/score",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
-                    "examples": examples,
-                    "scorer_id": scorer_id,
+                    "dimension": dimension,
+                    "llm_input": llm_input,
+                    "llm_output": llm_output,
                 },
-                experiment_create_params.ExperimentCreateParams,
+                dimension_score_params.DimensionScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExperimentStatus,
-        )
-
-    async def get(
-        self,
-        job_id: int,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExperimentStatus:
-        """
-        Checks on an experiment job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            f"/experiments/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ExperimentStatus,
+            cast_to=ContractsScoreMetrics,
         )
 
 
-class ExperimentResourceWithRawResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class DimensionResourceWithRawResponse:
+    def __init__(self, dimension: DimensionResource) -> None:
+        self._dimension = dimension
 
-        self.create = to_raw_response_wrapper(
-            experiment.create,
+        self.generate = to_raw_response_wrapper(
+            dimension.generate,
         )
-        self.get = to_raw_response_wrapper(
-            experiment.get,
-        )
-
-
-class AsyncExperimentResourceWithRawResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
-
-        self.create = async_to_raw_response_wrapper(
-            experiment.create,
-        )
-        self.get = async_to_raw_response_wrapper(
-            experiment.get,
+        self.score = to_raw_response_wrapper(
+            dimension.score,
         )
 
 
-class ExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: ExperimentResource) -> None:
-        self._experiment = experiment
+class AsyncDimensionResourceWithRawResponse:
+    def __init__(self, dimension: AsyncDimensionResource) -> None:
+        self._dimension = dimension
 
-        self.create = to_streamed_response_wrapper(
-            experiment.create,
+        self.generate = async_to_raw_response_wrapper(
+            dimension.generate,
         )
-        self.get = to_streamed_response_wrapper(
-            experiment.get,
+        self.score = async_to_raw_response_wrapper(
+            dimension.score,
         )
 
 
-class AsyncExperimentResourceWithStreamingResponse:
-    def __init__(self, experiment: AsyncExperimentResource) -> None:
-        self._experiment = experiment
+class DimensionResourceWithStreamingResponse:
+    def __init__(self, dimension: DimensionResource) -> None:
+        self._dimension = dimension
 
-        self.create = async_to_streamed_response_wrapper(
-            experiment.create,
+        self.generate = to_streamed_response_wrapper(
+            dimension.generate,
         )
-        self.get = async_to_streamed_response_wrapper(
-            experiment.get,
+        self.score = to_streamed_response_wrapper(
+            dimension.score,
+        )
+
+
+class AsyncDimensionResourceWithStreamingResponse:
+    def __init__(self, dimension: AsyncDimensionResource) -> None:
+        self._dimension = dimension
+
+        self.generate = async_to_streamed_response_wrapper(
+            dimension.generate,
+        )
+        self.score = async_to_streamed_response_wrapper(
+            dimension.score,
         )

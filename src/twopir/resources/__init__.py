@@ -16,13 +16,13 @@ from .tune import (
     TuneResourceWithStreamingResponse,
     AsyncTuneResourceWithStreamingResponse,
 )
-from .contract import (
-    ContractResource,
-    AsyncContractResource,
-    ContractResourceWithRawResponse,
-    AsyncContractResourceWithRawResponse,
-    ContractResourceWithStreamingResponse,
-    AsyncContractResourceWithStreamingResponse,
+from .contracts import (
+    ContractsResource,
+    AsyncContractsResource,
+    ContractsResourceWithRawResponse,
+    AsyncContractsResourceWithRawResponse,
+    ContractsResourceWithStreamingResponse,
+    AsyncContractsResourceWithStreamingResponse,
 )
 from .inference import (
     InferenceResource,
@@ -32,13 +32,13 @@ from .inference import (
     InferenceResourceWithStreamingResponse,
     AsyncInferenceResourceWithStreamingResponse,
 )
-from .experiment import (
-    ExperimentResource,
-    AsyncExperimentResource,
-    ExperimentResourceWithRawResponse,
-    AsyncExperimentResourceWithRawResponse,
-    ExperimentResourceWithStreamingResponse,
-    AsyncExperimentResourceWithStreamingResponse,
+from .experiments import (
+    ExperimentsResource,
+    AsyncExperimentsResource,
+    ExperimentsResourceWithRawResponse,
+    AsyncExperimentsResourceWithRawResponse,
+    ExperimentsResourceWithStreamingResponse,
+    AsyncExperimentsResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -60,16 +60,16 @@ __all__ = [
     "AsyncTuneResourceWithRawResponse",
     "TuneResourceWithStreamingResponse",
     "AsyncTuneResourceWithStreamingResponse",
-    "ExperimentResource",
-    "AsyncExperimentResource",
-    "ExperimentResourceWithRawResponse",
-    "AsyncExperimentResourceWithRawResponse",
-    "ExperimentResourceWithStreamingResponse",
-    "AsyncExperimentResourceWithStreamingResponse",
-    "ContractResource",
-    "AsyncContractResource",
-    "ContractResourceWithRawResponse",
-    "AsyncContractResourceWithRawResponse",
-    "ContractResourceWithStreamingResponse",
-    "AsyncContractResourceWithStreamingResponse",
+    "ExperimentsResource",
+    "AsyncExperimentsResource",
+    "ExperimentsResourceWithRawResponse",
+    "AsyncExperimentsResourceWithRawResponse",
+    "ExperimentsResourceWithStreamingResponse",
+    "AsyncExperimentsResourceWithStreamingResponse",
+    "ContractsResource",
+    "AsyncContractsResource",
+    "ContractsResourceWithRawResponse",
+    "AsyncContractsResourceWithRawResponse",
+    "ContractsResourceWithStreamingResponse",
+    "AsyncContractsResourceWithStreamingResponse",
 ]

@@ -31,11 +31,10 @@ import os
 from twopir import Twopir
 
 client = Twopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
-contracts_score_metrics = client.contract.score(
+contracts_score_metrics = client.contracts.score(
     contract={
         "name": "My Application",
         "description": "You are a helpful assistant",
@@ -71,13 +70,12 @@ import asyncio
 from twopir import AsyncTwopir
 
 client = AsyncTwopir(
-    # This is the default and can be omitted
-    api_key=os.environ.get("TWOPIR_API_KEY"),
+    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    contracts_score_metrics = await client.contract.score(
+    contracts_score_metrics = await client.contracts.score(
         contract={
             "name": "My Application",
             "description": "You are a helpful assistant",
@@ -128,7 +126,7 @@ from twopir import Twopir
 client = Twopir()
 
 try:
-    client.contract.score(
+    client.contracts.score(
         contract={
             "description": "description",
             "name": "name",
@@ -178,7 +176,7 @@ client = Twopir(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).contract.score(
+client.with_options(max_retries=5).contracts.score(
     contract={
         "description": "description",
         "name": "name",
@@ -208,7 +206,7 @@ client = Twopir(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).contract.score(
+client.with_options(timeout=5.0).contracts.score(
     contract={
         "description": "description",
         "name": "name",
@@ -254,7 +252,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from twopir import Twopir
 
 client = Twopir()
-response = client.contract.with_raw_response.score(
+response = client.contracts.with_raw_response.score(
     contract={
         "description": "description",
         "name": "name",
@@ -264,7 +262,7 @@ response = client.contract.with_raw_response.score(
 )
 print(response.headers.get('X-My-Header'))
 
-contract = response.parse()  # get the object that `contract.score()` would have returned
+contract = response.parse()  # get the object that `contracts.score()` would have returned
 print(contract.scores)
 ```
 
@@ -279,7 +277,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.contract.with_streaming_response.score(
+with client.contracts.with_streaming_response.score(
     contract={
         "description": "description",
         "name": "name",

@@ -29,6 +29,74 @@ class TestInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
+    def test_method_evaluate_with_all_params(self, client: Twopir) -> None:
+        input = client.data.inputs.evaluate(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            llm_input="string",
+        )
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
+
+    @parametrize
     def test_raw_response_evaluate(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.evaluate(
             contract={
@@ -66,6 +134,73 @@ class TestInputs:
             contract={
                 "description": "description",
                 "name": "name",
+            },
+        )
+        assert_matches_type(DataGenerationStatus, input, path=["response"])
+
+    @parametrize
+    def test_method_generate_with_all_params(self, client: Twopir) -> None:
+        input = client.data.inputs.generate(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
             },
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
@@ -147,6 +282,74 @@ class TestAsyncInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
+    async def test_method_evaluate_with_all_params(self, async_client: AsyncTwopir) -> None:
+        input = await async_client.data.inputs.evaluate(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            llm_input="string",
+        )
+        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
+
+    @parametrize
     async def test_raw_response_evaluate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.evaluate(
             contract={
@@ -184,6 +387,73 @@ class TestAsyncInputs:
             contract={
                 "description": "description",
                 "name": "name",
+            },
+        )
+        assert_matches_type(DataGenerationStatus, input, path=["response"])
+
+    @parametrize
+    async def test_method_generate_with_all_params(self, async_client: AsyncTwopir) -> None:
+        input = await async_client.data.inputs.generate(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
             },
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])

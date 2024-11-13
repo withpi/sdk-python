@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -13,7 +13,10 @@ class OptimizationStatus(BaseModel):
     contract: Optional[Contract] = None
     """The optimized contract. Absent unless state is done"""
 
-    job_id: int
+    detailed_status: List[str]
+    """Detailed status of the job"""
+
+    job_id: str
     """The job id"""
 
     state: Literal["running", "done", "error"]

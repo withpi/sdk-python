@@ -14,12 +14,12 @@ from twopir.types import ExperimentStatus
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestExperiment:
+class TestExperiments:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Twopir) -> None:
-        experiment = client.experiment.create(
+        experiment = client.experiments.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -43,8 +43,90 @@ class TestExperiment:
         assert_matches_type(ExperimentStatus, experiment, path=["response"])
 
     @parametrize
+    def test_method_create_with_all_params(self, client: Twopir) -> None:
+        experiment = client.experiments.create(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            scorer_id=0,
+        )
+        assert_matches_type(ExperimentStatus, experiment, path=["response"])
+
+    @parametrize
     def test_raw_response_create(self, client: Twopir) -> None:
-        response = client.experiment.with_raw_response.create(
+        response = client.experiments.with_raw_response.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -73,7 +155,7 @@ class TestExperiment:
 
     @parametrize
     def test_streaming_response_create(self, client: Twopir) -> None:
-        with client.experiment.with_streaming_response.create(
+        with client.experiments.with_streaming_response.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -104,14 +186,14 @@ class TestExperiment:
 
     @parametrize
     def test_method_get(self, client: Twopir) -> None:
-        experiment = client.experiment.get(
+        experiment = client.experiments.get(
             0,
         )
         assert_matches_type(ExperimentStatus, experiment, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Twopir) -> None:
-        response = client.experiment.with_raw_response.get(
+        response = client.experiments.with_raw_response.get(
             0,
         )
 
@@ -122,7 +204,7 @@ class TestExperiment:
 
     @parametrize
     def test_streaming_response_get(self, client: Twopir) -> None:
-        with client.experiment.with_streaming_response.get(
+        with client.experiments.with_streaming_response.get(
             0,
         ) as response:
             assert not response.is_closed
@@ -134,12 +216,12 @@ class TestExperiment:
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncExperiment:
+class TestAsyncExperiments:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_create(self, async_client: AsyncTwopir) -> None:
-        experiment = await async_client.experiment.create(
+        experiment = await async_client.experiments.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -163,8 +245,90 @@ class TestAsyncExperiment:
         assert_matches_type(ExperimentStatus, experiment, path=["response"])
 
     @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncTwopir) -> None:
+        experiment = await async_client.experiments.create(
+            contract={
+                "description": "description",
+                "name": "name",
+                "dimensions": [
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                    {
+                        "id": "id",
+                        "description": "description",
+                        "sub_dimensions": [
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                            {
+                                "id": "id",
+                                "description": "description",
+                            },
+                        ],
+                    },
+                ],
+                "scorer_ast": "string",
+            },
+            examples=[
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+                {
+                    "llm_input": "string",
+                    "llm_output": "llm_output",
+                },
+            ],
+            scorer_id=0,
+        )
+        assert_matches_type(ExperimentStatus, experiment, path=["response"])
+
+    @parametrize
     async def test_raw_response_create(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.experiment.with_raw_response.create(
+        response = await async_client.experiments.with_raw_response.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -193,7 +357,7 @@ class TestAsyncExperiment:
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncTwopir) -> None:
-        async with async_client.experiment.with_streaming_response.create(
+        async with async_client.experiments.with_streaming_response.create(
             contract={
                 "description": "description",
                 "name": "name",
@@ -224,14 +388,14 @@ class TestAsyncExperiment:
 
     @parametrize
     async def test_method_get(self, async_client: AsyncTwopir) -> None:
-        experiment = await async_client.experiment.get(
+        experiment = await async_client.experiments.get(
             0,
         )
         assert_matches_type(ExperimentStatus, experiment, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.experiment.with_raw_response.get(
+        response = await async_client.experiments.with_raw_response.get(
             0,
         )
 
@@ -242,7 +406,7 @@ class TestAsyncExperiment:
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncTwopir) -> None:
-        async with async_client.experiment.with_streaming_response.get(
+        async with async_client.experiments.with_streaming_response.get(
             0,
         ) as response:
             assert not response.is_closed

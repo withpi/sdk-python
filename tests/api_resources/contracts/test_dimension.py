@@ -20,22 +20,22 @@ class TestDimension:
 
     @parametrize
     def test_method_generate(self, client: Twopir) -> None:
-        dimension = client.contract.dimension.generate(
+        dimension = client.contracts.dimension.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -44,22 +44,22 @@ class TestDimension:
 
     @parametrize
     def test_raw_response_generate(self, client: Twopir) -> None:
-        response = client.contract.dimension.with_raw_response.generate(
+        response = client.contracts.dimension.with_raw_response.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -72,22 +72,22 @@ class TestDimension:
 
     @parametrize
     def test_streaming_response_generate(self, client: Twopir) -> None:
-        with client.contract.dimension.with_streaming_response.generate(
+        with client.contracts.dimension.with_streaming_response.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -102,22 +102,22 @@ class TestDimension:
 
     @parametrize
     def test_method_score(self, client: Twopir) -> None:
-        dimension = client.contract.dimension.score(
+        dimension = client.contracts.dimension.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -128,22 +128,22 @@ class TestDimension:
 
     @parametrize
     def test_raw_response_score(self, client: Twopir) -> None:
-        response = client.contract.dimension.with_raw_response.score(
+        response = client.contracts.dimension.with_raw_response.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -158,22 +158,22 @@ class TestDimension:
 
     @parametrize
     def test_streaming_response_score(self, client: Twopir) -> None:
-        with client.contract.dimension.with_streaming_response.score(
+        with client.contracts.dimension.with_streaming_response.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -194,22 +194,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_method_generate(self, async_client: AsyncTwopir) -> None:
-        dimension = await async_client.contract.dimension.generate(
+        dimension = await async_client.contracts.dimension.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -218,22 +218,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.contract.dimension.with_raw_response.generate(
+        response = await async_client.contracts.dimension.with_raw_response.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -246,22 +246,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncTwopir) -> None:
-        async with async_client.contract.dimension.with_streaming_response.generate(
+        async with async_client.contracts.dimension.with_streaming_response.generate(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -276,22 +276,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_method_score(self, async_client: AsyncTwopir) -> None:
-        dimension = await async_client.contract.dimension.score(
+        dimension = await async_client.contracts.dimension.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -302,22 +302,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.contract.dimension.with_raw_response.score(
+        response = await async_client.contracts.dimension.with_raw_response.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },
@@ -332,22 +332,22 @@ class TestAsyncDimension:
 
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
-        async with async_client.contract.dimension.with_streaming_response.score(
+        async with async_client.contracts.dimension.with_streaming_response.score(
             dimension={
+                "id": "id",
                 "description": "description",
-                "label": "label",
                 "sub_dimensions": [
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                     {
+                        "id": "id",
                         "description": "description",
-                        "label": "label",
                     },
                 ],
             },

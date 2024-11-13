@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .contract import (
-    ContractResource,
-    AsyncContractResource,
-    ContractResourceWithRawResponse,
-    AsyncContractResourceWithRawResponse,
-    ContractResourceWithStreamingResponse,
-    AsyncContractResourceWithStreamingResponse,
+from .contracts import (
+    ContractsResource,
+    AsyncContractsResource,
+    ContractsResourceWithRawResponse,
+    AsyncContractsResourceWithRawResponse,
+    ContractsResourceWithStreamingResponse,
+    AsyncContractsResourceWithStreamingResponse,
 )
 from .dimension import (
     DimensionResource,
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncDimensionResourceWithRawResponse",
     "DimensionResourceWithStreamingResponse",
     "AsyncDimensionResourceWithStreamingResponse",
-    "ContractResource",
-    "AsyncContractResource",
-    "ContractResourceWithRawResponse",
-    "AsyncContractResourceWithRawResponse",
-    "ContractResourceWithStreamingResponse",
-    "AsyncContractResourceWithStreamingResponse",
+    "ContractsResource",
+    "AsyncContractsResource",
+    "ContractsResourceWithRawResponse",
+    "AsyncContractsResourceWithRawResponse",
+    "ContractsResourceWithStreamingResponse",
+    "AsyncContractsResourceWithStreamingResponse",
 ]
