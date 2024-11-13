@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["MessageRetrieveResponse"]
+__all__ = ["PromptGetDetailedMessagesResponse"]
 
-MessageRetrieveResponse: TypeAlias = str
+PromptGetDetailedMessagesResponse: TypeAlias = str

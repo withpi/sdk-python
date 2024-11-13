@@ -37,32 +37,32 @@ from ...types.shared.contract import Contract as SharedContract
 from ...types.shared_params.contract import Contract as SharedParamsContract
 from ...types.contracts_score_metrics import ContractsScoreMetrics
 
-__all__ = ["ContractResource", "AsyncContractResource"]
+__all__ = ["ContractsResource", "AsyncContractsResource"]
 
 
-class ContractResource(SyncAPIResource):
+class ContractsResource(SyncAPIResource):
     @cached_property
     def dimension(self) -> DimensionResource:
         return DimensionResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ContractResourceWithRawResponse:
+    def with_raw_response(self) -> ContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ContractResourceWithRawResponse(self)
+        return ContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ContractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
         """
-        return ContractResourceWithStreamingResponse(self)
+        return ContractsResourceWithStreamingResponse(self)
 
     def calibrate(
         self,
@@ -189,29 +189,29 @@ class ContractResource(SyncAPIResource):
         )
 
 
-class AsyncContractResource(AsyncAPIResource):
+class AsyncContractsResource(AsyncAPIResource):
     @cached_property
     def dimension(self) -> AsyncDimensionResource:
         return AsyncDimensionResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncContractResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncContractResourceWithRawResponse(self)
+        return AsyncContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncContractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
         """
-        return AsyncContractResourceWithStreamingResponse(self)
+        return AsyncContractsResourceWithStreamingResponse(self)
 
     async def calibrate(
         self,
@@ -338,77 +338,77 @@ class AsyncContractResource(AsyncAPIResource):
         )
 
 
-class ContractResourceWithRawResponse:
-    def __init__(self, contract: ContractResource) -> None:
-        self._contract = contract
+class ContractsResourceWithRawResponse:
+    def __init__(self, contracts: ContractsResource) -> None:
+        self._contracts = contracts
 
         self.calibrate = to_raw_response_wrapper(
-            contract.calibrate,
+            contracts.calibrate,
         )
         self.generate_dimensions = to_raw_response_wrapper(
-            contract.generate_dimensions,
+            contracts.generate_dimensions,
         )
         self.score = to_raw_response_wrapper(
-            contract.score,
+            contracts.score,
         )
 
     @cached_property
     def dimension(self) -> DimensionResourceWithRawResponse:
-        return DimensionResourceWithRawResponse(self._contract.dimension)
+        return DimensionResourceWithRawResponse(self._contracts.dimension)
 
 
-class AsyncContractResourceWithRawResponse:
-    def __init__(self, contract: AsyncContractResource) -> None:
-        self._contract = contract
+class AsyncContractsResourceWithRawResponse:
+    def __init__(self, contracts: AsyncContractsResource) -> None:
+        self._contracts = contracts
 
         self.calibrate = async_to_raw_response_wrapper(
-            contract.calibrate,
+            contracts.calibrate,
         )
         self.generate_dimensions = async_to_raw_response_wrapper(
-            contract.generate_dimensions,
+            contracts.generate_dimensions,
         )
         self.score = async_to_raw_response_wrapper(
-            contract.score,
+            contracts.score,
         )
 
     @cached_property
     def dimension(self) -> AsyncDimensionResourceWithRawResponse:
-        return AsyncDimensionResourceWithRawResponse(self._contract.dimension)
+        return AsyncDimensionResourceWithRawResponse(self._contracts.dimension)
 
 
-class ContractResourceWithStreamingResponse:
-    def __init__(self, contract: ContractResource) -> None:
-        self._contract = contract
+class ContractsResourceWithStreamingResponse:
+    def __init__(self, contracts: ContractsResource) -> None:
+        self._contracts = contracts
 
         self.calibrate = to_streamed_response_wrapper(
-            contract.calibrate,
+            contracts.calibrate,
         )
         self.generate_dimensions = to_streamed_response_wrapper(
-            contract.generate_dimensions,
+            contracts.generate_dimensions,
         )
         self.score = to_streamed_response_wrapper(
-            contract.score,
+            contracts.score,
         )
 
     @cached_property
     def dimension(self) -> DimensionResourceWithStreamingResponse:
-        return DimensionResourceWithStreamingResponse(self._contract.dimension)
+        return DimensionResourceWithStreamingResponse(self._contracts.dimension)
 
 
-class AsyncContractResourceWithStreamingResponse:
-    def __init__(self, contract: AsyncContractResource) -> None:
-        self._contract = contract
+class AsyncContractsResourceWithStreamingResponse:
+    def __init__(self, contracts: AsyncContractsResource) -> None:
+        self._contracts = contracts
 
         self.calibrate = async_to_streamed_response_wrapper(
-            contract.calibrate,
+            contracts.calibrate,
         )
         self.generate_dimensions = async_to_streamed_response_wrapper(
-            contract.generate_dimensions,
+            contracts.generate_dimensions,
         )
         self.score = async_to_streamed_response_wrapper(
-            contract.score,
+            contracts.score,
         )
 
     @cached_property
     def dimension(self) -> AsyncDimensionResourceWithStreamingResponse:
-        return AsyncDimensionResourceWithStreamingResponse(self._contract.dimension)
+        return AsyncDimensionResourceWithStreamingResponse(self._contracts.dimension)

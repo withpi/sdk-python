@@ -7,40 +7,28 @@ from typing_extensions import Literal
 
 import httpx
 
-from .messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
-)
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.tune import prompt_optimize_params
-from ...._base_client import make_request_options
-from ....types.optimization_status import OptimizationStatus
-from ....types.shared_params.contract import Contract
+from ...types.tune import prompt_optimize_params
+from ..._base_client import make_request_options
+from ...types.optimization_status import OptimizationStatus
+from ...types.shared_params.contract import Contract
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 
 
 class PromptResource(SyncAPIResource):
-    @cached_property
-    def messages(self) -> MessagesResource:
-        return MessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> PromptResourceWithRawResponse:
         """
@@ -60,7 +48,43 @@ class PromptResource(SyncAPIResource):
         """
         return PromptResourceWithStreamingResponse(self)
 
-    def get(
+    def get_detailed_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """Streams messages from a prompt optimization job, separated by newlines.
+
+        The full
+        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/tune/prompt/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    def get_status(
         self,
         job_id: str,
         *,
@@ -143,10 +167,6 @@ class PromptResource(SyncAPIResource):
 
 class AsyncPromptResource(AsyncAPIResource):
     @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        return AsyncMessagesResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> AsyncPromptResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
@@ -165,7 +185,43 @@ class AsyncPromptResource(AsyncAPIResource):
         """
         return AsyncPromptResourceWithStreamingResponse(self)
 
-    async def get(
+    async def get_detailed_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """Streams messages from a prompt optimization job, separated by newlines.
+
+        The full
+        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/tune/prompt/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+    async def get_status(
         self,
         job_id: str,
         *,
@@ -250,61 +306,57 @@ class PromptResourceWithRawResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get = to_raw_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = to_raw_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = to_raw_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = to_raw_response_wrapper(
             prompt.optimize,
         )
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithRawResponse:
-        return MessagesResourceWithRawResponse(self._prompt.messages)
 
 
 class AsyncPromptResourceWithRawResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get = async_to_raw_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = async_to_raw_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = async_to_raw_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = async_to_raw_response_wrapper(
             prompt.optimize,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        return AsyncMessagesResourceWithRawResponse(self._prompt.messages)
 
 
 class PromptResourceWithStreamingResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get = to_streamed_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = to_streamed_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = to_streamed_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = to_streamed_response_wrapper(
             prompt.optimize,
         )
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithStreamingResponse:
-        return MessagesResourceWithStreamingResponse(self._prompt.messages)
 
 
 class AsyncPromptResourceWithStreamingResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get = async_to_streamed_response_wrapper(
-            prompt.get,
+        self.get_detailed_messages = async_to_streamed_response_wrapper(
+            prompt.get_detailed_messages,
+        )
+        self.get_status = async_to_streamed_response_wrapper(
+            prompt.get_status,
         )
         self.optimize = async_to_streamed_response_wrapper(
             prompt.optimize,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        return AsyncMessagesResourceWithStreamingResponse(self._prompt.messages)

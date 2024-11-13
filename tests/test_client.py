@@ -774,7 +774,7 @@ class TestTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.contract.with_raw_response.score(
+        response = client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -805,7 +805,7 @@ class TestTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.contract.with_raw_response.score(
+        response = client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -836,7 +836,7 @@ class TestTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = client.contract.with_raw_response.score(
+        response = client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -1594,7 +1594,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.contract.with_raw_response.score(
+        response = await client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -1626,7 +1626,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.contract.with_raw_response.score(
+        response = await client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -1658,7 +1658,7 @@ class TestAsyncTwopir:
 
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
-        response = await client.contract.with_raw_response.score(
+        response = await client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
