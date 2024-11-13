@@ -12,6 +12,7 @@ from .prompt import (
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .prompt.prompt import PromptResource, AsyncPromptResource
 
 __all__ = ["TuneResource", "AsyncTuneResource"]
 
