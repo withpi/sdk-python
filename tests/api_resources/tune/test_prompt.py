@@ -18,15 +18,53 @@ class TestPrompt:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_get(self, client: Twopir) -> None:
-        prompt = client.tune.prompt.get(
+    def test_method_get_detailed_messages(self, client: Twopir) -> None:
+        prompt = client.tune.prompt.get_detailed_messages(
+            "job_id",
+        )
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_detailed_messages(self, client: Twopir) -> None:
+        response = client.tune.prompt.with_raw_response.get_detailed_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = response.parse()
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_detailed_messages(self, client: Twopir) -> None:
+        with client.tune.prompt.with_streaming_response.get_detailed_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = response.parse()
+            assert_matches_type(str, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_get_detailed_messages(self, client: Twopir) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.tune.prompt.with_raw_response.get_detailed_messages(
+                "",
+            )
+
+    @parametrize
+    def test_method_get_status(self, client: Twopir) -> None:
+        prompt = client.tune.prompt.get_status(
             "job_id",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    def test_raw_response_get(self, client: Twopir) -> None:
-        response = client.tune.prompt.with_raw_response.get(
+    def test_raw_response_get_status(self, client: Twopir) -> None:
+        response = client.tune.prompt.with_raw_response.get_status(
             "job_id",
         )
 
@@ -36,8 +74,8 @@ class TestPrompt:
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    def test_streaming_response_get(self, client: Twopir) -> None:
-        with client.tune.prompt.with_streaming_response.get(
+    def test_streaming_response_get_status(self, client: Twopir) -> None:
+        with client.tune.prompt.with_streaming_response.get_status(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -49,9 +87,9 @@ class TestPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get(self, client: Twopir) -> None:
+    def test_path_params_get_status(self, client: Twopir) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.tune.prompt.with_raw_response.get(
+            client.tune.prompt.with_raw_response.get_status(
                 "",
             )
 
@@ -227,15 +265,53 @@ class TestAsyncPrompt:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_get(self, async_client: AsyncTwopir) -> None:
-        prompt = await async_client.tune.prompt.get(
+    async def test_method_get_detailed_messages(self, async_client: AsyncTwopir) -> None:
+        prompt = await async_client.tune.prompt.get_detailed_messages(
+            "job_id",
+        )
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_detailed_messages(self, async_client: AsyncTwopir) -> None:
+        response = await async_client.tune.prompt.with_raw_response.get_detailed_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = await response.parse()
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_detailed_messages(self, async_client: AsyncTwopir) -> None:
+        async with async_client.tune.prompt.with_streaming_response.get_detailed_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = await response.parse()
+            assert_matches_type(str, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_get_detailed_messages(self, async_client: AsyncTwopir) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.tune.prompt.with_raw_response.get_detailed_messages(
+                "",
+            )
+
+    @parametrize
+    async def test_method_get_status(self, async_client: AsyncTwopir) -> None:
+        prompt = await async_client.tune.prompt.get_status(
             "job_id",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    async def test_raw_response_get(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.tune.prompt.with_raw_response.get(
+    async def test_raw_response_get_status(self, async_client: AsyncTwopir) -> None:
+        response = await async_client.tune.prompt.with_raw_response.get_status(
             "job_id",
         )
 
@@ -245,8 +321,8 @@ class TestAsyncPrompt:
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get(self, async_client: AsyncTwopir) -> None:
-        async with async_client.tune.prompt.with_streaming_response.get(
+    async def test_streaming_response_get_status(self, async_client: AsyncTwopir) -> None:
+        async with async_client.tune.prompt.with_streaming_response.get_status(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -258,9 +334,9 @@ class TestAsyncPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get(self, async_client: AsyncTwopir) -> None:
+    async def test_path_params_get_status(self, async_client: AsyncTwopir) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.tune.prompt.with_raw_response.get(
+            await async_client.tune.prompt.with_raw_response.get_status(
                 "",
             )
 

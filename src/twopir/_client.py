@@ -49,8 +49,8 @@ class Twopir(SyncAPIClient):
     inference: resources.InferenceResource
     data: resources.DataResource
     tune: resources.TuneResource
-    experiment: resources.ExperimentResource
-    contract: resources.ContractResource
+    experiments: resources.ExperimentsResource
+    contracts: resources.ContractsResource
     with_raw_response: TwopirWithRawResponse
     with_streaming_response: TwopirWithStreamedResponse
 
@@ -111,8 +111,8 @@ class Twopir(SyncAPIClient):
         self.inference = resources.InferenceResource(self)
         self.data = resources.DataResource(self)
         self.tune = resources.TuneResource(self)
-        self.experiment = resources.ExperimentResource(self)
-        self.contract = resources.ContractResource(self)
+        self.experiments = resources.ExperimentsResource(self)
+        self.contracts = resources.ContractsResource(self)
         self.with_raw_response = TwopirWithRawResponse(self)
         self.with_streaming_response = TwopirWithStreamedResponse(self)
 
@@ -225,8 +225,8 @@ class AsyncTwopir(AsyncAPIClient):
     inference: resources.AsyncInferenceResource
     data: resources.AsyncDataResource
     tune: resources.AsyncTuneResource
-    experiment: resources.AsyncExperimentResource
-    contract: resources.AsyncContractResource
+    experiments: resources.AsyncExperimentsResource
+    contracts: resources.AsyncContractsResource
     with_raw_response: AsyncTwopirWithRawResponse
     with_streaming_response: AsyncTwopirWithStreamedResponse
 
@@ -287,8 +287,8 @@ class AsyncTwopir(AsyncAPIClient):
         self.inference = resources.AsyncInferenceResource(self)
         self.data = resources.AsyncDataResource(self)
         self.tune = resources.AsyncTuneResource(self)
-        self.experiment = resources.AsyncExperimentResource(self)
-        self.contract = resources.AsyncContractResource(self)
+        self.experiments = resources.AsyncExperimentsResource(self)
+        self.contracts = resources.AsyncContractsResource(self)
         self.with_raw_response = AsyncTwopirWithRawResponse(self)
         self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
@@ -402,8 +402,8 @@ class TwopirWithRawResponse:
         self.inference = resources.InferenceResourceWithRawResponse(client.inference)
         self.data = resources.DataResourceWithRawResponse(client.data)
         self.tune = resources.TuneResourceWithRawResponse(client.tune)
-        self.experiment = resources.ExperimentResourceWithRawResponse(client.experiment)
-        self.contract = resources.ContractResourceWithRawResponse(client.contract)
+        self.experiments = resources.ExperimentsResourceWithRawResponse(client.experiments)
+        self.contracts = resources.ContractsResourceWithRawResponse(client.contracts)
 
 
 class AsyncTwopirWithRawResponse:
@@ -411,8 +411,8 @@ class AsyncTwopirWithRawResponse:
         self.inference = resources.AsyncInferenceResourceWithRawResponse(client.inference)
         self.data = resources.AsyncDataResourceWithRawResponse(client.data)
         self.tune = resources.AsyncTuneResourceWithRawResponse(client.tune)
-        self.experiment = resources.AsyncExperimentResourceWithRawResponse(client.experiment)
-        self.contract = resources.AsyncContractResourceWithRawResponse(client.contract)
+        self.experiments = resources.AsyncExperimentsResourceWithRawResponse(client.experiments)
+        self.contracts = resources.AsyncContractsResourceWithRawResponse(client.contracts)
 
 
 class TwopirWithStreamedResponse:
@@ -420,8 +420,8 @@ class TwopirWithStreamedResponse:
         self.inference = resources.InferenceResourceWithStreamingResponse(client.inference)
         self.data = resources.DataResourceWithStreamingResponse(client.data)
         self.tune = resources.TuneResourceWithStreamingResponse(client.tune)
-        self.experiment = resources.ExperimentResourceWithStreamingResponse(client.experiment)
-        self.contract = resources.ContractResourceWithStreamingResponse(client.contract)
+        self.experiments = resources.ExperimentsResourceWithStreamingResponse(client.experiments)
+        self.contracts = resources.ContractsResourceWithStreamingResponse(client.contracts)
 
 
 class AsyncTwopirWithStreamedResponse:
@@ -429,8 +429,8 @@ class AsyncTwopirWithStreamedResponse:
         self.inference = resources.AsyncInferenceResourceWithStreamingResponse(client.inference)
         self.data = resources.AsyncDataResourceWithStreamingResponse(client.data)
         self.tune = resources.AsyncTuneResourceWithStreamingResponse(client.tune)
-        self.experiment = resources.AsyncExperimentResourceWithStreamingResponse(client.experiment)
-        self.contract = resources.AsyncContractResourceWithStreamingResponse(client.contract)
+        self.experiments = resources.AsyncExperimentsResourceWithStreamingResponse(client.experiments)
+        self.contracts = resources.AsyncContractsResourceWithStreamingResponse(client.contracts)
 
 
 Client = Twopir
