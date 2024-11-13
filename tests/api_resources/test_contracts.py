@@ -17,12 +17,12 @@ from twopir.types.shared import Contract
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestContract:
+class TestContracts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_calibrate(self, client: Twopir) -> None:
-        contract = client.contract.calibrate(
+        contract = client.contracts.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -52,7 +52,7 @@ class TestContract:
 
     @parametrize
     def test_method_calibrate_with_all_params(self, client: Twopir) -> None:
-        contract = client.contract.calibrate(
+        contract = client.contracts.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -139,7 +139,7 @@ class TestContract:
 
     @parametrize
     def test_raw_response_calibrate(self, client: Twopir) -> None:
-        response = client.contract.with_raw_response.calibrate(
+        response = client.contracts.with_raw_response.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -173,7 +173,7 @@ class TestContract:
 
     @parametrize
     def test_streaming_response_calibrate(self, client: Twopir) -> None:
-        with client.contract.with_streaming_response.calibrate(
+        with client.contracts.with_streaming_response.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -209,7 +209,7 @@ class TestContract:
 
     @parametrize
     def test_method_generate_dimensions(self, client: Twopir) -> None:
-        contract = client.contract.generate_dimensions(
+        contract = client.contracts.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -219,7 +219,7 @@ class TestContract:
 
     @parametrize
     def test_method_generate_dimensions_with_all_params(self, client: Twopir) -> None:
-        contract = client.contract.generate_dimensions(
+        contract = client.contracts.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -286,7 +286,7 @@ class TestContract:
 
     @parametrize
     def test_raw_response_generate_dimensions(self, client: Twopir) -> None:
-        response = client.contract.with_raw_response.generate_dimensions(
+        response = client.contracts.with_raw_response.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -300,7 +300,7 @@ class TestContract:
 
     @parametrize
     def test_streaming_response_generate_dimensions(self, client: Twopir) -> None:
-        with client.contract.with_streaming_response.generate_dimensions(
+        with client.contracts.with_streaming_response.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -316,7 +316,7 @@ class TestContract:
 
     @parametrize
     def test_method_score(self, client: Twopir) -> None:
-        contract = client.contract.score(
+        contract = client.contracts.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -328,7 +328,7 @@ class TestContract:
 
     @parametrize
     def test_method_score_with_all_params(self, client: Twopir) -> None:
-        contract = client.contract.score(
+        contract = client.contracts.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -397,7 +397,7 @@ class TestContract:
 
     @parametrize
     def test_raw_response_score(self, client: Twopir) -> None:
-        response = client.contract.with_raw_response.score(
+        response = client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -413,7 +413,7 @@ class TestContract:
 
     @parametrize
     def test_streaming_response_score(self, client: Twopir) -> None:
-        with client.contract.with_streaming_response.score(
+        with client.contracts.with_streaming_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -430,12 +430,12 @@ class TestContract:
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncContract:
+class TestAsyncContracts:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_calibrate(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.calibrate(
+        contract = await async_client.contracts.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -465,7 +465,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_method_calibrate_with_all_params(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.calibrate(
+        contract = await async_client.contracts.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -552,7 +552,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_raw_response_calibrate(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.contract.with_raw_response.calibrate(
+        response = await async_client.contracts.with_raw_response.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -586,7 +586,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_streaming_response_calibrate(self, async_client: AsyncTwopir) -> None:
-        async with async_client.contract.with_streaming_response.calibrate(
+        async with async_client.contracts.with_streaming_response.calibrate(
             contract={
                 "description": "description",
                 "name": "name",
@@ -622,7 +622,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_method_generate_dimensions(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.generate_dimensions(
+        contract = await async_client.contracts.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -632,7 +632,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.generate_dimensions(
+        contract = await async_client.contracts.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -699,7 +699,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_raw_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.contract.with_raw_response.generate_dimensions(
+        response = await async_client.contracts.with_raw_response.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -713,7 +713,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_streaming_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
-        async with async_client.contract.with_streaming_response.generate_dimensions(
+        async with async_client.contracts.with_streaming_response.generate_dimensions(
             contract={
                 "description": "description",
                 "name": "name",
@@ -729,7 +729,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_method_score(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.score(
+        contract = await async_client.contracts.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -741,7 +741,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_method_score_with_all_params(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contract.score(
+        contract = await async_client.contracts.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -810,7 +810,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
-        response = await async_client.contract.with_raw_response.score(
+        response = await async_client.contracts.with_raw_response.score(
             contract={
                 "description": "description",
                 "name": "name",
@@ -826,7 +826,7 @@ class TestAsyncContract:
 
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
-        async with async_client.contract.with_streaming_response.score(
+        async with async_client.contracts.with_streaming_response.score(
             contract={
                 "description": "description",
                 "name": "name",
