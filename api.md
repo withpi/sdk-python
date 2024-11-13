@@ -43,9 +43,15 @@ Methods:
 
 ### Messages
 
+Types:
+
+```python
+from twopir.types.tune.prompt import MessageRetrieveResponse
+```
+
 Methods:
 
-- <code title="get /tune/prompt/{job_id}/messages">client.tune.prompt.messages.<a href="./src/twopir/resources/tune/prompt/messages.py">retrieve</a>(job_id) -> None</code>
+- <code title="get /tune/prompt/{job_id}/messages">client.tune.prompt.messages.<a href="./src/twopir/resources/tune/prompt/messages.py">retrieve</a>(job_id) -> str</code>
 
 # Experiment
 
