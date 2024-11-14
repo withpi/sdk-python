@@ -1,14 +1,20 @@
 # Shared Types
 
 ```python
-from twopir.types import Contract, Dimension, LlmResponse, SubDimension
+from twopir.types import Contract, Dimension, SubDimension
 ```
 
 # Inference
 
+Types:
+
+```python
+from twopir.types import InferenceRunResponse
+```
+
 Methods:
 
-- <code title="post /inference/run">client.inference.<a href="./src/twopir/resources/inference.py">run</a>(\*\*<a href="src/twopir/types/inference_run_params.py">params</a>) -> <a href="./src/twopir/types/shared/llm_response.py">LlmResponse</a></code>
+- <code title="post /inference/run">client.inference.<a href="./src/twopir/resources/inference.py">run</a>(\*\*<a href="src/twopir/types/inference_run_params.py">params</a>) -> <a href="./src/twopir/types/inference_run_response.py">InferenceRunResponse</a></code>
 
 # Data
 
