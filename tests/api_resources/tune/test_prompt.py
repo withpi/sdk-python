@@ -115,6 +115,7 @@ class TestPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -197,6 +198,7 @@ class TestPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -222,6 +224,7 @@ class TestPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
 
         assert response.is_closed is True
@@ -251,6 +254,7 @@ class TestPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -362,6 +366,7 @@ class TestAsyncPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -444,6 +449,7 @@ class TestAsyncPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -469,6 +475,7 @@ class TestAsyncPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
 
         assert response.is_closed is True
@@ -498,6 +505,7 @@ class TestAsyncPrompt:
                 },
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -123,6 +123,7 @@ class PromptResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["pi", "dspy"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,6 +141,8 @@ class PromptResource(SyncAPIResource):
 
           model_id: The model to use for generating responses
 
+          tuning_algorithm: The tuning algorithm to use
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -155,6 +158,7 @@ class PromptResource(SyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -260,6 +264,7 @@ class AsyncPromptResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["pi", "dspy"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -277,6 +282,8 @@ class AsyncPromptResource(AsyncAPIResource):
 
           model_id: The model to use for generating responses
 
+          tuning_algorithm: The tuning algorithm to use
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -292,6 +299,7 @@ class AsyncPromptResource(AsyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
