@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-
 import httpx
 
 from ..types import inference_run_params
@@ -21,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.llm_response import LlmResponse
+from ..types.inference_run_response import InferenceRunResponse
 
 __all__ = ["InferenceResource", "AsyncInferenceResource"]
 
@@ -49,14 +47,14 @@ class InferenceResource(SyncAPIResource):
     def run(
         self,
         *,
-        llm_input: Union[str, Dict[str, str]],
+        llm_input: inference_run_params.LlmInput,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LlmResponse:
+    ) -> InferenceRunResponse:
         """
         Runs inference, returning a response
 
@@ -75,7 +73,7 @@ class InferenceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LlmResponse,
+            cast_to=InferenceRunResponse,
         )
 
 
@@ -102,14 +100,14 @@ class AsyncInferenceResource(AsyncAPIResource):
     async def run(
         self,
         *,
-        llm_input: Union[str, Dict[str, str]],
+        llm_input: inference_run_params.LlmInput,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LlmResponse:
+    ) -> InferenceRunResponse:
         """
         Runs inference, returning a response
 
@@ -128,7 +126,7 @@ class AsyncInferenceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=LlmResponse,
+            cast_to=InferenceRunResponse,
         )
 
 
