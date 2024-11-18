@@ -104,15 +104,7 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -133,53 +125,9 @@ class TestPrompt:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -187,15 +135,7 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -213,15 +153,7 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -243,15 +175,7 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -355,15 +279,7 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -384,53 +300,9 @@ class TestAsyncPrompt:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -438,15 +310,7 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -464,15 +328,7 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",
@@ -494,15 +350,7 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
             tuning_algorithm="pi",

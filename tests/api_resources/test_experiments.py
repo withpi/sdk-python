@@ -28,15 +28,7 @@ class TestExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -56,53 +48,9 @@ class TestExperiments:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -110,15 +58,7 @@ class TestExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -135,15 +75,7 @@ class TestExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -164,15 +96,7 @@ class TestExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         ) as response:
@@ -230,15 +154,7 @@ class TestAsyncExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -258,53 +174,9 @@ class TestAsyncExperiments:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -312,15 +184,7 @@ class TestAsyncExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -337,15 +201,7 @@ class TestAsyncExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         )
@@ -366,15 +222,7 @@ class TestAsyncExperiments:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             scorer_id=0,
         ) as response:
