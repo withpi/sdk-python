@@ -28,15 +28,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         )
@@ -52,15 +44,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         )
@@ -80,15 +64,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         ) as response:
@@ -110,15 +86,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",
@@ -136,15 +104,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",
@@ -166,15 +126,7 @@ class TestDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",
@@ -202,15 +154,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         )
@@ -226,15 +170,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         )
@@ -254,15 +190,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
         ) as response:
@@ -284,15 +212,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",
@@ -310,15 +230,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",
@@ -340,15 +252,7 @@ class TestAsyncDimension:
                     {
                         "id": "id",
                         "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                    },
+                    }
                 ],
             },
             llm_input="string",

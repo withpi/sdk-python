@@ -42,53 +42,9 @@ class TestInputs:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -152,53 +108,9 @@ class TestInputs:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -295,53 +207,9 @@ class TestAsyncInputs:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -405,53 +273,9 @@ class TestAsyncInputs:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
