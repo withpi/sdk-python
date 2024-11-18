@@ -33,19 +33,7 @@ class TestContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -64,53 +52,9 @@ class TestContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -120,19 +64,7 @@ class TestContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -150,19 +82,7 @@ class TestContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
 
@@ -184,19 +104,7 @@ class TestContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed
@@ -231,53 +139,9 @@ class TestContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -340,53 +204,9 @@ class TestContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -446,19 +266,7 @@ class TestAsyncContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -477,53 +285,9 @@ class TestAsyncContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -533,19 +297,7 @@ class TestAsyncContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -563,19 +315,7 @@ class TestAsyncContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         )
 
@@ -597,19 +337,7 @@ class TestAsyncContracts:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
-                {
-                    "labels": {"foo": "string"},
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "scores": {"foo": 0},
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed
@@ -644,53 +372,9 @@ class TestAsyncContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -753,53 +437,9 @@ class TestAsyncContracts:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
