@@ -59,10 +59,8 @@ class PromptResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
-        """Streams messages from a prompt optimization job, separated by newlines.
-
-        The full
-        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+        """
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -96,7 +94,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Polls the status of a prompt optimization job.
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -132,7 +130,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Do Pi Prompt optimization.
+        Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
@@ -200,10 +198,8 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
-        """Streams messages from a prompt optimization job, separated by newlines.
-
-        The full
-        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+        """
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -237,7 +233,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Polls the status of a prompt optimization job.
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -273,7 +269,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Do Pi Prompt optimization.
+        Start a prompt optimization job
 
         Args:
           contract: The contract to optimize

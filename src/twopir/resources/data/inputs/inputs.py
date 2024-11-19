@@ -73,7 +73,7 @@ class InputsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InputEvaluationMetrics:
         """
-        Evaluate an input
+        Evaluates an input against a contract
 
         Args:
           contract: The contract the input is intended to drive
@@ -141,7 +141,7 @@ class AsyncInputsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InputEvaluationMetrics:
         """
-        Evaluate an input
+        Evaluates an input against a contract
 
         Args:
           contract: The contract the input is intended to drive

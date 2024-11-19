@@ -56,7 +56,7 @@ class InferenceResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InferenceRunResponse:
         """
-        Runs inference, returning a response
+        Runs LLM inference, returning a response
 
         Args:
           extra_headers: Send extra headers
@@ -109,7 +109,7 @@ class AsyncInferenceResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InferenceRunResponse:
         """
-        Runs inference, returning a response
+        Runs LLM inference, returning a response
 
         Args:
           extra_headers: Send extra headers
