@@ -8,22 +8,8 @@ from .contracts import (
     ContractsResourceWithStreamingResponse,
     AsyncContractsResourceWithStreamingResponse,
 )
-from .dimension import (
-    DimensionResource,
-    AsyncDimensionResource,
-    DimensionResourceWithRawResponse,
-    AsyncDimensionResourceWithRawResponse,
-    DimensionResourceWithStreamingResponse,
-    AsyncDimensionResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "DimensionResource",
-    "AsyncDimensionResource",
-    "DimensionResourceWithRawResponse",
-    "AsyncDimensionResourceWithRawResponse",
-    "DimensionResourceWithStreamingResponse",
-    "AsyncDimensionResourceWithStreamingResponse",
     "ContractsResource",
     "AsyncContractsResource",
     "ContractsResourceWithRawResponse",

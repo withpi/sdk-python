@@ -32,14 +32,6 @@ from .inference import (
     InferenceResourceWithStreamingResponse,
     AsyncInferenceResourceWithStreamingResponse,
 )
-from .experiments import (
-    ExperimentsResource,
-    AsyncExperimentsResource,
-    ExperimentsResourceWithRawResponse,
-    AsyncExperimentsResourceWithRawResponse,
-    ExperimentsResourceWithStreamingResponse,
-    AsyncExperimentsResourceWithStreamingResponse,
-)
 
 __all__ = [
     "InferenceResource",
@@ -60,12 +52,6 @@ __all__ = [
     "AsyncTuneResourceWithRawResponse",
     "TuneResourceWithStreamingResponse",
     "AsyncTuneResourceWithStreamingResponse",
-    "ExperimentsResource",
-    "AsyncExperimentsResource",
-    "ExperimentsResourceWithRawResponse",
-    "AsyncExperimentsResourceWithRawResponse",
-    "ExperimentsResourceWithStreamingResponse",
-    "AsyncExperimentsResourceWithStreamingResponse",
     "ContractsResource",
     "AsyncContractsResource",
     "ContractsResourceWithRawResponse",
