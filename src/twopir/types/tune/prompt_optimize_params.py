@@ -20,7 +20,7 @@ class PromptOptimizeParams(TypedDict, total=False):
     model_id: Required[Literal["gpt-4o-mini", "mock-llm"]]
     """The model to use for generating responses"""
 
-    tuning_algorithm: Required[Literal["pi", "dspy"]]
+    tuning_algorithm: Required[Literal["pi"]]
     """The tuning algorithm to use"""
 
 
