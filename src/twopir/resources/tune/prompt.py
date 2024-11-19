@@ -121,7 +121,7 @@ class PromptResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
-        tuning_algorithm: Literal["pi", "dspy"],
+        tuning_algorithm: Literal["pi"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -260,7 +260,7 @@ class AsyncPromptResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
-        tuning_algorithm: Literal["pi", "dspy"],
+        tuning_algorithm: Literal["pi"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
