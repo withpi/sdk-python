@@ -6,29 +6,42 @@ from typing import Dict, Union
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import input_evaluate_params, input_generate_params
-from ..._base_client import make_request_options
-from ...types.data_generation_status import DataGenerationStatus
-from ...types.shared_params.contract import Contract
-from ...types.input_evaluation_metrics import InputEvaluationMetrics
+from ....types.data import input_evaluate_params, input_generate_params
+from ...._base_client import make_request_options
+from .generate_from_seeds import (
+    GenerateFromSeedsResource,
+    AsyncGenerateFromSeedsResource,
+    GenerateFromSeedsResourceWithRawResponse,
+    AsyncGenerateFromSeedsResourceWithRawResponse,
+    GenerateFromSeedsResourceWithStreamingResponse,
+    AsyncGenerateFromSeedsResourceWithStreamingResponse,
+)
+from ....types.data_generation_status import DataGenerationStatus
+from ....types.shared_params.contract import Contract
+from ....types.input_evaluation_metrics import InputEvaluationMetrics
+from .generate_from_seeds.generate_from_seeds import GenerateFromSeedsResource, AsyncGenerateFromSeedsResource
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 
 
 class InputsResource(SyncAPIResource):
+    @cached_property
+    def generate_from_seeds(self) -> GenerateFromSeedsResource:
+        return GenerateFromSeedsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> InputsResourceWithRawResponse:
         """
@@ -156,6 +169,10 @@ class InputsResource(SyncAPIResource):
 
 
 class AsyncInputsResource(AsyncAPIResource):
+    @cached_property
+    def generate_from_seeds(self) -> AsyncGenerateFromSeedsResource:
+        return AsyncGenerateFromSeedsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncInputsResourceWithRawResponse:
         """
@@ -296,6 +313,10 @@ class InputsResourceWithRawResponse:
             inputs.get,
         )
 
+    @cached_property
+    def generate_from_seeds(self) -> GenerateFromSeedsResourceWithRawResponse:
+        return GenerateFromSeedsResourceWithRawResponse(self._inputs.generate_from_seeds)
+
 
 class AsyncInputsResourceWithRawResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
@@ -310,6 +331,10 @@ class AsyncInputsResourceWithRawResponse:
         self.get = async_to_raw_response_wrapper(
             inputs.get,
         )
+
+    @cached_property
+    def generate_from_seeds(self) -> AsyncGenerateFromSeedsResourceWithRawResponse:
+        return AsyncGenerateFromSeedsResourceWithRawResponse(self._inputs.generate_from_seeds)
 
 
 class InputsResourceWithStreamingResponse:
@@ -326,6 +351,10 @@ class InputsResourceWithStreamingResponse:
             inputs.get,
         )
 
+    @cached_property
+    def generate_from_seeds(self) -> GenerateFromSeedsResourceWithStreamingResponse:
+        return GenerateFromSeedsResourceWithStreamingResponse(self._inputs.generate_from_seeds)
+
 
 class AsyncInputsResourceWithStreamingResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
@@ -340,3 +369,7 @@ class AsyncInputsResourceWithStreamingResponse:
         self.get = async_to_streamed_response_wrapper(
             inputs.get,
         )
+
+    @cached_property
+    def generate_from_seeds(self) -> AsyncGenerateFromSeedsResourceWithStreamingResponse:
+        return AsyncGenerateFromSeedsResourceWithStreamingResponse(self._inputs.generate_from_seeds)
