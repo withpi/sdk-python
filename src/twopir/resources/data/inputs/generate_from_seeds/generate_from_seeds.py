@@ -63,7 +63,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Start an input data generation job
+        Gets the current status of a data generation job
 
         Args:
           extra_headers: Send extra headers
@@ -121,7 +121,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Start an input data generation job
+        Gets the current status of a data generation job
 
         Args:
           extra_headers: Send extra headers

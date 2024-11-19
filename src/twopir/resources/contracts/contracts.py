@@ -60,7 +60,7 @@ class ContractsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedContract:
         """
-        Genrate dimensions for a contract
+        Generates dimensions for a contract which will be used to evaluate it
 
         Args:
           extra_headers: Send extra headers
@@ -96,7 +96,7 @@ class ContractsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractsScoreMetrics:
         """
-        Scores a contract
+        Scores a contract based on the provided input and output
 
         Args:
           contract: The contract to score
@@ -162,7 +162,7 @@ class AsyncContractsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedContract:
         """
-        Genrate dimensions for a contract
+        Generates dimensions for a contract which will be used to evaluate it
 
         Args:
           extra_headers: Send extra headers
@@ -198,7 +198,7 @@ class AsyncContractsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractsScoreMetrics:
         """
-        Scores a contract
+        Scores a contract based on the provided input and output
 
         Args:
           contract: The contract to score

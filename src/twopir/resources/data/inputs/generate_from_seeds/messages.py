@@ -50,7 +50,7 @@ class MessagesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a job
+        Streams messages from the data generation job
 
         Args:
           extra_headers: Send extra headers
@@ -105,7 +105,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a job
+        Streams messages from the data generation job
 
         Args:
           extra_headers: Send extra headers
