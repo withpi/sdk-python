@@ -59,10 +59,8 @@ class PromptResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
-        """Streams messages from a prompt optimization job, separated by newlines.
-
-        The full
-        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+        """
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -96,7 +94,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Polls the status of a prompt optimization job.
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -123,6 +121,7 @@ class PromptResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["pi"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,7 +130,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Do Pi Prompt optimization.
+        Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
@@ -139,6 +138,8 @@ class PromptResource(SyncAPIResource):
           examples: The examples to train and validate on
 
           model_id: The model to use for generating responses
+
+          tuning_algorithm: The tuning algorithm to use
 
           extra_headers: Send extra headers
 
@@ -155,6 +156,7 @@ class PromptResource(SyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -196,10 +198,8 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
-        """Streams messages from a prompt optimization job, separated by newlines.
-
-        The full
-        job object can be retrieved from the /tune/prompt/{job_id} endpoint.
+        """
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -233,7 +233,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Polls the status of a prompt optimization job.
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -260,6 +260,7 @@ class AsyncPromptResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
         model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["pi"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -268,7 +269,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> OptimizationStatus:
         """
-        Do Pi Prompt optimization.
+        Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
@@ -276,6 +277,8 @@ class AsyncPromptResource(AsyncAPIResource):
           examples: The examples to train and validate on
 
           model_id: The model to use for generating responses
+
+          tuning_algorithm: The tuning algorithm to use
 
           extra_headers: Send extra headers
 
@@ -292,6 +295,7 @@ class AsyncPromptResource(AsyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),

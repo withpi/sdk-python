@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.contract import Contract
-
-__all__ = ["InputGenerateParams"]
+__all__ = ["GenerateFromSeedGenerateParams"]
 
 
-class InputGenerateParams(TypedDict, total=False):
-    contract: Required[Contract]
+class GenerateFromSeedGenerateParams(TypedDict, total=False):
+    seeds: Required[List[str]]

@@ -104,17 +104,10 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -132,53 +125,9 @@ class TestPrompt:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -186,17 +135,10 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -211,17 +153,10 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
 
         assert response.is_closed is True
@@ -240,17 +175,10 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -351,17 +279,10 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -379,53 +300,9 @@ class TestAsyncPrompt:
                             {
                                 "id": "id",
                                 "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
+                            }
                         ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
-                    {
-                        "id": "id",
-                        "description": "description",
-                        "sub_dimensions": [
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                            {
-                                "id": "id",
-                                "description": "description",
-                            },
-                        ],
-                    },
+                    }
                 ],
                 "scorer_ast": "string",
             },
@@ -433,17 +310,10 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -458,17 +328,10 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         )
 
         assert response.is_closed is True
@@ -487,17 +350,10 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
-                {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                },
+                }
             ],
             model_id="gpt-4o-mini",
+            tuning_algorithm="pi",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
