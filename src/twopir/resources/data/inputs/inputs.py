@@ -31,7 +31,6 @@ from .generate_from_seeds import (
 )
 from ....types.shared_params.contract import Contract
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
-from .generate_from_seeds.generate_from_seeds import GenerateFromSeedsResource, AsyncGenerateFromSeedsResource
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 

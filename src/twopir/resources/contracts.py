@@ -6,24 +6,24 @@ from typing import Dict, Union
 
 import httpx
 
-from ...types import contract_score_params, contract_generate_dimensions_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from ..types import contract_score_params, contract_generate_dimensions_params
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.shared.contract import Contract as SharedContract
-from ...types.shared_params.contract import Contract as SharedParamsContract
-from ...types.contracts_score_metrics import ContractsScoreMetrics
+from .._base_client import make_request_options
+from ..types.shared.contract import Contract as SharedContract
+from ..types.shared_params.contract import Contract as SharedParamsContract
+from ..types.contracts_score_metrics import ContractsScoreMetrics
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
 
