@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from .sub_dimension import SubDimension
 
@@ -16,6 +16,9 @@ class Dimension(TypedDict, total=False):
 
     description: Required[str]
     """The description of the dimension"""
+
+    scoring_type: Required[Literal["llm_as_a_judge"]]
+    """The type of scoring performed for this dimension"""
 
     sub_dimensions: Required[Iterable[SubDimension]]
     """The sub dimensions of the dimension"""
