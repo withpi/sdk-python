@@ -121,15 +121,16 @@ class TestPrompt:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
             examples=[
                 {
@@ -296,15 +297,16 @@ class TestAsyncPrompt:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
             examples=[
                 {

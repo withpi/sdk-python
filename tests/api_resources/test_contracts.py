@@ -38,15 +38,16 @@ class TestContracts:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -103,15 +104,16 @@ class TestContracts:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
             llm_input="string",
             llm_output="llm_output",
@@ -176,15 +178,16 @@ class TestAsyncContracts:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -241,15 +244,16 @@ class TestAsyncContracts:
                     {
                         "id": "id",
                         "description": "description",
+                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "scoring_type": "llm_as_a_judge",
                             }
                         ],
                     }
                 ],
-                "scorer_ast": "string",
             },
             llm_input="string",
             llm_output="llm_output",
