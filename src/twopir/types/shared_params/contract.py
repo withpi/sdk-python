@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
 from .dimension import Dimension
@@ -19,6 +19,3 @@ class Contract(TypedDict, total=False):
 
     dimensions: Iterable[Dimension]
     """The dimensions of the contract"""
-
-    scorer_ast: Union[str, Dict[str, object], None]
-    """The scorer AST of the contract"""

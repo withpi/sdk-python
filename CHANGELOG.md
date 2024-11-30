@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2024-11-28)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([#28](https://github.com/2pir-ai/sdk-python/issues/28)) ([8afd78d](https://github.com/2pir-ai/sdk-python/commit/8afd78df4aaf723e2858aa8c31da53239ea8502b))
+
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#34](https://github.com/2pir-ai/sdk-python/issues/34)) ([69d7a85](https://github.com/2pir-ai/sdk-python/commit/69d7a8574c7a6bb64781f6595f23a85f451099b5))
+
+
+### Chores
+
+* **internal:** exclude mypy from running on tests ([#33](https://github.com/2pir-ai/sdk-python/issues/33)) ([86521b8](https://github.com/2pir-ai/sdk-python/commit/86521b83e8f1d1938ab957af87831d139f5230d9))
+* **internal:** fix compat model_dump method when warnings are passed ([#30](https://github.com/2pir-ai/sdk-python/issues/30)) ([3964d5a](https://github.com/2pir-ai/sdk-python/commit/3964d5a20296f45aa26529ff81c792c495a0209a))
+* remove now unused `cached-property` dep ([#32](https://github.com/2pir-ai/sdk-python/issues/32)) ([6370161](https://github.com/2pir-ai/sdk-python/commit/63701618fdc46ca666dd5bfb56e7fd28f030e17f))
+
+
+### Documentation
+
+* add info log level to readme ([#31](https://github.com/2pir-ai/sdk-python/issues/31)) ([0373c2c](https://github.com/2pir-ai/sdk-python/commit/0373c2cc44633dc435982c19bdd3d6d082a70b9a))
+
 ## 0.1.0-alpha.4 (2024-11-19)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
