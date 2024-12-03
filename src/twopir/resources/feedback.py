@@ -49,7 +49,7 @@ class FeedbackResource(SyncAPIResource):
     def cluster(
         self,
         *,
-        body: Iterable[feedback_cluster_params.Body],
+        feedbacks: Iterable[feedback_cluster_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,7 +71,7 @@ class FeedbackResource(SyncAPIResource):
         """
         return self._post(
             "/feedback/cluster",
-            body=maybe_transform(body, Iterable[feedback_cluster_params.Body]),
+            body=maybe_transform(feedbacks, Iterable[feedback_cluster_params.Feedback]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -102,7 +102,7 @@ class AsyncFeedbackResource(AsyncAPIResource):
     async def cluster(
         self,
         *,
-        body: Iterable[feedback_cluster_params.Body],
+        feedbacks: Iterable[feedback_cluster_params.Feedback],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,7 +124,7 @@ class AsyncFeedbackResource(AsyncAPIResource):
         """
         return await self._post(
             "/feedback/cluster",
-            body=await async_maybe_transform(body, Iterable[feedback_cluster_params.Body]),
+            body=await async_maybe_transform(feedbacks, Iterable[feedback_cluster_params.Feedback]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
