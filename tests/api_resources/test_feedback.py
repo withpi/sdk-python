@@ -20,7 +20,7 @@ class TestFeedback:
     @parametrize
     def test_method_cluster(self, client: Twopir) -> None:
         feedback = client.feedback.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
@@ -36,7 +36,7 @@ class TestFeedback:
     @parametrize
     def test_raw_response_cluster(self, client: Twopir) -> None:
         response = client.feedback.with_raw_response.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
@@ -56,7 +56,7 @@ class TestFeedback:
     @parametrize
     def test_streaming_response_cluster(self, client: Twopir) -> None:
         with client.feedback.with_streaming_response.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
@@ -82,7 +82,7 @@ class TestAsyncFeedback:
     @parametrize
     async def test_method_cluster(self, async_client: AsyncTwopir) -> None:
         feedback = await async_client.feedback.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
@@ -98,7 +98,7 @@ class TestAsyncFeedback:
     @parametrize
     async def test_raw_response_cluster(self, async_client: AsyncTwopir) -> None:
         response = await async_client.feedback.with_raw_response.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
@@ -118,7 +118,7 @@ class TestAsyncFeedback:
     @parametrize
     async def test_streaming_response_cluster(self, async_client: AsyncTwopir) -> None:
         async with async_client.feedback.with_streaming_response.cluster(
-            body=[
+            feedbacks=[
                 {
                     "comment": "comment",
                     "identifier": "identifier",
