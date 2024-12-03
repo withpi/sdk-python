@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List
-from typing_extensions import Literal
 
 from ..._models import BaseModel
 from .sub_dimension import SubDimension
@@ -16,8 +15,12 @@ class Dimension(BaseModel):
     description: str
     """The description of the dimension"""
 
-    scoring_type: Literal["llm_as_a_judge"]
-    """The type of scoring performed for this dimension"""
-
     sub_dimensions: List[SubDimension]
     """The sub dimensions of the dimension"""
+
+    weight: float
+    """
+    The weight of the dimension The sum of dimension weights will be normalized to
+    one internally. A higher weight counts for more when aggregating this dimension
+    is aggregated into the final score.
+    """

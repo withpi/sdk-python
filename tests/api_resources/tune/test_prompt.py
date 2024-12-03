@@ -121,14 +121,17 @@ class TestPrompt:
                     {
                         "id": "id",
                         "description": "description",
-                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "parameters": [0],
+                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
+                                "weight": 0,
                             }
                         ],
+                        "weight": 0,
                     }
                 ],
             },
@@ -297,14 +300,17 @@ class TestAsyncPrompt:
                     {
                         "id": "id",
                         "description": "description",
-                        "scoring_type": "llm_as_a_judge",
                         "sub_dimensions": [
                             {
                                 "id": "id",
                                 "description": "description",
+                                "parameters": [0],
+                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
+                                "weight": 0,
                             }
                         ],
+                        "weight": 0,
                     }
                 ],
             },
