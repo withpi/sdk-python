@@ -5,14 +5,14 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["FeedbackClusterParams", "Body"]
+__all__ = ["FeedbackClusterParams", "Feedback"]
 
 
 class FeedbackClusterParams(TypedDict, total=False):
-    body: Required[Iterable[Body]]
+    feedbacks: Required[Iterable[Feedback]]
 
 
-class Body(TypedDict, total=False):
+class Feedback(TypedDict, total=False):
     comment: Required[str]
     """The comment on the feedback"""
 
