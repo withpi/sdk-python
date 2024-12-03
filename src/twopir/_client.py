@@ -50,6 +50,7 @@ class Twopir(SyncAPIClient):
     data: resources.DataResource
     tune: resources.TuneResource
     contracts: resources.ContractsResource
+    feedback: resources.FeedbackResource
     with_raw_response: TwopirWithRawResponse
     with_streaming_response: TwopirWithStreamedResponse
 
@@ -111,6 +112,7 @@ class Twopir(SyncAPIClient):
         self.data = resources.DataResource(self)
         self.tune = resources.TuneResource(self)
         self.contracts = resources.ContractsResource(self)
+        self.feedback = resources.FeedbackResource(self)
         self.with_raw_response = TwopirWithRawResponse(self)
         self.with_streaming_response = TwopirWithStreamedResponse(self)
 
@@ -224,6 +226,7 @@ class AsyncTwopir(AsyncAPIClient):
     data: resources.AsyncDataResource
     tune: resources.AsyncTuneResource
     contracts: resources.AsyncContractsResource
+    feedback: resources.AsyncFeedbackResource
     with_raw_response: AsyncTwopirWithRawResponse
     with_streaming_response: AsyncTwopirWithStreamedResponse
 
@@ -285,6 +288,7 @@ class AsyncTwopir(AsyncAPIClient):
         self.data = resources.AsyncDataResource(self)
         self.tune = resources.AsyncTuneResource(self)
         self.contracts = resources.AsyncContractsResource(self)
+        self.feedback = resources.AsyncFeedbackResource(self)
         self.with_raw_response = AsyncTwopirWithRawResponse(self)
         self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
@@ -399,6 +403,7 @@ class TwopirWithRawResponse:
         self.data = resources.DataResourceWithRawResponse(client.data)
         self.tune = resources.TuneResourceWithRawResponse(client.tune)
         self.contracts = resources.ContractsResourceWithRawResponse(client.contracts)
+        self.feedback = resources.FeedbackResourceWithRawResponse(client.feedback)
 
 
 class AsyncTwopirWithRawResponse:
@@ -407,6 +412,7 @@ class AsyncTwopirWithRawResponse:
         self.data = resources.AsyncDataResourceWithRawResponse(client.data)
         self.tune = resources.AsyncTuneResourceWithRawResponse(client.tune)
         self.contracts = resources.AsyncContractsResourceWithRawResponse(client.contracts)
+        self.feedback = resources.AsyncFeedbackResourceWithRawResponse(client.feedback)
 
 
 class TwopirWithStreamedResponse:
@@ -415,6 +421,7 @@ class TwopirWithStreamedResponse:
         self.data = resources.DataResourceWithStreamingResponse(client.data)
         self.tune = resources.TuneResourceWithStreamingResponse(client.tune)
         self.contracts = resources.ContractsResourceWithStreamingResponse(client.contracts)
+        self.feedback = resources.FeedbackResourceWithStreamingResponse(client.feedback)
 
 
 class AsyncTwopirWithStreamedResponse:
@@ -423,6 +430,7 @@ class AsyncTwopirWithStreamedResponse:
         self.data = resources.AsyncDataResourceWithStreamingResponse(client.data)
         self.tune = resources.AsyncTuneResourceWithStreamingResponse(client.tune)
         self.contracts = resources.AsyncContractsResourceWithStreamingResponse(client.contracts)
+        self.feedback = resources.AsyncFeedbackResourceWithStreamingResponse(client.feedback)
 
 
 Client = Twopir
