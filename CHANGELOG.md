@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2024-12-04)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Features
+
+* **api:** api update ([#40](https://github.com/2pir-ai/sdk-python/issues/40)) ([448d44a](https://github.com/2pir-ai/sdk-python/commit/448d44a9c2733e52ec36f726796c5996e17fb187))
+* **api:** api update ([#43](https://github.com/2pir-ai/sdk-python/issues/43)) ([17e952c](https://github.com/2pir-ai/sdk-python/commit/17e952c8b06962d9822232d435b590265ba38aa9))
+* **api:** manual updates ([#42](https://github.com/2pir-ai/sdk-python/issues/42)) ([539875d](https://github.com/2pir-ai/sdk-python/commit/539875d0a625082d82e9123a0171293d89891c00))
+
+
+### Chores
+
+* make the `Omit` type public ([#44](https://github.com/2pir-ai/sdk-python/issues/44)) ([090062f](https://github.com/2pir-ai/sdk-python/commit/090062fdef7294304d5a746a1309921d3ab81f5d))
+
 ## 0.1.0-alpha.6 (2024-12-03)
 
 Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
