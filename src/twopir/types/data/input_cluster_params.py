@@ -5,14 +5,14 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
-__all__ = ["InputClusterParams", "Body"]
+__all__ = ["InputClusterParams", "Input"]
 
 
 class InputClusterParams(TypedDict, total=False):
-    body: Required[Iterable[Body]]
+    inputs: Required[Iterable[Input]]
 
 
-class Body(TypedDict, total=False):
+class Input(TypedDict, total=False):
     identifier: Required[str]
     """The identifier of the input"""
 
