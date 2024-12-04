@@ -63,7 +63,7 @@ class InputsResource(SyncAPIResource):
     def cluster(
         self,
         *,
-        body: Iterable[input_cluster_params.Body],
+        inputs: Iterable[input_cluster_params.Input],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -85,7 +85,7 @@ class InputsResource(SyncAPIResource):
         """
         return self._post(
             "/data/input/cluster",
-            body=maybe_transform(body, Iterable[input_cluster_params.Body]),
+            body=maybe_transform(inputs, Iterable[input_cluster_params.Input]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -163,7 +163,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def cluster(
         self,
         *,
-        body: Iterable[input_cluster_params.Body],
+        inputs: Iterable[input_cluster_params.Input],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,7 +185,7 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         return await self._post(
             "/data/input/cluster",
-            body=await async_maybe_transform(body, Iterable[input_cluster_params.Body]),
+            body=await async_maybe_transform(inputs, Iterable[input_cluster_params.Input]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
