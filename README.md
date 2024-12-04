@@ -265,7 +265,7 @@ response = client.contracts.with_raw_response.score(
 print(response.headers.get('X-My-Header'))
 
 contract = response.parse()  # get the object that `contracts.score()` would have returned
-print(contract.scores)
+print(contract.dimension_scores)
 ```
 
 These methods return an [`APIResponse`](https://github.com/2pir-ai/sdk-python/tree/main/src/twopir/_response.py) object.
