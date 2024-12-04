@@ -21,7 +21,7 @@ class TestInputs:
     @parametrize
     def test_method_cluster(self, client: Twopir) -> None:
         input = client.data.inputs.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",
@@ -33,7 +33,7 @@ class TestInputs:
     @parametrize
     def test_raw_response_cluster(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",
@@ -49,7 +49,7 @@ class TestInputs:
     @parametrize
     def test_streaming_response_cluster(self, client: Twopir) -> None:
         with client.data.inputs.with_streaming_response.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",
@@ -142,7 +142,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_cluster(self, async_client: AsyncTwopir) -> None:
         input = await async_client.data.inputs.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",
@@ -154,7 +154,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_raw_response_cluster(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",
@@ -170,7 +170,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_cluster(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.with_streaming_response.cluster(
-            body=[
+            inputs=[
                 {
                     "identifier": "identifier",
                     "llm_input": "string",

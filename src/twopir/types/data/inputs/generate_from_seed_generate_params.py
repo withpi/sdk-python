@@ -9,4 +9,6 @@ __all__ = ["GenerateFromSeedGenerateParams"]
 
 
 class GenerateFromSeedGenerateParams(TypedDict, total=False):
+    num_inputs: Required[int]
+
     seeds: Required[List[str]]
