@@ -26,8 +26,15 @@ from twopir.types import DataGenerationStatus, InputEvaluationMetrics
 
 ## Inputs
 
+Types:
+
+```python
+from twopir.types.data import InputTopicCluster, InputClusterResponse
+```
+
 Methods:
 
+- <code title="post /data/input/cluster">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/twopir/types/data/input_cluster_params.py">params</a>) -> <a href="./src/twopir/types/data/input_cluster_response.py">InputClusterResponse</a></code>
 - <code title="post /data/input/evaluate">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">evaluate</a>(\*\*<a href="src/twopir/types/data/input_evaluate_params.py">params</a>) -> <a href="./src/twopir/types/input_evaluation_metrics.py">InputEvaluationMetrics</a></code>
 
 ### GenerateFromSeeds
@@ -78,3 +85,15 @@ Methods:
 
 - <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/twopir/resources/contracts.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/score">client.contracts.<a href="./src/twopir/resources/contracts.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
+
+# Feedback
+
+Types:
+
+```python
+from twopir.types import FeedbackTopicCluster, FeedbackClusterResponse
+```
+
+Methods:
+
+- <code title="post /feedback/cluster">client.feedback.<a href="./src/twopir/resources/feedback.py">cluster</a>(\*\*<a href="src/twopir/types/feedback_cluster_params.py">params</a>) -> <a href="./src/twopir/types/feedback_cluster_response.py">FeedbackClusterResponse</a></code>
