@@ -20,6 +20,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.data.inputs import generate_from_seed_generate_params
 from ....types.data_generation_status import DataGenerationStatus
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
@@ -81,6 +82,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
     def generate(
         self,
         *,
+        num_inputs: int,
         seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -105,7 +107,13 @@ class GenerateFromSeedsResource(SyncAPIResource):
             "/data/input/generate_from_seeds",
             body=maybe_transform(seeds, List[str]),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                ),
             ),
             cast_to=DataGenerationStatus,
         )
@@ -201,6 +209,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
     async def generate(
         self,
         *,
+        num_inputs: int,
         seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -225,7 +234,13 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             "/data/input/generate_from_seeds",
             body=await async_maybe_transform(seeds, List[str]),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                ),
             ),
             cast_to=DataGenerationStatus,
         )
