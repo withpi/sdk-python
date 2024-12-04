@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Iterable
 
 import httpx
 
@@ -19,7 +19,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.data import input_evaluate_params
+from ....types.data import input_cluster_params, input_evaluate_params
 from ...._base_client import make_request_options
 from .generate_from_seeds import (
     GenerateFromSeedsResource,
@@ -31,6 +31,7 @@ from .generate_from_seeds import (
 )
 from ....types.shared_params.contract import Contract
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
+from ....types.data.input_cluster_response import InputClusterResponse
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 
@@ -58,6 +59,38 @@ class InputsResource(SyncAPIResource):
         For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
         """
         return InputsResourceWithStreamingResponse(self)
+
+    def cluster(
+        self,
+        *,
+        body: Iterable[input_cluster_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> InputClusterResponse:
+        """
+        Clusters inputs into groups with counts
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/data/input/cluster",
+            body=maybe_transform(body, Iterable[input_cluster_params.Body]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=InputClusterResponse,
+        )
 
     def evaluate(
         self,
@@ -127,6 +160,38 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         return AsyncInputsResourceWithStreamingResponse(self)
 
+    async def cluster(
+        self,
+        *,
+        body: Iterable[input_cluster_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> InputClusterResponse:
+        """
+        Clusters inputs into groups with counts
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/data/input/cluster",
+            body=await async_maybe_transform(body, Iterable[input_cluster_params.Body]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=InputClusterResponse,
+        )
+
     async def evaluate(
         self,
         *,
@@ -175,6 +240,9 @@ class InputsResourceWithRawResponse:
     def __init__(self, inputs: InputsResource) -> None:
         self._inputs = inputs
 
+        self.cluster = to_raw_response_wrapper(
+            inputs.cluster,
+        )
         self.evaluate = to_raw_response_wrapper(
             inputs.evaluate,
         )
@@ -188,6 +256,9 @@ class AsyncInputsResourceWithRawResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
         self._inputs = inputs
 
+        self.cluster = async_to_raw_response_wrapper(
+            inputs.cluster,
+        )
         self.evaluate = async_to_raw_response_wrapper(
             inputs.evaluate,
         )
@@ -201,6 +272,9 @@ class InputsResourceWithStreamingResponse:
     def __init__(self, inputs: InputsResource) -> None:
         self._inputs = inputs
 
+        self.cluster = to_streamed_response_wrapper(
+            inputs.cluster,
+        )
         self.evaluate = to_streamed_response_wrapper(
             inputs.evaluate,
         )
@@ -214,6 +288,9 @@ class AsyncInputsResourceWithStreamingResponse:
     def __init__(self, inputs: AsyncInputsResource) -> None:
         self._inputs = inputs
 
+        self.cluster = async_to_streamed_response_wrapper(
+            inputs.cluster,
+        )
         self.evaluate = async_to_streamed_response_wrapper(
             inputs.evaluate,
         )
