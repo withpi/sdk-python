@@ -25,7 +25,7 @@ class SubDimension(TypedDict, total=False):
     scoring_method: Required[Optional[Literal["twopir_judge"]]]
     """The judge used for scoring this dimension (for llm_as_a_judge type)"""
 
-    scoring_type: Required[Literal["llm_as_a_judge"]]
+    scoring_type: Required[Literal["llm_as_a_judge", "glean", "glean_structured_detector", "python_code"]]
     """The type of scoring performed for this dimension"""
 
     weight: Required[float]
