@@ -43,7 +43,6 @@ class TestContracts:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
@@ -112,7 +111,6 @@ class TestContracts:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
@@ -189,7 +187,6 @@ class TestAsyncContracts:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
@@ -258,7 +255,6 @@ class TestAsyncContracts:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
