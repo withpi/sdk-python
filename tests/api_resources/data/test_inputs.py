@@ -90,7 +90,6 @@ class TestInputs:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
@@ -211,7 +210,6 @@ class TestAsyncInputs:
                                 "id": "id",
                                 "description": "description",
                                 "parameters": [0],
-                                "scoring_method": "twopir_judge",
                                 "scoring_type": "llm_as_a_judge",
                                 "weight": 0,
                             }
