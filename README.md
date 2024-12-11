@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.2pir.ai](https://docs.2pir.ai). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.withpi.ai](https://docs.withpi.ai). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -49,8 +49,8 @@ contracts_score_metrics = client.contracts.score(
             },
         ],
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 print(contracts_score_metrics.scores)
 ```
@@ -90,8 +90,8 @@ async def main() -> None:
                 },
             ],
         },
-        llm_input={"query": "Help me with my problem"},
-        llm_output="llm_output",
+        llm_input="Help me with my problem",
+        llm_output="Of course I can help with that",
     )
     print(contracts_score_metrics.scores)
 
@@ -128,11 +128,21 @@ client = Twopir()
 try:
     client.contracts.score(
         contract={
-            "description": "description",
-            "name": "name",
+            "name": "My Application",
+            "description": "You are a helpful assistant",
+            "dimensions": [
+                {
+                    "description": "Test whether the LLM follows instructions",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM responds to the query",
+                    "label": "Topicality",
+                },
+            ],
         },
-        llm_input="string",
-        llm_output="llm_output",
+        llm_input="Help me with my problem",
+        llm_output="Of course I can help with that",
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -178,11 +188,21 @@ client = Twopir(
 # Or, configure per-request:
 client.with_options(max_retries=5).contracts.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 ```
 
@@ -208,11 +228,21 @@ client = Twopir(
 # Override per-request:
 client.with_options(timeout=5.0).contracts.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 ```
 
@@ -256,11 +286,18 @@ from twopir import Twopir
 client = Twopir()
 response = client.contracts.with_raw_response.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [{
+            "description": "Test whether the LLM follows instructions",
+            "label": "Instruction Following",
+        }, {
+            "description": "Test whether the LLM responds to the query",
+            "label": "Topicality",
+        }],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -281,11 +318,21 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.contracts.with_streaming_response.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -334,18 +381,19 @@ can also get all the extra fields on the Pydantic model as a dict with
 
 You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
 
-- Support for proxies
-- Custom transports
+- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)
+- Custom [transports](https://www.python-httpx.org/advanced/transports/)
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
+import httpx
 from twopir import Twopir, DefaultHttpxClient
 
 client = Twopir(
     # Or use the `TWOPIR_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
-        proxies="http://my.test.proxy.example.com",
+        proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
 )
