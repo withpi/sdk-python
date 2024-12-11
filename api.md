@@ -36,6 +36,7 @@ Methods:
 
 - <code title="post /data/input/cluster">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/twopir/types/data/input_cluster_params.py">params</a>) -> <a href="./src/twopir/types/data/input_cluster_response.py">InputClusterResponse</a></code>
 - <code title="post /data/input/evaluate">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">evaluate</a>(\*\*<a href="src/twopir/types/data/input_evaluate_params.py">params</a>) -> <a href="./src/twopir/types/input_evaluation_metrics.py">InputEvaluationMetrics</a></code>
+- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/twopir/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
 
 ### GenerateFromSeeds
 
