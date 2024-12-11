@@ -128,11 +128,21 @@ client = Twopir()
 try:
     client.contracts.score(
         contract={
-            "description": "description",
-            "name": "name",
+            "name": "My Application",
+            "description": "You are a helpful assistant",
+            "dimensions": [
+                {
+                    "description": "Test whether the LLM follows instructions",
+                    "label": "Instruction Following",
+                },
+                {
+                    "description": "Test whether the LLM responds to the query",
+                    "label": "Topicality",
+                },
+            ],
         },
-        llm_input="string",
-        llm_output="llm_output",
+        llm_input="Help me with my problem",
+        llm_output="Of course I can help with that",
     )
 except twopir.APIConnectionError as e:
     print("The server could not be reached")
@@ -178,11 +188,21 @@ client = Twopir(
 # Or, configure per-request:
 client.with_options(max_retries=5).contracts.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 ```
 
@@ -208,11 +228,21 @@ client = Twopir(
 # Override per-request:
 client.with_options(timeout=5.0).contracts.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 ```
 
@@ -256,11 +286,18 @@ from twopir import Twopir
 client = Twopir()
 response = client.contracts.with_raw_response.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [{
+            "description": "Test whether the LLM follows instructions",
+            "label": "Instruction Following",
+        }, {
+            "description": "Test whether the LLM responds to the query",
+            "label": "Topicality",
+        }],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -281,11 +318,21 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.contracts.with_streaming_response.score(
     contract={
-        "description": "description",
-        "name": "name",
+        "name": "My Application",
+        "description": "You are a helpful assistant",
+        "dimensions": [
+            {
+                "description": "Test whether the LLM follows instructions",
+                "label": "Instruction Following",
+            },
+            {
+                "description": "Test whether the LLM responds to the query",
+                "label": "Topicality",
+            },
+        ],
     },
-    llm_input="string",
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
