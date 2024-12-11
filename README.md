@@ -49,8 +49,8 @@ contracts_score_metrics = client.contracts.score(
             },
         ],
     },
-    llm_input={"query": "Help me with my problem"},
-    llm_output="llm_output",
+    llm_input="Help me with my problem",
+    llm_output="Of course I can help with that",
 )
 print(contracts_score_metrics.scores)
 ```
@@ -90,8 +90,8 @@ async def main() -> None:
                 },
             ],
         },
-        llm_input={"query": "Help me with my problem"},
-        llm_output="llm_output",
+        llm_input="Help me with my problem",
+        llm_output="Of course I can help with that",
     )
     print(contracts_score_metrics.scores)
 
