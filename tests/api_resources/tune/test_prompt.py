@@ -119,14 +119,16 @@ class TestPrompt:
                 "name": "name",
                 "dimensions": [
                     {
-                        "id": "id",
                         "description": "description",
+                        "label": "label",
                         "sub_dimensions": [
                             {
-                                "id": "id",
                                 "description": "description",
+                                "label": "label",
+                                "scoring_type": "LLM_AS_A_JUDGE",
+                                "huggingface_url": "huggingface_url",
                                 "parameters": [0],
-                                "scoring_type": "llm_as_a_judge",
+                                "python_code": "python_code",
                                 "weight": 0,
                             }
                         ],
@@ -297,14 +299,16 @@ class TestAsyncPrompt:
                 "name": "name",
                 "dimensions": [
                     {
-                        "id": "id",
                         "description": "description",
+                        "label": "label",
                         "sub_dimensions": [
                             {
-                                "id": "id",
                                 "description": "description",
+                                "label": "label",
+                                "scoring_type": "LLM_AS_A_JUDGE",
+                                "huggingface_url": "huggingface_url",
                                 "parameters": [0],
-                                "scoring_type": "llm_as_a_judge",
+                                "python_code": "python_code",
                                 "weight": 0,
                             }
                         ],

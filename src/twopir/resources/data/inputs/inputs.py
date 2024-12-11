@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -19,7 +20,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.data import input_cluster_params, input_evaluate_params
+from ....types.data import input_cluster_params, input_evaluate_params, input_generate_seeds_params
 from ...._base_client import make_request_options
 from .generate_from_seeds import (
     GenerateFromSeedsResource,
@@ -29,6 +30,7 @@ from .generate_from_seeds import (
     GenerateFromSeedsResourceWithStreamingResponse,
     AsyncGenerateFromSeedsResourceWithStreamingResponse,
 )
+from ....types.data_generation_status import DataGenerationStatus
 from ....types.shared_params.contract import Contract
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
 from ....types.data.input_cluster_response import InputClusterResponse
@@ -135,6 +137,72 @@ class InputsResource(SyncAPIResource):
             cast_to=InputEvaluationMetrics,
         )
 
+    def generate_seeds(
+        self,
+        *,
+        contract: Contract,
+        num_inputs: int,
+        context_types: Optional[
+            List[
+                Literal[
+                    "none",
+                    "article",
+                    "conversation",
+                    "debate",
+                    "webpage",
+                    "passage",
+                    "chat history",
+                    "email thread",
+                    "text messages",
+                    "financial document",
+                    "scientific paper",
+                    "slide presentation description",
+                ]
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataGenerationStatus:
+        """
+        Generates seed messages for input data.
+
+        Args:
+          contract: The contract to generate input seeds for.
+
+          num_inputs: Number of input seeds to generate.
+
+          context_types: The types of context to generate for the input prompts if specified. Otherwise
+              the context_types will be inferred.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/data/input/generate_seeds",
+            body=maybe_transform(
+                {
+                    "contract": contract,
+                    "num_inputs": num_inputs,
+                    "context_types": context_types,
+                },
+                input_generate_seeds_params.InputGenerateSeedsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DataGenerationStatus,
+        )
+
 
 class AsyncInputsResource(AsyncAPIResource):
     @cached_property
@@ -235,6 +303,72 @@ class AsyncInputsResource(AsyncAPIResource):
             cast_to=InputEvaluationMetrics,
         )
 
+    async def generate_seeds(
+        self,
+        *,
+        contract: Contract,
+        num_inputs: int,
+        context_types: Optional[
+            List[
+                Literal[
+                    "none",
+                    "article",
+                    "conversation",
+                    "debate",
+                    "webpage",
+                    "passage",
+                    "chat history",
+                    "email thread",
+                    "text messages",
+                    "financial document",
+                    "scientific paper",
+                    "slide presentation description",
+                ]
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataGenerationStatus:
+        """
+        Generates seed messages for input data.
+
+        Args:
+          contract: The contract to generate input seeds for.
+
+          num_inputs: Number of input seeds to generate.
+
+          context_types: The types of context to generate for the input prompts if specified. Otherwise
+              the context_types will be inferred.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/data/input/generate_seeds",
+            body=await async_maybe_transform(
+                {
+                    "contract": contract,
+                    "num_inputs": num_inputs,
+                    "context_types": context_types,
+                },
+                input_generate_seeds_params.InputGenerateSeedsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DataGenerationStatus,
+        )
+
 
 class InputsResourceWithRawResponse:
     def __init__(self, inputs: InputsResource) -> None:
@@ -245,6 +379,9 @@ class InputsResourceWithRawResponse:
         )
         self.evaluate = to_raw_response_wrapper(
             inputs.evaluate,
+        )
+        self.generate_seeds = to_raw_response_wrapper(
+            inputs.generate_seeds,
         )
 
     @cached_property
@@ -262,6 +399,9 @@ class AsyncInputsResourceWithRawResponse:
         self.evaluate = async_to_raw_response_wrapper(
             inputs.evaluate,
         )
+        self.generate_seeds = async_to_raw_response_wrapper(
+            inputs.generate_seeds,
+        )
 
     @cached_property
     def generate_from_seeds(self) -> AsyncGenerateFromSeedsResourceWithRawResponse:
@@ -278,6 +418,9 @@ class InputsResourceWithStreamingResponse:
         self.evaluate = to_streamed_response_wrapper(
             inputs.evaluate,
         )
+        self.generate_seeds = to_streamed_response_wrapper(
+            inputs.generate_seeds,
+        )
 
     @cached_property
     def generate_from_seeds(self) -> GenerateFromSeedsResourceWithStreamingResponse:
@@ -293,6 +436,9 @@ class AsyncInputsResourceWithStreamingResponse:
         )
         self.evaluate = async_to_streamed_response_wrapper(
             inputs.evaluate,
+        )
+        self.generate_seeds = async_to_streamed_response_wrapper(
+            inputs.generate_seeds,
         )
 
     @cached_property

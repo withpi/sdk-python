@@ -9,11 +9,20 @@ __all__ = ["SubDimension"]
 
 
 class SubDimension(BaseModel):
-    id: str
-    """The label of the dimension"""
-
     description: str
     """The description of the dimension"""
+
+    label: str
+    """The label of the dimension"""
+
+    scoring_type: Literal["LLM_AS_A_JUDGE", "HUGGINGFACE_SCORER", "PYTHON_CODE"]
+    """The type of scoring performed for this dimension"""
+
+    huggingface_url: Optional[str] = None
+    """
+    The URL of the HuggingFace model to use for scoring. Only relevant for
+    scoring_type of hugingface_scorer
+    """
 
     parameters: Optional[List[float]] = None
     """The learned parameters for the scoring method.
@@ -22,10 +31,10 @@ class SubDimension(BaseModel):
     point from 1-5, normalized to a 0-1 range.
     """
 
-    scoring_type: Literal["llm_as_a_judge", "glean_structured_detector", "python_code"]
-    """The type of scoring performed for this dimension"""
+    python_code: Optional[str] = None
+    """The PYTHON code associated the python_code DimensionScoringType."""
 
-    weight: float
+    weight: Optional[float] = None
     """The weight of the subdimension.
 
     The sum of subdimension weights will be normalized to one internally.  A higher weight counts
