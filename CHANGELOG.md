@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2024-12-11)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Features
+
+* **api:** manual updates ([#58](https://github.com/2pir-ai/sdk-python/issues/58)) ([c6667e6](https://github.com/2pir-ai/sdk-python/commit/c6667e66ea98bf5a13684e5932aac50109517248))
+* **api:** manual updates ([#59](https://github.com/2pir-ai/sdk-python/issues/59)) ([e03f6e3](https://github.com/2pir-ai/sdk-python/commit/e03f6e336f34d13bae47980a28b12a8fe7af081d))
+* **api:** manual updates ([#60](https://github.com/2pir-ai/sdk-python/issues/60)) ([fded5f8](https://github.com/2pir-ai/sdk-python/commit/fded5f827fd72a0ea4cefb6113beddcdb54e57c9))
+
+
+### Chores
+
+* **internal:** bump pydantic dependency ([#55](https://github.com/2pir-ai/sdk-python/issues/55)) ([cf394a6](https://github.com/2pir-ai/sdk-python/commit/cf394a694eefedc544622006d3965a3b5dc074d4))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#57](https://github.com/2pir-ai/sdk-python/issues/57)) ([28b9857](https://github.com/2pir-ai/sdk-python/commit/28b9857c8e3d554910a3f1e0edeba7367f970456))
+
 ## 0.1.0-alpha.9 (2024-12-08)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
