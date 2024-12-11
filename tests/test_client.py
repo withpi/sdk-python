@@ -713,11 +713,21 @@ class TestTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "description",
-                            "name": "name",
+                            "name": "My Application",
+                            "description": "You are a helpful assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM responds to the query",
+                                    "label": "Topicality",
+                                },
+                            ],
                         },
-                        llm_input="string",
-                        llm_output="llm_output",
+                        llm_input="Help me with my problem",
+                        llm_output="Of course I can help with that",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -738,11 +748,21 @@ class TestTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "description",
-                            "name": "name",
+                            "name": "My Application",
+                            "description": "You are a helpful assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM responds to the query",
+                                    "label": "Topicality",
+                                },
+                            ],
                         },
-                        llm_input="string",
-                        llm_output="llm_output",
+                        llm_input="Help me with my problem",
+                        llm_output="Of course I can help with that",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1532,11 +1552,21 @@ class TestAsyncTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "description",
-                            "name": "name",
+                            "name": "My Application",
+                            "description": "You are a helpful assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM responds to the query",
+                                    "label": "Topicality",
+                                },
+                            ],
                         },
-                        llm_input="string",
-                        llm_output="llm_output",
+                        llm_input="Help me with my problem",
+                        llm_output="Of course I can help with that",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1557,11 +1587,21 @@ class TestAsyncTwopir:
                     object,
                     dict(
                         contract={
-                            "description": "description",
-                            "name": "name",
+                            "name": "My Application",
+                            "description": "You are a helpful assistant",
+                            "dimensions": [
+                                {
+                                    "description": "Test whether the LLM follows instructions",
+                                    "label": "Instruction Following",
+                                },
+                                {
+                                    "description": "Test whether the LLM responds to the query",
+                                    "label": "Topicality",
+                                },
+                            ],
                         },
-                        llm_input="string",
-                        llm_output="llm_output",
+                        llm_input="Help me with my problem",
+                        llm_output="Of course I can help with that",
                     ),
                 ),
                 cast_to=httpx.Response,
