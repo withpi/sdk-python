@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import _exceptions
+from . import resources, _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,7 +24,6 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import feedback, contracts, inference
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import TwopirError, APIStatusError
 from ._base_client import (
@@ -32,18 +31,26 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.data import data
-from .resources.tune import tune
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Twopir", "AsyncTwopir", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "resources",
+    "Twopir",
+    "AsyncTwopir",
+    "Client",
+    "AsyncClient",
+]
 
 
 class Twopir(SyncAPIClient):
-    inference: inference.InferenceResource
-    data: data.DataResource
-    tune: tune.TuneResource
-    contracts: contracts.ContractsResource
-    feedback: feedback.FeedbackResource
+    inference: resources.InferenceResource
+    data: resources.DataResource
+    tune: resources.TuneResource
+    contracts: resources.ContractsResource
+    feedback: resources.FeedbackResource
     with_raw_response: TwopirWithRawResponse
     with_streaming_response: TwopirWithStreamedResponse
 
@@ -101,11 +108,11 @@ class Twopir(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.inference = inference.InferenceResource(self)
-        self.data = data.DataResource(self)
-        self.tune = tune.TuneResource(self)
-        self.contracts = contracts.ContractsResource(self)
-        self.feedback = feedback.FeedbackResource(self)
+        self.inference = resources.InferenceResource(self)
+        self.data = resources.DataResource(self)
+        self.tune = resources.TuneResource(self)
+        self.contracts = resources.ContractsResource(self)
+        self.feedback = resources.FeedbackResource(self)
         self.with_raw_response = TwopirWithRawResponse(self)
         self.with_streaming_response = TwopirWithStreamedResponse(self)
 
@@ -215,11 +222,11 @@ class Twopir(SyncAPIClient):
 
 
 class AsyncTwopir(AsyncAPIClient):
-    inference: inference.AsyncInferenceResource
-    data: data.AsyncDataResource
-    tune: tune.AsyncTuneResource
-    contracts: contracts.AsyncContractsResource
-    feedback: feedback.AsyncFeedbackResource
+    inference: resources.AsyncInferenceResource
+    data: resources.AsyncDataResource
+    tune: resources.AsyncTuneResource
+    contracts: resources.AsyncContractsResource
+    feedback: resources.AsyncFeedbackResource
     with_raw_response: AsyncTwopirWithRawResponse
     with_streaming_response: AsyncTwopirWithStreamedResponse
 
@@ -277,11 +284,11 @@ class AsyncTwopir(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.inference = inference.AsyncInferenceResource(self)
-        self.data = data.AsyncDataResource(self)
-        self.tune = tune.AsyncTuneResource(self)
-        self.contracts = contracts.AsyncContractsResource(self)
-        self.feedback = feedback.AsyncFeedbackResource(self)
+        self.inference = resources.AsyncInferenceResource(self)
+        self.data = resources.AsyncDataResource(self)
+        self.tune = resources.AsyncTuneResource(self)
+        self.contracts = resources.AsyncContractsResource(self)
+        self.feedback = resources.AsyncFeedbackResource(self)
         self.with_raw_response = AsyncTwopirWithRawResponse(self)
         self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
 
@@ -392,38 +399,38 @@ class AsyncTwopir(AsyncAPIClient):
 
 class TwopirWithRawResponse:
     def __init__(self, client: Twopir) -> None:
-        self.inference = inference.InferenceResourceWithRawResponse(client.inference)
-        self.data = data.DataResourceWithRawResponse(client.data)
-        self.tune = tune.TuneResourceWithRawResponse(client.tune)
-        self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
-        self.feedback = feedback.FeedbackResourceWithRawResponse(client.feedback)
+        self.inference = resources.InferenceResourceWithRawResponse(client.inference)
+        self.data = resources.DataResourceWithRawResponse(client.data)
+        self.tune = resources.TuneResourceWithRawResponse(client.tune)
+        self.contracts = resources.ContractsResourceWithRawResponse(client.contracts)
+        self.feedback = resources.FeedbackResourceWithRawResponse(client.feedback)
 
 
 class AsyncTwopirWithRawResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.inference = inference.AsyncInferenceResourceWithRawResponse(client.inference)
-        self.data = data.AsyncDataResourceWithRawResponse(client.data)
-        self.tune = tune.AsyncTuneResourceWithRawResponse(client.tune)
-        self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
-        self.feedback = feedback.AsyncFeedbackResourceWithRawResponse(client.feedback)
+        self.inference = resources.AsyncInferenceResourceWithRawResponse(client.inference)
+        self.data = resources.AsyncDataResourceWithRawResponse(client.data)
+        self.tune = resources.AsyncTuneResourceWithRawResponse(client.tune)
+        self.contracts = resources.AsyncContractsResourceWithRawResponse(client.contracts)
+        self.feedback = resources.AsyncFeedbackResourceWithRawResponse(client.feedback)
 
 
 class TwopirWithStreamedResponse:
     def __init__(self, client: Twopir) -> None:
-        self.inference = inference.InferenceResourceWithStreamingResponse(client.inference)
-        self.data = data.DataResourceWithStreamingResponse(client.data)
-        self.tune = tune.TuneResourceWithStreamingResponse(client.tune)
-        self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
-        self.feedback = feedback.FeedbackResourceWithStreamingResponse(client.feedback)
+        self.inference = resources.InferenceResourceWithStreamingResponse(client.inference)
+        self.data = resources.DataResourceWithStreamingResponse(client.data)
+        self.tune = resources.TuneResourceWithStreamingResponse(client.tune)
+        self.contracts = resources.ContractsResourceWithStreamingResponse(client.contracts)
+        self.feedback = resources.FeedbackResourceWithStreamingResponse(client.feedback)
 
 
 class AsyncTwopirWithStreamedResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.inference = inference.AsyncInferenceResourceWithStreamingResponse(client.inference)
-        self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
-        self.tune = tune.AsyncTuneResourceWithStreamingResponse(client.tune)
-        self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
-        self.feedback = feedback.AsyncFeedbackResourceWithStreamingResponse(client.feedback)
+        self.inference = resources.AsyncInferenceResourceWithStreamingResponse(client.inference)
+        self.data = resources.AsyncDataResourceWithStreamingResponse(client.data)
+        self.tune = resources.AsyncTuneResourceWithStreamingResponse(client.tune)
+        self.contracts = resources.AsyncContractsResourceWithStreamingResponse(client.contracts)
+        self.feedback = resources.AsyncFeedbackResourceWithStreamingResponse(client.feedback)
 
 
 Client = Twopir

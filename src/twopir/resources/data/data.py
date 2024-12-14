@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from .inputs.inputs import (
+from .inputs import (
     InputsResource,
     AsyncInputsResource,
     InputsResourceWithRawResponse,
@@ -12,6 +10,9 @@ from .inputs.inputs import (
     InputsResourceWithStreamingResponse,
     AsyncInputsResourceWithStreamingResponse,
 )
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from .inputs.inputs import InputsResource, AsyncInputsResource
 
 __all__ = ["DataResource", "AsyncDataResource"]
 
