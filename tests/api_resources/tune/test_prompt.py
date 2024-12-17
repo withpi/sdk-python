@@ -125,13 +125,25 @@ class TestPrompt:
                             {
                                 "description": "description",
                                 "label": "label",
-                                "scoring_type": "LLM_AS_A_JUDGE",
+                                "scoring_type": "PI_SCORER",
+                                "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
                                 "python_code": "python_code",
                                 "weight": 0,
                             }
                         ],
+                        "action_dimension": {
+                            "description": "description",
+                            "label": "label",
+                            "scoring_type": "PI_SCORER",
+                            "action_on_low_score": True,
+                            "huggingface_url": "huggingface_url",
+                            "parameters": [0],
+                            "python_code": "python_code",
+                            "weight": 0,
+                        },
+                        "action_on_low_score": True,
                         "weight": 0,
                     }
                 ],
@@ -305,13 +317,25 @@ class TestAsyncPrompt:
                             {
                                 "description": "description",
                                 "label": "label",
-                                "scoring_type": "LLM_AS_A_JUDGE",
+                                "scoring_type": "PI_SCORER",
+                                "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
                                 "python_code": "python_code",
                                 "weight": 0,
                             }
                         ],
+                        "action_dimension": {
+                            "description": "description",
+                            "label": "label",
+                            "scoring_type": "PI_SCORER",
+                            "action_on_low_score": True,
+                            "huggingface_url": "huggingface_url",
+                            "parameters": [0],
+                            "python_code": "python_code",
+                            "weight": 0,
+                        },
+                        "action_on_low_score": True,
                         "weight": 0,
                     }
                 ],
