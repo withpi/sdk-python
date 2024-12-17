@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.11 (2024-12-17)
+
+Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
+
+### Features
+
+* **api:** manual updates ([#69](https://github.com/2pir-ai/sdk-python/issues/69)) ([b2954c9](https://github.com/2pir-ai/sdk-python/commit/b2954c9c2daad6bcd0b801f0076b068ab3014f5e))
+
+
+### Chores
+
+* **internal:** add support for TypeAliasType ([#64](https://github.com/2pir-ai/sdk-python/issues/64)) ([9524aac](https://github.com/2pir-ai/sdk-python/commit/9524aac089944683fac2dc8a3f9167f5400ec300))
+* **internal:** bump pyright ([#62](https://github.com/2pir-ai/sdk-python/issues/62)) ([8044538](https://github.com/2pir-ai/sdk-python/commit/80445386e63e877c062c06133780135e65fce036))
+* **internal:** codegen related update ([#65](https://github.com/2pir-ai/sdk-python/issues/65)) ([e2df086](https://github.com/2pir-ai/sdk-python/commit/e2df086bf42c53865458e8acf2e3e93422870791))
+* **internal:** codegen related update ([#66](https://github.com/2pir-ai/sdk-python/issues/66)) ([8b37d25](https://github.com/2pir-ai/sdk-python/commit/8b37d250dd1fc7e9019c0479b336760971a1b1ca))
+* **internal:** codegen related update ([#67](https://github.com/2pir-ai/sdk-python/issues/67)) ([8ea01b6](https://github.com/2pir-ai/sdk-python/commit/8ea01b615cd92c43e0681216d27e65fb78ab63b4))
+* **internal:** codegen related update ([#68](https://github.com/2pir-ai/sdk-python/issues/68)) ([5ba144a](https://github.com/2pir-ai/sdk-python/commit/5ba144a2c2d440816efdf03f41b6a8169e1d170e))
+
 ## 0.1.0-alpha.10 (2024-12-11)
 
 Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)

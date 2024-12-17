@@ -5,8 +5,6 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from .dimension import Dimension
-
 __all__ = ["Contract"]
 
 
@@ -17,5 +15,8 @@ class Contract(TypedDict, total=False):
     name: Required[str]
     """The name of the contract"""
 
-    dimensions: Iterable[Dimension]
+    dimensions: Iterable["Dimension"]
     """The dimensions of the contract"""
+
+
+from .dimension import Dimension
