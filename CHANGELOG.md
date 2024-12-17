@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.12 (2024-12-17)
+
+Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
+
+### Chores
+
+* **internal:** codegen related update ([#65](https://github.com/2pir-ai/sdk-python/issues/65)) ([cea75a6](https://github.com/2pir-ai/sdk-python/commit/cea75a6575f7139d9cc439b9dfd17a2a101eb2e6))
+* **internal:** codegen related update ([#66](https://github.com/2pir-ai/sdk-python/issues/66)) ([8ac23d9](https://github.com/2pir-ai/sdk-python/commit/8ac23d9cf81d517c21825f9c85ca5561a7cffc75))
+* **internal:** codegen related update ([#67](https://github.com/2pir-ai/sdk-python/issues/67)) ([693e7b9](https://github.com/2pir-ai/sdk-python/commit/693e7b9b1f51ef4c3a4c50c8f964dbed0508bdd8))
+* **internal:** codegen related update ([#68](https://github.com/2pir-ai/sdk-python/issues/68)) ([2b282ce](https://github.com/2pir-ai/sdk-python/commit/2b282ce9303d92ab23922c02c9f7e801efefec28))
+* **internal:** codegen related update ([#72](https://github.com/2pir-ai/sdk-python/issues/72)) ([653e197](https://github.com/2pir-ai/sdk-python/commit/653e19785767fb56a7328659158fb2c4339f076d))
+* **internal:** fix some typos ([#74](https://github.com/2pir-ai/sdk-python/issues/74)) ([3e9a340](https://github.com/2pir-ai/sdk-python/commit/3e9a3407aa6393012cbf2d61646a40f66b953a2b))
+
+
+### Documentation
+
+* **readme:** example snippet for client context manager ([#73](https://github.com/2pir-ai/sdk-python/issues/73)) ([08ad3b9](https://github.com/2pir-ai/sdk-python/commit/08ad3b9daf96a3b16c9d664632a28fccfae8f5a4))
+
 ## 0.1.0-alpha.11 (2024-12-17)
 
 Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
