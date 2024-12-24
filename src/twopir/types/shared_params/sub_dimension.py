@@ -26,7 +26,7 @@ class SubDimension(TypedDict, total=False):
     the -1 scores and thus we achieve the short-circuit behavior.
     """
 
-    action_on_low_score: bool
+    action_on_low_score: Optional[bool]
     """
     If `action_on_low_score = True`, the node emits the real value if action
     dimension score is <= 0.5 and it returns -1 otherwise.
@@ -48,7 +48,7 @@ class SubDimension(TypedDict, total=False):
     python_code: Optional[str]
     """The PYTHON code associated the PYTHON_CODE DimensionScoringType."""
 
-    weight: float
+    weight: Optional[float]
     """The weight of the subdimension.
 
     The sum of subdimension weights will be normalized to one internally.  A higher weight counts

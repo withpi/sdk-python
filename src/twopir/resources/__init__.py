@@ -32,22 +32,8 @@ from .contracts import (
     ContractsResourceWithStreamingResponse,
     AsyncContractsResourceWithStreamingResponse,
 )
-from .inference import (
-    InferenceResource,
-    AsyncInferenceResource,
-    InferenceResourceWithRawResponse,
-    AsyncInferenceResourceWithRawResponse,
-    InferenceResourceWithStreamingResponse,
-    AsyncInferenceResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "InferenceResource",
-    "AsyncInferenceResource",
-    "InferenceResourceWithRawResponse",
-    "AsyncInferenceResourceWithRawResponse",
-    "InferenceResourceWithStreamingResponse",
-    "AsyncInferenceResourceWithStreamingResponse",
     "DataResource",
     "AsyncDataResource",
     "DataResourceWithRawResponse",
