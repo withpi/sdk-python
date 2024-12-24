@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import feedback, contracts, inference
+from .resources import feedback, contracts
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import TwopirError, APIStatusError
 from ._base_client import (
@@ -39,7 +39,6 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Twopir", "
 
 
 class Twopir(SyncAPIClient):
-    inference: inference.InferenceResource
     data: data.DataResource
     tune: tune.TuneResource
     contracts: contracts.ContractsResource
@@ -101,7 +100,6 @@ class Twopir(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.inference = inference.InferenceResource(self)
         self.data = data.DataResource(self)
         self.tune = tune.TuneResource(self)
         self.contracts = contracts.ContractsResource(self)
@@ -215,7 +213,6 @@ class Twopir(SyncAPIClient):
 
 
 class AsyncTwopir(AsyncAPIClient):
-    inference: inference.AsyncInferenceResource
     data: data.AsyncDataResource
     tune: tune.AsyncTuneResource
     contracts: contracts.AsyncContractsResource
@@ -277,7 +274,6 @@ class AsyncTwopir(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.inference = inference.AsyncInferenceResource(self)
         self.data = data.AsyncDataResource(self)
         self.tune = tune.AsyncTuneResource(self)
         self.contracts = contracts.AsyncContractsResource(self)
@@ -392,7 +388,6 @@ class AsyncTwopir(AsyncAPIClient):
 
 class TwopirWithRawResponse:
     def __init__(self, client: Twopir) -> None:
-        self.inference = inference.InferenceResourceWithRawResponse(client.inference)
         self.data = data.DataResourceWithRawResponse(client.data)
         self.tune = tune.TuneResourceWithRawResponse(client.tune)
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
@@ -401,7 +396,6 @@ class TwopirWithRawResponse:
 
 class AsyncTwopirWithRawResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.inference = inference.AsyncInferenceResourceWithRawResponse(client.inference)
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
         self.tune = tune.AsyncTuneResourceWithRawResponse(client.tune)
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
@@ -410,7 +404,6 @@ class AsyncTwopirWithRawResponse:
 
 class TwopirWithStreamedResponse:
     def __init__(self, client: Twopir) -> None:
-        self.inference = inference.InferenceResourceWithStreamingResponse(client.inference)
         self.data = data.DataResourceWithStreamingResponse(client.data)
         self.tune = tune.TuneResourceWithStreamingResponse(client.tune)
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
@@ -419,7 +412,6 @@ class TwopirWithStreamedResponse:
 
 class AsyncTwopirWithStreamedResponse:
     def __init__(self, client: AsyncTwopir) -> None:
-        self.inference = inference.AsyncInferenceResourceWithStreamingResponse(client.inference)
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
         self.tune = tune.AsyncTuneResourceWithStreamingResponse(client.tune)
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
