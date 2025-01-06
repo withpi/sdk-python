@@ -17,10 +17,13 @@ class PromptOptimizeParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """The examples to train and validate on"""
 
+    initial_system_instruction: Required[str]
+    """The initial system instruction"""
+
     model_id: Required[Literal["gpt-4o-mini", "mock-llm"]]
     """The model to use for generating responses"""
 
-    tuning_algorithm: Required[Literal["pi"]]
+    tuning_algorithm: Required[Literal["PI", "DSPY"]]
     """The tuning algorithm to use"""
 
 
