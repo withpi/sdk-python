@@ -27,7 +27,6 @@ class TestFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         )
@@ -43,7 +42,6 @@ class TestFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         )
@@ -63,7 +61,6 @@ class TestFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         ) as response:
@@ -89,7 +86,6 @@ class TestAsyncFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         )
@@ -105,7 +101,6 @@ class TestAsyncFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         )
@@ -125,7 +120,6 @@ class TestAsyncFeedback:
                     "llm_input": "string",
                     "llm_output": "llm_output",
                     "rating": "positive",
-                    "source": "internal",
                 }
             ],
         ) as response:

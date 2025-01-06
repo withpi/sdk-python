@@ -73,7 +73,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -114,7 +114,7 @@ class TestInputs:
                     }
                 ],
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -125,7 +125,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
 
         assert response.is_closed is True
@@ -140,7 +140,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -292,7 +292,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -333,7 +333,7 @@ class TestAsyncInputs:
                     }
                 ],
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -344,7 +344,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
 
         assert response.is_closed is True
@@ -359,7 +359,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

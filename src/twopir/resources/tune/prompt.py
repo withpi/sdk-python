@@ -120,8 +120,9 @@ class PromptResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
+        initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
-        tuning_algorithm: Literal["pi"],
+        tuning_algorithm: Literal["PI", "DSPY"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -136,6 +137,8 @@ class PromptResource(SyncAPIResource):
           contract: The contract to optimize
 
           examples: The examples to train and validate on
+
+          initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
 
@@ -155,6 +158,7 @@ class PromptResource(SyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
+                    "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
                 },
@@ -259,8 +263,9 @@ class AsyncPromptResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[prompt_optimize_params.Example],
+        initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
-        tuning_algorithm: Literal["pi"],
+        tuning_algorithm: Literal["PI", "DSPY"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,6 +280,8 @@ class AsyncPromptResource(AsyncAPIResource):
           contract: The contract to optimize
 
           examples: The examples to train and validate on
+
+          initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
 
@@ -294,6 +301,7 @@ class AsyncPromptResource(AsyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
+                    "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
                 },
