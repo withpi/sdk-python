@@ -106,8 +106,9 @@ class TestPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -154,8 +155,9 @@ class TestPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -172,8 +174,9 @@ class TestPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
 
         assert response.is_closed is True
@@ -194,8 +197,9 @@ class TestPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -298,8 +302,9 @@ class TestAsyncPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -346,8 +351,9 @@ class TestAsyncPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
         assert_matches_type(OptimizationStatus, prompt, path=["response"])
 
@@ -364,8 +370,9 @@ class TestAsyncPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         )
 
         assert response.is_closed is True
@@ -386,8 +393,9 @@ class TestAsyncPrompt:
                     "llm_output": "llm_output",
                 }
             ],
+            initial_system_instruction="initial_system_instruction",
             model_id="gpt-4o-mini",
-            tuning_algorithm="pi",
+            tuning_algorithm="PI",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
