@@ -26,7 +26,7 @@ class TestFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         )
@@ -41,7 +41,7 @@ class TestFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         )
@@ -60,7 +60,7 @@ class TestFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         ) as response:
@@ -85,7 +85,7 @@ class TestAsyncFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         )
@@ -100,7 +100,7 @@ class TestAsyncFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         )
@@ -119,7 +119,7 @@ class TestAsyncFeedback:
                     "identifier": "identifier",
                     "llm_input": "string",
                     "llm_output": "llm_output",
-                    "rating": "positive",
+                    "rating": "Strongly Agree",
                 }
             ],
         ) as response:
