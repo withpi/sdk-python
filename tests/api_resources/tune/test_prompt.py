@@ -155,6 +155,7 @@ class TestPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
+                    "rating": "Strongly Agree",
                 }
             ],
             initial_system_instruction="initial_system_instruction",
@@ -353,6 +354,7 @@ class TestAsyncPrompt:
                 {
                     "llm_input": "string",
                     "llm_output": "llm_output",
+                    "rating": "Strongly Agree",
                 }
             ],
             initial_system_instruction="initial_system_instruction",
