@@ -25,7 +25,7 @@ class Feedback(TypedDict, total=False):
     llm_output: Required[str]
     """The output to evaluate"""
 
-    rating: Required[Literal["positive", "negative"]]
+    rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
     """Structured text rating of this feedback."""
 
     sources: Optional[List[str]]
