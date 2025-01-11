@@ -5,13 +5,11 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..shared_params.contract import Contract
-
 __all__ = ["PromptOptimizeParams", "Example"]
 
 
 class PromptOptimizeParams(TypedDict, total=False):
-    contract: Required[Contract]
+    contract: Required["Contract"]
     """The contract to optimize"""
 
     examples: Required[Iterable[Example]]
@@ -36,3 +34,6 @@ class Example(TypedDict, total=False):
 
     rating: Optional[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
     """The rating of the llm_output given the llm_input"""
+
+
+from ..shared_params.contract import Contract
