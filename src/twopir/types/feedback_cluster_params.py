@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["FeedbackClusterParams", "Feedback"]
@@ -25,11 +25,11 @@ class Feedback(TypedDict, total=False):
     llm_output: Required[str]
     """The output to evaluate"""
 
-    rating: Required[Literal["positive", "negative"]]
+    rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
     """Structured text rating of this feedback."""
 
-    source: Required[Literal["internal", "external"]]
+    sources: Optional[List[str]]
     """
-    The source label of the feedback. When computing cluster statistics, per-source
+    The source labels of the feedback. When computing cluster statistics, per-source
     statistics will be maintained.
     """

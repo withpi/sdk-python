@@ -15,7 +15,7 @@ class FeedbackTopicCluster(BaseModel):
     per_source_counts: Dict[str, int]
     """The counts of feedback per source"""
 
-    rating: Literal["positive", "negative"]
+    rating: Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]
     """The rating of the feedback in this cluster"""
 
     topic: str

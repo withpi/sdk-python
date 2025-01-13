@@ -72,6 +72,7 @@ from twopir.types import ContractsScoreMetrics
 
 Methods:
 
+- <code title="post /contracts/calibrate">client.contracts.<a href="./src/twopir/resources/contracts.py">calibrate</a>(\*\*<a href="src/twopir/types/contract_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/twopir/resources/contracts.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/score">client.contracts.<a href="./src/twopir/resources/contracts.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
 

@@ -73,7 +73,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -92,6 +92,7 @@ class TestInputs:
                                 "description": "description",
                                 "label": "label",
                                 "scoring_type": "PI_SCORER",
+                                "action_dimension": None,
                                 "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
@@ -103,6 +104,7 @@ class TestInputs:
                             "description": "description",
                             "label": "label",
                             "scoring_type": "PI_SCORER",
+                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "huggingface_url",
                             "parameters": [0],
@@ -114,7 +116,7 @@ class TestInputs:
                     }
                 ],
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -125,7 +127,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
 
         assert response.is_closed is True
@@ -140,7 +142,7 @@ class TestInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -176,6 +178,7 @@ class TestInputs:
                                 "description": "description",
                                 "label": "label",
                                 "scoring_type": "PI_SCORER",
+                                "action_dimension": None,
                                 "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
@@ -187,6 +190,7 @@ class TestInputs:
                             "description": "description",
                             "label": "label",
                             "scoring_type": "PI_SCORER",
+                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "huggingface_url",
                             "parameters": [0],
@@ -292,7 +296,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -311,6 +315,7 @@ class TestAsyncInputs:
                                 "description": "description",
                                 "label": "label",
                                 "scoring_type": "PI_SCORER",
+                                "action_dimension": None,
                                 "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
@@ -322,6 +327,7 @@ class TestAsyncInputs:
                             "description": "description",
                             "label": "label",
                             "scoring_type": "PI_SCORER",
+                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "huggingface_url",
                             "parameters": [0],
@@ -333,7 +339,7 @@ class TestAsyncInputs:
                     }
                 ],
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -344,7 +350,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         )
 
         assert response.is_closed is True
@@ -359,7 +365,7 @@ class TestAsyncInputs:
                 "description": "description",
                 "name": "name",
             },
-            llm_input="string",
+            llm_inputs=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -395,6 +401,7 @@ class TestAsyncInputs:
                                 "description": "description",
                                 "label": "label",
                                 "scoring_type": "PI_SCORER",
+                                "action_dimension": None,
                                 "action_on_low_score": True,
                                 "huggingface_url": "huggingface_url",
                                 "parameters": [0],
@@ -406,6 +413,7 @@ class TestAsyncInputs:
                             "description": "description",
                             "label": "label",
                             "scoring_type": "PI_SCORER",
+                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "huggingface_url",
                             "parameters": [0],

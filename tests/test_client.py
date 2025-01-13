@@ -718,11 +718,25 @@ class TestTwopir:
                             "dimensions": [
                                 {
                                     "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following",
+                                    "label": "Instruction Following Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Instruction Following",
+                                            "description": "Does the response follow the given instructions?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                                 {
                                     "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality",
+                                    "label": "Topicality Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Topicality",
+                                            "description": "Does the response answer the given question?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                             ],
                         },
@@ -753,11 +767,25 @@ class TestTwopir:
                             "dimensions": [
                                 {
                                     "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following",
+                                    "label": "Instruction Following Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Instruction Following",
+                                            "description": "Does the response follow the given instructions?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                                 {
                                     "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality",
+                                    "label": "Topicality Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Topicality",
+                                            "description": "Does the response answer the given question?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                             ],
                         },
@@ -1557,11 +1585,25 @@ class TestAsyncTwopir:
                             "dimensions": [
                                 {
                                     "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following",
+                                    "label": "Instruction Following Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Instruction Following",
+                                            "description": "Does the response follow the given instructions?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                                 {
                                     "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality",
+                                    "label": "Topicality Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Topicality",
+                                            "description": "Does the response answer the given question?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                             ],
                         },
@@ -1592,11 +1634,25 @@ class TestAsyncTwopir:
                             "dimensions": [
                                 {
                                     "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following",
+                                    "label": "Instruction Following Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Instruction Following",
+                                            "description": "Does the response follow the given instructions?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                                 {
                                     "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality",
+                                    "label": "Topicality Dimension",
+                                    "sub_dimensions": [
+                                        {
+                                            "label": "Topicality",
+                                            "description": "Does the response answer the given question?",
+                                            "scoring_type": "PI_SCORER",
+                                        }
+                                    ],
                                 },
                             ],
                         },

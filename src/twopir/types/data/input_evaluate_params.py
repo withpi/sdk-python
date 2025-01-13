@@ -2,17 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, List, Union
 from typing_extensions import Required, TypedDict
-
-from ..shared_params.contract import Contract
 
 __all__ = ["InputEvaluateParams"]
 
 
 class InputEvaluateParams(TypedDict, total=False):
-    contract: Required[Contract]
+    contract: Required["Contract"]
     """The contract the input is intended to drive"""
 
-    llm_input: Required[Union[str, Dict[str, str]]]
-    """The input to evaluate"""
+    llm_inputs: Required[List[Union[str, Dict[str, str]]]]
+    """The inputs to evaluate"""
+
+
+from ..shared_params.contract import Contract

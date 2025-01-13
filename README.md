@@ -41,11 +41,25 @@ contracts_score_metrics = client.contracts.score(
         "dimensions": [
             {
                 "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following",
+                "label": "Instruction Following Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Instruction Following",
+                        "description": "Does the response follow the given instructions?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
             {
                 "description": "Test whether the LLM responds to the query",
-                "label": "Topicality",
+                "label": "Topicality Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Topicality",
+                        "description": "Does the response answer the given question?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
         ],
     },
@@ -82,11 +96,25 @@ async def main() -> None:
             "dimensions": [
                 {
                     "description": "Test whether the LLM follows instructions",
-                    "label": "Instruction Following",
+                    "label": "Instruction Following Dimension",
+                    "sub_dimensions": [
+                        {
+                            "label": "Instruction Following",
+                            "description": "Does the response follow the given instructions?",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
                 },
                 {
                     "description": "Test whether the LLM responds to the query",
-                    "label": "Topicality",
+                    "label": "Topicality Dimension",
+                    "sub_dimensions": [
+                        {
+                            "label": "Topicality",
+                            "description": "Does the response answer the given question?",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
                 },
             ],
         },
@@ -133,11 +161,25 @@ try:
             "dimensions": [
                 {
                     "description": "Test whether the LLM follows instructions",
-                    "label": "Instruction Following",
+                    "label": "Instruction Following Dimension",
+                    "sub_dimensions": [
+                        {
+                            "label": "Instruction Following",
+                            "description": "Does the response follow the given instructions?",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
                 },
                 {
                     "description": "Test whether the LLM responds to the query",
-                    "label": "Topicality",
+                    "label": "Topicality Dimension",
+                    "sub_dimensions": [
+                        {
+                            "label": "Topicality",
+                            "description": "Does the response answer the given question?",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
                 },
             ],
         },
@@ -155,7 +197,7 @@ except twopir.APIStatusError as e:
     print(e.response)
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Status Code | Error Type                 |
 | ----------- | -------------------------- |
@@ -193,11 +235,25 @@ client.with_options(max_retries=5).contracts.score(
         "dimensions": [
             {
                 "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following",
+                "label": "Instruction Following Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Instruction Following",
+                        "description": "Does the response follow the given instructions?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
             {
                 "description": "Test whether the LLM responds to the query",
-                "label": "Topicality",
+                "label": "Topicality Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Topicality",
+                        "description": "Does the response answer the given question?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
         ],
     },
@@ -233,11 +289,25 @@ client.with_options(timeout=5.0).contracts.score(
         "dimensions": [
             {
                 "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following",
+                "label": "Instruction Following Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Instruction Following",
+                        "description": "Does the response follow the given instructions?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
             {
                 "description": "Test whether the LLM responds to the query",
-                "label": "Topicality",
+                "label": "Topicality Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Topicality",
+                        "description": "Does the response answer the given question?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
         ],
     },
@@ -290,10 +360,20 @@ response = client.contracts.with_raw_response.score(
         "description": "You are a helpful assistant",
         "dimensions": [{
             "description": "Test whether the LLM follows instructions",
-            "label": "Instruction Following",
+            "label": "Instruction Following Dimension",
+            "sub_dimensions": [{
+                "label": "Instruction Following",
+                "description": "Does the response follow the given instructions?",
+                "scoring_type": "PI_SCORER",
+            }],
         }, {
             "description": "Test whether the LLM responds to the query",
-            "label": "Topicality",
+            "label": "Topicality Dimension",
+            "sub_dimensions": [{
+                "label": "Topicality",
+                "description": "Does the response answer the given question?",
+                "scoring_type": "PI_SCORER",
+            }],
         }],
     },
     llm_input="Help me with my problem",
@@ -323,11 +403,25 @@ with client.contracts.with_streaming_response.score(
         "dimensions": [
             {
                 "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following",
+                "label": "Instruction Following Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Instruction Following",
+                        "description": "Does the response follow the given instructions?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
             {
                 "description": "Test whether the LLM responds to the query",
-                "label": "Topicality",
+                "label": "Topicality Dimension",
+                "sub_dimensions": [
+                    {
+                        "label": "Topicality",
+                        "description": "Does the response answer the given question?",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
             },
         ],
     },
@@ -351,8 +445,7 @@ If you need to access undocumented endpoints, params, or response properties, th
 #### Undocumented endpoints
 
 To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
-http verbs. Options on the client will be respected (such as retries) will be respected when making this
-request.
+http verbs. Options on the client will be respected (such as retries) when making this request.
 
 ```py
 import httpx
@@ -424,7 +517,7 @@ with Twopir() as client:
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals)_.
+2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
 3. Changes that we do not expect to impact the vast majority of users in practice.
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.

@@ -18,5 +18,5 @@ class DataGenerationStatus(BaseModel):
     job_id: str
     """The job id"""
 
-    state: Literal["queued", "running", "done", "error"]
+    state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""

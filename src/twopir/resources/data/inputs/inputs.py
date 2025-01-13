@@ -98,7 +98,7 @@ class InputsResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        llm_input: Union[str, Dict[str, str]],
+        llm_inputs: List[Union[str, Dict[str, str]]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -107,12 +107,12 @@ class InputsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InputEvaluationMetrics:
         """
-        Evaluates an input against a contract
+        Evaluates inputs against a contract description
 
         Args:
           contract: The contract the input is intended to drive
 
-          llm_input: The input to evaluate
+          llm_inputs: The inputs to evaluate
 
           extra_headers: Send extra headers
 
@@ -127,7 +127,7 @@ class InputsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
-                    "llm_input": llm_input,
+                    "llm_inputs": llm_inputs,
                 },
                 input_evaluate_params.InputEvaluateParams,
             ),
@@ -264,7 +264,7 @@ class AsyncInputsResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        llm_input: Union[str, Dict[str, str]],
+        llm_inputs: List[Union[str, Dict[str, str]]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -273,12 +273,12 @@ class AsyncInputsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> InputEvaluationMetrics:
         """
-        Evaluates an input against a contract
+        Evaluates inputs against a contract description
 
         Args:
           contract: The contract the input is intended to drive
 
-          llm_input: The input to evaluate
+          llm_inputs: The inputs to evaluate
 
           extra_headers: Send extra headers
 
@@ -293,7 +293,7 @@ class AsyncInputsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
-                    "llm_input": llm_input,
+                    "llm_inputs": llm_inputs,
                 },
                 input_evaluate_params.InputEvaluateParams,
             ),

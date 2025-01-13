@@ -10,5 +10,6 @@ from .feedback_topic_cluster import FeedbackTopicCluster as FeedbackTopicCluster
 from .contracts_score_metrics import ContractsScoreMetrics as ContractsScoreMetrics
 from .feedback_cluster_params import FeedbackClusterParams as FeedbackClusterParams
 from .input_evaluation_metrics import InputEvaluationMetrics as InputEvaluationMetrics
+from .contract_calibrate_params import ContractCalibrateParams as ContractCalibrateParams
 from .feedback_cluster_response import FeedbackClusterResponse as FeedbackClusterResponse
 from .contract_generate_dimensions_params import ContractGenerateDimensionsParams as ContractGenerateDimensionsParams
