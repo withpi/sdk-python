@@ -22,10 +22,10 @@ class TestFeedback:
         feedback = client.feedback.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],
@@ -37,10 +37,10 @@ class TestFeedback:
         response = client.feedback.with_raw_response.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],
@@ -56,10 +56,10 @@ class TestFeedback:
         with client.feedback.with_streaming_response.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],
@@ -81,10 +81,10 @@ class TestAsyncFeedback:
         feedback = await async_client.feedback.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],
@@ -96,10 +96,10 @@ class TestAsyncFeedback:
         response = await async_client.feedback.with_raw_response.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],
@@ -115,10 +115,10 @@ class TestAsyncFeedback:
         async with async_client.feedback.with_streaming_response.cluster(
             feedbacks=[
                 {
-                    "comment": "comment",
-                    "identifier": "identifier",
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "comment": "This is a great response",
+                    "identifier": "1234abcd",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                     "rating": "Strongly Agree",
                 }
             ],

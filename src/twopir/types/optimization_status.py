@@ -17,7 +17,7 @@ class OptimizationStatus(BaseModel):
 
     optimized_prompt_messages: List[Dict[str, str]]
     """
-    The optimized prompt messages in the openai message format with the jinja
+    The optimized prompt messages in the OpenAI message format with the jinja
     {{ input }} variable for the next user prompt
     """
 
