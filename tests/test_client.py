@@ -827,11 +827,11 @@ class TestTwopir:
 
         response = client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
         )
 
         assert response.retries_taken == failures_before_success
@@ -858,11 +858,11 @@ class TestTwopir:
 
         response = client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -889,11 +889,11 @@ class TestTwopir:
 
         response = client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1695,11 +1695,11 @@ class TestAsyncTwopir:
 
         response = await client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
         )
 
         assert response.retries_taken == failures_before_success
@@ -1727,11 +1727,11 @@ class TestAsyncTwopir:
 
         response = await client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1759,11 +1759,11 @@ class TestAsyncTwopir:
 
         response = await client.contracts.with_raw_response.score(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
-            llm_input="string",
-            llm_output="llm_output",
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
