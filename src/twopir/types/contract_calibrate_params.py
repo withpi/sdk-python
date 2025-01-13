@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable, Optional
+from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ContractCalibrateParams", "Example"]
@@ -23,7 +23,7 @@ class Example(TypedDict, total=False):
     llm_output: Required[str]
     """The output to evaluate"""
 
-    rating: Optional[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
+    rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
     """The rating of the llm_output given the llm_input"""
 
 
