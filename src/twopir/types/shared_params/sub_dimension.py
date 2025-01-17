@@ -18,7 +18,7 @@ class SubDimension(TypedDict, total=False):
     scoring_type: Required[Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE"]]
     """The type of scoring performed for this dimension"""
 
-    action_dimension: Optional[SubDimension]
+    action_dimension: Optional["SubDimension"]
     """If `action_dimension` is set, this node is a part of short-circuit subtree.
 
     If the score of the action_dimension is > 0.5, then evaluate the node and return
