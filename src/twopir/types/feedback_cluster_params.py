@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["FeedbackClusterParams", "Feedback"]
@@ -19,8 +19,8 @@ class Feedback(TypedDict, total=False):
     identifier: Required[str]
     """The identifier of the feedback used to align responses"""
 
-    llm_input: Required[Union[str, Dict[str, str]]]
-    """The input to evaluate"""
+    llm_input: Required[str]
+    """The input to LLM"""
 
     llm_output: Required[str]
     """The output to evaluate"""
