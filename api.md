@@ -67,14 +67,21 @@ Methods:
 Types:
 
 ```python
-from twopir.types import ContractsScoreMetrics
+from twopir.types import (
+    ContractsScoreMetrics,
+    ContractsScoreMetrics,
+    SDKContract,
+    ContractWriteToHfResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /contracts/calibrate">client.contracts.<a href="./src/twopir/resources/contracts.py">calibrate</a>(\*\*<a href="src/twopir/types/contract_calibrate_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/twopir/resources/contracts.py">generate_dimensions</a>(\*\*<a href="src/twopir/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
+- <code title="post /contracts/read_from_hf">client.contracts.<a href="./src/twopir/resources/contracts.py">read_from_hf</a>(\*\*<a href="src/twopir/types/contract_read_from_hf_params.py">params</a>) -> <a href="./src/twopir/types/shared/contract.py">Contract</a></code>
 - <code title="post /contracts/score">client.contracts.<a href="./src/twopir/resources/contracts.py">score</a>(\*\*<a href="src/twopir/types/contract_score_params.py">params</a>) -> <a href="./src/twopir/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
+- <code title="post /contracts/write_to_hf">client.contracts.<a href="./src/twopir/resources/contracts.py">write_to_hf</a>(\*\*<a href="src/twopir/types/contract_write_to_hf_params.py">params</a>) -> <a href="./src/twopir/types/contract_write_to_hf_response.py">object</a></code>
 
 # Feedback
 
