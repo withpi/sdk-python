@@ -97,16 +97,16 @@ class TestPrompt:
     def test_method_optimize(self, client: Twopir) -> None:
         prompt = client.tune.prompt.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -116,49 +116,48 @@ class TestPrompt:
     def test_method_optimize_with_all_params(self, client: Twopir) -> None:
         prompt = client.tune.prompt.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
                 "dimensions": [
                     {
-                        "description": "description",
-                        "label": "label",
+                        "description": "Relevance of the response",
+                        "label": "Relevance",
                         "sub_dimensions": [
                             {
-                                "description": "description",
-                                "label": "label",
+                                "description": "Is the response relevant to the prompt?",
+                                "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
                                 "action_dimension": None,
                                 "action_on_low_score": True,
-                                "huggingface_url": "huggingface_url",
-                                "parameters": [0],
-                                "python_code": "python_code",
-                                "weight": 0,
+                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                "weight": 1,
                             }
                         ],
                         "action_dimension": {
-                            "description": "description",
-                            "label": "label",
+                            "description": "Is the response relevant to the prompt?",
+                            "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
                             "action_dimension": None,
                             "action_on_low_score": True,
-                            "huggingface_url": "huggingface_url",
-                            "parameters": [0],
-                            "python_code": "python_code",
-                            "weight": 0,
+                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                            "weight": 1,
                         },
                         "action_on_low_score": True,
-                        "weight": 0,
+                        "weight": 1,
                     }
                 ],
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "rating": "Strongly Agree",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -168,16 +167,16 @@ class TestPrompt:
     def test_raw_response_optimize(self, client: Twopir) -> None:
         response = client.tune.prompt.with_raw_response.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -191,16 +190,16 @@ class TestPrompt:
     def test_streaming_response_optimize(self, client: Twopir) -> None:
         with client.tune.prompt.with_streaming_response.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         ) as response:
@@ -296,16 +295,16 @@ class TestAsyncPrompt:
     async def test_method_optimize(self, async_client: AsyncTwopir) -> None:
         prompt = await async_client.tune.prompt.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -315,49 +314,48 @@ class TestAsyncPrompt:
     async def test_method_optimize_with_all_params(self, async_client: AsyncTwopir) -> None:
         prompt = await async_client.tune.prompt.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
                 "dimensions": [
                     {
-                        "description": "description",
-                        "label": "label",
+                        "description": "Relevance of the response",
+                        "label": "Relevance",
                         "sub_dimensions": [
                             {
-                                "description": "description",
-                                "label": "label",
+                                "description": "Is the response relevant to the prompt?",
+                                "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
                                 "action_dimension": None,
                                 "action_on_low_score": True,
-                                "huggingface_url": "huggingface_url",
-                                "parameters": [0],
-                                "python_code": "python_code",
-                                "weight": 0,
+                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                "weight": 1,
                             }
                         ],
                         "action_dimension": {
-                            "description": "description",
-                            "label": "label",
+                            "description": "Is the response relevant to the prompt?",
+                            "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
                             "action_dimension": None,
                             "action_on_low_score": True,
-                            "huggingface_url": "huggingface_url",
-                            "parameters": [0],
-                            "python_code": "python_code",
-                            "weight": 0,
+                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                            "weight": 1,
                         },
                         "action_on_low_score": True,
-                        "weight": 0,
+                        "weight": 1,
                     }
                 ],
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
-                    "rating": "Strongly Agree",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -367,16 +365,16 @@ class TestAsyncPrompt:
     async def test_raw_response_optimize(self, async_client: AsyncTwopir) -> None:
         response = await async_client.tune.prompt.with_raw_response.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
@@ -390,16 +388,16 @@ class TestAsyncPrompt:
     async def test_streaming_response_optimize(self, async_client: AsyncTwopir) -> None:
         async with async_client.tune.prompt.with_streaming_response.optimize(
             contract={
-                "description": "description",
-                "name": "name",
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
             },
             examples=[
                 {
-                    "llm_input": "string",
-                    "llm_output": "llm_output",
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            initial_system_instruction="initial_system_instruction",
+            initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         ) as response:
