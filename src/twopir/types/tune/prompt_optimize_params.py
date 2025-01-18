@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["PromptOptimizeParams", "Example"]
@@ -26,8 +26,8 @@ class PromptOptimizeParams(TypedDict, total=False):
 
 
 class Example(TypedDict, total=False):
-    llm_input: Required[Union[str, Dict[str, str]]]
-    """The input to evaluate"""
+    llm_input: Required[str]
+    """The input to LLM"""
 
     llm_output: Required[str]
     """The output to evaluate"""
