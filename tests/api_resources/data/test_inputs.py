@@ -73,7 +73,10 @@ class TestInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -116,7 +119,10 @@ class TestInputs:
                     }
                 ],
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -127,7 +133,10 @@ class TestInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
 
         assert response.is_closed is True
@@ -142,7 +151,10 @@ class TestInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -296,7 +308,10 @@ class TestAsyncInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -339,7 +354,10 @@ class TestAsyncInputs:
                     }
                 ],
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
@@ -350,7 +368,10 @@ class TestAsyncInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
 
         assert response.is_closed is True
@@ -365,7 +386,10 @@ class TestAsyncInputs:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_inputs=["string"],
+            llm_inputs=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
