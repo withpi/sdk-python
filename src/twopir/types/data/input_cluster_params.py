@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
 __all__ = ["InputClusterParams", "Input"]
@@ -16,5 +16,5 @@ class Input(TypedDict, total=False):
     identifier: Required[str]
     """The identifier of the input"""
 
-    llm_input: Required[Union[str, Dict[str, str]]]
-    """The input to evaluate"""
+    llm_input: Required[str]
+    """The input to LLM"""

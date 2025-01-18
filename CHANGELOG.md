@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.16 (2025-01-18)
+
+Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
+
+### Features
+
+* **api:** api update ([#98](https://github.com/2pir-ai/sdk-python/issues/98)) ([b3e7b2e](https://github.com/2pir-ai/sdk-python/commit/b3e7b2e62e705b1d32a41205f804c91433156b5e))
+
 ## 0.1.0-alpha.15 (2025-01-18)
 
 Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
