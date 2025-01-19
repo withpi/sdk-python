@@ -41,8 +41,7 @@ class SubDimension(TypedDict, total=False):
     parameters: Optional[Iterable[float]]
     """The learned parameters for the scoring method.
 
-    For PI_SCORER type, this corresponds to the values assigned to each Likert point
-    from 1-5, normalized to a 0-1 range.
+    This represents piecewise linear interpolation between [0, 1].
     """
 
     python_code: Optional[str]
