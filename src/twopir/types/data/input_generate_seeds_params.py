@@ -5,11 +5,13 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
+from ..shared_params.contract import Contract
+
 __all__ = ["InputGenerateSeedsParams"]
 
 
 class InputGenerateSeedsParams(TypedDict, total=False):
-    contract: Required["Contract"]
+    contract: Required[Contract]
     """The contract to generate input seeds for."""
 
     num_inputs: Required[int]
@@ -37,6 +39,3 @@ class InputGenerateSeedsParams(TypedDict, total=False):
 
     Otherwise the context_types will be inferred.
     """
-
-
-from ..shared_params.contract import Contract

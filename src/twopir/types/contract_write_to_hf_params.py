@@ -5,11 +5,13 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
+from .shared_params.contract import Contract
+
 __all__ = ["ContractWriteToHfParams"]
 
 
 class ContractWriteToHfParams(TypedDict, total=False):
-    contract: Required["Contract"]
+    contract: Required[Contract]
     """The contract to write to Huggingface"""
 
     hf_contract_name: Required[str]
@@ -21,6 +23,3 @@ class ContractWriteToHfParams(TypedDict, total=False):
 
     hf_token: Optional[str]
     """Huggingface token to use if you want to write to your own HF organization"""
-
-
-from .shared_params.contract import Contract
