@@ -5,11 +5,13 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
+from .shared_params.contract import Contract
+
 __all__ = ["ContractCalibrateParams", "Example"]
 
 
 class ContractCalibrateParams(TypedDict, total=False):
-    contract: Required["Contract"]
+    contract: Required[Contract]
     """The contract to calibrate"""
 
     examples: Required[Iterable[Example]]
@@ -25,6 +27,3 @@ class Example(TypedDict, total=False):
 
     rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
     """The rating of the llm_output given the llm_input"""
-
-
-from .shared_params.contract import Contract

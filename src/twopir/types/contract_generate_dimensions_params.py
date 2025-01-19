@@ -4,11 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
+from .shared_params.contract import Contract
+
 __all__ = ["ContractGenerateDimensionsParams"]
 
 
 class ContractGenerateDimensionsParams(TypedDict, total=False):
-    contract: Required["Contract"]
-
-
-from .shared_params.contract import Contract
+    contract: Required[Contract]

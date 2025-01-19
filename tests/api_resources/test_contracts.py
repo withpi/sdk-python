@@ -52,7 +52,14 @@ class TestContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -64,12 +71,9 @@ class TestContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -155,7 +159,14 @@ class TestContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -167,12 +178,9 @@ class TestContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -215,14 +223,14 @@ class TestContracts:
     @parametrize
     def test_method_read_from_hf(self, client: Twopir) -> None:
         contract = client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_method_read_from_hf_with_all_params(self, client: Twopir) -> None:
         contract = client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -230,7 +238,7 @@ class TestContracts:
     @parametrize
     def test_raw_response_read_from_hf(self, client: Twopir) -> None:
         response = client.contracts.with_raw_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -241,7 +249,7 @@ class TestContracts:
     @parametrize
     def test_streaming_response_read_from_hf(self, client: Twopir) -> None:
         with client.contracts.with_streaming_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -278,7 +286,14 @@ class TestContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -290,12 +305,9 @@ class TestContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -348,7 +360,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(object, contract, path=["response"])
 
@@ -367,7 +379,14 @@ class TestContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -379,19 +398,16 @@ class TestContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
                     }
                 ],
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(object, contract, path=["response"])
@@ -403,7 +419,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -418,7 +434,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -464,7 +480,14 @@ class TestAsyncContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -476,12 +499,9 @@ class TestAsyncContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -567,7 +587,14 @@ class TestAsyncContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -579,12 +606,9 @@ class TestAsyncContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -627,14 +651,14 @@ class TestAsyncContracts:
     @parametrize
     async def test_method_read_from_hf(self, async_client: AsyncTwopir) -> None:
         contract = await async_client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_method_read_from_hf_with_all_params(self, async_client: AsyncTwopir) -> None:
         contract = await async_client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -642,7 +666,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_raw_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
         response = await async_client.contracts.with_raw_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -653,7 +677,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_streaming_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
         async with async_client.contracts.with_streaming_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -690,7 +714,14 @@ class TestAsyncContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -702,12 +733,9 @@ class TestAsyncContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
@@ -760,7 +788,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(object, contract, path=["response"])
 
@@ -779,7 +807,14 @@ class TestAsyncContracts:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": None,
+                                "action_dimension": {
+                                    "description": "Is the response relevant to the prompt?",
+                                    "label": "Relevance to Prompt",
+                                    "scoring_type": "PI_SCORER",
+                                    "action_on_low_score": True,
+                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
+                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                },
                                 "action_on_low_score": True,
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                                 "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
@@ -791,19 +826,16 @@ class TestAsyncContracts:
                             "description": "Is the response relevant to the prompt?",
                             "label": "Relevance to Prompt",
                             "scoring_type": "PI_SCORER",
-                            "action_dimension": None,
                             "action_on_low_score": True,
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                            "weight": 1,
                         },
                         "action_on_low_score": True,
                         "weight": 1,
                     }
                 ],
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(object, contract, path=["response"])
@@ -815,7 +847,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -830,7 +862,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
