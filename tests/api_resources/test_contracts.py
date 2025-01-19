@@ -215,14 +215,14 @@ class TestContracts:
     @parametrize
     def test_method_read_from_hf(self, client: Twopir) -> None:
         contract = client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_method_read_from_hf_with_all_params(self, client: Twopir) -> None:
         contract = client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -230,7 +230,7 @@ class TestContracts:
     @parametrize
     def test_raw_response_read_from_hf(self, client: Twopir) -> None:
         response = client.contracts.with_raw_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -241,7 +241,7 @@ class TestContracts:
     @parametrize
     def test_streaming_response_read_from_hf(self, client: Twopir) -> None:
         with client.contracts.with_streaming_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -348,7 +348,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(object, contract, path=["response"])
 
@@ -391,7 +391,7 @@ class TestContracts:
                     }
                 ],
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(object, contract, path=["response"])
@@ -403,7 +403,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -418,7 +418,7 @@ class TestContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -627,14 +627,14 @@ class TestAsyncContracts:
     @parametrize
     async def test_method_read_from_hf(self, async_client: AsyncTwopir) -> None:
         contract = await async_client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_method_read_from_hf_with_all_params(self, async_client: AsyncTwopir) -> None:
         contract = await async_client.contracts.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(Contract, contract, path=["response"])
@@ -642,7 +642,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_raw_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
         response = await async_client.contracts.with_raw_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -653,7 +653,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_streaming_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
         async with async_client.contracts.with_streaming_response.read_from_hf(
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -760,7 +760,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(object, contract, path=["response"])
 
@@ -803,7 +803,7 @@ class TestAsyncContracts:
                     }
                 ],
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
         assert_matches_type(object, contract, path=["response"])
@@ -815,7 +815,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         )
 
         assert response.is_closed is True
@@ -830,7 +830,7 @@ class TestAsyncContracts:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            hf_contract_name="hf_contract_name",
+            hf_contract_name="2pir/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
