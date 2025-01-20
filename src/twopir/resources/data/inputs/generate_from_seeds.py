@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import List
+
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -80,7 +82,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
     def generate(
         self,
         *,
-        seeds: generate_from_seed_generate_params.Seeds,
+        num_inputs: int,
+        seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,9 +105,15 @@ class GenerateFromSeedsResource(SyncAPIResource):
         """
         return self._post(
             "/data/input/generate_from_seeds",
-            body=maybe_transform(seeds, generate_from_seed_generate_params.GenerateFromSeedGenerateParams),
+            body=maybe_transform(seeds, List[str]),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                ),
             ),
             cast_to=DataGenerationStatus,
         )
@@ -200,7 +209,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
     async def generate(
         self,
         *,
-        seeds: generate_from_seed_generate_params.Seeds,
+        num_inputs: int,
+        seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -222,9 +232,15 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         """
         return await self._post(
             "/data/input/generate_from_seeds",
-            body=await async_maybe_transform(seeds, generate_from_seed_generate_params.GenerateFromSeedGenerateParams),
+            body=await async_maybe_transform(seeds, List[str]),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                ),
             ),
             cast_to=DataGenerationStatus,
         )

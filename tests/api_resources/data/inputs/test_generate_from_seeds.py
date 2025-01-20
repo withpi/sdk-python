@@ -58,26 +58,16 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_method_generate(self, client: Twopir) -> None:
         generate_from_seed = client.data.inputs.generate_from_seeds.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
     @parametrize
     def test_raw_response_generate(self, client: Twopir) -> None:
         response = client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         )
 
         assert response.is_closed is True
@@ -88,13 +78,8 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_streaming_response_generate(self, client: Twopir) -> None:
         with client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -187,26 +172,16 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_method_generate(self, async_client: AsyncTwopir) -> None:
         generate_from_seed = await async_client.data.inputs.generate_from_seeds.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         )
 
         assert response.is_closed is True
@@ -217,13 +192,8 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            seeds={
-                "num_inputs": 50,
-                "seeds": [
-                    "Write a short children's story about a brave little mouse who goes on an adventure to find the tallest cheese tower in the forest.",
-                    "Tell a whimsical tale about a group of farm animals who band together to save their home from being sold. ",
-                ],
-            },
+            num_inputs=0,
+            seeds=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
