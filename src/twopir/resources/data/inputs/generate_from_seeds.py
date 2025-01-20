@@ -82,6 +82,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
     def generate(
         self,
         *,
+        contract_description: str,
         num_inputs: int,
         seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -112,7 +113,11 @@ class GenerateFromSeedsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                    {
+                        "contract_description": contract_description,
+                        "num_inputs": num_inputs,
+                    },
+                    generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
                 ),
             ),
             cast_to=DataGenerationStatus,
@@ -209,6 +214,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
     async def generate(
         self,
         *,
+        contract_description: str,
         num_inputs: int,
         seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -239,7 +245,11 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"num_inputs": num_inputs}, generate_from_seed_generate_params.GenerateFromSeedGenerateParams
+                    {
+                        "contract_description": contract_description,
+                        "num_inputs": num_inputs,
+                    },
+                    generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
                 ),
             ),
             cast_to=DataGenerationStatus,
