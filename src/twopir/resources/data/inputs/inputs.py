@@ -31,7 +31,6 @@ from .generate_from_seeds import (
     AsyncGenerateFromSeedsResourceWithStreamingResponse,
 )
 from ....types.data_generation_status import DataGenerationStatus
-from ....types.shared_params.contract import Contract
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
 from ....types.data.input_cluster_response import InputClusterResponse
 
@@ -140,7 +139,7 @@ class InputsResource(SyncAPIResource):
     def generate_seeds(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         num_inputs: int,
         context_types: Optional[
             List[
@@ -172,9 +171,10 @@ class InputsResource(SyncAPIResource):
         Generates seed messages for input data.
 
         Args:
-          contract: The contract to generate input seeds for.
+          contract_description: The application contract's description
 
-          num_inputs: Number of input seeds to generate.
+          num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
+              please use the generate_from_seeds API.
 
           context_types: The types of context to generate for the input prompts if specified. Otherwise
               the context_types will be inferred.
@@ -191,7 +191,7 @@ class InputsResource(SyncAPIResource):
             "/data/input/generate_seeds",
             body=maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "num_inputs": num_inputs,
                     "context_types": context_types,
                 },
@@ -306,7 +306,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def generate_seeds(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         num_inputs: int,
         context_types: Optional[
             List[
@@ -338,9 +338,10 @@ class AsyncInputsResource(AsyncAPIResource):
         Generates seed messages for input data.
 
         Args:
-          contract: The contract to generate input seeds for.
+          contract_description: The application contract's description
 
-          num_inputs: Number of input seeds to generate.
+          num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
+              please use the generate_from_seeds API.
 
           context_types: The types of context to generate for the input prompts if specified. Otherwise
               the context_types will be inferred.
@@ -357,7 +358,7 @@ class AsyncInputsResource(AsyncAPIResource):
             "/data/input/generate_seeds",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "num_inputs": num_inputs,
                     "context_types": context_types,
                 },
