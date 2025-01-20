@@ -54,12 +54,6 @@ class Dimension(TypedDict, total=False):
     the -1 scores and thus we achieve the short-circuit behavior.
     """
 
-    action_on_low_score: Optional[bool]
-    """
-    If `action_on_low_score = True`, the node emits the real value if action
-    dimension score is <= 0.5 and it returns -1 otherwise.
-    """
-
     weight: Optional[float]
     """
     The weight of the dimension The sum of dimension weights will be normalized to
