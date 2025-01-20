@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
-from typing_extensions import Literal
+from typing import List, Iterable
 
 import httpx
 
@@ -141,25 +140,6 @@ class InputsResource(SyncAPIResource):
         *,
         contract_description: str,
         num_inputs: int,
-        context_types: Optional[
-            List[
-                Literal[
-                    "none",
-                    "article",
-                    "conversation",
-                    "debate",
-                    "webpage",
-                    "passage",
-                    "chat history",
-                    "email thread",
-                    "text messages",
-                    "financial document",
-                    "scientific paper",
-                    "slide presentation description",
-                ]
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,9 +156,6 @@ class InputsResource(SyncAPIResource):
           num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
               please use the generate_from_seeds API.
 
-          context_types: The types of context to generate for the input prompts if specified. Otherwise
-              the context_types will be inferred.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -193,7 +170,6 @@ class InputsResource(SyncAPIResource):
                 {
                     "contract_description": contract_description,
                     "num_inputs": num_inputs,
-                    "context_types": context_types,
                 },
                 input_generate_seeds_params.InputGenerateSeedsParams,
             ),
@@ -308,25 +284,6 @@ class AsyncInputsResource(AsyncAPIResource):
         *,
         contract_description: str,
         num_inputs: int,
-        context_types: Optional[
-            List[
-                Literal[
-                    "none",
-                    "article",
-                    "conversation",
-                    "debate",
-                    "webpage",
-                    "passage",
-                    "chat history",
-                    "email thread",
-                    "text messages",
-                    "financial document",
-                    "scientific paper",
-                    "slide presentation description",
-                ]
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,9 +300,6 @@ class AsyncInputsResource(AsyncAPIResource):
           num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
               please use the generate_from_seeds API.
 
-          context_types: The types of context to generate for the input prompts if specified. Otherwise
-              the context_types will be inferred.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -360,7 +314,6 @@ class AsyncInputsResource(AsyncAPIResource):
                 {
                     "contract_description": contract_description,
                     "num_inputs": num_inputs,
-                    "context_types": context_types,
                 },
                 input_generate_seeds_params.InputGenerateSeedsParams,
             ),

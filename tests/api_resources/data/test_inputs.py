@@ -118,15 +118,6 @@ class TestInputs:
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
     @parametrize
-    def test_method_generate_seeds_with_all_params(self, client: Twopir) -> None:
-        input = client.data.inputs.generate_seeds(
-            contract_description="Write a haiku based on a topic description",
-            num_inputs=10,
-            context_types=["none"],
-        )
-        assert_matches_type(DataGenerationStatus, input, path=["response"])
-
-    @parametrize
     def test_raw_response_generate_seeds(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.generate_seeds(
             contract_description="Write a haiku based on a topic description",
@@ -250,15 +241,6 @@ class TestAsyncInputs:
         input = await async_client.data.inputs.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
-        )
-        assert_matches_type(DataGenerationStatus, input, path=["response"])
-
-    @parametrize
-    async def test_method_generate_seeds_with_all_params(self, async_client: AsyncTwopir) -> None:
-        input = await async_client.data.inputs.generate_seeds(
-            contract_description="Write a haiku based on a topic description",
-            num_inputs=10,
-            context_types=["none"],
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
