@@ -9,6 +9,8 @@ __all__ = ["GenerateFromSeedGenerateParams"]
 
 
 class GenerateFromSeedGenerateParams(TypedDict, total=False):
+    contract_description: Required[str]
+
     num_inputs: Required[int]
 
     seeds: Required[List[str]]
