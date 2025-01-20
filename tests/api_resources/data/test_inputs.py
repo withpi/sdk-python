@@ -69,60 +69,7 @@ class TestInputs:
     @parametrize
     def test_method_evaluate(self, client: Twopir) -> None:
         input = client.data.inputs.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            llm_inputs=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
-
-    @parametrize
-    def test_method_evaluate_with_all_params(self, client: Twopir) -> None:
-        input = client.data.inputs.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "action_on_low_score": True,
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "action_on_low_score": True,
-                        "weight": 1,
-                    }
-                ],
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -133,10 +80,7 @@ class TestInputs:
     @parametrize
     def test_raw_response_evaluate(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -151,10 +95,7 @@ class TestInputs:
     @parametrize
     def test_streaming_response_evaluate(self, client: Twopir) -> None:
         with client.data.inputs.with_streaming_response.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -171,69 +112,15 @@ class TestInputs:
     @parametrize
     def test_method_generate_seeds(self, client: Twopir) -> None:
         input = client.data.inputs.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
-        )
-        assert_matches_type(DataGenerationStatus, input, path=["response"])
-
-    @parametrize
-    def test_method_generate_seeds_with_all_params(self, client: Twopir) -> None:
-        input = client.data.inputs.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "action_on_low_score": True,
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "action_on_low_score": True,
-                        "weight": 1,
-                    }
-                ],
-            },
-            num_inputs=10,
-            context_types=["none"],
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
     @parametrize
     def test_raw_response_generate_seeds(self, client: Twopir) -> None:
         response = client.data.inputs.with_raw_response.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         )
 
@@ -245,10 +132,7 @@ class TestInputs:
     @parametrize
     def test_streaming_response_generate_seeds(self, client: Twopir) -> None:
         with client.data.inputs.with_streaming_response.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         ) as response:
             assert not response.is_closed
@@ -312,60 +196,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_evaluate(self, async_client: AsyncTwopir) -> None:
         input = await async_client.data.inputs.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            llm_inputs=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-        assert_matches_type(InputEvaluationMetrics, input, path=["response"])
-
-    @parametrize
-    async def test_method_evaluate_with_all_params(self, async_client: AsyncTwopir) -> None:
-        input = await async_client.data.inputs.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "action_on_low_score": True,
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "action_on_low_score": True,
-                        "weight": 1,
-                    }
-                ],
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -376,10 +207,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_raw_response_evaluate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -394,10 +222,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_evaluate(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.with_streaming_response.evaluate(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             llm_inputs=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -414,69 +239,15 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_generate_seeds(self, async_client: AsyncTwopir) -> None:
         input = await async_client.data.inputs.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
-        )
-        assert_matches_type(DataGenerationStatus, input, path=["response"])
-
-    @parametrize
-    async def test_method_generate_seeds_with_all_params(self, async_client: AsyncTwopir) -> None:
-        input = await async_client.data.inputs.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "action_on_low_score": True,
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "action_on_low_score": True,
-                        "weight": 1,
-                    }
-                ],
-            },
-            num_inputs=10,
-            context_types=["none"],
         )
         assert_matches_type(DataGenerationStatus, input, path=["response"])
 
     @parametrize
     async def test_raw_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.with_raw_response.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         )
 
@@ -488,10 +259,7 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.with_streaming_response.generate_seeds(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         ) as response:
             assert not response.is_closed

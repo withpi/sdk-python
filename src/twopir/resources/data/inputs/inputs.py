@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
-from typing_extensions import Literal
+from typing import List, Iterable
 
 import httpx
 
@@ -31,7 +30,6 @@ from .generate_from_seeds import (
     AsyncGenerateFromSeedsResourceWithStreamingResponse,
 )
 from ....types.data_generation_status import DataGenerationStatus
-from ....types.shared_params.contract import Contract
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
 from ....types.data.input_cluster_response import InputClusterResponse
 
@@ -97,7 +95,7 @@ class InputsResource(SyncAPIResource):
     def evaluate(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         llm_inputs: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -110,7 +108,7 @@ class InputsResource(SyncAPIResource):
         Evaluates inputs against a contract description
 
         Args:
-          contract: The contract the input is intended to drive
+          contract_description: The application contract's description
 
           llm_inputs: The inputs to evaluate
 
@@ -126,7 +124,7 @@ class InputsResource(SyncAPIResource):
             "/data/input/evaluate",
             body=maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "llm_inputs": llm_inputs,
                 },
                 input_evaluate_params.InputEvaluateParams,
@@ -140,27 +138,8 @@ class InputsResource(SyncAPIResource):
     def generate_seeds(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         num_inputs: int,
-        context_types: Optional[
-            List[
-                Literal[
-                    "none",
-                    "article",
-                    "conversation",
-                    "debate",
-                    "webpage",
-                    "passage",
-                    "chat history",
-                    "email thread",
-                    "text messages",
-                    "financial document",
-                    "scientific paper",
-                    "slide presentation description",
-                ]
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -172,12 +151,10 @@ class InputsResource(SyncAPIResource):
         Generates seed messages for input data.
 
         Args:
-          contract: The contract to generate input seeds for.
+          contract_description: The application contract's description
 
-          num_inputs: Number of input seeds to generate.
-
-          context_types: The types of context to generate for the input prompts if specified. Otherwise
-              the context_types will be inferred.
+          num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
+              please use the generate_from_seeds API.
 
           extra_headers: Send extra headers
 
@@ -191,9 +168,8 @@ class InputsResource(SyncAPIResource):
             "/data/input/generate_seeds",
             body=maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "num_inputs": num_inputs,
-                    "context_types": context_types,
                 },
                 input_generate_seeds_params.InputGenerateSeedsParams,
             ),
@@ -263,7 +239,7 @@ class AsyncInputsResource(AsyncAPIResource):
     async def evaluate(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         llm_inputs: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,7 +252,7 @@ class AsyncInputsResource(AsyncAPIResource):
         Evaluates inputs against a contract description
 
         Args:
-          contract: The contract the input is intended to drive
+          contract_description: The application contract's description
 
           llm_inputs: The inputs to evaluate
 
@@ -292,7 +268,7 @@ class AsyncInputsResource(AsyncAPIResource):
             "/data/input/evaluate",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "llm_inputs": llm_inputs,
                 },
                 input_evaluate_params.InputEvaluateParams,
@@ -306,27 +282,8 @@ class AsyncInputsResource(AsyncAPIResource):
     async def generate_seeds(
         self,
         *,
-        contract: Contract,
+        contract_description: str,
         num_inputs: int,
-        context_types: Optional[
-            List[
-                Literal[
-                    "none",
-                    "article",
-                    "conversation",
-                    "debate",
-                    "webpage",
-                    "passage",
-                    "chat history",
-                    "email thread",
-                    "text messages",
-                    "financial document",
-                    "scientific paper",
-                    "slide presentation description",
-                ]
-            ]
-        ]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -338,12 +295,10 @@ class AsyncInputsResource(AsyncAPIResource):
         Generates seed messages for input data.
 
         Args:
-          contract: The contract to generate input seeds for.
+          contract_description: The application contract's description
 
-          num_inputs: Number of input seeds to generate.
-
-          context_types: The types of context to generate for the input prompts if specified. Otherwise
-              the context_types will be inferred.
+          num_inputs: Number of input seeds to generate. Must be <= 50. If you want to generate more,
+              please use the generate_from_seeds API.
 
           extra_headers: Send extra headers
 
@@ -357,9 +312,8 @@ class AsyncInputsResource(AsyncAPIResource):
             "/data/input/generate_seeds",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
+                    "contract_description": contract_description,
                     "num_inputs": num_inputs,
-                    "context_types": context_types,
                 },
                 input_generate_seeds_params.InputGenerateSeedsParams,
             ),
