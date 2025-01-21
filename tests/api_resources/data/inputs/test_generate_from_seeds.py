@@ -58,18 +58,24 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_method_generate(self, client: Twopir) -> None:
         generate_from_seed = client.data.inputs.generate_from_seeds.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(DataGenerationResult, generate_from_seed, path=["response"])
 
     @parametrize
     def test_raw_response_generate(self, client: Twopir) -> None:
         response = client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
 
         assert response.is_closed is True
@@ -80,9 +86,12 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_streaming_response_generate(self, client: Twopir) -> None:
         with client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -175,18 +184,24 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_method_generate(self, async_client: AsyncTwopir) -> None:
         generate_from_seed = await async_client.data.inputs.generate_from_seeds.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
         assert_matches_type(DataGenerationResult, generate_from_seed, path=["response"])
 
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncTwopir) -> None:
         response = await async_client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         )
 
         assert response.is_closed is True
@@ -197,9 +212,12 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncTwopir) -> None:
         async with async_client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            contract_description="contract_description",
-            num_inputs=0,
-            seeds=["string"],
+            contract_description="Write a children's story communicating a simple life lesson.",
+            num_inputs=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
