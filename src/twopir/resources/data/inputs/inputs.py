@@ -29,9 +29,9 @@ from .generate_from_seeds import (
     GenerateFromSeedsResourceWithStreamingResponse,
     AsyncGenerateFromSeedsResourceWithStreamingResponse,
 )
+from ....types.data_generation_result import DataGenerationResult
 from ....types.input_evaluation_metrics import InputEvaluationMetrics
 from ....types.data.input_cluster_response import InputClusterResponse
-from ....types.data.input_generate_seeds_response import InputGenerateSeedsResponse
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
 
@@ -146,7 +146,7 @@ class InputsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InputGenerateSeedsResponse:
+    ) -> DataGenerationResult:
         """
         Generates seed messages for input data.
 
@@ -176,7 +176,7 @@ class InputsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=InputGenerateSeedsResponse,
+            cast_to=DataGenerationResult,
         )
 
 
@@ -290,7 +290,7 @@ class AsyncInputsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InputGenerateSeedsResponse:
+    ) -> DataGenerationResult:
         """
         Generates seed messages for input data.
 
@@ -320,7 +320,7 @@ class AsyncInputsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=InputGenerateSeedsResponse,
+            cast_to=DataGenerationResult,
         )
 
 
