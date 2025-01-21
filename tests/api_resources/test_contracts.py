@@ -85,6 +85,14 @@ class TestContracts:
                     "rating": "Strongly Agree",
                 }
             ],
+            preference_examples=[
+                {
+                    "chosen": "The lazy dog was jumped over by the quick brown fox",
+                    "llm_input": "Tell me something different",
+                    "rejected": "The lazy dog was flied over by the quick brown fox",
+                }
+            ],
+            strategy="LITE",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
@@ -505,6 +513,14 @@ class TestAsyncContracts:
                     "rating": "Strongly Agree",
                 }
             ],
+            preference_examples=[
+                {
+                    "chosen": "The lazy dog was jumped over by the quick brown fox",
+                    "llm_input": "Tell me something different",
+                    "rejected": "The lazy dog was flied over by the quick brown fox",
+                }
+            ],
+            strategy="LITE",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
