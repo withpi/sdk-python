@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -38,7 +39,7 @@ class ContractsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ContractsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
@@ -59,6 +60,8 @@ class ContractsResource(SyncAPIResource):
         *,
         contract: SharedParamsContract,
         examples: Iterable[contract_calibrate_params.Example],
+        preference_examples: Iterable[contract_calibrate_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,6 +77,11 @@ class ContractsResource(SyncAPIResource):
 
           examples: Rated examples to use when calibrating the contract
 
+          preference_examples: Preference examples to use when calibrating the contract
+
+          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
+              but may result in better result.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -88,6 +96,8 @@ class ContractsResource(SyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
+                    "preference_examples": preference_examples,
+                    "strategy": strategy,
                 },
                 contract_calibrate_params.ContractCalibrateParams,
             ),
@@ -277,7 +287,7 @@ class AsyncContractsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncContractsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
@@ -298,6 +308,8 @@ class AsyncContractsResource(AsyncAPIResource):
         *,
         contract: SharedParamsContract,
         examples: Iterable[contract_calibrate_params.Example],
+        preference_examples: Iterable[contract_calibrate_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -313,6 +325,11 @@ class AsyncContractsResource(AsyncAPIResource):
 
           examples: Rated examples to use when calibrating the contract
 
+          preference_examples: Preference examples to use when calibrating the contract
+
+          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
+              but may result in better result.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -327,6 +344,8 @@ class AsyncContractsResource(AsyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
+                    "preference_examples": preference_examples,
+                    "strategy": strategy,
                 },
                 contract_calibrate_params.ContractCalibrateParams,
             ),
