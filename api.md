@@ -9,7 +9,7 @@ from twopir.types import Contract, Dimension, SubDimension
 Types:
 
 ```python
-from twopir.types import DataGenerationStatus, InputEvaluationMetrics
+from twopir.types import InputEvaluationMetrics
 ```
 
 ## Inputs
@@ -17,27 +17,31 @@ from twopir.types import DataGenerationStatus, InputEvaluationMetrics
 Types:
 
 ```python
-from twopir.types.data import InputTopicCluster, InputClusterResponse
+from twopir.types.data import InputTopicCluster, InputClusterResponse, InputGenerateSeedsResponse
 ```
 
 Methods:
 
 - <code title="post /data/input/cluster">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/twopir/types/data/input_cluster_params.py">params</a>) -> <a href="./src/twopir/types/data/input_cluster_response.py">InputClusterResponse</a></code>
 - <code title="post /data/input/evaluate">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">evaluate</a>(\*\*<a href="src/twopir/types/data/input_evaluate_params.py">params</a>) -> <a href="./src/twopir/types/input_evaluation_metrics.py">InputEvaluationMetrics</a></code>
-- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/twopir/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/twopir/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/twopir/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/twopir/types/data/input_generate_seeds_response.py">InputGenerateSeedsResponse</a></code>
 
 ### GenerateFromSeeds
 
 Types:
 
 ```python
-from twopir.types.data.inputs import GenerateFromSeedStreamMessagesResponse
+from twopir.types.data.inputs import (
+    GenerateFromSeedRetrieveResponse,
+    GenerateFromSeedGenerateResponse,
+    GenerateFromSeedStreamMessagesResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/twopir/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/twopir/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/twopir/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/twopir/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/twopir/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/twopir/types/data/inputs/generate_from_seed_retrieve_response.py">GenerateFromSeedRetrieveResponse</a></code>
+- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/twopir/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/twopir/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/twopir/types/data/inputs/generate_from_seed_generate_response.py">GenerateFromSeedGenerateResponse</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/twopir/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
 # Tune

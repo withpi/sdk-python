@@ -21,7 +21,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.data.inputs import generate_from_seed_generate_params
-from ....types.data_generation_status import DataGenerationStatus
+from ....types.data.inputs.generate_from_seed_generate_response import GenerateFromSeedGenerateResponse
+from ....types.data.inputs.generate_from_seed_retrieve_response import GenerateFromSeedRetrieveResponse
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
 
@@ -56,7 +57,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> GenerateFromSeedRetrieveResponse:
         """
         Gets the current status of a data generation job
 
@@ -76,7 +77,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=GenerateFromSeedRetrieveResponse,
         )
 
     def generate(
@@ -91,7 +92,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> GenerateFromSeedGenerateResponse:
         """
         Generates input data from a list of seeds
 
@@ -120,7 +121,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
                     generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
                 ),
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=GenerateFromSeedGenerateResponse,
         )
 
     def stream_messages(
@@ -188,7 +189,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> GenerateFromSeedRetrieveResponse:
         """
         Gets the current status of a data generation job
 
@@ -208,7 +209,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=GenerateFromSeedRetrieveResponse,
         )
 
     async def generate(
@@ -223,7 +224,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> GenerateFromSeedGenerateResponse:
         """
         Generates input data from a list of seeds
 
@@ -252,7 +253,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
                     generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
                 ),
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=GenerateFromSeedGenerateResponse,
         )
 
     async def stream_messages(
