@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import List
+
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -19,8 +21,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.data.inputs import generate_from_seed_generate_params
-from ....types.data.inputs.generate_from_seed_generate_response import GenerateFromSeedGenerateResponse
-from ....types.data.inputs.generate_from_seed_retrieve_response import GenerateFromSeedRetrieveResponse
+from ....types.data_generation_result import DataGenerationResult
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
 
@@ -55,7 +56,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateFromSeedRetrieveResponse:
+    ) -> DataGenerationResult:
         """
         Gets the current status of a data generation job
 
@@ -75,24 +76,32 @@ class GenerateFromSeedsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateFromSeedRetrieveResponse,
+            cast_to=DataGenerationResult,
         )
 
     def generate(
         self,
         *,
-        seeds: generate_from_seed_generate_params.Seeds,
+        contract_description: str,
+        num_inputs: int,
+        seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateFromSeedGenerateResponse:
+    ) -> DataGenerationResult:
         """
         Generates input data from a list of seeds
 
         Args:
+          contract_description: The application description to generate contract for.
+
+          num_inputs: The number of LLM inputs to generate
+
+          seeds: The list of LLM inputs to be used as seeds
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -103,11 +112,18 @@ class GenerateFromSeedsResource(SyncAPIResource):
         """
         return self._post(
             "/data/input/generate_from_seeds",
-            body=maybe_transform(seeds, generate_from_seed_generate_params.GenerateFromSeedGenerateParams),
+            body=maybe_transform(
+                {
+                    "contract_description": contract_description,
+                    "num_inputs": num_inputs,
+                    "seeds": seeds,
+                },
+                generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateFromSeedGenerateResponse,
+            cast_to=DataGenerationResult,
         )
 
     def stream_messages(
@@ -175,7 +191,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateFromSeedRetrieveResponse:
+    ) -> DataGenerationResult:
         """
         Gets the current status of a data generation job
 
@@ -195,24 +211,32 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateFromSeedRetrieveResponse,
+            cast_to=DataGenerationResult,
         )
 
     async def generate(
         self,
         *,
-        seeds: generate_from_seed_generate_params.Seeds,
+        contract_description: str,
+        num_inputs: int,
+        seeds: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateFromSeedGenerateResponse:
+    ) -> DataGenerationResult:
         """
         Generates input data from a list of seeds
 
         Args:
+          contract_description: The application description to generate contract for.
+
+          num_inputs: The number of LLM inputs to generate
+
+          seeds: The list of LLM inputs to be used as seeds
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -223,11 +247,18 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         """
         return await self._post(
             "/data/input/generate_from_seeds",
-            body=await async_maybe_transform(seeds, generate_from_seed_generate_params.GenerateFromSeedGenerateParams),
+            body=await async_maybe_transform(
+                {
+                    "contract_description": contract_description,
+                    "num_inputs": num_inputs,
+                    "seeds": seeds,
+                },
+                generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateFromSeedGenerateResponse,
+            cast_to=DataGenerationResult,
         )
 
     async def stream_messages(
