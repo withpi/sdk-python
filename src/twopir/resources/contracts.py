@@ -110,7 +110,7 @@ class ContractsResource(SyncAPIResource):
     def generate_dimensions(
         self,
         *,
-        contract: SharedParamsContract,
+        contract_description: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -122,6 +122,8 @@ class ContractsResource(SyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
+          contract_description: The application description to generate contract for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -133,7 +135,8 @@ class ContractsResource(SyncAPIResource):
         return self._post(
             "/contracts/generate_dimensions",
             body=maybe_transform(
-                {"contract": contract}, contract_generate_dimensions_params.ContractGenerateDimensionsParams
+                {"contract_description": contract_description},
+                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -358,7 +361,7 @@ class AsyncContractsResource(AsyncAPIResource):
     async def generate_dimensions(
         self,
         *,
-        contract: SharedParamsContract,
+        contract_description: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -370,6 +373,8 @@ class AsyncContractsResource(AsyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
+          contract_description: The application description to generate contract for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -381,7 +386,8 @@ class AsyncContractsResource(AsyncAPIResource):
         return await self._post(
             "/contracts/generate_dimensions",
             body=await async_maybe_transform(
-                {"contract": contract}, contract_generate_dimensions_params.ContractGenerateDimensionsParams
+                {"contract_description": contract_description},
+                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

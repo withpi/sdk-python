@@ -143,64 +143,14 @@ class TestContracts:
     @parametrize
     def test_method_generate_dimensions(self, client: Twopir) -> None:
         contract = client.contracts.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-        )
-        assert_matches_type(Contract, contract, path=["response"])
-
-    @parametrize
-    def test_method_generate_dimensions_with_all_params(self, client: Twopir) -> None:
-        contract = client.contracts.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "weight": 1,
-                    }
-                ],
-            },
+            contract_description="contract_description",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_raw_response_generate_dimensions(self, client: Twopir) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="contract_description",
         )
 
         assert response.is_closed is True
@@ -211,10 +161,7 @@ class TestContracts:
     @parametrize
     def test_streaming_response_generate_dimensions(self, client: Twopir) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="contract_description",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -571,64 +518,14 @@ class TestAsyncContracts:
     @parametrize
     async def test_method_generate_dimensions(self, async_client: AsyncTwopir) -> None:
         contract = await async_client.contracts.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-        )
-        assert_matches_type(Contract, contract, path=["response"])
-
-    @parametrize
-    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncTwopir) -> None:
-        contract = await async_client.contracts.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                    "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
-                                "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
-                                "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                            "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
-                        "weight": 1,
-                    }
-                ],
-            },
+            contract_description="contract_description",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
         response = await async_client.contracts.with_raw_response.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="contract_description",
         )
 
         assert response.is_closed is True
@@ -639,10 +536,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_streaming_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
+            contract_description="contract_description",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
