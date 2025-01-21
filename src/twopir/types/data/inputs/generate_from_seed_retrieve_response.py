@@ -3,12 +3,12 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ...._models import BaseModel
 
-__all__ = ["DataGenerationStatus"]
+__all__ = ["GenerateFromSeedRetrieveResponse"]
 
 
-class DataGenerationStatus(BaseModel):
+class GenerateFromSeedRetrieveResponse(BaseModel):
     data: Optional[List[str]] = None
     """The generated data. Absent unless state is done"""
 
