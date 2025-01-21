@@ -9,10 +9,9 @@ import pytest
 
 from twopir import Twopir, AsyncTwopir
 from tests.utils import assert_matches_type
-from twopir.types import InputEvaluationMetrics
+from twopir.types import DataGenerationResult, InputEvaluationMetrics
 from twopir.types.data import (
     InputClusterResponse,
-    InputGenerateSeedsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -116,7 +115,7 @@ class TestInputs:
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         )
-        assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+        assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
     def test_raw_response_generate_seeds(self, client: Twopir) -> None:
@@ -128,7 +127,7 @@ class TestInputs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         input = response.parse()
-        assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+        assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
     def test_streaming_response_generate_seeds(self, client: Twopir) -> None:
@@ -140,7 +139,7 @@ class TestInputs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             input = response.parse()
-            assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+            assert_matches_type(DataGenerationResult, input, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,7 +242,7 @@ class TestAsyncInputs:
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
         )
-        assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+        assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
     async def test_raw_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
@@ -255,7 +254,7 @@ class TestAsyncInputs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         input = await response.parse()
-        assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+        assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
     async def test_streaming_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
@@ -267,6 +266,6 @@ class TestAsyncInputs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             input = await response.parse()
-            assert_matches_type(InputGenerateSeedsResponse, input, path=["response"])
+            assert_matches_type(DataGenerationResult, input, path=["response"])
 
         assert cast(Any, response.is_closed) is True
