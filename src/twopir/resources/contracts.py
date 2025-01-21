@@ -122,6 +122,8 @@ class ContractsResource(SyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
+          contract_description: The application description to generate contract for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -371,6 +373,8 @@ class AsyncContractsResource(AsyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
+          contract_description: The application description to generate contract for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
