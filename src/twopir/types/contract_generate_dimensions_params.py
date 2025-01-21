@@ -9,3 +9,4 @@ __all__ = ["ContractGenerateDimensionsParams"]
 
 class ContractGenerateDimensionsParams(TypedDict, total=False):
     contract_description: Required[str]
+    """The application description to generate contract for."""
