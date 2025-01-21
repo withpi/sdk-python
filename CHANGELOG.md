@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-alpha.20 (2025-01-21)
+
+Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
+
+### Features
+
+* **api:** api update ([#117](https://github.com/2pir-ai/sdk-python/issues/117)) ([cf420a7](https://github.com/2pir-ai/sdk-python/commit/cf420a711cdec6497b8868550a9e0313bde2cdd5))
+
+
+### Bug Fixes
+
+* **tests:** make test_get_platform less flaky ([#120](https://github.com/2pir-ai/sdk-python/issues/120)) ([4e2efa5](https://github.com/2pir-ai/sdk-python/commit/4e2efa5bc6b0be4abd7269b22956963e9fc8fcfb))
+
+
+### Chores
+
+* **internal:** avoid pytest-asyncio deprecation warning ([#121](https://github.com/2pir-ai/sdk-python/issues/121)) ([87affb2](https://github.com/2pir-ai/sdk-python/commit/87affb201e15280846eeeb1979f01208dfecf983))
+
+
+### Documentation
+
+* **raw responses:** fix duplicate `the` ([#119](https://github.com/2pir-ai/sdk-python/issues/119)) ([6c91a44](https://github.com/2pir-ai/sdk-python/commit/6c91a4455b07408af32d4e557d09121c1eb2967c))
+
 ## 0.1.0-alpha.19 (2025-01-21)
 
 Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
