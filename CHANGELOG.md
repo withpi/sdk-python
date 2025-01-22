@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.24 (2025-01-22)
+
+Full Changelog: [v0.1.0-alpha.23...v0.1.0-alpha.24](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.23...v0.1.0-alpha.24)
+
+### Chores
+
+* **internal:** codegen related update ([#133](https://github.com/2pir-ai/sdk-python/issues/133)) ([bf44967](https://github.com/2pir-ai/sdk-python/commit/bf449674177163055d16122ace0dd16eab0e5194))
+
 ## 0.1.0-alpha.23 (2025-01-21)
 
 Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/2pir-ai/sdk-python/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)
