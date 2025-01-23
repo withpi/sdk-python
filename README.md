@@ -31,7 +31,7 @@ import os
 from withpi import PiClient
 
 client = PiClient(
-    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
 contracts_score_metrics = client.contracts.score(
@@ -71,7 +71,7 @@ print(contracts_score_metrics.scores)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `TWOPIR_API_KEY="My API Key"` to your `.env` file
+to add `WITHPI_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -84,7 +84,7 @@ import asyncio
 from withpi import AsyncPiClient
 
 client = AsyncPiClient(
-    api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
 
