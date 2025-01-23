@@ -311,7 +311,7 @@ class TestContracts:
             },
             hf_contract_name="2pir/tldr_contract",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     def test_method_write_to_hf_with_all_params(self, client: PiClient) -> None:
@@ -357,7 +357,7 @@ class TestContracts:
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     def test_raw_response_write_to_hf(self, client: PiClient) -> None:
@@ -372,7 +372,7 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     def test_streaming_response_write_to_hf(self, client: PiClient) -> None:
@@ -387,7 +387,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(object, contract, path=["response"])
+            assert_matches_type(str, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -686,7 +686,7 @@ class TestAsyncContracts:
             },
             hf_contract_name="2pir/tldr_contract",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     async def test_method_write_to_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
@@ -732,7 +732,7 @@ class TestAsyncContracts:
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_write_to_hf(self, async_client: AsyncPiClient) -> None:
@@ -747,7 +747,7 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
     async def test_streaming_response_write_to_hf(self, async_client: AsyncPiClient) -> None:
@@ -762,6 +762,6 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(object, contract, path=["response"])
+            assert_matches_type(str, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
