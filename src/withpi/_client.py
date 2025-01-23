@@ -26,7 +26,7 @@ from ._utils import (
 from ._version import __version__
 from .resources import feedback, contracts
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import TwopirError, APIStatusError
+from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -35,16 +35,25 @@ from ._base_client import (
 from .resources.data import data
 from .resources.tune import tune
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Twopir", "AsyncTwopir", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "PiClient",
+    "AsyncPiClient",
+    "Client",
+    "AsyncClient",
+]
 
 
-class Twopir(SyncAPIClient):
+class PiClient(SyncAPIClient):
     data: data.DataResource
     tune: tune.TuneResource
     contracts: contracts.ContractsResource
     feedback: feedback.FeedbackResource
-    with_raw_response: TwopirWithRawResponse
-    with_streaming_response: TwopirWithStreamedResponse
+    with_raw_response: PiClientWithRawResponse
+    with_streaming_response: PiClientWithStreamedResponse
 
     # client options
     api_key: str
@@ -72,20 +81,20 @@ class Twopir(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous twopir client instance.
+        """Construct a new synchronous Pi Client client instance.
 
         This automatically infers the `api_key` argument from the `TWOPIR_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("TWOPIR_API_KEY")
         if api_key is None:
-            raise TwopirError(
+            raise PiClientError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the TWOPIR_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("TWOPIR_BASE_URL")
+            base_url = os.environ.get("PI_CLIENT_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -104,8 +113,8 @@ class Twopir(SyncAPIClient):
         self.tune = tune.TuneResource(self)
         self.contracts = contracts.ContractsResource(self)
         self.feedback = feedback.FeedbackResource(self)
-        self.with_raw_response = TwopirWithRawResponse(self)
-        self.with_streaming_response = TwopirWithStreamedResponse(self)
+        self.with_raw_response = PiClientWithRawResponse(self)
+        self.with_streaming_response = PiClientWithStreamedResponse(self)
 
     @property
     @override
@@ -212,13 +221,13 @@ class Twopir(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncTwopir(AsyncAPIClient):
+class AsyncPiClient(AsyncAPIClient):
     data: data.AsyncDataResource
     tune: tune.AsyncTuneResource
     contracts: contracts.AsyncContractsResource
     feedback: feedback.AsyncFeedbackResource
-    with_raw_response: AsyncTwopirWithRawResponse
-    with_streaming_response: AsyncTwopirWithStreamedResponse
+    with_raw_response: AsyncPiClientWithRawResponse
+    with_streaming_response: AsyncPiClientWithStreamedResponse
 
     # client options
     api_key: str
@@ -246,20 +255,20 @@ class AsyncTwopir(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async twopir client instance.
+        """Construct a new async Pi Client client instance.
 
         This automatically infers the `api_key` argument from the `TWOPIR_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("TWOPIR_API_KEY")
         if api_key is None:
-            raise TwopirError(
+            raise PiClientError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the TWOPIR_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("TWOPIR_BASE_URL")
+            base_url = os.environ.get("PI_CLIENT_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -278,8 +287,8 @@ class AsyncTwopir(AsyncAPIClient):
         self.tune = tune.AsyncTuneResource(self)
         self.contracts = contracts.AsyncContractsResource(self)
         self.feedback = feedback.AsyncFeedbackResource(self)
-        self.with_raw_response = AsyncTwopirWithRawResponse(self)
-        self.with_streaming_response = AsyncTwopirWithStreamedResponse(self)
+        self.with_raw_response = AsyncPiClientWithRawResponse(self)
+        self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
     @property
     @override
@@ -386,38 +395,38 @@ class AsyncTwopir(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class TwopirWithRawResponse:
-    def __init__(self, client: Twopir) -> None:
+class PiClientWithRawResponse:
+    def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithRawResponse(client.data)
         self.tune = tune.TuneResourceWithRawResponse(client.tune)
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
         self.feedback = feedback.FeedbackResourceWithRawResponse(client.feedback)
 
 
-class AsyncTwopirWithRawResponse:
-    def __init__(self, client: AsyncTwopir) -> None:
+class AsyncPiClientWithRawResponse:
+    def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
         self.tune = tune.AsyncTuneResourceWithRawResponse(client.tune)
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
         self.feedback = feedback.AsyncFeedbackResourceWithRawResponse(client.feedback)
 
 
-class TwopirWithStreamedResponse:
-    def __init__(self, client: Twopir) -> None:
+class PiClientWithStreamedResponse:
+    def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithStreamingResponse(client.data)
         self.tune = tune.TuneResourceWithStreamingResponse(client.tune)
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
         self.feedback = feedback.FeedbackResourceWithStreamingResponse(client.feedback)
 
 
-class AsyncTwopirWithStreamedResponse:
-    def __init__(self, client: AsyncTwopir) -> None:
+class AsyncPiClientWithStreamedResponse:
+    def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
         self.tune = tune.AsyncTuneResourceWithStreamingResponse(client.tune)
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
         self.feedback = feedback.AsyncFeedbackResourceWithStreamingResponse(client.feedback)
 
 
-Client = Twopir
+Client = PiClient
 
-AsyncClient = AsyncTwopir
+AsyncClient = AsyncPiClient
