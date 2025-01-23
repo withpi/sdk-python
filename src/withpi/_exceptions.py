@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class TwopirError(Exception):
+class PiClientError(Exception):
     pass
 
 
-class APIError(TwopirError):
+class APIError(PiClientError):
     message: str
     request: httpx.Request
 

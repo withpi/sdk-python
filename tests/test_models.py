@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from twopir._utils import PropertyInfo
-from twopir._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from twopir._models import BaseModel, construct_type
+from withpi._utils import PropertyInfo
+from withpi._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from withpi._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

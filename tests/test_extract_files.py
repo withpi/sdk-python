@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from twopir._types import FileTypes
-from twopir._utils import extract_files
+from withpi._types import FileTypes
+from withpi._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:
