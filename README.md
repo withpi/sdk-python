@@ -1,8 +1,8 @@
-# Twopir Python API library
+# Pi Client Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/twopir.svg)](https://pypi.org/project/twopir/)
+[![PyPI version](https://img.shields.io/pypi/v/withpi.svg)](https://pypi.org/project/withpi/)
 
-The Twopir Python library provides convenient access to the Twopir REST API from any Python 3.8+
+The Pi Client Python library provides convenient access to the Pi Client REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -16,11 +16,11 @@ The REST API documentation can be found on [docs.withpi.ai](https://docs.withpi.
 
 ```sh
 # install from the production repo
-pip install git+ssh://git@github.com/2pir-ai/sdk-python.git
+pip install git+ssh://git@github.com/withpi/sdk-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre twopir`
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre withpi`
 
 ## Usage
 
@@ -28,9 +28,9 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from twopir import Twopir
+from withpi import PiClient
 
-client = Twopir(
+client = PiClient(
     api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -76,14 +76,14 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncTwopir` instead of `Twopir` and use `await` with each API call:
+Simply import `AsyncPiClient` instead of `PiClient` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from twopir import AsyncTwopir
+from withpi import AsyncPiClient
 
-client = AsyncTwopir(
+client = AsyncPiClient(
     api_key=os.environ.get("TWOPIR_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -140,18 +140,18 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `twopir.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `withpi.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `twopir.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `withpi.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `twopir.APIError`.
+All errors inherit from `withpi.APIError`.
 
 ```python
-import twopir
-from twopir import Twopir
+import withpi
+from withpi import PiClient
 
-client = Twopir()
+client = PiClient()
 
 try:
     client.contracts.score(
@@ -186,12 +186,12 @@ try:
         llm_input="Help me with my problem",
         llm_output="Of course I can help with that",
     )
-except twopir.APIConnectionError as e:
+except withpi.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except twopir.RateLimitError as e:
+except withpi.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except twopir.APIStatusError as e:
+except withpi.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -219,10 +219,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from twopir import Twopir
+from withpi import PiClient
 
 # Configure the default for all requests:
-client = Twopir(
+client = PiClient(
     # default is 2
     max_retries=0,
 )
@@ -268,16 +268,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from twopir import Twopir
+from withpi import PiClient
 
 # Configure the default for all requests:
-client = Twopir(
+client = PiClient(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = Twopir(
+client = PiClient(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -326,10 +326,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `TWOPIR_LOG` to `info`.
+You can enable logging by setting the environment variable `PI_CLIENT_LOG` to `info`.
 
 ```shell
-$ export TWOPIR_LOG=info
+$ export PI_CLIENT_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -351,9 +351,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from twopir import Twopir
+from withpi import PiClient
 
-client = Twopir()
+client = PiClient()
 response = client.contracts.with_raw_response.score(
     contract={
         "name": "My Application",
@@ -385,9 +385,9 @@ contract = response.parse()  # get the object that `contracts.score()` would hav
 print(contract.dimension_scores)
 ```
 
-These methods return an [`APIResponse`](https://github.com/2pir-ai/sdk-python/tree/main/src/twopir/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/withpi/sdk-python/tree/main/src/withpi/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/2pir-ai/sdk-python/tree/main/src/twopir/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/withpi/sdk-python/tree/main/src/withpi/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -480,10 +480,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from twopir import Twopir, DefaultHttpxClient
+from withpi import PiClient, DefaultHttpxClient
 
-client = Twopir(
-    # Or use the `TWOPIR_BASE_URL` env var
+client = PiClient(
+    # Or use the `PI_CLIENT_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -503,9 +503,9 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from twopir import Twopir
+from withpi import PiClient
 
-with Twopir() as client:
+with PiClient() as client:
   # make requests here
   ...
 
@@ -522,7 +522,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/2pir-ai/sdk-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/withpi/sdk-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -531,8 +531,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import twopir
-print(twopir.__version__)
+import withpi
+print(withpi.__version__)
 ```
 
 ## Requirements

@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from twopir._types import Omit, NoneType
-from twopir._utils import (
+from withpi._types import Omit, NoneType
+from withpi._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -18,8 +18,8 @@ from twopir._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from twopir._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from twopir._models import BaseModel
+from withpi._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from withpi._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

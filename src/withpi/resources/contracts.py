@@ -42,7 +42,7 @@ class ContractsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
         return ContractsResourceWithRawResponse(self)
 
@@ -51,7 +51,7 @@ class ContractsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return ContractsResourceWithStreamingResponse(self)
 
@@ -248,7 +248,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Write a contract to Huggingface dataset
 
@@ -282,7 +282,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
 
@@ -293,7 +293,7 @@ class AsyncContractsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncContractsResourceWithRawResponse(self)
 
@@ -302,7 +302,7 @@ class AsyncContractsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/2pir-ai/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncContractsResourceWithStreamingResponse(self)
 
@@ -499,7 +499,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Write a contract to Huggingface dataset
 
@@ -533,7 +533,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
 

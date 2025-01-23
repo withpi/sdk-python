@@ -7,12 +7,12 @@ from typing import Any, cast
 
 import pytest
 
-from twopir import Twopir, AsyncTwopir
+from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from twopir.types import (
+from withpi.types import (
     ContractsScoreMetrics,
 )
-from twopir.types.shared import Contract
+from withpi.types.shared import Contract
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +21,7 @@ class TestContracts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_calibrate(self, client: Twopir) -> None:
+    def test_method_calibrate(self, client: PiClient) -> None:
         contract = client.contracts.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -38,7 +38,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_method_calibrate_with_all_params(self, client: Twopir) -> None:
+    def test_method_calibrate_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -97,7 +97,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_raw_response_calibrate(self, client: Twopir) -> None:
+    def test_raw_response_calibrate(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -118,7 +118,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_streaming_response_calibrate(self, client: Twopir) -> None:
+    def test_streaming_response_calibrate(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -141,14 +141,14 @@ class TestContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_generate_dimensions(self, client: Twopir) -> None:
+    def test_method_generate_dimensions(self, client: PiClient) -> None:
         contract = client.contracts.generate_dimensions(
             contract_description="contract_description",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_raw_response_generate_dimensions(self, client: Twopir) -> None:
+    def test_raw_response_generate_dimensions(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
             contract_description="contract_description",
         )
@@ -159,7 +159,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_streaming_response_generate_dimensions(self, client: Twopir) -> None:
+    def test_streaming_response_generate_dimensions(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
             contract_description="contract_description",
         ) as response:
@@ -172,14 +172,14 @@ class TestContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_read_from_hf(self, client: Twopir) -> None:
+    def test_method_read_from_hf(self, client: PiClient) -> None:
         contract = client.contracts.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_method_read_from_hf_with_all_params(self, client: Twopir) -> None:
+    def test_method_read_from_hf_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
@@ -187,7 +187,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_raw_response_read_from_hf(self, client: Twopir) -> None:
+    def test_raw_response_read_from_hf(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         )
@@ -198,7 +198,7 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    def test_streaming_response_read_from_hf(self, client: Twopir) -> None:
+    def test_streaming_response_read_from_hf(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         ) as response:
@@ -211,7 +211,7 @@ class TestContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_score(self, client: Twopir) -> None:
+    def test_method_score(self, client: PiClient) -> None:
         contract = client.contracts.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -223,7 +223,7 @@ class TestContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    def test_method_score_with_all_params(self, client: Twopir) -> None:
+    def test_method_score_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -269,7 +269,7 @@ class TestContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    def test_raw_response_score(self, client: Twopir) -> None:
+    def test_raw_response_score(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -285,7 +285,7 @@ class TestContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    def test_streaming_response_score(self, client: Twopir) -> None:
+    def test_streaming_response_score(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -303,7 +303,7 @@ class TestContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_write_to_hf(self, client: Twopir) -> None:
+    def test_method_write_to_hf(self, client: PiClient) -> None:
         contract = client.contracts.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -311,10 +311,10 @@ class TestContracts:
             },
             hf_contract_name="2pir/tldr_contract",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    def test_method_write_to_hf_with_all_params(self, client: Twopir) -> None:
+    def test_method_write_to_hf_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -357,10 +357,10 @@ class TestContracts:
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    def test_raw_response_write_to_hf(self, client: Twopir) -> None:
+    def test_raw_response_write_to_hf(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -372,10 +372,10 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    def test_streaming_response_write_to_hf(self, client: Twopir) -> None:
+    def test_streaming_response_write_to_hf(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -387,7 +387,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(object, contract, path=["response"])
+            assert_matches_type(str, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -396,7 +396,7 @@ class TestAsyncContracts:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_calibrate(self, async_client: AsyncTwopir) -> None:
+    async def test_method_calibrate(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -413,7 +413,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_method_calibrate_with_all_params(self, async_client: AsyncTwopir) -> None:
+    async def test_method_calibrate_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -472,7 +472,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_raw_response_calibrate(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_calibrate(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -493,7 +493,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_streaming_response_calibrate(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_calibrate(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.calibrate(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -516,14 +516,14 @@ class TestAsyncContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_generate_dimensions(self, async_client: AsyncTwopir) -> None:
+    async def test_method_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.generate_dimensions(
             contract_description="contract_description",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_raw_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.generate_dimensions(
             contract_description="contract_description",
         )
@@ -534,7 +534,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_streaming_response_generate_dimensions(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
             contract_description="contract_description",
         ) as response:
@@ -547,14 +547,14 @@ class TestAsyncContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_read_from_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_method_read_from_hf(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncTwopir) -> None:
+    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
@@ -562,7 +562,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_raw_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         )
@@ -573,7 +573,7 @@ class TestAsyncContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
-    async def test_streaming_response_read_from_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.read_from_hf(
             hf_contract_name="2pir/tldr_contract",
         ) as response:
@@ -586,7 +586,7 @@ class TestAsyncContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_score(self, async_client: AsyncTwopir) -> None:
+    async def test_method_score(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -598,7 +598,7 @@ class TestAsyncContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    async def test_method_score_with_all_params(self, async_client: AsyncTwopir) -> None:
+    async def test_method_score_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -644,7 +644,7 @@ class TestAsyncContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    async def test_raw_response_score(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -660,7 +660,7 @@ class TestAsyncContracts:
         assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
 
     @parametrize
-    async def test_streaming_response_score(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.score(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -678,7 +678,7 @@ class TestAsyncContracts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_write_to_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_method_write_to_hf(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -686,10 +686,10 @@ class TestAsyncContracts:
             },
             hf_contract_name="2pir/tldr_contract",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    async def test_method_write_to_hf_with_all_params(self, async_client: AsyncTwopir) -> None:
+    async def test_method_write_to_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -732,10 +732,10 @@ class TestAsyncContracts:
             hf_contract_name="2pir/tldr_contract",
             hf_token="hf_token",
         )
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    async def test_raw_response_write_to_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_write_to_hf(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -747,10 +747,10 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(object, contract, path=["response"])
+        assert_matches_type(str, contract, path=["response"])
 
     @parametrize
-    async def test_streaming_response_write_to_hf(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_write_to_hf(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.write_to_hf(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -762,6 +762,6 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(object, contract, path=["response"])
+            assert_matches_type(str, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
