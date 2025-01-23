@@ -67,7 +67,7 @@ Methods:
 Types:
 
 ```python
-from withpi.types import ContractsScoreMetrics, SDKContract, ContractWriteToHfResponse
+from withpi.types import ContractsScoreMetrics, ContractWriteToHfResponse
 ```
 
 Methods:
