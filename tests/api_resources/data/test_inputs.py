@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from twopir import Twopir, AsyncTwopir
+from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from twopir.types import DataGenerationResult, InputEvaluationMetrics
-from twopir.types.data import (
+from withpi.types import DataGenerationResult, InputEvaluationMetrics
+from withpi.types.data import (
     InputClusterResponse,
 )
 
@@ -21,7 +21,7 @@ class TestInputs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_cluster(self, client: Twopir) -> None:
+    def test_method_cluster(self, client: PiClient) -> None:
         input = client.data.inputs.cluster(
             inputs=[
                 {
@@ -33,7 +33,7 @@ class TestInputs:
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
-    def test_raw_response_cluster(self, client: Twopir) -> None:
+    def test_raw_response_cluster(self, client: PiClient) -> None:
         response = client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
@@ -49,7 +49,7 @@ class TestInputs:
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
-    def test_streaming_response_cluster(self, client: Twopir) -> None:
+    def test_streaming_response_cluster(self, client: PiClient) -> None:
         with client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
@@ -67,7 +67,7 @@ class TestInputs:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_evaluate(self, client: Twopir) -> None:
+    def test_method_evaluate(self, client: PiClient) -> None:
         input = client.data.inputs.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -78,7 +78,7 @@ class TestInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
-    def test_raw_response_evaluate(self, client: Twopir) -> None:
+    def test_raw_response_evaluate(self, client: PiClient) -> None:
         response = client.data.inputs.with_raw_response.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -93,7 +93,7 @@ class TestInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
-    def test_streaming_response_evaluate(self, client: Twopir) -> None:
+    def test_streaming_response_evaluate(self, client: PiClient) -> None:
         with client.data.inputs.with_streaming_response.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -110,7 +110,7 @@ class TestInputs:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_generate_seeds(self, client: Twopir) -> None:
+    def test_method_generate_seeds(self, client: PiClient) -> None:
         input = client.data.inputs.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
@@ -118,7 +118,7 @@ class TestInputs:
         assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
-    def test_raw_response_generate_seeds(self, client: Twopir) -> None:
+    def test_raw_response_generate_seeds(self, client: PiClient) -> None:
         response = client.data.inputs.with_raw_response.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
@@ -130,7 +130,7 @@ class TestInputs:
         assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
-    def test_streaming_response_generate_seeds(self, client: Twopir) -> None:
+    def test_streaming_response_generate_seeds(self, client: PiClient) -> None:
         with client.data.inputs.with_streaming_response.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
@@ -148,7 +148,7 @@ class TestAsyncInputs:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_cluster(self, async_client: AsyncTwopir) -> None:
+    async def test_method_cluster(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.inputs.cluster(
             inputs=[
                 {
@@ -160,7 +160,7 @@ class TestAsyncInputs:
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
-    async def test_raw_response_cluster(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_cluster(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
@@ -176,7 +176,7 @@ class TestAsyncInputs:
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
-    async def test_streaming_response_cluster(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_cluster(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
@@ -194,7 +194,7 @@ class TestAsyncInputs:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_evaluate(self, async_client: AsyncTwopir) -> None:
+    async def test_method_evaluate(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.inputs.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -205,7 +205,7 @@ class TestAsyncInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
-    async def test_raw_response_evaluate(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_evaluate(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.inputs.with_raw_response.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -220,7 +220,7 @@ class TestAsyncInputs:
         assert_matches_type(InputEvaluationMetrics, input, path=["response"])
 
     @parametrize
-    async def test_streaming_response_evaluate(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_evaluate(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.inputs.with_streaming_response.evaluate(
             contract_description="Write a haiku based on a topic description",
             llm_inputs=[
@@ -237,7 +237,7 @@ class TestAsyncInputs:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_generate_seeds(self, async_client: AsyncTwopir) -> None:
+    async def test_method_generate_seeds(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.inputs.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
@@ -245,7 +245,7 @@ class TestAsyncInputs:
         assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
-    async def test_raw_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
+    async def test_raw_response_generate_seeds(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.inputs.with_raw_response.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,
@@ -257,7 +257,7 @@ class TestAsyncInputs:
         assert_matches_type(DataGenerationResult, input, path=["response"])
 
     @parametrize
-    async def test_streaming_response_generate_seeds(self, async_client: AsyncTwopir) -> None:
+    async def test_streaming_response_generate_seeds(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.inputs.with_streaming_response.generate_seeds(
             contract_description="Write a haiku based on a topic description",
             num_inputs=10,

@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/twopir/_version.py"
+    "src/withpi/_version.py"
   ]
 }

@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from twopir._types import Base64FileInput
-from twopir._utils import (
+from withpi._types import Base64FileInput
+from withpi._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from twopir._compat import PYDANTIC_V2
-from twopir._models import BaseModel
+from withpi._compat import PYDANTIC_V2
+from withpi._models import BaseModel
 
 _T = TypeVar("_T")
 

@@ -5,13 +5,13 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from twopir import Twopir, AsyncTwopir
-from twopir._streaming import Stream, AsyncStream, ServerSentEvent
+from withpi import PiClient, AsyncPiClient
+from withpi._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_basic(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_basic(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: completion\n"
         yield b'data: {"foo":true}\n'
@@ -28,7 +28,7 @@ async def test_basic(sync: bool, client: Twopir, async_client: AsyncTwopir) -> N
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_data_missing_event(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_data_missing_event(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b'data: {"foo":true}\n'
         yield b"\n"
@@ -44,7 +44,7 @@ async def test_data_missing_event(sync: bool, client: Twopir, async_client: Asyn
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_event_missing_data(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_event_missing_data(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"\n"
@@ -60,7 +60,7 @@ async def test_event_missing_data(sync: bool, client: Twopir, async_client: Asyn
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_events(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_multiple_events(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"\n"
@@ -82,7 +82,7 @@ async def test_multiple_events(sync: bool, client: Twopir, async_client: AsyncTw
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_events_with_data(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_multiple_events_with_data(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b'data: {"foo":true}\n'
@@ -106,7 +106,7 @@ async def test_multiple_events_with_data(sync: bool, client: Twopir, async_clien
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_data_lines_with_empty_line(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_multiple_data_lines_with_empty_line(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"data: {\n"
@@ -128,7 +128,7 @@ async def test_multiple_data_lines_with_empty_line(sync: bool, client: Twopir, a
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_data_json_escaped_double_new_line(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_data_json_escaped_double_new_line(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b'data: {"foo": "my long\\n\\ncontent"}'
@@ -145,7 +145,7 @@ async def test_data_json_escaped_double_new_line(sync: bool, client: Twopir, asy
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-async def test_multiple_data_lines(sync: bool, client: Twopir, async_client: AsyncTwopir) -> None:
+async def test_multiple_data_lines(sync: bool, client: PiClient, async_client: AsyncPiClient) -> None:
     def body() -> Iterator[bytes]:
         yield b"event: ping\n"
         yield b"data: {\n"
@@ -165,8 +165,8 @@ async def test_multiple_data_lines(sync: bool, client: Twopir, async_client: Asy
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
 async def test_special_new_line_character(
     sync: bool,
-    client: Twopir,
-    async_client: AsyncTwopir,
+    client: PiClient,
+    async_client: AsyncPiClient,
 ) -> None:
     def body() -> Iterator[bytes]:
         yield b'data: {"content":" culpa"}\n'
@@ -196,8 +196,8 @@ async def test_special_new_line_character(
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
 async def test_multi_byte_character_multiple_chunks(
     sync: bool,
-    client: Twopir,
-    async_client: AsyncTwopir,
+    client: PiClient,
+    async_client: AsyncPiClient,
 ) -> None:
     def body() -> Iterator[bytes]:
         yield b'data: {"content":"'
@@ -237,8 +237,8 @@ def make_event_iterator(
     content: Iterator[bytes],
     *,
     sync: bool,
-    client: Twopir,
-    async_client: AsyncTwopir,
+    client: PiClient,
+    async_client: AsyncPiClient,
 ) -> Iterator[ServerSentEvent] | AsyncIterator[ServerSentEvent]:
     if sync:
         return Stream(cast_to=object, client=client, response=httpx.Response(200, content=content))._iter_events()
