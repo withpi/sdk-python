@@ -9,7 +9,10 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types import OptimizationStatus
+from withpi.types.tune import (
+    PromptOptimizeResponse,
+    PromptGetStatusResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -60,7 +63,7 @@ class TestPrompt:
         prompt = client.tune.prompt.get_status(
             "job_id",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_get_status(self, client: PiClient) -> None:
@@ -71,7 +74,7 @@ class TestPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = response.parse()
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
     @parametrize
     def test_streaming_response_get_status(self, client: PiClient) -> None:
@@ -82,7 +85,7 @@ class TestPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = response.parse()
-            assert_matches_type(OptimizationStatus, prompt, path=["response"])
+            assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -111,7 +114,7 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     def test_method_optimize_with_all_params(self, client: PiClient) -> None:
@@ -165,7 +168,7 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_optimize(self, client: PiClient) -> None:
@@ -189,7 +192,7 @@ class TestPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = response.parse()
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     def test_streaming_response_optimize(self, client: PiClient) -> None:
@@ -213,7 +216,7 @@ class TestPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = response.parse()
-            assert_matches_type(OptimizationStatus, prompt, path=["response"])
+            assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -264,7 +267,7 @@ class TestAsyncPrompt:
         prompt = await async_client.tune.prompt.get_status(
             "job_id",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_get_status(self, async_client: AsyncPiClient) -> None:
@@ -275,7 +278,7 @@ class TestAsyncPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = await response.parse()
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
     @parametrize
     async def test_streaming_response_get_status(self, async_client: AsyncPiClient) -> None:
@@ -286,7 +289,7 @@ class TestAsyncPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = await response.parse()
-            assert_matches_type(OptimizationStatus, prompt, path=["response"])
+            assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -315,7 +318,7 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     async def test_method_optimize_with_all_params(self, async_client: AsyncPiClient) -> None:
@@ -369,7 +372,7 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_optimize(self, async_client: AsyncPiClient) -> None:
@@ -393,7 +396,7 @@ class TestAsyncPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = await response.parse()
-        assert_matches_type(OptimizationStatus, prompt, path=["response"])
+        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
     @parametrize
     async def test_streaming_response_optimize(self, async_client: AsyncPiClient) -> None:
@@ -417,6 +420,6 @@ class TestAsyncPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = await response.parse()
-            assert_matches_type(OptimizationStatus, prompt, path=["response"])
+            assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True

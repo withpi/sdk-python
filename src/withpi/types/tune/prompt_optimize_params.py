@@ -15,7 +15,7 @@ class PromptOptimizeParams(TypedDict, total=False):
     """The contract to optimize"""
 
     dspy_optimization_type: Required[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]]
-    """The tuning algorithm to use"""
+    """The DSPY teleprompter/optimizer to use"""
 
     examples: Required[Iterable[Example]]
     """The examples to train and validate on"""

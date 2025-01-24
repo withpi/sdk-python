@@ -3,12 +3,12 @@
 from typing import Dict, List
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["OptimizationStatus"]
+__all__ = ["PromptOptimizeResponse"]
 
 
-class OptimizationStatus(BaseModel):
+class PromptOptimizeResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
