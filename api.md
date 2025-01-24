@@ -42,23 +42,25 @@ Methods:
 
 # Tune
 
+Types:
+
+```python
+from withpi.types import PromptOptimizationStatus
+```
+
 ## Prompt
 
 Types:
 
 ```python
-from withpi.types.tune import (
-    PromptGetDetailedMessagesResponse,
-    PromptGetStatusResponse,
-    PromptOptimizeResponse,
-)
+from withpi.types.tune import PromptGetDetailedMessagesResponse
 ```
 
 Methods:
 
 - <code title="get /tune/prompt/{job_id}/messages">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_detailed_messages</a>(job_id) -> str</code>
-- <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/tune/prompt_get_status_response.py">PromptGetStatusResponse</a></code>
-- <code title="post /tune/prompt">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/tune/prompt_optimize_response.py">PromptOptimizeResponse</a></code>
+- <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="post /tune/prompt">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 
 # Contracts
 
