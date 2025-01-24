@@ -335,7 +335,7 @@ class TestPiClient:
         assert request.headers.get("x-api-key") == api_key
 
         with pytest.raises(PiClientError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
+            with update_env(**{"WITHPI_API_KEY": Omit()}):
                 client2 = PiClient(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1188,7 +1188,7 @@ class TestAsyncPiClient:
         assert request.headers.get("x-api-key") == api_key
 
         with pytest.raises(PiClientError):
-            with update_env(**{"TWOPIR_API_KEY": Omit()}):
+            with update_env(**{"WITHPI_API_KEY": Omit()}):
                 client2 = AsyncPiClient(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 

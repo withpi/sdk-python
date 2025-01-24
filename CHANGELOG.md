@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.26 (2025-01-23)
+
+Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
+
+### Features
+
+* **api:** manual updates ([#141](https://github.com/withpi/sdk-python/issues/141)) ([7ef1e71](https://github.com/withpi/sdk-python/commit/7ef1e711e72d74e8cca0109c07d53e2782a7e4f6))
+* **api:** manual updates ([#144](https://github.com/withpi/sdk-python/issues/144)) ([61079da](https://github.com/withpi/sdk-python/commit/61079da4139e1f473bb3ab7ce42bcbb48ff6e714))
+* **api:** manual updates ([#145](https://github.com/withpi/sdk-python/issues/145)) ([17a5d08](https://github.com/withpi/sdk-python/commit/17a5d0842dca36d3be896e1c108d7ccc4a136138))
+
+
+### Chores
+
+* update SDK settings ([#143](https://github.com/withpi/sdk-python/issues/143)) ([8350e18](https://github.com/withpi/sdk-python/commit/8350e18b9dfa8094ad8adbe29727da2ea47e76e1))
+
 ## 0.1.0-alpha.25 (2025-01-23)
 
 Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)
