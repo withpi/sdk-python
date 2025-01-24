@@ -17,8 +17,8 @@ class ContractWriteToHfParams(TypedDict, total=False):
     hf_contract_name: Required[str]
     """Huggingface contract name e.g.
 
-    2pir/my_contract. By default we export to the 2pir organization. If you want to
-    use your own organization, we provide the hf_token.
+    withpi/my_contract. By default we export to the withpi organization. If you want
+    to use your own organization, we provide the hf_token.
     """
 
     hf_token: Optional[str]
