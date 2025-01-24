@@ -22,8 +22,9 @@ from ..._response import (
 )
 from ...types.tune import prompt_optimize_params
 from ..._base_client import make_request_options
-from ...types.optimization_status import OptimizationStatus
 from ...types.shared_params.contract import Contract
+from ...types.tune.prompt_optimize_response import PromptOptimizeResponse
+from ...types.tune.prompt_get_status_response import PromptGetStatusResponse
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 
@@ -92,7 +93,7 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptGetStatusResponse:
         """
         Checks on a prompt optimization job
 
@@ -112,7 +113,7 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptGetStatusResponse,
         )
 
     def optimize(
@@ -130,14 +131,14 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptOptimizeResponse:
         """
         Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
 
-          dspy_optimization_type: The tuning algorithm to use
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
           examples: The examples to train and validate on
 
@@ -171,7 +172,7 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptOptimizeResponse,
         )
 
 
@@ -239,7 +240,7 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptGetStatusResponse:
         """
         Checks on a prompt optimization job
 
@@ -259,7 +260,7 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptGetStatusResponse,
         )
 
     async def optimize(
@@ -277,14 +278,14 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptOptimizeResponse:
         """
         Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
 
-          dspy_optimization_type: The tuning algorithm to use
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
           examples: The examples to train and validate on
 
@@ -318,7 +319,7 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptOptimizeResponse,
         )
 
 
