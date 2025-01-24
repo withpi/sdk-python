@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .shared import Contract as Contract, Dimension as Dimension, SubDimension as SubDimension
 from .contract_score_params import ContractScoreParams as ContractScoreParams
+from .data_generation_status import DataGenerationStatus as DataGenerationStatus
 from .feedback_topic_cluster import FeedbackTopicCluster as FeedbackTopicCluster
 from .contracts_score_metrics import ContractsScoreMetrics as ContractsScoreMetrics
 from .feedback_cluster_params import FeedbackClusterParams as FeedbackClusterParams
