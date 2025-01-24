@@ -160,8 +160,8 @@ class ContractsResource(SyncAPIResource):
         Read a contract from Huggingface dataset
 
         Args:
-          hf_contract_name: Huggingface contract name e.g. 2pir/my_contract. You need to provide the
-              hf_token if the contract dataset is not public or not own by the 2pir
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
+              hf_token if the contract dataset is not public or not own by the withpi
               organization.
 
           hf_token: Huggingface token to read the contract dataset
@@ -255,8 +255,8 @@ class ContractsResource(SyncAPIResource):
         Args:
           contract: The contract to write to Huggingface
 
-          hf_contract_name: Huggingface contract name e.g. 2pir/my_contract. By default we export to the
-              2pir organization. If you want to use your own organization, we provide the
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. By default we export to the
+              withpi organization. If you want to use your own organization, we provide the
               hf_token.
 
           hf_token: Huggingface token to use if you want to write to your own HF organization
@@ -411,8 +411,8 @@ class AsyncContractsResource(AsyncAPIResource):
         Read a contract from Huggingface dataset
 
         Args:
-          hf_contract_name: Huggingface contract name e.g. 2pir/my_contract. You need to provide the
-              hf_token if the contract dataset is not public or not own by the 2pir
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
+              hf_token if the contract dataset is not public or not own by the withpi
               organization.
 
           hf_token: Huggingface token to read the contract dataset
@@ -506,8 +506,8 @@ class AsyncContractsResource(AsyncAPIResource):
         Args:
           contract: The contract to write to Huggingface
 
-          hf_contract_name: Huggingface contract name e.g. 2pir/my_contract. By default we export to the
-              2pir organization. If you want to use your own organization, we provide the
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. By default we export to the
+              withpi organization. If you want to use your own organization, we provide the
               hf_token.
 
           hf_token: Huggingface token to use if you want to write to your own HF organization

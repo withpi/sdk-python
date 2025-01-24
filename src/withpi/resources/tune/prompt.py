@@ -22,8 +22,9 @@ from ..._response import (
 )
 from ...types.tune import prompt_optimize_params
 from ..._base_client import make_request_options
-from ...types.optimization_status import OptimizationStatus
 from ...types.shared_params.contract import Contract
+from ...types.tune.prompt_optimize_response import PromptOptimizeResponse
+from ...types.tune.prompt_get_status_response import PromptGetStatusResponse
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 
@@ -92,7 +93,7 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptGetStatusResponse:
         """
         Checks on a prompt optimization job
 
@@ -112,13 +113,14 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptGetStatusResponse,
         )
 
     def optimize(
         self,
         *,
         contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
@@ -129,12 +131,14 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptOptimizeResponse:
         """
         Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
+
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
           examples: The examples to train and validate on
 
@@ -157,6 +161,7 @@ class PromptResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
@@ -167,7 +172,7 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptOptimizeResponse,
         )
 
 
@@ -235,7 +240,7 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptGetStatusResponse:
         """
         Checks on a prompt optimization job
 
@@ -255,13 +260,14 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptGetStatusResponse,
         )
 
     async def optimize(
         self,
         *,
         contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
@@ -272,12 +278,14 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptimizationStatus:
+    ) -> PromptOptimizeResponse:
         """
         Start a prompt optimization job
 
         Args:
           contract: The contract to optimize
+
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
           examples: The examples to train and validate on
 
@@ -300,6 +308,7 @@ class AsyncPromptResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
@@ -310,7 +319,7 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationStatus,
+            cast_to=PromptOptimizeResponse,
         )
 
 

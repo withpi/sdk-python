@@ -12,8 +12,8 @@ class ContractReadFromHfParams(TypedDict, total=False):
     hf_contract_name: Required[str]
     """Huggingface contract name e.g.
 
-    2pir/my_contract. You need to provide the hf_token if the contract dataset is
-    not public or not own by the 2pir organization.
+    withpi/my_contract. You need to provide the hf_token if the contract dataset is
+    not public or not own by the withpi organization.
     """
 
     hf_token: Optional[str]
