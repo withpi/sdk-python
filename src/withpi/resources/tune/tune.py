@@ -12,6 +12,14 @@ from .prompt import (
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .model.model import (
+    ModelResource,
+    AsyncModelResource,
+    ModelResourceWithRawResponse,
+    AsyncModelResourceWithRawResponse,
+    ModelResourceWithStreamingResponse,
+    AsyncModelResourceWithStreamingResponse,
+)
 
 __all__ = ["TuneResource", "AsyncTuneResource"]
 
@@ -20,6 +28,10 @@ class TuneResource(SyncAPIResource):
     @cached_property
     def prompt(self) -> PromptResource:
         return PromptResource(self._client)
+
+    @cached_property
+    def model(self) -> ModelResource:
+        return ModelResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> TuneResourceWithRawResponse:
@@ -45,6 +57,10 @@ class AsyncTuneResource(AsyncAPIResource):
     @cached_property
     def prompt(self) -> AsyncPromptResource:
         return AsyncPromptResource(self._client)
+
+    @cached_property
+    def model(self) -> AsyncModelResource:
+        return AsyncModelResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncTuneResourceWithRawResponse:
@@ -74,6 +90,10 @@ class TuneResourceWithRawResponse:
     def prompt(self) -> PromptResourceWithRawResponse:
         return PromptResourceWithRawResponse(self._tune.prompt)
 
+    @cached_property
+    def model(self) -> ModelResourceWithRawResponse:
+        return ModelResourceWithRawResponse(self._tune.model)
+
 
 class AsyncTuneResourceWithRawResponse:
     def __init__(self, tune: AsyncTuneResource) -> None:
@@ -82,6 +102,10 @@ class AsyncTuneResourceWithRawResponse:
     @cached_property
     def prompt(self) -> AsyncPromptResourceWithRawResponse:
         return AsyncPromptResourceWithRawResponse(self._tune.prompt)
+
+    @cached_property
+    def model(self) -> AsyncModelResourceWithRawResponse:
+        return AsyncModelResourceWithRawResponse(self._tune.model)
 
 
 class TuneResourceWithStreamingResponse:
@@ -92,6 +116,10 @@ class TuneResourceWithStreamingResponse:
     def prompt(self) -> PromptResourceWithStreamingResponse:
         return PromptResourceWithStreamingResponse(self._tune.prompt)
 
+    @cached_property
+    def model(self) -> ModelResourceWithStreamingResponse:
+        return ModelResourceWithStreamingResponse(self._tune.model)
+
 
 class AsyncTuneResourceWithStreamingResponse:
     def __init__(self, tune: AsyncTuneResource) -> None:
@@ -100,3 +128,7 @@ class AsyncTuneResourceWithStreamingResponse:
     @cached_property
     def prompt(self) -> AsyncPromptResourceWithStreamingResponse:
         return AsyncPromptResourceWithStreamingResponse(self._tune.prompt)
+
+    @cached_property
+    def model(self) -> AsyncModelResourceWithStreamingResponse:
+        return AsyncModelResourceWithStreamingResponse(self._tune.model)

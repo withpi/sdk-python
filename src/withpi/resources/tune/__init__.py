@@ -8,6 +8,14 @@ from .tune import (
     TuneResourceWithStreamingResponse,
     AsyncTuneResourceWithStreamingResponse,
 )
+from .model import (
+    ModelResource,
+    AsyncModelResource,
+    ModelResourceWithRawResponse,
+    AsyncModelResourceWithRawResponse,
+    ModelResourceWithStreamingResponse,
+    AsyncModelResourceWithStreamingResponse,
+)
 from .prompt import (
     PromptResource,
     AsyncPromptResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncPromptResourceWithRawResponse",
     "PromptResourceWithStreamingResponse",
     "AsyncPromptResourceWithStreamingResponse",
+    "ModelResource",
+    "AsyncModelResource",
+    "ModelResourceWithRawResponse",
+    "AsyncModelResourceWithRawResponse",
+    "ModelResourceWithStreamingResponse",
+    "AsyncModelResourceWithStreamingResponse",
     "TuneResource",
     "AsyncTuneResource",
     "TuneResourceWithRawResponse",

@@ -62,6 +62,22 @@ Methods:
 - <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 - <code title="post /tune/prompt">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 
+## Model
+
+### Sft
+
+Types:
+
+```python
+from withpi.types.tune.model import SftStatus, SftStreamMessagesResponse
+```
+
+Methods:
+
+- <code title="post /tune/model/sft/{job_id}">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">get_status</a>(job_id) -> <a href="./src/withpi/types/tune/model/sft_status.py">SftStatus</a></code>
+- <code title="post /tune/model/sft">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/tune/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/tune/model/sft_status.py">SftStatus</a></code>
+- <code title="post /tune/model/sft/{job_id}/messages">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/tune/model/sft_stream_messages_response.py">object</a></code>
+
 # Contracts
 
 Types:
