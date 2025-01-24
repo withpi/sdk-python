@@ -3,16 +3,14 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from pydantic import Field as FieldInfo
-
 from ...._models import BaseModel
 
 __all__ = ["SftStatus", "HostedFireworkModel"]
 
 
 class HostedFireworkModel(BaseModel):
-    api_model_id: str = FieldInfo(alias="model_id")
-    """Firework's model id."""
+    hosted_model_id: str
+    """Firework's hosted model id."""
 
 
 class SftStatus(BaseModel):
