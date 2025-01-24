@@ -23,8 +23,7 @@ from ..._response import (
 from ...types.tune import prompt_optimize_params
 from ..._base_client import make_request_options
 from ...types.shared_params.contract import Contract
-from ...types.tune.prompt_optimize_response import PromptOptimizeResponse
-from ...types.tune.prompt_get_status_response import PromptGetStatusResponse
+from ...types.prompt_optimization_status import PromptOptimizationStatus
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 
@@ -93,7 +92,7 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PromptGetStatusResponse:
+    ) -> PromptOptimizationStatus:
         """
         Checks on a prompt optimization job
 
@@ -113,7 +112,7 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptGetStatusResponse,
+            cast_to=PromptOptimizationStatus,
         )
 
     def optimize(
@@ -131,7 +130,7 @@ class PromptResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PromptOptimizeResponse:
+    ) -> PromptOptimizationStatus:
         """
         Start a prompt optimization job
 
@@ -172,7 +171,7 @@ class PromptResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptOptimizeResponse,
+            cast_to=PromptOptimizationStatus,
         )
 
 
@@ -240,7 +239,7 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PromptGetStatusResponse:
+    ) -> PromptOptimizationStatus:
         """
         Checks on a prompt optimization job
 
@@ -260,7 +259,7 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptGetStatusResponse,
+            cast_to=PromptOptimizationStatus,
         )
 
     async def optimize(
@@ -278,7 +277,7 @@ class AsyncPromptResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PromptOptimizeResponse:
+    ) -> PromptOptimizationStatus:
         """
         Start a prompt optimization job
 
@@ -319,7 +318,7 @@ class AsyncPromptResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptOptimizeResponse,
+            cast_to=PromptOptimizationStatus,
         )
 
 
