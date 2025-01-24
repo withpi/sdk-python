@@ -100,6 +100,7 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -153,6 +154,7 @@ class TestPrompt:
                     }
                 ],
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -172,6 +174,7 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -195,6 +198,7 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -300,6 +304,7 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -353,6 +358,7 @@ class TestAsyncPrompt:
                     }
                 ],
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -372,6 +378,7 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -395,6 +402,7 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",

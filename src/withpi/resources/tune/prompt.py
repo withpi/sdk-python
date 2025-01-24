@@ -119,6 +119,7 @@ class PromptResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
@@ -135,6 +136,8 @@ class PromptResource(SyncAPIResource):
 
         Args:
           contract: The contract to optimize
+
+          dspy_optimization_type: The tuning algorithm to use
 
           examples: The examples to train and validate on
 
@@ -157,6 +160,7 @@ class PromptResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
@@ -262,6 +266,7 @@ class AsyncPromptResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
@@ -278,6 +283,8 @@ class AsyncPromptResource(AsyncAPIResource):
 
         Args:
           contract: The contract to optimize
+
+          dspy_optimization_type: The tuning algorithm to use
 
           examples: The examples to train and validate on
 
@@ -300,6 +307,7 @@ class AsyncPromptResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
