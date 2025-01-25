@@ -18,7 +18,7 @@ class SftStartJobParams(TypedDict, total=False):
     """Examples to use in the SFT tuning process"""
 
     base_sft_model: Literal["LLAMA_3.1_8B"]
-    """The base model to use in the SFT."""
+    """The base model to start the SFT tuning process."""
 
 
 class Example(TypedDict, total=False):
