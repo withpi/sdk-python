@@ -18,46 +18,8 @@ class TestSft:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_get_status(self, client: PiClient) -> None:
-        sft = client.tune.model.sft.get_status(
-            "job_id",
-        )
-        assert_matches_type(SftStatus, sft, path=["response"])
-
-    @parametrize
-    def test_raw_response_get_status(self, client: PiClient) -> None:
-        response = client.tune.model.sft.with_raw_response.get_status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
-
-    @parametrize
-    def test_streaming_response_get_status(self, client: PiClient) -> None:
-        with client.tune.model.sft.with_streaming_response.get_status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_get_status(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.tune.model.sft.with_raw_response.get_status(
-                "",
-            )
-
-    @parametrize
-    def test_method_start_job(self, client: PiClient) -> None:
-        sft = client.tune.model.sft.start_job(
+    def test_method_create(self, client: PiClient) -> None:
+        sft = client.tune.model.sft.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -72,8 +34,8 @@ class TestSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
-        sft = client.tune.model.sft.start_job(
+    def test_method_create_with_all_params(self, client: PiClient) -> None:
+        sft = client.tune.model.sft.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -123,8 +85,8 @@ class TestSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.tune.model.sft.with_raw_response.start_job(
+    def test_raw_response_create(self, client: PiClient) -> None:
+        response = client.tune.model.sft.with_raw_response.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -143,8 +105,8 @@ class TestSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    def test_streaming_response_start_job(self, client: PiClient) -> None:
-        with client.tune.model.sft.with_streaming_response.start_job(
+    def test_streaming_response_create(self, client: PiClient) -> None:
+        with client.tune.model.sft.with_streaming_response.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -163,6 +125,44 @@ class TestSft:
             assert_matches_type(SftStatus, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_status(self, client: PiClient) -> None:
+        sft = client.tune.model.sft.get_status(
+            "job_id",
+        )
+        assert_matches_type(SftStatus, sft, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_status(self, client: PiClient) -> None:
+        response = client.tune.model.sft.with_raw_response.get_status(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sft = response.parse()
+        assert_matches_type(SftStatus, sft, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_status(self, client: PiClient) -> None:
+        with client.tune.model.sft.with_streaming_response.get_status(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sft = response.parse()
+            assert_matches_type(SftStatus, sft, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_get_status(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.tune.model.sft.with_raw_response.get_status(
+                "",
+            )
 
     @parametrize
     def test_method_stream_messages(self, client: PiClient) -> None:
@@ -207,46 +207,8 @@ class TestAsyncSft:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_get_status(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.tune.model.sft.get_status(
-            "job_id",
-        )
-        assert_matches_type(SftStatus, sft, path=["response"])
-
-    @parametrize
-    async def test_raw_response_get_status(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.tune.model.sft.with_raw_response.get_status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = await response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_get_status(self, async_client: AsyncPiClient) -> None:
-        async with async_client.tune.model.sft.with_streaming_response.get_status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = await response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_get_status(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.tune.model.sft.with_raw_response.get_status(
-                "",
-            )
-
-    @parametrize
-    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.tune.model.sft.start_job(
+    async def test_method_create(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.tune.model.sft.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -261,8 +223,8 @@ class TestAsyncSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.tune.model.sft.start_job(
+    async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.tune.model.sft.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -312,8 +274,8 @@ class TestAsyncSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.tune.model.sft.with_raw_response.start_job(
+    async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.tune.model.sft.with_raw_response.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -332,8 +294,8 @@ class TestAsyncSft:
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
-    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
-        async with async_client.tune.model.sft.with_streaming_response.start_job(
+    async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
+        async with async_client.tune.model.sft.with_streaming_response.create(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -352,6 +314,44 @@ class TestAsyncSft:
             assert_matches_type(SftStatus, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_status(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.tune.model.sft.get_status(
+            "job_id",
+        )
+        assert_matches_type(SftStatus, sft, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_status(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.tune.model.sft.with_raw_response.get_status(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sft = await response.parse()
+        assert_matches_type(SftStatus, sft, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_status(self, async_client: AsyncPiClient) -> None:
+        async with async_client.tune.model.sft.with_streaming_response.get_status(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sft = await response.parse()
+            assert_matches_type(SftStatus, sft, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_get_status(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.tune.model.sft.with_raw_response.get_status(
+                "",
+            )
 
     @parametrize
     async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
