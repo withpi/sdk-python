@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from ..shared_params.contract import Contract
+from .shared_params.contract import Contract
 
-__all__ = ["PromptCreateParams", "Example"]
+__all__ = ["PromptOptimizeParams", "Example"]
 
 
-class PromptCreateParams(TypedDict, total=False):
+class PromptOptimizeParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to optimize"""
 

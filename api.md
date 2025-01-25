@@ -40,43 +40,35 @@ Methods:
 - <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
-# Tune
+# Prompt
 
 Types:
 
 ```python
-from withpi.types import PromptOptimizationStatus
-```
-
-## Prompt
-
-Types:
-
-```python
-from withpi.types.tune import PromptOptimizationStatus, PromptStreamMessagesResponse
+from withpi.types import PromptOptimizationStatus, PromptStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="post /prompt/optimize">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">create</a>(\*\*<a href="src/withpi/types/tune/prompt_create_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
-- <code title="get /prompt/optimize/{job_id}">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
-- <code title="get /prompt/optimize/{job_id}/messages">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">stream_messages</a>(job_id) -> str</code>
+- <code title="get /prompt/optimize/{job_id}">client.prompt.<a href="./src/withpi/resources/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="post /prompt/optimize">client.prompt.<a href="./src/withpi/resources/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="get /prompt/optimize/{job_id}/messages">client.prompt.<a href="./src/withpi/resources/prompt.py">stream_messages</a>(job_id) -> str</code>
 
-## Model
+# Model
 
-### Sft
+## Sft
 
 Types:
 
 ```python
-from withpi.types.tune.model import SftStatus, SftStreamMessagesResponse
+from withpi.types.model import SftStatus, SftStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="post /model/sft">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">create</a>(\*\*<a href="src/withpi/types/tune/model/sft_create_params.py">params</a>) -> <a href="./src/withpi/types/tune/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft/{job_id}">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">get_status</a>(job_id) -> <a href="./src/withpi/types/tune/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft/{job_id}/messages">client.tune.model.sft.<a href="./src/withpi/resources/tune/model/sft.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/tune/model/sft_stream_messages_response.py">object</a></code>
+- <code title="post /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">get_status</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/model/sft_stream_messages_response.py">object</a></code>
 
 # Contracts
 
