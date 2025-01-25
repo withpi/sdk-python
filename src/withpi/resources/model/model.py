@@ -10,8 +10,8 @@ from .sft import (
     SftResourceWithStreamingResponse,
     AsyncSftResourceWithStreamingResponse,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["ModelResource", "AsyncModelResource"]
 

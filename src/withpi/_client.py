@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import feedback, contracts
+from .resources import prompt, feedback, contracts
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
@@ -33,7 +33,7 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.data import data
-from .resources.tune import tune
+from .resources.model import model
 
 __all__ = [
     "Timeout",
@@ -49,7 +49,8 @@ __all__ = [
 
 class PiClient(SyncAPIClient):
     data: data.DataResource
-    tune: tune.TuneResource
+    prompt: prompt.PromptResource
+    model: model.ModelResource
     contracts: contracts.ContractsResource
     feedback: feedback.FeedbackResource
     with_raw_response: PiClientWithRawResponse
@@ -110,7 +111,8 @@ class PiClient(SyncAPIClient):
         )
 
         self.data = data.DataResource(self)
-        self.tune = tune.TuneResource(self)
+        self.prompt = prompt.PromptResource(self)
+        self.model = model.ModelResource(self)
         self.contracts = contracts.ContractsResource(self)
         self.feedback = feedback.FeedbackResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
@@ -223,7 +225,8 @@ class PiClient(SyncAPIClient):
 
 class AsyncPiClient(AsyncAPIClient):
     data: data.AsyncDataResource
-    tune: tune.AsyncTuneResource
+    prompt: prompt.AsyncPromptResource
+    model: model.AsyncModelResource
     contracts: contracts.AsyncContractsResource
     feedback: feedback.AsyncFeedbackResource
     with_raw_response: AsyncPiClientWithRawResponse
@@ -284,7 +287,8 @@ class AsyncPiClient(AsyncAPIClient):
         )
 
         self.data = data.AsyncDataResource(self)
-        self.tune = tune.AsyncTuneResource(self)
+        self.prompt = prompt.AsyncPromptResource(self)
+        self.model = model.AsyncModelResource(self)
         self.contracts = contracts.AsyncContractsResource(self)
         self.feedback = feedback.AsyncFeedbackResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
@@ -398,7 +402,8 @@ class AsyncPiClient(AsyncAPIClient):
 class PiClientWithRawResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithRawResponse(client.data)
-        self.tune = tune.TuneResourceWithRawResponse(client.tune)
+        self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
+        self.model = model.ModelResourceWithRawResponse(client.model)
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
         self.feedback = feedback.FeedbackResourceWithRawResponse(client.feedback)
 
@@ -406,7 +411,8 @@ class PiClientWithRawResponse:
 class AsyncPiClientWithRawResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
-        self.tune = tune.AsyncTuneResourceWithRawResponse(client.tune)
+        self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
+        self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
         self.feedback = feedback.AsyncFeedbackResourceWithRawResponse(client.feedback)
 
@@ -414,7 +420,8 @@ class AsyncPiClientWithRawResponse:
 class PiClientWithStreamedResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithStreamingResponse(client.data)
-        self.tune = tune.TuneResourceWithStreamingResponse(client.tune)
+        self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
+        self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
         self.feedback = feedback.FeedbackResourceWithStreamingResponse(client.feedback)
 
@@ -422,7 +429,8 @@ class PiClientWithStreamedResponse:
 class AsyncPiClientWithStreamedResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
-        self.tune = tune.AsyncTuneResourceWithStreamingResponse(client.tune)
+        self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
+        self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
         self.feedback = feedback.AsyncFeedbackResourceWithStreamingResponse(client.feedback)
 

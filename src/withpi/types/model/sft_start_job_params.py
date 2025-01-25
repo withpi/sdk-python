@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from ...shared_params.contract import Contract
+from ..shared_params.contract import Contract
 
-__all__ = ["SftCreateParams", "Example"]
+__all__ = ["SftStartJobParams", "Example"]
 
 
-class SftCreateParams(TypedDict, total=False):
+class SftStartJobParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to use in the SFT tuning process"""
 
