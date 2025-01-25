@@ -102,7 +102,7 @@ class SftResource(SyncAPIResource):
 
           examples: Examples to use in the SFT tuning process
 
-          base_sft_model: The base model to use in the SFT.
+          base_sft_model: The base model to start the SFT tuning process.
 
           extra_headers: Send extra headers
 
@@ -236,7 +236,7 @@ class AsyncSftResource(AsyncAPIResource):
 
           examples: Examples to use in the SFT tuning process
 
-          base_sft_model: The base model to use in the SFT.
+          base_sft_model: The base model to start the SFT tuning process.
 
           extra_headers: Send extra headers
 
