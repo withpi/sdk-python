@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
 
-__all__ = ["SftStartJobParams", "Example"]
+__all__ = ["SftCreateParams", "Example"]
 
 
-class SftStartJobParams(TypedDict, total=False):
+class SftCreateParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to use in the SFT tuning process"""
 

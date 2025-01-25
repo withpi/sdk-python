@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.contract import Contract
 
-__all__ = ["PromptOptimizeParams", "Example"]
+__all__ = ["PromptCreateParams", "Example"]
 
 
-class PromptOptimizeParams(TypedDict, total=False):
+class PromptCreateParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to optimize"""
 
