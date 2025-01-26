@@ -20,6 +20,12 @@ class SftStartJobParams(TypedDict, total=False):
     base_sft_model: Literal["LLAMA_3.1_8B"]
     """The base model to start the SFT tuning process."""
 
+    learning_rate: float
+    """SFT learning rate"""
+
+    num_train_epochs: int
+    """SFT number of train epochs"""
+
 
 class Example(TypedDict, total=False):
     llm_input: Required[str]
