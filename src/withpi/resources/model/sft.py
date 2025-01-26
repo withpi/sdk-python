@@ -87,6 +87,8 @@ class SftResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[sft_start_job_params.Example],
         base_sft_model: Literal["LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,6 +106,10 @@ class SftResource(SyncAPIResource):
 
           base_sft_model: The base model to start the SFT tuning process.
 
+          learning_rate: SFT learning rate
+
+          num_train_epochs: SFT number of train epochs
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -119,6 +125,8 @@ class SftResource(SyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "num_train_epochs": num_train_epochs,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
@@ -221,6 +229,8 @@ class AsyncSftResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[sft_start_job_params.Example],
         base_sft_model: Literal["LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -238,6 +248,10 @@ class AsyncSftResource(AsyncAPIResource):
 
           base_sft_model: The base model to start the SFT tuning process.
 
+          learning_rate: SFT learning rate
+
+          num_train_epochs: SFT number of train epochs
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -253,6 +267,8 @@ class AsyncSftResource(AsyncAPIResource):
                     "contract": contract,
                     "examples": examples,
                     "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "num_train_epochs": num_train_epochs,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
