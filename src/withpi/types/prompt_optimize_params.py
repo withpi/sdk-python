@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from ..shared_params.contract import Contract
+from .shared_params.contract import Contract
 
 __all__ = ["PromptOptimizeParams", "Example"]
 

@@ -9,7 +9,7 @@ from withpi.types import Contract, Dimension, SubDimension
 Types:
 
 ```python
-from withpi.types import InputEvaluationMetrics
+from withpi.types import DataGenerationStatus, InputEvaluationMetrics
 ```
 
 ## Inputs
@@ -17,52 +17,58 @@ from withpi.types import InputEvaluationMetrics
 Types:
 
 ```python
-from withpi.types.data import InputTopicCluster, InputClusterResponse, InputGenerateSeedsResponse
+from withpi.types.data import InputTopicCluster, InputClusterResponse
 ```
 
 Methods:
 
 - <code title="post /data/input/cluster">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/withpi/types/data/input_cluster_params.py">params</a>) -> <a href="./src/withpi/types/data/input_cluster_response.py">InputClusterResponse</a></code>
 - <code title="post /data/input/evaluate">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">evaluate</a>(\*\*<a href="src/withpi/types/data/input_evaluate_params.py">params</a>) -> <a href="./src/withpi/types/input_evaluation_metrics.py">InputEvaluationMetrics</a></code>
-- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/withpi/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/withpi/types/data/input_generate_seeds_response.py">InputGenerateSeedsResponse</a></code>
+- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/withpi/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
 
 ### GenerateFromSeeds
 
 Types:
 
 ```python
-from withpi.types.data.inputs import (
-    GenerateFromSeedRetrieveResponse,
-    GenerateFromSeedGenerateResponse,
-    GenerateFromSeedStreamMessagesResponse,
-)
+from withpi.types.data.inputs import GenerateFromSeedStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_retrieve_response.py">GenerateFromSeedRetrieveResponse</a></code>
-- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_generate_response.py">GenerateFromSeedGenerateResponse</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
-# Tune
-
-## Prompt
+# Prompt
 
 Types:
 
 ```python
-from withpi.types.tune import (
-    PromptGetDetailedMessagesResponse,
-    PromptGetStatusResponse,
-    PromptOptimizeResponse,
-)
+from withpi.types import PromptOptimizationStatus, PromptStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="get /tune/prompt/{job_id}/messages">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_detailed_messages</a>(job_id) -> str</code>
-- <code title="get /tune/prompt/{job_id}">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/tune/prompt_get_status_response.py">PromptGetStatusResponse</a></code>
-- <code title="post /tune/prompt">client.tune.prompt.<a href="./src/withpi/resources/tune/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/tune/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/tune/prompt_optimize_response.py">PromptOptimizeResponse</a></code>
+- <code title="get /prompt/optimize/{job_id}">client.prompt.<a href="./src/withpi/resources/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="post /prompt/optimize">client.prompt.<a href="./src/withpi/resources/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="get /prompt/optimize/{job_id}/messages">client.prompt.<a href="./src/withpi/resources/prompt.py">stream_messages</a>(job_id) -> str</code>
+
+# Model
+
+## Sft
+
+Types:
+
+```python
+from withpi.types.model import SftStatus, SftStreamMessagesResponse
+```
+
+Methods:
+
+- <code title="post /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">get_status</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/model/sft_stream_messages_response.py">object</a></code>
 
 # Contracts
 

@@ -2,51 +2,53 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import Iterable
+from typing_extensions import Literal
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
+from ..types import prompt_optimize_params
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.data.inputs import generate_from_seed_generate_params
-from ....types.data_generation_status import DataGenerationStatus
+from .._base_client import make_request_options
+from ..types.shared_params.contract import Contract
+from ..types.prompt_optimization_status import PromptOptimizationStatus
 
-__all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
+__all__ = ["PromptResource", "AsyncPromptResource"]
 
 
-class GenerateFromSeedsResource(SyncAPIResource):
+class PromptResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> GenerateFromSeedsResourceWithRawResponse:
+    def with_raw_response(self) -> PromptResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return GenerateFromSeedsResourceWithRawResponse(self)
+        return PromptResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GenerateFromSeedsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> PromptResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return GenerateFromSeedsResourceWithStreamingResponse(self)
+        return PromptResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def get_status(
         self,
         job_id: str,
         *,
@@ -56,9 +58,9 @@ class GenerateFromSeedsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> PromptOptimizationStatus:
         """
-        Gets the current status of a data generation job
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -72,35 +74,44 @@ class GenerateFromSeedsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            f"/data/input/generate_from_seeds/{job_id}",
+            f"/prompt/optimize/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=PromptOptimizationStatus,
         )
 
-    def generate(
+    def optimize(
         self,
         *,
-        contract_description: str,
-        num_inputs: int,
-        seeds: List[str],
+        contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
+        examples: Iterable[prompt_optimize_params.Example],
+        initial_system_instruction: str,
+        model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["PI", "DSPY"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> PromptOptimizationStatus:
         """
-        Generates input data from a list of seeds
+        Start a prompt optimization job
 
         Args:
-          contract_description: The application description to generate contract for.
+          contract: The contract to optimize
 
-          num_inputs: The number of LLM inputs to generate
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
-          seeds: The list of LLM inputs to be used as seeds
+          examples: The examples to train and validate on
+
+          initial_system_instruction: The initial system instruction
+
+          model_id: The model to use for generating responses
+
+          tuning_algorithm: The tuning algorithm to use
 
           extra_headers: Send extra headers
 
@@ -111,19 +122,22 @@ class GenerateFromSeedsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/data/input/generate_from_seeds",
+            "/prompt/optimize",
             body=maybe_transform(
                 {
-                    "contract_description": contract_description,
-                    "num_inputs": num_inputs,
-                    "seeds": seeds,
+                    "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
+                    "examples": examples,
+                    "initial_system_instruction": initial_system_instruction,
+                    "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
-                generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
+                prompt_optimize_params.PromptOptimizeParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=PromptOptimizationStatus,
         )
 
     def stream_messages(
@@ -138,7 +152,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the data generation job
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -153,7 +167,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/data/input/generate_from_seeds/{job_id}/messages",
+            f"/prompt/optimize/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -161,27 +175,27 @@ class GenerateFromSeedsResource(SyncAPIResource):
         )
 
 
-class AsyncGenerateFromSeedsResource(AsyncAPIResource):
+class AsyncPromptResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncGenerateFromSeedsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncPromptResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncGenerateFromSeedsResourceWithRawResponse(self)
+        return AsyncPromptResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGenerateFromSeedsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncPromptResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncGenerateFromSeedsResourceWithStreamingResponse(self)
+        return AsyncPromptResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def get_status(
         self,
         job_id: str,
         *,
@@ -191,9 +205,9 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> PromptOptimizationStatus:
         """
-        Gets the current status of a data generation job
+        Checks on a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -207,35 +221,44 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            f"/data/input/generate_from_seeds/{job_id}",
+            f"/prompt/optimize/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=PromptOptimizationStatus,
         )
 
-    async def generate(
+    async def optimize(
         self,
         *,
-        contract_description: str,
-        num_inputs: int,
-        seeds: List[str],
+        contract: Contract,
+        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
+        examples: Iterable[prompt_optimize_params.Example],
+        initial_system_instruction: str,
+        model_id: Literal["gpt-4o-mini", "mock-llm"],
+        tuning_algorithm: Literal["PI", "DSPY"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
+    ) -> PromptOptimizationStatus:
         """
-        Generates input data from a list of seeds
+        Start a prompt optimization job
 
         Args:
-          contract_description: The application description to generate contract for.
+          contract: The contract to optimize
 
-          num_inputs: The number of LLM inputs to generate
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use
 
-          seeds: The list of LLM inputs to be used as seeds
+          examples: The examples to train and validate on
+
+          initial_system_instruction: The initial system instruction
+
+          model_id: The model to use for generating responses
+
+          tuning_algorithm: The tuning algorithm to use
 
           extra_headers: Send extra headers
 
@@ -246,19 +269,22 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/data/input/generate_from_seeds",
+            "/prompt/optimize",
             body=await async_maybe_transform(
                 {
-                    "contract_description": contract_description,
-                    "num_inputs": num_inputs,
-                    "seeds": seeds,
+                    "contract": contract,
+                    "dspy_optimization_type": dspy_optimization_type,
+                    "examples": examples,
+                    "initial_system_instruction": initial_system_instruction,
+                    "model_id": model_id,
+                    "tuning_algorithm": tuning_algorithm,
                 },
-                generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
+                prompt_optimize_params.PromptOptimizeParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataGenerationStatus,
+            cast_to=PromptOptimizationStatus,
         )
 
     async def stream_messages(
@@ -273,7 +299,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the data generation job
+        Opens a message stream about a prompt optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -288,7 +314,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/data/input/generate_from_seeds/{job_id}/messages",
+            f"/prompt/optimize/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -296,61 +322,61 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         )
 
 
-class GenerateFromSeedsResourceWithRawResponse:
-    def __init__(self, generate_from_seeds: GenerateFromSeedsResource) -> None:
-        self._generate_from_seeds = generate_from_seeds
+class PromptResourceWithRawResponse:
+    def __init__(self, prompt: PromptResource) -> None:
+        self._prompt = prompt
 
-        self.retrieve = to_raw_response_wrapper(
-            generate_from_seeds.retrieve,
+        self.get_status = to_raw_response_wrapper(
+            prompt.get_status,
         )
-        self.generate = to_raw_response_wrapper(
-            generate_from_seeds.generate,
+        self.optimize = to_raw_response_wrapper(
+            prompt.optimize,
         )
         self.stream_messages = to_raw_response_wrapper(
-            generate_from_seeds.stream_messages,
+            prompt.stream_messages,
         )
 
 
-class AsyncGenerateFromSeedsResourceWithRawResponse:
-    def __init__(self, generate_from_seeds: AsyncGenerateFromSeedsResource) -> None:
-        self._generate_from_seeds = generate_from_seeds
+class AsyncPromptResourceWithRawResponse:
+    def __init__(self, prompt: AsyncPromptResource) -> None:
+        self._prompt = prompt
 
-        self.retrieve = async_to_raw_response_wrapper(
-            generate_from_seeds.retrieve,
+        self.get_status = async_to_raw_response_wrapper(
+            prompt.get_status,
         )
-        self.generate = async_to_raw_response_wrapper(
-            generate_from_seeds.generate,
+        self.optimize = async_to_raw_response_wrapper(
+            prompt.optimize,
         )
         self.stream_messages = async_to_raw_response_wrapper(
-            generate_from_seeds.stream_messages,
+            prompt.stream_messages,
         )
 
 
-class GenerateFromSeedsResourceWithStreamingResponse:
-    def __init__(self, generate_from_seeds: GenerateFromSeedsResource) -> None:
-        self._generate_from_seeds = generate_from_seeds
+class PromptResourceWithStreamingResponse:
+    def __init__(self, prompt: PromptResource) -> None:
+        self._prompt = prompt
 
-        self.retrieve = to_streamed_response_wrapper(
-            generate_from_seeds.retrieve,
+        self.get_status = to_streamed_response_wrapper(
+            prompt.get_status,
         )
-        self.generate = to_streamed_response_wrapper(
-            generate_from_seeds.generate,
+        self.optimize = to_streamed_response_wrapper(
+            prompt.optimize,
         )
         self.stream_messages = to_streamed_response_wrapper(
-            generate_from_seeds.stream_messages,
+            prompt.stream_messages,
         )
 
 
-class AsyncGenerateFromSeedsResourceWithStreamingResponse:
-    def __init__(self, generate_from_seeds: AsyncGenerateFromSeedsResource) -> None:
-        self._generate_from_seeds = generate_from_seeds
+class AsyncPromptResourceWithStreamingResponse:
+    def __init__(self, prompt: AsyncPromptResource) -> None:
+        self._prompt = prompt
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            generate_from_seeds.retrieve,
+        self.get_status = async_to_streamed_response_wrapper(
+            prompt.get_status,
         )
-        self.generate = async_to_streamed_response_wrapper(
-            generate_from_seeds.generate,
+        self.optimize = async_to_streamed_response_wrapper(
+            prompt.optimize,
         )
         self.stream_messages = async_to_streamed_response_wrapper(
-            generate_from_seeds.stream_messages,
+            prompt.stream_messages,
         )

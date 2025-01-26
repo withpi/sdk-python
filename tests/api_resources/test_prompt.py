@@ -9,10 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.tune import (
-    PromptOptimizeResponse,
-    PromptGetStatusResponse,
-)
+from withpi.types import PromptOptimizationStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,84 +18,46 @@ class TestPrompt:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_get_detailed_messages(self, client: PiClient) -> None:
-        prompt = client.tune.prompt.get_detailed_messages(
-            "job_id",
-        )
-        assert_matches_type(str, prompt, path=["response"])
-
-    @parametrize
-    def test_raw_response_get_detailed_messages(self, client: PiClient) -> None:
-        response = client.tune.prompt.with_raw_response.get_detailed_messages(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        prompt = response.parse()
-        assert_matches_type(str, prompt, path=["response"])
-
-    @parametrize
-    def test_streaming_response_get_detailed_messages(self, client: PiClient) -> None:
-        with client.tune.prompt.with_streaming_response.get_detailed_messages(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            prompt = response.parse()
-            assert_matches_type(str, prompt, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_get_detailed_messages(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.tune.prompt.with_raw_response.get_detailed_messages(
-                "",
-            )
-
-    @parametrize
     def test_method_get_status(self, client: PiClient) -> None:
-        prompt = client.tune.prompt.get_status(
+        prompt = client.prompt.get_status(
             "job_id",
         )
-        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_get_status(self, client: PiClient) -> None:
-        response = client.tune.prompt.with_raw_response.get_status(
+        response = client.prompt.with_raw_response.get_status(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = response.parse()
-        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_streaming_response_get_status(self, client: PiClient) -> None:
-        with client.tune.prompt.with_streaming_response.get_status(
+        with client.prompt.with_streaming_response.get_status(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = response.parse()
-            assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+            assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_get_status(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.tune.prompt.with_raw_response.get_status(
+            client.prompt.with_raw_response.get_status(
                 "",
             )
 
     @parametrize
     def test_method_optimize(self, client: PiClient) -> None:
-        prompt = client.tune.prompt.optimize(
+        prompt = client.prompt.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -114,11 +73,11 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_method_optimize_with_all_params(self, client: PiClient) -> None:
-        prompt = client.tune.prompt.optimize(
+        prompt = client.prompt.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -168,11 +127,11 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_optimize(self, client: PiClient) -> None:
-        response = client.tune.prompt.with_raw_response.optimize(
+        response = client.prompt.with_raw_response.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -192,11 +151,11 @@ class TestPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = response.parse()
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     def test_streaming_response_optimize(self, client: PiClient) -> None:
-        with client.tune.prompt.with_streaming_response.optimize(
+        with client.prompt.with_streaming_response.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -216,93 +175,93 @@ class TestPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = response.parse()
-            assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+            assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_stream_messages(self, client: PiClient) -> None:
+        prompt = client.prompt.stream_messages(
+            "job_id",
+        )
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    def test_raw_response_stream_messages(self, client: PiClient) -> None:
+        response = client.prompt.with_raw_response.stream_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = response.parse()
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    def test_streaming_response_stream_messages(self, client: PiClient) -> None:
+        with client.prompt.with_streaming_response.stream_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = response.parse()
+            assert_matches_type(str, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_stream_messages(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.prompt.with_raw_response.stream_messages(
+                "",
+            )
 
 
 class TestAsyncPrompt:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_get_detailed_messages(self, async_client: AsyncPiClient) -> None:
-        prompt = await async_client.tune.prompt.get_detailed_messages(
-            "job_id",
-        )
-        assert_matches_type(str, prompt, path=["response"])
-
-    @parametrize
-    async def test_raw_response_get_detailed_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.tune.prompt.with_raw_response.get_detailed_messages(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        prompt = await response.parse()
-        assert_matches_type(str, prompt, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_get_detailed_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.tune.prompt.with_streaming_response.get_detailed_messages(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            prompt = await response.parse()
-            assert_matches_type(str, prompt, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_get_detailed_messages(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.tune.prompt.with_raw_response.get_detailed_messages(
-                "",
-            )
-
-    @parametrize
     async def test_method_get_status(self, async_client: AsyncPiClient) -> None:
-        prompt = await async_client.tune.prompt.get_status(
+        prompt = await async_client.prompt.get_status(
             "job_id",
         )
-        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_get_status(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.tune.prompt.with_raw_response.get_status(
+        response = await async_client.prompt.with_raw_response.get_status(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = await response.parse()
-        assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_streaming_response_get_status(self, async_client: AsyncPiClient) -> None:
-        async with async_client.tune.prompt.with_streaming_response.get_status(
+        async with async_client.prompt.with_streaming_response.get_status(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = await response.parse()
-            assert_matches_type(PromptGetStatusResponse, prompt, path=["response"])
+            assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_get_status(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.tune.prompt.with_raw_response.get_status(
+            await async_client.prompt.with_raw_response.get_status(
                 "",
             )
 
     @parametrize
     async def test_method_optimize(self, async_client: AsyncPiClient) -> None:
-        prompt = await async_client.tune.prompt.optimize(
+        prompt = await async_client.prompt.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -318,11 +277,11 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_method_optimize_with_all_params(self, async_client: AsyncPiClient) -> None:
-        prompt = await async_client.tune.prompt.optimize(
+        prompt = await async_client.prompt.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -372,11 +331,11 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
         )
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_optimize(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.tune.prompt.with_raw_response.optimize(
+        response = await async_client.prompt.with_raw_response.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -396,11 +355,11 @@ class TestAsyncPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = await response.parse()
-        assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+        assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
     async def test_streaming_response_optimize(self, async_client: AsyncPiClient) -> None:
-        async with async_client.tune.prompt.with_streaming_response.optimize(
+        async with async_client.prompt.with_streaming_response.optimize(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -420,6 +379,44 @@ class TestAsyncPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = await response.parse()
-            assert_matches_type(PromptOptimizeResponse, prompt, path=["response"])
+            assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
+        prompt = await async_client.prompt.stream_messages(
+            "job_id",
+        )
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.prompt.with_raw_response.stream_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = await response.parse()
+        assert_matches_type(str, prompt, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
+        async with async_client.prompt.with_streaming_response.stream_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = await response.parse()
+            assert_matches_type(str, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.prompt.with_raw_response.stream_messages(
+                "",
+            )
