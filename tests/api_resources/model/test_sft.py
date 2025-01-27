@@ -119,8 +119,8 @@ class TestSft:
                 }
             ],
             base_sft_model="LLAMA_3.1_8B",
-            learning_rate=0,
-            num_train_epochs=0,
+            learning_rate=0.0002,
+            num_train_epochs=10,
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
@@ -310,8 +310,8 @@ class TestAsyncSft:
                 }
             ],
             base_sft_model="LLAMA_3.1_8B",
-            learning_rate=0,
-            num_train_epochs=0,
+            learning_rate=0.0002,
+            num_train_epochs=10,
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
