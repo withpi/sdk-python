@@ -24,4 +24,4 @@ class SftStatus(BaseModel):
     """Current state of the job"""
 
     hosted_firework_models: Optional[List[HostedFireworkModel]] = None
-    """A list of hosted firework models"""
+    """A list of hosted Firework models"""
