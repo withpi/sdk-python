@@ -15,13 +15,19 @@ class ActionDimension(BaseModel):
     label: str
     """The label of the dimension"""
 
-    scoring_type: Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE"]
+    scoring_type: Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]
     """The type of scoring performed for this dimension"""
 
     action_on_low_score: Optional[bool] = None
     """
     If `action_on_low_score = True`, the node emits the real value if action
     dimension score is <= 0.5 and it returns -1 otherwise.
+    """
+
+    custom_model_id: Optional[str] = None
+    """
+    The ID of the custom model to use for scoring. Only relevant for scoring_type of
+    CUSTOM_MODEL_SCORER
     """
 
     huggingface_url: Optional[str] = None
@@ -41,7 +47,7 @@ class SubDimension(BaseModel):
     label: str
     """The label of the dimension"""
 
-    scoring_type: Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE"]
+    scoring_type: Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]
     """The type of scoring performed for this dimension"""
 
     action_dimension: Optional[ActionDimension] = None
@@ -50,6 +56,12 @@ class SubDimension(BaseModel):
     If the score of the action_dimension is > 0.5, then evaluate the node and return
     the actual score. If it is <= 0.5 return -1. The higher level node will ignore
     the -1 scores and thus we achieve the short-circuit behavior.
+    """
+
+    custom_model_id: Optional[str] = None
+    """
+    The ID of the custom model to use for scoring. Only relevant for scoring_type of
+    CUSTOM_MODEL_SCORER
     """
 
     huggingface_url: Optional[str] = None
