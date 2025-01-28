@@ -80,11 +80,23 @@ from withpi.types import ContractsScoreMetrics, ContractWriteToHfResponse
 
 Methods:
 
-- <code title="post /contracts/calibrate">client.contracts.<a href="./src/withpi/resources/contracts.py">calibrate</a>(\*\*<a href="src/withpi/types/contract_calibrate_params.py">params</a>) -> <a href="./src/withpi/types/shared/contract.py">Contract</a></code>
-- <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/withpi/resources/contracts.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/contract.py">Contract</a></code>
-- <code title="post /contracts/read_from_hf">client.contracts.<a href="./src/withpi/resources/contracts.py">read_from_hf</a>(\*\*<a href="src/withpi/types/contract_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/contract.py">Contract</a></code>
-- <code title="post /contracts/score">client.contracts.<a href="./src/withpi/resources/contracts.py">score</a>(\*\*<a href="src/withpi/types/contract_score_params.py">params</a>) -> <a href="./src/withpi/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
-- <code title="post /contracts/write_to_hf">client.contracts.<a href="./src/withpi/resources/contracts.py">write_to_hf</a>(\*\*<a href="src/withpi/types/contract_write_to_hf_params.py">params</a>) -> str</code>
+- <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/contract.py">Contract</a></code>
+- <code title="post /contracts/read_from_hf">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">read_from_hf</a>(\*\*<a href="src/withpi/types/contract_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/contract.py">Contract</a></code>
+- <code title="post /contracts/score">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">score</a>(\*\*<a href="src/withpi/types/contract_score_params.py">params</a>) -> <a href="./src/withpi/types/contracts_score_metrics.py">ContractsScoreMetrics</a></code>
+- <code title="post /contracts/write_to_hf">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">write_to_hf</a>(\*\*<a href="src/withpi/types/contract_write_to_hf_params.py">params</a>) -> str</code>
+
+## Calibrate
+
+Types:
+
+```python
+from withpi.types.contracts import ContractCalibrationStatus, CalibrateStreamMessagesResponse
+```
+
+Methods:
+
+- <code title="get /contracts/calibrate/{job_id}">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/contracts/contract_calibration_status.py">ContractCalibrationStatus</a></code>
+- <code title="get /contracts/calibrate/{job_id}/messages">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/contracts/calibrate_stream_messages_response.py">object</a></code>
 
 # Feedback
 
