@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import prompt, feedback, contracts
+from .resources import prompt, feedback
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
@@ -34,6 +34,7 @@ from ._base_client import (
 )
 from .resources.data import data
 from .resources.model import model
+from .resources.contracts import contracts
 
 __all__ = [
     "Timeout",

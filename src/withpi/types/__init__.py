@@ -10,7 +10,6 @@ from .prompt_optimize_params import PromptOptimizeParams as PromptOptimizeParams
 from .contracts_score_metrics import ContractsScoreMetrics as ContractsScoreMetrics
 from .feedback_cluster_params import FeedbackClusterParams as FeedbackClusterParams
 from .input_evaluation_metrics import InputEvaluationMetrics as InputEvaluationMetrics
-from .contract_calibrate_params import ContractCalibrateParams as ContractCalibrateParams
 from .feedback_cluster_response import FeedbackClusterResponse as FeedbackClusterResponse
 from .prompt_optimization_status import PromptOptimizationStatus as PromptOptimizationStatus
 from .contract_write_to_hf_params import ContractWriteToHfParams as ContractWriteToHfParams
