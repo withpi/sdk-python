@@ -2,40 +2,50 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal
+from typing import Dict, Union, Optional
 
 import httpx
 
-from ..types import (
+from ...types import (
     contract_score_params,
-    contract_calibrate_params,
     contract_write_to_hf_params,
     contract_read_from_hf_params,
     contract_generate_dimensions_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from .calibrate import (
+    CalibrateResource,
+    AsyncCalibrateResource,
+    CalibrateResourceWithRawResponse,
+    AsyncCalibrateResourceWithRawResponse,
+    CalibrateResourceWithStreamingResponse,
+    AsyncCalibrateResourceWithStreamingResponse,
+)
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.shared.contract import Contract as SharedContract
-from ..types.shared_params.contract import Contract as SharedParamsContract
-from ..types.contracts_score_metrics import ContractsScoreMetrics
+from ..._base_client import make_request_options
+from ...types.shared.contract import Contract as SharedContract
+from ...types.shared_params.contract import Contract as SharedParamsContract
+from ...types.contracts_score_metrics import ContractsScoreMetrics
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
 
 
 class ContractsResource(SyncAPIResource):
+    @cached_property
+    def calibrate(self) -> CalibrateResource:
+        return CalibrateResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> ContractsResourceWithRawResponse:
         """
@@ -54,58 +64,6 @@ class ContractsResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return ContractsResourceWithStreamingResponse(self)
-
-    def calibrate(
-        self,
-        *,
-        contract: SharedParamsContract,
-        examples: Iterable[contract_calibrate_params.Example],
-        preference_examples: Iterable[contract_calibrate_params.PreferenceExample] | NotGiven = NOT_GIVEN,
-        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
-        """
-        Calibrate the contract scoring dimension
-
-        Args:
-          contract: The contract to calibrate
-
-          examples: Rated examples to use when calibrating the contract
-
-          preference_examples: Preference examples to use when calibrating the contract
-
-          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
-              but may result in better result.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/contracts/calibrate",
-            body=maybe_transform(
-                {
-                    "contract": contract,
-                    "examples": examples,
-                    "preference_examples": preference_examples,
-                    "strategy": strategy,
-                },
-                contract_calibrate_params.ContractCalibrateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SharedContract,
-        )
 
     def generate_dimensions(
         self,
@@ -288,6 +246,10 @@ class ContractsResource(SyncAPIResource):
 
 class AsyncContractsResource(AsyncAPIResource):
     @cached_property
+    def calibrate(self) -> AsyncCalibrateResource:
+        return AsyncCalibrateResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -305,58 +267,6 @@ class AsyncContractsResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncContractsResourceWithStreamingResponse(self)
-
-    async def calibrate(
-        self,
-        *,
-        contract: SharedParamsContract,
-        examples: Iterable[contract_calibrate_params.Example],
-        preference_examples: Iterable[contract_calibrate_params.PreferenceExample] | NotGiven = NOT_GIVEN,
-        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
-        """
-        Calibrate the contract scoring dimension
-
-        Args:
-          contract: The contract to calibrate
-
-          examples: Rated examples to use when calibrating the contract
-
-          preference_examples: Preference examples to use when calibrating the contract
-
-          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
-              but may result in better result.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/contracts/calibrate",
-            body=await async_maybe_transform(
-                {
-                    "contract": contract,
-                    "examples": examples,
-                    "preference_examples": preference_examples,
-                    "strategy": strategy,
-                },
-                contract_calibrate_params.ContractCalibrateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SharedContract,
-        )
 
     async def generate_dimensions(
         self,
@@ -541,9 +451,6 @@ class ContractsResourceWithRawResponse:
     def __init__(self, contracts: ContractsResource) -> None:
         self._contracts = contracts
 
-        self.calibrate = to_raw_response_wrapper(
-            contracts.calibrate,
-        )
         self.generate_dimensions = to_raw_response_wrapper(
             contracts.generate_dimensions,
         )
@@ -557,14 +464,15 @@ class ContractsResourceWithRawResponse:
             contracts.write_to_hf,
         )
 
+    @cached_property
+    def calibrate(self) -> CalibrateResourceWithRawResponse:
+        return CalibrateResourceWithRawResponse(self._contracts.calibrate)
+
 
 class AsyncContractsResourceWithRawResponse:
     def __init__(self, contracts: AsyncContractsResource) -> None:
         self._contracts = contracts
 
-        self.calibrate = async_to_raw_response_wrapper(
-            contracts.calibrate,
-        )
         self.generate_dimensions = async_to_raw_response_wrapper(
             contracts.generate_dimensions,
         )
@@ -578,14 +486,15 @@ class AsyncContractsResourceWithRawResponse:
             contracts.write_to_hf,
         )
 
+    @cached_property
+    def calibrate(self) -> AsyncCalibrateResourceWithRawResponse:
+        return AsyncCalibrateResourceWithRawResponse(self._contracts.calibrate)
+
 
 class ContractsResourceWithStreamingResponse:
     def __init__(self, contracts: ContractsResource) -> None:
         self._contracts = contracts
 
-        self.calibrate = to_streamed_response_wrapper(
-            contracts.calibrate,
-        )
         self.generate_dimensions = to_streamed_response_wrapper(
             contracts.generate_dimensions,
         )
@@ -599,14 +508,15 @@ class ContractsResourceWithStreamingResponse:
             contracts.write_to_hf,
         )
 
+    @cached_property
+    def calibrate(self) -> CalibrateResourceWithStreamingResponse:
+        return CalibrateResourceWithStreamingResponse(self._contracts.calibrate)
+
 
 class AsyncContractsResourceWithStreamingResponse:
     def __init__(self, contracts: AsyncContractsResource) -> None:
         self._contracts = contracts
 
-        self.calibrate = async_to_streamed_response_wrapper(
-            contracts.calibrate,
-        )
         self.generate_dimensions = async_to_streamed_response_wrapper(
             contracts.generate_dimensions,
         )
@@ -619,3 +529,7 @@ class AsyncContractsResourceWithStreamingResponse:
         self.write_to_hf = async_to_streamed_response_wrapper(
             contracts.write_to_hf,
         )
+
+    @cached_property
+    def calibrate(self) -> AsyncCalibrateResourceWithStreamingResponse:
+        return AsyncCalibrateResourceWithStreamingResponse(self._contracts.calibrate)

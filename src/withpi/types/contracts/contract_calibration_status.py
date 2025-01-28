@@ -4,16 +4,15 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from ..shared.contract import Contract
 
-__all__ = ["SftStatus", "HostedFireworkModel"]
-
-
-class HostedFireworkModel(BaseModel):
-    hosted_model_id: str
-    """Firework's hosted model id."""
+__all__ = ["ContractCalibrationStatus"]
 
 
-class SftStatus(BaseModel):
+class ContractCalibrationStatus(BaseModel):
+    calibrated_contract: Optional[Contract] = None
+    """The calibrated contract"""
+
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -22,6 +21,3 @@ class SftStatus(BaseModel):
 
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""
-
-    hosted_firework_models: Optional[List[HostedFireworkModel]] = None
-    """A list of hosted Firework models"""
