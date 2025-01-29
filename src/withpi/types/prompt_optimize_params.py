@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from .shared_params.contract import Contract
@@ -13,9 +13,6 @@ __all__ = ["PromptOptimizeParams", "Example"]
 class PromptOptimizeParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to optimize"""
-
-    dspy_optimization_type: Required[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]]
-    """The DSPY teleprompter/optimizer to use"""
 
     examples: Required[Iterable[Example]]
     """The examples to train and validate on"""
@@ -28,6 +25,12 @@ class PromptOptimizeParams(TypedDict, total=False):
 
     tuning_algorithm: Required[Literal["PI", "DSPY"]]
     """The tuning algorithm to use"""
+
+    dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]]
+    """The DSPY teleprompter/optimizer to use.
+
+    This is only applied for the DSPY otherwise leave it as None.
+    """
 
 
 class Example(TypedDict, total=False):
