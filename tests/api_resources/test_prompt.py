@@ -62,7 +62,6 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -119,7 +118,6 @@ class TestPrompt:
                     }
                 ],
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -129,6 +127,7 @@ class TestPrompt:
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
@@ -139,7 +138,6 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -163,7 +161,6 @@ class TestPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -269,7 +266,6 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -326,7 +322,6 @@ class TestAsyncPrompt:
                     }
                 ],
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -336,6 +331,7 @@ class TestAsyncPrompt:
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
+            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
@@ -346,7 +342,6 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -370,7 +365,6 @@ class TestAsyncPrompt:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             examples=[
                 {
                     "llm_input": "Tell me something different",

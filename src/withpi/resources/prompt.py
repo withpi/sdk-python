@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -85,11 +85,11 @@ class PromptResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
+        dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -103,8 +103,6 @@ class PromptResource(SyncAPIResource):
         Args:
           contract: The contract to optimize
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use
-
           examples: The examples to train and validate on
 
           initial_system_instruction: The initial system instruction
@@ -112,6 +110,9 @@ class PromptResource(SyncAPIResource):
           model_id: The model to use for generating responses
 
           tuning_algorithm: The tuning algorithm to use
+
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This is only applied for the DSPY
+              otherwise leave it as None.
 
           extra_headers: Send extra headers
 
@@ -126,11 +127,11 @@ class PromptResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "contract": contract,
-                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
+                    "dspy_optimization_type": dspy_optimization_type,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -232,11 +233,11 @@ class AsyncPromptResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        dspy_optimization_type: Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"],
         examples: Iterable[prompt_optimize_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
+        dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -250,8 +251,6 @@ class AsyncPromptResource(AsyncAPIResource):
         Args:
           contract: The contract to optimize
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use
-
           examples: The examples to train and validate on
 
           initial_system_instruction: The initial system instruction
@@ -259,6 +258,9 @@ class AsyncPromptResource(AsyncAPIResource):
           model_id: The model to use for generating responses
 
           tuning_algorithm: The tuning algorithm to use
+
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This is only applied for the DSPY
+              otherwise leave it as None.
 
           extra_headers: Send extra headers
 
@@ -273,11 +275,11 @@ class AsyncPromptResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "contract": contract,
-                    "dspy_optimization_type": dspy_optimization_type,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
+                    "dspy_optimization_type": dspy_optimization_type,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
