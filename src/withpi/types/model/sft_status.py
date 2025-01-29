@@ -9,8 +9,17 @@ __all__ = ["SftStatus", "HostedFireworkModel"]
 
 
 class HostedFireworkModel(BaseModel):
+    contract_score: float
+    """The contract score of the evaluation set"""
+
+    eval_loss: float
+    """The evaluation loss"""
+
     hosted_model_id: str
-    """Firework's hosted model id."""
+    """Firework's hosted model id"""
+
+    step: int
+    """The training step"""
 
 
 class SftStatus(BaseModel):
