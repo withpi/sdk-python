@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Optional
 
 import httpx
 
@@ -151,7 +151,7 @@ class ContractsResource(SyncAPIResource):
         self,
         *,
         contract: SharedParamsContract,
-        llm_input: Union[str, Dict[str, str]],
+        llm_input: str,
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -354,7 +354,7 @@ class AsyncContractsResource(AsyncAPIResource):
         self,
         *,
         contract: SharedParamsContract,
-        llm_input: Union[str, Dict[str, str]],
+        llm_input: str,
         llm_output: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
