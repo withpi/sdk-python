@@ -90,6 +90,7 @@ class PromptResource(SyncAPIResource):
         model_id: Literal["gpt-4o-mini", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
+        use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -111,8 +112,11 @@ class PromptResource(SyncAPIResource):
 
           tuning_algorithm: The tuning algorithm to use
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This is only applied for the DSPY
-              otherwise leave it as None.
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY otherwise
+              leave it as None.
+
+          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY
+              otherwise leave it as False.
 
           extra_headers: Send extra headers
 
@@ -132,6 +136,7 @@ class PromptResource(SyncAPIResource):
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
+                    "use_chain_of_thought": use_chain_of_thought,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
@@ -238,6 +243,7 @@ class AsyncPromptResource(AsyncAPIResource):
         model_id: Literal["gpt-4o-mini", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
+        use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -259,8 +265,11 @@ class AsyncPromptResource(AsyncAPIResource):
 
           tuning_algorithm: The tuning algorithm to use
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This is only applied for the DSPY
-              otherwise leave it as None.
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY otherwise
+              leave it as None.
+
+          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY
+              otherwise leave it as False.
 
           extra_headers: Send extra headers
 
@@ -280,6 +289,7 @@ class AsyncPromptResource(AsyncAPIResource):
                     "model_id": model_id,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
+                    "use_chain_of_thought": use_chain_of_thought,
                 },
                 prompt_optimize_params.PromptOptimizeParams,
             ),
