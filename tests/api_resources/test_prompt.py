@@ -100,7 +100,14 @@ class TestPrompt:
                                 },
                                 "custom_model_id": "your-model-id",
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                                "parameters": [
+                                    0.14285714285714285,
+                                    0.2857142857142857,
+                                    0.42857142857142855,
+                                    0.5714285714285714,
+                                    0.7142857142857143,
+                                    0.8571428571428571,
+                                ],
                                 "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
                                 "weight": 1,
                             }
@@ -114,6 +121,14 @@ class TestPrompt:
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
                         },
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
                         "weight": 1,
                     }
                 ],
@@ -128,6 +143,7 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
@@ -304,7 +320,14 @@ class TestAsyncPrompt:
                                 },
                                 "custom_model_id": "your-model-id",
                                 "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
-                                "parameters": [0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+                                "parameters": [
+                                    0.14285714285714285,
+                                    0.2857142857142857,
+                                    0.42857142857142855,
+                                    0.5714285714285714,
+                                    0.7142857142857143,
+                                    0.8571428571428571,
+                                ],
                                 "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
                                 "weight": 1,
                             }
@@ -318,6 +341,14 @@ class TestAsyncPrompt:
                             "huggingface_url": "https://yourmodelid.us-east-1.aws.endpoints.huggingface.cloud",
                             "python_code": '\ndef score(response_text, input_text, input_args, kwargs):\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
                         },
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
                         "weight": 1,
                     }
                 ],
@@ -332,6 +363,7 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 

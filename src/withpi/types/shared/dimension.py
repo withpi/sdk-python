@@ -59,6 +59,12 @@ class Dimension(BaseModel):
     the -1 scores and thus we achieve the short-circuit behavior.
     """
 
+    parameters: Optional[List[float]] = None
+    """The learned parameters for the scoring method.
+
+    This represents piecewise linear interpolation between [0, 1].
+    """
+
     weight: Optional[float] = None
     """
     The weight of the dimension The sum of dimension weights will be normalized to
