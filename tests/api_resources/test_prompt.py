@@ -143,6 +143,7 @@ class TestPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
@@ -362,6 +363,7 @@ class TestAsyncPrompt:
             model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
