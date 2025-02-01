@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .sft import (
+from .sft.sft import (
     SftResource,
     AsyncSftResource,
     SftResourceWithRawResponse,
