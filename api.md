@@ -61,14 +61,25 @@ Methods:
 Types:
 
 ```python
-from withpi.types.model import SftStatus, SftStreamMessagesResponse
+from withpi.types.model import SftStatus
 ```
 
 Methods:
 
-- <code title="post /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">get_status</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> <a href="./src/withpi/types/model/sft_stream_messages_response.py">object</a></code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+
+### Messages
+
+Types:
+
+```python
+from withpi.types.model.sft import MessageStreamResponse
+```
+
+Methods:
+
+- <code title="get /model/sft/{job_id}/messages">client.model.sft.messages.<a href="./src/withpi/resources/model/sft/messages.py">stream</a>(job_id) -> <a href="./src/withpi/types/model/sft/message_stream_response.py">object</a></code>
 
 # Contracts
 
