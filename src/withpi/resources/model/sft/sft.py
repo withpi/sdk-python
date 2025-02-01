@@ -7,28 +7,40 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from .messages import (
+    MessagesResource,
+    AsyncMessagesResource,
+    MessagesResourceWithRawResponse,
+    AsyncMessagesResourceWithRawResponse,
+    MessagesResourceWithStreamingResponse,
+    AsyncMessagesResourceWithStreamingResponse,
+)
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_start_job_params
-from ..._base_client import make_request_options
-from ...types.model.sft_status import SftStatus
-from ...types.shared_params.contract import Contract
+from ....types.model import sft_start_job_params
+from ...._base_client import make_request_options
+from ....types.model.sft_status import SftStatus
+from ....types.shared_params.contract import Contract
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
 
 class SftResource(SyncAPIResource):
+    @cached_property
+    def messages(self) -> MessagesResource:
+        return MessagesResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> SftResourceWithRawResponse:
         """
@@ -48,7 +60,7 @@ class SftResource(SyncAPIResource):
         """
         return SftResourceWithStreamingResponse(self)
 
-    def get_status(
+    def retrieve(
         self,
         job_id: str,
         *,
@@ -73,7 +85,7 @@ class SftResource(SyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._post(
+        return self._get(
             f"/model/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -136,41 +148,12 @@ class SftResource(SyncAPIResource):
             cast_to=SftStatus,
         )
 
-    def stream_messages(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Streams messages from a model SFT tuning job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._post(
-            f"/model/sft/{job_id}/messages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
 
 class AsyncSftResource(AsyncAPIResource):
+    @cached_property
+    def messages(self) -> AsyncMessagesResource:
+        return AsyncMessagesResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncSftResourceWithRawResponse:
         """
@@ -190,7 +173,7 @@ class AsyncSftResource(AsyncAPIResource):
         """
         return AsyncSftResourceWithStreamingResponse(self)
 
-    async def get_status(
+    async def retrieve(
         self,
         job_id: str,
         *,
@@ -215,7 +198,7 @@ class AsyncSftResource(AsyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._post(
+        return await self._get(
             f"/model/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -278,95 +261,66 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
-    async def stream_messages(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Streams messages from a model SFT tuning job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._post(
-            f"/model/sft/{job_id}/messages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
 
 class SftResourceWithRawResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
-        self.get_status = to_raw_response_wrapper(
-            sft.get_status,
+        self.retrieve = to_raw_response_wrapper(
+            sft.retrieve,
         )
         self.start_job = to_raw_response_wrapper(
             sft.start_job,
         )
-        self.stream_messages = to_raw_response_wrapper(
-            sft.stream_messages,
-        )
+
+    @cached_property
+    def messages(self) -> MessagesResourceWithRawResponse:
+        return MessagesResourceWithRawResponse(self._sft.messages)
 
 
 class AsyncSftResourceWithRawResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
-        self.get_status = async_to_raw_response_wrapper(
-            sft.get_status,
+        self.retrieve = async_to_raw_response_wrapper(
+            sft.retrieve,
         )
         self.start_job = async_to_raw_response_wrapper(
             sft.start_job,
         )
-        self.stream_messages = async_to_raw_response_wrapper(
-            sft.stream_messages,
-        )
+
+    @cached_property
+    def messages(self) -> AsyncMessagesResourceWithRawResponse:
+        return AsyncMessagesResourceWithRawResponse(self._sft.messages)
 
 
 class SftResourceWithStreamingResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
-        self.get_status = to_streamed_response_wrapper(
-            sft.get_status,
+        self.retrieve = to_streamed_response_wrapper(
+            sft.retrieve,
         )
         self.start_job = to_streamed_response_wrapper(
             sft.start_job,
         )
-        self.stream_messages = to_streamed_response_wrapper(
-            sft.stream_messages,
-        )
+
+    @cached_property
+    def messages(self) -> MessagesResourceWithStreamingResponse:
+        return MessagesResourceWithStreamingResponse(self._sft.messages)
 
 
 class AsyncSftResourceWithStreamingResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
-        self.get_status = async_to_streamed_response_wrapper(
-            sft.get_status,
+        self.retrieve = async_to_streamed_response_wrapper(
+            sft.retrieve,
         )
         self.start_job = async_to_streamed_response_wrapper(
             sft.start_job,
         )
-        self.stream_messages = async_to_streamed_response_wrapper(
-            sft.stream_messages,
-        )
+
+    @cached_property
+    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
+        return AsyncMessagesResourceWithStreamingResponse(self._sft.messages)
