@@ -21,7 +21,7 @@ class TestMessages:
         message = client.model.sft.messages.stream(
             "job_id",
         )
-        assert_matches_type(object, message, path=["response"])
+        assert_matches_type(str, message, path=["response"])
 
     @parametrize
     def test_raw_response_stream(self, client: PiClient) -> None:
@@ -32,7 +32,7 @@ class TestMessages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = response.parse()
-        assert_matches_type(object, message, path=["response"])
+        assert_matches_type(str, message, path=["response"])
 
     @parametrize
     def test_streaming_response_stream(self, client: PiClient) -> None:
@@ -43,7 +43,7 @@ class TestMessages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = response.parse()
-            assert_matches_type(object, message, path=["response"])
+            assert_matches_type(str, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -63,7 +63,7 @@ class TestAsyncMessages:
         message = await async_client.model.sft.messages.stream(
             "job_id",
         )
-        assert_matches_type(object, message, path=["response"])
+        assert_matches_type(str, message, path=["response"])
 
     @parametrize
     async def test_raw_response_stream(self, async_client: AsyncPiClient) -> None:
@@ -74,7 +74,7 @@ class TestAsyncMessages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = await response.parse()
-        assert_matches_type(object, message, path=["response"])
+        assert_matches_type(str, message, path=["response"])
 
     @parametrize
     async def test_streaming_response_stream(self, async_client: AsyncPiClient) -> None:
@@ -85,7 +85,7 @@ class TestAsyncMessages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = await response.parse()
-            assert_matches_type(object, message, path=["response"])
+            assert_matches_type(str, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
