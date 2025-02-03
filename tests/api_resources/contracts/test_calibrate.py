@@ -62,13 +62,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
@@ -156,13 +149,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -177,13 +163,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -280,13 +259,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
@@ -374,13 +346,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -395,13 +360,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
