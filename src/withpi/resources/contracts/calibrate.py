@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -85,8 +85,8 @@ class CalibrateResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[calibrate_start_job_params.Example],
-        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -101,9 +101,11 @@ class CalibrateResource(SyncAPIResource):
         Args:
           contract: The contract to calibrate
 
-          examples: Rated examples to use when calibrating the contract
+          examples: Rated examples to use when calibrating the contract. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract
+          preference_examples: Preference examples to use when calibrating the contract. Must specify either
+              the examples or preference examples
 
           strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
               but may result in better result.
@@ -143,7 +145,7 @@ class CalibrateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Opens a message stream about a contract calibration job
 
@@ -158,12 +160,13 @@ class CalibrateResource(SyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
             f"/contracts/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
 
@@ -224,8 +227,8 @@ class AsyncCalibrateResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[calibrate_start_job_params.Example],
-        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -240,9 +243,11 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Args:
           contract: The contract to calibrate
 
-          examples: Rated examples to use when calibrating the contract
+          examples: Rated examples to use when calibrating the contract. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract
+          preference_examples: Preference examples to use when calibrating the contract. Must specify either
+              the examples or preference examples
 
           strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
               but may result in better result.
@@ -282,7 +287,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Opens a message stream about a contract calibration job
 
@@ -297,12 +302,13 @@ class AsyncCalibrateResource(AsyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
             f"/contracts/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
 

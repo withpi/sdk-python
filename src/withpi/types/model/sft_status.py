@@ -12,6 +12,9 @@ class HostedFireworkModel(BaseModel):
     contract_score: float
     """The contract score of the evaluation set"""
 
+    epoch: float
+    """The training epoch"""
+
     eval_loss: float
     """The evaluation loss"""
 

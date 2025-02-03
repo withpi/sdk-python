@@ -9,7 +9,9 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.contracts import ContractCalibrationStatus
+from withpi.types.contracts import (
+    ContractCalibrationStatus,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -62,13 +64,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
@@ -156,13 +151,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -177,13 +165,6 @@ class TestCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -198,7 +179,7 @@ class TestCalibrate:
         calibrate = client.contracts.calibrate.stream_messages(
             "job_id",
         )
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     def test_raw_response_stream_messages(self, client: PiClient) -> None:
@@ -209,7 +190,7 @@ class TestCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = response.parse()
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     def test_streaming_response_stream_messages(self, client: PiClient) -> None:
@@ -220,7 +201,7 @@ class TestCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = response.parse()
-            assert_matches_type(object, calibrate, path=["response"])
+            assert_matches_type(str, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -280,13 +261,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
@@ -374,13 +348,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -395,13 +362,6 @@ class TestAsyncCalibrate:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -416,7 +376,7 @@ class TestAsyncCalibrate:
         calibrate = await async_client.contracts.calibrate.stream_messages(
             "job_id",
         )
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
@@ -427,7 +387,7 @@ class TestAsyncCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = await response.parse()
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
@@ -438,7 +398,7 @@ class TestAsyncCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = await response.parse()
-            assert_matches_type(object, calibrate, path=["response"])
+            assert_matches_type(str, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
