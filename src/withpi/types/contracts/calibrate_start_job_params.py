@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.contract import Contract
@@ -14,11 +14,17 @@ class CalibrateStartJobParams(TypedDict, total=False):
     contract: Required[Contract]
     """The contract to calibrate"""
 
-    examples: Required[Iterable[Example]]
-    """Rated examples to use when calibrating the contract"""
+    examples: Optional[Iterable[Example]]
+    """Rated examples to use when calibrating the contract.
 
-    preference_examples: Iterable[PreferenceExample]
-    """Preference examples to use when calibrating the contract"""
+    Must specify either the examples or the preference examples
+    """
+
+    preference_examples: Optional[Iterable[PreferenceExample]]
+    """Preference examples to use when calibrating the contract.
+
+    Must specify either the examples or preference examples
+    """
 
     strategy: Literal["LITE", "FULL"]
     """The strategy to use to calibrate the contract.

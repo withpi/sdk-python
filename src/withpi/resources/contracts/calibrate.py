@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -85,8 +85,8 @@ class CalibrateResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[calibrate_start_job_params.Example],
-        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -101,9 +101,11 @@ class CalibrateResource(SyncAPIResource):
         Args:
           contract: The contract to calibrate
 
-          examples: Rated examples to use when calibrating the contract
+          examples: Rated examples to use when calibrating the contract. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract
+          preference_examples: Preference examples to use when calibrating the contract. Must specify either
+              the examples or preference examples
 
           strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
               but may result in better result.
@@ -224,8 +226,8 @@ class AsyncCalibrateResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[calibrate_start_job_params.Example],
-        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -240,9 +242,11 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Args:
           contract: The contract to calibrate
 
-          examples: Rated examples to use when calibrating the contract
+          examples: Rated examples to use when calibrating the contract. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract
+          preference_examples: Preference examples to use when calibrating the contract. Must specify either
+              the examples or preference examples
 
           strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
               but may result in better result.
