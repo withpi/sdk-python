@@ -98,7 +98,7 @@ class SftResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[sft_start_job_params.Example],
-        base_sft_model: Literal["LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.1_1B", "LLAMA_3.1_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -246,7 +246,7 @@ class AsyncSftResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[sft_start_job_params.Example],
-        base_sft_model: Literal["LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.1_1B", "LLAMA_3.1_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
