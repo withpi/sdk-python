@@ -10,7 +10,7 @@ __all__ = ["SftStatus", "HostedFireworkModel"]
 
 class HostedFireworkModel(BaseModel):
     contract_score: float
-    """The contract score of the evaluation set"""
+    """The contract score of the eval set what isn't used in training"""
 
     epoch: float
     """The training epoch"""
