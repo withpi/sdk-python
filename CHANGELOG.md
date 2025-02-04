@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.34 (2025-02-04)
+
+Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)
+
+### Features
+
+* **api:** api update ([#189](https://github.com/withpi/sdk-python/issues/189)) ([e10ad37](https://github.com/withpi/sdk-python/commit/e10ad37a76112d59ceaad67d6a58748acd992098))
+* **api:** api update ([#190](https://github.com/withpi/sdk-python/issues/190)) ([96d9d5b](https://github.com/withpi/sdk-python/commit/96d9d5b3063278e14162a5cfc98178b8ce34c605))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#188](https://github.com/withpi/sdk-python/issues/188)) ([a378b18](https://github.com/withpi/sdk-python/commit/a378b1854bf072f3f468bef240a630eb1e55ffce))
+* **internal:** change default timeout to an int ([#186](https://github.com/withpi/sdk-python/issues/186)) ([f14b1b1](https://github.com/withpi/sdk-python/commit/f14b1b1059e797beacee84faded0c0dba736e89a))
+
 ## 0.1.0-alpha.33 (2025-02-03)
 
 Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)
