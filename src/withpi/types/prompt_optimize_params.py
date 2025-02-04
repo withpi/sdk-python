@@ -20,7 +20,7 @@ class PromptOptimizeParams(TypedDict, total=False):
     initial_system_instruction: Required[str]
     """The initial system instruction"""
 
-    model_id: Required[Literal["gpt-4o-mini", "mock-llm"]]
+    model_id: Required[Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"]]
     """The model to use for generating responses"""
 
     tuning_algorithm: Required[Literal["PI", "DSPY"]]
