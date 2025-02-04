@@ -15,7 +15,10 @@ class SftStartJobParams(TypedDict, total=False):
     """The contract to use in the SFT tuning process"""
 
     examples: Required[Iterable[Example]]
-    """Examples to use in the SFT tuning process"""
+    """Examples to use in the SFT tuning process.
+
+    We split this data into train/test 90/10.
+    """
 
     base_sft_model: Literal["LLAMA_3.1_8B"]
     """The base model to start the SFT tuning process."""

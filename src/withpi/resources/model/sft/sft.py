@@ -114,7 +114,8 @@ class SftResource(SyncAPIResource):
         Args:
           contract: The contract to use in the SFT tuning process
 
-          examples: Examples to use in the SFT tuning process
+          examples: Examples to use in the SFT tuning process. We split this data into train/test
+              90/10.
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -261,7 +262,8 @@ class AsyncSftResource(AsyncAPIResource):
         Args:
           contract: The contract to use in the SFT tuning process
 
-          examples: Examples to use in the SFT tuning process
+          examples: Examples to use in the SFT tuning process. We split this data into train/test
+              90/10.
 
           base_sft_model: The base model to start the SFT tuning process.
 
