@@ -17,7 +17,7 @@ class SftStartJobParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """Examples to use in the SFT tuning process.
 
-    We split this data into train/test 90/10.
+    We split this data into train/eval 90/10.
     """
 
     base_sft_model: Literal["LLAMA_3.1_8B"]
