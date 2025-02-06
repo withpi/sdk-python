@@ -9,5 +9,8 @@ __all__ = ["QueryGenerateFanoutsParams"]
 
 
 class QueryGenerateFanoutsParams(TypedDict, total=False):
+    num_fanout_queries: Required[int]
+    """The number of fanout queries to generate for each input query"""
+
     queries: Required[List[str]]
     """The list of queries to generate fanouts for"""
