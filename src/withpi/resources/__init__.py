@@ -24,6 +24,14 @@ from .prompt import (
     PromptResourceWithStreamingResponse,
     AsyncPromptResourceWithStreamingResponse,
 )
+from .queries import (
+    QueriesResource,
+    AsyncQueriesResource,
+    QueriesResourceWithRawResponse,
+    AsyncQueriesResourceWithRawResponse,
+    QueriesResourceWithStreamingResponse,
+    AsyncQueriesResourceWithStreamingResponse,
+)
 from .contracts import (
     ContractsResource,
     AsyncContractsResource,
@@ -58,4 +66,10 @@ __all__ = [
     "AsyncContractsResourceWithRawResponse",
     "ContractsResourceWithStreamingResponse",
     "AsyncContractsResourceWithStreamingResponse",
+    "QueriesResource",
+    "AsyncQueriesResource",
+    "QueriesResourceWithRawResponse",
+    "AsyncQueriesResourceWithRawResponse",
+    "QueriesResourceWithStreamingResponse",
+    "AsyncQueriesResourceWithStreamingResponse",
 ]
