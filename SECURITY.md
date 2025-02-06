@@ -20,7 +20,7 @@ or products provided by Pi Client please follow the respective company's securit
 
 ### Pi Client Terms and Policies
 
-Please contact dev-feedback@2pir.ai for any questions or concerns regarding security of our services.
+Please contact support@withpi.ai for any questions or concerns regarding security of our services.
 
 ---
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 
 import httpx
 
@@ -19,7 +19,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.data import input_cluster_params, input_evaluate_params, input_generate_seeds_params
+from ....types.data import input_cluster_params, input_generate_seeds_params
 from ...._base_client import make_request_options
 from .generate_from_seeds import (
     GenerateFromSeedsResource,
@@ -30,7 +30,6 @@ from .generate_from_seeds import (
     AsyncGenerateFromSeedsResourceWithStreamingResponse,
 )
 from ....types.data_generation_status import DataGenerationStatus
-from ....types.input_evaluation_metrics import InputEvaluationMetrics
 from ....types.data.input_cluster_response import InputClusterResponse
 
 __all__ = ["InputsResource", "AsyncInputsResource"]
@@ -90,49 +89,6 @@ class InputsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=InputClusterResponse,
-        )
-
-    def evaluate(
-        self,
-        *,
-        contract_description: str,
-        llm_inputs: List[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InputEvaluationMetrics:
-        """
-        Evaluates inputs against a contract description
-
-        Args:
-          contract_description: The application contract's description
-
-          llm_inputs: The inputs to evaluate
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/data/input/evaluate",
-            body=maybe_transform(
-                {
-                    "contract_description": contract_description,
-                    "llm_inputs": llm_inputs,
-                },
-                input_evaluate_params.InputEvaluateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=InputEvaluationMetrics,
         )
 
     def generate_seeds(
@@ -236,49 +192,6 @@ class AsyncInputsResource(AsyncAPIResource):
             cast_to=InputClusterResponse,
         )
 
-    async def evaluate(
-        self,
-        *,
-        contract_description: str,
-        llm_inputs: List[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> InputEvaluationMetrics:
-        """
-        Evaluates inputs against a contract description
-
-        Args:
-          contract_description: The application contract's description
-
-          llm_inputs: The inputs to evaluate
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/data/input/evaluate",
-            body=await async_maybe_transform(
-                {
-                    "contract_description": contract_description,
-                    "llm_inputs": llm_inputs,
-                },
-                input_evaluate_params.InputEvaluateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=InputEvaluationMetrics,
-        )
-
     async def generate_seeds(
         self,
         *,
@@ -331,9 +244,6 @@ class InputsResourceWithRawResponse:
         self.cluster = to_raw_response_wrapper(
             inputs.cluster,
         )
-        self.evaluate = to_raw_response_wrapper(
-            inputs.evaluate,
-        )
         self.generate_seeds = to_raw_response_wrapper(
             inputs.generate_seeds,
         )
@@ -349,9 +259,6 @@ class AsyncInputsResourceWithRawResponse:
 
         self.cluster = async_to_raw_response_wrapper(
             inputs.cluster,
-        )
-        self.evaluate = async_to_raw_response_wrapper(
-            inputs.evaluate,
         )
         self.generate_seeds = async_to_raw_response_wrapper(
             inputs.generate_seeds,
@@ -369,9 +276,6 @@ class InputsResourceWithStreamingResponse:
         self.cluster = to_streamed_response_wrapper(
             inputs.cluster,
         )
-        self.evaluate = to_streamed_response_wrapper(
-            inputs.evaluate,
-        )
         self.generate_seeds = to_streamed_response_wrapper(
             inputs.generate_seeds,
         )
@@ -387,9 +291,6 @@ class AsyncInputsResourceWithStreamingResponse:
 
         self.cluster = async_to_streamed_response_wrapper(
             inputs.cluster,
-        )
-        self.evaluate = async_to_streamed_response_wrapper(
-            inputs.evaluate,
         )
         self.generate_seeds = async_to_streamed_response_wrapper(
             inputs.generate_seeds,
