@@ -20,6 +20,7 @@ class TestQueries:
     @parametrize
     def test_method_generate_fanouts(self, client: PiClient) -> None:
         query = client.queries.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",
@@ -30,6 +31,7 @@ class TestQueries:
     @parametrize
     def test_raw_response_generate_fanouts(self, client: PiClient) -> None:
         response = client.queries.with_raw_response.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",
@@ -44,6 +46,7 @@ class TestQueries:
     @parametrize
     def test_streaming_response_generate_fanouts(self, client: PiClient) -> None:
         with client.queries.with_streaming_response.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",
@@ -64,6 +67,7 @@ class TestAsyncQueries:
     @parametrize
     async def test_method_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",
@@ -74,6 +78,7 @@ class TestAsyncQueries:
     @parametrize
     async def test_raw_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         response = await async_client.queries.with_raw_response.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",
@@ -88,6 +93,7 @@ class TestAsyncQueries:
     @parametrize
     async def test_streaming_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         async with async_client.queries.with_streaming_response.generate_fanouts(
+            num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
                 "What was the profession of both Ellery Queen and John Fowles?",

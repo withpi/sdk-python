@@ -49,6 +49,7 @@ class QueriesResource(SyncAPIResource):
     def generate_fanouts(
         self,
         *,
+        num_fanout_queries: int,
         queries: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -61,6 +62,8 @@ class QueriesResource(SyncAPIResource):
         Generates query fanouts for an input query.
 
         Args:
+          num_fanout_queries: The number of fanout queries to generate for each input query
+
           queries: The list of queries to generate fanouts for
 
           extra_headers: Send extra headers
@@ -73,7 +76,13 @@ class QueriesResource(SyncAPIResource):
         """
         return self._post(
             "/queries/generate_fanouts",
-            body=maybe_transform({"queries": queries}, query_generate_fanouts_params.QueryGenerateFanoutsParams),
+            body=maybe_transform(
+                {
+                    "num_fanout_queries": num_fanout_queries,
+                    "queries": queries,
+                },
+                query_generate_fanouts_params.QueryGenerateFanoutsParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -104,6 +113,7 @@ class AsyncQueriesResource(AsyncAPIResource):
     async def generate_fanouts(
         self,
         *,
+        num_fanout_queries: int,
         queries: List[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -116,6 +126,8 @@ class AsyncQueriesResource(AsyncAPIResource):
         Generates query fanouts for an input query.
 
         Args:
+          num_fanout_queries: The number of fanout queries to generate for each input query
+
           queries: The list of queries to generate fanouts for
 
           extra_headers: Send extra headers
@@ -129,7 +141,11 @@ class AsyncQueriesResource(AsyncAPIResource):
         return await self._post(
             "/queries/generate_fanouts",
             body=await async_maybe_transform(
-                {"queries": queries}, query_generate_fanouts_params.QueryGenerateFanoutsParams
+                {
+                    "num_fanout_queries": num_fanout_queries,
+                    "queries": queries,
+                },
+                query_generate_fanouts_params.QueryGenerateFanoutsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
