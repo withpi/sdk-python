@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.36 (2025-02-06)
+
+Full Changelog: [v0.1.0-alpha.35...v0.1.0-alpha.36](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.35...v0.1.0-alpha.36)
+
+### Features
+
+* **api:** api update ([#199](https://github.com/withpi/sdk-python/issues/199)) ([7d787ca](https://github.com/withpi/sdk-python/commit/7d787cad2c2b8de7afcaef5c3be7c814b7be232c))
+* **api:** manual updates ([#200](https://github.com/withpi/sdk-python/issues/200)) ([234cee3](https://github.com/withpi/sdk-python/commit/234cee3f16938ba5484b52465113d4dc3efffda1))
+* **client:** send `X-Stainless-Read-Timeout` header ([#197](https://github.com/withpi/sdk-python/issues/197)) ([2754e3c](https://github.com/withpi/sdk-python/commit/2754e3c96f8f407d67184ef9366b45e3ad068e2f))
+
 ## 0.1.0-alpha.35 (2025-02-04)
 
 Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
