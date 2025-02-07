@@ -10,10 +10,10 @@ __all__ = ["QueryGenerateFanoutsResponse", "QueryGenerateFanoutsResponseItem"]
 
 class QueryGenerateFanoutsResponseItem(BaseModel):
     fanout_queries: List[str]
-    """The list of fanout queries generated from the input"""
+    """The list of fanout queries associated with the input"""
 
     query: str
-    """The input query to generate fanouts from."""
+    """The input query that the fanout queries are based on."""
 
 
 QueryGenerateFanoutsResponse: TypeAlias = List[QueryGenerateFanoutsResponseItem]
