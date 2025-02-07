@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.37 (2025-02-07)
+
+Full Changelog: [v0.1.0-alpha.36...v0.1.0-alpha.37](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.36...v0.1.0-alpha.37)
+
+### Features
+
+* **api:** api update ([#202](https://github.com/withpi/sdk-python/issues/202)) ([3e9d054](https://github.com/withpi/sdk-python/commit/3e9d054cb795ab496e149e08a68385d0b821684d))
+* **api:** api update ([#204](https://github.com/withpi/sdk-python/issues/204)) ([256aefb](https://github.com/withpi/sdk-python/commit/256aefbdd72c06c268b427e8fc90413fd8b68baf))
+
+
+### Chores
+
+* **internal:** fix type traversing dictionary params ([#205](https://github.com/withpi/sdk-python/issues/205)) ([b5860ef](https://github.com/withpi/sdk-python/commit/b5860efb34688e177f6f336e548cc33e4613f9cd))
+
 ## 0.1.0-alpha.36 (2025-02-06)
 
 Full Changelog: [v0.1.0-alpha.35...v0.1.0-alpha.36](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.35...v0.1.0-alpha.36)
