@@ -79,6 +79,8 @@ class TestGenerateFromSeeds:
             batch_size=5,
             num_shots=5,
             similarity_threshold=0.85,
+            themes=["Chemistry", "Software Engineering"],
+            themes_coverage=0.8,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
@@ -220,6 +222,8 @@ class TestAsyncGenerateFromSeeds:
             batch_size=5,
             num_shots=5,
             similarity_threshold=0.85,
+            themes=["Chemistry", "Software Engineering"],
+            themes_coverage=0.8,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 

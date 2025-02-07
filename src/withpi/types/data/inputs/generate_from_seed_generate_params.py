@@ -35,3 +35,12 @@ class GenerateFromSeedGenerateParams(TypedDict, total=False):
     If a generated input is similar to any of the existing ones with similarity >
     `similarity_threshold`, we reject it.
     """
+
+    themes: List[str]
+    """Hints to the process to generate inputs in specific fields or domains"""
+
+    themes_coverage: float
+    """If `themes` exist, then `themes_coverage` decides how often to use them.
+
+    Use < 1.0, if `themes` are not exhaustive.
+    """
