@@ -49,9 +49,9 @@ class QueriesResource(SyncAPIResource):
     def generate_fanouts(
         self,
         *,
-        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery],
-        num_fanout_queries: int,
         queries: List[str],
+        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery] | NotGiven = NOT_GIVEN,
+        num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,11 +63,11 @@ class QueriesResource(SyncAPIResource):
         Generates query fanouts for an input query.
 
         Args:
+          queries: The list of queries to generate fanouts for
+
           example_fanout_queries: The list of queries to use as few-shot examples for the fanout generation
 
           num_fanout_queries: The number of fanout queries to generate for each input query
-
-          queries: The list of queries to generate fanouts for
 
           extra_headers: Send extra headers
 
@@ -81,9 +81,9 @@ class QueriesResource(SyncAPIResource):
             "/queries/generate_fanouts",
             body=maybe_transform(
                 {
+                    "queries": queries,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
-                    "queries": queries,
                 },
                 query_generate_fanouts_params.QueryGenerateFanoutsParams,
             ),
@@ -117,9 +117,9 @@ class AsyncQueriesResource(AsyncAPIResource):
     async def generate_fanouts(
         self,
         *,
-        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery],
-        num_fanout_queries: int,
         queries: List[str],
+        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery] | NotGiven = NOT_GIVEN,
+        num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,11 +131,11 @@ class AsyncQueriesResource(AsyncAPIResource):
         Generates query fanouts for an input query.
 
         Args:
+          queries: The list of queries to generate fanouts for
+
           example_fanout_queries: The list of queries to use as few-shot examples for the fanout generation
 
           num_fanout_queries: The number of fanout queries to generate for each input query
-
-          queries: The list of queries to generate fanouts for
 
           extra_headers: Send extra headers
 
@@ -149,9 +149,9 @@ class AsyncQueriesResource(AsyncAPIResource):
             "/queries/generate_fanouts",
             body=await async_maybe_transform(
                 {
+                    "queries": queries,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
-                    "queries": queries,
                 },
                 query_generate_fanouts_params.QueryGenerateFanoutsParams,
             ),

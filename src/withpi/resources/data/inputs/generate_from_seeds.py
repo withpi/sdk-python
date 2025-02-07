@@ -88,6 +88,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         similarity_threshold: float | NotGiven = NOT_GIVEN,
+        themes: List[str] | NotGiven = NOT_GIVEN,
+        themes_coverage: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,6 +116,11 @@ class GenerateFromSeedsResource(SyncAPIResource):
           similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
               `similarity_threshold`, we reject it.
 
+          themes: Hints to the process to generate inputs in specific fields or domains
+
+          themes_coverage: If `themes` exist, then `themes_coverage` decides how often to use them. Use <
+              1.0, if `themes` are not exhaustive.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -132,6 +139,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
                     "batch_size": batch_size,
                     "num_shots": num_shots,
                     "similarity_threshold": similarity_threshold,
+                    "themes": themes,
+                    "themes_coverage": themes_coverage,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
@@ -238,6 +247,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         similarity_threshold: float | NotGiven = NOT_GIVEN,
+        themes: List[str] | NotGiven = NOT_GIVEN,
+        themes_coverage: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -264,6 +275,11 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
           similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
               `similarity_threshold`, we reject it.
 
+          themes: Hints to the process to generate inputs in specific fields or domains
+
+          themes_coverage: If `themes` exist, then `themes_coverage` decides how often to use them. Use <
+              1.0, if `themes` are not exhaustive.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -282,6 +298,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
                     "batch_size": batch_size,
                     "num_shots": num_shots,
                     "similarity_threshold": similarity_threshold,
+                    "themes": themes,
+                    "themes_coverage": themes_coverage,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
