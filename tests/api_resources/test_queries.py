@@ -20,6 +20,18 @@ class TestQueries:
     @parametrize
     def test_method_generate_fanouts(self, client: PiClient) -> None:
         query = client.queries.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -31,6 +43,18 @@ class TestQueries:
     @parametrize
     def test_raw_response_generate_fanouts(self, client: PiClient) -> None:
         response = client.queries.with_raw_response.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -46,6 +70,18 @@ class TestQueries:
     @parametrize
     def test_streaming_response_generate_fanouts(self, client: PiClient) -> None:
         with client.queries.with_streaming_response.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -67,6 +103,18 @@ class TestAsyncQueries:
     @parametrize
     async def test_method_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -78,6 +126,18 @@ class TestAsyncQueries:
     @parametrize
     async def test_raw_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         response = await async_client.queries.with_raw_response.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -93,6 +153,18 @@ class TestAsyncQueries:
     @parametrize
     async def test_streaming_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         async with async_client.queries.with_streaming_response.generate_fanouts(
+            example_fanout_queries=[
+                {
+                    "fanout_queries": [
+                        "Genus of the cheetah",
+                        "Genus of the pronghorn",
+                        "Genus of the springbok",
+                        "Genus of the wildebeest",
+                        "Genus of the lion",
+                    ],
+                    "query": "What are the genera of the five fastest land animals?",
+                }
+            ],
             num_fanout_queries=5,
             queries=[
                 "Name the four largest fish and what they eat.",
