@@ -58,8 +58,8 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_method_generate(self, client: PiClient) -> None:
         generate_from_seed = client.data.inputs.generate_from_seeds.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -68,10 +68,25 @@ class TestGenerateFromSeeds:
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
     @parametrize
+    def test_method_generate_with_all_params(self, client: PiClient) -> None:
+        generate_from_seed = client.data.inputs.generate_from_seeds.generate(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+            batch_size=5,
+            num_shots=5,
+            similarity_threshold=0.85,
+        )
+        assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
+
+    @parametrize
     def test_raw_response_generate(self, client: PiClient) -> None:
         response = client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -86,8 +101,8 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_streaming_response_generate(self, client: PiClient) -> None:
         with client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -184,8 +199,8 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_method_generate(self, async_client: AsyncPiClient) -> None:
         generate_from_seed = await async_client.data.inputs.generate_from_seeds.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -194,10 +209,25 @@ class TestAsyncGenerateFromSeeds:
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
     @parametrize
+    async def test_method_generate_with_all_params(self, async_client: AsyncPiClient) -> None:
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.generate(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+            batch_size=5,
+            num_shots=5,
+            similarity_threshold=0.85,
+        )
+        assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
+
+    @parametrize
     async def test_raw_response_generate(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.inputs.generate_from_seeds.with_raw_response.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
@@ -212,8 +242,8 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.inputs.generate_from_seeds.with_streaming_response.generate(
-            contract_description="Write a children's story communicating a simple life lesson.",
-            num_inputs=50,
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
             seeds=[
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
