@@ -82,9 +82,12 @@ class GenerateFromSeedsResource(SyncAPIResource):
     def generate(
         self,
         *,
-        contract_description: str,
-        num_inputs: int,
+        application_description: str,
+        num_inputs_to_generate: int,
         seeds: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        similarity_threshold: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -96,11 +99,20 @@ class GenerateFromSeedsResource(SyncAPIResource):
         Generates input data from a list of seeds
 
         Args:
-          contract_description: The application description to generate contract for.
+          application_description: The application description to generate contract for.
 
-          num_inputs: The number of LLM inputs to generate
+          num_inputs_to_generate: The number of LLM inputs to generate
 
           seeds: The list of LLM inputs to be used as seeds
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
+              be same as `num_shots`.
+
+          num_shots: Number of inputs to be included in the prompt for generation. Generally it could
+              be same as `batch_size`.
+
+          similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
+              `similarity_threshold`, we reject it.
 
           extra_headers: Send extra headers
 
@@ -114,9 +126,12 @@ class GenerateFromSeedsResource(SyncAPIResource):
             "/data/input/generate_from_seeds",
             body=maybe_transform(
                 {
-                    "contract_description": contract_description,
-                    "num_inputs": num_inputs,
+                    "application_description": application_description,
+                    "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
+                    "batch_size": batch_size,
+                    "num_shots": num_shots,
+                    "similarity_threshold": similarity_threshold,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
@@ -217,9 +232,12 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
     async def generate(
         self,
         *,
-        contract_description: str,
-        num_inputs: int,
+        application_description: str,
+        num_inputs_to_generate: int,
         seeds: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        similarity_threshold: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -231,11 +249,20 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         Generates input data from a list of seeds
 
         Args:
-          contract_description: The application description to generate contract for.
+          application_description: The application description to generate contract for.
 
-          num_inputs: The number of LLM inputs to generate
+          num_inputs_to_generate: The number of LLM inputs to generate
 
           seeds: The list of LLM inputs to be used as seeds
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
+              be same as `num_shots`.
+
+          num_shots: Number of inputs to be included in the prompt for generation. Generally it could
+              be same as `batch_size`.
+
+          similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
+              `similarity_threshold`, we reject it.
 
           extra_headers: Send extra headers
 
@@ -249,9 +276,12 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             "/data/input/generate_from_seeds",
             body=await async_maybe_transform(
                 {
-                    "contract_description": contract_description,
-                    "num_inputs": num_inputs,
+                    "application_description": application_description,
+                    "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
+                    "batch_size": batch_size,
+                    "num_shots": num_shots,
+                    "similarity_threshold": similarity_threshold,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
