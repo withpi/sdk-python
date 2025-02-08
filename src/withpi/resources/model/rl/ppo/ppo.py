@@ -107,8 +107,11 @@ class PpoResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlPpoStatus:
-        """
-        Start the Reinforcement Learning (RL) job using PPO
+        """Initialize the Proximal Policy Optimization (PPO) reinforcement learning job.
+
+        We
+        implement Low-Rank Adaptation (LoRA) for the reinforcement learning process,
+        with a fixed rank of 16.
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -221,8 +224,11 @@ class AsyncPpoResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlPpoStatus:
-        """
-        Start the Reinforcement Learning (RL) job using PPO
+        """Initialize the Proximal Policy Optimization (PPO) reinforcement learning job.
+
+        We
+        implement Low-Rank Adaptation (LoRA) for the reinforcement learning process,
+        with a fixed rank of 16.
 
         Args:
           contract: The contract to use in the SFT tuning process
