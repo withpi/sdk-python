@@ -5,12 +5,12 @@ from typing_extensions import Literal
 
 from ...._models import BaseModel
 
-__all__ = ["RlPpoStatus", "HostedFireworkModel"]
+__all__ = ["RlPpoStatus", "TrainedModel"]
 
 
-class HostedFireworkModel(BaseModel):
+class TrainedModel(BaseModel):
     contract_score: float
-    """The contract score of the eval set what isn't used in training"""
+    """The PI contract score of the eval set what isn't used in training"""
 
     epoch: float
     """The training epoch"""
@@ -18,11 +18,14 @@ class HostedFireworkModel(BaseModel):
     eval_loss: float
     """The evaluation loss"""
 
-    hosted_model_id: str
+    firework_hosted_model_id: str
     """Firework's hosted model id"""
 
     step: int
     """The training step"""
+
+    hf_model_name: Optional[str] = None
+    """The SFT model weights in Huggingface"""
 
 
 class RlPpoStatus(BaseModel):
@@ -35,5 +38,5 @@ class RlPpoStatus(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""
 
-    hosted_firework_models: Optional[List[HostedFireworkModel]] = None
-    """A list of hosted Firework models"""
+    trained_models: Optional[List[TrainedModel]] = None
+    """A list of trained models selected based on the PI Contract score."""
