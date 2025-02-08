@@ -23,7 +23,6 @@ from withpi.types.data import InputTopicCluster, InputClusterResponse
 Methods:
 
 - <code title="post /data/input/cluster">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/withpi/types/data/input_cluster_params.py">params</a>) -> <a href="./src/withpi/types/data/input_cluster_response.py">InputClusterResponse</a></code>
-- <code title="post /data/input/generate_seeds">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">generate_seeds</a>(\*\*<a href="src/withpi/types/data/input_generate_seeds_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
 
 ### GenerateFromSeeds
 
