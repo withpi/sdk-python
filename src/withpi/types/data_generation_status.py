@@ -9,9 +9,6 @@ __all__ = ["DataGenerationStatus"]
 
 
 class DataGenerationStatus(BaseModel):
-    data: Optional[List[str]] = None
-    """The generated data. Absent unless state is done"""
-
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -20,3 +17,6 @@ class DataGenerationStatus(BaseModel):
 
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""
+
+    data: Optional[List[str]] = None
+    """The generated data. Absent unless state is done"""
