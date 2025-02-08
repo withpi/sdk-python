@@ -81,6 +81,33 @@ Methods:
 
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.messages.<a href="./src/withpi/resources/model/sft/messages.py">stream</a>(job_id) -> str</code>
 
+## Rl
+
+### Ppo
+
+Types:
+
+```python
+from withpi.types.model.rl import RlPpoStatus
+```
+
+Methods:
+
+- <code title="get /model/rl/ppo/{job_id}">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo/ppo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
+- <code title="post /model/rl/ppo">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo/ppo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/ppo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
+
+#### Messages
+
+Types:
+
+```python
+from withpi.types.model.rl.ppo import MessageStreamResponse
+```
+
+Methods:
+
+- <code title="get /model/rl/ppo/{job_id}/messages">client.model.rl.ppo.messages.<a href="./src/withpi/resources/model/rl/ppo/messages.py">stream</a>(job_id) -> str</code>
+
 # Contracts
 
 Types:

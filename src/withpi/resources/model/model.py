@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .rl.rl import (
+    RlResource,
+    AsyncRlResource,
+    RlResourceWithRawResponse,
+    AsyncRlResourceWithRawResponse,
+    RlResourceWithStreamingResponse,
+    AsyncRlResourceWithStreamingResponse,
+)
 from .sft.sft import (
     SftResource,
     AsyncSftResource,
@@ -20,6 +28,10 @@ class ModelResource(SyncAPIResource):
     @cached_property
     def sft(self) -> SftResource:
         return SftResource(self._client)
+
+    @cached_property
+    def rl(self) -> RlResource:
+        return RlResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ModelResourceWithRawResponse:
@@ -45,6 +57,10 @@ class AsyncModelResource(AsyncAPIResource):
     @cached_property
     def sft(self) -> AsyncSftResource:
         return AsyncSftResource(self._client)
+
+    @cached_property
+    def rl(self) -> AsyncRlResource:
+        return AsyncRlResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncModelResourceWithRawResponse:
@@ -74,6 +90,10 @@ class ModelResourceWithRawResponse:
     def sft(self) -> SftResourceWithRawResponse:
         return SftResourceWithRawResponse(self._model.sft)
 
+    @cached_property
+    def rl(self) -> RlResourceWithRawResponse:
+        return RlResourceWithRawResponse(self._model.rl)
+
 
 class AsyncModelResourceWithRawResponse:
     def __init__(self, model: AsyncModelResource) -> None:
@@ -82,6 +102,10 @@ class AsyncModelResourceWithRawResponse:
     @cached_property
     def sft(self) -> AsyncSftResourceWithRawResponse:
         return AsyncSftResourceWithRawResponse(self._model.sft)
+
+    @cached_property
+    def rl(self) -> AsyncRlResourceWithRawResponse:
+        return AsyncRlResourceWithRawResponse(self._model.rl)
 
 
 class ModelResourceWithStreamingResponse:
@@ -92,6 +116,10 @@ class ModelResourceWithStreamingResponse:
     def sft(self) -> SftResourceWithStreamingResponse:
         return SftResourceWithStreamingResponse(self._model.sft)
 
+    @cached_property
+    def rl(self) -> RlResourceWithStreamingResponse:
+        return RlResourceWithStreamingResponse(self._model.rl)
+
 
 class AsyncModelResourceWithStreamingResponse:
     def __init__(self, model: AsyncModelResource) -> None:
@@ -100,3 +128,7 @@ class AsyncModelResourceWithStreamingResponse:
     @cached_property
     def sft(self) -> AsyncSftResourceWithStreamingResponse:
         return AsyncSftResourceWithStreamingResponse(self._model.sft)
+
+    @cached_property
+    def rl(self) -> AsyncRlResourceWithStreamingResponse:
+        return AsyncRlResourceWithStreamingResponse(self._model.rl)
