@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.40 (2025-02-09)
+
+Full Changelog: [v0.1.0-alpha.39...v0.1.0-alpha.40](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.39...v0.1.0-alpha.40)
+
+### Features
+
+* **api:** api update ([#216](https://github.com/withpi/sdk-python/issues/216)) ([0cfa836](https://github.com/withpi/sdk-python/commit/0cfa836f58c3bab0cd4b3edd9af5cbad89977291))
+* **api:** api update ([#218](https://github.com/withpi/sdk-python/issues/218)) ([ce35ff7](https://github.com/withpi/sdk-python/commit/ce35ff77f3d5dece7856dee03b34b8ce37b56c51))
+* **api:** api update ([#219](https://github.com/withpi/sdk-python/issues/219)) ([3ead5ea](https://github.com/withpi/sdk-python/commit/3ead5ea69c7b22ebf346a9663245cdacc63ba656))
+* **api:** api update ([#220](https://github.com/withpi/sdk-python/issues/220)) ([0f2e7ff](https://github.com/withpi/sdk-python/commit/0f2e7ff613e998a91720fb8e8eb3b0fb649002cf))
+* **api:** api update ([#221](https://github.com/withpi/sdk-python/issues/221)) ([e8bd21d](https://github.com/withpi/sdk-python/commit/e8bd21d586dab4fff591e540c5eaa83d18ecf1ff))
+
 ## 0.1.0-alpha.39 (2025-02-07)
 
 Full Changelog: [v0.1.0-alpha.38...v0.1.0-alpha.39](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.38...v0.1.0-alpha.39)
