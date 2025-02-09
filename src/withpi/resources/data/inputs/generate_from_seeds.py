@@ -85,6 +85,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         application_description: str,
         num_inputs_to_generate: int,
         seeds: List[str],
+        augment_with_auto_themes: bool | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         similarity_threshold: float | NotGiven = NOT_GIVEN,
@@ -107,6 +108,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
 
           seeds: The list of LLM inputs to be used as seeds
 
+          augment_with_auto_themes: If `true`, also use auto generated themes on the top of user provided ones.
+
           batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
@@ -116,7 +119,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
           similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
               `similarity_threshold`, we reject it.
 
-          themes: Hints to the process to generate inputs in specific fields or domains
+          themes: Hints to the process to generate inputs in specific fields or domains or user
+              types
 
           themes_coverage: If `themes` exist, then `themes_coverage` decides how often to use them. Use <
               1.0, if `themes` are not exhaustive.
@@ -136,6 +140,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
                     "application_description": application_description,
                     "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
+                    "augment_with_auto_themes": augment_with_auto_themes,
                     "batch_size": batch_size,
                     "num_shots": num_shots,
                     "similarity_threshold": similarity_threshold,
@@ -244,6 +249,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         application_description: str,
         num_inputs_to_generate: int,
         seeds: List[str],
+        augment_with_auto_themes: bool | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         similarity_threshold: float | NotGiven = NOT_GIVEN,
@@ -266,6 +272,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
 
           seeds: The list of LLM inputs to be used as seeds
 
+          augment_with_auto_themes: If `true`, also use auto generated themes on the top of user provided ones.
+
           batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
@@ -275,7 +283,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
           similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
               `similarity_threshold`, we reject it.
 
-          themes: Hints to the process to generate inputs in specific fields or domains
+          themes: Hints to the process to generate inputs in specific fields or domains or user
+              types
 
           themes_coverage: If `themes` exist, then `themes_coverage` decides how often to use them. Use <
               1.0, if `themes` are not exhaustive.
@@ -295,6 +304,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
                     "application_description": application_description,
                     "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
+                    "augment_with_auto_themes": augment_with_auto_themes,
                     "batch_size": batch_size,
                     "num_shots": num_shots,
                     "similarity_threshold": similarity_threshold,
