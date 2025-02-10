@@ -76,12 +76,9 @@ class TestGenerateFromSeeds:
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
             ],
-            augment_with_auto_themes=False,
             batch_size=5,
             num_shots=5,
             similarity_threshold=0.925,
-            themes=["Chemistry", "Software Engineering", "Advanced Users"],
-            themes_coverage=0.75,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
@@ -220,12 +217,9 @@ class TestAsyncGenerateFromSeeds:
                 "The quick brown fox jumped over the lazy dog",
                 "The lazy dog was jumped over by the quick brown fox",
             ],
-            augment_with_auto_themes=False,
             batch_size=5,
             num_shots=5,
             similarity_threshold=0.925,
-            themes=["Chemistry", "Software Engineering", "Advanced Users"],
-            themes_coverage=0.75,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
