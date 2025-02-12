@@ -29,13 +29,17 @@ Methods:
 Types:
 
 ```python
-from withpi.types.data.inputs import GenerateFromSeedStreamMessagesResponse
+from withpi.types.data.inputs import (
+    GenerateFromSeedStreamDataResponse,
+    GenerateFromSeedStreamMessagesResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
 # Prompt

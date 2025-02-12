@@ -117,6 +117,44 @@ class TestGenerateFromSeeds:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_stream_data(self, client: PiClient) -> None:
+        generate_from_seed = client.data.inputs.generate_from_seeds.stream_data(
+            "job_id",
+        )
+        assert_matches_type(str, generate_from_seed, path=["response"])
+
+    @parametrize
+    def test_raw_response_stream_data(self, client: PiClient) -> None:
+        response = client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_from_seed = response.parse()
+        assert_matches_type(str, generate_from_seed, path=["response"])
+
+    @parametrize
+    def test_streaming_response_stream_data(self, client: PiClient) -> None:
+        with client.data.inputs.generate_from_seeds.with_streaming_response.stream_data(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_from_seed = response.parse()
+            assert_matches_type(str, generate_from_seed, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_stream_data(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
+                "",
+            )
+
+    @parametrize
     def test_method_stream_messages(self, client: PiClient) -> None:
         generate_from_seed = client.data.inputs.generate_from_seeds.stream_messages(
             "job_id",
@@ -256,6 +294,44 @@ class TestAsyncGenerateFromSeeds:
             assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_stream_data(self, async_client: AsyncPiClient) -> None:
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.stream_data(
+            "job_id",
+        )
+        assert_matches_type(str, generate_from_seed, path=["response"])
+
+    @parametrize
+    async def test_raw_response_stream_data(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_from_seed = await response.parse()
+        assert_matches_type(str, generate_from_seed, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_stream_data(self, async_client: AsyncPiClient) -> None:
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.stream_data(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_from_seed = await response.parse()
+            assert_matches_type(str, generate_from_seed, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_stream_data(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
+                "",
+            )
 
     @parametrize
     async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
