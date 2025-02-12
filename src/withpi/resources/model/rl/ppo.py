@@ -6,40 +6,28 @@ from typing import Iterable
 
 import httpx
 
-from .messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
-)
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ....._utils import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ....._compat import cached_property
-from ....._resource import SyncAPIResource, AsyncAPIResource
-from ....._response import (
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import make_request_options
-from .....types.model.rl import ppo_start_job_params
-from .....types.model.rl.rl_ppo_status import RlPpoStatus
-from .....types.shared_params.contract import Contract
+from ...._base_client import make_request_options
+from ....types.model.rl import ppo_start_job_params
+from ....types.model.rl.rl_ppo_status import RlPpoStatus
+from ....types.shared_params.contract import Contract
 
 __all__ = ["PpoResource", "AsyncPpoResource"]
 
 
 class PpoResource(SyncAPIResource):
-    @cached_property
-    def messages(self) -> MessagesResource:
-        return MessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> PpoResourceWithRawResponse:
         """
@@ -151,12 +139,42 @@ class PpoResource(SyncAPIResource):
             cast_to=RlPpoStatus,
         )
 
+    def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams messages from the RL PPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/model/rl/ppo/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
 
 class AsyncPpoResource(AsyncAPIResource):
-    @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        return AsyncMessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncPpoResourceWithRawResponse:
         """
@@ -268,6 +286,40 @@ class AsyncPpoResource(AsyncAPIResource):
             cast_to=RlPpoStatus,
         )
 
+    async def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams messages from the RL PPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/model/rl/ppo/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
 
 class PpoResourceWithRawResponse:
     def __init__(self, ppo: PpoResource) -> None:
@@ -279,10 +331,9 @@ class PpoResourceWithRawResponse:
         self.start_job = to_raw_response_wrapper(
             ppo.start_job,
         )
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithRawResponse:
-        return MessagesResourceWithRawResponse(self._ppo.messages)
+        self.stream_messages = to_raw_response_wrapper(
+            ppo.stream_messages,
+        )
 
 
 class AsyncPpoResourceWithRawResponse:
@@ -295,10 +346,9 @@ class AsyncPpoResourceWithRawResponse:
         self.start_job = async_to_raw_response_wrapper(
             ppo.start_job,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        return AsyncMessagesResourceWithRawResponse(self._ppo.messages)
+        self.stream_messages = async_to_raw_response_wrapper(
+            ppo.stream_messages,
+        )
 
 
 class PpoResourceWithStreamingResponse:
@@ -311,10 +361,9 @@ class PpoResourceWithStreamingResponse:
         self.start_job = to_streamed_response_wrapper(
             ppo.start_job,
         )
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithStreamingResponse:
-        return MessagesResourceWithStreamingResponse(self._ppo.messages)
+        self.stream_messages = to_streamed_response_wrapper(
+            ppo.stream_messages,
+        )
 
 
 class AsyncPpoResourceWithStreamingResponse:
@@ -327,7 +376,6 @@ class AsyncPpoResourceWithStreamingResponse:
         self.start_job = async_to_streamed_response_wrapper(
             ppo.start_job,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        return AsyncMessagesResourceWithStreamingResponse(self._ppo.messages)
+        self.stream_messages = async_to_streamed_response_wrapper(
+            ppo.stream_messages,
+        )

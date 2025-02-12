@@ -52,7 +52,7 @@ from withpi.types import PromptOptimizationStatus, PromptStreamMessagesResponse
 
 Methods:
 
-- <code title="get /prompt/optimize/{job_id}">client.prompt.<a href="./src/withpi/resources/prompt.py">get_status</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
+- <code title="get /prompt/optimize/{job_id}">client.prompt.<a href="./src/withpi/resources/prompt.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 - <code title="post /prompt/optimize">client.prompt.<a href="./src/withpi/resources/prompt.py">optimize</a>(\*\*<a href="src/withpi/types/prompt_optimize_params.py">params</a>) -> <a href="./src/withpi/types/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 - <code title="get /prompt/optimize/{job_id}/messages">client.prompt.<a href="./src/withpi/resources/prompt.py">stream_messages</a>(job_id) -> str</code>
 
@@ -68,21 +68,9 @@ from withpi.types.model import SftStatus, SftStreamMessagesResponse
 
 Methods:
 
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">stream_messages</a>(job_id) -> str</code>
-
-### Messages
-
-Types:
-
-```python
-from withpi.types.model.sft import MessageStreamResponse
-```
-
-Methods:
-
-- <code title="get /model/sft/{job_id}/messages">client.model.sft.messages.<a href="./src/withpi/resources/model/sft/messages.py">stream</a>(job_id) -> str</code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
 
 ## Rl
 
@@ -91,25 +79,14 @@ Methods:
 Types:
 
 ```python
-from withpi.types.model.rl import RlPpoStatus
+from withpi.types.model.rl import RlPpoStatus, PpoStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="get /model/rl/ppo/{job_id}">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo/ppo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
-- <code title="post /model/rl/ppo">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo/ppo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/ppo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
-
-#### Messages
-
-Types:
-
-```python
-from withpi.types.model.rl.ppo import MessageStreamResponse
-```
-
-Methods:
-
-- <code title="get /model/rl/ppo/{job_id}/messages">client.model.rl.ppo.messages.<a href="./src/withpi/resources/model/rl/ppo/messages.py">stream</a>(job_id) -> str</code>
+- <code title="get /model/rl/ppo/{job_id}">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
+- <code title="post /model/rl/ppo">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/ppo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
+- <code title="get /model/rl/ppo/{job_id}/messages">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">stream_messages</a>(job_id) -> str</code>
 
 # Contracts
 
