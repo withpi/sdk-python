@@ -18,15 +18,15 @@ class TestPrompt:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_get_status(self, client: PiClient) -> None:
-        prompt = client.prompt.get_status(
+    def test_method_retrieve(self, client: PiClient) -> None:
+        prompt = client.prompt.retrieve(
             "job_id",
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    def test_raw_response_get_status(self, client: PiClient) -> None:
-        response = client.prompt.with_raw_response.get_status(
+    def test_raw_response_retrieve(self, client: PiClient) -> None:
+        response = client.prompt.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -36,8 +36,8 @@ class TestPrompt:
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    def test_streaming_response_get_status(self, client: PiClient) -> None:
-        with client.prompt.with_streaming_response.get_status(
+    def test_streaming_response_retrieve(self, client: PiClient) -> None:
+        with client.prompt.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -49,9 +49,9 @@ class TestPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_get_status(self, client: PiClient) -> None:
+    def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.prompt.with_raw_response.get_status(
+            client.prompt.with_raw_response.retrieve(
                 "",
             )
 
@@ -238,15 +238,15 @@ class TestAsyncPrompt:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_get_status(self, async_client: AsyncPiClient) -> None:
-        prompt = await async_client.prompt.get_status(
+    async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
+        prompt = await async_client.prompt.retrieve(
             "job_id",
         )
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    async def test_raw_response_get_status(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.prompt.with_raw_response.get_status(
+    async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.prompt.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -256,8 +256,8 @@ class TestAsyncPrompt:
         assert_matches_type(PromptOptimizationStatus, prompt, path=["response"])
 
     @parametrize
-    async def test_streaming_response_get_status(self, async_client: AsyncPiClient) -> None:
-        async with async_client.prompt.with_streaming_response.get_status(
+    async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
+        async with async_client.prompt.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -269,9 +269,9 @@ class TestAsyncPrompt:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_get_status(self, async_client: AsyncPiClient) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.prompt.with_raw_response.get_status(
+            await async_client.prompt.with_raw_response.retrieve(
                 "",
             )
 
