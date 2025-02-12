@@ -141,6 +141,40 @@ class GenerateFromSeedsResource(SyncAPIResource):
             cast_to=DataGenerationStatus,
         )
 
+    def stream_data(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams Data from the data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/data/input/generate_from_seeds/{job_id}/data",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     def stream_messages(
         self,
         job_id: str,
@@ -291,6 +325,40 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             cast_to=DataGenerationStatus,
         )
 
+    async def stream_data(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams Data from the data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/data/input/generate_from_seeds/{job_id}/data",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def stream_messages(
         self,
         job_id: str,
@@ -336,6 +404,9 @@ class GenerateFromSeedsResourceWithRawResponse:
         self.generate = to_raw_response_wrapper(
             generate_from_seeds.generate,
         )
+        self.stream_data = to_raw_response_wrapper(
+            generate_from_seeds.stream_data,
+        )
         self.stream_messages = to_raw_response_wrapper(
             generate_from_seeds.stream_messages,
         )
@@ -350,6 +421,9 @@ class AsyncGenerateFromSeedsResourceWithRawResponse:
         )
         self.generate = async_to_raw_response_wrapper(
             generate_from_seeds.generate,
+        )
+        self.stream_data = async_to_raw_response_wrapper(
+            generate_from_seeds.stream_data,
         )
         self.stream_messages = async_to_raw_response_wrapper(
             generate_from_seeds.stream_messages,
@@ -366,6 +440,9 @@ class GenerateFromSeedsResourceWithStreamingResponse:
         self.generate = to_streamed_response_wrapper(
             generate_from_seeds.generate,
         )
+        self.stream_data = to_streamed_response_wrapper(
+            generate_from_seeds.stream_data,
+        )
         self.stream_messages = to_streamed_response_wrapper(
             generate_from_seeds.stream_messages,
         )
@@ -380,6 +457,9 @@ class AsyncGenerateFromSeedsResourceWithStreamingResponse:
         )
         self.generate = async_to_streamed_response_wrapper(
             generate_from_seeds.generate,
+        )
+        self.stream_data = async_to_streamed_response_wrapper(
+            generate_from_seeds.stream_data,
         )
         self.stream_messages = async_to_streamed_response_wrapper(
             generate_from_seeds.stream_messages,
