@@ -20,7 +20,7 @@ class SftStartJobParams(TypedDict, total=False):
     We split this data into train/eval 90/10.
     """
 
-    base_sft_model: Literal["LLAMA_3.2_1B", "LLAMA_3.2_3B", "LLAMA_3.1_8B"]
+    base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
     """The base model to start the SFT tuning process."""
 
     learning_rate: float
