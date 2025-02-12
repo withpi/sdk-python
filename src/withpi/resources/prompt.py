@@ -48,7 +48,7 @@ class PromptResource(SyncAPIResource):
         """
         return PromptResourceWithStreamingResponse(self)
 
-    def get_status(
+    def retrieve(
         self,
         job_id: str,
         *,
@@ -201,7 +201,7 @@ class AsyncPromptResource(AsyncAPIResource):
         """
         return AsyncPromptResourceWithStreamingResponse(self)
 
-    async def get_status(
+    async def retrieve(
         self,
         job_id: str,
         *,
@@ -338,8 +338,8 @@ class PromptResourceWithRawResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get_status = to_raw_response_wrapper(
-            prompt.get_status,
+        self.retrieve = to_raw_response_wrapper(
+            prompt.retrieve,
         )
         self.optimize = to_raw_response_wrapper(
             prompt.optimize,
@@ -353,8 +353,8 @@ class AsyncPromptResourceWithRawResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get_status = async_to_raw_response_wrapper(
-            prompt.get_status,
+        self.retrieve = async_to_raw_response_wrapper(
+            prompt.retrieve,
         )
         self.optimize = async_to_raw_response_wrapper(
             prompt.optimize,
@@ -368,8 +368,8 @@ class PromptResourceWithStreamingResponse:
     def __init__(self, prompt: PromptResource) -> None:
         self._prompt = prompt
 
-        self.get_status = to_streamed_response_wrapper(
-            prompt.get_status,
+        self.retrieve = to_streamed_response_wrapper(
+            prompt.retrieve,
         )
         self.optimize = to_streamed_response_wrapper(
             prompt.optimize,
@@ -383,8 +383,8 @@ class AsyncPromptResourceWithStreamingResponse:
     def __init__(self, prompt: AsyncPromptResource) -> None:
         self._prompt = prompt
 
-        self.get_status = async_to_streamed_response_wrapper(
-            prompt.get_status,
+        self.retrieve = async_to_streamed_response_wrapper(
+            prompt.retrieve,
         )
         self.optimize = async_to_streamed_response_wrapper(
             prompt.optimize,

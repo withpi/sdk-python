@@ -7,40 +7,28 @@ from typing_extensions import Literal
 
 import httpx
 
-from .messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
-)
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.model import sft_start_job_params
-from ...._base_client import make_request_options
-from ....types.model.sft_status import SftStatus
-from ....types.shared_params.contract import Contract
+from ...types.model import sft_start_job_params
+from ..._base_client import make_request_options
+from ...types.model.sft_status import SftStatus
+from ...types.shared_params.contract import Contract
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
 
 class SftResource(SyncAPIResource):
-    @cached_property
-    def messages(self) -> MessagesResource:
-        return MessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> SftResourceWithRawResponse:
         """
@@ -187,10 +175,6 @@ class SftResource(SyncAPIResource):
 
 
 class AsyncSftResource(AsyncAPIResource):
-    @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        return AsyncMessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncSftResourceWithRawResponse:
         """
@@ -350,10 +334,6 @@ class SftResourceWithRawResponse:
             sft.stream_messages,
         )
 
-    @cached_property
-    def messages(self) -> MessagesResourceWithRawResponse:
-        return MessagesResourceWithRawResponse(self._sft.messages)
-
 
 class AsyncSftResourceWithRawResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
@@ -368,10 +348,6 @@ class AsyncSftResourceWithRawResponse:
         self.stream_messages = async_to_raw_response_wrapper(
             sft.stream_messages,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        return AsyncMessagesResourceWithRawResponse(self._sft.messages)
 
 
 class SftResourceWithStreamingResponse:
@@ -388,10 +364,6 @@ class SftResourceWithStreamingResponse:
             sft.stream_messages,
         )
 
-    @cached_property
-    def messages(self) -> MessagesResourceWithStreamingResponse:
-        return MessagesResourceWithStreamingResponse(self._sft.messages)
-
 
 class AsyncSftResourceWithStreamingResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
@@ -406,7 +378,3 @@ class AsyncSftResourceWithStreamingResponse:
         self.stream_messages = async_to_streamed_response_wrapper(
             sft.stream_messages,
         )
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        return AsyncMessagesResourceWithStreamingResponse(self._sft.messages)

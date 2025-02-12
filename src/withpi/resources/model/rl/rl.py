@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .ppo.ppo import (
+from .ppo import (
     PpoResource,
     AsyncPpoResource,
     PpoResourceWithRawResponse,
