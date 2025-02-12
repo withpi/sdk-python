@@ -136,7 +136,7 @@ class TestSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            base_sft_model="LLAMA_3.2_1B",
+            base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
             num_train_epochs=10,
         )
@@ -345,7 +345,7 @@ class TestAsyncSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            base_sft_model="LLAMA_3.2_1B",
+            base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
             num_train_epochs=10,
         )
