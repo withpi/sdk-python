@@ -9,55 +9,55 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.model.rl import RlPpoStatus
+from withpi.types.model.rl import RlGrpoStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestPpo:
+class TestGrpo:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
-        ppo = client.model.rl.ppo.retrieve(
+        grpo = client.model.rl.grpo.retrieve(
             "job_id",
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
-        response = client.model.rl.ppo.with_raw_response.retrieve(
+        response = client.model.rl.grpo.with_raw_response.retrieve(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = response.parse()
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        grpo = response.parse()
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
-        with client.model.rl.ppo.with_streaming_response.retrieve(
+        with client.model.rl.grpo.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = response.parse()
-            assert_matches_type(RlPpoStatus, ppo, path=["response"])
+            grpo = response.parse()
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.rl.ppo.with_raw_response.retrieve(
+            client.model.rl.grpo.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
-        ppo = client.model.rl.ppo.start_job(
+        grpo = client.model.rl.grpo.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -65,11 +65,11 @@ class TestPpo:
             examples=[{"llm_input": "Tell me something different"}],
             model="LLAMA_3.2_1B",
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
-        ppo = client.model.rl.ppo.start_job(
+        grpo = client.model.rl.grpo.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -131,11 +131,11 @@ class TestPpo:
             learning_rate=0.0002,
             num_train_epochs=10,
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.model.rl.ppo.with_raw_response.start_job(
+        response = client.model.rl.grpo.with_raw_response.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -146,12 +146,12 @@ class TestPpo:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = response.parse()
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        grpo = response.parse()
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
-        with client.model.rl.ppo.with_streaming_response.start_job(
+        with client.model.rl.grpo.with_streaming_response.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -162,94 +162,94 @@ class TestPpo:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = response.parse()
-            assert_matches_type(RlPpoStatus, ppo, path=["response"])
+            grpo = response.parse()
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_stream_messages(self, client: PiClient) -> None:
-        ppo = client.model.rl.ppo.stream_messages(
+        grpo = client.model.rl.grpo.stream_messages(
             "job_id",
         )
-        assert_matches_type(str, ppo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     def test_raw_response_stream_messages(self, client: PiClient) -> None:
-        response = client.model.rl.ppo.with_raw_response.stream_messages(
+        response = client.model.rl.grpo.with_raw_response.stream_messages(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = response.parse()
-        assert_matches_type(str, ppo, path=["response"])
+        grpo = response.parse()
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     def test_streaming_response_stream_messages(self, client: PiClient) -> None:
-        with client.model.rl.ppo.with_streaming_response.stream_messages(
+        with client.model.rl.grpo.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = response.parse()
-            assert_matches_type(str, ppo, path=["response"])
+            grpo = response.parse()
+            assert_matches_type(str, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_stream_messages(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.rl.ppo.with_raw_response.stream_messages(
+            client.model.rl.grpo.with_raw_response.stream_messages(
                 "",
             )
 
 
-class TestAsyncPpo:
+class TestAsyncGrpo:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
-        ppo = await async_client.model.rl.ppo.retrieve(
+        grpo = await async_client.model.rl.grpo.retrieve(
             "job_id",
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.rl.ppo.with_raw_response.retrieve(
+        response = await async_client.model.rl.grpo.with_raw_response.retrieve(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = await response.parse()
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        grpo = await response.parse()
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.rl.ppo.with_streaming_response.retrieve(
+        async with async_client.model.rl.grpo.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = await response.parse()
-            assert_matches_type(RlPpoStatus, ppo, path=["response"])
+            grpo = await response.parse()
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.rl.ppo.with_raw_response.retrieve(
+            await async_client.model.rl.grpo.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
-        ppo = await async_client.model.rl.ppo.start_job(
+        grpo = await async_client.model.rl.grpo.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -257,11 +257,11 @@ class TestAsyncPpo:
             examples=[{"llm_input": "Tell me something different"}],
             model="LLAMA_3.2_1B",
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
-        ppo = await async_client.model.rl.ppo.start_job(
+        grpo = await async_client.model.rl.grpo.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -323,11 +323,11 @@ class TestAsyncPpo:
             learning_rate=0.0002,
             num_train_epochs=10,
         )
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.rl.ppo.with_raw_response.start_job(
+        response = await async_client.model.rl.grpo.with_raw_response.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -338,12 +338,12 @@ class TestAsyncPpo:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = await response.parse()
-        assert_matches_type(RlPpoStatus, ppo, path=["response"])
+        grpo = await response.parse()
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.rl.ppo.with_streaming_response.start_job(
+        async with async_client.model.rl.grpo.with_streaming_response.start_job(
             contract={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -354,45 +354,45 @@ class TestAsyncPpo:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = await response.parse()
-            assert_matches_type(RlPpoStatus, ppo, path=["response"])
+            grpo = await response.parse()
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
-        ppo = await async_client.model.rl.ppo.stream_messages(
+        grpo = await async_client.model.rl.grpo.stream_messages(
             "job_id",
         )
-        assert_matches_type(str, ppo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.rl.ppo.with_raw_response.stream_messages(
+        response = await async_client.model.rl.grpo.with_raw_response.stream_messages(
             "job_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        ppo = await response.parse()
-        assert_matches_type(str, ppo, path=["response"])
+        grpo = await response.parse()
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.rl.ppo.with_streaming_response.stream_messages(
+        async with async_client.model.rl.grpo.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            ppo = await response.parse()
-            assert_matches_type(str, ppo, path=["response"])
+            grpo = await response.parse()
+            assert_matches_type(str, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.rl.ppo.with_raw_response.stream_messages(
+            await async_client.model.rl.grpo.with_raw_response.stream_messages(
                 "",
             )

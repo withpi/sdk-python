@@ -21,32 +21,32 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.model.rl import ppo_start_job_params
-from ....types.model.rl.rl_ppo_status import RlPpoStatus
+from ....types.model.rl import grpo_start_job_params
 from ....types.shared_params.contract import Contract
+from ....types.model.rl.rl_grpo_status import RlGrpoStatus
 
-__all__ = ["PpoResource", "AsyncPpoResource"]
+__all__ = ["GrpoResource", "AsyncGrpoResource"]
 
 
-class PpoResource(SyncAPIResource):
+class GrpoResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PpoResourceWithRawResponse:
+    def with_raw_response(self) -> GrpoResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return PpoResourceWithRawResponse(self)
+        return GrpoResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PpoResourceWithStreamingResponse:
+    def with_streaming_response(self) -> GrpoResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return PpoResourceWithStreamingResponse(self)
+        return GrpoResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -58,9 +58,9 @@ class PpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlPpoStatus:
+    ) -> RlGrpoStatus:
         """
-        Get the current status of the RL PPO job
+        Get the current status of the RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -74,18 +74,18 @@ class PpoResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            f"/model/rl/ppo/{job_id}",
+            f"/model/rl/grpo/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlPpoStatus,
+            cast_to=RlGrpoStatus,
         )
 
     def start_job(
         self,
         *,
         contract: Contract,
-        examples: Iterable[ppo_start_job_params.Example],
+        examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
@@ -95,15 +95,13 @@ class PpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlPpoStatus:
-        """Initialize the Proximal Policy Optimization (PPO) reinforcement learning job.
-
-        We
-        implement Low-Rank Adaptation (LoRA) for the reinforcement learning process,
-        with a fixed rank of 16.
+    ) -> RlGrpoStatus:
+        """
+        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
+        job.
 
         Args:
-          contract: The contract to use in the SFT tuning process
+          contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
 
@@ -122,7 +120,7 @@ class PpoResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/model/rl/ppo",
+            "/model/rl/grpo",
             body=maybe_transform(
                 {
                     "contract": contract,
@@ -131,12 +129,12 @@ class PpoResource(SyncAPIResource):
                     "learning_rate": learning_rate,
                     "num_train_epochs": num_train_epochs,
                 },
-                ppo_start_job_params.PpoStartJobParams,
+                grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlPpoStatus,
+            cast_to=RlGrpoStatus,
         )
 
     def stream_messages(
@@ -151,7 +149,7 @@ class PpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL PPO job
+        Streams messages from the RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -166,7 +164,7 @@ class PpoResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/model/rl/ppo/{job_id}/messages",
+            f"/model/rl/grpo/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -174,25 +172,25 @@ class PpoResource(SyncAPIResource):
         )
 
 
-class AsyncPpoResource(AsyncAPIResource):
+class AsyncGrpoResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPpoResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncGrpoResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncPpoResourceWithRawResponse(self)
+        return AsyncGrpoResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPpoResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncGrpoResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncPpoResourceWithStreamingResponse(self)
+        return AsyncGrpoResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -204,9 +202,9 @@ class AsyncPpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlPpoStatus:
+    ) -> RlGrpoStatus:
         """
-        Get the current status of the RL PPO job
+        Get the current status of the RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -220,18 +218,18 @@ class AsyncPpoResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            f"/model/rl/ppo/{job_id}",
+            f"/model/rl/grpo/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlPpoStatus,
+            cast_to=RlGrpoStatus,
         )
 
     async def start_job(
         self,
         *,
         contract: Contract,
-        examples: Iterable[ppo_start_job_params.Example],
+        examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
@@ -241,15 +239,13 @@ class AsyncPpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlPpoStatus:
-        """Initialize the Proximal Policy Optimization (PPO) reinforcement learning job.
-
-        We
-        implement Low-Rank Adaptation (LoRA) for the reinforcement learning process,
-        with a fixed rank of 16.
+    ) -> RlGrpoStatus:
+        """
+        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
+        job.
 
         Args:
-          contract: The contract to use in the SFT tuning process
+          contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
 
@@ -268,7 +264,7 @@ class AsyncPpoResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/model/rl/ppo",
+            "/model/rl/grpo",
             body=await async_maybe_transform(
                 {
                     "contract": contract,
@@ -277,12 +273,12 @@ class AsyncPpoResource(AsyncAPIResource):
                     "learning_rate": learning_rate,
                     "num_train_epochs": num_train_epochs,
                 },
-                ppo_start_job_params.PpoStartJobParams,
+                grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlPpoStatus,
+            cast_to=RlGrpoStatus,
         )
 
     async def stream_messages(
@@ -297,7 +293,7 @@ class AsyncPpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL PPO job
+        Streams messages from the RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -312,7 +308,7 @@ class AsyncPpoResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/model/rl/ppo/{job_id}/messages",
+            f"/model/rl/grpo/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -320,61 +316,61 @@ class AsyncPpoResource(AsyncAPIResource):
         )
 
 
-class PpoResourceWithRawResponse:
-    def __init__(self, ppo: PpoResource) -> None:
-        self._ppo = ppo
+class GrpoResourceWithRawResponse:
+    def __init__(self, grpo: GrpoResource) -> None:
+        self._grpo = grpo
 
         self.retrieve = to_raw_response_wrapper(
-            ppo.retrieve,
+            grpo.retrieve,
         )
         self.start_job = to_raw_response_wrapper(
-            ppo.start_job,
+            grpo.start_job,
         )
         self.stream_messages = to_raw_response_wrapper(
-            ppo.stream_messages,
+            grpo.stream_messages,
         )
 
 
-class AsyncPpoResourceWithRawResponse:
-    def __init__(self, ppo: AsyncPpoResource) -> None:
-        self._ppo = ppo
+class AsyncGrpoResourceWithRawResponse:
+    def __init__(self, grpo: AsyncGrpoResource) -> None:
+        self._grpo = grpo
 
         self.retrieve = async_to_raw_response_wrapper(
-            ppo.retrieve,
+            grpo.retrieve,
         )
         self.start_job = async_to_raw_response_wrapper(
-            ppo.start_job,
+            grpo.start_job,
         )
         self.stream_messages = async_to_raw_response_wrapper(
-            ppo.stream_messages,
+            grpo.stream_messages,
         )
 
 
-class PpoResourceWithStreamingResponse:
-    def __init__(self, ppo: PpoResource) -> None:
-        self._ppo = ppo
+class GrpoResourceWithStreamingResponse:
+    def __init__(self, grpo: GrpoResource) -> None:
+        self._grpo = grpo
 
         self.retrieve = to_streamed_response_wrapper(
-            ppo.retrieve,
+            grpo.retrieve,
         )
         self.start_job = to_streamed_response_wrapper(
-            ppo.start_job,
+            grpo.start_job,
         )
         self.stream_messages = to_streamed_response_wrapper(
-            ppo.stream_messages,
+            grpo.stream_messages,
         )
 
 
-class AsyncPpoResourceWithStreamingResponse:
-    def __init__(self, ppo: AsyncPpoResource) -> None:
-        self._ppo = ppo
+class AsyncGrpoResourceWithStreamingResponse:
+    def __init__(self, grpo: AsyncGrpoResource) -> None:
+        self._grpo = grpo
 
         self.retrieve = async_to_streamed_response_wrapper(
-            ppo.retrieve,
+            grpo.retrieve,
         )
         self.start_job = async_to_streamed_response_wrapper(
-            ppo.start_job,
+            grpo.start_job,
         )
         self.stream_messages = async_to_streamed_response_wrapper(
-            ppo.stream_messages,
+            grpo.stream_messages,
         )
