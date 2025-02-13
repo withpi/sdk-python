@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["GenerateFromSeedGenerateParams"]
 
@@ -24,14 +24,11 @@ class GenerateFromSeedGenerateParams(TypedDict, total=False):
     Must be <=10. Generally it could be same as `num_shots`.
     """
 
+    exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"]
+    """The exloration mode for input generation. Defaults to `BALANCED`"""
+
     num_shots: int
     """Number of inputs to be included in the prompt for generation.
 
     Generally it could be same as `batch_size`.
-    """
-
-    similarity_threshold: float
-    """
-    If a generated input is similar to any of the existing ones with similarity >
-    `similarity_threshold`, we reject it.
     """
