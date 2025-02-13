@@ -7,12 +7,12 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
 
-__all__ = ["PpoStartJobParams", "Example"]
+__all__ = ["GrpoStartJobParams", "Example"]
 
 
-class PpoStartJobParams(TypedDict, total=False):
+class GrpoStartJobParams(TypedDict, total=False):
     contract: Required[Contract]
-    """The contract to use in the SFT tuning process"""
+    """The contract to use in the GRPO tuning process"""
 
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""

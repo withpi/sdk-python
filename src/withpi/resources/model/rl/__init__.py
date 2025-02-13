@@ -8,22 +8,22 @@ from .rl import (
     RlResourceWithStreamingResponse,
     AsyncRlResourceWithStreamingResponse,
 )
-from .ppo import (
-    PpoResource,
-    AsyncPpoResource,
-    PpoResourceWithRawResponse,
-    AsyncPpoResourceWithRawResponse,
-    PpoResourceWithStreamingResponse,
-    AsyncPpoResourceWithStreamingResponse,
+from .grpo import (
+    GrpoResource,
+    AsyncGrpoResource,
+    GrpoResourceWithRawResponse,
+    AsyncGrpoResourceWithRawResponse,
+    GrpoResourceWithStreamingResponse,
+    AsyncGrpoResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "PpoResource",
-    "AsyncPpoResource",
-    "PpoResourceWithRawResponse",
-    "AsyncPpoResourceWithRawResponse",
-    "PpoResourceWithStreamingResponse",
-    "AsyncPpoResourceWithStreamingResponse",
+    "GrpoResource",
+    "AsyncGrpoResource",
+    "GrpoResourceWithRawResponse",
+    "AsyncGrpoResourceWithRawResponse",
+    "GrpoResourceWithStreamingResponse",
+    "AsyncGrpoResourceWithStreamingResponse",
     "RlResource",
     "AsyncRlResource",
     "RlResourceWithRawResponse",
