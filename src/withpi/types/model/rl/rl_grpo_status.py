@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from ...._models import BaseModel
 
-__all__ = ["RlPpoStatus", "TrainedModel"]
+__all__ = ["RlGrpoStatus", "TrainedModel"]
 
 
 class TrainedModel(BaseModel):
@@ -28,7 +28,7 @@ class TrainedModel(BaseModel):
     """The SFT model weights in Huggingface"""
 
 
-class RlPpoStatus(BaseModel):
+class RlGrpoStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 

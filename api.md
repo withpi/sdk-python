@@ -74,19 +74,19 @@ Methods:
 
 ## Rl
 
-### Ppo
+### Grpo
 
 Types:
 
 ```python
-from withpi.types.model.rl import RlPpoStatus, PpoStreamMessagesResponse
+from withpi.types.model.rl import RlGrpoStatus, GrpoStreamMessagesResponse
 ```
 
 Methods:
 
-- <code title="get /model/rl/ppo/{job_id}">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
-- <code title="post /model/rl/ppo">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/ppo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_ppo_status.py">RlPpoStatus</a></code>
-- <code title="get /model/rl/ppo/{job_id}/messages">client.model.rl.ppo.<a href="./src/withpi/resources/model/rl/ppo.py">stream_messages</a>(job_id) -> str</code>
+- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
 
 # Contracts
 
