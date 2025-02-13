@@ -77,8 +77,8 @@ class TestGenerateFromSeeds:
                 "The lazy dog was jumped over by the quick brown fox",
             ],
             batch_size=5,
+            exploration_mode="CONSERVATIVE",
             num_shots=5,
-            similarity_threshold=0.925,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
@@ -256,8 +256,8 @@ class TestAsyncGenerateFromSeeds:
                 "The lazy dog was jumped over by the quick brown fox",
             ],
             batch_size=5,
+            exploration_mode="CONSERVATIVE",
             num_shots=5,
-            similarity_threshold=0.925,
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
 
