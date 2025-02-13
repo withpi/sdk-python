@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["PpoStreamMessagesResponse"]
+__all__ = ["GrpoStreamMessagesResponse"]
 
-PpoStreamMessagesResponse: TypeAlias = str
+GrpoStreamMessagesResponse: TypeAlias = str
