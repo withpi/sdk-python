@@ -23,10 +23,12 @@ from pydantic import ValidationError
 
 from withpi import PiClient, AsyncPiClient, APIResponseValidationError
 from withpi._types import Omit
+from withpi._utils import maybe_transform
 from withpi._models import BaseModel, FinalRequestOptions
 from withpi._constants import RAW_RESPONSE_HEADER
 from withpi._exceptions import PiClientError, APIStatusError, APITimeoutError, APIResponseValidationError
 from withpi._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from withpi.types.contract_score_params import ContractScoreParams
 
 from .utils import update_env
 
@@ -714,37 +716,40 @@ class TestPiClient:
                 "/contracts/score",
                 body=cast(
                     object,
-                    dict(
-                        contract={
-                            "name": "My Application",
-                            "description": "You are a helpful assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Instruction Following",
-                                            "description": "Does the response follow the given instructions?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                                {
-                                    "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Topicality",
-                                            "description": "Does the response answer the given question?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                            ],
-                        },
-                        llm_input="Help me with my problem",
-                        llm_output="Of course I can help with that",
+                    maybe_transform(
+                        dict(
+                            contract={
+                                "name": "My Application",
+                                "description": "You are a helpful assistant",
+                                "dimensions": [
+                                    {
+                                        "description": "Test whether the LLM follows instructions",
+                                        "label": "Instruction Following Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Instruction Following",
+                                                "description": "Does the response follow the given instructions?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                    {
+                                        "description": "Test whether the LLM responds to the query",
+                                        "label": "Topicality Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Topicality",
+                                                "description": "Does the response answer the given question?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                ],
+                            },
+                            llm_input="Help me with my problem",
+                            llm_output="Of course I can help with that",
+                        ),
+                        ContractScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -763,37 +768,40 @@ class TestPiClient:
                 "/contracts/score",
                 body=cast(
                     object,
-                    dict(
-                        contract={
-                            "name": "My Application",
-                            "description": "You are a helpful assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Instruction Following",
-                                            "description": "Does the response follow the given instructions?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                                {
-                                    "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Topicality",
-                                            "description": "Does the response answer the given question?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                            ],
-                        },
-                        llm_input="Help me with my problem",
-                        llm_output="Of course I can help with that",
+                    maybe_transform(
+                        dict(
+                            contract={
+                                "name": "My Application",
+                                "description": "You are a helpful assistant",
+                                "dimensions": [
+                                    {
+                                        "description": "Test whether the LLM follows instructions",
+                                        "label": "Instruction Following Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Instruction Following",
+                                                "description": "Does the response follow the given instructions?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                    {
+                                        "description": "Test whether the LLM responds to the query",
+                                        "label": "Topicality Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Topicality",
+                                                "description": "Does the response answer the given question?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                ],
+                            },
+                            llm_input="Help me with my problem",
+                            llm_output="Of course I can help with that",
+                        ),
+                        ContractScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1581,37 +1589,40 @@ class TestAsyncPiClient:
                 "/contracts/score",
                 body=cast(
                     object,
-                    dict(
-                        contract={
-                            "name": "My Application",
-                            "description": "You are a helpful assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Instruction Following",
-                                            "description": "Does the response follow the given instructions?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                                {
-                                    "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Topicality",
-                                            "description": "Does the response answer the given question?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                            ],
-                        },
-                        llm_input="Help me with my problem",
-                        llm_output="Of course I can help with that",
+                    maybe_transform(
+                        dict(
+                            contract={
+                                "name": "My Application",
+                                "description": "You are a helpful assistant",
+                                "dimensions": [
+                                    {
+                                        "description": "Test whether the LLM follows instructions",
+                                        "label": "Instruction Following Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Instruction Following",
+                                                "description": "Does the response follow the given instructions?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                    {
+                                        "description": "Test whether the LLM responds to the query",
+                                        "label": "Topicality Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Topicality",
+                                                "description": "Does the response answer the given question?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                ],
+                            },
+                            llm_input="Help me with my problem",
+                            llm_output="Of course I can help with that",
+                        ),
+                        ContractScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1630,37 +1641,40 @@ class TestAsyncPiClient:
                 "/contracts/score",
                 body=cast(
                     object,
-                    dict(
-                        contract={
-                            "name": "My Application",
-                            "description": "You are a helpful assistant",
-                            "dimensions": [
-                                {
-                                    "description": "Test whether the LLM follows instructions",
-                                    "label": "Instruction Following Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Instruction Following",
-                                            "description": "Does the response follow the given instructions?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                                {
-                                    "description": "Test whether the LLM responds to the query",
-                                    "label": "Topicality Dimension",
-                                    "sub_dimensions": [
-                                        {
-                                            "label": "Topicality",
-                                            "description": "Does the response answer the given question?",
-                                            "scoring_type": "PI_SCORER",
-                                        }
-                                    ],
-                                },
-                            ],
-                        },
-                        llm_input="Help me with my problem",
-                        llm_output="Of course I can help with that",
+                    maybe_transform(
+                        dict(
+                            contract={
+                                "name": "My Application",
+                                "description": "You are a helpful assistant",
+                                "dimensions": [
+                                    {
+                                        "description": "Test whether the LLM follows instructions",
+                                        "label": "Instruction Following Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Instruction Following",
+                                                "description": "Does the response follow the given instructions?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                    {
+                                        "description": "Test whether the LLM responds to the query",
+                                        "label": "Topicality Dimension",
+                                        "sub_dimensions": [
+                                            {
+                                                "label": "Topicality",
+                                                "description": "Does the response answer the given question?",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    },
+                                ],
+                            },
+                            llm_input="Help me with my problem",
+                            llm_output="Of course I can help with that",
+                        ),
+                        ContractScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
