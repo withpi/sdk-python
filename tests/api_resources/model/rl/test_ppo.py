@@ -63,7 +63,7 @@ class TestPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         )
         assert_matches_type(RlPpoStatus, ppo, path=["response"])
 
@@ -127,7 +127,7 @@ class TestPpo:
                 ],
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
             learning_rate=0.0002,
             num_train_epochs=10,
         )
@@ -141,7 +141,7 @@ class TestPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         )
 
         assert response.is_closed is True
@@ -157,7 +157,7 @@ class TestPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -255,7 +255,7 @@ class TestAsyncPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         )
         assert_matches_type(RlPpoStatus, ppo, path=["response"])
 
@@ -319,7 +319,7 @@ class TestAsyncPpo:
                 ],
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
             learning_rate=0.0002,
             num_train_epochs=10,
         )
@@ -333,7 +333,7 @@ class TestAsyncPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         )
 
         assert response.is_closed is True
@@ -349,7 +349,7 @@ class TestAsyncPpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="meta-llama/Llama-3.2-1B-Instruct",
+            model="LLAMA_3.2_1B",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

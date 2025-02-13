@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
 
@@ -17,11 +17,8 @@ class PpoStartJobParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""
 
-    model: Required[str]
-    """The Huggingface model name to run RL on.
-
-    Currently we only support the LLAMA model type and model size <= 8B parameters.
-    """
+    model: Required[Literal["LLAMA_3.2_1B"]]
+    """The model to start the RL process"""
 
     learning_rate: float
     """SFT learning rate"""

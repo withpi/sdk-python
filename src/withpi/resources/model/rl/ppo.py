@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
+from typing_extensions import Literal
 
 import httpx
 
@@ -85,7 +86,7 @@ class PpoResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[ppo_start_job_params.Example],
-        model: str,
+        model: Literal["LLAMA_3.2_1B"],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -106,8 +107,7 @@ class PpoResource(SyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          model: The Huggingface model name to run RL on. Currently we only support the LLAMA
-              model type and model size <= 8B parameters.
+          model: The model to start the RL process
 
           learning_rate: SFT learning rate
 
@@ -232,7 +232,7 @@ class AsyncPpoResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[ppo_start_job_params.Example],
-        model: str,
+        model: Literal["LLAMA_3.2_1B"],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -253,8 +253,7 @@ class AsyncPpoResource(AsyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          model: The Huggingface model name to run RL on. Currently we only support the LLAMA
-              model type and model size <= 8B parameters.
+          model: The model to start the RL process
 
           learning_rate: SFT learning rate
 
