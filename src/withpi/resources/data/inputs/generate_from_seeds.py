@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List
+from typing_extensions import Literal
 
 import httpx
 
@@ -86,8 +87,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
         num_inputs_to_generate: int,
         seeds: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
-        similarity_threshold: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,11 +109,10 @@ class GenerateFromSeedsResource(SyncAPIResource):
           batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
+          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
+
           num_shots: Number of inputs to be included in the prompt for generation. Generally it could
               be same as `batch_size`.
-
-          similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
-              `similarity_threshold`, we reject it.
 
           extra_headers: Send extra headers
 
@@ -130,8 +130,8 @@ class GenerateFromSeedsResource(SyncAPIResource):
                     "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
                     "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
-                    "similarity_threshold": similarity_threshold,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
@@ -270,8 +270,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         num_inputs_to_generate: int,
         seeds: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
-        similarity_threshold: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -292,11 +292,10 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
           batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
+          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
+
           num_shots: Number of inputs to be included in the prompt for generation. Generally it could
               be same as `batch_size`.
-
-          similarity_threshold: If a generated input is similar to any of the existing ones with similarity >
-              `similarity_threshold`, we reject it.
 
           extra_headers: Send extra headers
 
@@ -314,8 +313,8 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
                     "num_inputs_to_generate": num_inputs_to_generate,
                     "seeds": seeds,
                     "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
-                    "similarity_threshold": similarity_threshold,
                 },
                 generate_from_seed_generate_params.GenerateFromSeedGenerateParams,
             ),
