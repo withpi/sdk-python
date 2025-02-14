@@ -100,9 +100,9 @@ class GenerateFromSeedsResource(SyncAPIResource):
         Generates input data from a list of seeds
 
         Args:
-          application_description: The application description to generate contract for.
+          application_description: The application description for which the inputs would be applicable.
 
-          num_inputs_to_generate: The number of LLM inputs to generate
+          num_inputs_to_generate: The number of new LLM inputs to generate
 
           seeds: The list of LLM inputs to be used as seeds
 
@@ -283,9 +283,9 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         Generates input data from a list of seeds
 
         Args:
-          application_description: The application description to generate contract for.
+          application_description: The application description for which the inputs would be applicable.
 
-          num_inputs_to_generate: The number of LLM inputs to generate
+          num_inputs_to_generate: The number of new LLM inputs to generate
 
           seeds: The list of LLM inputs to be used as seeds
 
