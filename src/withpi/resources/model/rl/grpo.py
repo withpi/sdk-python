@@ -108,7 +108,7 @@ class GrpoResource(SyncAPIResource):
 
           model: The model to start the RL process
 
-          system_prompt: A custom prompt to use for prompting the RL model
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           learning_rate: SFT learning rate
 
@@ -259,7 +259,7 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           model: The model to start the RL process
 
-          system_prompt: A custom prompt to use for prompting the RL model
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           learning_rate: SFT learning rate
 
