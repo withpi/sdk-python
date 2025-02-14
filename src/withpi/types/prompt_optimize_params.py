@@ -29,13 +29,13 @@ class PromptOptimizeParams(TypedDict, total=False):
     dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]]
     """The DSPY teleprompter/optimizer to use.
 
-    This only applies for the DSPY otherwise leave it as None.
+    This only applies for the DSPY. Leave it as None if tuning_algorithm != DSPY.
     """
 
     use_chain_of_thought: bool
     """Decides if to use chain of thought or not.
 
-    This only applies for the DSPY otherwise leave it as False.
+    This only applies for the DSPY. Leave it as None if tuning_algorithm != DSPY.
     """
 
 
