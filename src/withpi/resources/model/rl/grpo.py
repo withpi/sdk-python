@@ -87,9 +87,9 @@ class GrpoResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,11 +108,11 @@ class GrpoResource(SyncAPIResource):
 
           model: The model to start the RL process
 
-          system_prompt: A custom system prompt to use during the RL tuning process
-
           learning_rate: SFT learning rate
 
           num_train_epochs: SFT number of train epochs
+
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           extra_headers: Send extra headers
 
@@ -131,15 +131,12 @@ class GrpoResource(SyncAPIResource):
                     "model": model,
                     "learning_rate": learning_rate,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"system_prompt": system_prompt}, grpo_start_job_params.GrpoStartJobParams),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RlGrpoStatus,
         )
@@ -238,9 +235,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -259,11 +256,11 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           model: The model to start the RL process
 
-          system_prompt: A custom system prompt to use during the RL tuning process
-
           learning_rate: SFT learning rate
 
           num_train_epochs: SFT number of train epochs
+
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           extra_headers: Send extra headers
 
@@ -282,17 +279,12 @@ class AsyncGrpoResource(AsyncAPIResource):
                     "model": model,
                     "learning_rate": learning_rate,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"system_prompt": system_prompt}, grpo_start_job_params.GrpoStartJobParams
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RlGrpoStatus,
         )

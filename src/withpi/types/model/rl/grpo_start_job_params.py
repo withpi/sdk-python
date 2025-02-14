@@ -20,14 +20,14 @@ class GrpoStartJobParams(TypedDict, total=False):
     model: Required[Literal["LLAMA_3.2_1B"]]
     """The model to start the RL process"""
 
-    system_prompt: Optional[str]
-    """A custom system prompt to use during the RL tuning process"""
-
     learning_rate: float
     """SFT learning rate"""
 
     num_train_epochs: int
     """SFT number of train epochs"""
+
+    system_prompt: Optional[str]
+    """A custom system prompt to use during the RL tuning process"""
 
 
 class Example(TypedDict, total=False):
