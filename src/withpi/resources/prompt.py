@@ -112,11 +112,11 @@ class PromptResource(SyncAPIResource):
 
           tuning_algorithm: The tuning algorithm to use
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY otherwise
-              leave it as None.
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY. Leave it
+              as None if tuning_algorithm != DSPY.
 
-          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY
-              otherwise leave it as False.
+          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY. Leave
+              it as None if tuning_algorithm != DSPY.
 
           extra_headers: Send extra headers
 
@@ -265,11 +265,11 @@ class AsyncPromptResource(AsyncAPIResource):
 
           tuning_algorithm: The tuning algorithm to use
 
-          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY otherwise
-              leave it as None.
+          dspy_optimization_type: The DSPY teleprompter/optimizer to use. This only applies for the DSPY. Leave it
+              as None if tuning_algorithm != DSPY.
 
-          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY
-              otherwise leave it as False.
+          use_chain_of_thought: Decides if to use chain of thought or not. This only applies for the DSPY. Leave
+              it as None if tuning_algorithm != DSPY.
 
           extra_headers: Send extra headers
 

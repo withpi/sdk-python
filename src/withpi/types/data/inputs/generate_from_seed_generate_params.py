@@ -10,10 +10,10 @@ __all__ = ["GenerateFromSeedGenerateParams"]
 
 class GenerateFromSeedGenerateParams(TypedDict, total=False):
     application_description: Required[str]
-    """The application description to generate contract for."""
+    """The application description for which the inputs would be applicable."""
 
     num_inputs_to_generate: Required[int]
-    """The number of LLM inputs to generate"""
+    """The number of new LLM inputs to generate"""
 
     seeds: Required[List[str]]
     """The list of LLM inputs to be used as seeds"""
