@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -87,6 +87,7 @@ class GrpoResource(SyncAPIResource):
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -106,6 +107,8 @@ class GrpoResource(SyncAPIResource):
           examples: Examples to use in the RL tuning process
 
           model: The model to start the RL process
+
+          system_prompt: A custom prompt to use for prompting the RL model
 
           learning_rate: SFT learning rate
 
@@ -132,7 +135,11 @@ class GrpoResource(SyncAPIResource):
                 grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"system_prompt": system_prompt}, grpo_start_job_params.GrpoStartJobParams),
             ),
             cast_to=RlGrpoStatus,
         )
@@ -231,6 +238,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         model: Literal["LLAMA_3.2_1B"],
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -250,6 +258,8 @@ class AsyncGrpoResource(AsyncAPIResource):
           examples: Examples to use in the RL tuning process
 
           model: The model to start the RL process
+
+          system_prompt: A custom prompt to use for prompting the RL model
 
           learning_rate: SFT learning rate
 
@@ -276,7 +286,13 @@ class AsyncGrpoResource(AsyncAPIResource):
                 grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"system_prompt": system_prompt}, grpo_start_job_params.GrpoStartJobParams
+                ),
             ),
             cast_to=RlGrpoStatus,
         )
