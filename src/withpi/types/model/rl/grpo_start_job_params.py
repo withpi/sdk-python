@@ -21,7 +21,7 @@ class GrpoStartJobParams(TypedDict, total=False):
     """The model to start the RL process"""
 
     system_prompt: Optional[str]
-    """A custom prompt to use for prompting the RL model"""
+    """A custom system prompt to use during the RL tuning process"""
 
     learning_rate: float
     """SFT learning rate"""
