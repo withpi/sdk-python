@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.49 (2025-02-14)
+
+Full Changelog: [v0.1.0-alpha.48...v0.1.0-alpha.49](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.48...v0.1.0-alpha.49)
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#249](https://github.com/withpi/sdk-python/issues/249)) ([5cb7bc8](https://github.com/withpi/sdk-python/commit/5cb7bc88dad2bf1551cb0948f315492f86489b8c))
+
+
+### Chores
+
+* **internal:** update client tests ([#247](https://github.com/withpi/sdk-python/issues/247)) ([f542f80](https://github.com/withpi/sdk-python/commit/f542f801b0c4ee570c97bfd4af78b3dcac57fd5c))
+
 ## 0.1.0-alpha.48 (2025-02-13)
 
 Full Changelog: [v0.1.0-alpha.47...v0.1.0-alpha.48](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.47...v0.1.0-alpha.48)
