@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
@@ -19,6 +19,9 @@ class GrpoStartJobParams(TypedDict, total=False):
 
     model: Required[Literal["LLAMA_3.2_1B"]]
     """The model to start the RL process"""
+
+    system_prompt: Optional[str]
+    """A custom prompt to use for prompting the RL model"""
 
     learning_rate: float
     """SFT learning rate"""
