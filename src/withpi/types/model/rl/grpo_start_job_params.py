@@ -29,4 +29,4 @@ class GrpoStartJobParams(TypedDict, total=False):
 
 class Example(TypedDict, total=False):
     llm_input: Required[str]
-    """The input to LLM"""
+    """The input prompt to LLM for the RL training process"""
