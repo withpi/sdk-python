@@ -7,29 +7,53 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ...._compat import cached_property
+from .completions import (
+    CompletionsResource,
+    AsyncCompletionsResource,
+    CompletionsResourceWithRawResponse,
+    AsyncCompletionsResourceWithRawResponse,
+    CompletionsResourceWithStreamingResponse,
+    AsyncCompletionsResourceWithStreamingResponse,
+)
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_start_job_params
-from ..._base_client import make_request_options
-from ...types.model.sft_status import SftStatus
-from ...types.shared_params.contract import Contract
-from ...types.model.sft_check_response import SftCheckResponse
+from ....types.model import sft_start_job_params
+from ...._base_client import make_request_options
+from .chat_completions import (
+    ChatCompletionsResource,
+    AsyncChatCompletionsResource,
+    ChatCompletionsResourceWithRawResponse,
+    AsyncChatCompletionsResourceWithRawResponse,
+    ChatCompletionsResourceWithStreamingResponse,
+    AsyncChatCompletionsResourceWithStreamingResponse,
+)
+from ....types.model.sft_status import SftStatus
+from ....types.shared_params.contract import Contract
+from ....types.model.sft_check_response import SftCheckResponse
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
 
 class SftResource(SyncAPIResource):
+    @cached_property
+    def chat_completions(self) -> ChatCompletionsResource:
+        return ChatCompletionsResource(self._client)
+
+    @cached_property
+    def completions(self) -> CompletionsResource:
+        return CompletionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> SftResourceWithRawResponse:
         """
@@ -245,6 +269,14 @@ class SftResource(SyncAPIResource):
 
 
 class AsyncSftResource(AsyncAPIResource):
+    @cached_property
+    def chat_completions(self) -> AsyncChatCompletionsResource:
+        return AsyncChatCompletionsResource(self._client)
+
+    @cached_property
+    def completions(self) -> AsyncCompletionsResource:
+        return AsyncCompletionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncSftResourceWithRawResponse:
         """
@@ -479,6 +511,14 @@ class SftResourceWithRawResponse:
             sft.stream_messages,
         )
 
+    @cached_property
+    def chat_completions(self) -> ChatCompletionsResourceWithRawResponse:
+        return ChatCompletionsResourceWithRawResponse(self._sft.chat_completions)
+
+    @cached_property
+    def completions(self) -> CompletionsResourceWithRawResponse:
+        return CompletionsResourceWithRawResponse(self._sft.completions)
+
 
 class AsyncSftResourceWithRawResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
@@ -499,6 +539,14 @@ class AsyncSftResourceWithRawResponse:
         self.stream_messages = async_to_raw_response_wrapper(
             sft.stream_messages,
         )
+
+    @cached_property
+    def chat_completions(self) -> AsyncChatCompletionsResourceWithRawResponse:
+        return AsyncChatCompletionsResourceWithRawResponse(self._sft.chat_completions)
+
+    @cached_property
+    def completions(self) -> AsyncCompletionsResourceWithRawResponse:
+        return AsyncCompletionsResourceWithRawResponse(self._sft.completions)
 
 
 class SftResourceWithStreamingResponse:
@@ -521,6 +569,14 @@ class SftResourceWithStreamingResponse:
             sft.stream_messages,
         )
 
+    @cached_property
+    def chat_completions(self) -> ChatCompletionsResourceWithStreamingResponse:
+        return ChatCompletionsResourceWithStreamingResponse(self._sft.chat_completions)
+
+    @cached_property
+    def completions(self) -> CompletionsResourceWithStreamingResponse:
+        return CompletionsResourceWithStreamingResponse(self._sft.completions)
+
 
 class AsyncSftResourceWithStreamingResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
@@ -541,3 +597,11 @@ class AsyncSftResourceWithStreamingResponse:
         self.stream_messages = async_to_streamed_response_wrapper(
             sft.stream_messages,
         )
+
+    @cached_property
+    def chat_completions(self) -> AsyncChatCompletionsResourceWithStreamingResponse:
+        return AsyncChatCompletionsResourceWithStreamingResponse(self._sft.chat_completions)
+
+    @cached_property
+    def completions(self) -> AsyncCompletionsResourceWithStreamingResponse:
+        return AsyncCompletionsResourceWithStreamingResponse(self._sft.completions)
