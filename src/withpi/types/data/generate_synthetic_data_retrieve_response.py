@@ -3,12 +3,20 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["DataGenerationStatus"]
+__all__ = ["GenerateSyntheticDataRetrieveResponse", "Data"]
 
 
-class DataGenerationStatus(BaseModel):
+class Data(BaseModel):
+    llm_input: str
+    """The input to LLM"""
+
+    llm_output: str
+    """The output to evaluate"""
+
+
+class GenerateSyntheticDataRetrieveResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -18,8 +26,8 @@ class DataGenerationStatus(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""
 
-    data: Optional[List[str]] = None
-    """The generated data.
+    data: Optional[List[Data]] = None
+    """The generated synthetic data.
 
     Can be present even if the state is not done/error as it is streamed.
     """
