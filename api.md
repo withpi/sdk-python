@@ -73,11 +73,35 @@ from withpi.types.model import (
 
 Methods:
 
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}/check">client.model.sft.<a href="./src/withpi/resources/model/sft.py">check</a>(job_id) -> <a href="./src/withpi/types/model/sft_check_response.py">SftCheckResponse</a></code>
-- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> str</code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}/check">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">check</a>(job_id) -> <a href="./src/withpi/types/model/sft_check_response.py">SftCheckResponse</a></code>
+- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">load</a>(job_id) -> str</code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">stream_messages</a>(job_id) -> str</code>
+
+### ChatCompletions
+
+Types:
+
+```python
+from withpi.types.model.sft import ChatCompletionListResponse
+```
+
+Methods:
+
+- <code title="get /model/sft/{job_id}/chat/completions">client.model.sft.chat_completions.<a href="./src/withpi/resources/model/sft/chat_completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/sft/chat_completion_list_response.py">object</a></code>
+
+### Completions
+
+Types:
+
+```python
+from withpi.types.model.sft import CompletionListResponse
+```
+
+Methods:
+
+- <code title="get /model/sft/{job_id}/completions">client.model.sft.completions.<a href="./src/withpi/resources/model/sft/completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/sft/completion_list_response.py">object</a></code>
 
 ## Rl
 
