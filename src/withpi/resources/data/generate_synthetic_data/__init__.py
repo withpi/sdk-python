@@ -8,13 +8,13 @@ from .data import (
     DataResourceWithStreamingResponse,
     AsyncDataResourceWithStreamingResponse,
 )
-from .inputs import (
-    InputsResource,
-    AsyncInputsResource,
-    InputsResourceWithRawResponse,
-    AsyncInputsResourceWithRawResponse,
-    InputsResourceWithStreamingResponse,
-    AsyncInputsResourceWithStreamingResponse,
+from .messages import (
+    MessagesResource,
+    AsyncMessagesResource,
+    MessagesResourceWithRawResponse,
+    AsyncMessagesResourceWithRawResponse,
+    MessagesResourceWithStreamingResponse,
+    AsyncMessagesResourceWithStreamingResponse,
 )
 from .generate_synthetic_data import (
     GenerateSyntheticDataResource,
@@ -26,22 +26,22 @@ from .generate_synthetic_data import (
 )
 
 __all__ = [
-    "InputsResource",
-    "AsyncInputsResource",
-    "InputsResourceWithRawResponse",
-    "AsyncInputsResourceWithRawResponse",
-    "InputsResourceWithStreamingResponse",
-    "AsyncInputsResourceWithStreamingResponse",
-    "GenerateSyntheticDataResource",
-    "AsyncGenerateSyntheticDataResource",
-    "GenerateSyntheticDataResourceWithRawResponse",
-    "AsyncGenerateSyntheticDataResourceWithRawResponse",
-    "GenerateSyntheticDataResourceWithStreamingResponse",
-    "AsyncGenerateSyntheticDataResourceWithStreamingResponse",
     "DataResource",
     "AsyncDataResource",
     "DataResourceWithRawResponse",
     "AsyncDataResourceWithRawResponse",
     "DataResourceWithStreamingResponse",
     "AsyncDataResourceWithStreamingResponse",
+    "MessagesResource",
+    "AsyncMessagesResource",
+    "MessagesResourceWithRawResponse",
+    "AsyncMessagesResourceWithRawResponse",
+    "MessagesResourceWithStreamingResponse",
+    "AsyncMessagesResourceWithStreamingResponse",
+    "GenerateSyntheticDataResource",
+    "AsyncGenerateSyntheticDataResource",
+    "GenerateSyntheticDataResourceWithRawResponse",
+    "AsyncGenerateSyntheticDataResourceWithRawResponse",
+    "GenerateSyntheticDataResourceWithStreamingResponse",
+    "AsyncGenerateSyntheticDataResourceWithStreamingResponse",
 ]
