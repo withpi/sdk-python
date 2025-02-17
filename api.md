@@ -42,6 +42,46 @@ Methods:
 - <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
+## GenerateSyntheticData
+
+Types:
+
+```python
+from withpi.types.data import (
+    GenerateSyntheticDataCreateResponse,
+    GenerateSyntheticDataRetrieveResponse,
+)
+```
+
+Methods:
+
+- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data/generate_synthetic_data.py">create</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_create_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_create_response.py">GenerateSyntheticDataCreateResponse</a></code>
+- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_retrieve_response.py">GenerateSyntheticDataRetrieveResponse</a></code>
+
+### Data
+
+Types:
+
+```python
+from withpi.types.data.generate_synthetic_data import DataListResponse
+```
+
+Methods:
+
+- <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.data.<a href="./src/withpi/resources/data/generate_synthetic_data/data.py">list</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data/data_list_response.py">DataListResponse</a></code>
+
+### Messages
+
+Types:
+
+```python
+from withpi.types.data.generate_synthetic_data import MessageListResponse
+```
+
+Methods:
+
+- <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.messages.<a href="./src/withpi/resources/data/generate_synthetic_data/messages.py">list</a>(job_id) -> str</code>
+
 # Prompt
 
 Types:
