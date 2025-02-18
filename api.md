@@ -150,14 +150,45 @@ Methods:
 Types:
 
 ```python
-from withpi.types.model.rl import RlGrpoStatus, GrpoStreamMessagesResponse
+from withpi.types.model.rl import (
+    RlGrpoStatus,
+    GrpoCheckResponse,
+    GrpoLoadResponse,
+    GrpoStreamMessagesResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
+- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/rl/grpo/{job_id}/check">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">check</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo_check_response.py">GrpoCheckResponse</a></code>
+- <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">load</a>(job_id) -> str</code>
+- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">stream_messages</a>(job_id) -> str</code>
+
+#### ChatCompletions
+
+Types:
+
+```python
+from withpi.types.model.rl.grpo import ChatCompletionListResponse
+```
+
+Methods:
+
+- <code title="get /model/rl/grpo/{job_id}/chat/completions">client.model.rl.grpo.chat_completions.<a href="./src/withpi/resources/model/rl/grpo/chat_completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo/chat_completion_list_response.py">object</a></code>
+
+#### Completions
+
+Types:
+
+```python
+from withpi.types.model.rl.grpo import CompletionListResponse
+```
+
+Methods:
+
+- <code title="get /model/rl/grpo/{job_id}/completions">client.model.rl.grpo.completions.<a href="./src/withpi/resources/model/rl/grpo/completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo/completion_list_response.py">object</a></code>
 
 # Contracts
 
@@ -197,3 +228,11 @@ from withpi.types import QueryGenerateFanoutsResponse
 Methods:
 
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
+
+# ModelRlGrpo
+
+Types:
+
+```python
+from withpi.types import RlGrpoStatus
+```
