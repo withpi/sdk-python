@@ -9,7 +9,9 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types import ContractsScoreMetrics
+from withpi.types import (
+    ContractsScoreMetrics,
+)
 from withpi.types.shared import Contract
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -40,6 +42,45 @@ class TestContracts:
     def test_streaming_response_generate_dimensions(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
             contract_description="contract_description",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            contract = response.parse()
+            assert_matches_type(Contract, contract, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_read_from_hf(self, client: PiClient) -> None:
+        contract = client.contracts.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    def test_method_read_from_hf_with_all_params(self, client: PiClient) -> None:
+        contract = client.contracts.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+            hf_token="hf_token",
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    def test_raw_response_read_from_hf(self, client: PiClient) -> None:
+        response = client.contracts.with_raw_response.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        contract = response.parse()
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    def test_streaming_response_read_from_hf(self, client: PiClient) -> None:
+        with client.contracts.with_streaming_response.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -185,6 +226,45 @@ class TestAsyncContracts:
     async def test_streaming_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
             contract_description="contract_description",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            contract = await response.parse()
+            assert_matches_type(Contract, contract, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_read_from_hf(self, async_client: AsyncPiClient) -> None:
+        contract = await async_client.contracts.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
+        contract = await async_client.contracts.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+            hf_token="hf_token",
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    async def test_raw_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.contracts.with_raw_response.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        contract = await response.parse()
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
+        async with async_client.contracts.with_streaming_response.read_from_hf(
+            hf_contract_name="withpi/tldr_contract",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
