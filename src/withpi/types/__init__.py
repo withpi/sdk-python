@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from .shared import Contract as Contract, Dimension as Dimension, SubDimension as SubDimension
-from .rl_grpo_status import RlGrpoStatus as RlGrpoStatus
 from .contract_score_params import ContractScoreParams as ContractScoreParams
 from .data_generation_status import DataGenerationStatus as DataGenerationStatus
 from .prompt_optimize_params import PromptOptimizeParams as PromptOptimizeParams
