@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.shared_params.example import Example
 from ..types.shared_params.contract import Contract
 from ..types.prompt_optimization_status import PromptOptimizationStatus
 
@@ -85,7 +86,7 @@ class PromptResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[prompt_optimize_params.Example],
+        examples: Iterable[Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
@@ -238,7 +239,7 @@ class AsyncPromptResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[prompt_optimize_params.Example],
+        examples: Iterable[Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],

@@ -5,9 +5,10 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
+from ..shared_params.example import Example
 from ..shared_params.contract import Contract
 
-__all__ = ["SftStartJobParams", "Example"]
+__all__ = ["SftStartJobParams"]
 
 
 class SftStartJobParams(TypedDict, total=False):
@@ -28,11 +29,3 @@ class SftStartJobParams(TypedDict, total=False):
 
     num_train_epochs: int
     """SFT number of train epochs"""
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""

@@ -4,16 +4,9 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from ..shared.example import Example
 
-__all__ = ["GenerateSyntheticDataCreateResponse", "Data"]
-
-
-class Data(BaseModel):
-    llm_input: str
-    """The input to LLM"""
-
-    llm_output: str
-    """The output to evaluate"""
+__all__ = ["GenerateSyntheticDataCreateResponse"]
 
 
 class GenerateSyntheticDataCreateResponse(BaseModel):
@@ -26,7 +19,7 @@ class GenerateSyntheticDataCreateResponse(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
     """Current state of the job"""
 
-    data: Optional[List[Data]] = None
+    data: Optional[List[Example]] = None
     """The generated synthetic data.
 
     Can be present even if the state is not done/error as it is streamed.
