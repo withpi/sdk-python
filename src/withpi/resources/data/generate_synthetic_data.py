@@ -7,52 +7,29 @@ from typing_extensions import Literal
 
 import httpx
 
-from .data import (
-    DataResource,
-    AsyncDataResource,
-    DataResourceWithRawResponse,
-    AsyncDataResourceWithRawResponse,
-    DataResourceWithStreamingResponse,
-    AsyncDataResourceWithStreamingResponse,
-)
-from .messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
-)
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.data import generate_synthetic_data_create_params
-from ...._base_client import make_request_options
-from ....types.data.generate_synthetic_data_create_response import GenerateSyntheticDataCreateResponse
-from ....types.data.generate_synthetic_data_retrieve_response import GenerateSyntheticDataRetrieveResponse
+from ...types.data import generate_synthetic_data_create_params
+from ..._base_client import make_request_options
+from ...types.data.generate_synthetic_data_create_response import GenerateSyntheticDataCreateResponse
+from ...types.data.generate_synthetic_data_retrieve_response import GenerateSyntheticDataRetrieveResponse
+from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
 
 __all__ = ["GenerateSyntheticDataResource", "AsyncGenerateSyntheticDataResource"]
 
 
 class GenerateSyntheticDataResource(SyncAPIResource):
-    @cached_property
-    def data(self) -> DataResource:
-        return DataResource(self._client)
-
-    @cached_property
-    def messages(self) -> MessagesResource:
-        return MessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> GenerateSyntheticDataResourceWithRawResponse:
         """
@@ -166,16 +143,75 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             cast_to=GenerateSyntheticDataRetrieveResponse,
         )
 
+    def stream_data(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataStreamDataResponse:
+        """
+        Streams SDKExample objects from the synthetic data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/data/generate_synthetic_data/{job_id}/data",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GenerateSyntheticDataStreamDataResponse,
+        )
+
+    def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams messages from the synthetic data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/data/generate_synthetic_data/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
 
 class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
-    @cached_property
-    def data(self) -> AsyncDataResource:
-        return AsyncDataResource(self._client)
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResource:
-        return AsyncMessagesResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncGenerateSyntheticDataResourceWithRawResponse:
         """
@@ -289,6 +325,73 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             cast_to=GenerateSyntheticDataRetrieveResponse,
         )
 
+    async def stream_data(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataStreamDataResponse:
+        """
+        Streams SDKExample objects from the synthetic data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/data/generate_synthetic_data/{job_id}/data",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GenerateSyntheticDataStreamDataResponse,
+        )
+
+    async def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Streams messages from the synthetic data generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/data/generate_synthetic_data/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
 
 class GenerateSyntheticDataResourceWithRawResponse:
     def __init__(self, generate_synthetic_data: GenerateSyntheticDataResource) -> None:
@@ -300,14 +403,12 @@ class GenerateSyntheticDataResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
-
-    @cached_property
-    def data(self) -> DataResourceWithRawResponse:
-        return DataResourceWithRawResponse(self._generate_synthetic_data.data)
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithRawResponse:
-        return MessagesResourceWithRawResponse(self._generate_synthetic_data.messages)
+        self.stream_data = to_raw_response_wrapper(
+            generate_synthetic_data.stream_data,
+        )
+        self.stream_messages = to_raw_response_wrapper(
+            generate_synthetic_data.stream_messages,
+        )
 
 
 class AsyncGenerateSyntheticDataResourceWithRawResponse:
@@ -320,14 +421,12 @@ class AsyncGenerateSyntheticDataResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
-
-    @cached_property
-    def data(self) -> AsyncDataResourceWithRawResponse:
-        return AsyncDataResourceWithRawResponse(self._generate_synthetic_data.data)
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        return AsyncMessagesResourceWithRawResponse(self._generate_synthetic_data.messages)
+        self.stream_data = async_to_raw_response_wrapper(
+            generate_synthetic_data.stream_data,
+        )
+        self.stream_messages = async_to_raw_response_wrapper(
+            generate_synthetic_data.stream_messages,
+        )
 
 
 class GenerateSyntheticDataResourceWithStreamingResponse:
@@ -340,14 +439,12 @@ class GenerateSyntheticDataResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
-
-    @cached_property
-    def data(self) -> DataResourceWithStreamingResponse:
-        return DataResourceWithStreamingResponse(self._generate_synthetic_data.data)
-
-    @cached_property
-    def messages(self) -> MessagesResourceWithStreamingResponse:
-        return MessagesResourceWithStreamingResponse(self._generate_synthetic_data.messages)
+        self.stream_data = to_streamed_response_wrapper(
+            generate_synthetic_data.stream_data,
+        )
+        self.stream_messages = to_streamed_response_wrapper(
+            generate_synthetic_data.stream_messages,
+        )
 
 
 class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
@@ -360,11 +457,9 @@ class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
-
-    @cached_property
-    def data(self) -> AsyncDataResourceWithStreamingResponse:
-        return AsyncDataResourceWithStreamingResponse(self._generate_synthetic_data.data)
-
-    @cached_property
-    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        return AsyncMessagesResourceWithStreamingResponse(self._generate_synthetic_data.messages)
+        self.stream_data = async_to_streamed_response_wrapper(
+            generate_synthetic_data.stream_data,
+        )
+        self.stream_messages = async_to_streamed_response_wrapper(
+            generate_synthetic_data.stream_messages,
+        )
