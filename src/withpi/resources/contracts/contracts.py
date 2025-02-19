@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
-from ...types import contract_score_params, contract_generate_dimensions_params
+from ...types import (
+    contract_score_params,
+    contract_read_from_hf_params,
+    contract_generate_dimensions_params,
+)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -88,6 +94,51 @@ class ContractsResource(SyncAPIResource):
             body=maybe_transform(
                 {"contract_description": contract_description},
                 contract_generate_dimensions_params.ContractGenerateDimensionsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SharedContract,
+        )
+
+    def read_from_hf(
+        self,
+        *,
+        hf_contract_name: str,
+        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SharedContract:
+        """
+        Read a contract from Huggingface dataset
+
+        Args:
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
+              hf_token if the contract dataset is not public or not own by the withpi
+              organization.
+
+          hf_token: Huggingface token to read the contract dataset
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/contracts/read_from_hf",
+            body=maybe_transform(
+                {
+                    "hf_contract_name": hf_contract_name,
+                    "hf_token": hf_token,
+                },
+                contract_read_from_hf_params.ContractReadFromHfParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -204,6 +255,51 @@ class AsyncContractsResource(AsyncAPIResource):
             cast_to=SharedContract,
         )
 
+    async def read_from_hf(
+        self,
+        *,
+        hf_contract_name: str,
+        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SharedContract:
+        """
+        Read a contract from Huggingface dataset
+
+        Args:
+          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
+              hf_token if the contract dataset is not public or not own by the withpi
+              organization.
+
+          hf_token: Huggingface token to read the contract dataset
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/contracts/read_from_hf",
+            body=await async_maybe_transform(
+                {
+                    "hf_contract_name": hf_contract_name,
+                    "hf_token": hf_token,
+                },
+                contract_read_from_hf_params.ContractReadFromHfParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SharedContract,
+        )
+
     async def score(
         self,
         *,
@@ -259,6 +355,9 @@ class ContractsResourceWithRawResponse:
         self.generate_dimensions = to_raw_response_wrapper(
             contracts.generate_dimensions,
         )
+        self.read_from_hf = to_raw_response_wrapper(
+            contracts.read_from_hf,
+        )
         self.score = to_raw_response_wrapper(
             contracts.score,
         )
@@ -274,6 +373,9 @@ class AsyncContractsResourceWithRawResponse:
 
         self.generate_dimensions = async_to_raw_response_wrapper(
             contracts.generate_dimensions,
+        )
+        self.read_from_hf = async_to_raw_response_wrapper(
+            contracts.read_from_hf,
         )
         self.score = async_to_raw_response_wrapper(
             contracts.score,
@@ -291,6 +393,9 @@ class ContractsResourceWithStreamingResponse:
         self.generate_dimensions = to_streamed_response_wrapper(
             contracts.generate_dimensions,
         )
+        self.read_from_hf = to_streamed_response_wrapper(
+            contracts.read_from_hf,
+        )
         self.score = to_streamed_response_wrapper(
             contracts.score,
         )
@@ -306,6 +411,9 @@ class AsyncContractsResourceWithStreamingResponse:
 
         self.generate_dimensions = async_to_streamed_response_wrapper(
             contracts.generate_dimensions,
+        )
+        self.read_from_hf = async_to_streamed_response_wrapper(
+            contracts.read_from_hf,
         )
         self.score = async_to_streamed_response_wrapper(
             contracts.score,
