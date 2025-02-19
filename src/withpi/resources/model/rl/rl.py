@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .grpo.grpo import (
+from .grpo import (
     GrpoResource,
     AsyncGrpoResource,
     GrpoResourceWithRawResponse,
