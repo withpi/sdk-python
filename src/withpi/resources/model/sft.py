@@ -23,6 +23,7 @@ from ..._response import (
 from ...types.model import sft_start_job_params
 from ..._base_client import make_request_options
 from ...types.model.sft_status import SftStatus
+from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
 from ...types.model.sft_check_response import SftCheckResponse
 
@@ -155,7 +156,7 @@ class SftResource(SyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[sft_start_job_params.Example],
+        examples: Iterable[Example],
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
@@ -370,7 +371,7 @@ class AsyncSftResource(AsyncAPIResource):
         self,
         *,
         contract: Contract,
-        examples: Iterable[sft_start_job_params.Example],
+        examples: Iterable[Example],
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,

@@ -5,9 +5,10 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
+from .shared_params.example import Example
 from .shared_params.contract import Contract
 
-__all__ = ["PromptOptimizeParams", "Example"]
+__all__ = ["PromptOptimizeParams"]
 
 
 class PromptOptimizeParams(TypedDict, total=False):
@@ -37,11 +38,3 @@ class PromptOptimizeParams(TypedDict, total=False):
 
     This only applies for the DSPY. Leave it as None if tuning_algorithm != DSPY.
     """
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""

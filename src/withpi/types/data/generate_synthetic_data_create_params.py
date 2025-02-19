@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["GenerateSyntheticDataCreateParams", "Seed"]
+from ..shared_params.example import Example
+
+__all__ = ["GenerateSyntheticDataCreateParams"]
 
 
 class GenerateSyntheticDataCreateParams(TypedDict, total=False):
@@ -15,7 +17,7 @@ class GenerateSyntheticDataCreateParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 
-    seeds: Required[Iterable[Seed]]
+    seeds: Required[Iterable[Example]]
     """The list of LLM examples (inputs + outputs) to be used as seeds"""
 
     batch_size: int
@@ -32,11 +34,3 @@ class GenerateSyntheticDataCreateParams(TypedDict, total=False):
 
     Generally it could be same as `batch_size`.
     """
-
-
-class Seed(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""
