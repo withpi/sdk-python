@@ -14,3 +14,9 @@ from .generate_synthetic_data_create_response import (
 from .generate_synthetic_data_retrieve_response import (
     GenerateSyntheticDataRetrieveResponse as GenerateSyntheticDataRetrieveResponse,
 )
+from .generate_synthetic_data_stream_data_response import (
+    GenerateSyntheticDataStreamDataResponse as GenerateSyntheticDataStreamDataResponse,
+)
+from .generate_synthetic_data_stream_messages_response import (
+    GenerateSyntheticDataStreamMessagesResponse as GenerateSyntheticDataStreamMessagesResponse,
+)

@@ -50,37 +50,17 @@ Types:
 from withpi.types.data import (
     GenerateSyntheticDataCreateResponse,
     GenerateSyntheticDataRetrieveResponse,
+    GenerateSyntheticDataStreamDataResponse,
+    GenerateSyntheticDataStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data/generate_synthetic_data.py">create</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_create_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_create_response.py">GenerateSyntheticDataCreateResponse</a></code>
-- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_retrieve_response.py">GenerateSyntheticDataRetrieveResponse</a></code>
-
-### Data
-
-Types:
-
-```python
-from withpi.types.data.generate_synthetic_data import DataListResponse
-```
-
-Methods:
-
-- <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.data.<a href="./src/withpi/resources/data/generate_synthetic_data/data.py">list</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data/data_list_response.py">DataListResponse</a></code>
-
-### Messages
-
-Types:
-
-```python
-from withpi.types.data.generate_synthetic_data import MessageListResponse
-```
-
-Methods:
-
-- <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.messages.<a href="./src/withpi/resources/data/generate_synthetic_data/messages.py">list</a>(job_id) -> str</code>
+- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">create</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_create_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_create_response.py">GenerateSyntheticDataCreateResponse</a></code>
+- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_retrieve_response.py">GenerateSyntheticDataRetrieveResponse</a></code>
+- <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_stream_data_response.py">GenerateSyntheticDataStreamDataResponse</a></code>
+- <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_messages</a>(job_id) -> str</code>
 
 # Prompt
 
@@ -113,35 +93,11 @@ from withpi.types.model import (
 
 Methods:
 
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}/check">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">check</a>(job_id) -> <a href="./src/withpi/types/model/sft_check_response.py">SftCheckResponse</a></code>
-- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">load</a>(job_id) -> str</code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft/sft.py">stream_messages</a>(job_id) -> str</code>
-
-### ChatCompletions
-
-Types:
-
-```python
-from withpi.types.model.sft import ChatCompletionListResponse
-```
-
-Methods:
-
-- <code title="get /model/sft/{job_id}/chat/completions">client.model.sft.chat_completions.<a href="./src/withpi/resources/model/sft/chat_completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/sft/chat_completion_list_response.py">object</a></code>
-
-### Completions
-
-Types:
-
-```python
-from withpi.types.model.sft import CompletionListResponse
-```
-
-Methods:
-
-- <code title="get /model/sft/{job_id}/completions">client.model.sft.completions.<a href="./src/withpi/resources/model/sft/completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/sft/completion_list_response.py">object</a></code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}/check">client.model.sft.<a href="./src/withpi/resources/model/sft.py">check</a>(job_id) -> <a href="./src/withpi/types/model/sft_check_response.py">SftCheckResponse</a></code>
+- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> str</code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
 
 ## Rl
 
@@ -160,35 +116,11 @@ from withpi.types.model.rl import (
 
 Methods:
 
-- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo/{job_id}/check">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">check</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo_check_response.py">GrpoCheckResponse</a></code>
-- <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">load</a>(job_id) -> str</code>
-- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo/grpo.py">stream_messages</a>(job_id) -> str</code>
-
-#### ChatCompletions
-
-Types:
-
-```python
-from withpi.types.model.rl.grpo import ChatCompletionListResponse
-```
-
-Methods:
-
-- <code title="get /model/rl/grpo/{job_id}/chat/completions">client.model.rl.grpo.chat_completions.<a href="./src/withpi/resources/model/rl/grpo/chat_completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo/chat_completion_list_response.py">object</a></code>
-
-#### Completions
-
-Types:
-
-```python
-from withpi.types.model.rl.grpo import CompletionListResponse
-```
-
-Methods:
-
-- <code title="get /model/rl/grpo/{job_id}/completions">client.model.rl.grpo.completions.<a href="./src/withpi/resources/model/rl/grpo/completions.py">list</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo/completion_list_response.py">object</a></code>
+- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/rl/grpo/{job_id}/check">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">check</a>(job_id) -> <a href="./src/withpi/types/model/rl/grpo_check_response.py">GrpoCheckResponse</a></code>
+- <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">load</a>(job_id) -> str</code>
+- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
 
 # Contracts
 
