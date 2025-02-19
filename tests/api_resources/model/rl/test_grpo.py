@@ -9,8 +9,10 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types import RlGrpoStatus
-from withpi.types.model.rl import GrpoCheckResponse
+from withpi.types.model.rl import (
+    RlGrpoStatus,
+    GrpoCheckResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

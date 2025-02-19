@@ -38,8 +38,8 @@ from .chat_completions import (
     AsyncChatCompletionsResourceWithStreamingResponse,
 )
 from .....types.model.rl import grpo_start_job_params
-from .....types.rl_grpo_status import RlGrpoStatus
 from .....types.shared_params.contract import Contract
+from .....types.model.rl.rl_grpo_status import RlGrpoStatus
 from .....types.model.rl.grpo_check_response import GrpoCheckResponse
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
