@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from withpi.types import Contract, Dimension, SubDimension
+from withpi.types import Contract, Dimension, Example, SubDimension
 ```
 
 # Data
