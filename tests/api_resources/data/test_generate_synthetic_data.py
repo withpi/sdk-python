@@ -24,17 +24,12 @@ class TestGenerateSyntheticData:
     @parametrize
     def test_method_create(self, client: PiClient) -> None:
         generate_synthetic_data = client.data.generate_synthetic_data.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         )
         assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
@@ -42,38 +37,30 @@ class TestGenerateSyntheticData:
     @parametrize
     def test_method_create_with_all_params(self, client: PiClient) -> None:
         generate_synthetic_data = client.data.generate_synthetic_data.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
+            application_description="AI application for writing a children's story given topics.",
             batch_size=5,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
         )
         assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: PiClient) -> None:
         response = client.data.generate_synthetic_data.with_raw_response.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         )
 
@@ -85,17 +72,12 @@ class TestGenerateSyntheticData:
     @parametrize
     def test_streaming_response_create(self, client: PiClient) -> None:
         with client.data.generate_synthetic_data.with_streaming_response.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed
@@ -227,17 +209,12 @@ class TestAsyncGenerateSyntheticData:
     @parametrize
     async def test_method_create(self, async_client: AsyncPiClient) -> None:
         generate_synthetic_data = await async_client.data.generate_synthetic_data.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         )
         assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
@@ -245,38 +222,30 @@ class TestAsyncGenerateSyntheticData:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
         generate_synthetic_data = await async_client.data.generate_synthetic_data.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
+            application_description="AI application for writing a children's story given topics.",
             batch_size=5,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
         )
         assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.generate_synthetic_data.with_raw_response.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         )
 
@@ -288,17 +257,12 @@ class TestAsyncGenerateSyntheticData:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.generate_synthetic_data.with_streaming_response.create(
-            application_description="application_description",
             num_examples_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                },
-                {
-                    "llm_input": "Write a short poem",
-                    "llm_output": "Moonlight dancing on waves,\nStars whisper ancient tales,\nNight's gentle embrace",
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed
