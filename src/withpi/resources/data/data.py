@@ -12,7 +12,7 @@ from .inputs.inputs import (
     InputsResourceWithStreamingResponse,
     AsyncInputsResourceWithStreamingResponse,
 )
-from .generate_synthetic_data.generate_synthetic_data import (
+from .generate_synthetic_data import (
     GenerateSyntheticDataResource,
     AsyncGenerateSyntheticDataResource,
     GenerateSyntheticDataResourceWithRawResponse,
