@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ...types.data import generate_synthetic_data_create_params
 from ..._base_client import make_request_options
+from ...types.shared_params.example import Example
 from ...types.data.generate_synthetic_data_create_response import GenerateSyntheticDataCreateResponse
 from ...types.data.generate_synthetic_data_retrieve_response import GenerateSyntheticDataRetrieveResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
@@ -54,7 +55,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         *,
         application_description: str,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_synthetic_data_create_params.Seed],
+        seeds: Iterable[Example],
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
@@ -236,7 +237,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         *,
         application_description: str,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_synthetic_data_create_params.Seed],
+        seeds: Iterable[Example],
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
