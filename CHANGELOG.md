@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.63 (2025-02-19)
+
+Full Changelog: [v0.1.0-alpha.62...v0.1.0-alpha.63](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.62...v0.1.0-alpha.63)
+
+### Features
+
+* **api:** api update ([#290](https://github.com/withpi/sdk-python/issues/290)) ([d443338](https://github.com/withpi/sdk-python/commit/d4433386a10f00e8a2f887720b00812588f8c821))
+
 ## 0.1.0-alpha.62 (2025-02-19)
 
 Full Changelog: [v0.1.0-alpha.61...v0.1.0-alpha.62](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.61...v0.1.0-alpha.62)

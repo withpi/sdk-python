@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -53,12 +53,13 @@ class GenerateSyntheticDataResource(SyncAPIResource):
     def create(
         self,
         *,
-        application_description: str,
         num_examples_to_generate: int,
         seeds: Iterable[Example],
+        application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,19 +71,20 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         Generates synthetic data from a list of seeds
 
         Args:
-          application_description: The application description for which the synthetic data would be applicable.
-
           num_examples_to_generate: The number of new LLM examples to generate
 
           seeds: The list of LLM examples (inputs + outputs) to be used as seeds
 
+          application_description: The application description for which the synthetic data would be applicable.
+
           batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
-          exploration_mode: The exloration mode for examples generation. Defaults to `BALANCED`
+          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
 
-          num_shots: Number of examples to be included in the prompt for generation. Generally it
-              could be same as `batch_size`.
+          num_shots: Number of examples to be included in the prompt for generation
+
+          system_prompt: The system prompt to generate the responses for the application's inputs
 
           extra_headers: Send extra headers
 
@@ -96,12 +98,13 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             "/data/generate_synthetic_data",
             body=maybe_transform(
                 {
-                    "application_description": application_description,
                     "num_examples_to_generate": num_examples_to_generate,
                     "seeds": seeds,
+                    "application_description": application_description,
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "system_prompt": system_prompt,
                 },
                 generate_synthetic_data_create_params.GenerateSyntheticDataCreateParams,
             ),
@@ -235,12 +238,13 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        application_description: str,
         num_examples_to_generate: int,
         seeds: Iterable[Example],
+        application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -252,19 +256,20 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         Generates synthetic data from a list of seeds
 
         Args:
-          application_description: The application description for which the synthetic data would be applicable.
-
           num_examples_to_generate: The number of new LLM examples to generate
 
           seeds: The list of LLM examples (inputs + outputs) to be used as seeds
 
+          application_description: The application description for which the synthetic data would be applicable.
+
           batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
               be same as `num_shots`.
 
-          exploration_mode: The exloration mode for examples generation. Defaults to `BALANCED`
+          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
 
-          num_shots: Number of examples to be included in the prompt for generation. Generally it
-              could be same as `batch_size`.
+          num_shots: Number of examples to be included in the prompt for generation
+
+          system_prompt: The system prompt to generate the responses for the application's inputs
 
           extra_headers: Send extra headers
 
@@ -278,12 +283,13 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             "/data/generate_synthetic_data",
             body=await async_maybe_transform(
                 {
-                    "application_description": application_description,
                     "num_examples_to_generate": num_examples_to_generate,
                     "seeds": seeds,
+                    "application_description": application_description,
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "system_prompt": system_prompt,
                 },
                 generate_synthetic_data_create_params.GenerateSyntheticDataCreateParams,
             ),
