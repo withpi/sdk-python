@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.64 (2025-02-21)
+
+Full Changelog: [v0.1.0-alpha.63...v0.1.0-alpha.64](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.63...v0.1.0-alpha.64)
+
+### Features
+
+* **client:** allow passing `NotGiven` for body ([#293](https://github.com/withpi/sdk-python/issues/293)) ([1458fa0](https://github.com/withpi/sdk-python/commit/1458fa0421c7c26a4a399c5bef61cca27c0b8967))
+
+
+### Bug Fixes
+
+* **client:** mark some request bodies as optional ([1458fa0](https://github.com/withpi/sdk-python/commit/1458fa0421c7c26a4a399c5bef61cca27c0b8967))
+
 ## 0.1.0-alpha.63 (2025-02-19)
 
 Full Changelog: [v0.1.0-alpha.62...v0.1.0-alpha.63](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.62...v0.1.0-alpha.63)
