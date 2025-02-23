@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.65 (2025-02-23)
+
+Full Changelog: [v0.1.0-alpha.64...v0.1.0-alpha.65](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.64...v0.1.0-alpha.65)
+
+### Features
+
+* **api:** api update ([#298](https://github.com/withpi/sdk-python/issues/298)) ([c080869](https://github.com/withpi/sdk-python/commit/c080869c0ceb3471a5982868ec34be05f981f628))
+
+
+### Chores
+
+* **internal:** fix devcontainers setup ([#296](https://github.com/withpi/sdk-python/issues/296)) ([8a18b9c](https://github.com/withpi/sdk-python/commit/8a18b9ccc64e8fa4377af23b23b2bf9ba699c3e6))
+
 ## 0.1.0-alpha.64 (2025-02-21)
 
 Full Changelog: [v0.1.0-alpha.63...v0.1.0-alpha.64](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.63...v0.1.0-alpha.64)
