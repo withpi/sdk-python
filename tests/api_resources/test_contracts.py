@@ -23,14 +23,14 @@ class TestContracts:
     @parametrize
     def test_method_generate_dimensions(self, client: PiClient) -> None:
         contract = client.contracts.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     def test_raw_response_generate_dimensions(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestContracts:
     @parametrize
     def test_streaming_response_generate_dimensions(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -207,14 +207,14 @@ class TestAsyncContracts:
     @parametrize
     async def test_method_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         )
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         )
 
         assert response.is_closed is True
@@ -225,7 +225,7 @@ class TestAsyncContracts:
     @parametrize
     async def test_streaming_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
-            contract_description="contract_description",
+            contract_description="Write a children's story communicating a simple life lesson.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
