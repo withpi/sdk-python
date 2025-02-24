@@ -21,11 +21,14 @@ class TrainedModel(BaseModel):
     firework_hosted_model_id: str
     """Firework's hosted model id"""
 
+    is_loaded: bool
+    """Whether the model is loaded in the serving system"""
+
+    serving_id: int
+    """The serving id of the trained model within this Job"""
+
     step: int
     """The training step"""
-
-    hf_model_name: Optional[str] = None
-    """The SFT model weights in Huggingface"""
 
 
 class RlGrpoStatus(BaseModel):

@@ -24,7 +24,6 @@ from ...._base_client import make_request_options
 from ....types.model.rl import grpo_start_job_params
 from ....types.shared_params.contract import Contract
 from ....types.model.rl.rl_grpo_status import RlGrpoStatus
-from ....types.model.rl.grpo_check_response import GrpoCheckResponse
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -82,39 +81,6 @@ class GrpoResource(SyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
-    def check(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoCheckResponse:
-        """
-        Check if the model is serving
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/model/rl/grpo/{job_id}/check",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoCheckResponse,
-        )
-
     def load(
         self,
         job_id: str,
@@ -125,7 +91,7 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> RlGrpoStatus:
         """Load the model into serving.
 
         This can support a very small amount of interactive
@@ -147,7 +113,7 @@ class GrpoResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=RlGrpoStatus,
         )
 
     def start_job(
@@ -298,39 +264,6 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
-    async def check(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoCheckResponse:
-        """
-        Check if the model is serving
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/model/rl/grpo/{job_id}/check",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoCheckResponse,
-        )
-
     async def load(
         self,
         job_id: str,
@@ -341,7 +274,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> RlGrpoStatus:
         """Load the model into serving.
 
         This can support a very small amount of interactive
@@ -363,7 +296,7 @@ class AsyncGrpoResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=RlGrpoStatus,
         )
 
     async def start_job(
@@ -468,9 +401,6 @@ class GrpoResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             grpo.retrieve,
         )
-        self.check = to_raw_response_wrapper(
-            grpo.check,
-        )
         self.load = to_raw_response_wrapper(
             grpo.load,
         )
@@ -488,9 +418,6 @@ class AsyncGrpoResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             grpo.retrieve,
-        )
-        self.check = async_to_raw_response_wrapper(
-            grpo.check,
         )
         self.load = async_to_raw_response_wrapper(
             grpo.load,
@@ -510,9 +437,6 @@ class GrpoResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             grpo.retrieve,
         )
-        self.check = to_streamed_response_wrapper(
-            grpo.check,
-        )
         self.load = to_streamed_response_wrapper(
             grpo.load,
         )
@@ -530,9 +454,6 @@ class AsyncGrpoResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             grpo.retrieve,
-        )
-        self.check = async_to_streamed_response_wrapper(
-            grpo.check,
         )
         self.load = async_to_streamed_response_wrapper(
             grpo.load,
