@@ -9,10 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.model import (
-    SftStatus,
-    SftCheckResponse,
-)
+from withpi.types.model import SftStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -59,49 +56,11 @@ class TestSft:
             )
 
     @parametrize
-    def test_method_check(self, client: PiClient) -> None:
-        sft = client.model.sft.check(
-            "job_id",
-        )
-        assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-    @parametrize
-    def test_raw_response_check(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.check(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = response.parse()
-        assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-    @parametrize
-    def test_streaming_response_check(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.check(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = response.parse()
-            assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_check(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.check(
-                "",
-            )
-
-    @parametrize
     def test_method_load(self, client: PiClient) -> None:
         sft = client.model.sft.load(
             "job_id",
         )
-        assert_matches_type(str, sft, path=["response"])
+        assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     def test_raw_response_load(self, client: PiClient) -> None:
@@ -112,7 +71,7 @@ class TestSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = response.parse()
-        assert_matches_type(str, sft, path=["response"])
+        assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     def test_streaming_response_load(self, client: PiClient) -> None:
@@ -123,7 +82,7 @@ class TestSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = response.parse()
-            assert_matches_type(str, sft, path=["response"])
+            assert_matches_type(SftStatus, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -344,49 +303,11 @@ class TestAsyncSft:
             )
 
     @parametrize
-    async def test_method_check(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.check(
-            "job_id",
-        )
-        assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-    @parametrize
-    async def test_raw_response_check(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.check(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = await response.parse()
-        assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_check(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.check(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = await response.parse()
-            assert_matches_type(SftCheckResponse, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_check(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.check(
-                "",
-            )
-
-    @parametrize
     async def test_method_load(self, async_client: AsyncPiClient) -> None:
         sft = await async_client.model.sft.load(
             "job_id",
         )
-        assert_matches_type(str, sft, path=["response"])
+        assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     async def test_raw_response_load(self, async_client: AsyncPiClient) -> None:
@@ -397,7 +318,7 @@ class TestAsyncSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = await response.parse()
-        assert_matches_type(str, sft, path=["response"])
+        assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     async def test_streaming_response_load(self, async_client: AsyncPiClient) -> None:
@@ -408,7 +329,7 @@ class TestAsyncSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = await response.parse()
-            assert_matches_type(str, sft, path=["response"])
+            assert_matches_type(SftStatus, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

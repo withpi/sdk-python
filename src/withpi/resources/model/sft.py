@@ -25,7 +25,6 @@ from ..._base_client import make_request_options
 from ...types.model.sft_status import SftStatus
 from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
-from ...types.model.sft_check_response import SftCheckResponse
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -83,39 +82,6 @@ class SftResource(SyncAPIResource):
             cast_to=SftStatus,
         )
 
-    def check(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftCheckResponse:
-        """
-        Check if the model is serving
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/model/sft/{job_id}/check",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftCheckResponse,
-        )
-
     def load(
         self,
         job_id: str,
@@ -126,7 +92,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> SftStatus:
         """Load the SFT model into serving.
 
         This can support a very small amount of
@@ -149,7 +115,7 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=SftStatus,
         )
 
     def start_job(
@@ -298,39 +264,6 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
-    async def check(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftCheckResponse:
-        """
-        Check if the model is serving
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/model/sft/{job_id}/check",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftCheckResponse,
-        )
-
     async def load(
         self,
         job_id: str,
@@ -341,7 +274,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> SftStatus:
         """Load the SFT model into serving.
 
         This can support a very small amount of
@@ -364,7 +297,7 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=SftStatus,
         )
 
     async def start_job(
@@ -467,9 +400,6 @@ class SftResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             sft.retrieve,
         )
-        self.check = to_raw_response_wrapper(
-            sft.check,
-        )
         self.load = to_raw_response_wrapper(
             sft.load,
         )
@@ -487,9 +417,6 @@ class AsyncSftResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             sft.retrieve,
-        )
-        self.check = async_to_raw_response_wrapper(
-            sft.check,
         )
         self.load = async_to_raw_response_wrapper(
             sft.load,
@@ -509,9 +436,6 @@ class SftResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             sft.retrieve,
         )
-        self.check = to_streamed_response_wrapper(
-            sft.check,
-        )
         self.load = to_streamed_response_wrapper(
             sft.load,
         )
@@ -529,9 +453,6 @@ class AsyncSftResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             sft.retrieve,
-        )
-        self.check = async_to_streamed_response_wrapper(
-            sft.check,
         )
         self.load = async_to_streamed_response_wrapper(
             sft.load,

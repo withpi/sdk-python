@@ -9,10 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.model.rl import (
-    RlGrpoStatus,
-    GrpoCheckResponse,
-)
+from withpi.types.model.rl import RlGrpoStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -59,49 +56,11 @@ class TestGrpo:
             )
 
     @parametrize
-    def test_method_check(self, client: PiClient) -> None:
-        grpo = client.model.rl.grpo.check(
-            "job_id",
-        )
-        assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-    @parametrize
-    def test_raw_response_check(self, client: PiClient) -> None:
-        response = client.model.rl.grpo.with_raw_response.check(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = response.parse()
-        assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-    @parametrize
-    def test_streaming_response_check(self, client: PiClient) -> None:
-        with client.model.rl.grpo.with_streaming_response.check(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = response.parse()
-            assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_check(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.rl.grpo.with_raw_response.check(
-                "",
-            )
-
-    @parametrize
     def test_method_load(self, client: PiClient) -> None:
         grpo = client.model.rl.grpo.load(
             "job_id",
         )
-        assert_matches_type(str, grpo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_raw_response_load(self, client: PiClient) -> None:
@@ -112,7 +71,7 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(str, grpo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     def test_streaming_response_load(self, client: PiClient) -> None:
@@ -123,7 +82,7 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(str, grpo, path=["response"])
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -328,49 +287,11 @@ class TestAsyncGrpo:
             )
 
     @parametrize
-    async def test_method_check(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.model.rl.grpo.check(
-            "job_id",
-        )
-        assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-    @parametrize
-    async def test_raw_response_check(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.rl.grpo.with_raw_response.check(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = await response.parse()
-        assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_check(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.rl.grpo.with_streaming_response.check(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = await response.parse()
-            assert_matches_type(GrpoCheckResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_check(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.rl.grpo.with_raw_response.check(
-                "",
-            )
-
-    @parametrize
     async def test_method_load(self, async_client: AsyncPiClient) -> None:
         grpo = await async_client.model.rl.grpo.load(
             "job_id",
         )
-        assert_matches_type(str, grpo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_raw_response_load(self, async_client: AsyncPiClient) -> None:
@@ -381,7 +302,7 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(str, grpo, path=["response"])
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @parametrize
     async def test_streaming_response_load(self, async_client: AsyncPiClient) -> None:
@@ -392,7 +313,7 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(str, grpo, path=["response"])
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
