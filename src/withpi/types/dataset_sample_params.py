@@ -15,5 +15,5 @@ class DatasetSampleParams(TypedDict, total=False):
     split: Required[str]
     """The split to sample from."""
 
-    subset: Optional[str]
+    subset: Required[Optional[str]]
     """The subset to sample from."""
