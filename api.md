@@ -149,3 +149,15 @@ from withpi.types import QueryGenerateFanoutsResponse
 Methods:
 
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
+
+# Dataset
+
+Types:
+
+```python
+from withpi.types import DatasetSampleResponse
+```
+
+Methods:
+
+- <code title="post /dataset/sample_from_hf">client.dataset.<a href="./src/withpi/resources/dataset.py">sample</a>(\*\*<a href="src/withpi/types/dataset_sample_params.py">params</a>) -> <a href="./src/withpi/types/dataset_sample_response.py">DatasetSampleResponse</a></code>
