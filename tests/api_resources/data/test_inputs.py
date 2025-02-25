@@ -20,43 +20,37 @@ class TestInputs:
     @parametrize
     def test_method_cluster(self, client: PiClient) -> None:
         input = client.data.inputs.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
     def test_method_cluster_with_all_params(self, client: PiClient) -> None:
         input = client.data.inputs.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ],
-                "num_clusters": 5,
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            num_clusters=5,
         )
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
     def test_raw_response_cluster(self, client: PiClient) -> None:
         response = client.data.inputs.with_raw_response.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -67,14 +61,12 @@ class TestInputs:
     @parametrize
     def test_streaming_response_cluster(self, client: PiClient) -> None:
         with client.data.inputs.with_streaming_response.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -91,43 +83,37 @@ class TestAsyncInputs:
     @parametrize
     async def test_method_cluster(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.inputs.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
     async def test_method_cluster_with_all_params(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.inputs.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ],
-                "num_clusters": 5,
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            num_clusters=5,
         )
         assert_matches_type(InputClusterResponse, input, path=["response"])
 
     @parametrize
     async def test_raw_response_cluster(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.inputs.with_raw_response.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -138,14 +124,12 @@ class TestAsyncInputs:
     @parametrize
     async def test_streaming_response_cluster(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.inputs.with_streaming_response.cluster(
-            inputs={
-                "inputs": [
-                    {
-                        "identifier": "12345",
-                        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                    }
-                ]
-            },
+            inputs=[
+                {
+                    "identifier": "12345",
+                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
