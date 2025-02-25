@@ -10,7 +10,7 @@ __all__ = ["InputClusterParams", "Input"]
 
 class InputClusterParams(TypedDict, total=False):
     inputs: Required[Iterable[Input]]
-    """The data to cluster."""
+    """The data to create clusters from."""
 
     num_clusters: Optional[int]
     """The number of clusters to form.

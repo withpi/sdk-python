@@ -74,7 +74,7 @@ class InputsResource(SyncAPIResource):
         Clusters inputs into groups with counts
 
         Args:
-          inputs: The data to cluster.
+          inputs: The data to create clusters from.
 
           num_clusters: The number of clusters to form. If none, the api chooses a number automatically.
 
@@ -142,7 +142,7 @@ class AsyncInputsResource(AsyncAPIResource):
         Clusters inputs into groups with counts
 
         Args:
-          inputs: The data to cluster.
+          inputs: The data to create clusters from.
 
           num_clusters: The number of clusters to form. If none, the api chooses a number automatically.
 
