@@ -24,6 +24,14 @@ from .prompt import (
     PromptResourceWithStreamingResponse,
     AsyncPromptResourceWithStreamingResponse,
 )
+from .dataset import (
+    DatasetResource,
+    AsyncDatasetResource,
+    DatasetResourceWithRawResponse,
+    AsyncDatasetResourceWithRawResponse,
+    DatasetResourceWithStreamingResponse,
+    AsyncDatasetResourceWithStreamingResponse,
+)
 from .queries import (
     QueriesResource,
     AsyncQueriesResource,
@@ -72,4 +80,10 @@ __all__ = [
     "AsyncQueriesResourceWithRawResponse",
     "QueriesResourceWithStreamingResponse",
     "AsyncQueriesResourceWithStreamingResponse",
+    "DatasetResource",
+    "AsyncDatasetResource",
+    "DatasetResourceWithRawResponse",
+    "AsyncDatasetResourceWithRawResponse",
+    "DatasetResourceWithStreamingResponse",
+    "AsyncDatasetResourceWithStreamingResponse",
 ]
