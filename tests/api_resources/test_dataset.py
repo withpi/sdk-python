@@ -22,14 +22,6 @@ class TestDataset:
         dataset = client.dataset.sample(
             name="name",
             split="split",
-        )
-        assert_matches_type(DatasetSampleResponse, dataset, path=["response"])
-
-    @parametrize
-    def test_method_sample_with_all_params(self, client: PiClient) -> None:
-        dataset = client.dataset.sample(
-            name="name",
-            split="split",
             subset="subset",
         )
         assert_matches_type(DatasetSampleResponse, dataset, path=["response"])
@@ -39,6 +31,7 @@ class TestDataset:
         response = client.dataset.with_raw_response.sample(
             name="name",
             split="split",
+            subset="subset",
         )
 
         assert response.is_closed is True
@@ -51,6 +44,7 @@ class TestDataset:
         with client.dataset.with_streaming_response.sample(
             name="name",
             split="split",
+            subset="subset",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -69,14 +63,6 @@ class TestAsyncDataset:
         dataset = await async_client.dataset.sample(
             name="name",
             split="split",
-        )
-        assert_matches_type(DatasetSampleResponse, dataset, path=["response"])
-
-    @parametrize
-    async def test_method_sample_with_all_params(self, async_client: AsyncPiClient) -> None:
-        dataset = await async_client.dataset.sample(
-            name="name",
-            split="split",
             subset="subset",
         )
         assert_matches_type(DatasetSampleResponse, dataset, path=["response"])
@@ -86,6 +72,7 @@ class TestAsyncDataset:
         response = await async_client.dataset.with_raw_response.sample(
             name="name",
             split="split",
+            subset="subset",
         )
 
         assert response.is_closed is True
@@ -98,6 +85,7 @@ class TestAsyncDataset:
         async with async_client.dataset.with_streaming_response.sample(
             name="name",
             split="split",
+            subset="subset",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
