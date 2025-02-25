@@ -13,7 +13,10 @@ class InputClusterParams(TypedDict, total=False):
     """The data to cluster."""
 
     num_clusters: Optional[int]
-    """The number of clusters to form."""
+    """The number of clusters to form.
+
+    If none, the api chooses a number automatically.
+    """
 
 
 class Input(TypedDict, total=False):
