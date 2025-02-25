@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Iterable, Optional
+
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -59,7 +61,8 @@ class InputsResource(SyncAPIResource):
     def cluster(
         self,
         *,
-        inputs: input_cluster_params.Inputs,
+        inputs: Iterable[input_cluster_params.Input],
+        num_clusters: Optional[int] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,6 +74,10 @@ class InputsResource(SyncAPIResource):
         Clusters inputs into groups with counts
 
         Args:
+          inputs: The data to cluster.
+
+          num_clusters: The number of clusters to form.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -81,7 +88,13 @@ class InputsResource(SyncAPIResource):
         """
         return self._post(
             "/data/input/cluster",
-            body=maybe_transform(inputs, input_cluster_params.InputClusterParams),
+            body=maybe_transform(
+                {
+                    "inputs": inputs,
+                    "num_clusters": num_clusters,
+                },
+                input_cluster_params.InputClusterParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -116,7 +129,8 @@ class AsyncInputsResource(AsyncAPIResource):
     async def cluster(
         self,
         *,
-        inputs: input_cluster_params.Inputs,
+        inputs: Iterable[input_cluster_params.Input],
+        num_clusters: Optional[int] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -128,6 +142,10 @@ class AsyncInputsResource(AsyncAPIResource):
         Clusters inputs into groups with counts
 
         Args:
+          inputs: The data to cluster.
+
+          num_clusters: The number of clusters to form.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -138,7 +156,13 @@ class AsyncInputsResource(AsyncAPIResource):
         """
         return await self._post(
             "/data/input/cluster",
-            body=await async_maybe_transform(inputs, input_cluster_params.InputClusterParams),
+            body=await async_maybe_transform(
+                {
+                    "inputs": inputs,
+                    "num_clusters": num_clusters,
+                },
+                input_cluster_params.InputClusterParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
