@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import prompt, dataset, queries
+from .resources import prompt, queries
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
@@ -54,7 +54,6 @@ class PiClient(SyncAPIClient):
     model: model.ModelResource
     contracts: contracts.ContractsResource
     queries: queries.QueriesResource
-    dataset: dataset.DatasetResource
     with_raw_response: PiClientWithRawResponse
     with_streaming_response: PiClientWithStreamedResponse
 
@@ -117,7 +116,6 @@ class PiClient(SyncAPIClient):
         self.model = model.ModelResource(self)
         self.contracts = contracts.ContractsResource(self)
         self.queries = queries.QueriesResource(self)
-        self.dataset = dataset.DatasetResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
         self.with_streaming_response = PiClientWithStreamedResponse(self)
 
@@ -232,7 +230,6 @@ class AsyncPiClient(AsyncAPIClient):
     model: model.AsyncModelResource
     contracts: contracts.AsyncContractsResource
     queries: queries.AsyncQueriesResource
-    dataset: dataset.AsyncDatasetResource
     with_raw_response: AsyncPiClientWithRawResponse
     with_streaming_response: AsyncPiClientWithStreamedResponse
 
@@ -295,7 +292,6 @@ class AsyncPiClient(AsyncAPIClient):
         self.model = model.AsyncModelResource(self)
         self.contracts = contracts.AsyncContractsResource(self)
         self.queries = queries.AsyncQueriesResource(self)
-        self.dataset = dataset.AsyncDatasetResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
         self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
@@ -411,7 +407,6 @@ class PiClientWithRawResponse:
         self.model = model.ModelResourceWithRawResponse(client.model)
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
-        self.dataset = dataset.DatasetResourceWithRawResponse(client.dataset)
 
 
 class AsyncPiClientWithRawResponse:
@@ -421,7 +416,6 @@ class AsyncPiClientWithRawResponse:
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
-        self.dataset = dataset.AsyncDatasetResourceWithRawResponse(client.dataset)
 
 
 class PiClientWithStreamedResponse:
@@ -431,7 +425,6 @@ class PiClientWithStreamedResponse:
         self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
-        self.dataset = dataset.DatasetResourceWithStreamingResponse(client.dataset)
 
 
 class AsyncPiClientWithStreamedResponse:
@@ -441,7 +434,6 @@ class AsyncPiClientWithStreamedResponse:
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
-        self.dataset = dataset.AsyncDatasetResourceWithStreamingResponse(client.dataset)
 
 
 Client = PiClient
