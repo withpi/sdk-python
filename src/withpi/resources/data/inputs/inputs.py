@@ -76,7 +76,7 @@ class InputsResource(SyncAPIResource):
         Args:
           inputs: The data to cluster.
 
-          num_clusters: The number of clusters to form.
+          num_clusters: The number of clusters to form. If none, the api chooses a number automatically.
 
           extra_headers: Send extra headers
 
@@ -144,7 +144,7 @@ class AsyncInputsResource(AsyncAPIResource):
         Args:
           inputs: The data to cluster.
 
-          num_clusters: The number of clusters to form.
+          num_clusters: The number of clusters to form. If none, the api chooses a number automatically.
 
           extra_headers: Send extra headers
 
