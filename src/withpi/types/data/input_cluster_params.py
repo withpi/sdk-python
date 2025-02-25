@@ -2,19 +2,27 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["InputClusterParams", "Input"]
+__all__ = ["InputClusterParams", "Inputs", "InputsInput"]
 
 
 class InputClusterParams(TypedDict, total=False):
-    inputs: Required[Iterable[Input]]
+    inputs: Required[Inputs]
 
 
-class Input(TypedDict, total=False):
+class InputsInput(TypedDict, total=False):
     identifier: Required[str]
     """The identifier of the input"""
 
     llm_input: Required[str]
     """The input to LLM"""
+
+
+class Inputs(TypedDict, total=False):
+    inputs: Required[Iterable[InputsInput]]
+    """The data to cluster."""
+
+    num_clusters: Optional[int]
+    """The number of clusters to form."""
