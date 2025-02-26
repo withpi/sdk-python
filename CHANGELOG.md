@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.75 (2025-02-26)
+
+Full Changelog: [v0.1.0-alpha.74...v0.1.0-alpha.75](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.74...v0.1.0-alpha.75)
+
+### Features
+
+* **api:** api update ([#329](https://github.com/withpi/sdk-python/issues/329)) ([a8749e6](https://github.com/withpi/sdk-python/commit/a8749e6d5ea447913215c66955877d2768aeff5d))
+
+
+### Chores
+
+* **internal:** properly set __pydantic_private__ ([#327](https://github.com/withpi/sdk-python/issues/327)) ([f0dfd56](https://github.com/withpi/sdk-python/commit/f0dfd56bfed745dffc10613a081463f0251bbfa0))
+
 ## 0.1.0-alpha.74 (2025-02-26)
 
 Full Changelog: [v0.1.0-alpha.73...v0.1.0-alpha.74](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.73...v0.1.0-alpha.74)
