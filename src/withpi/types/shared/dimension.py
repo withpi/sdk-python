@@ -16,7 +16,7 @@ class ActionDimension(BaseModel):
     label: str
     """The label of the dimension"""
 
-    scoring_type: Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]
+    scoring_type: Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]
     """The type of scoring performed for this dimension"""
 
     action_on_low_score: Optional[bool] = None
@@ -29,12 +29,6 @@ class ActionDimension(BaseModel):
     """
     The ID of the custom model to use for scoring. Only relevant for scoring_type of
     CUSTOM_MODEL_SCORER
-    """
-
-    huggingface_url: Optional[str] = None
-    """
-    The URL of the HuggingFace model to use for scoring. Only relevant for
-    scoring_type of HUGGINGFACE_SCORER
     """
 
     python_code: Optional[str] = None

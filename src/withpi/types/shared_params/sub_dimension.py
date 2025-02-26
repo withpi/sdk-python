@@ -15,7 +15,7 @@ class ActionDimension(TypedDict, total=False):
     label: Required[str]
     """The label of the dimension"""
 
-    scoring_type: Required[Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
+    scoring_type: Required[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
     """The type of scoring performed for this dimension"""
 
     action_on_low_score: Optional[bool]
@@ -30,12 +30,6 @@ class ActionDimension(TypedDict, total=False):
     CUSTOM_MODEL_SCORER
     """
 
-    huggingface_url: Optional[str]
-    """
-    The URL of the HuggingFace model to use for scoring. Only relevant for
-    scoring_type of HUGGINGFACE_SCORER
-    """
-
     python_code: Optional[str]
     """The PYTHON code associated the PYTHON_CODE DimensionScoringType."""
 
@@ -47,7 +41,7 @@ class SubDimension(TypedDict, total=False):
     label: Required[str]
     """The label of the dimension"""
 
-    scoring_type: Required[Literal["PI_SCORER", "HUGGINGFACE_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
+    scoring_type: Required[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
     """The type of scoring performed for this dimension"""
 
     action_dimension: Optional[ActionDimension]
@@ -62,12 +56,6 @@ class SubDimension(TypedDict, total=False):
     """
     The ID of the custom model to use for scoring. Only relevant for scoring_type of
     CUSTOM_MODEL_SCORER
-    """
-
-    huggingface_url: Optional[str]
-    """
-    The URL of the HuggingFace model to use for scoring. Only relevant for
-    scoring_type of HUGGINGFACE_SCORER
     """
 
     parameters: Optional[Iterable[float]]
