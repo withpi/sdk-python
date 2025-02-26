@@ -83,29 +83,37 @@ Methods:
 Types:
 
 ```python
-from withpi.types.model import SftStatus, SftStreamMessagesResponse
+from withpi.types.model import SftStatus, SftDownloadResponse, SftStreamMessagesResponse
 ```
 
 Methods:
 
 - <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft/{job_id}/download">client.model.sft.<a href="./src/withpi/resources/model/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/sft_download_params.py">params</a>) -> str</code>
 - <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
 - <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
 
 ## Rl
 
+Types:
+
+```python
+from withpi.types.model import RlGrpoStatus
+```
+
 ### Grpo
 
 Types:
 
 ```python
-from withpi.types.model.rl import RlGrpoStatus, GrpoStreamMessagesResponse
+from withpi.types.model.rl import RlGrpoStatus, GrpoDownloadResponse, GrpoStreamMessagesResponse
 ```
 
 Methods:
 
 - <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="post /model/rl/grpo/{job_id}/download">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/rl/grpo_download_params.py">params</a>) -> str</code>
 - <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 - <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 - <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
