@@ -125,6 +125,7 @@ class SftResource(SyncAPIResource):
         examples: Iterable[Example],
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -136,7 +137,7 @@ class SftResource(SyncAPIResource):
         """Initialize the supervised fine-tuning (SFT) job for the model.
 
         We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process, with a fixed rank of 16.
+        Low-Rank Adaptation (LoRA) for the fine-tuning process.
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -147,6 +148,8 @@ class SftResource(SyncAPIResource):
           base_sft_model: The base model to start the SFT tuning process.
 
           learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
 
@@ -166,6 +169,7 @@ class SftResource(SyncAPIResource):
                     "examples": examples,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
+                    "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
                 },
                 sft_start_job_params.SftStartJobParams,
@@ -307,6 +311,7 @@ class AsyncSftResource(AsyncAPIResource):
         examples: Iterable[Example],
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -318,7 +323,7 @@ class AsyncSftResource(AsyncAPIResource):
         """Initialize the supervised fine-tuning (SFT) job for the model.
 
         We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process, with a fixed rank of 16.
+        Low-Rank Adaptation (LoRA) for the fine-tuning process.
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -329,6 +334,8 @@ class AsyncSftResource(AsyncAPIResource):
           base_sft_model: The base model to start the SFT tuning process.
 
           learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
 
@@ -348,6 +355,7 @@ class AsyncSftResource(AsyncAPIResource):
                     "examples": examples,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
+                    "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
                 },
                 sft_start_job_params.SftStartJobParams,

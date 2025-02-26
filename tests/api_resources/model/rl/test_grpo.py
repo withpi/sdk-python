@@ -101,7 +101,6 @@ class TestGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -162,8 +161,9 @@ class TestGrpo:
                 ],
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
+            base_rl_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
+            lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
             system_prompt="system_prompt",
         )
@@ -177,7 +177,6 @@ class TestGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         )
 
         assert response.is_closed is True
@@ -193,7 +192,6 @@ class TestGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -329,7 +327,6 @@ class TestAsyncGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -390,8 +387,9 @@ class TestAsyncGrpo:
                 ],
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
+            base_rl_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
+            lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
             system_prompt="system_prompt",
         )
@@ -405,7 +403,6 @@ class TestAsyncGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         )
 
         assert response.is_closed is True
@@ -421,7 +418,6 @@ class TestAsyncGrpo:
                 "name": "Sample Contract",
             },
             examples=[{"llm_input": "Tell me something different"}],
-            model="LLAMA_3.2_1B",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

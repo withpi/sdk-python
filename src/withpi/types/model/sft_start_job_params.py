@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, TypedDict
 from ..shared_params.example import Example
 from ..shared_params.contract import Contract
 
-__all__ = ["SftStartJobParams"]
+__all__ = ["SftStartJobParams", "LoraConfig"]
 
 
 class SftStartJobParams(TypedDict, total=False):
@@ -27,5 +27,13 @@ class SftStartJobParams(TypedDict, total=False):
     learning_rate: float
     """SFT learning rate"""
 
+    lora_config: LoraConfig
+    """The LoRA configuration."""
+
     num_train_epochs: int
     """SFT number of train epochs"""
+
+
+class LoraConfig(TypedDict, total=False):
+    lora_rank: Literal["R_16", "R_32", "R_64"]
+    """The number of dimensions in the low-rank decomposition of the weight updates."""
