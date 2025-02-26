@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
 
-__all__ = ["GrpoStartJobParams", "Example"]
+__all__ = ["GrpoStartJobParams", "Example", "LoraConfig"]
 
 
 class GrpoStartJobParams(TypedDict, total=False):
@@ -17,11 +17,14 @@ class GrpoStartJobParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""
 
-    model: Required[Literal["LLAMA_3.2_1B"]]
-    """The model to start the RL process"""
+    base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
+    """The base model to start the RL tunning process"""
 
     learning_rate: float
     """SFT learning rate"""
+
+    lora_config: LoraConfig
+    """The LoRA configuration."""
 
     num_train_epochs: int
     """SFT number of train epochs"""
@@ -33,3 +36,8 @@ class GrpoStartJobParams(TypedDict, total=False):
 class Example(TypedDict, total=False):
     llm_input: Required[str]
     """The input prompt to LLM for the RL training process"""
+
+
+class LoraConfig(TypedDict, total=False):
+    lora_rank: Literal["R_16", "R_32", "R_64"]
+    """The number of dimensions in the low-rank decomposition of the weight updates."""

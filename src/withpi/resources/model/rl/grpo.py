@@ -121,8 +121,9 @@ class GrpoResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        model: Literal["LLAMA_3.2_1B"],
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -141,9 +142,11 @@ class GrpoResource(SyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          model: The model to start the RL process
+          base_rl_model: The base model to start the RL tunning process
 
           learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
 
@@ -163,8 +166,9 @@ class GrpoResource(SyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
-                    "model": model,
+                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
+                    "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
                     "system_prompt": system_prompt,
                 },
@@ -304,8 +308,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        model: Literal["LLAMA_3.2_1B"],
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -324,9 +329,11 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          model: The model to start the RL process
+          base_rl_model: The base model to start the RL tunning process
 
           learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
 
@@ -346,8 +353,9 @@ class AsyncGrpoResource(AsyncAPIResource):
                 {
                     "contract": contract,
                     "examples": examples,
-                    "model": model,
+                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
+                    "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
                     "system_prompt": system_prompt,
                 },
