@@ -20,7 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_start_job_params
+from ...types.model import sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
 from ...types.model.sft_status import SftStatus
 from ...types.shared_params.example import Example
@@ -80,6 +80,45 @@ class SftResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SftStatus,
+        )
+
+    def download(
+        self,
+        job_id: str,
+        *,
+        serving_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Generates a signed URL for downloading a model as a .tar.gz archive for self
+        hosting.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._post(
+            f"/model/sft/{job_id}/download",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"serving_id": serving_id}, sft_download_params.SftDownloadParams),
+            ),
+            cast_to=str,
         )
 
     def load(
@@ -268,6 +307,45 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
+    async def download(
+        self,
+        job_id: str,
+        *,
+        serving_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Generates a signed URL for downloading a model as a .tar.gz archive for self
+        hosting.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._post(
+            f"/model/sft/{job_id}/download",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"serving_id": serving_id}, sft_download_params.SftDownloadParams),
+            ),
+            cast_to=str,
+        )
+
     async def load(
         self,
         job_id: str,
@@ -408,6 +486,9 @@ class SftResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             sft.retrieve,
         )
+        self.download = to_raw_response_wrapper(
+            sft.download,
+        )
         self.load = to_raw_response_wrapper(
             sft.load,
         )
@@ -425,6 +506,9 @@ class AsyncSftResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             sft.retrieve,
+        )
+        self.download = async_to_raw_response_wrapper(
+            sft.download,
         )
         self.load = async_to_raw_response_wrapper(
             sft.load,
@@ -444,6 +528,9 @@ class SftResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             sft.retrieve,
         )
+        self.download = to_streamed_response_wrapper(
+            sft.download,
+        )
         self.load = to_streamed_response_wrapper(
             sft.load,
         )
@@ -461,6 +548,9 @@ class AsyncSftResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             sft.retrieve,
+        )
+        self.download = async_to_streamed_response_wrapper(
+            sft.download,
         )
         self.load = async_to_streamed_response_wrapper(
             sft.load,
