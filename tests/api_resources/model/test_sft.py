@@ -173,6 +173,7 @@ class TestSft:
             ],
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
+            lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
         )
         assert_matches_type(SftStatus, sft, path=["response"])
@@ -417,6 +418,7 @@ class TestAsyncSft:
             ],
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
+            lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
         )
         assert_matches_type(SftStatus, sft, path=["response"])
