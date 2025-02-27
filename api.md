@@ -151,9 +151,10 @@ Methods:
 Types:
 
 ```python
-from withpi.types import QueryGenerateFanoutsResponse
+from withpi.types import QueryClassificationResponse, QueryGenerateFanoutsResponse
 ```
 
 Methods:
 
+- <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classification_response.py">QueryClassificationResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
