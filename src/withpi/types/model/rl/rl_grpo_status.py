@@ -18,9 +18,6 @@ class TrainedModel(BaseModel):
     eval_loss: float
     """The evaluation loss"""
 
-    firework_hosted_model_id: str
-    """Firework's hosted model id"""
-
     is_loaded: bool
     """Whether the model is loaded in the serving system"""
 
