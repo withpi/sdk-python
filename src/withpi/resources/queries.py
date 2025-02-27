@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import List, Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
-from ..types import query_generate_fanouts_params
+from ..types import query_classify_params, query_generate_fanouts_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -21,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_classification_response import QueryClassificationResponse
 from ..types.query_generate_fanouts_response import QueryGenerateFanoutsResponse
 
 __all__ = ["QueriesResource", "AsyncQueriesResource"]
@@ -45,6 +47,63 @@ class QueriesResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return QueriesResourceWithStreamingResponse(self)
+
+    def classify(
+        self,
+        *,
+        classes: Iterable[query_classify_params.Class],
+        queries: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[query_classify_params.Example]] | NotGiven = NOT_GIVEN,
+        mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryClassificationResponse:
+        """
+        Classifies queries into provided classes based on a custom taxonomy.
+
+        Args:
+          classes: The list of class definitions to classify the queries into. Must be <= 20.
+
+          queries: The list of queries to classify. Must be <= 10.
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <=10.
+
+          examples: Optional list of examples to provide as few-shot examples for the classifier.
+              Must be <= 20.
+
+          mode: The mode to use for the classification. The probabilistic mode returns
+              probabilities for each class.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/queries/classify",
+            body=maybe_transform(
+                {
+                    "classes": classes,
+                    "queries": queries,
+                    "batch_size": batch_size,
+                    "examples": examples,
+                    "mode": mode,
+                },
+                query_classify_params.QueryClassifyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryClassificationResponse,
+        )
 
     def generate_fanouts(
         self,
@@ -114,6 +173,63 @@ class AsyncQueriesResource(AsyncAPIResource):
         """
         return AsyncQueriesResourceWithStreamingResponse(self)
 
+    async def classify(
+        self,
+        *,
+        classes: Iterable[query_classify_params.Class],
+        queries: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[query_classify_params.Example]] | NotGiven = NOT_GIVEN,
+        mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> QueryClassificationResponse:
+        """
+        Classifies queries into provided classes based on a custom taxonomy.
+
+        Args:
+          classes: The list of class definitions to classify the queries into. Must be <= 20.
+
+          queries: The list of queries to classify. Must be <= 10.
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <=10.
+
+          examples: Optional list of examples to provide as few-shot examples for the classifier.
+              Must be <= 20.
+
+          mode: The mode to use for the classification. The probabilistic mode returns
+              probabilities for each class.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/queries/classify",
+            body=await async_maybe_transform(
+                {
+                    "classes": classes,
+                    "queries": queries,
+                    "batch_size": batch_size,
+                    "examples": examples,
+                    "mode": mode,
+                },
+                query_classify_params.QueryClassifyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=QueryClassificationResponse,
+        )
+
     async def generate_fanouts(
         self,
         *,
@@ -166,6 +282,9 @@ class QueriesResourceWithRawResponse:
     def __init__(self, queries: QueriesResource) -> None:
         self._queries = queries
 
+        self.classify = to_raw_response_wrapper(
+            queries.classify,
+        )
         self.generate_fanouts = to_raw_response_wrapper(
             queries.generate_fanouts,
         )
@@ -175,6 +294,9 @@ class AsyncQueriesResourceWithRawResponse:
     def __init__(self, queries: AsyncQueriesResource) -> None:
         self._queries = queries
 
+        self.classify = async_to_raw_response_wrapper(
+            queries.classify,
+        )
         self.generate_fanouts = async_to_raw_response_wrapper(
             queries.generate_fanouts,
         )
@@ -184,6 +306,9 @@ class QueriesResourceWithStreamingResponse:
     def __init__(self, queries: QueriesResource) -> None:
         self._queries = queries
 
+        self.classify = to_streamed_response_wrapper(
+            queries.classify,
+        )
         self.generate_fanouts = to_streamed_response_wrapper(
             queries.generate_fanouts,
         )
@@ -193,6 +318,9 @@ class AsyncQueriesResourceWithStreamingResponse:
     def __init__(self, queries: AsyncQueriesResource) -> None:
         self._queries = queries
 
+        self.classify = async_to_streamed_response_wrapper(
+            queries.classify,
+        )
         self.generate_fanouts = async_to_streamed_response_wrapper(
             queries.generate_fanouts,
         )
