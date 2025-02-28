@@ -83,7 +83,7 @@ class PiClient(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Pi Client client instance.
+        """Construct a new synchronous PiClient client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
@@ -259,7 +259,7 @@ class AsyncPiClient(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Pi Client client instance.
+        """Construct a new async AsyncPiClient client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
