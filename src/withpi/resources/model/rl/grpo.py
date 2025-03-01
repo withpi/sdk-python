@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -22,8 +21,10 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.model.rl import grpo_download_params, grpo_start_job_params
+from ....types.shared.rl_grpo_status import RlGrpoStatus
 from ....types.shared_params.contract import Contract
-from ....types.model.rl.rl_grpo_status import RlGrpoStatus
+from ....types.shared_params.lora_config import LoraConfig
+from ....types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -160,9 +161,9 @@ class GrpoResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_rl_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -386,9 +387,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_rl_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

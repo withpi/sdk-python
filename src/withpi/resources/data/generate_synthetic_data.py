@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -23,8 +22,8 @@ from ..._response import (
 from ...types.data import generate_synthetic_data_create_params
 from ..._base_client import make_request_options
 from ...types.shared_params.example import Example
-from ...types.data.generate_synthetic_data_create_response import GenerateSyntheticDataCreateResponse
-from ...types.data.generate_synthetic_data_retrieve_response import GenerateSyntheticDataRetrieveResponse
+from ...types.shared.sdk_exploration_mode import SDKExplorationMode
+from ...types.shared.synthetic_data_status import SyntheticDataStatus
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
 
 __all__ = ["GenerateSyntheticDataResource", "AsyncGenerateSyntheticDataResource"]
@@ -57,7 +56,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         seeds: Iterable[Example],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -66,7 +65,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataCreateResponse:
+    ) -> SyntheticDataStatus:
         """
         Generates synthetic data from a list of seeds
 
@@ -111,7 +110,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataCreateResponse,
+            cast_to=SyntheticDataStatus,
         )
 
     def retrieve(
@@ -124,7 +123,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataRetrieveResponse:
+    ) -> SyntheticDataStatus:
         """
         Gets the current status of a synthetic data generation job
 
@@ -144,7 +143,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataRetrieveResponse,
+            cast_to=SyntheticDataStatus,
         )
 
     def stream_data(
@@ -242,7 +241,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         seeds: Iterable[Example],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -251,7 +250,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataCreateResponse:
+    ) -> SyntheticDataStatus:
         """
         Generates synthetic data from a list of seeds
 
@@ -296,7 +295,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataCreateResponse,
+            cast_to=SyntheticDataStatus,
         )
 
     async def retrieve(
@@ -309,7 +308,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataRetrieveResponse:
+    ) -> SyntheticDataStatus:
         """
         Gets the current status of a synthetic data generation job
 
@@ -329,7 +328,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataRetrieveResponse,
+            cast_to=SyntheticDataStatus,
         )
 
     async def stream_data(

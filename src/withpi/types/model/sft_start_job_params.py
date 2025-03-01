@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
 from ..shared_params.example import Example
 from ..shared_params.contract import Contract
+from ..shared_params.lora_config import LoraConfig
+from ..shared.finetuning_base_model import FinetuningBaseModel
 
-__all__ = ["SftStartJobParams", "LoraConfig"]
+__all__ = ["SftStartJobParams"]
 
 
 class SftStartJobParams(TypedDict, total=False):
@@ -21,7 +23,7 @@ class SftStartJobParams(TypedDict, total=False):
     We split this data into train/eval 90/10.
     """
 
-    base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
+    base_sft_model: FinetuningBaseModel
     """The base model to start the SFT tuning process."""
 
     learning_rate: float
@@ -32,8 +34,3 @@ class SftStartJobParams(TypedDict, total=False):
 
     num_train_epochs: int
     """SFT number of train epochs"""
-
-
-class LoraConfig(TypedDict, total=False):
-    lora_rank: Literal["R_16", "R_32", "R_64"]
-    """The number of dimensions in the low-rank decomposition of the weight updates."""

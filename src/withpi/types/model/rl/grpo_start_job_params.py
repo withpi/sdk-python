@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
 from ...shared_params.contract import Contract
+from ...shared_params.lora_config import LoraConfig
+from ...shared.finetuning_base_model import FinetuningBaseModel
 
-__all__ = ["GrpoStartJobParams", "Example", "LoraConfig"]
+__all__ = ["GrpoStartJobParams", "Example"]
 
 
 class GrpoStartJobParams(TypedDict, total=False):
@@ -17,7 +19,7 @@ class GrpoStartJobParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""
 
-    base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
+    base_rl_model: FinetuningBaseModel
     """The base model to start the RL tunning process"""
 
     learning_rate: float
@@ -36,8 +38,3 @@ class GrpoStartJobParams(TypedDict, total=False):
 class Example(TypedDict, total=False):
     llm_input: Required[str]
     """The input prompt to LLM for the RL training process"""
-
-
-class LoraConfig(TypedDict, total=False):
-    lora_rank: Literal["R_16", "R_32", "R_64"]
-    """The number of dimensions in the low-rank decomposition of the weight updates."""
