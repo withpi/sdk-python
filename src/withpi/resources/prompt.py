@@ -24,7 +24,7 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.shared_params.example import Example
 from ..types.shared_params.contract import Contract
-from ..types.prompt_optimization_status import PromptOptimizationStatus
+from ..types.shared.prompt_optimization_status import PromptOptimizationStatus
 
 __all__ = ["PromptResource", "AsyncPromptResource"]
 

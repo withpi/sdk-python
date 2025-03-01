@@ -23,7 +23,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.contracts import calibrate_start_job_params
 from ...types.shared_params.contract import Contract
-from ...types.contracts.contract_calibration_status import ContractCalibrationStatus
+from ...types.shared.contract_calibration_status import ContractCalibrationStatus
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 

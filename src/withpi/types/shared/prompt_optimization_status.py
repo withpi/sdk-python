@@ -1,9 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List
-from typing_extensions import Literal
 
-from .._models import BaseModel
+from .state import State
+from ..._models import BaseModel
 
 __all__ = ["PromptOptimizationStatus"]
 
@@ -21,5 +21,5 @@ class PromptOptimizationStatus(BaseModel):
     {{ input }} variable for the next user prompt
     """
 
-    state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
+    state: State
     """Current state of the job"""

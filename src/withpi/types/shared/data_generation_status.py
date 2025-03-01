@@ -1,26 +1,25 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal
 
+from .state import State
 from ..._models import BaseModel
-from ..shared.example import Example
 
-__all__ = ["GenerateSyntheticDataRetrieveResponse"]
+__all__ = ["DataGenerationStatus"]
 
 
-class GenerateSyntheticDataRetrieveResponse(BaseModel):
+class DataGenerationStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
     job_id: str
     """The job id"""
 
-    state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
+    state: State
     """Current state of the job"""
 
-    data: Optional[List[Example]] = None
-    """The generated synthetic data.
+    data: Optional[List[str]] = None
+    """The generated data.
 
     Can be present even if the state is not done/error as it is streamed.
     """
