@@ -10,10 +10,9 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.data import (
-    GenerateSyntheticDataCreateResponse,
-    GenerateSyntheticDataRetrieveResponse,
     GenerateSyntheticDataStreamDataResponse,
 )
+from withpi.types.shared import SyntheticDataStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -32,7 +31,7 @@ class TestGenerateSyntheticData:
                 }
             ],
         )
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: PiClient) -> None:
@@ -50,7 +49,7 @@ class TestGenerateSyntheticData:
             num_shots=5,
             system_prompt="Write a children's story given a topic from the user.",
         )
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: PiClient) -> None:
@@ -67,7 +66,7 @@ class TestGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = response.parse()
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: PiClient) -> None:
@@ -84,7 +83,7 @@ class TestGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = response.parse()
-            assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+            assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -93,7 +92,7 @@ class TestGenerateSyntheticData:
         generate_synthetic_data = client.data.generate_synthetic_data.retrieve(
             "job_id",
         )
-        assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
@@ -104,7 +103,7 @@ class TestGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = response.parse()
-        assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
@@ -115,7 +114,7 @@ class TestGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = response.parse()
-            assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+            assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -217,7 +216,7 @@ class TestAsyncGenerateSyntheticData:
                 }
             ],
         )
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
@@ -235,7 +234,7 @@ class TestAsyncGenerateSyntheticData:
             num_shots=5,
             system_prompt="Write a children's story given a topic from the user.",
         )
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
@@ -252,7 +251,7 @@ class TestAsyncGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = await response.parse()
-        assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
@@ -269,7 +268,7 @@ class TestAsyncGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = await response.parse()
-            assert_matches_type(GenerateSyntheticDataCreateResponse, generate_synthetic_data, path=["response"])
+            assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -278,7 +277,7 @@ class TestAsyncGenerateSyntheticData:
         generate_synthetic_data = await async_client.data.generate_synthetic_data.retrieve(
             "job_id",
         )
-        assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
@@ -289,7 +288,7 @@ class TestAsyncGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = await response.parse()
-        assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
@@ -300,7 +299,7 @@ class TestAsyncGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = await response.parse()
-            assert_matches_type(GenerateSyntheticDataRetrieveResponse, generate_synthetic_data, path=["response"])
+            assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

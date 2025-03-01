@@ -2,13 +2,14 @@
 
 from typing import List, Optional
 
-from .._models import BaseModel
-from .shared.state import State
+from .state import State
+from ..._models import BaseModel
+from .trained_model import TrainedModel
 
-__all__ = ["DataGenerationStatus"]
+__all__ = ["SftStatus"]
 
 
-class DataGenerationStatus(BaseModel):
+class SftStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -18,8 +19,5 @@ class DataGenerationStatus(BaseModel):
     state: State
     """Current state of the job"""
 
-    data: Optional[List[str]] = None
-    """The generated data.
-
-    Can be present even if the state is not done/error as it is streamed.
-    """
+    trained_models: Optional[List[TrainedModel]] = None
+    """A list of trained models selected based on the PI Contract score."""

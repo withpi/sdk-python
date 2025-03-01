@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal
 
 import httpx
 
@@ -22,9 +21,11 @@ from ..._response import (
 )
 from ...types.model import sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
-from ...types.model.sft_status import SftStatus
+from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
+from ...types.shared_params.lora_config import LoraConfig
+from ...types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -162,9 +163,9 @@ class SftResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -387,9 +388,9 @@ class AsyncSftResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

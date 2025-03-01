@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal
 
 import httpx
 
@@ -23,6 +22,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.data.inputs import generate_from_seed_generate_params
 from ....types.data_generation_status import DataGenerationStatus
+from ....types.shared.sdk_exploration_mode import SDKExplorationMode
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
 
@@ -87,7 +87,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         num_inputs_to_generate: int,
         seeds: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -270,7 +270,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         num_inputs_to_generate: int,
         seeds: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"] | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

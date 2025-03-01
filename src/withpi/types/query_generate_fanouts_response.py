@@ -3,17 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .._models import BaseModel
+from .shared.query_fanout_example import QueryFanoutExample
 
-__all__ = ["QueryGenerateFanoutsResponse", "QueryGenerateFanoutsResponseItem"]
+__all__ = ["QueryGenerateFanoutsResponse"]
 
-
-class QueryGenerateFanoutsResponseItem(BaseModel):
-    fanout_queries: List[str]
-    """The list of fanout queries associated with the input"""
-
-    query: str
-    """The input query that the fanout queries are based on."""
-
-
-QueryGenerateFanoutsResponse: TypeAlias = List[QueryGenerateFanoutsResponseItem]
+QueryGenerateFanoutsResponse: TypeAlias = List[QueryFanoutExample]

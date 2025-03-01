@@ -1,10 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal
 
+from .state import State
+from .contract import Contract
 from ..._models import BaseModel
-from ..shared.contract import Contract
 
 __all__ = ["ContractCalibrationStatus"]
 
@@ -19,5 +19,5 @@ class ContractCalibrationStatus(BaseModel):
     job_id: str
     """The job id"""
 
-    state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
+    state: State
     """Current state of the job"""
