@@ -233,7 +233,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the synthetic data generation job
+        Opens a message stream about a Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
@@ -457,7 +457,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the synthetic data generation job
+        Opens a message stream about a Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
