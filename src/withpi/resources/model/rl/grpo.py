@@ -199,13 +199,13 @@ class GrpoResource(SyncAPIResource):
     def start_job(
         self,
         *,
+        base_rl_model: FinetuningBaseModel,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        learning_rate: float,
+        lora_config: LoraConfig,
+        num_train_epochs: int,
+        system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -218,11 +218,11 @@ class GrpoResource(SyncAPIResource):
         job.
 
         Args:
+          base_rl_model: The base model to start the RL tunning process
+
           contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
-
-          base_rl_model: The base model to start the RL tunning process
 
           learning_rate: SFT learning rate
 
@@ -244,9 +244,9 @@ class GrpoResource(SyncAPIResource):
             "/model/rl/grpo",
             body=maybe_transform(
                 {
+                    "base_rl_model": base_rl_model,
                     "contract": contract,
                     "examples": examples,
-                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
@@ -462,13 +462,13 @@ class AsyncGrpoResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
+        base_rl_model: FinetuningBaseModel,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        learning_rate: float,
+        lora_config: LoraConfig,
+        num_train_epochs: int,
+        system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -481,11 +481,11 @@ class AsyncGrpoResource(AsyncAPIResource):
         job.
 
         Args:
+          base_rl_model: The base model to start the RL tunning process
+
           contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
-
-          base_rl_model: The base model to start the RL tunning process
 
           learning_rate: SFT learning rate
 
@@ -507,9 +507,9 @@ class AsyncGrpoResource(AsyncAPIResource):
             "/model/rl/grpo",
             body=await async_maybe_transform(
                 {
+                    "base_rl_model": base_rl_model,
                     "contract": contract,
                     "examples": examples,
-                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,

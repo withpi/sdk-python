@@ -13,25 +13,25 @@ __all__ = ["GrpoStartJobParams", "Example"]
 
 
 class GrpoStartJobParams(TypedDict, total=False):
+    base_rl_model: Required[FinetuningBaseModel]
+    """The base model to start the RL tunning process"""
+
     contract: Required[Contract]
     """The contract to use in the GRPO tuning process"""
 
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""
 
-    base_rl_model: FinetuningBaseModel
-    """The base model to start the RL tunning process"""
-
-    learning_rate: float
+    learning_rate: Required[float]
     """SFT learning rate"""
 
-    lora_config: LoraConfig
+    lora_config: Required[LoraConfig]
     """The LoRA configuration."""
 
-    num_train_epochs: int
+    num_train_epochs: Required[int]
     """SFT number of train epochs"""
 
-    system_prompt: Optional[str]
+    system_prompt: Required[Optional[str]]
     """A custom system prompt to use during the RL tuning process"""
 
 
