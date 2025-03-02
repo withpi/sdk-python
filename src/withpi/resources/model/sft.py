@@ -65,7 +65,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
         """
-        Get the current status of a model SFT tuning job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -327,7 +327,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
         """
-        Get the current status of a model SFT tuning job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
