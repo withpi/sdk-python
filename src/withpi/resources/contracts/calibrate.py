@@ -186,7 +186,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a contract calibration job
+        Opens a message stream about a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -365,7 +365,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a contract calibration job
+        Opens a message stream about a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
