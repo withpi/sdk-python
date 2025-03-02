@@ -182,7 +182,7 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -247,7 +247,7 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -263,7 +263,7 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
 
         assert response.is_closed is True
@@ -283,7 +283,7 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -497,7 +497,7 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -562,7 +562,7 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
@@ -578,7 +578,7 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         )
 
         assert response.is_closed is True
@@ -598,7 +598,7 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            system_prompt="system_prompt",
+            system_prompt="An optional system prompt.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
