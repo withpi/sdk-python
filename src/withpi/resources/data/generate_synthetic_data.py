@@ -128,7 +128,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Gets the current status of a synthetic data generation job
+        Checks the status of a Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
@@ -352,7 +352,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Gets the current status of a synthetic data generation job
+        Checks the status of a Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
