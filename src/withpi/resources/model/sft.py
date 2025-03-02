@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 
 import httpx
 
@@ -19,11 +19,14 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_download_params, sft_start_job_params
+from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
+from ...types.contracts import State
+from ...types.contracts.state import State
 from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
+from ...types.model.sft_list_response import SftListResponse
 from ...types.shared_params.lora_config import LoraConfig
 from ...types.shared.finetuning_base_model import FinetuningBaseModel
 
@@ -81,6 +84,43 @@ class SftResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SftStatus,
+        )
+
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftListResponse:
+        """
+        Returns a list of SFT jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/model/sft",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, sft_list_params.SftListParams),
+            ),
+            cast_to=SftListResponse,
         )
 
     def download(
@@ -308,6 +348,43 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftListResponse:
+        """
+        Returns a list of SFT jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/model/sft",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, sft_list_params.SftListParams),
+            ),
+            cast_to=SftListResponse,
+        )
+
     async def download(
         self,
         job_id: str,
@@ -487,6 +564,9 @@ class SftResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             sft.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            sft.list,
+        )
         self.download = to_raw_response_wrapper(
             sft.download,
         )
@@ -507,6 +587,9 @@ class AsyncSftResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             sft.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            sft.list,
         )
         self.download = async_to_raw_response_wrapper(
             sft.download,
@@ -529,6 +612,9 @@ class SftResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             sft.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            sft.list,
+        )
         self.download = to_streamed_response_wrapper(
             sft.download,
         )
@@ -549,6 +635,9 @@ class AsyncSftResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             sft.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            sft.list,
         )
         self.download = async_to_streamed_response_wrapper(
             sft.download,
