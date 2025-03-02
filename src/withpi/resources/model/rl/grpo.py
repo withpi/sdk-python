@@ -272,7 +272,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL GRPO job
+        Opens a message stream about a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -535,7 +535,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL GRPO job
+        Opens a message stream about a RL GRPO job
 
         Args:
           extra_headers: Send extra headers

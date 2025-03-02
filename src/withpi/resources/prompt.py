@@ -201,7 +201,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a prompt optimization job
+        Opens a message stream about a Prompt Optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -393,7 +393,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a prompt optimization job
+        Opens a message stream about a Prompt Optimization job
 
         Args:
           extra_headers: Send extra headers

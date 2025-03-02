@@ -272,7 +272,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from a model SFT tuning job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -534,7 +534,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from a model SFT tuning job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
