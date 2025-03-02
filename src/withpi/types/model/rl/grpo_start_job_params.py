@@ -23,13 +23,13 @@ class GrpoStartJobParams(TypedDict, total=False):
     """Examples to use in the RL tuning process"""
 
     learning_rate: Required[float]
-    """SFT learning rate"""
+    """GRPO learning rate"""
 
     lora_config: Required[LoraConfig]
     """The LoRA configuration."""
 
     num_train_epochs: Required[int]
-    """SFT number of train epochs"""
+    """GRPO number of train epochs"""
 
     system_prompt: Required[Optional[str]]
     """A custom system prompt to use during the RL tuning process"""

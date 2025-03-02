@@ -224,11 +224,11 @@ class GrpoResource(SyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          learning_rate: SFT learning rate
+          learning_rate: GRPO learning rate
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: GRPO number of train epochs
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -487,11 +487,11 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           examples: Examples to use in the RL tuning process
 
-          learning_rate: SFT learning rate
+          learning_rate: GRPO learning rate
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: GRPO number of train epochs
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
