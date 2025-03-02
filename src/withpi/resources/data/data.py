@@ -2,8 +2,24 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
+import httpx
+
+from ...types import data_list_question_answer_jobs_params
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .inputs.inputs import (
     InputsResource,
     AsyncInputsResource,
@@ -12,6 +28,9 @@ from .inputs.inputs import (
     InputsResourceWithStreamingResponse,
     AsyncInputsResourceWithStreamingResponse,
 )
+from ..._base_client import make_request_options
+from ...types.contracts import State
+from ...types.contracts.state import State
 from .generate_synthetic_data import (
     GenerateSyntheticDataResource,
     AsyncGenerateSyntheticDataResource,
@@ -20,6 +39,7 @@ from .generate_synthetic_data import (
     GenerateSyntheticDataResourceWithStreamingResponse,
     AsyncGenerateSyntheticDataResourceWithStreamingResponse,
 )
+from ...types.data_list_question_answer_jobs_response import DataListQuestionAnswerJobsResponse
 
 __all__ = ["DataResource", "AsyncDataResource"]
 
@@ -52,6 +72,45 @@ class DataResource(SyncAPIResource):
         """
         return DataResourceWithStreamingResponse(self)
 
+    def list_question_answer_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataListQuestionAnswerJobsResponse:
+        """
+        Returns a list of question answer jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/data/generate_question_answers",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"state": state}, data_list_question_answer_jobs_params.DataListQuestionAnswerJobsParams
+                ),
+            ),
+            cast_to=DataListQuestionAnswerJobsResponse,
+        )
+
 
 class AsyncDataResource(AsyncAPIResource):
     @cached_property
@@ -81,10 +140,53 @@ class AsyncDataResource(AsyncAPIResource):
         """
         return AsyncDataResourceWithStreamingResponse(self)
 
+    async def list_question_answer_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataListQuestionAnswerJobsResponse:
+        """
+        Returns a list of question answer jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/data/generate_question_answers",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, data_list_question_answer_jobs_params.DataListQuestionAnswerJobsParams
+                ),
+            ),
+            cast_to=DataListQuestionAnswerJobsResponse,
+        )
+
 
 class DataResourceWithRawResponse:
     def __init__(self, data: DataResource) -> None:
         self._data = data
+
+        self.list_question_answer_jobs = to_raw_response_wrapper(
+            data.list_question_answer_jobs,
+        )
 
     @cached_property
     def inputs(self) -> InputsResourceWithRawResponse:
@@ -99,6 +201,10 @@ class AsyncDataResourceWithRawResponse:
     def __init__(self, data: AsyncDataResource) -> None:
         self._data = data
 
+        self.list_question_answer_jobs = async_to_raw_response_wrapper(
+            data.list_question_answer_jobs,
+        )
+
     @cached_property
     def inputs(self) -> AsyncInputsResourceWithRawResponse:
         return AsyncInputsResourceWithRawResponse(self._data.inputs)
@@ -112,6 +218,10 @@ class DataResourceWithStreamingResponse:
     def __init__(self, data: DataResource) -> None:
         self._data = data
 
+        self.list_question_answer_jobs = to_streamed_response_wrapper(
+            data.list_question_answer_jobs,
+        )
+
     @cached_property
     def inputs(self) -> InputsResourceWithStreamingResponse:
         return InputsResourceWithStreamingResponse(self._data.inputs)
@@ -124,6 +234,10 @@ class DataResourceWithStreamingResponse:
 class AsyncDataResourceWithStreamingResponse:
     def __init__(self, data: AsyncDataResource) -> None:
         self._data = data
+
+        self.list_question_answer_jobs = async_to_streamed_response_wrapper(
+            data.list_question_answer_jobs,
+        )
 
     @cached_property
     def inputs(self) -> AsyncInputsResourceWithStreamingResponse:

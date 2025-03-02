@@ -35,3 +35,11 @@ from .query_generate_fanouts_params import QueryGenerateFanoutsParams as QueryGe
 from .prompt_stream_messages_response import PromptStreamMessagesResponse as PromptStreamMessagesResponse
 from .query_generate_fanouts_response import QueryGenerateFanoutsResponse as QueryGenerateFanoutsResponse
 from .contract_generate_dimensions_params import ContractGenerateDimensionsParams as ContractGenerateDimensionsParams
+from .prompt_list_optimization_jobs_params import PromptListOptimizationJobsParams as PromptListOptimizationJobsParams
+from .data_list_question_answer_jobs_params import DataListQuestionAnswerJobsParams as DataListQuestionAnswerJobsParams
+from .prompt_list_optimization_jobs_response import (
+    PromptListOptimizationJobsResponse as PromptListOptimizationJobsResponse,
+)
+from .data_list_question_answer_jobs_response import (
+    DataListQuestionAnswerJobsResponse as DataListQuestionAnswerJobsResponse,
+)

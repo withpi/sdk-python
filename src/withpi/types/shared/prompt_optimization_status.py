@@ -2,8 +2,8 @@
 
 from typing import Dict, List
 
-from .state import State
 from ..._models import BaseModel
+from ..contracts.state import State
 
 __all__ = ["PromptOptimizationStatus"]
 
