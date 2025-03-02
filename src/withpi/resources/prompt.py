@@ -64,7 +64,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptOptimizationStatus:
         """
-        Checks on a prompt optimization job
+        Checks the status of a Prompt Optimization job
 
         Args:
           extra_headers: Send extra headers
@@ -256,7 +256,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptOptimizationStatus:
         """
-        Checks on a prompt optimization job
+        Checks the status of a Prompt Optimization job
 
         Args:
           extra_headers: Send extra headers

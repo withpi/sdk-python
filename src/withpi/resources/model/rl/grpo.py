@@ -64,7 +64,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Get the current status of the RL GRPO job
+        Checks the status of a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -327,7 +327,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Get the current status of the RL GRPO job
+        Checks the status of a RL GRPO job
 
         Args:
           extra_headers: Send extra headers

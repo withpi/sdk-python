@@ -62,7 +62,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Checks on a contract calibration job
+        Checks the status of a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -241,7 +241,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Checks on a contract calibration job
+        Checks the status of a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
