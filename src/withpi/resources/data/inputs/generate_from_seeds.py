@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 import httpx
 
@@ -20,9 +20,12 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.data.inputs import generate_from_seed_generate_params
+from ....types.contracts import State
+from ....types.data.inputs import generate_from_seed_generate_params, generate_from_seed_list_jobs_params
+from ....types.contracts.state import State
 from ....types.data_generation_status import DataGenerationStatus
 from ....types.shared.sdk_exploration_mode import SDKExplorationMode
+from ....types.data.inputs.generate_from_seed_list_jobs_response import GenerateFromSeedListJobsResponse
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]
 
@@ -139,6 +142,45 @@ class GenerateFromSeedsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DataGenerationStatus,
+        )
+
+    def list_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateFromSeedListJobsResponse:
+        """
+        Returns a list of input generation jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/data/input/generate_from_seeds",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"state": state}, generate_from_seed_list_jobs_params.GenerateFromSeedListJobsParams
+                ),
+            ),
+            cast_to=GenerateFromSeedListJobsResponse,
         )
 
     def stream_data(
@@ -324,6 +366,45 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
             cast_to=DataGenerationStatus,
         )
 
+    async def list_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateFromSeedListJobsResponse:
+        """
+        Returns a list of input generation jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/data/input/generate_from_seeds",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, generate_from_seed_list_jobs_params.GenerateFromSeedListJobsParams
+                ),
+            ),
+            cast_to=GenerateFromSeedListJobsResponse,
+        )
+
     async def stream_data(
         self,
         job_id: str,
@@ -403,6 +484,9 @@ class GenerateFromSeedsResourceWithRawResponse:
         self.generate = to_raw_response_wrapper(
             generate_from_seeds.generate,
         )
+        self.list_jobs = to_raw_response_wrapper(
+            generate_from_seeds.list_jobs,
+        )
         self.stream_data = to_raw_response_wrapper(
             generate_from_seeds.stream_data,
         )
@@ -420,6 +504,9 @@ class AsyncGenerateFromSeedsResourceWithRawResponse:
         )
         self.generate = async_to_raw_response_wrapper(
             generate_from_seeds.generate,
+        )
+        self.list_jobs = async_to_raw_response_wrapper(
+            generate_from_seeds.list_jobs,
         )
         self.stream_data = async_to_raw_response_wrapper(
             generate_from_seeds.stream_data,
@@ -439,6 +526,9 @@ class GenerateFromSeedsResourceWithStreamingResponse:
         self.generate = to_streamed_response_wrapper(
             generate_from_seeds.generate,
         )
+        self.list_jobs = to_streamed_response_wrapper(
+            generate_from_seeds.list_jobs,
+        )
         self.stream_data = to_streamed_response_wrapper(
             generate_from_seeds.stream_data,
         )
@@ -456,6 +546,9 @@ class AsyncGenerateFromSeedsResourceWithStreamingResponse:
         )
         self.generate = async_to_streamed_response_wrapper(
             generate_from_seeds.generate,
+        )
+        self.list_jobs = async_to_streamed_response_wrapper(
+            generate_from_seeds.list_jobs,
         )
         self.stream_data = async_to_streamed_response_wrapper(
             generate_from_seeds.stream_data,

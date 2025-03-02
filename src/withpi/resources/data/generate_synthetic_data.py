@@ -19,11 +19,14 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import generate_synthetic_data_create_params
+from ...types.data import generate_synthetic_data_create_params, generate_synthetic_data_list_jobs_params
 from ..._base_client import make_request_options
+from ...types.contracts import State
+from ...types.contracts.state import State
 from ...types.shared_params.example import Example
 from ...types.shared.sdk_exploration_mode import SDKExplorationMode
 from ...types.shared.synthetic_data_status import SyntheticDataStatus
+from ...types.data.generate_synthetic_data_list_jobs_response import GenerateSyntheticDataListJobsResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
 
 __all__ = ["GenerateSyntheticDataResource", "AsyncGenerateSyntheticDataResource"]
@@ -144,6 +147,45 @@ class GenerateSyntheticDataResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SyntheticDataStatus,
+        )
+
+    def list_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataListJobsResponse:
+        """
+        Returns a list of synthetic datajobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/data/generate_synthetic_data",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"state": state}, generate_synthetic_data_list_jobs_params.GenerateSyntheticDataListJobsParams
+                ),
+            ),
+            cast_to=GenerateSyntheticDataListJobsResponse,
         )
 
     def stream_data(
@@ -331,6 +373,45 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             cast_to=SyntheticDataStatus,
         )
 
+    async def list_jobs(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataListJobsResponse:
+        """
+        Returns a list of synthetic datajobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/data/generate_synthetic_data",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, generate_synthetic_data_list_jobs_params.GenerateSyntheticDataListJobsParams
+                ),
+            ),
+            cast_to=GenerateSyntheticDataListJobsResponse,
+        )
+
     async def stream_data(
         self,
         job_id: str,
@@ -409,6 +490,9 @@ class GenerateSyntheticDataResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list_jobs = to_raw_response_wrapper(
+            generate_synthetic_data.list_jobs,
+        )
         self.stream_data = to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
         )
@@ -426,6 +510,9 @@ class AsyncGenerateSyntheticDataResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
+        )
+        self.list_jobs = async_to_raw_response_wrapper(
+            generate_synthetic_data.list_jobs,
         )
         self.stream_data = async_to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -445,6 +532,9 @@ class GenerateSyntheticDataResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list_jobs = to_streamed_response_wrapper(
+            generate_synthetic_data.list_jobs,
+        )
         self.stream_data = to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,
         )
@@ -462,6 +552,9 @@ class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
+        )
+        self.list_jobs = async_to_streamed_response_wrapper(
+            generate_synthetic_data.list_jobs,
         )
         self.stream_data = async_to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,

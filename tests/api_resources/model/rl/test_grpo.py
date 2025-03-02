@@ -10,6 +10,9 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.shared import RlGrpoStatus
+from withpi.types.model.rl import (
+    GrpoListResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -54,6 +57,38 @@ class TestGrpo:
             client.model.rl.grpo.with_raw_response.retrieve(
                 "",
             )
+
+    @parametrize
+    def test_method_list(self, client: PiClient) -> None:
+        grpo = client.model.rl.grpo.list()
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    def test_method_list_with_all_params(self, client: PiClient) -> None:
+        grpo = client.model.rl.grpo.list(
+            state="QUEUED",
+        )
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    def test_raw_response_list(self, client: PiClient) -> None:
+        response = client.model.rl.grpo.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = response.parse()
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: PiClient) -> None:
+        with client.model.rl.grpo.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = response.parse()
+            assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_download(self, client: PiClient) -> None:
@@ -322,6 +357,38 @@ class TestAsyncGrpo:
             await async_client.model.rl.grpo.with_raw_response.retrieve(
                 "",
             )
+
+    @parametrize
+    async def test_method_list(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.model.rl.grpo.list()
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.model.rl.grpo.list(
+            state="QUEUED",
+        )
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.model.rl.grpo.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = await response.parse()
+        assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
+        async with async_client.model.rl.grpo.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = await response.parse()
+            assert_matches_type(GrpoListResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_download(self, async_client: AsyncPiClient) -> None:

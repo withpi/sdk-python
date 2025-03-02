@@ -20,10 +20,13 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.model.rl import grpo_download_params, grpo_start_job_params
+from ....types.model.rl import grpo_list_params, grpo_download_params, grpo_start_job_params
+from ....types.contracts import State
+from ....types.contracts.state import State
 from ....types.shared.rl_grpo_status import RlGrpoStatus
 from ....types.shared_params.contract import Contract
 from ....types.shared_params.lora_config import LoraConfig
+from ....types.model.rl.grpo_list_response import GrpoListResponse
 from ....types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
@@ -80,6 +83,43 @@ class GrpoResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RlGrpoStatus,
+        )
+
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoListResponse:
+        """
+        Returns a list of GRPO jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/model/rl/grpo",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+            ),
+            cast_to=GrpoListResponse,
         )
 
     def download(
@@ -308,6 +348,43 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoListResponse:
+        """
+        Returns a list of GRPO jobs, optionally filtered by state
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/model/rl/grpo",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+            ),
+            cast_to=GrpoListResponse,
+        )
+
     async def download(
         self,
         job_id: str,
@@ -488,6 +565,9 @@ class GrpoResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             grpo.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            grpo.list,
+        )
         self.download = to_raw_response_wrapper(
             grpo.download,
         )
@@ -508,6 +588,9 @@ class AsyncGrpoResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             grpo.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            grpo.list,
         )
         self.download = async_to_raw_response_wrapper(
             grpo.download,
@@ -530,6 +613,9 @@ class GrpoResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             grpo.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            grpo.list,
+        )
         self.download = to_streamed_response_wrapper(
             grpo.download,
         )
@@ -550,6 +636,9 @@ class AsyncGrpoResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             grpo.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            grpo.list,
         )
         self.download = async_to_streamed_response_wrapper(
             grpo.download,

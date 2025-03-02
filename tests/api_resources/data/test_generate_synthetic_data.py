@@ -10,6 +10,7 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.data import (
+    GenerateSyntheticDataListJobsResponse,
     GenerateSyntheticDataStreamDataResponse,
 )
 from withpi.types.shared import SyntheticDataStatus
@@ -124,6 +125,38 @@ class TestGenerateSyntheticData:
             client.data.generate_synthetic_data.with_raw_response.retrieve(
                 "",
             )
+
+    @parametrize
+    def test_method_list_jobs(self, client: PiClient) -> None:
+        generate_synthetic_data = client.data.generate_synthetic_data.list_jobs()
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    def test_method_list_jobs_with_all_params(self, client: PiClient) -> None:
+        generate_synthetic_data = client.data.generate_synthetic_data.list_jobs(
+            state="QUEUED",
+        )
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    def test_raw_response_list_jobs(self, client: PiClient) -> None:
+        response = client.data.generate_synthetic_data.with_raw_response.list_jobs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_synthetic_data = response.parse()
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list_jobs(self, client: PiClient) -> None:
+        with client.data.generate_synthetic_data.with_streaming_response.list_jobs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_synthetic_data = response.parse()
+            assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_stream_data(self, client: PiClient) -> None:
@@ -309,6 +342,38 @@ class TestAsyncGenerateSyntheticData:
             await async_client.data.generate_synthetic_data.with_raw_response.retrieve(
                 "",
             )
+
+    @parametrize
+    async def test_method_list_jobs(self, async_client: AsyncPiClient) -> None:
+        generate_synthetic_data = await async_client.data.generate_synthetic_data.list_jobs()
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    async def test_method_list_jobs_with_all_params(self, async_client: AsyncPiClient) -> None:
+        generate_synthetic_data = await async_client.data.generate_synthetic_data.list_jobs(
+            state="QUEUED",
+        )
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    async def test_raw_response_list_jobs(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.data.generate_synthetic_data.with_raw_response.list_jobs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_synthetic_data = await response.parse()
+        assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list_jobs(self, async_client: AsyncPiClient) -> None:
+        async with async_client.data.generate_synthetic_data.with_streaming_response.list_jobs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_synthetic_data = await response.parse()
+            assert_matches_type(GenerateSyntheticDataListJobsResponse, generate_synthetic_data, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_stream_data(self, async_client: AsyncPiClient) -> None:

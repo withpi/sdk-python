@@ -2,9 +2,9 @@
 
 from typing import List, Optional
 
-from .state import State
 from .example import Example
 from ..._models import BaseModel
+from ..contracts.state import State
 
 __all__ = ["SyntheticDataStatus"]
 
