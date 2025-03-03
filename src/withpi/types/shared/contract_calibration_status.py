@@ -10,9 +10,6 @@ __all__ = ["ContractCalibrationStatus"]
 
 
 class ContractCalibrationStatus(BaseModel):
-    calibrated_contract: Optional[Contract] = None
-    """The calibrated contract"""
-
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -21,3 +18,6 @@ class ContractCalibrationStatus(BaseModel):
 
     state: State
     """Current state of the job"""
+
+    calibrated_contract: Optional[Contract] = None
+    """The calibrated contract"""
