@@ -97,7 +97,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GrpoListResponse:
         """
-        Returns a list of GRPO jobs, optionally filtered by state
+        Lists the RL GRPO Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -360,7 +360,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GrpoListResponse:
         """
-        Returns a list of GRPO jobs, optionally filtered by state
+        Lists the RL GRPO Jobs owned by a user
 
         Args:
           state: Filter jobs by state

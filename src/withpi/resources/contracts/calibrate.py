@@ -95,7 +95,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateListResponse:
         """
-        Returns a list of contract calibration jobs, optionally filtered by state
+        Lists the Contract Calibration Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -274,7 +274,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateListResponse:
         """
-        Returns a list of contract calibration jobs, optionally filtered by state
+        Lists the Contract Calibration Jobs owned by a user
 
         Args:
           state: Filter jobs by state

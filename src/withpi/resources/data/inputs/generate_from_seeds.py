@@ -156,7 +156,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateFromSeedListJobsResponse:
         """
-        Returns a list of input generation jobs, optionally filtered by state
+        Lists the Data Generation Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -378,7 +378,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateFromSeedListJobsResponse:
         """
-        Returns a list of input generation jobs, optionally filtered by state
+        Lists the Data Generation Jobs owned by a user
 
         Args:
           state: Filter jobs by state

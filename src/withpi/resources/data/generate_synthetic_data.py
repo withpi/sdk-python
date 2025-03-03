@@ -161,7 +161,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateSyntheticDataListJobsResponse:
         """
-        Returns a list of synthetic datajobs, optionally filtered by state
+        Lists the Synthetic Data Generation Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -385,7 +385,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateSyntheticDataListJobsResponse:
         """
-        Returns a list of synthetic datajobs, optionally filtered by state
+        Lists the Synthetic Data Generation Jobs owned by a user
 
         Args:
           state: Filter jobs by state
