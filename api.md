@@ -30,12 +30,8 @@ from withpi.types import (
 Types:
 
 ```python
-from withpi.types import DataGenerationStatus, DataListQuestionAnswerJobsResponse
+from withpi.types import DataGenerationStatus
 ```
-
-Methods:
-
-- <code title="get /data/generate_question_answers">client.data.<a href="./src/withpi/resources/data/data.py">list_question_answer_jobs</a>(\*\*<a href="src/withpi/types/data_list_question_answer_jobs_params.py">params</a>) -> <a href="./src/withpi/types/data_list_question_answer_jobs_response.py">DataListQuestionAnswerJobsResponse</a></code>
 
 ## Inputs
 

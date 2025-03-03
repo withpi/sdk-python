@@ -97,7 +97,7 @@ class PromptResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptListOptimizationJobsResponse:
         """
-        Returns a list of prompt optimization jobs, optionally filtered by state
+        Lists the Prompt Optimization Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -289,7 +289,7 @@ class AsyncPromptResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptListOptimizationJobsResponse:
         """
-        Returns a list of prompt optimization jobs, optionally filtered by state
+        Lists the Prompt Optimization Jobs owned by a user
 
         Args:
           state: Filter jobs by state
