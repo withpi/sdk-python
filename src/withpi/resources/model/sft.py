@@ -136,8 +136,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -173,11 +172,8 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Load the SFT model into serving.
-
-        This can support a very small amount of
-        interactive traffic. Please reach out if you want to use this model in a
-        production setting.
+        """
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -398,8 +394,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -435,11 +430,8 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Load the SFT model into serving.
-
-        This can support a very small amount of
-        interactive traffic. Please reach out if you want to use this model in a
-        production setting.
+        """
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
