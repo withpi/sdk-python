@@ -131,7 +131,7 @@ class TestGenerateSyntheticData:
         generate_synthetic_data = client.data.generate_synthetic_data.cancel(
             "job_id",
         )
-        assert_matches_type(object, generate_synthetic_data, path=["response"])
+        assert_matches_type(str, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
@@ -142,7 +142,7 @@ class TestGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = response.parse()
-        assert_matches_type(object, generate_synthetic_data, path=["response"])
+        assert_matches_type(str, generate_synthetic_data, path=["response"])
 
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
@@ -153,7 +153,7 @@ class TestGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = response.parse()
-            assert_matches_type(object, generate_synthetic_data, path=["response"])
+            assert_matches_type(str, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -386,7 +386,7 @@ class TestAsyncGenerateSyntheticData:
         generate_synthetic_data = await async_client.data.generate_synthetic_data.cancel(
             "job_id",
         )
-        assert_matches_type(object, generate_synthetic_data, path=["response"])
+        assert_matches_type(str, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -397,7 +397,7 @@ class TestAsyncGenerateSyntheticData:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         generate_synthetic_data = await response.parse()
-        assert_matches_type(object, generate_synthetic_data, path=["response"])
+        assert_matches_type(str, generate_synthetic_data, path=["response"])
 
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -408,7 +408,7 @@ class TestAsyncGenerateSyntheticData:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             generate_synthetic_data = await response.parse()
-            assert_matches_type(object, generate_synthetic_data, path=["response"])
+            assert_matches_type(str, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
