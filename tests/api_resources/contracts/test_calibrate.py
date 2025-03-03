@@ -91,6 +91,44 @@ class TestCalibrate:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_cancel(self, client: PiClient) -> None:
+        calibrate = client.contracts.calibrate.cancel(
+            "job_id",
+        )
+        assert_matches_type(object, calibrate, path=["response"])
+
+    @parametrize
+    def test_raw_response_cancel(self, client: PiClient) -> None:
+        response = client.contracts.calibrate.with_raw_response.cancel(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = response.parse()
+        assert_matches_type(object, calibrate, path=["response"])
+
+    @parametrize
+    def test_streaming_response_cancel(self, client: PiClient) -> None:
+        with client.contracts.calibrate.with_streaming_response.cancel(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = response.parse()
+            assert_matches_type(object, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_cancel(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.contracts.calibrate.with_raw_response.cancel(
+                "",
+            )
+
+    @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         calibrate = client.contracts.calibrate.start_job(
             contract={
@@ -315,6 +353,44 @@ class TestAsyncCalibrate:
             assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
+        calibrate = await async_client.contracts.calibrate.cancel(
+            "job_id",
+        )
+        assert_matches_type(object, calibrate, path=["response"])
+
+    @parametrize
+    async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.contracts.calibrate.with_raw_response.cancel(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = await response.parse()
+        assert_matches_type(object, calibrate, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
+        async with async_client.contracts.calibrate.with_streaming_response.cancel(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = await response.parse()
+            assert_matches_type(object, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.contracts.calibrate.with_raw_response.cancel(
+                "",
+            )
 
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
