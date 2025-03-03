@@ -39,3 +39,6 @@ from .prompt_list_optimization_jobs_params import PromptListOptimizationJobsPara
 from .prompt_list_optimization_jobs_response import (
     PromptListOptimizationJobsResponse as PromptListOptimizationJobsResponse,
 )
+from .prompt_cancel_optimization_job_response import (
+    PromptCancelOptimizationJobResponse as PromptCancelOptimizationJobResponse,
+)

@@ -95,7 +95,7 @@ class TestCalibrate:
         calibrate = client.contracts.calibrate.cancel(
             "job_id",
         )
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
@@ -106,7 +106,7 @@ class TestCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = response.parse()
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
@@ -117,7 +117,7 @@ class TestCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = response.parse()
-            assert_matches_type(object, calibrate, path=["response"])
+            assert_matches_type(str, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -359,7 +359,7 @@ class TestAsyncCalibrate:
         calibrate = await async_client.contracts.calibrate.cancel(
             "job_id",
         )
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -370,7 +370,7 @@ class TestAsyncCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = await response.parse()
-        assert_matches_type(object, calibrate, path=["response"])
+        assert_matches_type(str, calibrate, path=["response"])
 
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -381,7 +381,7 @@ class TestAsyncCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = await response.parse()
-            assert_matches_type(object, calibrate, path=["response"])
+            assert_matches_type(str, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
