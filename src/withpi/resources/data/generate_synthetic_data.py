@@ -70,7 +70,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Generates synthetic data from a list of seeds
+        Launches a Synthetic Data Generation job
 
         Args:
           num_examples_to_generate: The number of new LLM examples to generate
@@ -294,7 +294,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Generates synthetic data from a list of seeds
+        Launches a Synthetic Data Generation job
 
         Args:
           num_examples_to_generate: The number of new LLM examples to generate

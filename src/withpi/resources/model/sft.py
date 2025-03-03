@@ -210,10 +210,8 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Initialize the supervised fine-tuning (SFT) job for the model.
-
-        We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process.
+        """
+        Launches a SFT job
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -468,10 +466,8 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Initialize the supervised fine-tuning (SFT) job for the model.
-
-        We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process.
+        """
+        Launches a SFT job
 
         Args:
           contract: The contract to use in the SFT tuning process

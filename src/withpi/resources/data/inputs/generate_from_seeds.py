@@ -100,7 +100,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Generates input data from a list of seeds
+        Launches a Data Generation job
 
         Args:
           application_description: The application description for which the inputs would be applicable.
@@ -322,7 +322,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Generates input data from a list of seeds
+        Launches a Data Generation job
 
         Args:
           application_description: The application description for which the inputs would be applicable.

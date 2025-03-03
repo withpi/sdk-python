@@ -135,7 +135,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Start a contract calibration job
+        Launches a Contract Calibration job
 
         Args:
           contract: The contract to calibrate
@@ -314,7 +314,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Start a contract calibration job
+        Launches a Contract Calibration job
 
         Args:
           contract: The contract to calibrate

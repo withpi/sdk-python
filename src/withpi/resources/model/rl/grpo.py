@@ -211,8 +211,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
-        job.
+        Launches a RL GRPO job
 
         Args:
           base_rl_model: The base model to start the RL tunning process
@@ -471,8 +470,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
-        job.
+        Launches a RL GRPO job
 
         Args:
           base_rl_model: The base model to start the RL tunning process
