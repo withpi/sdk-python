@@ -85,6 +85,39 @@ class PromptResource(SyncAPIResource):
             cast_to=PromptOptimizationStatus,
         )
 
+    def cancel_optimization_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Cancels a Prompt Optimization job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/prompt/optimize/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     def list_optimization_jobs(
         self,
         *,
@@ -277,6 +310,39 @@ class AsyncPromptResource(AsyncAPIResource):
             cast_to=PromptOptimizationStatus,
         )
 
+    async def cancel_optimization_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Cancels a Prompt Optimization job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/prompt/optimize/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     async def list_optimization_jobs(
         self,
         *,
@@ -423,6 +489,9 @@ class PromptResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             prompt.retrieve,
         )
+        self.cancel_optimization_job = to_raw_response_wrapper(
+            prompt.cancel_optimization_job,
+        )
         self.list_optimization_jobs = to_raw_response_wrapper(
             prompt.list_optimization_jobs,
         )
@@ -440,6 +509,9 @@ class AsyncPromptResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             prompt.retrieve,
+        )
+        self.cancel_optimization_job = async_to_raw_response_wrapper(
+            prompt.cancel_optimization_job,
         )
         self.list_optimization_jobs = async_to_raw_response_wrapper(
             prompt.list_optimization_jobs,
@@ -459,6 +531,9 @@ class PromptResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             prompt.retrieve,
         )
+        self.cancel_optimization_job = to_streamed_response_wrapper(
+            prompt.cancel_optimization_job,
+        )
         self.list_optimization_jobs = to_streamed_response_wrapper(
             prompt.list_optimization_jobs,
         )
@@ -476,6 +551,9 @@ class AsyncPromptResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             prompt.retrieve,
+        )
+        self.cancel_optimization_job = async_to_streamed_response_wrapper(
+            prompt.cancel_optimization_job,
         )
         self.list_optimization_jobs = async_to_streamed_response_wrapper(
             prompt.list_optimization_jobs,
