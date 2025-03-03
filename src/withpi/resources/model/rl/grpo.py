@@ -135,8 +135,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -172,10 +171,8 @@ class GrpoResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
-        """Load the model into serving.
-
-        This can support a very small amount of interactive
-        traffic. Please reach out if you want to use this model in a production setting.
+        """
+        Loads a RL GRPO model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -398,8 +395,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -435,10 +431,8 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
-        """Load the model into serving.
-
-        This can support a very small amount of interactive
-        traffic. Please reach out if you want to use this model in a production setting.
+        """
+        Loads a RL GRPO model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
