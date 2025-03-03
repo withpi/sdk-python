@@ -195,7 +195,7 @@ class GenerateFromSeedsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams Data from the data generation job
+        Streams data from the Data Generation job
 
         Args:
           extra_headers: Send extra headers
@@ -417,7 +417,7 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams Data from the data generation job
+        Streams data from the Data Generation job
 
         Args:
           extra_headers: Send extra headers

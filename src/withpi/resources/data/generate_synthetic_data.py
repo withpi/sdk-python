@@ -200,7 +200,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateSyntheticDataStreamDataResponse:
         """
-        Streams SDKExample objects from the synthetic data generation job
+        Streams data from the Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
@@ -424,7 +424,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GenerateSyntheticDataStreamDataResponse:
         """
-        Streams SDKExample objects from the synthetic data generation job
+        Streams data from the Synthetic Data Generation job
 
         Args:
           extra_headers: Send extra headers
