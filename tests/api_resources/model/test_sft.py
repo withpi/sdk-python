@@ -95,7 +95,7 @@ class TestSft:
         sft = client.model.sft.cancel(
             "job_id",
         )
-        assert_matches_type(object, sft, path=["response"])
+        assert_matches_type(str, sft, path=["response"])
 
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
@@ -106,7 +106,7 @@ class TestSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = response.parse()
-        assert_matches_type(object, sft, path=["response"])
+        assert_matches_type(str, sft, path=["response"])
 
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
@@ -117,7 +117,7 @@ class TestSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = response.parse()
-            assert_matches_type(object, sft, path=["response"])
+            assert_matches_type(str, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -452,7 +452,7 @@ class TestAsyncSft:
         sft = await async_client.model.sft.cancel(
             "job_id",
         )
-        assert_matches_type(object, sft, path=["response"])
+        assert_matches_type(str, sft, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -463,7 +463,7 @@ class TestAsyncSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = await response.parse()
-        assert_matches_type(object, sft, path=["response"])
+        assert_matches_type(str, sft, path=["response"])
 
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -474,7 +474,7 @@ class TestAsyncSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = await response.parse()
-            assert_matches_type(object, sft, path=["response"])
+            assert_matches_type(str, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

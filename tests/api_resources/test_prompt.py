@@ -63,7 +63,7 @@ class TestPrompt:
         prompt = client.prompt.cancel_optimization_job(
             "job_id",
         )
-        assert_matches_type(object, prompt, path=["response"])
+        assert_matches_type(str, prompt, path=["response"])
 
     @parametrize
     def test_raw_response_cancel_optimization_job(self, client: PiClient) -> None:
@@ -74,7 +74,7 @@ class TestPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = response.parse()
-        assert_matches_type(object, prompt, path=["response"])
+        assert_matches_type(str, prompt, path=["response"])
 
     @parametrize
     def test_streaming_response_cancel_optimization_job(self, client: PiClient) -> None:
@@ -85,7 +85,7 @@ class TestPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = response.parse()
-            assert_matches_type(object, prompt, path=["response"])
+            assert_matches_type(str, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -350,7 +350,7 @@ class TestAsyncPrompt:
         prompt = await async_client.prompt.cancel_optimization_job(
             "job_id",
         )
-        assert_matches_type(object, prompt, path=["response"])
+        assert_matches_type(str, prompt, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel_optimization_job(self, async_client: AsyncPiClient) -> None:
@@ -361,7 +361,7 @@ class TestAsyncPrompt:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         prompt = await response.parse()
-        assert_matches_type(object, prompt, path=["response"])
+        assert_matches_type(str, prompt, path=["response"])
 
     @parametrize
     async def test_streaming_response_cancel_optimization_job(self, async_client: AsyncPiClient) -> None:
@@ -372,7 +372,7 @@ class TestAsyncPrompt:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             prompt = await response.parse()
-            assert_matches_type(object, prompt, path=["response"])
+            assert_matches_type(str, prompt, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -159,7 +159,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Cancels a Synthetic Data Generation job
 
@@ -179,7 +179,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
     def list_jobs(
@@ -416,7 +416,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> str:
         """
         Cancels a Synthetic Data Generation job
 
@@ -436,7 +436,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=str,
         )
 
     async def list_jobs(

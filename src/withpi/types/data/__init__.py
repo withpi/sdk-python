@@ -8,6 +8,9 @@ from .input_cluster_response import InputClusterResponse as InputClusterResponse
 from .generate_synthetic_data_create_params import (
     GenerateSyntheticDataCreateParams as GenerateSyntheticDataCreateParams,
 )
+from .generate_synthetic_data_cancel_response import (
+    GenerateSyntheticDataCancelResponse as GenerateSyntheticDataCancelResponse,
+)
 from .generate_synthetic_data_list_jobs_params import (
     GenerateSyntheticDataListJobsParams as GenerateSyntheticDataListJobsParams,
 )

@@ -95,7 +95,7 @@ class TestGrpo:
         grpo = client.model.rl.grpo.cancel(
             "job_id",
         )
-        assert_matches_type(object, grpo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
@@ -106,7 +106,7 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(object, grpo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
@@ -117,7 +117,7 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(object, grpo, path=["response"])
+            assert_matches_type(str, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -448,7 +448,7 @@ class TestAsyncGrpo:
         grpo = await async_client.model.rl.grpo.cancel(
             "job_id",
         )
-        assert_matches_type(object, grpo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -459,7 +459,7 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(object, grpo, path=["response"])
+        assert_matches_type(str, grpo, path=["response"])
 
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
@@ -470,7 +470,7 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(object, grpo, path=["response"])
+            assert_matches_type(str, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
