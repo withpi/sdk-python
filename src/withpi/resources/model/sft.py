@@ -98,7 +98,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftListResponse:
         """
-        Returns a list of SFT jobs, optionally filtered by state
+        Lists the SFT Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -360,7 +360,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftListResponse:
         """
-        Returns a list of SFT jobs, optionally filtered by state
+        Lists the SFT Jobs owned by a user
 
         Args:
           state: Filter jobs by state
