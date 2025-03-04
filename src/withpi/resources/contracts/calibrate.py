@@ -21,8 +21,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.contracts import State, calibrate_list_params, calibrate_start_job_params
-from ...types.contracts.state import State
+from ...types.contracts import calibrate_list_params, calibrate_start_job_params
+from ...types.shared.state import State
 from ...types.shared_params.contract import Contract
 from ...types.contracts.calibrate_list_response import CalibrateListResponse
 from ...types.shared.contract_calibration_status import ContractCalibrationStatus

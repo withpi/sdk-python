@@ -21,10 +21,9 @@ from ..._response import (
 )
 from ...types.data import generate_synthetic_data_create_params, generate_synthetic_data_list_jobs_params
 from ..._base_client import make_request_options
-from ...types.contracts import State
-from ...types.contracts.state import State
+from ...types.shared.state import State
 from ...types.shared_params.example import Example
-from ...types.shared.sdk_exploration_mode import SDKExplorationMode
+from ...types.shared.exploration_mode import ExplorationMode
 from ...types.shared.synthetic_data_status import SyntheticDataStatus
 from ...types.data.generate_synthetic_data_list_jobs_response import GenerateSyntheticDataListJobsResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
@@ -59,7 +58,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         seeds: Iterable[Example],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -316,7 +315,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         seeds: Iterable[Example],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

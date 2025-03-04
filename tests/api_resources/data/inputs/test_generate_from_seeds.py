@@ -9,7 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types import DataGenerationStatus
+from withpi.types.shared import DataGenerationStatus
 from withpi.types.data.inputs import (
     GenerateFromSeedListJobsResponse,
 )

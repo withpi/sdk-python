@@ -2,9 +2,9 @@
 
 from typing import List, Optional
 
+from .state import State
 from ..._models import BaseModel
 from .trained_model import TrainedModel
-from ..contracts.state import State
 
 __all__ = ["SftStatus"]
 

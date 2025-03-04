@@ -22,8 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.contracts import State
-from ..types.contracts.state import State
+from ..types.shared.state import State
 from ..types.shared_params.example import Example
 from ..types.shared_params.contract import Contract
 from ..types.shared.prompt_optimization_status import PromptOptimizationStatus

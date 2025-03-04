@@ -3,7 +3,7 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .sdk_action_dimension import SDKActionDimension
+from .action_dimension import ActionDimension
 from .dimension_scoring_type import DimensionScoringType
 
 __all__ = ["SubDimension"]
@@ -19,7 +19,7 @@ class SubDimension(BaseModel):
     scoring_type: DimensionScoringType
     """The type of scoring performed for this dimension"""
 
-    action_dimension: Optional[SDKActionDimension] = None
+    action_dimension: Optional[ActionDimension] = None
     """If `action_dimension` is set, this node is a part of short-circuit subtree.
 
     If the score of the action_dimension is > 0.5, then evaluate the node and return

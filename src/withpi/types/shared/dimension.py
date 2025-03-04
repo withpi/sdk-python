@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from ..._models import BaseModel
 from .sub_dimension import SubDimension
-from .sdk_action_dimension import SDKActionDimension
+from .action_dimension import ActionDimension
 
 __all__ = ["Dimension"]
 
@@ -19,7 +19,7 @@ class Dimension(BaseModel):
     sub_dimensions: List[SubDimension]
     """The sub dimensions of the dimension"""
 
-    action_dimension: Optional[SDKActionDimension] = None
+    action_dimension: Optional[ActionDimension] = None
     """If `action_dimension` is set, this node is a part of short-circuit subtree.
 
     If the score of the action_dimension is > 0.5, then evaluate the node and return
