@@ -1,9 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List
-from typing_extensions import Literal
+from typing import Dict, List, Optional
 
-from .._models import BaseModel
+from .state import State
+from ..._models import BaseModel
 
 __all__ = ["PromptOptimizationStatus"]
 
@@ -15,11 +15,11 @@ class PromptOptimizationStatus(BaseModel):
     job_id: str
     """The job id"""
 
-    optimized_prompt_messages: List[Dict[str, str]]
+    state: State
+    """Current state of the job"""
+
+    optimized_prompt_messages: Optional[List[Dict[str, str]]] = None
     """
     The optimized prompt messages in the OpenAI message format with the jinja
     {{ input }} variable for the next user prompt
     """
-
-    state: Literal["QUEUED", "RUNNING", "DONE", "ERROR"]
-    """Current state of the job"""

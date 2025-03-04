@@ -22,8 +22,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.query_classification_response import QueryClassificationResponse
 from ..types.query_generate_fanouts_response import QueryGenerateFanoutsResponse
+from ..types.shared_params.query_fanout_example import QueryFanoutExample
+from ..types.shared.query_classification_response import QueryClassificationResponse
 
 __all__ = ["QueriesResource", "AsyncQueriesResource"]
 
@@ -109,7 +110,7 @@ class QueriesResource(SyncAPIResource):
         self,
         *,
         queries: List[str],
-        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery] | NotGiven = NOT_GIVEN,
+        example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -234,7 +235,7 @@ class AsyncQueriesResource(AsyncAPIResource):
         self,
         *,
         queries: List[str],
-        example_fanout_queries: Iterable[query_generate_fanouts_params.ExampleFanoutQuery] | NotGiven = NOT_GIVEN,
+        example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

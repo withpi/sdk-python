@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.1.0-alpha.79 (2025-03-04)
+
+Full Changelog: [v0.1.0-alpha.78...v0.1.0-alpha.79](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.78...v0.1.0-alpha.79)
+
+### Features
+
+* **api:** api update ([#343](https://github.com/withpi/sdk-python/issues/343)) ([365e284](https://github.com/withpi/sdk-python/commit/365e284cd8b9b4633afc2be0780e77e06a8b5a4a))
+* **api:** api update ([#344](https://github.com/withpi/sdk-python/issues/344)) ([92e094d](https://github.com/withpi/sdk-python/commit/92e094d01b5dde55a4406c8250daf7b6973b9f1d))
+* **api:** api update ([#345](https://github.com/withpi/sdk-python/issues/345)) ([5cf0aa1](https://github.com/withpi/sdk-python/commit/5cf0aa19a0ac4f504a02d77050b771fae14f20e1))
+* **api:** api update ([#346](https://github.com/withpi/sdk-python/issues/346)) ([d61fdce](https://github.com/withpi/sdk-python/commit/d61fdce40d68126d46a439aeb61ffdb280d196e3))
+* **api:** api update ([#347](https://github.com/withpi/sdk-python/issues/347)) ([d24d4ae](https://github.com/withpi/sdk-python/commit/d24d4ae44ff9ab3b5374bf6bd9fbcb533019ff35))
+* **api:** api update ([#348](https://github.com/withpi/sdk-python/issues/348)) ([2739c6b](https://github.com/withpi/sdk-python/commit/2739c6befeb95fc571e89597121d5959c75499f4))
+* **api:** api update ([#349](https://github.com/withpi/sdk-python/issues/349)) ([0cb22df](https://github.com/withpi/sdk-python/commit/0cb22df343a2c74c0b8d6f1f540626db50cd1a45))
+* **api:** api update ([#350](https://github.com/withpi/sdk-python/issues/350)) ([a75f256](https://github.com/withpi/sdk-python/commit/a75f256349a840cad15b8456c67dc75f3fdbbfbd))
+* **api:** api update ([#351](https://github.com/withpi/sdk-python/issues/351)) ([e3085cf](https://github.com/withpi/sdk-python/commit/e3085cf3e827788dd9c4ac974eb6cb15597d2eea))
+* **api:** api update ([#352](https://github.com/withpi/sdk-python/issues/352)) ([e692e2b](https://github.com/withpi/sdk-python/commit/e692e2ba2045097aa462b9fefa3566c97ad05dfc))
+* **api:** api update ([#353](https://github.com/withpi/sdk-python/issues/353)) ([1d5ea52](https://github.com/withpi/sdk-python/commit/1d5ea52a60b4f46ffc190c524fbc3c83629d9435))
+* **api:** api update ([#354](https://github.com/withpi/sdk-python/issues/354)) ([9c6eb7e](https://github.com/withpi/sdk-python/commit/9c6eb7e99ad7f00bcf806996dc59acbd38d95c87))
+* **api:** api update ([#355](https://github.com/withpi/sdk-python/issues/355)) ([1774f3a](https://github.com/withpi/sdk-python/commit/1774f3a9f48190998f28889fa3df983e42464c69))
+* **api:** api update ([#356](https://github.com/withpi/sdk-python/issues/356)) ([70d20fd](https://github.com/withpi/sdk-python/commit/70d20fd64624b4b759f35f60516f0add86f8b5a0))
+* **api:** api update ([#357](https://github.com/withpi/sdk-python/issues/357)) ([cb38de2](https://github.com/withpi/sdk-python/commit/cb38de236973b395896b3e66ed65e961b1f4888c))
+* **api:** manual updates ([#358](https://github.com/withpi/sdk-python/issues/358)) ([0a7c928](https://github.com/withpi/sdk-python/commit/0a7c9286ad02cc7ec14186b16c3efebca411d3b6))
+
+
+### Chores
+
+* **docs:** update client docstring ([#341](https://github.com/withpi/sdk-python/issues/341)) ([d7611b5](https://github.com/withpi/sdk-python/commit/d7611b5716e8f09c51f9bc402af63ae9199c49f7))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#340](https://github.com/withpi/sdk-python/issues/340)) ([395e49d](https://github.com/withpi/sdk-python/commit/395e49de2b5150ad285eeb3774a20665b5db14bc))
+
 ## 0.1.0-alpha.78 (2025-02-27)
 
 Full Changelog: [v0.1.0-alpha.77...v0.1.0-alpha.78](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.77...v0.1.0-alpha.78)

@@ -8,11 +8,14 @@ from .input_cluster_response import InputClusterResponse as InputClusterResponse
 from .generate_synthetic_data_create_params import (
     GenerateSyntheticDataCreateParams as GenerateSyntheticDataCreateParams,
 )
-from .generate_synthetic_data_create_response import (
-    GenerateSyntheticDataCreateResponse as GenerateSyntheticDataCreateResponse,
+from .generate_synthetic_data_cancel_response import (
+    GenerateSyntheticDataCancelResponse as GenerateSyntheticDataCancelResponse,
 )
-from .generate_synthetic_data_retrieve_response import (
-    GenerateSyntheticDataRetrieveResponse as GenerateSyntheticDataRetrieveResponse,
+from .generate_synthetic_data_list_jobs_params import (
+    GenerateSyntheticDataListJobsParams as GenerateSyntheticDataListJobsParams,
+)
+from .generate_synthetic_data_list_jobs_response import (
+    GenerateSyntheticDataListJobsResponse as GenerateSyntheticDataListJobsResponse,
 )
 from .generate_synthetic_data_stream_data_response import (
     GenerateSyntheticDataStreamDataResponse as GenerateSyntheticDataStreamDataResponse,

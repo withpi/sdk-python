@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -21,9 +20,13 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.model.rl import grpo_download_params, grpo_start_job_params
+from ....types.model.rl import grpo_list_params, grpo_download_params, grpo_start_job_params
+from ....types.shared.state import State
+from ....types.shared.rl_grpo_status import RlGrpoStatus
 from ....types.shared_params.contract import Contract
-from ....types.model.rl.rl_grpo_status import RlGrpoStatus
+from ....types.shared_params.lora_config import LoraConfig
+from ....types.model.rl.grpo_list_response import GrpoListResponse
+from ....types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -60,7 +63,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Get the current status of the RL GRPO job
+        Checks the status of a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -81,6 +84,76 @@ class GrpoResource(SyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoListResponse:
+        """
+        Lists the RL GRPO Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/model/rl/grpo",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+            ),
+            cast_to=GrpoListResponse,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a RL GRPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/model/rl/grpo/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     def download(
         self,
         job_id: str,
@@ -94,8 +167,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -131,10 +203,8 @@ class GrpoResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
-        """Load the model into serving.
-
-        This can support a very small amount of interactive
-        traffic. Please reach out if you want to use this model in a production setting.
+        """
+        Loads a RL GRPO model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -158,13 +228,13 @@ class GrpoResource(SyncAPIResource):
     def start_job(
         self,
         *,
+        base_rl_model: FinetuningBaseModel,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        learning_rate: float,
+        lora_config: LoraConfig,
+        num_train_epochs: int,
+        system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,21 +243,20 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
-        job.
+        Launches a RL GRPO job
 
         Args:
+          base_rl_model: The base model to start the RL tunning process
+
           contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
 
-          base_rl_model: The base model to start the RL tunning process
-
-          learning_rate: SFT learning rate
+          learning_rate: GRPO learning rate
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: GRPO number of train epochs
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -203,9 +272,9 @@ class GrpoResource(SyncAPIResource):
             "/model/rl/grpo",
             body=maybe_transform(
                 {
+                    "base_rl_model": base_rl_model,
                     "contract": contract,
                     "examples": examples,
-                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
@@ -231,7 +300,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL GRPO job
+        Opens a message stream about a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -286,7 +355,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Get the current status of the RL GRPO job
+        Checks the status of a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -307,6 +376,76 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoListResponse:
+        """
+        Lists the RL GRPO Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/model/rl/grpo",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+            ),
+            cast_to=GrpoListResponse,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a RL GRPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/model/rl/grpo/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def download(
         self,
         job_id: str,
@@ -320,8 +459,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -357,10 +495,8 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
-        """Load the model into serving.
-
-        This can support a very small amount of interactive
-        traffic. Please reach out if you want to use this model in a production setting.
+        """
+        Loads a RL GRPO model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -384,13 +520,13 @@ class AsyncGrpoResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
+        base_rl_model: FinetuningBaseModel,
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: grpo_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        learning_rate: float,
+        lora_config: LoraConfig,
+        num_train_epochs: int,
+        system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -399,21 +535,20 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RlGrpoStatus:
         """
-        Initialize the Group Relative Policy Optimization (GRPO) reinforcement learning
-        job.
+        Launches a RL GRPO job
 
         Args:
+          base_rl_model: The base model to start the RL tunning process
+
           contract: The contract to use in the GRPO tuning process
 
           examples: Examples to use in the RL tuning process
 
-          base_rl_model: The base model to start the RL tunning process
-
-          learning_rate: SFT learning rate
+          learning_rate: GRPO learning rate
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: GRPO number of train epochs
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -429,9 +564,9 @@ class AsyncGrpoResource(AsyncAPIResource):
             "/model/rl/grpo",
             body=await async_maybe_transform(
                 {
+                    "base_rl_model": base_rl_model,
                     "contract": contract,
                     "examples": examples,
-                    "base_rl_model": base_rl_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
@@ -457,7 +592,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from the RL GRPO job
+        Opens a message stream about a RL GRPO job
 
         Args:
           extra_headers: Send extra headers
@@ -487,6 +622,12 @@ class GrpoResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             grpo.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            grpo.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            grpo.cancel,
+        )
         self.download = to_raw_response_wrapper(
             grpo.download,
         )
@@ -507,6 +648,12 @@ class AsyncGrpoResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             grpo.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            grpo.list,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            grpo.cancel,
         )
         self.download = async_to_raw_response_wrapper(
             grpo.download,
@@ -529,6 +676,12 @@ class GrpoResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             grpo.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            grpo.list,
+        )
+        self.cancel = to_streamed_response_wrapper(
+            grpo.cancel,
+        )
         self.download = to_streamed_response_wrapper(
             grpo.download,
         )
@@ -549,6 +702,12 @@ class AsyncGrpoResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             grpo.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            grpo.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            grpo.cancel,
         )
         self.download = async_to_streamed_response_wrapper(
             grpo.download,

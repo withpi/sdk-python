@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Literal
+from typing import Iterable, Optional
 
 import httpx
 
@@ -20,11 +19,15 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_download_params, sft_start_job_params
+from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
-from ...types.model.sft_status import SftStatus
+from ...types.shared.state import State
+from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
+from ...types.model.sft_list_response import SftListResponse
+from ...types.shared_params.lora_config import LoraConfig
+from ...types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -61,7 +64,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
         """
-        Get the current status of a model SFT tuning job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -82,6 +85,76 @@ class SftResource(SyncAPIResource):
             cast_to=SftStatus,
         )
 
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftListResponse:
+        """
+        Lists the SFT Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/model/sft",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, sft_list_params.SftListParams),
+            ),
+            cast_to=SftListResponse,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a SFT job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/model/sft/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     def download(
         self,
         job_id: str,
@@ -95,8 +168,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -132,11 +204,8 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Load the SFT model into serving.
-
-        This can support a very small amount of
-        interactive traffic. Please reach out if you want to use this model in a
-        production setting.
+        """
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -162,10 +231,11 @@ class SftResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,10 +243,8 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Initialize the supervised fine-tuning (SFT) job for the model.
-
-        We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process.
+        """
+        Launches a SFT job
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -191,6 +259,8 @@ class SftResource(SyncAPIResource):
           lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
+
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           extra_headers: Send extra headers
 
@@ -210,6 +280,7 @@ class SftResource(SyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
@@ -231,7 +302,7 @@ class SftResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from a model SFT tuning job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -286,7 +357,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
         """
-        Get the current status of a model SFT tuning job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -307,6 +378,76 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftListResponse:
+        """
+        Lists the SFT Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/model/sft",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, sft_list_params.SftListParams),
+            ),
+            cast_to=SftListResponse,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a SFT job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/model/sft/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def download(
         self,
         job_id: str,
@@ -320,8 +461,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Generates a signed URL for downloading a model as a .tar.gz archive for self
-        hosting.
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -357,11 +497,8 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Load the SFT model into serving.
-
-        This can support a very small amount of
-        interactive traffic. Please reach out if you want to use this model in a
-        production setting.
+        """
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -387,10 +524,11 @@ class AsyncSftResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -398,10 +536,8 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Initialize the supervised fine-tuning (SFT) job for the model.
-
-        We implement
-        Low-Rank Adaptation (LoRA) for the fine-tuning process.
+        """
+        Launches a SFT job
 
         Args:
           contract: The contract to use in the SFT tuning process
@@ -416,6 +552,8 @@ class AsyncSftResource(AsyncAPIResource):
           lora_config: The LoRA configuration.
 
           num_train_epochs: SFT number of train epochs
+
+          system_prompt: A custom system prompt to use during the RL tuning process
 
           extra_headers: Send extra headers
 
@@ -435,6 +573,7 @@ class AsyncSftResource(AsyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
@@ -456,7 +595,7 @@ class AsyncSftResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Streams messages from a model SFT tuning job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -486,6 +625,12 @@ class SftResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             sft.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            sft.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            sft.cancel,
+        )
         self.download = to_raw_response_wrapper(
             sft.download,
         )
@@ -506,6 +651,12 @@ class AsyncSftResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             sft.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            sft.list,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            sft.cancel,
         )
         self.download = async_to_raw_response_wrapper(
             sft.download,
@@ -528,6 +679,12 @@ class SftResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             sft.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            sft.list,
+        )
+        self.cancel = to_streamed_response_wrapper(
+            sft.cancel,
+        )
         self.download = to_streamed_response_wrapper(
             sft.download,
         )
@@ -548,6 +705,12 @@ class AsyncSftResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             sft.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            sft.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            sft.cancel,
         )
         self.download = async_to_streamed_response_wrapper(
             sft.download,

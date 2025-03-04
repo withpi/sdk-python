@@ -21,9 +21,11 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.contracts import calibrate_start_job_params
+from ...types.contracts import calibrate_list_params, calibrate_start_job_params
+from ...types.shared.state import State
 from ...types.shared_params.contract import Contract
-from ...types.contracts.contract_calibration_status import ContractCalibrationStatus
+from ...types.contracts.calibrate_list_response import CalibrateListResponse
+from ...types.shared.contract_calibration_status import ContractCalibrationStatus
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -60,7 +62,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Checks on a contract calibration job
+        Checks the status of a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -81,6 +83,76 @@ class CalibrateResource(SyncAPIResource):
             cast_to=ContractCalibrationStatus,
         )
 
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrateListResponse:
+        """
+        Lists the Contract Calibration Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/contracts/calibrate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
+            ),
+            cast_to=CalibrateListResponse,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Contract Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/contracts/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     def start_job(
         self,
         *,
@@ -96,7 +168,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Start a contract calibration job
+        Launches a Contract Calibration job
 
         Args:
           contract: The contract to calibrate
@@ -147,7 +219,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a contract calibration job
+        Opens a message stream about a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -202,7 +274,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Checks on a contract calibration job
+        Checks the status of a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -223,6 +295,76 @@ class AsyncCalibrateResource(AsyncAPIResource):
             cast_to=ContractCalibrationStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrateListResponse:
+        """
+        Lists the Contract Calibration Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/contracts/calibrate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
+            ),
+            cast_to=CalibrateListResponse,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Contract Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/contracts/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def start_job(
         self,
         *,
@@ -238,7 +380,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ContractCalibrationStatus:
         """
-        Start a contract calibration job
+        Launches a Contract Calibration job
 
         Args:
           contract: The contract to calibrate
@@ -289,7 +431,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a contract calibration job
+        Opens a message stream about a Contract Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -319,6 +461,12 @@ class CalibrateResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             calibrate.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            calibrate.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            calibrate.cancel,
+        )
         self.start_job = to_raw_response_wrapper(
             calibrate.start_job,
         )
@@ -333,6 +481,12 @@ class AsyncCalibrateResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             calibrate.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            calibrate.list,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            calibrate.cancel,
         )
         self.start_job = async_to_raw_response_wrapper(
             calibrate.start_job,
@@ -349,6 +503,12 @@ class CalibrateResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             calibrate.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            calibrate.list,
+        )
+        self.cancel = to_streamed_response_wrapper(
+            calibrate.cancel,
+        )
         self.start_job = to_streamed_response_wrapper(
             calibrate.start_job,
         )
@@ -363,6 +523,12 @@ class AsyncCalibrateResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             calibrate.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            calibrate.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            calibrate.cancel,
         )
         self.start_job = async_to_streamed_response_wrapper(
             calibrate.start_job,
