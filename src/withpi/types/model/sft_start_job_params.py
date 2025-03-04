@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 from ..shared_params.example import Example
@@ -34,3 +34,6 @@ class SftStartJobParams(TypedDict, total=False):
 
     num_train_epochs: int
     """SFT number of train epochs"""
+
+    system_prompt: Optional[str]
+    """A custom system prompt to use during the RL tuning process"""

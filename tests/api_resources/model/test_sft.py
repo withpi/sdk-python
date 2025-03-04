@@ -290,6 +290,7 @@ class TestSft:
             learning_rate=0.0002,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
@@ -647,6 +648,7 @@ class TestAsyncSft:
             learning_rate=0.0002,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
+            system_prompt="An optional system prompt.",
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
