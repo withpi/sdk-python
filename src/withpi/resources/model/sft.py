@@ -21,8 +21,7 @@ from ..._response import (
 )
 from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
-from ...types.contracts import State
-from ...types.contracts.state import State
+from ...types.shared.state import State
 from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract

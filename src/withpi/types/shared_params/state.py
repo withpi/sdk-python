@@ -4,6 +4,6 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["SDKExplorationMode"]
+__all__ = ["State"]
 
-SDKExplorationMode: TypeAlias = Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"]
+State: TypeAlias = Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]

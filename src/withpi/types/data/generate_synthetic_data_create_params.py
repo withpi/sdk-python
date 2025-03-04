@@ -6,7 +6,7 @@ from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 from ..shared_params.example import Example
-from ..shared.sdk_exploration_mode import SDKExplorationMode
+from ..shared.exploration_mode import ExplorationMode
 
 __all__ = ["GenerateSyntheticDataCreateParams"]
 
@@ -27,7 +27,7 @@ class GenerateSyntheticDataCreateParams(TypedDict, total=False):
     Must be <=10. Generally it could be same as `num_shots`.
     """
 
-    exploration_mode: SDKExplorationMode
+    exploration_mode: ExplorationMode
     """The exploration mode for examples generation. Defaults to `BALANCED`"""
 
     num_shots: int

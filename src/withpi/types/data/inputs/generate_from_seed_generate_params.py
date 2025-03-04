@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-from ...shared.sdk_exploration_mode import SDKExplorationMode
+from ...shared.exploration_mode import ExplorationMode
 
 __all__ = ["GenerateFromSeedGenerateParams"]
 
@@ -26,7 +26,7 @@ class GenerateFromSeedGenerateParams(TypedDict, total=False):
     Must be <=10. Generally it could be same as `num_shots`.
     """
 
-    exploration_mode: SDKExplorationMode
+    exploration_mode: ExplorationMode
     """The exloration mode for input generation. Defaults to `BALANCED`"""
 
     num_shots: int
