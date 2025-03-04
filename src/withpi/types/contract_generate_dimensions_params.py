@@ -10,3 +10,9 @@ __all__ = ["ContractGenerateDimensionsParams"]
 class ContractGenerateDimensionsParams(TypedDict, total=False):
     contract_description: Required[str]
     """The application description to generate contract for."""
+
+    try_auto_generating_python_code: bool
+    """
+    If true, try to generate python code for sub-dimensions with structured
+    evaluation
+    """
