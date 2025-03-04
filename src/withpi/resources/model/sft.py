@@ -236,6 +236,7 @@ class SftResource(SyncAPIResource):
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -260,6 +261,8 @@ class SftResource(SyncAPIResource):
 
           num_train_epochs: SFT number of train epochs
 
+          system_prompt: A custom system prompt to use during the RL tuning process
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -278,6 +281,7 @@ class SftResource(SyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
@@ -525,6 +529,7 @@ class AsyncSftResource(AsyncAPIResource):
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -549,6 +554,8 @@ class AsyncSftResource(AsyncAPIResource):
 
           num_train_epochs: SFT number of train epochs
 
+          system_prompt: A custom system prompt to use during the RL tuning process
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -567,6 +574,7 @@ class AsyncSftResource(AsyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
                 },
                 sft_start_job_params.SftStartJobParams,
             ),
