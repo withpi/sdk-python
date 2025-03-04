@@ -21,8 +21,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.model.rl import grpo_list_params, grpo_download_params, grpo_start_job_params
-from ....types.contracts import State
-from ....types.contracts.state import State
+from ....types.shared.state import State
 from ....types.shared.rl_grpo_status import RlGrpoStatus
 from ....types.shared_params.contract import Contract
 from ....types.shared_params.lora_config import LoraConfig

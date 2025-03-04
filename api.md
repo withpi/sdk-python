@@ -2,21 +2,20 @@
 
 ```python
 from withpi.types import (
+    ActionDimension,
     Contract,
     ContractCalibrationStatus,
     DataGenerationStatus,
     Dimension,
     DimensionScoringType,
     Example,
+    ExplorationMode,
     FinetuningBaseModel,
     LoraConfig,
     PromptOptimizationStatus,
+    QueryClassificationResponse,
     QueryFanoutExample,
     RlGrpoStatus,
-    SDKActionDimension,
-    SDKContract,
-    SDKExample,
-    SDKExplorationMode,
     SftStatus,
     State,
     SubDimension,
@@ -26,12 +25,6 @@ from withpi.types import (
 ```
 
 # Data
-
-Types:
-
-```python
-from withpi.types import DataGenerationStatus
-```
 
 ## Inputs
 
@@ -60,9 +53,9 @@ from withpi.types.data.inputs import (
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">generate</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_generate_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">list_jobs</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_list_jobs_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_list_jobs_response.py">GenerateFromSeedListJobsResponse</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
@@ -95,7 +88,6 @@ Types:
 
 ```python
 from withpi.types import (
-    PromptOptimizationStatus,
     PromptCancelOptimizationJobResponse,
     PromptListOptimizationJobsResponse,
     PromptStreamMessagesResponse,
@@ -118,7 +110,6 @@ Types:
 
 ```python
 from withpi.types.model import (
-    SftStatus,
     SftListResponse,
     SftCancelResponse,
     SftDownloadResponse,
@@ -138,19 +129,12 @@ Methods:
 
 ## Rl
 
-Types:
-
-```python
-from withpi.types.model import RlGrpoStatus
-```
-
 ### Grpo
 
 Types:
 
 ```python
 from withpi.types.model.rl import (
-    RlGrpoStatus,
     GrpoListResponse,
     GrpoCancelResponse,
     GrpoDownloadResponse,
@@ -188,8 +172,6 @@ Types:
 
 ```python
 from withpi.types.contracts import (
-    ContractCalibrationStatus,
-    State,
     CalibrateListResponse,
     CalibrateCancelResponse,
     CalibrateStreamMessagesResponse,
@@ -209,10 +191,10 @@ Methods:
 Types:
 
 ```python
-from withpi.types import QueryClassificationResponse, QueryGenerateFanoutsResponse
+from withpi.types import QueryGenerateFanoutsResponse
 ```
 
 Methods:
 
-- <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classification_response.py">QueryClassificationResponse</a></code>
+- <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/shared/query_classification_response.py">QueryClassificationResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>

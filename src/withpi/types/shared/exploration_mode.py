@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["SDKExplorationMode"]
+__all__ = ["ExplorationMode"]
 
-SDKExplorationMode: TypeAlias = Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"]
+ExplorationMode: TypeAlias = Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"]

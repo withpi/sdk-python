@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from .sdk_action_dimension import SDKActionDimension
+from .action_dimension import ActionDimension
 from ..shared.dimension_scoring_type import DimensionScoringType
 
 __all__ = ["SubDimension"]
@@ -21,7 +21,7 @@ class SubDimension(TypedDict, total=False):
     scoring_type: Required[DimensionScoringType]
     """The type of scoring performed for this dimension"""
 
-    action_dimension: Optional[SDKActionDimension]
+    action_dimension: Optional[ActionDimension]
     """If `action_dimension` is set, this node is a part of short-circuit subtree.
 
     If the score of the action_dimension is > 0.5, then evaluate the node and return

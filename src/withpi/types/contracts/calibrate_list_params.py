@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-from .state import State
+from ..shared.state import State
 
 __all__ = ["CalibrateListParams"]
 
