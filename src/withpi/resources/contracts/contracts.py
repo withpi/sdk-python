@@ -68,6 +68,7 @@ class ContractsResource(SyncAPIResource):
         self,
         *,
         contract_description: str,
+        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -81,6 +82,9 @@ class ContractsResource(SyncAPIResource):
         Args:
           contract_description: The application description to generate contract for.
 
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
+              evaluation
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -92,7 +96,10 @@ class ContractsResource(SyncAPIResource):
         return self._post(
             "/contracts/generate_dimensions",
             body=maybe_transform(
-                {"contract_description": contract_description},
+                {
+                    "contract_description": contract_description,
+                    "try_auto_generating_python_code": try_auto_generating_python_code,
+                },
                 contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(
@@ -222,6 +229,7 @@ class AsyncContractsResource(AsyncAPIResource):
         self,
         *,
         contract_description: str,
+        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -235,6 +243,9 @@ class AsyncContractsResource(AsyncAPIResource):
         Args:
           contract_description: The application description to generate contract for.
 
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
+              evaluation
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -246,7 +257,10 @@ class AsyncContractsResource(AsyncAPIResource):
         return await self._post(
             "/contracts/generate_dimensions",
             body=await async_maybe_transform(
-                {"contract_description": contract_description},
+                {
+                    "contract_description": contract_description,
+                    "try_auto_generating_python_code": try_auto_generating_python_code,
+                },
                 contract_generate_dimensions_params.ContractGenerateDimensionsParams,
             ),
             options=make_request_options(

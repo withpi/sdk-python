@@ -28,6 +28,14 @@ class TestContracts:
         assert_matches_type(Contract, contract, path=["response"])
 
     @parametrize
+    def test_method_generate_dimensions_with_all_params(self, client: PiClient) -> None:
+        contract = client.contracts.generate_dimensions(
+            contract_description="Write a children's story communicating a simple life lesson.",
+            try_auto_generating_python_code=False,
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
     def test_raw_response_generate_dimensions(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
             contract_description="Write a children's story communicating a simple life lesson.",
@@ -205,6 +213,14 @@ class TestAsyncContracts:
     async def test_method_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.generate_dimensions(
             contract_description="Write a children's story communicating a simple life lesson.",
+        )
+        assert_matches_type(Contract, contract, path=["response"])
+
+    @parametrize
+    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncPiClient) -> None:
+        contract = await async_client.contracts.generate_dimensions(
+            contract_description="Write a children's story communicating a simple life lesson.",
+            try_auto_generating_python_code=False,
         )
         assert_matches_type(Contract, contract, path=["response"])
 
