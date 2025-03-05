@@ -33,7 +33,7 @@ class SftStartJobParams(TypedDict, total=False):
     """The LoRA configuration."""
 
     num_train_epochs: int
-    """SFT number of train epochs"""
+    """SFT number of train epochs: <= 10."""
 
     system_prompt: Optional[str]
     """A custom system prompt to use during the RL tuning process"""
