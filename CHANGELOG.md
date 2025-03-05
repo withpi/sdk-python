@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.82 (2025-03-05)
+
+Full Changelog: [v0.1.0-alpha.81...v0.1.0-alpha.82](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.81...v0.1.0-alpha.82)
+
+### Bug Fixes
+
+* revert autoguesser changes ([#368](https://github.com/withpi/sdk-python/issues/368)) ([675b181](https://github.com/withpi/sdk-python/commit/675b1816758d61ac0ee64fd18325b922a7d79ef6))
+
+
+### Chores
+
+* **internal:** remove unused http client options forwarding ([#366](https://github.com/withpi/sdk-python/issues/366)) ([191857d](https://github.com/withpi/sdk-python/commit/191857dbdea73ac033a254cf49402cff2d116d3d))
+
 ## 0.1.0-alpha.81 (2025-03-04)
 
 Full Changelog: [v0.1.0-alpha.80...v0.1.0-alpha.81](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.80...v0.1.0-alpha.81)
