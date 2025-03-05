@@ -258,7 +258,7 @@ class SftResource(SyncAPIResource):
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: SFT number of train epochs: <= 10.
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -551,7 +551,7 @@ class AsyncSftResource(AsyncAPIResource):
 
           lora_config: The LoRA configuration.
 
-          num_train_epochs: SFT number of train epochs
+          num_train_epochs: SFT number of train epochs: <= 10.
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
