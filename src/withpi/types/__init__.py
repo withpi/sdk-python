@@ -12,7 +12,6 @@ from .shared import (
     RlGrpoStatus as RlGrpoStatus,
     SubDimension as SubDimension,
     TrainedModel as TrainedModel,
-    ActionDimension as ActionDimension,
     ExplorationMode as ExplorationMode,
     QueryFanoutExample as QueryFanoutExample,
     FinetuningBaseModel as FinetuningBaseModel,
