@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Required, TypedDict
+from typing import Dict, Union, Iterable
+from typing_extensions import Required, TypeAlias, TypedDict
 
 from .dimension import Dimension
 
 __all__ = ["Contract"]
 
 
-class Contract(TypedDict, total=False):
+class ContractTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the contract"""
 
@@ -19,3 +19,6 @@ class Contract(TypedDict, total=False):
 
     dimensions: Iterable[Dimension]
     """The dimensions of the contract"""
+
+
+Contract: TypeAlias = Union[ContractTyped, Dict[str, object]]

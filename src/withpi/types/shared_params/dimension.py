@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing import Dict, Union, Iterable, Optional
+from typing_extensions import Required, TypeAlias, TypedDict
 
 from .sub_dimension import SubDimension
 
 __all__ = ["Dimension"]
 
 
-class Dimension(TypedDict, total=False):
+class DimensionTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the dimension"""
 
@@ -32,3 +32,6 @@ class Dimension(TypedDict, total=False):
     one internally. A higher weight counts for more when aggregating this dimension
     is aggregated into the final score.
     """
+
+
+Dimension: TypeAlias = Union[DimensionTyped, Dict[str, object]]
