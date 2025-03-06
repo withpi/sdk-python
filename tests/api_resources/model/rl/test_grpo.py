@@ -240,14 +240,6 @@ class TestGrpo:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "custom_model_id": "your-model-id",
-                                    "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
                                 "custom_model_id": "your-model-id",
                                 "parameters": [
                                     0.14285714285714285,
@@ -261,14 +253,6 @@ class TestGrpo:
                                 "weight": 1,
                             }
                         ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "custom_model_id": "your-model-id",
-                            "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
                         "parameters": [
                             0.14285714285714285,
                             0.2857142857142857,
@@ -593,14 +577,6 @@ class TestAsyncGrpo:
                                 "description": "Is the response relevant to the prompt?",
                                 "label": "Relevance to Prompt",
                                 "scoring_type": "PI_SCORER",
-                                "action_dimension": {
-                                    "description": "Is the response relevant to the prompt?",
-                                    "label": "Relevance to Prompt",
-                                    "scoring_type": "PI_SCORER",
-                                    "action_on_low_score": True,
-                                    "custom_model_id": "your-model-id",
-                                    "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                },
                                 "custom_model_id": "your-model-id",
                                 "parameters": [
                                     0.14285714285714285,
@@ -614,14 +590,6 @@ class TestAsyncGrpo:
                                 "weight": 1,
                             }
                         ],
-                        "action_dimension": {
-                            "description": "Is the response relevant to the prompt?",
-                            "label": "Relevance to Prompt",
-                            "scoring_type": "PI_SCORER",
-                            "action_on_low_score": True,
-                            "custom_model_id": "your-model-id",
-                            "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                        },
                         "parameters": [
                             0.14285714285714285,
                             0.2857142857142857,

@@ -2,7 +2,6 @@
 
 ```python
 from withpi.types import (
-    ActionDimension,
     Contract,
     ContractCalibrationStatus,
     DataGenerationStatus,
