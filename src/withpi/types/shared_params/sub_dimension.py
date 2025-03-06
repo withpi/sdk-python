@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing import Dict, Union, Iterable, Optional
+from typing_extensions import Required, TypeAlias, TypedDict
 
 from ..shared.dimension_scoring_type import DimensionScoringType
 
 __all__ = ["SubDimension"]
 
 
-class SubDimension(TypedDict, total=False):
+class SubDimensionTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the dimension"""
 
@@ -41,3 +41,6 @@ class SubDimension(TypedDict, total=False):
     The sum of subdimension weights will be normalized to one internally.  A higher weight counts
             for more when aggregating this subdimension into the parent dimension.
     """
+
+
+SubDimension: TypeAlias = Union[SubDimensionTyped, Dict[str, object]]
