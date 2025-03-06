@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from ..._models import BaseModel
 from .dimension_scoring_type import DimensionScoringType
@@ -39,3 +39,9 @@ class SubDimension(BaseModel):
     The sum of subdimension weights will be normalized to one internally.  A higher weight counts
             for more when aggregating this subdimension into the parent dimension.
     """
+
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
