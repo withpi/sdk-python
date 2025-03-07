@@ -19,6 +19,14 @@ from .rl.rl import (
     AsyncRlResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .classifier import (
+    ClassifierResource,
+    AsyncClassifierResource,
+    ClassifierResourceWithRawResponse,
+    AsyncClassifierResourceWithRawResponse,
+    ClassifierResourceWithStreamingResponse,
+    AsyncClassifierResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["ModelResource", "AsyncModelResource"]
@@ -32,6 +40,10 @@ class ModelResource(SyncAPIResource):
     @cached_property
     def rl(self) -> RlResource:
         return RlResource(self._client)
+
+    @cached_property
+    def classifier(self) -> ClassifierResource:
+        return ClassifierResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ModelResourceWithRawResponse:
@@ -61,6 +73,10 @@ class AsyncModelResource(AsyncAPIResource):
     @cached_property
     def rl(self) -> AsyncRlResource:
         return AsyncRlResource(self._client)
+
+    @cached_property
+    def classifier(self) -> AsyncClassifierResource:
+        return AsyncClassifierResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncModelResourceWithRawResponse:
@@ -94,6 +110,10 @@ class ModelResourceWithRawResponse:
     def rl(self) -> RlResourceWithRawResponse:
         return RlResourceWithRawResponse(self._model.rl)
 
+    @cached_property
+    def classifier(self) -> ClassifierResourceWithRawResponse:
+        return ClassifierResourceWithRawResponse(self._model.classifier)
+
 
 class AsyncModelResourceWithRawResponse:
     def __init__(self, model: AsyncModelResource) -> None:
@@ -106,6 +126,10 @@ class AsyncModelResourceWithRawResponse:
     @cached_property
     def rl(self) -> AsyncRlResourceWithRawResponse:
         return AsyncRlResourceWithRawResponse(self._model.rl)
+
+    @cached_property
+    def classifier(self) -> AsyncClassifierResourceWithRawResponse:
+        return AsyncClassifierResourceWithRawResponse(self._model.classifier)
 
 
 class ModelResourceWithStreamingResponse:
@@ -120,6 +144,10 @@ class ModelResourceWithStreamingResponse:
     def rl(self) -> RlResourceWithStreamingResponse:
         return RlResourceWithStreamingResponse(self._model.rl)
 
+    @cached_property
+    def classifier(self) -> ClassifierResourceWithStreamingResponse:
+        return ClassifierResourceWithStreamingResponse(self._model.classifier)
+
 
 class AsyncModelResourceWithStreamingResponse:
     def __init__(self, model: AsyncModelResource) -> None:
@@ -132,3 +160,7 @@ class AsyncModelResourceWithStreamingResponse:
     @cached_property
     def rl(self) -> AsyncRlResourceWithStreamingResponse:
         return AsyncRlResourceWithStreamingResponse(self._model.rl)
+
+    @cached_property
+    def classifier(self) -> AsyncClassifierResourceWithStreamingResponse:
+        return AsyncClassifierResourceWithStreamingResponse(self._model.classifier)
