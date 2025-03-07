@@ -150,6 +150,30 @@ Methods:
 - <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/rl_grpo_status.py">RlGrpoStatus</a></code>
 - <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
 
+## Classifier
+
+Types:
+
+```python
+from withpi.types.model import (
+    ClassifierCreateResponse,
+    ClassifierRetrieveResponse,
+    ClassifierListResponse,
+    ClassifierCancelResponse,
+    ClassifierDownloadResponse,
+    ClassifierMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">create</a>(\*\*<a href="src/withpi/types/model/classifier_create_params.py">params</a>) -> <a href="./src/withpi/types/model/classifier_create_response.py">ClassifierCreateResponse</a></code>
+- <code title="get /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/classifier_retrieve_response.py">ClassifierRetrieveResponse</a></code>
+- <code title="get /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">list</a>(\*\*<a href="src/withpi/types/model/classifier_list_params.py">params</a>) -> <a href="./src/withpi/types/model/classifier_list_response.py">ClassifierListResponse</a></code>
+- <code title="delete /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">cancel</a>(job_id) -> str</code>
+- <code title="post /model/classifier/{job_id}/download">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/classifier_download_params.py">params</a>) -> str</code>
+- <code title="get /model/classifier/{job_id}/messages">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">messages</a>(job_id) -> str</code>
+
 # Contracts
 
 Types:
