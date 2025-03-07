@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.example import Example
 from ..shared_params.contract import Contract
 from ..shared_params.lora_config import LoraConfig
-from ..shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["SftStartJobParams"]
 
@@ -23,7 +22,7 @@ class SftStartJobParams(TypedDict, total=False):
     We split this data into train/eval 90/10.
     """
 
-    base_sft_model: FinetuningBaseModel
+    base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
     """The base model to start the SFT tuning process."""
 
     learning_rate: float

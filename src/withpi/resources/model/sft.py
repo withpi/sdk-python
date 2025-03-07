@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -27,7 +28,6 @@ from ...types.shared_params.example import Example
 from ...types.shared_params.contract import Contract
 from ...types.model.sft_list_response import SftListResponse
 from ...types.shared_params.lora_config import LoraConfig
-from ...types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -231,7 +231,7 @@ class SftResource(SyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
@@ -524,7 +524,7 @@ class AsyncSftResource(AsyncAPIResource):
         *,
         contract: Contract,
         examples: Iterable[Example],
-        base_sft_model: FinetuningBaseModel | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
