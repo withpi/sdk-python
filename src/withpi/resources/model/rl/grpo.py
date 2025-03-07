@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -26,7 +27,6 @@ from ....types.shared.rl_grpo_status import RlGrpoStatus
 from ....types.shared_params.contract import Contract
 from ....types.shared_params.lora_config import LoraConfig
 from ....types.model.rl.grpo_list_response import GrpoListResponse
-from ....types.shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -228,7 +228,7 @@ class GrpoResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        base_rl_model: FinetuningBaseModel,
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,
@@ -520,7 +520,7 @@ class AsyncGrpoResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        base_rl_model: FinetuningBaseModel,
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
         contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,

@@ -11,7 +11,6 @@ from .trained_model import TrainedModel as TrainedModel
 from .rl_grpo_status import RlGrpoStatus as RlGrpoStatus
 from .exploration_mode import ExplorationMode as ExplorationMode
 from .query_fanout_example import QueryFanoutExample as QueryFanoutExample
-from .finetuning_base_model import FinetuningBaseModel as FinetuningBaseModel
 from .synthetic_data_status import SyntheticDataStatus as SyntheticDataStatus
 from .data_generation_status import DataGenerationStatus as DataGenerationStatus
 from .dimension_scoring_type import DimensionScoringType as DimensionScoringType

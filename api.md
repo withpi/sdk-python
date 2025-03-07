@@ -9,7 +9,6 @@ from withpi.types import (
     DimensionScoringType,
     Example,
     ExplorationMode,
-    FinetuningBaseModel,
     LoraConfig,
     PromptOptimizationStatus,
     QueryClassificationResponse,

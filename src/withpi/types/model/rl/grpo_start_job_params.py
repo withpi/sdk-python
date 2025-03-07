@@ -3,17 +3,16 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from ...shared_params.contract import Contract
 from ...shared_params.lora_config import LoraConfig
-from ...shared.finetuning_base_model import FinetuningBaseModel
 
 __all__ = ["GrpoStartJobParams", "Example"]
 
 
 class GrpoStartJobParams(TypedDict, total=False):
-    base_rl_model: Required[FinetuningBaseModel]
+    base_rl_model: Required[Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]]
     """The base model to start the RL tunning process"""
 
     contract: Required[Contract]
