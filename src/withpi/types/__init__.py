@@ -14,7 +14,6 @@ from .shared import (
     TrainedModel as TrainedModel,
     ExplorationMode as ExplorationMode,
     QueryFanoutExample as QueryFanoutExample,
-    FinetuningBaseModel as FinetuningBaseModel,
     SyntheticDataStatus as SyntheticDataStatus,
     DataGenerationStatus as DataGenerationStatus,
     DimensionScoringType as DimensionScoringType,
