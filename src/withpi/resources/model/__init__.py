@@ -24,6 +24,14 @@ from .model import (
     ModelResourceWithStreamingResponse,
     AsyncModelResourceWithStreamingResponse,
 )
+from .classifier import (
+    ClassifierResource,
+    AsyncClassifierResource,
+    ClassifierResourceWithRawResponse,
+    AsyncClassifierResourceWithRawResponse,
+    ClassifierResourceWithStreamingResponse,
+    AsyncClassifierResourceWithStreamingResponse,
+)
 
 __all__ = [
     "SftResource",
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncRlResourceWithRawResponse",
     "RlResourceWithStreamingResponse",
     "AsyncRlResourceWithStreamingResponse",
+    "ClassifierResource",
+    "AsyncClassifierResource",
+    "ClassifierResourceWithRawResponse",
+    "AsyncClassifierResourceWithRawResponse",
+    "ClassifierResourceWithStreamingResponse",
+    "AsyncClassifierResourceWithStreamingResponse",
     "ModelResource",
     "AsyncModelResource",
     "ModelResourceWithRawResponse",
