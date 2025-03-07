@@ -1,6 +1,6 @@
 [project]
 name = "withpi"
-version = "0.1.0-alpha.85"
+version = "0.1.0-alpha.86"
 description = "The official Python library for the Pi Client API"
 dynamic = ["readme"]
 license = "Apache-2.0"
