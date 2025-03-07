@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
@@ -16,11 +17,11 @@ class TrainedModel(BaseModel):
     eval_loss: float
     """The evaluation loss"""
 
-    is_loaded: bool
-    """Whether the model is loaded in the serving system"""
-
     serving_id: int
     """The serving id of the trained model within this Job"""
+
+    serving_state: Literal["UNLOADED", "LOADING", "SERVING"]
+    """State of the model in the serving system"""
 
     step: int
     """The training step"""
