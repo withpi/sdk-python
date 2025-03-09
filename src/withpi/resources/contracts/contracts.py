@@ -36,7 +36,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.sdk_contract import SDKContract
 from ...types.sdk_contract_param import SDKContractParam
-from ...types.contract_score_response import ContractScoreResponse
+from ...types.scoring_system_metrics import ScoringSystemMetrics
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
 
@@ -52,7 +52,7 @@ class ContractsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return ContractsResourceWithRawResponse(self)
 
@@ -61,7 +61,7 @@ class ContractsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return ContractsResourceWithStreamingResponse(self)
 
@@ -166,7 +166,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores a contract based on the provided input and output
 
@@ -198,7 +198,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 
@@ -213,7 +213,7 @@ class AsyncContractsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncContractsResourceWithRawResponse(self)
 
@@ -222,7 +222,7 @@ class AsyncContractsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncContractsResourceWithStreamingResponse(self)
 
@@ -327,7 +327,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores a contract based on the provided input and output
 
@@ -359,7 +359,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 
