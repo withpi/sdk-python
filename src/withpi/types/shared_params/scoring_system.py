@@ -5,20 +5,20 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypeAlias, TypedDict
 
-from .sdk_dimension_param import SDKDimensionParam
+from ..sdk_dimension_param import SDKDimensionParam
 
-__all__ = ["SDKContractParam"]
+__all__ = ["ScoringSystem"]
 
 
-class SDKContractParamTyped(TypedDict, total=False):
+class ScoringSystemTyped(TypedDict, total=False):
     description: Required[str]
-    """The description of the contract"""
+    """The application description"""
 
     name: Required[str]
-    """The name of the contract"""
+    """The name of the scoring system"""
 
     dimensions: Iterable[SDKDimensionParam]
-    """The dimensions of the contract"""
+    """The dimensions of the scoring system"""
 
 
-SDKContractParam: TypeAlias = Union[SDKContractParamTyped, Dict[str, object]]
+ScoringSystem: TypeAlias = Union[ScoringSystemTyped, Dict[str, object]]
