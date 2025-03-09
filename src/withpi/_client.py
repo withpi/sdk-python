@@ -36,6 +36,7 @@ from .resources.data import data
 from .resources.model import model
 from .resources.prompt import prompt
 from .resources.contracts import contracts
+from .resources.scoring_system import scoring_system
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Withpi", "AsyncWithpi", "Client", "AsyncClient"]
 
@@ -46,6 +47,7 @@ class Withpi(SyncAPIClient):
     model: model.ModelResource
     prompt: prompt.PromptResource
     queries: queries.QueriesResource
+    scoring_system: scoring_system.ScoringSystemResource
     with_raw_response: WithpiWithRawResponse
     with_streaming_response: WithpiWithStreamedResponse
 
@@ -108,6 +110,7 @@ class Withpi(SyncAPIClient):
         self.model = model.ModelResource(self)
         self.prompt = prompt.PromptResource(self)
         self.queries = queries.QueriesResource(self)
+        self.scoring_system = scoring_system.ScoringSystemResource(self)
         self.with_raw_response = WithpiWithRawResponse(self)
         self.with_streaming_response = WithpiWithStreamedResponse(self)
 
@@ -222,6 +225,7 @@ class AsyncWithpi(AsyncAPIClient):
     model: model.AsyncModelResource
     prompt: prompt.AsyncPromptResource
     queries: queries.AsyncQueriesResource
+    scoring_system: scoring_system.AsyncScoringSystemResource
     with_raw_response: AsyncWithpiWithRawResponse
     with_streaming_response: AsyncWithpiWithStreamedResponse
 
@@ -284,6 +288,7 @@ class AsyncWithpi(AsyncAPIClient):
         self.model = model.AsyncModelResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
         self.queries = queries.AsyncQueriesResource(self)
+        self.scoring_system = scoring_system.AsyncScoringSystemResource(self)
         self.with_raw_response = AsyncWithpiWithRawResponse(self)
         self.with_streaming_response = AsyncWithpiWithStreamedResponse(self)
 
@@ -399,6 +404,7 @@ class WithpiWithRawResponse:
         self.model = model.ModelResourceWithRawResponse(client.model)
         self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
+        self.scoring_system = scoring_system.ScoringSystemResourceWithRawResponse(client.scoring_system)
 
 
 class AsyncWithpiWithRawResponse:
@@ -408,6 +414,7 @@ class AsyncWithpiWithRawResponse:
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
+        self.scoring_system = scoring_system.AsyncScoringSystemResourceWithRawResponse(client.scoring_system)
 
 
 class WithpiWithStreamedResponse:
@@ -417,6 +424,7 @@ class WithpiWithStreamedResponse:
         self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
+        self.scoring_system = scoring_system.ScoringSystemResourceWithStreamingResponse(client.scoring_system)
 
 
 class AsyncWithpiWithStreamedResponse:
@@ -426,6 +434,7 @@ class AsyncWithpiWithStreamedResponse:
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
+        self.scoring_system = scoring_system.AsyncScoringSystemResourceWithStreamingResponse(client.scoring_system)
 
 
 Client = Withpi

@@ -40,6 +40,14 @@ from .contracts import (
     ContractsResourceWithStreamingResponse,
     AsyncContractsResourceWithStreamingResponse,
 )
+from .scoring_system import (
+    ScoringSystemResource,
+    AsyncScoringSystemResource,
+    ScoringSystemResourceWithRawResponse,
+    AsyncScoringSystemResourceWithRawResponse,
+    ScoringSystemResourceWithStreamingResponse,
+    AsyncScoringSystemResourceWithStreamingResponse,
+)
 
 __all__ = [
     "ContractsResource",
@@ -72,4 +80,10 @@ __all__ = [
     "AsyncQueriesResourceWithRawResponse",
     "QueriesResourceWithStreamingResponse",
     "AsyncQueriesResourceWithStreamingResponse",
+    "ScoringSystemResource",
+    "AsyncScoringSystemResource",
+    "ScoringSystemResourceWithRawResponse",
+    "AsyncScoringSystemResourceWithRawResponse",
+    "ScoringSystemResourceWithStreamingResponse",
+    "AsyncScoringSystemResourceWithStreamingResponse",
 ]
