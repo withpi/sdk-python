@@ -5,16 +5,16 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from ..sdk_contract_param import SDKContractParam
-from .calibration_strategy import CalibrationStrategy
-from .sdk_labeled_example_param import SDKLabeledExampleParam
-from .sdk_preference_example_param import SDKPreferenceExampleParam
+from .scoring_system_param import ScoringSystemParam
+from ..contracts.calibration_strategy import CalibrationStrategy
+from ..contracts.sdk_labeled_example_param import SDKLabeledExampleParam
+from ..contracts.sdk_preference_example_param import SDKPreferenceExampleParam
 
 __all__ = ["CalibrateLaunchParams"]
 
 
 class CalibrateLaunchParams(TypedDict, total=False):
-    scoring_system: Required[SDKContractParam]
+    scoring_system: Required[ScoringSystemParam]
     """The scoring system to calibrate"""
 
     examples: Optional[Iterable[SDKLabeledExampleParam]]

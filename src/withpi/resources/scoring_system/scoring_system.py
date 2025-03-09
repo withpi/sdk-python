@@ -33,9 +33,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.scoring_system_score_response import ScoringSystemScoreResponse
-from ...types.scoring_system_read_from_hf_response import ScoringSystemReadFromHfResponse
-from ...types.scoring_system_generate_dimensions_response import ScoringSystemGenerateDimensionsResponse
+from ...types.scoring_system import ScoringSystem
+from ...types.scoring_system_metrics import ScoringSystemMetrics
+from ...types.scoring_system.scoring_system import ScoringSystem
+from ...types.scoring_system.scoring_system_param import ScoringSystemParam
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -51,7 +52,7 @@ class ScoringSystemResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return ScoringSystemResourceWithRawResponse(self)
 
@@ -60,7 +61,7 @@ class ScoringSystemResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return ScoringSystemResourceWithStreamingResponse(self)
 
@@ -75,7 +76,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateDimensionsResponse:
+    ) -> ScoringSystem:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -105,7 +106,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateDimensionsResponse,
+            cast_to=ScoringSystem,
         )
 
     def read_from_hf(
@@ -119,7 +120,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemReadFromHfResponse:
+    ) -> ScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -150,7 +151,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemReadFromHfResponse,
+            cast_to=ScoringSystem,
         )
 
     def score(
@@ -158,14 +159,14 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: scoring_system_score_params.ScoringSystem,
+        scoring_system: ScoringSystemParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores a scoring system based on the provided input and output
 
@@ -197,7 +198,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 
@@ -212,7 +213,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncScoringSystemResourceWithRawResponse(self)
 
@@ -221,7 +222,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncScoringSystemResourceWithStreamingResponse(self)
 
@@ -236,7 +237,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateDimensionsResponse:
+    ) -> ScoringSystem:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -266,7 +267,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateDimensionsResponse,
+            cast_to=ScoringSystem,
         )
 
     async def read_from_hf(
@@ -280,7 +281,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemReadFromHfResponse:
+    ) -> ScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -311,7 +312,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemReadFromHfResponse,
+            cast_to=ScoringSystem,
         )
 
     async def score(
@@ -319,14 +320,14 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: scoring_system_score_params.ScoringSystem,
+        scoring_system: ScoringSystemParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores a scoring system based on the provided input and output
 
@@ -358,7 +359,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 

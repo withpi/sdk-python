@@ -11,7 +11,7 @@ from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
 from withpi.types import (
     SDKContract,
-    ContractScoreResponse,
+    ScoringSystemMetrics,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -117,7 +117,7 @@ class TestContracts:
                 "name": "Sample Contract",
             },
         )
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -163,7 +163,7 @@ class TestContracts:
                 ],
             },
         )
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -180,7 +180,7 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -197,7 +197,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(ContractScoreResponse, contract, path=["response"])
+            assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -302,7 +302,7 @@ class TestAsyncContracts:
                 "name": "Sample Contract",
             },
         )
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -348,7 +348,7 @@ class TestAsyncContracts:
                 ],
             },
         )
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -365,7 +365,7 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(ContractScoreResponse, contract, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -382,6 +382,6 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(ContractScoreResponse, contract, path=["response"])
+            assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
