@@ -35,7 +35,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.shared.contract import Contract as SharedContract
 from ...types.shared_params.contract import Contract as SharedParamsContract
-from ...types.contracts_score_metrics import ContractsScoreMetrics
+from ...types.contract_score_response import ContractScoreResponse
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
 
@@ -165,7 +165,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractsScoreMetrics:
+    ) -> ContractScoreResponse:
         """
         Scores a contract based on the provided input and output
 
@@ -197,7 +197,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractsScoreMetrics,
+            cast_to=ContractScoreResponse,
         )
 
 
@@ -326,7 +326,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContractsScoreMetrics:
+    ) -> ContractScoreResponse:
         """
         Scores a contract based on the provided input and output
 
@@ -358,7 +358,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContractsScoreMetrics,
+            cast_to=ContractScoreResponse,
         )
 
 
