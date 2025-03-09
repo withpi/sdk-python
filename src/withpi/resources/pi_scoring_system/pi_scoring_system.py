@@ -7,6 +7,7 @@ from typing import Optional
 import httpx
 
 from ...types import (
+    ScoringSystem,
     pi_scoring_system_score_params,
     pi_scoring_system_read_from_hf_params,
     pi_scoring_system_generate_dimensions_params,
@@ -34,9 +35,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import ScoringSystem
-from ...types.scoring_system.scoring_system import ScoringSystem
-from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
-from ...types.scoring_system.scoring_system_param import ScoringSystemParam
+from ...types.scoring_system_param import ScoringSystemParam
+from ...types.scoring_system_metrics import ScoringSystemMetrics
 
 __all__ = ["PiScoringSystemResource", "AsyncPiScoringSystemResource"]
 

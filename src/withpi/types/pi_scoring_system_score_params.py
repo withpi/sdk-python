@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .scoring_system.scoring_system_param import ScoringSystemParam
+from .scoring_system_param import ScoringSystemParam
 
 __all__ = ["PiScoringSystemScoreParams"]
 

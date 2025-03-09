@@ -23,10 +23,10 @@ from ..._base_client import make_request_options
 from ...types.contracts import State, CalibrationStrategy
 from ...types.contracts.state import State
 from ...types.pi_scoring_system import calibrate_list_params, calibrate_create_params
+from ...types.scoring_system_param import ScoringSystemParam
 from ...types.contracts.calibration_strategy import CalibrationStrategy
 from ...types.scoring_system.calibration_status import CalibrationStatus
 from ...types.contracts.sdk_labeled_example_param import SDKLabeledExampleParam
-from ...types.scoring_system.scoring_system_param import ScoringSystemParam
 from ...types.contracts.sdk_preference_example_param import SDKPreferenceExampleParam
 from ...types.pi_scoring_system.calibrate_list_response import CalibrateListResponse
 
