@@ -31,7 +31,7 @@ client = PiClient(
     api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
-contracts_score_metrics = client.contracts.score(
+response = client.contracts.score(
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
     scoring_system={
@@ -39,7 +39,7 @@ contracts_score_metrics = client.contracts.score(
         "name": "Sample Contract",
     },
 )
-print(contracts_score_metrics.scores)
+print(response.scores)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -62,7 +62,7 @@ client = AsyncPiClient(
 
 
 async def main() -> None:
-    contracts_score_metrics = await client.contracts.score(
+    response = await client.contracts.score(
         llm_input="Help me with my problem",
         llm_output="Of course I can help with that",
         scoring_system={
@@ -70,7 +70,7 @@ async def main() -> None:
             "name": "Sample Contract",
         },
     )
-    print(contracts_score_metrics.scores)
+    print(response.scores)
 
 
 asyncio.run(main())

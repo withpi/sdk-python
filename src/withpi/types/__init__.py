@@ -24,7 +24,7 @@ from .shared import (
 from .contract_score_params import ContractScoreParams as ContractScoreParams
 from .query_classify_params import QueryClassifyParams as QueryClassifyParams
 from .prompt_optimize_params import PromptOptimizeParams as PromptOptimizeParams
-from .contracts_score_metrics import ContractsScoreMetrics as ContractsScoreMetrics
+from .contract_score_response import ContractScoreResponse as ContractScoreResponse
 from .contract_read_from_hf_params import ContractReadFromHfParams as ContractReadFromHfParams
 from .query_generate_fanouts_params import QueryGenerateFanoutsParams as QueryGenerateFanoutsParams
 from .prompt_stream_messages_response import PromptStreamMessagesResponse as PromptStreamMessagesResponse
