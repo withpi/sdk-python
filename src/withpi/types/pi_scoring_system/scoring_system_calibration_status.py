@@ -3,8 +3,8 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
+from ..scoring_system import ScoringSystem
 from ..contracts.state import State
-from ..shared.scoring_system import ScoringSystem
 
 __all__ = ["ScoringSystemCalibrationStatus"]
 

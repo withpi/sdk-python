@@ -23,7 +23,7 @@ from ..._base_client import make_request_options
 from ...types.contracts import State, CalibrationStrategy
 from ...types.contracts.state import State
 from ...types.pi_scoring_system import calibrate_list_params, calibrate_start_job_params
-from ...types.shared_params.scoring_system import ScoringSystem
+from ...types.scoring_system_param import ScoringSystemParam
 from ...types.contracts.calibration_strategy import CalibrationStrategy
 from ...types.contracts.sdk_labeled_example_param import SDKLabeledExampleParam
 from ...types.contracts.sdk_preference_example_param import SDKPreferenceExampleParam
@@ -159,7 +159,7 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        scoring_system: ScoringSystem,
+        scoring_system: ScoringSystemParam,
         examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
         strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
@@ -371,7 +371,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        scoring_system: ScoringSystem,
+        scoring_system: ScoringSystemParam,
         examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
         strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
