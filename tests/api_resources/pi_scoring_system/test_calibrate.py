@@ -9,8 +9,8 @@ import pytest
 
 from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
-from withpi.types.scoring_system import (
-    CalibrationStatus,
+from withpi.types.scoring_system import CalibrationStatus
+from withpi.types.pi_scoring_system import (
     CalibrateListResponse,
 )
 
@@ -22,14 +22,158 @@ class TestCalibrate:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create(self, client: Withpi) -> None:
+        calibrate = client.pi_scoring_system.calibrate.create(
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        )
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Withpi) -> None:
+        calibrate = client.pi_scoring_system.calibrate.create(
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+                "dimensions": [
+                    {
+                        "description": "Relevance of the response",
+                        "label": "Relevance",
+                        "sub_dimensions": [
+                            {
+                                "description": "Is the response relevant to the prompt?",
+                                "label": "Relevance to Prompt",
+                                "scoring_type": "PI_SCORER",
+                                "custom_model_id": "your-model-id",
+                                "parameters": [
+                                    0.14285714285714285,
+                                    0.2857142857142857,
+                                    0.42857142857142855,
+                                    0.5714285714285714,
+                                    0.7142857142857143,
+                                    0.8571428571428571,
+                                ],
+                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                "weight": 1,
+                            }
+                        ],
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
+                        "weight": 1,
+                    }
+                ],
+            },
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                    "rating": "Strongly Agree",
+                }
+            ],
+            preference_examples=[
+                {
+                    "chosen": "The lazy dog was jumped over by the quick brown fox",
+                    "llm_input": "Tell me something different",
+                    "rejected": "The lazy dog was flied over by the quick brown fox",
+                }
+            ],
+            strategy="LITE",
+        )
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_create(self, client: Withpi) -> None:
+        response = client.pi_scoring_system.calibrate.with_raw_response.create(
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = response.parse()
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_create(self, client: Withpi) -> None:
+        with client.pi_scoring_system.calibrate.with_streaming_response.create(
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = response.parse()
+            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve(self, client: Withpi) -> None:
+        calibrate = client.pi_scoring_system.calibrate.retrieve(
+            "job_id",
+        )
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_retrieve(self, client: Withpi) -> None:
+        response = client.pi_scoring_system.calibrate.with_raw_response.retrieve(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = response.parse()
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Withpi) -> None:
+        with client.pi_scoring_system.calibrate.with_streaming_response.retrieve(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = response.parse()
+            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_retrieve(self, client: Withpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.pi_scoring_system.calibrate.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_list(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.list()
+        calibrate = client.pi_scoring_system.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.list(
+        calibrate = client.pi_scoring_system.calibrate.list(
             state="QUEUED",
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
@@ -37,7 +181,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Withpi) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.list()
+        response = client.pi_scoring_system.calibrate.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -47,7 +191,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Withpi) -> None:
-        with client.scoring_system.calibrate.with_streaming_response.list() as response:
+        with client.pi_scoring_system.calibrate.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -59,7 +203,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_method_cancel(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.cancel(
+        calibrate = client.pi_scoring_system.calibrate.cancel(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -67,7 +211,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_cancel(self, client: Withpi) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.cancel(
+        response = client.pi_scoring_system.calibrate.with_raw_response.cancel(
             "job_id",
         )
 
@@ -79,7 +223,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_cancel(self, client: Withpi) -> None:
-        with client.scoring_system.calibrate.with_streaming_response.cancel(
+        with client.pi_scoring_system.calibrate.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -94,116 +238,14 @@ class TestCalibrate:
     @parametrize
     def test_path_params_cancel(self, client: Withpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scoring_system.calibrate.with_raw_response.cancel(
+            client.pi_scoring_system.calibrate.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_launch(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.launch(
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_launch_with_all_params(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.launch(
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "custom_model_id": "your-model-id",
-                                "parameters": [
-                                    0.14285714285714285,
-                                    0.2857142857142857,
-                                    0.42857142857142855,
-                                    0.5714285714285714,
-                                    0.7142857142857143,
-                                    0.8571428571428571,
-                                ],
-                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "parameters": [
-                            0.14285714285714285,
-                            0.2857142857142857,
-                            0.42857142857142855,
-                            0.5714285714285714,
-                            0.7142857142857143,
-                            0.8571428571428571,
-                        ],
-                        "weight": 1,
-                    }
-                ],
-            },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
-                }
-            ],
-            preference_examples=[
-                {
-                    "chosen": "The lazy dog was jumped over by the quick brown fox",
-                    "llm_input": "Tell me something different",
-                    "rejected": "The lazy dog was flied over by the quick brown fox",
-                }
-            ],
-            strategy="LITE",
-        )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_launch(self, client: Withpi) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.launch(
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_launch(self, client: Withpi) -> None:
-        with client.scoring_system.calibrate.with_streaming_response.launch(
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_messages(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.messages(
+        calibrate = client.pi_scoring_system.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -211,7 +253,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_messages(self, client: Withpi) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.messages(
+        response = client.pi_scoring_system.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -223,7 +265,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_messages(self, client: Withpi) -> None:
-        with client.scoring_system.calibrate.with_streaming_response.messages(
+        with client.pi_scoring_system.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -238,49 +280,7 @@ class TestCalibrate:
     @parametrize
     def test_path_params_messages(self, client: Withpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scoring_system.calibrate.with_raw_response.messages(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_status(self, client: Withpi) -> None:
-        calibrate = client.scoring_system.calibrate.status(
-            "job_id",
-        )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_status(self, client: Withpi) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_status(self, client: Withpi) -> None:
-        with client.scoring_system.calibrate.with_streaming_response.status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_status(self, client: Withpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scoring_system.calibrate.with_raw_response.status(
+            client.pi_scoring_system.calibrate.with_raw_response.messages(
                 "",
             )
 
@@ -290,86 +290,8 @@ class TestAsyncCalibrate:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_list(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.list()
-        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.list(
-            state="QUEUED",
-        )
-        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_list(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.list()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = await response.parse()
-        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncWithpi) -> None:
-        async with async_client.scoring_system.calibrate.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = await response.parse()
-            assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_cancel(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.cancel(
-            "job_id",
-        )
-        assert_matches_type(str, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_cancel(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.cancel(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = await response.parse()
-        assert_matches_type(str, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_cancel(self, async_client: AsyncWithpi) -> None:
-        async with async_client.scoring_system.calibrate.with_streaming_response.cancel(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = await response.parse()
-            assert_matches_type(str, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_cancel(self, async_client: AsyncWithpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scoring_system.calibrate.with_raw_response.cancel(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_launch(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.launch(
+    async def test_method_create(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.create(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -379,8 +301,8 @@ class TestAsyncCalibrate:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_launch_with_all_params(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.launch(
+    async def test_method_create_with_all_params(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.create(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -438,8 +360,8 @@ class TestAsyncCalibrate:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_launch(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.launch(
+    async def test_raw_response_create(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.pi_scoring_system.calibrate.with_raw_response.create(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -453,8 +375,8 @@ class TestAsyncCalibrate:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_launch(self, async_client: AsyncWithpi) -> None:
-        async with async_client.scoring_system.calibrate.with_streaming_response.launch(
+    async def test_streaming_response_create(self, async_client: AsyncWithpi) -> None:
+        async with async_client.pi_scoring_system.calibrate.with_streaming_response.create(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -470,8 +392,128 @@ class TestAsyncCalibrate:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_retrieve(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.retrieve(
+            "job_id",
+        )
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.pi_scoring_system.calibrate.with_raw_response.retrieve(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = await response.parse()
+        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncWithpi) -> None:
+        async with async_client.pi_scoring_system.calibrate.with_streaming_response.retrieve(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = await response.parse()
+            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncWithpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.pi_scoring_system.calibrate.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.list()
+        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.list(
+            state="QUEUED",
+        )
+        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.pi_scoring_system.calibrate.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = await response.parse()
+        assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncWithpi) -> None:
+        async with async_client.pi_scoring_system.calibrate.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = await response.parse()
+            assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_cancel(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.pi_scoring_system.calibrate.cancel(
+            "job_id",
+        )
+        assert_matches_type(str, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_cancel(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.pi_scoring_system.calibrate.with_raw_response.cancel(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = await response.parse()
+        assert_matches_type(str, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_cancel(self, async_client: AsyncWithpi) -> None:
+        async with async_client.pi_scoring_system.calibrate.with_streaming_response.cancel(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = await response.parse()
+            assert_matches_type(str, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_cancel(self, async_client: AsyncWithpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.pi_scoring_system.calibrate.with_raw_response.cancel(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_messages(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.messages(
+        calibrate = await async_client.pi_scoring_system.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -479,7 +521,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_messages(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.messages(
+        response = await async_client.pi_scoring_system.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -491,7 +533,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_messages(self, async_client: AsyncWithpi) -> None:
-        async with async_client.scoring_system.calibrate.with_streaming_response.messages(
+        async with async_client.pi_scoring_system.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -506,48 +548,6 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_path_params_messages(self, async_client: AsyncWithpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scoring_system.calibrate.with_raw_response.messages(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_status(self, async_client: AsyncWithpi) -> None:
-        calibrate = await async_client.scoring_system.calibrate.status(
-            "job_id",
-        )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_status(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = await response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_status(self, async_client: AsyncWithpi) -> None:
-        async with async_client.scoring_system.calibrate.with_streaming_response.status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = await response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_status(self, async_client: AsyncWithpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scoring_system.calibrate.with_raw_response.status(
+            await async_client.pi_scoring_system.calibrate.with_raw_response.messages(
                 "",
             )

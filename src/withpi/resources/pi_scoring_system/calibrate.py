@@ -21,14 +21,14 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.contracts import State, CalibrationStrategy
-from ...types.scoring_system import calibrate_list_params, calibrate_launch_params
 from ...types.contracts.state import State
+from ...types.pi_scoring_system import calibrate_list_params, calibrate_create_params
 from ...types.contracts.calibration_strategy import CalibrationStrategy
 from ...types.scoring_system.calibration_status import CalibrationStatus
 from ...types.contracts.sdk_labeled_example_param import SDKLabeledExampleParam
 from ...types.scoring_system.scoring_system_param import ScoringSystemParam
 from ...types.contracts.sdk_preference_example_param import SDKPreferenceExampleParam
-from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
+from ...types.pi_scoring_system.calibrate_list_response import CalibrateListResponse
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -53,77 +53,7 @@ class CalibrateResource(SyncAPIResource):
         """
         return CalibrateResourceWithStreamingResponse(self)
 
-    def list(
-        self,
-        *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateListResponse:
-        """
-        Lists the Scoring System Calibration Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/scoring_system/calibrate",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
-            ),
-            cast_to=CalibrateListResponse,
-        )
-
-    def cancel(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Cancels a Scoring System Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._delete(
-            f"/scoring_system/calibrate/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
-    def launch(
+    def create(
         self,
         *,
         scoring_system: ScoringSystemParam,
@@ -161,7 +91,7 @@ class CalibrateResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scoring_system/calibrate",
+            "/pi_scoring_system/calibrate",
             body=maybe_transform(
                 {
                     "scoring_system": scoring_system,
@@ -169,12 +99,115 @@ class CalibrateResource(SyncAPIResource):
                     "preference_examples": preference_examples,
                     "strategy": strategy,
                 },
-                calibrate_launch_params.CalibrateLaunchParams,
+                calibrate_create_params.CalibrateCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CalibrationStatus,
+        )
+
+    def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrationStatus:
+        """
+        Checks the status of a Scoring System Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/pi_scoring_system/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CalibrationStatus,
+        )
+
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrateListResponse:
+        """
+        Lists the Scoring System Calibration Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/pi_scoring_system/calibrate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
+            ),
+            cast_to=CalibrateListResponse,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Scoring System Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/pi_scoring_system/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
     def messages(
@@ -204,44 +237,11 @@ class CalibrateResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/scoring_system/calibrate/{job_id}/messages",
+            f"/pi_scoring_system/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrationStatus:
-        """
-        Checks the status of a Scoring System Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/scoring_system/calibrate/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CalibrationStatus,
         )
 
 
@@ -265,77 +265,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         """
         return AsyncCalibrateResourceWithStreamingResponse(self)
 
-    async def list(
-        self,
-        *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateListResponse:
-        """
-        Lists the Scoring System Calibration Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/scoring_system/calibrate",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
-            ),
-            cast_to=CalibrateListResponse,
-        )
-
-    async def cancel(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Cancels a Scoring System Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._delete(
-            f"/scoring_system/calibrate/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
-    async def launch(
+    async def create(
         self,
         *,
         scoring_system: ScoringSystemParam,
@@ -373,7 +303,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scoring_system/calibrate",
+            "/pi_scoring_system/calibrate",
             body=await async_maybe_transform(
                 {
                     "scoring_system": scoring_system,
@@ -381,12 +311,115 @@ class AsyncCalibrateResource(AsyncAPIResource):
                     "preference_examples": preference_examples,
                     "strategy": strategy,
                 },
-                calibrate_launch_params.CalibrateLaunchParams,
+                calibrate_create_params.CalibrateCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CalibrationStatus,
+        )
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrationStatus:
+        """
+        Checks the status of a Scoring System Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/pi_scoring_system/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CalibrationStatus,
+        )
+
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrateListResponse:
+        """
+        Lists the Scoring System Calibration Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/pi_scoring_system/calibrate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"state": state}, calibrate_list_params.CalibrateListParams),
+            ),
+            cast_to=CalibrateListResponse,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Scoring System Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/pi_scoring_system/calibrate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
     async def messages(
@@ -416,44 +449,11 @@ class AsyncCalibrateResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/scoring_system/calibrate/{job_id}/messages",
+            f"/pi_scoring_system/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    async def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrationStatus:
-        """
-        Checks the status of a Scoring System Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/scoring_system/calibrate/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CalibrationStatus,
         )
 
 
@@ -461,20 +461,20 @@ class CalibrateResourceWithRawResponse:
     def __init__(self, calibrate: CalibrateResource) -> None:
         self._calibrate = calibrate
 
+        self.create = to_raw_response_wrapper(
+            calibrate.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            calibrate.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             calibrate.list,
         )
         self.cancel = to_raw_response_wrapper(
             calibrate.cancel,
         )
-        self.launch = to_raw_response_wrapper(
-            calibrate.launch,
-        )
         self.messages = to_raw_response_wrapper(
             calibrate.messages,
-        )
-        self.status = to_raw_response_wrapper(
-            calibrate.status,
         )
 
 
@@ -482,20 +482,20 @@ class AsyncCalibrateResourceWithRawResponse:
     def __init__(self, calibrate: AsyncCalibrateResource) -> None:
         self._calibrate = calibrate
 
+        self.create = async_to_raw_response_wrapper(
+            calibrate.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            calibrate.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             calibrate.list,
         )
         self.cancel = async_to_raw_response_wrapper(
             calibrate.cancel,
         )
-        self.launch = async_to_raw_response_wrapper(
-            calibrate.launch,
-        )
         self.messages = async_to_raw_response_wrapper(
             calibrate.messages,
-        )
-        self.status = async_to_raw_response_wrapper(
-            calibrate.status,
         )
 
 
@@ -503,20 +503,20 @@ class CalibrateResourceWithStreamingResponse:
     def __init__(self, calibrate: CalibrateResource) -> None:
         self._calibrate = calibrate
 
+        self.create = to_streamed_response_wrapper(
+            calibrate.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            calibrate.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             calibrate.list,
         )
         self.cancel = to_streamed_response_wrapper(
             calibrate.cancel,
         )
-        self.launch = to_streamed_response_wrapper(
-            calibrate.launch,
-        )
         self.messages = to_streamed_response_wrapper(
             calibrate.messages,
-        )
-        self.status = to_streamed_response_wrapper(
-            calibrate.status,
         )
 
 
@@ -524,18 +524,18 @@ class AsyncCalibrateResourceWithStreamingResponse:
     def __init__(self, calibrate: AsyncCalibrateResource) -> None:
         self._calibrate = calibrate
 
+        self.create = async_to_streamed_response_wrapper(
+            calibrate.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            calibrate.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             calibrate.list,
         )
         self.cancel = async_to_streamed_response_wrapper(
             calibrate.cancel,
         )
-        self.launch = async_to_streamed_response_wrapper(
-            calibrate.launch,
-        )
         self.messages = async_to_streamed_response_wrapper(
             calibrate.messages,
-        )
-        self.status = async_to_streamed_response_wrapper(
-            calibrate.status,
         )
