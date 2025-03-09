@@ -34,8 +34,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import ScoringSystem
-from ...types.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system.scoring_system import ScoringSystem
+from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system.scoring_system_param import ScoringSystemParam
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]

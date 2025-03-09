@@ -22,7 +22,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.contracts import State, CalibrationStrategy, calibrate_list_params, calibrate_launch_params
 from ...types.contracts.state import State
-from ...types.sdk_contract_param import SDKContractParam
+from ...types.shared_params.sdk_contract import SDKContract
 from ...types.contracts.calibration_strategy import CalibrationStrategy
 from ...types.contracts.calibrate_list_response import CalibrateListResponse
 from ...types.contracts.sdk_labeled_example_param import SDKLabeledExampleParam
@@ -125,7 +125,7 @@ class CalibrateResource(SyncAPIResource):
     def launch(
         self,
         *,
-        scoring_system: SDKContractParam,
+        scoring_system: SDKContract,
         examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
         strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
@@ -337,7 +337,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def launch(
         self,
         *,
-        scoring_system: SDKContractParam,
+        scoring_system: SDKContract,
         examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
         strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
