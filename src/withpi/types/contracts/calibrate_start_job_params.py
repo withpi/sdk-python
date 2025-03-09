@@ -11,23 +11,23 @@ __all__ = ["CalibrateStartJobParams", "Example", "PreferenceExample"]
 
 
 class CalibrateStartJobParams(TypedDict, total=False):
-    contract: Required[Contract]
-    """The contract to calibrate"""
+    scoring_system: Required[Contract]
+    """The scoring system to calibrate"""
 
     examples: Optional[Iterable[Example]]
-    """Rated examples to use when calibrating the contract.
+    """Rated examples to use when calibrating the scoring system.
 
     Must specify either the examples or the preference examples
     """
 
     preference_examples: Optional[Iterable[PreferenceExample]]
-    """Preference examples to use when calibrating the contract.
+    """Preference examples to use when calibrating the scoring system.
 
     Must specify either the examples or preference examples
     """
 
     strategy: Literal["LITE", "FULL"]
-    """The strategy to use to calibrate the contract.
+    """The strategy to use to calibrate the scoring system.
 
     FULL would take longer than LITE but may result in better result.
     """

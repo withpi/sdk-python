@@ -67,7 +67,7 @@ class ContractsResource(SyncAPIResource):
     def generate_dimensions(
         self,
         *,
-        contract_description: str,
+        application_description: str,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -80,7 +80,7 @@ class ContractsResource(SyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
-          contract_description: The application description to generate contract for.
+          application_description: The application description to generate a scoring system for.
 
           try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
               evaluation
@@ -97,7 +97,7 @@ class ContractsResource(SyncAPIResource):
             "/contracts/generate_dimensions",
             body=maybe_transform(
                 {
-                    "contract_description": contract_description,
+                    "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 contract_generate_dimensions_params.ContractGenerateDimensionsParams,
@@ -111,7 +111,7 @@ class ContractsResource(SyncAPIResource):
     def read_from_hf(
         self,
         *,
-        hf_contract_name: str,
+        hf_scoring_system_name: str,
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -121,14 +121,14 @@ class ContractsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedContract:
         """
-        Read a contract from Huggingface dataset
+        Read a scoring system from Huggingface dataset
 
         Args:
-          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
-              hf_token if the contract dataset is not public or not own by the withpi
-              organization.
+          hf_scoring_system_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
+              provide the hf_token if the scoring system dataset is not public or not own by
+              the withpi organization.
 
-          hf_token: Huggingface token to read the contract dataset
+          hf_token: Huggingface token to use if you want to read to your own HF organization
 
           extra_headers: Send extra headers
 
@@ -142,7 +142,7 @@ class ContractsResource(SyncAPIResource):
             "/contracts/read_from_hf",
             body=maybe_transform(
                 {
-                    "hf_contract_name": hf_contract_name,
+                    "hf_scoring_system_name": hf_scoring_system_name,
                     "hf_token": hf_token,
                 },
                 contract_read_from_hf_params.ContractReadFromHfParams,
@@ -156,9 +156,9 @@ class ContractsResource(SyncAPIResource):
     def score(
         self,
         *,
-        contract: SharedParamsContract,
         llm_input: str,
         llm_output: str,
+        scoring_system: SharedParamsContract,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -170,11 +170,11 @@ class ContractsResource(SyncAPIResource):
         Scores a contract based on the provided input and output
 
         Args:
-          contract: The contract to score
-
           llm_input: The input to score
 
           llm_output: The output to score
+
+          scoring_system: The scoring system to score
 
           extra_headers: Send extra headers
 
@@ -188,9 +188,9 @@ class ContractsResource(SyncAPIResource):
             "/contracts/score",
             body=maybe_transform(
                 {
-                    "contract": contract,
                     "llm_input": llm_input,
                     "llm_output": llm_output,
+                    "scoring_system": scoring_system,
                 },
                 contract_score_params.ContractScoreParams,
             ),
@@ -228,7 +228,7 @@ class AsyncContractsResource(AsyncAPIResource):
     async def generate_dimensions(
         self,
         *,
-        contract_description: str,
+        application_description: str,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -241,7 +241,7 @@ class AsyncContractsResource(AsyncAPIResource):
         Generates dimensions for a contract which will be used to evaluate it
 
         Args:
-          contract_description: The application description to generate contract for.
+          application_description: The application description to generate a scoring system for.
 
           try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
               evaluation
@@ -258,7 +258,7 @@ class AsyncContractsResource(AsyncAPIResource):
             "/contracts/generate_dimensions",
             body=await async_maybe_transform(
                 {
-                    "contract_description": contract_description,
+                    "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 contract_generate_dimensions_params.ContractGenerateDimensionsParams,
@@ -272,7 +272,7 @@ class AsyncContractsResource(AsyncAPIResource):
     async def read_from_hf(
         self,
         *,
-        hf_contract_name: str,
+        hf_scoring_system_name: str,
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -282,14 +282,14 @@ class AsyncContractsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedContract:
         """
-        Read a contract from Huggingface dataset
+        Read a scoring system from Huggingface dataset
 
         Args:
-          hf_contract_name: Huggingface contract name e.g. withpi/my_contract. You need to provide the
-              hf_token if the contract dataset is not public or not own by the withpi
-              organization.
+          hf_scoring_system_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
+              provide the hf_token if the scoring system dataset is not public or not own by
+              the withpi organization.
 
-          hf_token: Huggingface token to read the contract dataset
+          hf_token: Huggingface token to use if you want to read to your own HF organization
 
           extra_headers: Send extra headers
 
@@ -303,7 +303,7 @@ class AsyncContractsResource(AsyncAPIResource):
             "/contracts/read_from_hf",
             body=await async_maybe_transform(
                 {
-                    "hf_contract_name": hf_contract_name,
+                    "hf_scoring_system_name": hf_scoring_system_name,
                     "hf_token": hf_token,
                 },
                 contract_read_from_hf_params.ContractReadFromHfParams,
@@ -317,9 +317,9 @@ class AsyncContractsResource(AsyncAPIResource):
     async def score(
         self,
         *,
-        contract: SharedParamsContract,
         llm_input: str,
         llm_output: str,
+        scoring_system: SharedParamsContract,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -331,11 +331,11 @@ class AsyncContractsResource(AsyncAPIResource):
         Scores a contract based on the provided input and output
 
         Args:
-          contract: The contract to score
-
           llm_input: The input to score
 
           llm_output: The output to score
+
+          scoring_system: The scoring system to score
 
           extra_headers: Send extra headers
 
@@ -349,9 +349,9 @@ class AsyncContractsResource(AsyncAPIResource):
             "/contracts/score",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
                     "llm_input": llm_input,
                     "llm_output": llm_output,
+                    "scoring_system": scoring_system,
                 },
                 contract_score_params.ContractScoreParams,
             ),
