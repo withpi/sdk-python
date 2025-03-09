@@ -212,14 +212,14 @@ class TestGrpo:
     def test_method_start_job(self, client: PiClient) -> None:
         grpo = client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
@@ -228,7 +228,11 @@ class TestGrpo:
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         grpo = client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={"lora_rank": "R_16"},
+            num_train_epochs=10,
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -265,10 +269,6 @@ class TestGrpo:
                     }
                 ],
             },
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={"lora_rank": "R_16"},
-            num_train_epochs=10,
             system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
@@ -277,14 +277,14 @@ class TestGrpo:
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.model.rl.grpo.with_raw_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         )
 
@@ -297,14 +297,14 @@ class TestGrpo:
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.model.rl.grpo.with_streaming_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         ) as response:
             assert not response.is_closed
@@ -549,14 +549,14 @@ class TestAsyncGrpo:
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         grpo = await async_client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
@@ -565,7 +565,11 @@ class TestAsyncGrpo:
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         grpo = await async_client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={"lora_rank": "R_16"},
+            num_train_epochs=10,
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -602,10 +606,6 @@ class TestAsyncGrpo:
                     }
                 ],
             },
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={"lora_rank": "R_16"},
-            num_train_epochs=10,
             system_prompt="An optional system prompt.",
         )
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
@@ -614,14 +614,14 @@ class TestAsyncGrpo:
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.model.rl.grpo.with_raw_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         )
 
@@ -634,14 +634,14 @@ class TestAsyncGrpo:
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.model.rl.grpo.with_streaming_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
             system_prompt="An optional system prompt.",
         ) as response:
             assert not response.is_closed
