@@ -7,9 +7,9 @@ from typing import Optional
 import httpx
 
 from ...types import (
-    scoring_system_score_params,
-    scoring_system_read_from_hf_params,
-    scoring_system_generate_dimensions_params,
+    pi_scoring_system_score_params,
+    pi_scoring_system_read_from_hf_params,
+    pi_scoring_system_generate_dimensions_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
@@ -38,32 +38,32 @@ from ...types.scoring_system.scoring_system import ScoringSystem
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system.scoring_system_param import ScoringSystemParam
 
-__all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
+__all__ = ["PiScoringSystemResource", "AsyncPiScoringSystemResource"]
 
 
-class ScoringSystemResource(SyncAPIResource):
+class PiScoringSystemResource(SyncAPIResource):
     @cached_property
     def calibrate(self) -> CalibrateResource:
         return CalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ScoringSystemResourceWithRawResponse:
+    def with_raw_response(self) -> PiScoringSystemResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ScoringSystemResourceWithRawResponse(self)
+        return PiScoringSystemResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScoringSystemResourceWithStreamingResponse:
+    def with_streaming_response(self) -> PiScoringSystemResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return ScoringSystemResourceWithStreamingResponse(self)
+        return PiScoringSystemResourceWithStreamingResponse(self)
 
     def generate_dimensions(
         self,
@@ -95,13 +95,13 @@ class ScoringSystemResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scoring_system/generate_dimensions",
+            "/pi_scoring_system/generate_dimensions",
             body=maybe_transform(
                 {
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                scoring_system_generate_dimensions_params.ScoringSystemGenerateDimensionsParams,
+                pi_scoring_system_generate_dimensions_params.PiScoringSystemGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -140,13 +140,13 @@ class ScoringSystemResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scoring_system/read_from_hf",
+            "/pi_scoring_system/read_from_hf",
             body=maybe_transform(
                 {
                     "hf_scoring_system_name": hf_scoring_system_name,
                     "hf_token": hf_token,
                 },
-                scoring_system_read_from_hf_params.ScoringSystemReadFromHfParams,
+                pi_scoring_system_read_from_hf_params.PiScoringSystemReadFromHfParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -186,14 +186,14 @@ class ScoringSystemResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scoring_system/score",
+            "/pi_scoring_system/score",
             body=maybe_transform(
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_system": scoring_system,
                 },
-                scoring_system_score_params.ScoringSystemScoreParams,
+                pi_scoring_system_score_params.PiScoringSystemScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -202,29 +202,29 @@ class ScoringSystemResource(SyncAPIResource):
         )
 
 
-class AsyncScoringSystemResource(AsyncAPIResource):
+class AsyncPiScoringSystemResource(AsyncAPIResource):
     @cached_property
     def calibrate(self) -> AsyncCalibrateResource:
         return AsyncCalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncScoringSystemResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncPiScoringSystemResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncScoringSystemResourceWithRawResponse(self)
+        return AsyncPiScoringSystemResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScoringSystemResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncPiScoringSystemResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncScoringSystemResourceWithStreamingResponse(self)
+        return AsyncPiScoringSystemResourceWithStreamingResponse(self)
 
     async def generate_dimensions(
         self,
@@ -256,13 +256,13 @@ class AsyncScoringSystemResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scoring_system/generate_dimensions",
+            "/pi_scoring_system/generate_dimensions",
             body=await async_maybe_transform(
                 {
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                scoring_system_generate_dimensions_params.ScoringSystemGenerateDimensionsParams,
+                pi_scoring_system_generate_dimensions_params.PiScoringSystemGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -301,13 +301,13 @@ class AsyncScoringSystemResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scoring_system/read_from_hf",
+            "/pi_scoring_system/read_from_hf",
             body=await async_maybe_transform(
                 {
                     "hf_scoring_system_name": hf_scoring_system_name,
                     "hf_token": hf_token,
                 },
-                scoring_system_read_from_hf_params.ScoringSystemReadFromHfParams,
+                pi_scoring_system_read_from_hf_params.PiScoringSystemReadFromHfParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -347,14 +347,14 @@ class AsyncScoringSystemResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scoring_system/score",
+            "/pi_scoring_system/score",
             body=await async_maybe_transform(
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_system": scoring_system,
                 },
-                scoring_system_score_params.ScoringSystemScoreParams,
+                pi_scoring_system_score_params.PiScoringSystemScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -363,77 +363,77 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         )
 
 
-class ScoringSystemResourceWithRawResponse:
-    def __init__(self, scoring_system: ScoringSystemResource) -> None:
-        self._scoring_system = scoring_system
+class PiScoringSystemResourceWithRawResponse:
+    def __init__(self, pi_scoring_system: PiScoringSystemResource) -> None:
+        self._pi_scoring_system = pi_scoring_system
 
         self.generate_dimensions = to_raw_response_wrapper(
-            scoring_system.generate_dimensions,
+            pi_scoring_system.generate_dimensions,
         )
         self.read_from_hf = to_raw_response_wrapper(
-            scoring_system.read_from_hf,
+            pi_scoring_system.read_from_hf,
         )
         self.score = to_raw_response_wrapper(
-            scoring_system.score,
+            pi_scoring_system.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithRawResponse:
-        return CalibrateResourceWithRawResponse(self._scoring_system.calibrate)
+        return CalibrateResourceWithRawResponse(self._pi_scoring_system.calibrate)
 
 
-class AsyncScoringSystemResourceWithRawResponse:
-    def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
-        self._scoring_system = scoring_system
+class AsyncPiScoringSystemResourceWithRawResponse:
+    def __init__(self, pi_scoring_system: AsyncPiScoringSystemResource) -> None:
+        self._pi_scoring_system = pi_scoring_system
 
         self.generate_dimensions = async_to_raw_response_wrapper(
-            scoring_system.generate_dimensions,
+            pi_scoring_system.generate_dimensions,
         )
         self.read_from_hf = async_to_raw_response_wrapper(
-            scoring_system.read_from_hf,
+            pi_scoring_system.read_from_hf,
         )
         self.score = async_to_raw_response_wrapper(
-            scoring_system.score,
+            pi_scoring_system.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithRawResponse:
-        return AsyncCalibrateResourceWithRawResponse(self._scoring_system.calibrate)
+        return AsyncCalibrateResourceWithRawResponse(self._pi_scoring_system.calibrate)
 
 
-class ScoringSystemResourceWithStreamingResponse:
-    def __init__(self, scoring_system: ScoringSystemResource) -> None:
-        self._scoring_system = scoring_system
+class PiScoringSystemResourceWithStreamingResponse:
+    def __init__(self, pi_scoring_system: PiScoringSystemResource) -> None:
+        self._pi_scoring_system = pi_scoring_system
 
         self.generate_dimensions = to_streamed_response_wrapper(
-            scoring_system.generate_dimensions,
+            pi_scoring_system.generate_dimensions,
         )
         self.read_from_hf = to_streamed_response_wrapper(
-            scoring_system.read_from_hf,
+            pi_scoring_system.read_from_hf,
         )
         self.score = to_streamed_response_wrapper(
-            scoring_system.score,
+            pi_scoring_system.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithStreamingResponse:
-        return CalibrateResourceWithStreamingResponse(self._scoring_system.calibrate)
+        return CalibrateResourceWithStreamingResponse(self._pi_scoring_system.calibrate)
 
 
-class AsyncScoringSystemResourceWithStreamingResponse:
-    def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
-        self._scoring_system = scoring_system
+class AsyncPiScoringSystemResourceWithStreamingResponse:
+    def __init__(self, pi_scoring_system: AsyncPiScoringSystemResource) -> None:
+        self._pi_scoring_system = pi_scoring_system
 
         self.generate_dimensions = async_to_streamed_response_wrapper(
-            scoring_system.generate_dimensions,
+            pi_scoring_system.generate_dimensions,
         )
         self.read_from_hf = async_to_streamed_response_wrapper(
-            scoring_system.read_from_hf,
+            pi_scoring_system.read_from_hf,
         )
         self.score = async_to_streamed_response_wrapper(
-            scoring_system.score,
+            pi_scoring_system.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithStreamingResponse:
-        return AsyncCalibrateResourceWithStreamingResponse(self._scoring_system.calibrate)
+        return AsyncCalibrateResourceWithStreamingResponse(self._pi_scoring_system.calibrate)

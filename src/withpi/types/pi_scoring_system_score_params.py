@@ -6,10 +6,10 @@ from typing_extensions import Required, TypedDict
 
 from .scoring_system.scoring_system_param import ScoringSystemParam
 
-__all__ = ["ScoringSystemScoreParams"]
+__all__ = ["PiScoringSystemScoreParams"]
 
 
-class ScoringSystemScoreParams(TypedDict, total=False):
+class PiScoringSystemScoreParams(TypedDict, total=False):
     llm_input: Required[str]
     """The input to score"""
 
