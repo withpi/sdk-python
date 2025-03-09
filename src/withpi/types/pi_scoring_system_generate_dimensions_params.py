@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ScoringSystemGenerateDimensionsParams"]
+__all__ = ["PiScoringSystemGenerateDimensionsParams"]
 
 
-class ScoringSystemGenerateDimensionsParams(TypedDict, total=False):
+class PiScoringSystemGenerateDimensionsParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description to generate a scoring system for."""
 
