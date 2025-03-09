@@ -2,21 +2,21 @@
 
 from typing import TYPE_CHECKING, List, Optional
 
-from .._models import BaseModel
-from .sdk_dimension import SDKDimension
+from ..._models import BaseModel
+from ..sdk_dimension import SDKDimension
 
-__all__ = ["SDKContract"]
+__all__ = ["ScoringSystem"]
 
 
-class SDKContract(BaseModel):
+class ScoringSystem(BaseModel):
     description: str
-    """The description of the contract"""
+    """The application description"""
 
     name: str
-    """The name of the contract"""
+    """The name of the scoring system"""
 
     dimensions: Optional[List[SDKDimension]] = None
-    """The dimensions of the contract"""
+    """The dimensions of the scoring system"""
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.

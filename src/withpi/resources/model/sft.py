@@ -25,10 +25,10 @@ from ...types.model.rl import TextGenerationBaseModel
 from ...types.contracts import State
 from ...types.contracts.state import State
 from ...types.model.sft_status import SftStatus
-from ...types.sdk_contract_param import SDKContractParam
 from ...types.data.sdk_example_param import SDKExampleParam
 from ...types.model.sft_list_response import SftListResponse
 from ...types.model.rl.lora_config_param import LoraConfigParam
+from ...types.shared_params.sdk_contract import SDKContract
 from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
@@ -232,7 +232,7 @@ class SftResource(SyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExampleParam],
-        scoring_system: SDKContractParam,
+        scoring_system: SDKContract,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
@@ -526,7 +526,7 @@ class AsyncSftResource(AsyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExampleParam],
-        scoring_system: SDKContractParam,
+        scoring_system: SDKContract,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
