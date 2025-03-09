@@ -4,7 +4,7 @@ from typing import Dict
 
 from .._models import BaseModel
 
-__all__ = ["ContractsScoreMetrics", "DimensionScores"]
+__all__ = ["ContractScoreResponse", "DimensionScores"]
 
 
 class DimensionScores(BaseModel):
@@ -15,9 +15,9 @@ class DimensionScores(BaseModel):
     """The total score of the dimension"""
 
 
-class ContractsScoreMetrics(BaseModel):
+class ContractScoreResponse(BaseModel):
     dimension_scores: Dict[str, DimensionScores]
     """The score components for each dimension"""
 
     total_score: float
-    """The total score of the contract"""
+    """The total score of the scoring system"""

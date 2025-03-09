@@ -10,7 +10,7 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types import (
-    ContractsScoreMetrics,
+    ContractScoreResponse,
 )
 from withpi.types.shared import Contract
 
@@ -108,7 +108,7 @@ class TestContracts:
                 "name": "Sample Contract",
             },
         )
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     def test_method_score_with_all_params(self, client: PiClient) -> None:
@@ -153,7 +153,7 @@ class TestContracts:
                 ],
             },
         )
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     def test_raw_response_score(self, client: PiClient) -> None:
@@ -169,7 +169,7 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     def test_streaming_response_score(self, client: PiClient) -> None:
@@ -185,7 +185,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+            assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -281,7 +281,7 @@ class TestAsyncContracts:
                 "name": "Sample Contract",
             },
         )
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     async def test_method_score_with_all_params(self, async_client: AsyncPiClient) -> None:
@@ -326,7 +326,7 @@ class TestAsyncContracts:
                 ],
             },
         )
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
@@ -342,7 +342,7 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+        assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
@@ -358,6 +358,6 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(ContractsScoreMetrics, contract, path=["response"])
+            assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
