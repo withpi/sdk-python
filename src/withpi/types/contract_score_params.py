@@ -10,11 +10,11 @@ __all__ = ["ContractScoreParams"]
 
 
 class ContractScoreParams(TypedDict, total=False):
-    contract: Required[Contract]
-    """The contract to score"""
-
     llm_input: Required[str]
     """The input to score"""
 
     llm_output: Required[str]
     """The output to score"""
+
+    scoring_system: Required[Contract]
+    """The scoring system to score"""

@@ -32,36 +32,12 @@ client = PiClient(
 )
 
 contracts_score_metrics = client.contracts.score(
-    contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Instruction Following",
-                        "description": "Does the response follow the given instructions?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-            {
-                "description": "Test whether the LLM responds to the query",
-                "label": "Topicality Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Topicality",
-                        "description": "Does the response answer the given question?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-        ],
-    },
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
+    scoring_system={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Contract",
+    },
 )
 print(contracts_score_metrics.scores)
 ```
@@ -87,36 +63,12 @@ client = AsyncPiClient(
 
 async def main() -> None:
     contracts_score_metrics = await client.contracts.score(
-        contract={
-            "name": "My Application",
-            "description": "You are a helpful assistant",
-            "dimensions": [
-                {
-                    "description": "Test whether the LLM follows instructions",
-                    "label": "Instruction Following Dimension",
-                    "sub_dimensions": [
-                        {
-                            "label": "Instruction Following",
-                            "description": "Does the response follow the given instructions?",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                },
-                {
-                    "description": "Test whether the LLM responds to the query",
-                    "label": "Topicality Dimension",
-                    "sub_dimensions": [
-                        {
-                            "label": "Topicality",
-                            "description": "Does the response answer the given question?",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                },
-            ],
-        },
         llm_input="Help me with my problem",
         llm_output="Of course I can help with that",
+        scoring_system={
+            "description": "Write a children's story communicating a simple life lesson.",
+            "name": "Sample Contract",
+        },
     )
     print(contracts_score_metrics.scores)
 
@@ -152,36 +104,12 @@ client = PiClient()
 
 try:
     client.contracts.score(
-        contract={
-            "name": "My Application",
-            "description": "You are a helpful assistant",
-            "dimensions": [
-                {
-                    "description": "Test whether the LLM follows instructions",
-                    "label": "Instruction Following Dimension",
-                    "sub_dimensions": [
-                        {
-                            "label": "Instruction Following",
-                            "description": "Does the response follow the given instructions?",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                },
-                {
-                    "description": "Test whether the LLM responds to the query",
-                    "label": "Topicality Dimension",
-                    "sub_dimensions": [
-                        {
-                            "label": "Topicality",
-                            "description": "Does the response answer the given question?",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                },
-            ],
-        },
         llm_input="Help me with my problem",
         llm_output="Of course I can help with that",
+        scoring_system={
+            "description": "Write a children's story communicating a simple life lesson.",
+            "name": "Sample Contract",
+        },
     )
 except withpi.APIConnectionError as e:
     print("The server could not be reached")
@@ -226,36 +154,12 @@ client = PiClient(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).contracts.score(
-    contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Instruction Following",
-                        "description": "Does the response follow the given instructions?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-            {
-                "description": "Test whether the LLM responds to the query",
-                "label": "Topicality Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Topicality",
-                        "description": "Does the response answer the given question?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-        ],
-    },
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
+    scoring_system={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Contract",
+    },
 )
 ```
 
@@ -280,36 +184,12 @@ client = PiClient(
 
 # Override per-request:
 client.with_options(timeout=5.0).contracts.score(
-    contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Instruction Following",
-                        "description": "Does the response follow the given instructions?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-            {
-                "description": "Test whether the LLM responds to the query",
-                "label": "Topicality Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Topicality",
-                        "description": "Does the response answer the given question?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-        ],
-    },
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
+    scoring_system={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Contract",
+    },
 )
 ```
 
@@ -352,29 +232,12 @@ from withpi import PiClient
 
 client = PiClient()
 response = client.contracts.with_raw_response.score(
-    contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
-        "dimensions": [{
-            "description": "Test whether the LLM follows instructions",
-            "label": "Instruction Following Dimension",
-            "sub_dimensions": [{
-                "label": "Instruction Following",
-                "description": "Does the response follow the given instructions?",
-                "scoring_type": "PI_SCORER",
-            }],
-        }, {
-            "description": "Test whether the LLM responds to the query",
-            "label": "Topicality Dimension",
-            "sub_dimensions": [{
-                "label": "Topicality",
-                "description": "Does the response answer the given question?",
-                "scoring_type": "PI_SCORER",
-            }],
-        }],
-    },
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
+    scoring_system={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Contract",
+    },
 )
 print(response.headers.get('X-My-Header'))
 
@@ -394,36 +257,12 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.contracts.with_streaming_response.score(
-    contract={
-        "name": "My Application",
-        "description": "You are a helpful assistant",
-        "dimensions": [
-            {
-                "description": "Test whether the LLM follows instructions",
-                "label": "Instruction Following Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Instruction Following",
-                        "description": "Does the response follow the given instructions?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-            {
-                "description": "Test whether the LLM responds to the query",
-                "label": "Topicality Dimension",
-                "sub_dimensions": [
-                    {
-                        "label": "Topicality",
-                        "description": "Does the response answer the given question?",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            },
-        ],
-    },
     llm_input="Help me with my problem",
     llm_output="Of course I can help with that",
+    scoring_system={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Contract",
+    },
 ) as response:
     print(response.headers.get("X-My-Header"))
 

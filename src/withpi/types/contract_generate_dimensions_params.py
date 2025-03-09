@@ -8,8 +8,8 @@ __all__ = ["ContractGenerateDimensionsParams"]
 
 
 class ContractGenerateDimensionsParams(TypedDict, total=False):
-    contract_description: Required[str]
-    """The application description to generate contract for."""
+    application_description: Required[str]
+    """The application description to generate a scoring system for."""
 
     try_auto_generating_python_code: bool
     """
