@@ -15,9 +15,6 @@ class GrpoStartJobParams(TypedDict, total=False):
     base_rl_model: Required[Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]]
     """The base model to start the RL tunning process"""
 
-    contract: Required[Contract]
-    """The contract to use in the GRPO tuning process"""
-
     examples: Required[Iterable[Example]]
     """Examples to use in the RL tuning process"""
 
@@ -29,6 +26,9 @@ class GrpoStartJobParams(TypedDict, total=False):
 
     num_train_epochs: Required[int]
     """GRPO number of train epochs"""
+
+    scoring_system: Required[Contract]
+    """The scoring system to use in the GRPO tuning process"""
 
     system_prompt: Required[Optional[str]]
     """A custom system prompt to use during the RL tuning process"""

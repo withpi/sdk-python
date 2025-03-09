@@ -211,23 +211,29 @@ class TestSft:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         sft = client.model.sft.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         sft = client.model.sft.start_job(
-            contract={
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -264,12 +270,6 @@ class TestSft:
                     }
                 ],
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
             lora_config={"lora_rank": "R_16"},
@@ -281,16 +281,16 @@ class TestSft:
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.model.sft.with_raw_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         )
 
         assert response.is_closed is True
@@ -301,16 +301,16 @@ class TestSft:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.model.sft.with_streaming_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -553,23 +553,29 @@ class TestAsyncSft:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         sft = await async_client.model.sft.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
 
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         sft = await async_client.model.sft.start_job(
-            contract={
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -606,12 +612,6 @@ class TestAsyncSft:
                     }
                 ],
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
             lora_config={"lora_rank": "R_16"},
@@ -623,16 +623,16 @@ class TestAsyncSft:
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.model.sft.with_raw_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         )
 
         assert response.is_closed is True
@@ -643,16 +643,16 @@ class TestAsyncSft:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.model.sft.with_streaming_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -229,8 +229,8 @@ class SftResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        contract: Contract,
         examples: Iterable[Example],
+        scoring_system: Contract,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
@@ -243,14 +243,15 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """
-        Launches a SFT job
+        """Launches a SFT job
 
         Args:
-          contract: The contract to use in the SFT tuning process
+          examples: Examples to use in the SFT tuning process.
 
-          examples: Examples to use in the SFT tuning process. We split this data into train/eval
+        We split this data into train/eval
               90/10.
+
+          scoring_system: The scoring system to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -274,8 +275,8 @@ class SftResource(SyncAPIResource):
             "/model/sft",
             body=maybe_transform(
                 {
-                    "contract": contract,
                     "examples": examples,
+                    "scoring_system": scoring_system,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
@@ -522,8 +523,8 @@ class AsyncSftResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        contract: Contract,
         examples: Iterable[Example],
+        scoring_system: Contract,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfig | NotGiven = NOT_GIVEN,
@@ -536,14 +537,15 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """
-        Launches a SFT job
+        """Launches a SFT job
 
         Args:
-          contract: The contract to use in the SFT tuning process
+          examples: Examples to use in the SFT tuning process.
 
-          examples: Examples to use in the SFT tuning process. We split this data into train/eval
+        We split this data into train/eval
               90/10.
+
+          scoring_system: The scoring system to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -567,8 +569,8 @@ class AsyncSftResource(AsyncAPIResource):
             "/model/sft",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
                     "examples": examples,
+                    "scoring_system": scoring_system,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
