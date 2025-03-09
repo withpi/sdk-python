@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .state import State
 from ..._models import BaseModel
-from ..shared.sdk_contract import SDKContract
+from ..sdk_contract import SDKContract
 
 __all__ = ["ContractCalibrationStatus"]
 

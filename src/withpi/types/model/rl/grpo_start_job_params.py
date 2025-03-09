@@ -6,8 +6,8 @@ from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 from .lora_config_param import LoraConfigParam
+from ...sdk_contract_param import SDKContractParam
 from .text_generation_base_model import TextGenerationBaseModel
-from ...shared_params.sdk_contract import SDKContract
 
 __all__ = ["GrpoStartJobParams", "Example"]
 
@@ -28,7 +28,7 @@ class GrpoStartJobParams(TypedDict, total=False):
     num_train_epochs: Required[int]
     """GRPO number of train epochs"""
 
-    scoring_system: Required[SDKContract]
+    scoring_system: Required[SDKContractParam]
     """The scoring system to use in the GRPO tuning process"""
 
     system_prompt: Required[Optional[str]]
