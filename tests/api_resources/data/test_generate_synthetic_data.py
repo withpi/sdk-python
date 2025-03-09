@@ -23,48 +23,17 @@ class TestGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: Withpi) -> None:
-        generate_synthetic_data = client.data.generate_synthetic_data.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    def test_method_retrieve(self, client: Withpi) -> None:
+        generate_synthetic_data = client.data.generate_synthetic_data.retrieve(
+            "job_id",
         )
         assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_with_all_params(self, client: Withpi) -> None:
-        generate_synthetic_data = client.data.generate_synthetic_data.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            application_description="AI application for writing a children's story given topics.",
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-            system_prompt="Write a children's story given a topic from the user.",
-        )
-        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create(self, client: Withpi) -> None:
-        response = client.data.generate_synthetic_data.with_raw_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    def test_raw_response_retrieve(self, client: Withpi) -> None:
+        response = client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id",
         )
 
         assert response.is_closed is True
@@ -74,15 +43,9 @@ class TestGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_create(self, client: Withpi) -> None:
-        with client.data.generate_synthetic_data.with_streaming_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    def test_streaming_response_retrieve(self, client: Withpi) -> None:
+        with client.data.generate_synthetic_data.with_streaming_response.retrieve(
+            "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -91,6 +54,14 @@ class TestGenerateSyntheticData:
             assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_retrieve(self, client: Withpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.data.generate_synthetic_data.with_raw_response.retrieve(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -172,17 +143,48 @@ class TestGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve_status(self, client: Withpi) -> None:
-        generate_synthetic_data = client.data.generate_synthetic_data.retrieve_status(
-            "job_id",
+    def test_method_start_job(self, client: Withpi) -> None:
+        generate_synthetic_data = client.data.generate_synthetic_data.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
         assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_retrieve_status(self, client: Withpi) -> None:
-        response = client.data.generate_synthetic_data.with_raw_response.retrieve_status(
-            "job_id",
+    def test_method_start_job_with_all_params(self, client: Withpi) -> None:
+        generate_synthetic_data = client.data.generate_synthetic_data.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            application_description="AI application for writing a children's story given topics.",
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
+        )
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_start_job(self, client: Withpi) -> None:
+        response = client.data.generate_synthetic_data.with_raw_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -192,9 +194,15 @@ class TestGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_retrieve_status(self, client: Withpi) -> None:
-        with client.data.generate_synthetic_data.with_streaming_response.retrieve_status(
-            "job_id",
+    def test_streaming_response_start_job(self, client: Withpi) -> None:
+        with client.data.generate_synthetic_data.with_streaming_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -203,14 +211,6 @@ class TestGenerateSyntheticData:
             assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_retrieve_status(self, client: Withpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.data.generate_synthetic_data.with_raw_response.retrieve_status(
-                "",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -302,48 +302,17 @@ class TestAsyncGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create(self, async_client: AsyncWithpi) -> None:
-        generate_synthetic_data = await async_client.data.generate_synthetic_data.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    async def test_method_retrieve(self, async_client: AsyncWithpi) -> None:
+        generate_synthetic_data = await async_client.data.generate_synthetic_data.retrieve(
+            "job_id",
         )
         assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncWithpi) -> None:
-        generate_synthetic_data = await async_client.data.generate_synthetic_data.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            application_description="AI application for writing a children's story given topics.",
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-            system_prompt="Write a children's story given a topic from the user.",
-        )
-        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.data.generate_synthetic_data.with_raw_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    async def test_raw_response_retrieve(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id",
         )
 
         assert response.is_closed is True
@@ -353,15 +322,9 @@ class TestAsyncGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncWithpi) -> None:
-        async with async_client.data.generate_synthetic_data.with_streaming_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+    async def test_streaming_response_retrieve(self, async_client: AsyncWithpi) -> None:
+        async with async_client.data.generate_synthetic_data.with_streaming_response.retrieve(
+            "job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -370,6 +333,14 @@ class TestAsyncGenerateSyntheticData:
             assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncWithpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.data.generate_synthetic_data.with_raw_response.retrieve(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -451,17 +422,48 @@ class TestAsyncGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve_status(self, async_client: AsyncWithpi) -> None:
-        generate_synthetic_data = await async_client.data.generate_synthetic_data.retrieve_status(
-            "job_id",
+    async def test_method_start_job(self, async_client: AsyncWithpi) -> None:
+        generate_synthetic_data = await async_client.data.generate_synthetic_data.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
         assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_retrieve_status(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.data.generate_synthetic_data.with_raw_response.retrieve_status(
-            "job_id",
+    async def test_method_start_job_with_all_params(self, async_client: AsyncWithpi) -> None:
+        generate_synthetic_data = await async_client.data.generate_synthetic_data.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            application_description="AI application for writing a children's story given topics.",
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
+        )
+        assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.data.generate_synthetic_data.with_raw_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -471,9 +473,15 @@ class TestAsyncGenerateSyntheticData:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_retrieve_status(self, async_client: AsyncWithpi) -> None:
-        async with async_client.data.generate_synthetic_data.with_streaming_response.retrieve_status(
-            "job_id",
+    async def test_streaming_response_start_job(self, async_client: AsyncWithpi) -> None:
+        async with async_client.data.generate_synthetic_data.with_streaming_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -482,14 +490,6 @@ class TestAsyncGenerateSyntheticData:
             assert_matches_type(SyntheticDataStatus, generate_synthetic_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_retrieve_status(self, async_client: AsyncWithpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.data.generate_synthetic_data.with_raw_response.retrieve_status(
-                "",
-            )
 
     @pytest.mark.skip()
     @parametrize

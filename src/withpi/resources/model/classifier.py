@@ -20,7 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import classifier_list_params, classifier_create_params, classifier_download_params
+from ...types.model import classifier_list_params, classifier_download_params, classifier_start_job_params
 from ..._base_client import make_request_options
 from ...types.contracts import State
 from ...types.contracts.state import State
@@ -51,13 +51,10 @@ class ClassifierResource(SyncAPIResource):
         """
         return ClassifierResourceWithStreamingResponse(self)
 
-    def create(
+    def retrieve(
         self,
+        job_id: str,
         *,
-        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[SDKExampleParam],
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -66,17 +63,9 @@ class ClassifierResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ClassificationStatus:
         """
-        Launches a Classifier job
+        Checks the status of a Classifier job
 
         Args:
-          base_model: The base model to start the classification tuning process
-
-          examples: Examples to use in the classification tuning process
-
-          learning_rate: Classification learning rate
-
-          num_train_epochs: Classification number of train epochs
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -85,17 +74,10 @@ class ClassifierResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
-            "/model/classifier",
-            body=maybe_transform(
-                {
-                    "base_model": base_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "num_train_epochs": num_train_epochs,
-                },
-                classifier_create_params.ClassifierCreateParams,
-            ),
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/model/classifier/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -210,95 +192,7 @@ class ClassifierResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def messages(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Opens a message stream about a Classifier job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
-        return self._get(
-            f"/model/classifier/{job_id}/messages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
-    def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassificationStatus:
-        """
-        Checks the status of a Classifier job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/model/classifier/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClassificationStatus,
-        )
-
-
-class AsyncClassifierResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncClassifierResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncClassifierResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncClassifierResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
-        """
-        return AsyncClassifierResourceWithStreamingResponse(self)
-
-    async def create(
+    def start_job(
         self,
         *,
         base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
@@ -332,17 +226,105 @@ class AsyncClassifierResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._post(
             "/model/classifier",
-            body=await async_maybe_transform(
+            body=maybe_transform(
                 {
                     "base_model": base_model,
                     "examples": examples,
                     "learning_rate": learning_rate,
                     "num_train_epochs": num_train_epochs,
                 },
-                classifier_create_params.ClassifierCreateParams,
+                classifier_start_job_params.ClassifierStartJobParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ClassificationStatus,
+        )
+
+    def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Opens a message stream about a Classifier job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/model/classifier/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
+
+class AsyncClassifierResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncClassifierResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncClassifierResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncClassifierResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
+        """
+        return AsyncClassifierResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ClassificationStatus:
+        """
+        Checks the status of a Classifier job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/model/classifier/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -459,7 +441,58 @@ class AsyncClassifierResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def messages(
+    async def start_job(
+        self,
+        *,
+        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
+        examples: Iterable[SDKExampleParam],
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ClassificationStatus:
+        """
+        Launches a Classifier job
+
+        Args:
+          base_model: The base model to start the classification tuning process
+
+          examples: Examples to use in the classification tuning process
+
+          learning_rate: Classification learning rate
+
+          num_train_epochs: Classification number of train epochs
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/model/classifier",
+            body=await async_maybe_transform(
+                {
+                    "base_model": base_model,
+                    "examples": examples,
+                    "learning_rate": learning_rate,
+                    "num_train_epochs": num_train_epochs,
+                },
+                classifier_start_job_params.ClassifierStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ClassificationStatus,
+        )
+
+    async def stream_messages(
         self,
         job_id: str,
         *,
@@ -493,46 +526,13 @@ class AsyncClassifierResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassificationStatus:
-        """
-        Checks the status of a Classifier job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/model/classifier/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClassificationStatus,
-        )
-
 
 class ClassifierResourceWithRawResponse:
     def __init__(self, classifier: ClassifierResource) -> None:
         self._classifier = classifier
 
-        self.create = to_raw_response_wrapper(
-            classifier.create,
+        self.retrieve = to_raw_response_wrapper(
+            classifier.retrieve,
         )
         self.list = to_raw_response_wrapper(
             classifier.list,
@@ -543,11 +543,11 @@ class ClassifierResourceWithRawResponse:
         self.download = to_raw_response_wrapper(
             classifier.download,
         )
-        self.messages = to_raw_response_wrapper(
-            classifier.messages,
+        self.start_job = to_raw_response_wrapper(
+            classifier.start_job,
         )
-        self.status = to_raw_response_wrapper(
-            classifier.status,
+        self.stream_messages = to_raw_response_wrapper(
+            classifier.stream_messages,
         )
 
 
@@ -555,8 +555,8 @@ class AsyncClassifierResourceWithRawResponse:
     def __init__(self, classifier: AsyncClassifierResource) -> None:
         self._classifier = classifier
 
-        self.create = async_to_raw_response_wrapper(
-            classifier.create,
+        self.retrieve = async_to_raw_response_wrapper(
+            classifier.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
             classifier.list,
@@ -567,11 +567,11 @@ class AsyncClassifierResourceWithRawResponse:
         self.download = async_to_raw_response_wrapper(
             classifier.download,
         )
-        self.messages = async_to_raw_response_wrapper(
-            classifier.messages,
+        self.start_job = async_to_raw_response_wrapper(
+            classifier.start_job,
         )
-        self.status = async_to_raw_response_wrapper(
-            classifier.status,
+        self.stream_messages = async_to_raw_response_wrapper(
+            classifier.stream_messages,
         )
 
 
@@ -579,8 +579,8 @@ class ClassifierResourceWithStreamingResponse:
     def __init__(self, classifier: ClassifierResource) -> None:
         self._classifier = classifier
 
-        self.create = to_streamed_response_wrapper(
-            classifier.create,
+        self.retrieve = to_streamed_response_wrapper(
+            classifier.retrieve,
         )
         self.list = to_streamed_response_wrapper(
             classifier.list,
@@ -591,11 +591,11 @@ class ClassifierResourceWithStreamingResponse:
         self.download = to_streamed_response_wrapper(
             classifier.download,
         )
-        self.messages = to_streamed_response_wrapper(
-            classifier.messages,
+        self.start_job = to_streamed_response_wrapper(
+            classifier.start_job,
         )
-        self.status = to_streamed_response_wrapper(
-            classifier.status,
+        self.stream_messages = to_streamed_response_wrapper(
+            classifier.stream_messages,
         )
 
 
@@ -603,8 +603,8 @@ class AsyncClassifierResourceWithStreamingResponse:
     def __init__(self, classifier: AsyncClassifierResource) -> None:
         self._classifier = classifier
 
-        self.create = async_to_streamed_response_wrapper(
-            classifier.create,
+        self.retrieve = async_to_streamed_response_wrapper(
+            classifier.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
             classifier.list,
@@ -615,9 +615,9 @@ class AsyncClassifierResourceWithStreamingResponse:
         self.download = async_to_streamed_response_wrapper(
             classifier.download,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            classifier.messages,
+        self.start_job = async_to_streamed_response_wrapper(
+            classifier.start_job,
         )
-        self.status = async_to_streamed_response_wrapper(
-            classifier.status,
+        self.stream_messages = async_to_streamed_response_wrapper(
+            classifier.stream_messages,
         )
