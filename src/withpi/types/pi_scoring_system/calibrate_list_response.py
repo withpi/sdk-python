@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..scoring_system.calibration_status import CalibrationStatus
+from .scoring_system_calibration_status import ScoringSystemCalibrationStatus
 
 __all__ = ["CalibrateListResponse"]
 
-CalibrateListResponse: TypeAlias = List[CalibrationStatus]
+CalibrateListResponse: TypeAlias = List[ScoringSystemCalibrationStatus]

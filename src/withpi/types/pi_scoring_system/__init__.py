@@ -7,3 +7,4 @@ from .calibrate_create_params import CalibrateCreateParams as CalibrateCreatePar
 from .calibrate_list_response import CalibrateListResponse as CalibrateListResponse
 from .calibrate_cancel_response import CalibrateCancelResponse as CalibrateCancelResponse
 from .calibrate_messages_response import CalibrateMessagesResponse as CalibrateMessagesResponse
+from .scoring_system_calibration_status import ScoringSystemCalibrationStatus as ScoringSystemCalibrationStatus

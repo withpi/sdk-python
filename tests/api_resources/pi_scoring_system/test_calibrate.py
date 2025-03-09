@@ -9,9 +9,9 @@ import pytest
 
 from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
-from withpi.types.scoring_system import CalibrationStatus
 from withpi.types.pi_scoring_system import (
     CalibrateListResponse,
+    ScoringSystemCalibrationStatus,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -29,7 +29,7 @@ class TestCalibrate:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -88,7 +88,7 @@ class TestCalibrate:
             ],
             strategy="LITE",
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -103,7 +103,7 @@ class TestCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -118,7 +118,7 @@ class TestCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+            assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -128,7 +128,7 @@ class TestCalibrate:
         calibrate = client.pi_scoring_system.calibrate.retrieve(
             "job_id",
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -140,7 +140,7 @@ class TestCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -152,7 +152,7 @@ class TestCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+            assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -297,7 +297,7 @@ class TestAsyncCalibrate:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -356,7 +356,7 @@ class TestAsyncCalibrate:
             ],
             strategy="LITE",
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -371,7 +371,7 @@ class TestAsyncCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = await response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -386,7 +386,7 @@ class TestAsyncCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = await response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+            assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -396,7 +396,7 @@ class TestAsyncCalibrate:
         calibrate = await async_client.pi_scoring_system.calibrate.retrieve(
             "job_id",
         )
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -408,7 +408,7 @@ class TestAsyncCalibrate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         calibrate = await response.parse()
-        assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+        assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -420,7 +420,7 @@ class TestAsyncCalibrate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             calibrate = await response.parse()
-            assert_matches_type(CalibrationStatus, calibrate, path=["response"])
+            assert_matches_type(ScoringSystemCalibrationStatus, calibrate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

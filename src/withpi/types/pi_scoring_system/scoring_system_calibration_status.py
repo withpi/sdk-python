@@ -2,15 +2,14 @@
 
 from typing import List, Optional
 
-from withpi.types import ScoringSystem
-
 from ..._models import BaseModel
+from ..scoring_system import ScoringSystem
 from ..contracts.state import State
 
-__all__ = ["CalibrationStatus"]
+__all__ = ["ScoringSystemCalibrationStatus"]
 
 
-class CalibrationStatus(BaseModel):
+class ScoringSystemCalibrationStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
