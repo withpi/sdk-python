@@ -1,8 +1,8 @@
-# Pi Client Python API library
+# Withpi Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/withpi.svg)](https://pypi.org/project/withpi/)
 
-The Pi Client Python library provides convenient access to the Pi Client REST API from any Python 3.8+
+The Withpi Python library provides convenient access to the Withpi REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -10,14 +10,17 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.withpi.ai](https://docs.withpi.ai). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.withpi.com](https://docs.withpi.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
-# install from PyPI
-pip install --pre withpi
+# install from the production repo
+pip install git+ssh://git@github.com/withpi/sdk-python.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre withpi`
 
 ## Usage
 
@@ -25,21 +28,13 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from withpi import PiClient
+from withpi import Withpi
 
-client = PiClient(
+client = Withpi(
     api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.contracts.score(
-    llm_input="Help me with my problem",
-    llm_output="Of course I can help with that",
-    scoring_system={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Contract",
-    },
-)
-print(response.scores)
+contract_calibration_statuses = client.contracts.calibrate.list()
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -49,28 +44,20 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncPiClient` instead of `PiClient` and use `await` with each API call:
+Simply import `AsyncWithpi` instead of `Withpi` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from withpi import AsyncPiClient
+from withpi import AsyncWithpi
 
-client = AsyncPiClient(
+client = AsyncWithpi(
     api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    response = await client.contracts.score(
-        llm_input="Help me with my problem",
-        llm_output="Of course I can help with that",
-        scoring_system={
-            "description": "Write a children's story communicating a simple life lesson.",
-            "name": "Sample Contract",
-        },
-    )
-    print(response.scores)
+    contract_calibration_statuses = await client.contracts.calibrate.list()
 
 
 asyncio.run(main())
@@ -98,19 +85,12 @@ All errors inherit from `withpi.APIError`.
 
 ```python
 import withpi
-from withpi import PiClient
+from withpi import Withpi
 
-client = PiClient()
+client = Withpi()
 
 try:
-    client.contracts.score(
-        llm_input="Help me with my problem",
-        llm_output="Of course I can help with that",
-        scoring_system={
-            "description": "Write a children's story communicating a simple life lesson.",
-            "name": "Sample Contract",
-        },
-    )
+    client.contracts.calibrate.list()
 except withpi.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -144,23 +124,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from withpi import PiClient
+from withpi import Withpi
 
 # Configure the default for all requests:
-client = PiClient(
+client = Withpi(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).contracts.score(
-    llm_input="Help me with my problem",
-    llm_output="Of course I can help with that",
-    scoring_system={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Contract",
-    },
-)
+client.with_options(max_retries=5).contracts.calibrate.list()
 ```
 
 ### Timeouts
@@ -169,28 +142,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from withpi import PiClient
+from withpi import Withpi
 
 # Configure the default for all requests:
-client = PiClient(
+client = Withpi(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = PiClient(
+client = Withpi(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).contracts.score(
-    llm_input="Help me with my problem",
-    llm_output="Of course I can help with that",
-    scoring_system={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Contract",
-    },
-)
+client.with_options(timeout=5.0).contracts.calibrate.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -203,10 +169,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `PI_CLIENT_LOG` to `info`.
+You can enable logging by setting the environment variable `WITHPI_LOG` to `info`.
 
 ```shell
-$ export PI_CLIENT_LOG=info
+$ export WITHPI_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -228,21 +194,14 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from withpi import PiClient
+from withpi import Withpi
 
-client = PiClient()
-response = client.contracts.with_raw_response.score(
-    llm_input="Help me with my problem",
-    llm_output="Of course I can help with that",
-    scoring_system={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Contract",
-    },
-)
+client = Withpi()
+response = client.contracts.calibrate.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-contract = response.parse()  # get the object that `contracts.score()` would have returned
-print(contract.dimension_scores)
+calibrate = response.parse()  # get the object that `contracts.calibrate.list()` would have returned
+print(calibrate)
 ```
 
 These methods return an [`APIResponse`](https://github.com/withpi/sdk-python/tree/main/src/withpi/_response.py) object.
@@ -256,14 +215,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.contracts.with_streaming_response.score(
-    llm_input="Help me with my problem",
-    llm_output="Of course I can help with that",
-    scoring_system={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Contract",
-    },
-) as response:
+with client.contracts.calibrate.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -316,10 +268,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from withpi import PiClient, DefaultHttpxClient
+from withpi import Withpi, DefaultHttpxClient
 
-client = PiClient(
-    # Or use the `PI_CLIENT_BASE_URL` env var
+client = Withpi(
+    # Or use the `WITHPI_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -339,9 +291,9 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from withpi import PiClient
+from withpi import Withpi
 
-with PiClient() as client:
+with Withpi() as client:
   # make requests here
   ...
 

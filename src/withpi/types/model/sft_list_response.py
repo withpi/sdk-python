@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..shared.sft_status import SftStatus
+from .sft_status import SftStatus
 
 __all__ = ["SftListResponse"]
 

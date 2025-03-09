@@ -24,9 +24,9 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import prompt, queries
+from .resources import queries
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import PiClientError, APIStatusError
+from ._exceptions import WithpiError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -34,28 +34,22 @@ from ._base_client import (
 )
 from .resources.data import data
 from .resources.model import model
+from .resources.prompt import prompt
 from .resources.contracts import contracts
+from .resources.scoring_system import scoring_system
 
-__all__ = [
-    "Timeout",
-    "Transport",
-    "ProxiesTypes",
-    "RequestOptions",
-    "PiClient",
-    "AsyncPiClient",
-    "Client",
-    "AsyncClient",
-]
+__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Withpi", "AsyncWithpi", "Client", "AsyncClient"]
 
 
-class PiClient(SyncAPIClient):
-    data: data.DataResource
-    prompt: prompt.PromptResource
-    model: model.ModelResource
+class Withpi(SyncAPIClient):
     contracts: contracts.ContractsResource
+    data: data.DataResource
+    model: model.ModelResource
+    prompt: prompt.PromptResource
     queries: queries.QueriesResource
-    with_raw_response: PiClientWithRawResponse
-    with_streaming_response: PiClientWithStreamedResponse
+    scoring_system: scoring_system.ScoringSystemResource
+    with_raw_response: WithpiWithRawResponse
+    with_streaming_response: WithpiWithStreamedResponse
 
     # client options
     api_key: str
@@ -83,20 +77,20 @@ class PiClient(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous PiClient client instance.
+        """Construct a new synchronous Withpi client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("WITHPI_API_KEY")
         if api_key is None:
-            raise PiClientError(
+            raise WithpiError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the WITHPI_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("PI_CLIENT_BASE_URL")
+            base_url = os.environ.get("WITHPI_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -111,13 +105,14 @@ class PiClient(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.data = data.DataResource(self)
-        self.prompt = prompt.PromptResource(self)
-        self.model = model.ModelResource(self)
         self.contracts = contracts.ContractsResource(self)
+        self.data = data.DataResource(self)
+        self.model = model.ModelResource(self)
+        self.prompt = prompt.PromptResource(self)
         self.queries = queries.QueriesResource(self)
-        self.with_raw_response = PiClientWithRawResponse(self)
-        self.with_streaming_response = PiClientWithStreamedResponse(self)
+        self.scoring_system = scoring_system.ScoringSystemResource(self)
+        self.with_raw_response = WithpiWithRawResponse(self)
+        self.with_streaming_response = WithpiWithStreamedResponse(self)
 
     @property
     @override
@@ -224,14 +219,15 @@ class PiClient(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncPiClient(AsyncAPIClient):
-    data: data.AsyncDataResource
-    prompt: prompt.AsyncPromptResource
-    model: model.AsyncModelResource
+class AsyncWithpi(AsyncAPIClient):
     contracts: contracts.AsyncContractsResource
+    data: data.AsyncDataResource
+    model: model.AsyncModelResource
+    prompt: prompt.AsyncPromptResource
     queries: queries.AsyncQueriesResource
-    with_raw_response: AsyncPiClientWithRawResponse
-    with_streaming_response: AsyncPiClientWithStreamedResponse
+    scoring_system: scoring_system.AsyncScoringSystemResource
+    with_raw_response: AsyncWithpiWithRawResponse
+    with_streaming_response: AsyncWithpiWithStreamedResponse
 
     # client options
     api_key: str
@@ -259,20 +255,20 @@ class AsyncPiClient(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncPiClient client instance.
+        """Construct a new async AsyncWithpi client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("WITHPI_API_KEY")
         if api_key is None:
-            raise PiClientError(
+            raise WithpiError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the WITHPI_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("PI_CLIENT_BASE_URL")
+            base_url = os.environ.get("WITHPI_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -287,13 +283,14 @@ class AsyncPiClient(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.data = data.AsyncDataResource(self)
-        self.prompt = prompt.AsyncPromptResource(self)
-        self.model = model.AsyncModelResource(self)
         self.contracts = contracts.AsyncContractsResource(self)
+        self.data = data.AsyncDataResource(self)
+        self.model = model.AsyncModelResource(self)
+        self.prompt = prompt.AsyncPromptResource(self)
         self.queries = queries.AsyncQueriesResource(self)
-        self.with_raw_response = AsyncPiClientWithRawResponse(self)
-        self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
+        self.scoring_system = scoring_system.AsyncScoringSystemResource(self)
+        self.with_raw_response = AsyncWithpiWithRawResponse(self)
+        self.with_streaming_response = AsyncWithpiWithStreamedResponse(self)
 
     @property
     @override
@@ -400,42 +397,46 @@ class AsyncPiClient(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class PiClientWithRawResponse:
-    def __init__(self, client: PiClient) -> None:
-        self.data = data.DataResourceWithRawResponse(client.data)
-        self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
-        self.model = model.ModelResourceWithRawResponse(client.model)
+class WithpiWithRawResponse:
+    def __init__(self, client: Withpi) -> None:
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
+        self.data = data.DataResourceWithRawResponse(client.data)
+        self.model = model.ModelResourceWithRawResponse(client.model)
+        self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
+        self.scoring_system = scoring_system.ScoringSystemResourceWithRawResponse(client.scoring_system)
 
 
-class AsyncPiClientWithRawResponse:
-    def __init__(self, client: AsyncPiClient) -> None:
-        self.data = data.AsyncDataResourceWithRawResponse(client.data)
-        self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
-        self.model = model.AsyncModelResourceWithRawResponse(client.model)
+class AsyncWithpiWithRawResponse:
+    def __init__(self, client: AsyncWithpi) -> None:
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
+        self.data = data.AsyncDataResourceWithRawResponse(client.data)
+        self.model = model.AsyncModelResourceWithRawResponse(client.model)
+        self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
+        self.scoring_system = scoring_system.AsyncScoringSystemResourceWithRawResponse(client.scoring_system)
 
 
-class PiClientWithStreamedResponse:
-    def __init__(self, client: PiClient) -> None:
-        self.data = data.DataResourceWithStreamingResponse(client.data)
-        self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
-        self.model = model.ModelResourceWithStreamingResponse(client.model)
+class WithpiWithStreamedResponse:
+    def __init__(self, client: Withpi) -> None:
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
+        self.data = data.DataResourceWithStreamingResponse(client.data)
+        self.model = model.ModelResourceWithStreamingResponse(client.model)
+        self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
+        self.scoring_system = scoring_system.ScoringSystemResourceWithStreamingResponse(client.scoring_system)
 
 
-class AsyncPiClientWithStreamedResponse:
-    def __init__(self, client: AsyncPiClient) -> None:
-        self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
-        self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
-        self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
+class AsyncWithpiWithStreamedResponse:
+    def __init__(self, client: AsyncWithpi) -> None:
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
+        self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
+        self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
+        self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
+        self.scoring_system = scoring_system.AsyncScoringSystemResourceWithStreamingResponse(client.scoring_system)
 
 
-Client = PiClient
+Client = Withpi
 
-AsyncClient = AsyncPiClient
+AsyncClient = AsyncWithpi

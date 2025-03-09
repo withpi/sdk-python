@@ -22,9 +22,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_classify_response import QueryClassifyResponse
+from ..types.query_fanout_example_param import QueryFanoutExampleParam
 from ..types.query_generate_fanouts_response import QueryGenerateFanoutsResponse
-from ..types.shared_params.query_fanout_example import QueryFanoutExample
-from ..types.shared.query_classification_response import QueryClassificationResponse
 
 __all__ = ["QueriesResource", "AsyncQueriesResource"]
 
@@ -63,7 +63,7 @@ class QueriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryClassificationResponse:
+    ) -> QueryClassifyResponse:
         """
         Classifies queries into provided classes based on a custom taxonomy.
 
@@ -103,14 +103,14 @@ class QueriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryClassificationResponse,
+            cast_to=QueryClassifyResponse,
         )
 
     def generate_fanouts(
         self,
         *,
         queries: List[str],
-        example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
+        example_fanout_queries: Iterable[QueryFanoutExampleParam] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -188,7 +188,7 @@ class AsyncQueriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryClassificationResponse:
+    ) -> QueryClassifyResponse:
         """
         Classifies queries into provided classes based on a custom taxonomy.
 
@@ -228,14 +228,14 @@ class AsyncQueriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryClassificationResponse,
+            cast_to=QueryClassifyResponse,
         )
 
     async def generate_fanouts(
         self,
         *,
         queries: List[str],
-        example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
+        example_fanout_queries: Iterable[QueryFanoutExampleParam] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

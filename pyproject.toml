@@ -1,11 +1,11 @@
 [project]
 name = "withpi"
-version = "0.1.0-alpha.91"
-description = "The official Python library for the Pi Client API"
+version = "0.1.0-alpha.92"
+description = "The official Python library for the withpi API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Pi Client", email = "support@withpi.ai" },
+{ name = "Withpi", email = "support@withpi.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

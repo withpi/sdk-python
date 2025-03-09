@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..shared.contract_calibration_status import ContractCalibrationStatus
+from .contract_calibration_status import ContractCalibrationStatus
 
 __all__ = ["CalibrateListResponse"]
 
