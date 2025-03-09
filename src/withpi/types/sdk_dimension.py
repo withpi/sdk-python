@@ -3,12 +3,12 @@
 from typing import TYPE_CHECKING, List, Optional
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["ScoringSystem", "Dimension", "DimensionSubDimension"]
+__all__ = ["SDKDimension", "SubDimension"]
 
 
-class DimensionSubDimension(BaseModel):
+class SubDimension(BaseModel):
     description: str
     """The description of the dimension"""
 
@@ -47,14 +47,14 @@ class DimensionSubDimension(BaseModel):
         def __getattr__(self, attr: str) -> object: ...
 
 
-class Dimension(BaseModel):
+class SDKDimension(BaseModel):
     description: str
     """The description of the dimension"""
 
     label: str
     """The label of the dimension"""
 
-    sub_dimensions: List[DimensionSubDimension]
+    sub_dimensions: List[SubDimension]
     """The sub dimensions of the dimension"""
 
     parameters: Optional[List[float]] = None
@@ -69,23 +69,6 @@ class Dimension(BaseModel):
     one internally. A higher weight counts for more when aggregating this dimension
     is aggregated into the final score.
     """
-
-    if TYPE_CHECKING:
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
-
-
-class ScoringSystem(BaseModel):
-    description: str
-    """The application description"""
-
-    name: str
-    """The name of the scoring system"""
-
-    dimensions: Optional[List[Dimension]] = None
-    """The dimensions of the scoring system"""
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.

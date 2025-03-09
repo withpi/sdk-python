@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from .sdk_contract import SDKContract as SDKContract
+from .sdk_dimension import SDKDimension as SDKDimension
 from .scoring_system import ScoringSystem as ScoringSystem
 from .sdk_contract_param import SDKContractParam as SDKContractParam
+from .sdk_dimension_param import SDKDimensionParam as SDKDimensionParam
 from .query_fanout_example import QueryFanoutExample as QueryFanoutExample
 from .scoring_system_param import ScoringSystemParam as ScoringSystemParam
 from .contract_score_params import ContractScoreParams as ContractScoreParams

@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from withpi.types import ScoringSystemMetrics, SDKContract
+from withpi.types import ScoringSystemMetrics, SDKContract, SDKDimension
 ```
 
 Methods:
@@ -58,9 +58,9 @@ from withpi.types.data import (
 Methods:
 
 - <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">create</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_create_params.py">params</a>) -> <a href="./src/withpi/types/data/synthetic_data_status.py">SyntheticDataStatus</a></code>
-- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">list</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_list_response.py">GenerateSyntheticDataListResponse</a></code>
 - <code title="delete /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve_status</a>(job_id) -> <a href="./src/withpi/types/data/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_stream_data_response.py">GenerateSyntheticDataStreamDataResponse</a></code>
 - <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_messages</a>(job_id) -> str</code>
 
@@ -93,9 +93,9 @@ from withpi.types.data.input import (
 Methods:
 
 - <code title="post /data/input/generate_from_seeds">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">create</a>(\*\*<a href="src/withpi/types/data/input/generate_from_seed_create_params.py">params</a>) -> <a href="./src/withpi/types/data/input/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/input/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">list</a>(\*\*<a href="src/withpi/types/data/input/generate_from_seed_list_params.py">params</a>) -> <a href="./src/withpi/types/data/input/generate_from_seed_list_response.py">GenerateFromSeedListResponse</a></code>
 - <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">retrieve_status</a>(job_id) -> <a href="./src/withpi/types/data/input/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
@@ -119,11 +119,11 @@ from withpi.types.model import (
 Methods:
 
 - <code title="post /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">create</a>(\*\*<a href="src/withpi/types/model/classifier_create_params.py">params</a>) -> <a href="./src/withpi/types/model/classification_status.py">ClassificationStatus</a></code>
-- <code title="get /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/classification_status.py">ClassificationStatus</a></code>
 - <code title="get /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">list</a>(\*\*<a href="src/withpi/types/model/classifier_list_params.py">params</a>) -> <a href="./src/withpi/types/model/classifier_list_response.py">ClassifierListResponse</a></code>
 - <code title="delete /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/classifier/{job_id}/download">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/classifier_download_params.py">params</a>) -> str</code>
 - <code title="get /model/classifier/{job_id}/messages">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">messages</a>(job_id) -> str</code>
+- <code title="get /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">status</a>(job_id) -> <a href="./src/withpi/types/model/classification_status.py">ClassificationStatus</a></code>
 
 ## Rl
 
@@ -146,12 +146,12 @@ from withpi.types.model.rl import (
 Methods:
 
 - <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">create</a>(\*\*<a href="src/withpi/types/model/rl/grpo_create_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 - <code title="get /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">list</a>(\*\*<a href="src/withpi/types/model/rl/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/grpo_list_response.py">GrpoListResponse</a></code>
 - <code title="delete /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/rl/grpo/{job_id}/download">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/rl/grpo_download_params.py">params</a>) -> str</code>
 - <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 - <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">messages</a>(job_id) -> str</code>
+- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">status</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 
 ## Sft
 
@@ -170,12 +170,47 @@ from withpi.types.model import (
 Methods:
 
 - <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">create</a>(\*\*<a href="src/withpi/types/model/sft_create_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
 - <code title="get /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">list</a>(\*\*<a href="src/withpi/types/model/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_list_response.py">SftListResponse</a></code>
 - <code title="delete /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/sft/{job_id}/download">client.model.sft.<a href="./src/withpi/resources/model/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/sft_download_params.py">params</a>) -> str</code>
 - <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">messages</a>(job_id) -> str</code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">status</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+
+# PiScoringSystem
+
+Types:
+
+```python
+from withpi.types import ScoringSystem
+```
+
+Methods:
+
+- <code title="post /pi_scoring_system/generate_dimensions">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/pi_scoring_system_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system.py">ScoringSystem</a></code>
+- <code title="post /pi_scoring_system/read_from_hf">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">read_from_hf</a>(\*\*<a href="src/withpi/types/pi_scoring_system_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system.py">ScoringSystem</a></code>
+- <code title="post /pi_scoring_system/score">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">score</a>(\*\*<a href="src/withpi/types/pi_scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
+
+## Calibrate
+
+Types:
+
+```python
+from withpi.types.pi_scoring_system import (
+    ScoringSystemCalibrationStatus,
+    CalibrateListResponse,
+    CalibrateCancelResponse,
+    CalibrateMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">create</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
+- <code title="get /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
+- <code title="get /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
+- <code title="delete /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /pi_scoring_system/calibrate/{job_id}/messages">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">messages</a>(job_id) -> str</code>
 
 # Prompt
 
@@ -212,53 +247,3 @@ Methods:
 
 - <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classify_response.py">QueryClassifyResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
-
-# ScoringSystem
-
-Types:
-
-```python
-from withpi.types import ScoringSystem
-```
-
-## Calibrate
-
-Types:
-
-```python
-from withpi.types.scoring_system import CalibrationStatus
-```
-
-# PiScoringSystem
-
-Types:
-
-```python
-from withpi.types import ScoringSystem
-```
-
-Methods:
-
-- <code title="post /pi_scoring_system/generate_dimensions">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/pi_scoring_system_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /pi_scoring_system/read_from_hf">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">read_from_hf</a>(\*\*<a href="src/withpi/types/pi_scoring_system_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /pi_scoring_system/score">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">score</a>(\*\*<a href="src/withpi/types/pi_scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
-
-## Calibrate
-
-Types:
-
-```python
-from withpi.types.pi_scoring_system import (
-    CalibrateListResponse,
-    CalibrateCancelResponse,
-    CalibrateMessagesResponse,
-)
-```
-
-Methods:
-
-- <code title="post /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">create</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibration_status.py">CalibrationStatus</a></code>
-- <code title="get /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scoring_system/calibration_status.py">CalibrationStatus</a></code>
-- <code title="get /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
-- <code title="delete /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
-- <code title="get /pi_scoring_system/calibrate/{job_id}/messages">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">messages</a>(job_id) -> str</code>
