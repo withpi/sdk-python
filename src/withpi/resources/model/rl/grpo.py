@@ -229,11 +229,11 @@ class GrpoResource(SyncAPIResource):
         self,
         *,
         base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,
         lora_config: LoraConfig,
         num_train_epochs: int,
+        scoring_system: Contract,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -248,8 +248,6 @@ class GrpoResource(SyncAPIResource):
         Args:
           base_rl_model: The base model to start the RL tunning process
 
-          contract: The contract to use in the GRPO tuning process
-
           examples: Examples to use in the RL tuning process
 
           learning_rate: GRPO learning rate
@@ -257,6 +255,8 @@ class GrpoResource(SyncAPIResource):
           lora_config: The LoRA configuration.
 
           num_train_epochs: GRPO number of train epochs
+
+          scoring_system: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -273,11 +273,11 @@ class GrpoResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "base_rl_model": base_rl_model,
-                    "contract": contract,
                     "examples": examples,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "scoring_system": scoring_system,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
@@ -521,11 +521,11 @@ class AsyncGrpoResource(AsyncAPIResource):
         self,
         *,
         base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        contract: Contract,
         examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,
         lora_config: LoraConfig,
         num_train_epochs: int,
+        scoring_system: Contract,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -540,8 +540,6 @@ class AsyncGrpoResource(AsyncAPIResource):
         Args:
           base_rl_model: The base model to start the RL tunning process
 
-          contract: The contract to use in the GRPO tuning process
-
           examples: Examples to use in the RL tuning process
 
           learning_rate: GRPO learning rate
@@ -549,6 +547,8 @@ class AsyncGrpoResource(AsyncAPIResource):
           lora_config: The LoRA configuration.
 
           num_train_epochs: GRPO number of train epochs
+
+          scoring_system: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -565,11 +565,11 @@ class AsyncGrpoResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "base_rl_model": base_rl_model,
-                    "contract": contract,
                     "examples": examples,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
+                    "scoring_system": scoring_system,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
