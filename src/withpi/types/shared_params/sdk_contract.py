@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["SDKDimensionParam", "SubDimension"]
+__all__ = ["SDKContract", "Dimension", "DimensionSubDimension"]
 
 
-class SubDimensionTyped(TypedDict, total=False):
+class DimensionSubDimensionTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the dimension"""
 
@@ -41,17 +41,17 @@ class SubDimensionTyped(TypedDict, total=False):
     """
 
 
-SubDimension: TypeAlias = Union[SubDimensionTyped, Dict[str, object]]
+DimensionSubDimension: TypeAlias = Union[DimensionSubDimensionTyped, Dict[str, object]]
 
 
-class SDKDimensionParamTyped(TypedDict, total=False):
+class DimensionTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the dimension"""
 
     label: Required[str]
     """The label of the dimension"""
 
-    sub_dimensions: Required[Iterable[SubDimension]]
+    sub_dimensions: Required[Iterable[DimensionSubDimension]]
     """The sub dimensions of the dimension"""
 
     parameters: Optional[Iterable[float]]
@@ -68,4 +68,18 @@ class SDKDimensionParamTyped(TypedDict, total=False):
     """
 
 
-SDKDimensionParam: TypeAlias = Union[SDKDimensionParamTyped, Dict[str, object]]
+Dimension: TypeAlias = Union[DimensionTyped, Dict[str, object]]
+
+
+class SDKContractTyped(TypedDict, total=False):
+    description: Required[str]
+    """The description of the contract"""
+
+    name: Required[str]
+    """The name of the contract"""
+
+    dimensions: Iterable[Dimension]
+    """The dimensions of the contract"""
+
+
+SDKContract: TypeAlias = Union[SDKContractTyped, Dict[str, object]]
