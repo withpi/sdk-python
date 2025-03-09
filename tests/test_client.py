@@ -718,36 +718,12 @@ class TestPiClient:
                     object,
                     maybe_transform(
                         dict(
-                            contract={
-                                "name": "My Application",
-                                "description": "You are a helpful assistant",
-                                "dimensions": [
-                                    {
-                                        "description": "Test whether the LLM follows instructions",
-                                        "label": "Instruction Following Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Instruction Following",
-                                                "description": "Does the response follow the given instructions?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                    {
-                                        "description": "Test whether the LLM responds to the query",
-                                        "label": "Topicality Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Topicality",
-                                                "description": "Does the response answer the given question?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
                             llm_input="Help me with my problem",
                             llm_output="Of course I can help with that",
+                            scoring_system={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "name": "Sample Contract",
+                            },
                         ),
                         ContractScoreParams,
                     ),
@@ -770,36 +746,12 @@ class TestPiClient:
                     object,
                     maybe_transform(
                         dict(
-                            contract={
-                                "name": "My Application",
-                                "description": "You are a helpful assistant",
-                                "dimensions": [
-                                    {
-                                        "description": "Test whether the LLM follows instructions",
-                                        "label": "Instruction Following Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Instruction Following",
-                                                "description": "Does the response follow the given instructions?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                    {
-                                        "description": "Test whether the LLM responds to the query",
-                                        "label": "Topicality Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Topicality",
-                                                "description": "Does the response answer the given question?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
                             llm_input="Help me with my problem",
                             llm_output="Of course I can help with that",
+                            scoring_system={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "name": "Sample Contract",
+                            },
                         ),
                         ContractScoreParams,
                     ),
@@ -837,12 +789,12 @@ class TestPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
         )
 
         assert response.retries_taken == failures_before_success
@@ -868,12 +820,12 @@ class TestPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -899,12 +851,12 @@ class TestPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1591,36 +1543,12 @@ class TestAsyncPiClient:
                     object,
                     maybe_transform(
                         dict(
-                            contract={
-                                "name": "My Application",
-                                "description": "You are a helpful assistant",
-                                "dimensions": [
-                                    {
-                                        "description": "Test whether the LLM follows instructions",
-                                        "label": "Instruction Following Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Instruction Following",
-                                                "description": "Does the response follow the given instructions?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                    {
-                                        "description": "Test whether the LLM responds to the query",
-                                        "label": "Topicality Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Topicality",
-                                                "description": "Does the response answer the given question?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
                             llm_input="Help me with my problem",
                             llm_output="Of course I can help with that",
+                            scoring_system={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "name": "Sample Contract",
+                            },
                         ),
                         ContractScoreParams,
                     ),
@@ -1643,36 +1571,12 @@ class TestAsyncPiClient:
                     object,
                     maybe_transform(
                         dict(
-                            contract={
-                                "name": "My Application",
-                                "description": "You are a helpful assistant",
-                                "dimensions": [
-                                    {
-                                        "description": "Test whether the LLM follows instructions",
-                                        "label": "Instruction Following Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Instruction Following",
-                                                "description": "Does the response follow the given instructions?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                    {
-                                        "description": "Test whether the LLM responds to the query",
-                                        "label": "Topicality Dimension",
-                                        "sub_dimensions": [
-                                            {
-                                                "label": "Topicality",
-                                                "description": "Does the response answer the given question?",
-                                                "scoring_type": "PI_SCORER",
-                                            }
-                                        ],
-                                    },
-                                ],
-                            },
                             llm_input="Help me with my problem",
                             llm_output="Of course I can help with that",
+                            scoring_system={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "name": "Sample Contract",
+                            },
                         ),
                         ContractScoreParams,
                     ),
@@ -1711,12 +1615,12 @@ class TestAsyncPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = await client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
         )
 
         assert response.retries_taken == failures_before_success
@@ -1743,12 +1647,12 @@ class TestAsyncPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = await client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1775,12 +1679,12 @@ class TestAsyncPiClient:
         respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
 
         response = await client.contracts.with_raw_response.score(
-            contract={
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 

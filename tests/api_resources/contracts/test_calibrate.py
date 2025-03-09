@@ -131,7 +131,7 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         calibrate = client.contracts.calibrate.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
@@ -141,7 +141,7 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         calibrate = client.contracts.calibrate.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -199,7 +199,7 @@ class TestCalibrate:
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.contracts.calibrate.with_raw_response.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
@@ -213,7 +213,7 @@ class TestCalibrate:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.contracts.calibrate.with_streaming_response.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
@@ -379,7 +379,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.contracts.calibrate.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
@@ -389,7 +389,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.contracts.calibrate.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
                 "dimensions": [
@@ -447,7 +447,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.calibrate.with_raw_response.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },
@@ -461,7 +461,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.calibrate.with_streaming_response.start_job(
-            contract={
+            scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
             },

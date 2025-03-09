@@ -156,7 +156,7 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        contract: Contract,
+        scoring_system: Contract,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -171,16 +171,16 @@ class CalibrateResource(SyncAPIResource):
         Launches a Contract Calibration job
 
         Args:
-          contract: The contract to calibrate
+          scoring_system: The scoring system to calibrate
 
-          examples: Rated examples to use when calibrating the contract. Must specify either the
-              examples or the preference examples
+          examples: Rated examples to use when calibrating the scoring system. Must specify either
+              the examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract. Must specify either
-              the examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
+              either the examples or preference examples
 
-          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
-              but may result in better result.
+          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
+              LITE but may result in better result.
 
           extra_headers: Send extra headers
 
@@ -194,7 +194,7 @@ class CalibrateResource(SyncAPIResource):
             "/contracts/calibrate",
             body=maybe_transform(
                 {
-                    "contract": contract,
+                    "scoring_system": scoring_system,
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "strategy": strategy,
@@ -368,7 +368,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        contract: Contract,
+        scoring_system: Contract,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -383,16 +383,16 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Launches a Contract Calibration job
 
         Args:
-          contract: The contract to calibrate
+          scoring_system: The scoring system to calibrate
 
-          examples: Rated examples to use when calibrating the contract. Must specify either the
-              examples or the preference examples
+          examples: Rated examples to use when calibrating the scoring system. Must specify either
+              the examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the contract. Must specify either
-              the examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
+              either the examples or preference examples
 
-          strategy: The strategy to use to calibrate the contract. FULL would take longer than LITE
-              but may result in better result.
+          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
+              LITE but may result in better result.
 
           extra_headers: Send extra headers
 
@@ -406,7 +406,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             "/contracts/calibrate",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
+                    "scoring_system": scoring_system,
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "strategy": strategy,
