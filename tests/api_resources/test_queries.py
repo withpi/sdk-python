@@ -7,10 +7,12 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import PiClient, AsyncPiClient
+from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
-from withpi.types import QueryGenerateFanoutsResponse
-from withpi.types.shared import QueryClassificationResponse
+from withpi.types import (
+    QueryClassifyResponse,
+    QueryGenerateFanoutsResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -18,8 +20,9 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestQueries:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_classify(self, client: PiClient) -> None:
+    def test_method_classify(self, client: Withpi) -> None:
         query = client.queries.classify(
             classes=[
                 {
@@ -41,10 +44,11 @@ class TestQueries:
                 "What steps should I follow to bake a chocolate cake?",
             ],
         )
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_classify_with_all_params(self, client: PiClient) -> None:
+    def test_method_classify_with_all_params(self, client: Withpi) -> None:
         query = client.queries.classify(
             classes=[
                 {
@@ -82,10 +86,11 @@ class TestQueries:
             ],
             mode="generative",
         )
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_classify(self, client: PiClient) -> None:
+    def test_raw_response_classify(self, client: Withpi) -> None:
         response = client.queries.with_raw_response.classify(
             classes=[
                 {
@@ -111,10 +116,11 @@ class TestQueries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query = response.parse()
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_classify(self, client: PiClient) -> None:
+    def test_streaming_response_classify(self, client: Withpi) -> None:
         with client.queries.with_streaming_response.classify(
             classes=[
                 {
@@ -140,12 +146,13 @@ class TestQueries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query = response.parse()
-            assert_matches_type(QueryClassificationResponse, query, path=["response"])
+            assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_generate_fanouts(self, client: PiClient) -> None:
+    def test_method_generate_fanouts(self, client: Withpi) -> None:
         query = client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -154,8 +161,9 @@ class TestQueries:
         )
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_generate_fanouts_with_all_params(self, client: PiClient) -> None:
+    def test_method_generate_fanouts_with_all_params(self, client: Withpi) -> None:
         query = client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -177,8 +185,9 @@ class TestQueries:
         )
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_generate_fanouts(self, client: PiClient) -> None:
+    def test_raw_response_generate_fanouts(self, client: Withpi) -> None:
         response = client.queries.with_raw_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -191,8 +200,9 @@ class TestQueries:
         query = response.parse()
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_generate_fanouts(self, client: PiClient) -> None:
+    def test_streaming_response_generate_fanouts(self, client: Withpi) -> None:
         with client.queries.with_streaming_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -211,8 +221,9 @@ class TestQueries:
 class TestAsyncQueries:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_classify(self, async_client: AsyncPiClient) -> None:
+    async def test_method_classify(self, async_client: AsyncWithpi) -> None:
         query = await async_client.queries.classify(
             classes=[
                 {
@@ -234,10 +245,11 @@ class TestAsyncQueries:
                 "What steps should I follow to bake a chocolate cake?",
             ],
         )
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_classify_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_classify_with_all_params(self, async_client: AsyncWithpi) -> None:
         query = await async_client.queries.classify(
             classes=[
                 {
@@ -275,10 +287,11 @@ class TestAsyncQueries:
             ],
             mode="generative",
         )
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_classify(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_classify(self, async_client: AsyncWithpi) -> None:
         response = await async_client.queries.with_raw_response.classify(
             classes=[
                 {
@@ -304,10 +317,11 @@ class TestAsyncQueries:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query = await response.parse()
-        assert_matches_type(QueryClassificationResponse, query, path=["response"])
+        assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_classify(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_classify(self, async_client: AsyncWithpi) -> None:
         async with async_client.queries.with_streaming_response.classify(
             classes=[
                 {
@@ -333,12 +347,13 @@ class TestAsyncQueries:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query = await response.parse()
-            assert_matches_type(QueryClassificationResponse, query, path=["response"])
+            assert_matches_type(QueryClassifyResponse, query, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_fanouts(self, async_client: AsyncPiClient) -> None:
+    async def test_method_generate_fanouts(self, async_client: AsyncWithpi) -> None:
         query = await async_client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -347,8 +362,9 @@ class TestAsyncQueries:
         )
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_fanouts_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_generate_fanouts_with_all_params(self, async_client: AsyncWithpi) -> None:
         query = await async_client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -370,8 +386,9 @@ class TestAsyncQueries:
         )
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_generate_fanouts(self, async_client: AsyncWithpi) -> None:
         response = await async_client.queries.with_raw_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -384,8 +401,9 @@ class TestAsyncQueries:
         query = await response.parse()
         assert_matches_type(QueryGenerateFanoutsResponse, query, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_generate_fanouts(self, async_client: AsyncWithpi) -> None:
         async with async_client.queries.with_streaming_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",

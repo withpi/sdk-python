@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.example import Example
-from ..shared.exploration_mode import ExplorationMode
+from .sdk_example_param import SDKExampleParam
+from .sdk_exploration_mode import SDKExplorationMode
 
 __all__ = ["GenerateSyntheticDataCreateParams"]
 
@@ -15,7 +15,7 @@ class GenerateSyntheticDataCreateParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 
-    seeds: Required[Iterable[Example]]
+    seeds: Required[Iterable[SDKExampleParam]]
     """The list of LLM examples (inputs + outputs) to be used as seeds"""
 
     application_description: Optional[str]
@@ -27,7 +27,7 @@ class GenerateSyntheticDataCreateParams(TypedDict, total=False):
     Must be <=10. Generally it could be same as `num_shots`.
     """
 
-    exploration_mode: ExplorationMode
+    exploration_mode: SDKExplorationMode
     """The exploration mode for examples generation. Defaults to `BALANCED`"""
 
     num_shots: int

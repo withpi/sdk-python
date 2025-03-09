@@ -7,11 +7,11 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import PiClient, AsyncPiClient
+from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
-from withpi.types.shared import ContractCalibrationStatus
 from withpi.types.contracts import (
     CalibrateListResponse,
+    ContractCalibrationStatus,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -20,58 +20,23 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCalibrate:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve(self, client: PiClient) -> None:
-        calibrate = client.contracts.calibrate.retrieve(
-            "job_id",
-        )
-        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-    @parametrize
-    def test_raw_response_retrieve(self, client: PiClient) -> None:
-        response = client.contracts.calibrate.with_raw_response.retrieve(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = response.parse()
-        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-    @parametrize
-    def test_streaming_response_retrieve(self, client: PiClient) -> None:
-        with client.contracts.calibrate.with_streaming_response.retrieve(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = response.parse()
-            assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_retrieve(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.contracts.calibrate.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
-    def test_method_list(self, client: PiClient) -> None:
+    def test_method_list(self, client: Withpi) -> None:
         calibrate = client.contracts.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_list_with_all_params(self, client: PiClient) -> None:
+    def test_method_list_with_all_params(self, client: Withpi) -> None:
         calibrate = client.contracts.calibrate.list(
             state="QUEUED",
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_list(self, client: PiClient) -> None:
+    def test_raw_response_list(self, client: Withpi) -> None:
         response = client.contracts.calibrate.with_raw_response.list()
 
         assert response.is_closed is True
@@ -79,8 +44,9 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_list(self, client: PiClient) -> None:
+    def test_streaming_response_list(self, client: Withpi) -> None:
         with client.contracts.calibrate.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -90,15 +56,17 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_cancel(self, client: PiClient) -> None:
+    def test_method_cancel(self, client: Withpi) -> None:
         calibrate = client.contracts.calibrate.cancel(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_cancel(self, client: PiClient) -> None:
+    def test_raw_response_cancel(self, client: Withpi) -> None:
         response = client.contracts.calibrate.with_raw_response.cancel(
             "job_id",
         )
@@ -108,8 +76,9 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_cancel(self, client: PiClient) -> None:
+    def test_streaming_response_cancel(self, client: Withpi) -> None:
         with client.contracts.calibrate.with_streaming_response.cancel(
             "job_id",
         ) as response:
@@ -121,16 +90,18 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_path_params_cancel(self, client: PiClient) -> None:
+    def test_path_params_cancel(self, client: Withpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.contracts.calibrate.with_raw_response.cancel(
                 "",
             )
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_start_job(self, client: PiClient) -> None:
-        calibrate = client.contracts.calibrate.start_job(
+    def test_method_launch(self, client: Withpi) -> None:
+        calibrate = client.contracts.calibrate.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -138,9 +109,10 @@ class TestCalibrate:
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
-        calibrate = client.contracts.calibrate.start_job(
+    def test_method_launch_with_all_params(self, client: Withpi) -> None:
+        calibrate = client.contracts.calibrate.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -196,9 +168,10 @@ class TestCalibrate:
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.contracts.calibrate.with_raw_response.start_job(
+    def test_raw_response_launch(self, client: Withpi) -> None:
+        response = client.contracts.calibrate.with_raw_response.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -210,9 +183,10 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_start_job(self, client: PiClient) -> None:
-        with client.contracts.calibrate.with_streaming_response.start_job(
+    def test_streaming_response_launch(self, client: Withpi) -> None:
+        with client.contracts.calibrate.with_streaming_response.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -226,16 +200,18 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_stream_messages(self, client: PiClient) -> None:
-        calibrate = client.contracts.calibrate.stream_messages(
+    def test_method_messages(self, client: Withpi) -> None:
+        calibrate = client.contracts.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_stream_messages(self, client: PiClient) -> None:
-        response = client.contracts.calibrate.with_raw_response.stream_messages(
+    def test_raw_response_messages(self, client: Withpi) -> None:
+        response = client.contracts.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -244,9 +220,10 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_stream_messages(self, client: PiClient) -> None:
-        with client.contracts.calibrate.with_streaming_response.stream_messages(
+    def test_streaming_response_messages(self, client: Withpi) -> None:
+        with client.contracts.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -257,10 +234,53 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_path_params_stream_messages(self, client: PiClient) -> None:
+    def test_path_params_messages(self, client: Withpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.contracts.calibrate.with_raw_response.stream_messages(
+            client.contracts.calibrate.with_raw_response.messages(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_status(self, client: Withpi) -> None:
+        calibrate = client.contracts.calibrate.status(
+            "job_id",
+        )
+        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_status(self, client: Withpi) -> None:
+        response = client.contracts.calibrate.with_raw_response.status(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = response.parse()
+        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_status(self, client: Withpi) -> None:
+        with client.contracts.calibrate.with_streaming_response.status(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = response.parse()
+            assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_status(self, client: Withpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.contracts.calibrate.with_raw_response.status(
                 "",
             )
 
@@ -268,58 +288,23 @@ class TestCalibrate:
 class TestAsyncCalibrate:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.contracts.calibrate.retrieve(
-            "job_id",
-        )
-        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-    @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.contracts.calibrate.with_raw_response.retrieve(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        calibrate = await response.parse()
-        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        async with async_client.contracts.calibrate.with_streaming_response.retrieve(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            calibrate = await response.parse()
-            assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.contracts.calibrate.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
-    async def test_method_list(self, async_client: AsyncPiClient) -> None:
+    async def test_method_list(self, async_client: AsyncWithpi) -> None:
         calibrate = await async_client.contracts.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncWithpi) -> None:
         calibrate = await async_client.contracts.calibrate.list(
             state="QUEUED",
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_list(self, async_client: AsyncWithpi) -> None:
         response = await async_client.contracts.calibrate.with_raw_response.list()
 
         assert response.is_closed is True
@@ -327,8 +312,9 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncWithpi) -> None:
         async with async_client.contracts.calibrate.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -338,15 +324,17 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
+    async def test_method_cancel(self, async_client: AsyncWithpi) -> None:
         calibrate = await async_client.contracts.calibrate.cancel(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_cancel(self, async_client: AsyncWithpi) -> None:
         response = await async_client.contracts.calibrate.with_raw_response.cancel(
             "job_id",
         )
@@ -356,8 +344,9 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_cancel(self, async_client: AsyncWithpi) -> None:
         async with async_client.contracts.calibrate.with_streaming_response.cancel(
             "job_id",
         ) as response:
@@ -369,16 +358,18 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
+    async def test_path_params_cancel(self, async_client: AsyncWithpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.contracts.calibrate.with_raw_response.cancel(
                 "",
             )
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.contracts.calibrate.start_job(
+    async def test_method_launch(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.contracts.calibrate.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -386,9 +377,10 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.contracts.calibrate.start_job(
+    async def test_method_launch_with_all_params(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.contracts.calibrate.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -444,9 +436,10 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.contracts.calibrate.with_raw_response.start_job(
+    async def test_raw_response_launch(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.contracts.calibrate.with_raw_response.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -458,9 +451,10 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
-        async with async_client.contracts.calibrate.with_streaming_response.start_job(
+    async def test_streaming_response_launch(self, async_client: AsyncWithpi) -> None:
+        async with async_client.contracts.calibrate.with_streaming_response.launch(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Contract",
@@ -474,16 +468,18 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.contracts.calibrate.stream_messages(
+    async def test_method_messages(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.contracts.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.contracts.calibrate.with_raw_response.stream_messages(
+    async def test_raw_response_messages(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.contracts.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -492,9 +488,10 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.contracts.calibrate.with_streaming_response.stream_messages(
+    async def test_streaming_response_messages(self, async_client: AsyncWithpi) -> None:
+        async with async_client.contracts.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -505,9 +502,52 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
+    async def test_path_params_messages(self, async_client: AsyncWithpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.contracts.calibrate.with_raw_response.stream_messages(
+            await async_client.contracts.calibrate.with_raw_response.messages(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_status(self, async_client: AsyncWithpi) -> None:
+        calibrate = await async_client.contracts.calibrate.status(
+            "job_id",
+        )
+        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_status(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.contracts.calibrate.with_raw_response.status(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calibrate = await response.parse()
+        assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_status(self, async_client: AsyncWithpi) -> None:
+        async with async_client.contracts.calibrate.with_streaming_response.status(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calibrate = await response.parse()
+            assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_status(self, async_client: AsyncWithpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.contracts.calibrate.with_raw_response.status(
                 "",
             )

@@ -19,13 +19,14 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import generate_synthetic_data_create_params, generate_synthetic_data_list_jobs_params
+from ...types.data import SDKExplorationMode, generate_synthetic_data_list_params, generate_synthetic_data_create_params
 from ..._base_client import make_request_options
-from ...types.shared.state import State
-from ...types.shared_params.example import Example
-from ...types.shared.exploration_mode import ExplorationMode
-from ...types.shared.synthetic_data_status import SyntheticDataStatus
-from ...types.data.generate_synthetic_data_list_jobs_response import GenerateSyntheticDataListJobsResponse
+from ...types.contracts import State
+from ...types.contracts.state import State
+from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.data.sdk_exploration_mode import SDKExplorationMode
+from ...types.data.synthetic_data_status import SyntheticDataStatus
+from ...types.data.generate_synthetic_data_list_response import GenerateSyntheticDataListResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
 
 __all__ = ["GenerateSyntheticDataResource", "AsyncGenerateSyntheticDataResource"]
@@ -38,7 +39,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return GenerateSyntheticDataResourceWithRawResponse(self)
 
@@ -47,7 +48,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return GenerateSyntheticDataResourceWithStreamingResponse(self)
 
@@ -55,10 +56,10 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[Example],
+        seeds: Iterable[SDKExampleParam],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -148,6 +149,45 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             cast_to=SyntheticDataStatus,
         )
 
+    def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataListResponse:
+        """
+        Lists the Synthetic Data Generation Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/data/generate_synthetic_data",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"state": state}, generate_synthetic_data_list_params.GenerateSyntheticDataListParams
+                ),
+            ),
+            cast_to=GenerateSyntheticDataListResponse,
+        )
+
     def cancel(
         self,
         job_id: str,
@@ -179,45 +219,6 @@ class GenerateSyntheticDataResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    def list_jobs(
-        self,
-        *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataListJobsResponse:
-        """
-        Lists the Synthetic Data Generation Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/data/generate_synthetic_data",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"state": state}, generate_synthetic_data_list_jobs_params.GenerateSyntheticDataListJobsParams
-                ),
-            ),
-            cast_to=GenerateSyntheticDataListJobsResponse,
         )
 
     def stream_data(
@@ -295,7 +296,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncGenerateSyntheticDataResourceWithRawResponse(self)
 
@@ -304,7 +305,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncGenerateSyntheticDataResourceWithStreamingResponse(self)
 
@@ -312,10 +313,10 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[Example],
+        seeds: Iterable[SDKExampleParam],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -405,6 +406,45 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             cast_to=SyntheticDataStatus,
         )
 
+    async def list(
+        self,
+        *,
+        state: Optional[State] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateSyntheticDataListResponse:
+        """
+        Lists the Synthetic Data Generation Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/data/generate_synthetic_data",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, generate_synthetic_data_list_params.GenerateSyntheticDataListParams
+                ),
+            ),
+            cast_to=GenerateSyntheticDataListResponse,
+        )
+
     async def cancel(
         self,
         job_id: str,
@@ -436,45 +476,6 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=str,
-        )
-
-    async def list_jobs(
-        self,
-        *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataListJobsResponse:
-        """
-        Lists the Synthetic Data Generation Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/data/generate_synthetic_data",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"state": state}, generate_synthetic_data_list_jobs_params.GenerateSyntheticDataListJobsParams
-                ),
-            ),
-            cast_to=GenerateSyntheticDataListJobsResponse,
         )
 
     async def stream_data(
@@ -555,11 +556,11 @@ class GenerateSyntheticDataResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list = to_raw_response_wrapper(
+            generate_synthetic_data.list,
+        )
         self.cancel = to_raw_response_wrapper(
             generate_synthetic_data.cancel,
-        )
-        self.list_jobs = to_raw_response_wrapper(
-            generate_synthetic_data.list_jobs,
         )
         self.stream_data = to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -579,11 +580,11 @@ class AsyncGenerateSyntheticDataResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list = async_to_raw_response_wrapper(
+            generate_synthetic_data.list,
+        )
         self.cancel = async_to_raw_response_wrapper(
             generate_synthetic_data.cancel,
-        )
-        self.list_jobs = async_to_raw_response_wrapper(
-            generate_synthetic_data.list_jobs,
         )
         self.stream_data = async_to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -603,11 +604,11 @@ class GenerateSyntheticDataResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            generate_synthetic_data.list,
+        )
         self.cancel = to_streamed_response_wrapper(
             generate_synthetic_data.cancel,
-        )
-        self.list_jobs = to_streamed_response_wrapper(
-            generate_synthetic_data.list_jobs,
         )
         self.stream_data = to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -627,11 +628,11 @@ class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
+        self.list = async_to_streamed_response_wrapper(
+            generate_synthetic_data.list,
+        )
         self.cancel = async_to_streamed_response_wrapper(
             generate_synthetic_data.cancel,
-        )
-        self.list_jobs = async_to_streamed_response_wrapper(
-            generate_synthetic_data.list_jobs,
         )
         self.stream_data = async_to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,

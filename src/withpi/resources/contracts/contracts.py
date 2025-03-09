@@ -7,6 +7,7 @@ from typing import Optional
 import httpx
 
 from ...types import (
+    SDKContract,
     contract_score_params,
     contract_read_from_hf_params,
     contract_generate_dimensions_params,
@@ -33,8 +34,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.contract import Contract as SharedContract
-from ...types.shared_params.contract import Contract as SharedParamsContract
+from ...types.sdk_contract import SDKContract
+from ...types.sdk_contract_param import SDKContractParam
 from ...types.contract_score_response import ContractScoreResponse
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
@@ -51,7 +52,7 @@ class ContractsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return ContractsResourceWithRawResponse(self)
 
@@ -60,7 +61,7 @@ class ContractsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return ContractsResourceWithStreamingResponse(self)
 
@@ -75,7 +76,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> SDKContract:
         """
         Generates dimensions for a contract which will be used to evaluate it
 
@@ -105,7 +106,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=SDKContract,
         )
 
     def read_from_hf(
@@ -119,7 +120,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> SDKContract:
         """
         Read a scoring system from Huggingface dataset
 
@@ -150,7 +151,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=SDKContract,
         )
 
     def score(
@@ -158,7 +159,7 @@ class ContractsResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsContract,
+        scoring_system: SDKContractParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -212,7 +213,7 @@ class AsyncContractsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncContractsResourceWithRawResponse(self)
 
@@ -221,7 +222,7 @@ class AsyncContractsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncContractsResourceWithStreamingResponse(self)
 
@@ -236,7 +237,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> SDKContract:
         """
         Generates dimensions for a contract which will be used to evaluate it
 
@@ -266,7 +267,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=SDKContract,
         )
 
     async def read_from_hf(
@@ -280,7 +281,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedContract:
+    ) -> SDKContract:
         """
         Read a scoring system from Huggingface dataset
 
@@ -311,7 +312,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedContract,
+            cast_to=SDKContract,
         )
 
     async def score(
@@ -319,7 +320,7 @@ class AsyncContractsResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsContract,
+        scoring_system: SDKContractParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

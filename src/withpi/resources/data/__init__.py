@@ -8,13 +8,13 @@ from .data import (
     DataResourceWithStreamingResponse,
     AsyncDataResourceWithStreamingResponse,
 )
-from .inputs import (
-    InputsResource,
-    AsyncInputsResource,
-    InputsResourceWithRawResponse,
-    AsyncInputsResourceWithRawResponse,
-    InputsResourceWithStreamingResponse,
-    AsyncInputsResourceWithStreamingResponse,
+from .input import (
+    InputResource,
+    AsyncInputResource,
+    InputResourceWithRawResponse,
+    AsyncInputResourceWithRawResponse,
+    InputResourceWithStreamingResponse,
+    AsyncInputResourceWithStreamingResponse,
 )
 from .generate_synthetic_data import (
     GenerateSyntheticDataResource,
@@ -26,18 +26,18 @@ from .generate_synthetic_data import (
 )
 
 __all__ = [
-    "InputsResource",
-    "AsyncInputsResource",
-    "InputsResourceWithRawResponse",
-    "AsyncInputsResourceWithRawResponse",
-    "InputsResourceWithStreamingResponse",
-    "AsyncInputsResourceWithStreamingResponse",
     "GenerateSyntheticDataResource",
     "AsyncGenerateSyntheticDataResource",
     "GenerateSyntheticDataResourceWithRawResponse",
     "AsyncGenerateSyntheticDataResourceWithRawResponse",
     "GenerateSyntheticDataResourceWithStreamingResponse",
     "AsyncGenerateSyntheticDataResourceWithStreamingResponse",
+    "InputResource",
+    "AsyncInputResource",
+    "InputResourceWithRawResponse",
+    "AsyncInputResourceWithRawResponse",
+    "InputResourceWithStreamingResponse",
+    "AsyncInputResourceWithStreamingResponse",
     "DataResource",
     "AsyncDataResource",
     "DataResourceWithRawResponse",
