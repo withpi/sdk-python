@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -20,14 +19,17 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
+from ...types.model import sft_list_params, sft_create_params, sft_download_params
 from ..._base_client import make_request_options
-from ...types.shared.state import State
-from ...types.shared.sft_status import SftStatus
-from ...types.shared_params.example import Example
-from ...types.shared_params.contract import Contract
+from ...types.model.rl import TextGenerationBaseModel
+from ...types.contracts import State
+from ...types.contracts.state import State
+from ...types.model.sft_status import SftStatus
+from ...types.sdk_contract_param import SDKContractParam
+from ...types.data.sdk_example_param import SDKExampleParam
 from ...types.model.sft_list_response import SftListResponse
-from ...types.shared_params.lora_config import LoraConfig
+from ...types.model.rl.lora_config_param import LoraConfigParam
+from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -39,7 +41,7 @@ class SftResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return SftResourceWithRawResponse(self)
 
@@ -48,9 +50,74 @@ class SftResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return SftResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        examples: Iterable[SDKExampleParam],
+        scoring_system: SDKContractParam,
+        base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftStatus:
+        """Launches a SFT job
+
+        Args:
+          examples: Examples to use in the SFT tuning process.
+
+        We split this data into train/eval
+              90/10.
+
+          scoring_system: The scoring system to use in the SFT tuning process
+
+          base_sft_model: The base model to start the SFT tuning process.
+
+          learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: SFT number of train epochs: <= 10.
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/model/sft",
+            body=maybe_transform(
+                {
+                    "examples": examples,
+                    "scoring_system": scoring_system,
+                    "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
+                },
+                sft_create_params.SftCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftStatus,
+        )
 
     def retrieve(
         self,
@@ -226,72 +293,7 @@ class SftResource(SyncAPIResource):
             cast_to=SftStatus,
         )
 
-    def start_job(
-        self,
-        *,
-        examples: Iterable[Example],
-        scoring_system: Contract,
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
-        """Launches a SFT job
-
-        Args:
-          examples: Examples to use in the SFT tuning process.
-
-        We split this data into train/eval
-              90/10.
-
-          scoring_system: The scoring system to use in the SFT tuning process
-
-          base_sft_model: The base model to start the SFT tuning process.
-
-          learning_rate: SFT learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: SFT number of train epochs: <= 10.
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/model/sft",
-            body=maybe_transform(
-                {
-                    "examples": examples,
-                    "scoring_system": scoring_system,
-                    "base_sft_model": base_sft_model,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "system_prompt": system_prompt,
-                },
-                sft_start_job_params.SftStartJobParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftStatus,
-        )
-
-    def stream_messages(
+    def messages(
         self,
         job_id: str,
         *,
@@ -333,7 +335,7 @@ class AsyncSftResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSftResourceWithRawResponse(self)
 
@@ -342,9 +344,74 @@ class AsyncSftResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncSftResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        examples: Iterable[SDKExampleParam],
+        scoring_system: SDKContractParam,
+        base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftStatus:
+        """Launches a SFT job
+
+        Args:
+          examples: Examples to use in the SFT tuning process.
+
+        We split this data into train/eval
+              90/10.
+
+          scoring_system: The scoring system to use in the SFT tuning process
+
+          base_sft_model: The base model to start the SFT tuning process.
+
+          learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: SFT number of train epochs: <= 10.
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/model/sft",
+            body=await async_maybe_transform(
+                {
+                    "examples": examples,
+                    "scoring_system": scoring_system,
+                    "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
+                },
+                sft_create_params.SftCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftStatus,
+        )
 
     async def retrieve(
         self,
@@ -520,72 +587,7 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=SftStatus,
         )
 
-    async def start_job(
-        self,
-        *,
-        examples: Iterable[Example],
-        scoring_system: Contract,
-        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfig | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
-        """Launches a SFT job
-
-        Args:
-          examples: Examples to use in the SFT tuning process.
-
-        We split this data into train/eval
-              90/10.
-
-          scoring_system: The scoring system to use in the SFT tuning process
-
-          base_sft_model: The base model to start the SFT tuning process.
-
-          learning_rate: SFT learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: SFT number of train epochs: <= 10.
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/model/sft",
-            body=await async_maybe_transform(
-                {
-                    "examples": examples,
-                    "scoring_system": scoring_system,
-                    "base_sft_model": base_sft_model,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "system_prompt": system_prompt,
-                },
-                sft_start_job_params.SftStartJobParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftStatus,
-        )
-
-    async def stream_messages(
+    async def messages(
         self,
         job_id: str,
         *,
@@ -624,6 +626,9 @@ class SftResourceWithRawResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
+        self.create = to_raw_response_wrapper(
+            sft.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             sft.retrieve,
         )
@@ -639,11 +644,8 @@ class SftResourceWithRawResponse:
         self.load = to_raw_response_wrapper(
             sft.load,
         )
-        self.start_job = to_raw_response_wrapper(
-            sft.start_job,
-        )
-        self.stream_messages = to_raw_response_wrapper(
-            sft.stream_messages,
+        self.messages = to_raw_response_wrapper(
+            sft.messages,
         )
 
 
@@ -651,6 +653,9 @@ class AsyncSftResourceWithRawResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
+        self.create = async_to_raw_response_wrapper(
+            sft.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             sft.retrieve,
         )
@@ -666,11 +671,8 @@ class AsyncSftResourceWithRawResponse:
         self.load = async_to_raw_response_wrapper(
             sft.load,
         )
-        self.start_job = async_to_raw_response_wrapper(
-            sft.start_job,
-        )
-        self.stream_messages = async_to_raw_response_wrapper(
-            sft.stream_messages,
+        self.messages = async_to_raw_response_wrapper(
+            sft.messages,
         )
 
 
@@ -678,6 +680,9 @@ class SftResourceWithStreamingResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
+        self.create = to_streamed_response_wrapper(
+            sft.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             sft.retrieve,
         )
@@ -693,11 +698,8 @@ class SftResourceWithStreamingResponse:
         self.load = to_streamed_response_wrapper(
             sft.load,
         )
-        self.start_job = to_streamed_response_wrapper(
-            sft.start_job,
-        )
-        self.stream_messages = to_streamed_response_wrapper(
-            sft.stream_messages,
+        self.messages = to_streamed_response_wrapper(
+            sft.messages,
         )
 
 
@@ -705,6 +707,9 @@ class AsyncSftResourceWithStreamingResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
+        self.create = async_to_streamed_response_wrapper(
+            sft.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             sft.retrieve,
         )
@@ -720,9 +725,6 @@ class AsyncSftResourceWithStreamingResponse:
         self.load = async_to_streamed_response_wrapper(
             sft.load,
         )
-        self.start_job = async_to_streamed_response_wrapper(
-            sft.start_job,
-        )
-        self.stream_messages = async_to_streamed_response_wrapper(
-            sft.stream_messages,
+        self.messages = async_to_streamed_response_wrapper(
+            sft.messages,
         )

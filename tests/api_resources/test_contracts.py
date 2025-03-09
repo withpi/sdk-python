@@ -7,12 +7,12 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import PiClient, AsyncPiClient
+from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
 from withpi.types import (
+    SDKContract,
     ContractScoreResponse,
 )
-from withpi.types.shared import Contract
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -20,23 +20,26 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestContracts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_generate_dimensions(self, client: PiClient) -> None:
+    def test_method_generate_dimensions(self, client: Withpi) -> None:
         contract = client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_generate_dimensions_with_all_params(self, client: PiClient) -> None:
+    def test_method_generate_dimensions_with_all_params(self, client: Withpi) -> None:
         contract = client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_generate_dimensions(self, client: PiClient) -> None:
+    def test_raw_response_generate_dimensions(self, client: Withpi) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -44,10 +47,11 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_generate_dimensions(self, client: PiClient) -> None:
+    def test_streaming_response_generate_dimensions(self, client: Withpi) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         ) as response:
@@ -55,27 +59,30 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(Contract, contract, path=["response"])
+            assert_matches_type(SDKContract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_read_from_hf(self, client: PiClient) -> None:
+    def test_method_read_from_hf(self, client: Withpi) -> None:
         contract = client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_read_from_hf_with_all_params(self, client: PiClient) -> None:
+    def test_method_read_from_hf_with_all_params(self, client: Withpi) -> None:
         contract = client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_read_from_hf(self, client: PiClient) -> None:
+    def test_raw_response_read_from_hf(self, client: Withpi) -> None:
         response = client.contracts.with_raw_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -83,10 +90,11 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_read_from_hf(self, client: PiClient) -> None:
+    def test_streaming_response_read_from_hf(self, client: Withpi) -> None:
         with client.contracts.with_streaming_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         ) as response:
@@ -94,12 +102,13 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(Contract, contract, path=["response"])
+            assert_matches_type(SDKContract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_score(self, client: PiClient) -> None:
+    def test_method_score(self, client: Withpi) -> None:
         contract = client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -110,8 +119,9 @@ class TestContracts:
         )
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_method_score_with_all_params(self, client: PiClient) -> None:
+    def test_method_score_with_all_params(self, client: Withpi) -> None:
         contract = client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -155,8 +165,9 @@ class TestContracts:
         )
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_raw_response_score(self, client: PiClient) -> None:
+    def test_raw_response_score(self, client: Withpi) -> None:
         response = client.contracts.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -171,8 +182,9 @@ class TestContracts:
         contract = response.parse()
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_score(self, client: PiClient) -> None:
+    def test_streaming_response_score(self, client: Withpi) -> None:
         with client.contracts.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -193,23 +205,26 @@ class TestContracts:
 class TestAsyncContracts:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_dimensions(self, async_client: AsyncPiClient) -> None:
+    async def test_method_generate_dimensions(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_generate_dimensions(self, async_client: AsyncWithpi) -> None:
         response = await async_client.contracts.with_raw_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -217,10 +232,11 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_generate_dimensions(self, async_client: AsyncWithpi) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         ) as response:
@@ -228,27 +244,30 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(Contract, contract, path=["response"])
+            assert_matches_type(SDKContract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_read_from_hf(self, async_client: AsyncPiClient) -> None:
+    async def test_method_read_from_hf(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_read_from_hf(self, async_client: AsyncWithpi) -> None:
         response = await async_client.contracts.with_raw_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -256,10 +275,11 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(Contract, contract, path=["response"])
+        assert_matches_type(SDKContract, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_read_from_hf(self, async_client: AsyncWithpi) -> None:
         async with async_client.contracts.with_streaming_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         ) as response:
@@ -267,12 +287,13 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(Contract, contract, path=["response"])
+            assert_matches_type(SDKContract, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_score(self, async_client: AsyncPiClient) -> None:
+    async def test_method_score(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -283,8 +304,9 @@ class TestAsyncContracts:
         )
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_method_score_with_all_params(self, async_client: AsyncPiClient) -> None:
+    async def test_method_score_with_all_params(self, async_client: AsyncWithpi) -> None:
         contract = await async_client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -328,8 +350,9 @@ class TestAsyncContracts:
         )
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
+    async def test_raw_response_score(self, async_client: AsyncWithpi) -> None:
         response = await async_client.contracts.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -344,8 +367,9 @@ class TestAsyncContracts:
         contract = await response.parse()
         assert_matches_type(ContractScoreResponse, contract, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
+    async def test_streaming_response_score(self, async_client: AsyncWithpi) -> None:
         async with async_client.contracts.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",

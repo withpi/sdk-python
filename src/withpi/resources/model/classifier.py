@@ -22,11 +22,11 @@ from ..._response import (
 )
 from ...types.model import classifier_list_params, classifier_create_params, classifier_download_params
 from ..._base_client import make_request_options
-from ...types.shared.state import State
-from ...types.shared_params.example import Example
+from ...types.contracts import State
+from ...types.contracts.state import State
+from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.model.classification_status import ClassificationStatus
 from ...types.model.classifier_list_response import ClassifierListResponse
-from ...types.model.classifier_create_response import ClassifierCreateResponse
-from ...types.model.classifier_retrieve_response import ClassifierRetrieveResponse
 
 __all__ = ["ClassifierResource", "AsyncClassifierResource"]
 
@@ -38,7 +38,7 @@ class ClassifierResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return ClassifierResourceWithRawResponse(self)
 
@@ -47,7 +47,7 @@ class ClassifierResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return ClassifierResourceWithStreamingResponse(self)
 
@@ -55,7 +55,7 @@ class ClassifierResource(SyncAPIResource):
         self,
         *,
         base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[Example],
+        examples: Iterable[SDKExampleParam],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -64,7 +64,7 @@ class ClassifierResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassifierCreateResponse:
+    ) -> ClassificationStatus:
         """
         Launches a Classifier job
 
@@ -99,7 +99,7 @@ class ClassifierResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ClassifierCreateResponse,
+            cast_to=ClassificationStatus,
         )
 
     def retrieve(
@@ -112,7 +112,7 @@ class ClassifierResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassifierRetrieveResponse:
+    ) -> ClassificationStatus:
         """
         Checks the status of a Classifier job
 
@@ -132,7 +132,7 @@ class ClassifierResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ClassifierRetrieveResponse,
+            cast_to=ClassificationStatus,
         )
 
     def list(
@@ -285,7 +285,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncClassifierResourceWithRawResponse(self)
 
@@ -294,7 +294,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/withpi-python#with_streaming_response
         """
         return AsyncClassifierResourceWithStreamingResponse(self)
 
@@ -302,7 +302,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         self,
         *,
         base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[Example],
+        examples: Iterable[SDKExampleParam],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -311,7 +311,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassifierCreateResponse:
+    ) -> ClassificationStatus:
         """
         Launches a Classifier job
 
@@ -346,7 +346,7 @@ class AsyncClassifierResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ClassifierCreateResponse,
+            cast_to=ClassificationStatus,
         )
 
     async def retrieve(
@@ -359,7 +359,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassifierRetrieveResponse:
+    ) -> ClassificationStatus:
         """
         Checks the status of a Classifier job
 
@@ -379,7 +379,7 @@ class AsyncClassifierResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ClassifierRetrieveResponse,
+            cast_to=ClassificationStatus,
         )
 
     async def list(

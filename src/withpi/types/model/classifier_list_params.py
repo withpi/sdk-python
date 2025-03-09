@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-from ..shared.state import State
+from ..contracts.state import State
 
 __all__ = ["ClassifierListParams"]
 

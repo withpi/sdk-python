@@ -21,14 +21,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from withpi import PiClient, AsyncPiClient, APIResponseValidationError
+from withpi import Withpi, AsyncWithpi, APIResponseValidationError
 from withpi._types import Omit
-from withpi._utils import maybe_transform
 from withpi._models import BaseModel, FinalRequestOptions
 from withpi._constants import RAW_RESPONSE_HEADER
-from withpi._exceptions import PiClientError, APIStatusError, APITimeoutError, APIResponseValidationError
+from withpi._exceptions import WithpiError, APIStatusError, APITimeoutError, APIResponseValidationError
 from withpi._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
-from withpi.types.contract_score_params import ContractScoreParams
 
 from .utils import update_env
 
@@ -46,7 +44,7 @@ def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
     return 0.1
 
 
-def _get_open_connections(client: PiClient | AsyncPiClient) -> int:
+def _get_open_connections(client: Withpi | AsyncWithpi) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -54,8 +52,8 @@ def _get_open_connections(client: PiClient | AsyncPiClient) -> int:
     return len(pool._requests)
 
 
-class TestPiClient:
-    client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestWithpi:
+    client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -102,7 +100,7 @@ class TestPiClient:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = PiClient(
+        client = Withpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -136,7 +134,7 @@ class TestPiClient:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = PiClient(
+        client = Withpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -261,9 +259,7 @@ class TestPiClient:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = PiClient(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
-        )
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -272,7 +268,7 @@ class TestPiClient:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = PiClient(
+            client = Withpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -282,7 +278,7 @@ class TestPiClient:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = PiClient(
+            client = Withpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -292,7 +288,7 @@ class TestPiClient:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = PiClient(
+            client = Withpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -303,7 +299,7 @@ class TestPiClient:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                PiClient(
+                Withpi(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -311,14 +307,14 @@ class TestPiClient:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = PiClient(
+        client = Withpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = PiClient(
+        client2 = Withpi(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -332,17 +328,17 @@ class TestPiClient:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-api-key") == api_key
 
-        with pytest.raises(PiClientError):
+        with pytest.raises(WithpiError):
             with update_env(**{"WITHPI_API_KEY": Omit()}):
-                client2 = PiClient(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = Withpi(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = PiClient(
+        client = Withpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -456,7 +452,7 @@ class TestPiClient:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: PiClient) -> None:
+    def test_multipart_repeating_array(self, client: Withpi) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -543,7 +539,7 @@ class TestPiClient:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = PiClient(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
+        client = Withpi(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -551,15 +547,15 @@ class TestPiClient:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(PI_CLIENT_BASE_URL="http://localhost:5000/from/env"):
-            client = PiClient(api_key=api_key, _strict_response_validation=True)
+        with update_env(WITHPI_BASE_URL="http://localhost:5000/from/env"):
+            client = Withpi(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            PiClient(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            PiClient(
+            Withpi(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Withpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -568,7 +564,7 @@ class TestPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: PiClient) -> None:
+    def test_base_url_trailing_slash(self, client: Withpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -581,8 +577,8 @@ class TestPiClient:
     @pytest.mark.parametrize(
         "client",
         [
-            PiClient(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            PiClient(
+            Withpi(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Withpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -591,7 +587,7 @@ class TestPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: PiClient) -> None:
+    def test_base_url_no_trailing_slash(self, client: Withpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -604,8 +600,8 @@ class TestPiClient:
     @pytest.mark.parametrize(
         "client",
         [
-            PiClient(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            PiClient(
+            Withpi(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Withpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -614,7 +610,7 @@ class TestPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: PiClient) -> None:
+    def test_absolute_request_url(self, client: Withpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -625,7 +621,7 @@ class TestPiClient:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -636,7 +632,7 @@ class TestPiClient:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -657,7 +653,7 @@ class TestPiClient:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
+            Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -666,12 +662,12 @@ class TestPiClient:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -699,7 +695,7 @@ class TestPiClient:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = PiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Withpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -709,27 +705,11 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/contracts/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/contracts/calibrate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/contracts/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Help me with my problem",
-                            llm_output="Of course I can help with that",
-                            scoring_system={
-                                "description": "Write a children's story communicating a simple life lesson.",
-                                "name": "Sample Contract",
-                            },
-                        ),
-                        ContractScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+            self.client.get(
+                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
@@ -737,27 +717,11 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/contracts/score").mock(return_value=httpx.Response(500))
+        respx_mock.get("/contracts/calibrate").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/contracts/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Help me with my problem",
-                            llm_output="Of course I can help with that",
-                            scoring_system={
-                                "description": "Write a children's story communicating a simple life lesson.",
-                                "name": "Sample Contract",
-                            },
-                        ),
-                        ContractScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+            self.client.get(
+                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
@@ -768,7 +732,7 @@ class TestPiClient:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
         self,
-        client: PiClient,
+        client: Withpi,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -786,16 +750,9 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-        )
+        response = client.contracts.calibrate.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -804,7 +761,7 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
-        self, client: PiClient, failures_before_success: int, respx_mock: MockRouter
+        self, client: Withpi, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -817,17 +774,9 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            extra_headers={"x-stainless-retry-count": Omit()},
-        )
+        response = client.contracts.calibrate.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -835,7 +784,7 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
-        self, client: PiClient, failures_before_success: int, respx_mock: MockRouter
+        self, client: Withpi, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -848,23 +797,15 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            extra_headers={"x-stainless-retry-count": "42"},
-        )
+        response = client.contracts.calibrate.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
-class TestAsyncPiClient:
-    client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestAsyncWithpi:
+    client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -913,7 +854,7 @@ class TestAsyncPiClient:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -947,7 +888,7 @@ class TestAsyncPiClient:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -1072,7 +1013,7 @@ class TestAsyncPiClient:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -1083,7 +1024,7 @@ class TestAsyncPiClient:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncPiClient(
+            client = AsyncWithpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1093,7 +1034,7 @@ class TestAsyncPiClient:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncPiClient(
+            client = AsyncWithpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1103,7 +1044,7 @@ class TestAsyncPiClient:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncPiClient(
+            client = AsyncWithpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1114,7 +1055,7 @@ class TestAsyncPiClient:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncPiClient(
+                AsyncWithpi(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -1122,14 +1063,14 @@ class TestAsyncPiClient:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = AsyncPiClient(
+        client2 = AsyncWithpi(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1143,17 +1084,17 @@ class TestAsyncPiClient:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-api-key") == api_key
 
-        with pytest.raises(PiClientError):
+        with pytest.raises(WithpiError):
             with update_env(**{"WITHPI_API_KEY": Omit()}):
-                client2 = AsyncPiClient(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = AsyncWithpi(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1267,7 +1208,7 @@ class TestAsyncPiClient:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncPiClient) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncWithpi) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -1354,7 +1295,7 @@ class TestAsyncPiClient:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncPiClient(
+        client = AsyncWithpi(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1364,17 +1305,17 @@ class TestAsyncPiClient:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(PI_CLIENT_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncPiClient(api_key=api_key, _strict_response_validation=True)
+        with update_env(WITHPI_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncWithpi(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1383,7 +1324,7 @@ class TestAsyncPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: AsyncPiClient) -> None:
+    def test_base_url_trailing_slash(self, client: AsyncWithpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1396,10 +1337,10 @@ class TestAsyncPiClient:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1408,7 +1349,7 @@ class TestAsyncPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: AsyncPiClient) -> None:
+    def test_base_url_no_trailing_slash(self, client: AsyncWithpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1421,10 +1362,10 @@ class TestAsyncPiClient:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1433,7 +1374,7 @@ class TestAsyncPiClient:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: AsyncPiClient) -> None:
+    def test_absolute_request_url(self, client: AsyncWithpi) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1444,7 +1385,7 @@ class TestAsyncPiClient:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1456,7 +1397,7 @@ class TestAsyncPiClient:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1478,7 +1419,7 @@ class TestAsyncPiClient:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncPiClient(
+            AsyncWithpi(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -1490,12 +1431,12 @@ class TestAsyncPiClient:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1524,7 +1465,7 @@ class TestAsyncPiClient:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncPiClient(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncWithpi(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1534,27 +1475,11 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/contracts/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/contracts/calibrate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/contracts/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Help me with my problem",
-                            llm_output="Of course I can help with that",
-                            scoring_system={
-                                "description": "Write a children's story communicating a simple life lesson.",
-                                "name": "Sample Contract",
-                            },
-                        ),
-                        ContractScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+            await self.client.get(
+                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1562,27 +1487,11 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/contracts/score").mock(return_value=httpx.Response(500))
+        respx_mock.get("/contracts/calibrate").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/contracts/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Help me with my problem",
-                            llm_output="Of course I can help with that",
-                            scoring_system={
-                                "description": "Write a children's story communicating a simple life lesson.",
-                                "name": "Sample Contract",
-                            },
-                        ),
-                        ContractScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+            await self.client.get(
+                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1594,7 +1503,7 @@ class TestAsyncPiClient:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
         self,
-        async_client: AsyncPiClient,
+        async_client: AsyncWithpi,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -1612,16 +1521,9 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = await client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-        )
+        response = await client.contracts.calibrate.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1631,7 +1533,7 @@ class TestAsyncPiClient:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
-        self, async_client: AsyncPiClient, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncWithpi, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1644,16 +1546,10 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = await client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            extra_headers={"x-stainless-retry-count": Omit()},
+        response = await client.contracts.calibrate.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1663,7 +1559,7 @@ class TestAsyncPiClient:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
-        self, async_client: AsyncPiClient, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncWithpi, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1676,16 +1572,10 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/contracts/score").mock(side_effect=retry_handler)
+        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
 
-        response = await client.contracts.with_raw_response.score(
-            llm_input="Tell me something different",
-            llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            extra_headers={"x-stainless-retry-count": "42"},
+        response = await client.contracts.calibrate.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
