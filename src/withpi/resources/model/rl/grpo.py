@@ -28,9 +28,9 @@ from ....types.model.rl import (
 )
 from ....types.contracts import State
 from ....types.contracts.state import State
+from ....types.sdk_contract_param import SDKContractParam
 from ....types.model.rl.rl_grpo_status import RlGrpoStatus
 from ....types.model.rl.lora_config_param import LoraConfigParam
-from ....types.shared_params.sdk_contract import SDKContract
 from ....types.model.rl.grpo_list_response import GrpoListResponse
 from ....types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
@@ -65,7 +65,7 @@ class GrpoResource(SyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: SDKContract,
+        scoring_system: SDKContractParam,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -357,7 +357,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: SDKContract,
+        scoring_system: SDKContractParam,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

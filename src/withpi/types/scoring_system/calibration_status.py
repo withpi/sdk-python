@@ -2,8 +2,9 @@
 
 from typing import List, Optional
 
+from withpi.types import ScoringSystem
+
 from ..._models import BaseModel
-from .scoring_system import ScoringSystem
 from ..contracts.state import State
 
 __all__ = ["CalibrationStatus"]

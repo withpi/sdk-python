@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["SDKContract", "Dimension", "DimensionSubDimension"]
+__all__ = ["SDKContractParam", "Dimension", "DimensionSubDimension"]
 
 
 class DimensionSubDimensionTyped(TypedDict, total=False):
@@ -71,7 +71,7 @@ class DimensionTyped(TypedDict, total=False):
 Dimension: TypeAlias = Union[DimensionTyped, Dict[str, object]]
 
 
-class SDKContractTyped(TypedDict, total=False):
+class SDKContractParamTyped(TypedDict, total=False):
     description: Required[str]
     """The description of the contract"""
 
@@ -82,4 +82,4 @@ class SDKContractTyped(TypedDict, total=False):
     """The dimensions of the contract"""
 
 
-SDKContract: TypeAlias = Union[SDKContractTyped, Dict[str, object]]
+SDKContractParam: TypeAlias = Union[SDKContractParamTyped, Dict[str, object]]
