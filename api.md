@@ -209,3 +209,43 @@ Methods:
 
 - <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classify_response.py">QueryClassifyResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
+
+# ScoringSystem
+
+Types:
+
+```python
+from withpi.types import (
+    ScoringSystemGenerateDimensionsResponse,
+    ScoringSystemReadFromHfResponse,
+    ScoringSystemScoreResponse,
+)
+```
+
+Methods:
+
+- <code title="post /scoring_system/generate_dimensions">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scoring_system_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_generate_dimensions_response.py">ScoringSystemGenerateDimensionsResponse</a></code>
+- <code title="post /scoring_system/read_from_hf">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scoring_system_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_read_from_hf_response.py">ScoringSystemReadFromHfResponse</a></code>
+- <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_score_response.py">ScoringSystemScoreResponse</a></code>
+
+## Calibrate
+
+Types:
+
+```python
+from withpi.types.scoring_system import (
+    CalibrateCreateResponse,
+    CalibrateRetrieveResponse,
+    CalibrateListResponse,
+    CalibrateCancelResponse,
+    CalibrateMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_create_response.py">CalibrateCreateResponse</a></code>
+- <code title="get /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scoring_system/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
+- <code title="get /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
+- <code title="delete /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /scoring_system/calibrate/{job_id}/messages">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">messages</a>(job_id) -> str</code>
