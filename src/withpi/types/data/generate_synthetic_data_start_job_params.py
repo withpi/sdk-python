@@ -8,10 +8,10 @@ from typing_extensions import Required, TypedDict
 from .sdk_example_param import SDKExampleParam
 from .sdk_exploration_mode import SDKExplorationMode
 
-__all__ = ["GenerateSyntheticDataCreateParams"]
+__all__ = ["GenerateSyntheticDataStartJobParams"]
 
 
-class GenerateSyntheticDataCreateParams(TypedDict, total=False):
+class GenerateSyntheticDataStartJobParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 

@@ -8,10 +8,10 @@ from typing_extensions import Literal, Required, TypedDict
 from ..sdk_contract_param import SDKContractParam
 from ..data.sdk_example_param import SDKExampleParam
 
-__all__ = ["OptimizeCreateParams"]
+__all__ = ["OptimizeStartJobParams"]
 
 
-class OptimizeCreateParams(TypedDict, total=False):
+class OptimizeStartJobParams(TypedDict, total=False):
     contract: Required[SDKContractParam]
     """The contract to optimize"""
 

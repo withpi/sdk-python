@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["OptimizeMessagesResponse"]
+__all__ = ["ClassifierStreamMessagesResponse"]
 
-OptimizeMessagesResponse: TypeAlias = str
+ClassifierStreamMessagesResponse: TypeAlias = str

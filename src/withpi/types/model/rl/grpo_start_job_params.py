@@ -9,10 +9,10 @@ from .lora_config_param import LoraConfigParam
 from ...sdk_contract_param import SDKContractParam
 from .text_generation_base_model import TextGenerationBaseModel
 
-__all__ = ["GrpoCreateParams", "Example"]
+__all__ = ["GrpoStartJobParams", "Example"]
 
 
-class GrpoCreateParams(TypedDict, total=False):
+class GrpoStartJobParams(TypedDict, total=False):
     base_rl_model: Required[TextGenerationBaseModel]
     """The base model to start the RL tunning process"""
 

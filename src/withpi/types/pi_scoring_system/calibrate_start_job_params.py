@@ -10,10 +10,10 @@ from ..contracts.calibration_strategy import CalibrationStrategy
 from ..contracts.sdk_labeled_example_param import SDKLabeledExampleParam
 from ..contracts.sdk_preference_example_param import SDKPreferenceExampleParam
 
-__all__ = ["CalibrateCreateParams"]
+__all__ = ["CalibrateStartJobParams"]
 
 
-class CalibrateCreateParams(TypedDict, total=False):
+class CalibrateStartJobParams(TypedDict, total=False):
     scoring_system: Required[ScoringSystemParam]
     """The scoring system to calibrate"""
 

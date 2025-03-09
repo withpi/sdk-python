@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..data.sdk_example_param import SDKExampleParam
 
-__all__ = ["ClassifierCreateParams"]
+__all__ = ["ClassifierStartJobParams"]
 
 
-class ClassifierCreateParams(TypedDict, total=False):
+class ClassifierStartJobParams(TypedDict, total=False):
     base_model: Required[Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"]]
     """The base model to start the classification tuning process"""
 
