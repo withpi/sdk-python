@@ -24,7 +24,7 @@ from ..._base_client import make_request_options
 from ...types.prompt import optimize_list_params, optimize_start_job_params
 from ...types.shared_params.scorer import Scorer
 from ...types.prompt.optimize_list_response import OptimizeListResponse
-from ...types.prompt.prompt_optimization_status import PromptOptimizationStatus
+from ...types.shared.prompt_optimization_status import PromptOptimizationStatus
 
 __all__ = ["OptimizeResource", "AsyncOptimizeResource"]
 

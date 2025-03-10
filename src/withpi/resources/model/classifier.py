@@ -22,7 +22,7 @@ from ..._response import (
 )
 from ...types.model import classifier_list_params, classifier_download_params, classifier_start_job_params
 from ..._base_client import make_request_options
-from ...types.model.classification_status import ClassificationStatus
+from ...types.shared.classification_status import ClassificationStatus
 from ...types.model.classifier_list_response import ClassifierListResponse
 
 __all__ = ["ClassifierResource", "AsyncClassifierResource"]

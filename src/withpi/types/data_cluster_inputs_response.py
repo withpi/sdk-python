@@ -5,10 +5,10 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["DataCreateClusterInputsResponse", "DataCreateClusterInputsResponseItem"]
+__all__ = ["DataClusterInputsResponse", "DataClusterInputsResponseItem"]
 
 
-class DataCreateClusterInputsResponseItem(BaseModel):
+class DataClusterInputsResponseItem(BaseModel):
     inputs: List[str]
     """The input IDs assigned to this topic"""
 
@@ -16,4 +16,4 @@ class DataCreateClusterInputsResponseItem(BaseModel):
     """The topic of the input in this cluster"""
 
 
-DataCreateClusterInputsResponse: TypeAlias = List[DataCreateClusterInputsResponseItem]
+DataClusterInputsResponse: TypeAlias = List[DataClusterInputsResponseItem]
