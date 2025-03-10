@@ -28,7 +28,7 @@ from ...types.shared.sft_status import SftStatus
 from ...types.model.sft_list_response import SftListResponse
 from ...types.shared_params.sdk_example import SDKExample
 from ...types.model.rl.lora_config_param import LoraConfigParam
-from ...types.shared_params.sdk_contract import SDKContract
+from ...types.shared_params.scoring_system import ScoringSystem
 from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
@@ -232,7 +232,7 @@ class SftResource(SyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scoring_system: SDKContract,
+        scoring_system: ScoringSystem,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
@@ -526,7 +526,7 @@ class AsyncSftResource(AsyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scoring_system: SDKContract,
+        scoring_system: ScoringSystem,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,

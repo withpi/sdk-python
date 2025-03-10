@@ -6,15 +6,12 @@ from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.sdk_example import SDKExample
-from ..shared_params.sdk_contract import SDKContract
+from ..shared_params.scoring_system import ScoringSystem
 
 __all__ = ["OptimizeStartJobParams"]
 
 
 class OptimizeStartJobParams(TypedDict, total=False):
-    contract: Required[SDKContract]
-    """The contract to optimize"""
-
     examples: Required[Iterable[SDKExample]]
     """The examples to train and validate on"""
 
@@ -23,6 +20,9 @@ class OptimizeStartJobParams(TypedDict, total=False):
 
     model_id: Required[Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"]]
     """The model to use for generating responses"""
+
+    scoring_system: Required[ScoringSystem]
+    """The contract to optimize"""
 
     tuning_algorithm: Required[Literal["PI", "DSPY"]]
     """The tuning algorithm to use"""

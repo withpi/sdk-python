@@ -7,7 +7,7 @@ from typing_extensions import Required, TypedDict
 
 from .rl.lora_config_param import LoraConfigParam
 from ..shared_params.sdk_example import SDKExample
-from ..shared_params.sdk_contract import SDKContract
+from ..shared_params.scoring_system import ScoringSystem
 from .rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftStartJobParams"]
@@ -20,7 +20,7 @@ class SftStartJobParams(TypedDict, total=False):
     We split this data into train/eval 90/10.
     """
 
-    scoring_system: Required[SDKContract]
+    scoring_system: Required[ScoringSystem]
     """The scoring system to use in the SFT tuning process"""
 
     base_sft_model: TextGenerationBaseModel

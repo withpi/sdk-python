@@ -7,14 +7,14 @@ from typing_extensions import Required, TypedDict
 
 from .calibration_strategy import CalibrationStrategy
 from .sdk_labeled_example_param import SDKLabeledExampleParam
-from ..shared_params.sdk_contract import SDKContract
 from .sdk_preference_example_param import SDKPreferenceExampleParam
+from ..shared_params.scoring_system import ScoringSystem
 
 __all__ = ["CalibrateStartJobParams"]
 
 
 class CalibrateStartJobParams(TypedDict, total=False):
-    scoring_system: Required[SDKContract]
+    scoring_system: Required[ScoringSystem]
     """The scoring system to calibrate"""
 
     examples: Optional[Iterable[SDKLabeledExampleParam]]

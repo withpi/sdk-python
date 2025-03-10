@@ -239,7 +239,7 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -256,7 +256,7 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -306,7 +306,7 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -327,7 +327,7 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         ) as response:
@@ -604,7 +604,7 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -621,7 +621,7 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -671,7 +671,7 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -692,7 +692,7 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         ) as response:
