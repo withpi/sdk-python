@@ -5,17 +5,13 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..data.sdk_example_param import SDKExampleParam
-from ..shared_params.sdk_contract import SDKContract
+from ..shared_params.scorer import Scorer
 
-__all__ = ["OptimizeStartJobParams"]
+__all__ = ["OptimizeStartJobParams", "Example"]
 
 
 class OptimizeStartJobParams(TypedDict, total=False):
-    contract: Required[SDKContract]
-    """The contract to optimize"""
-
-    examples: Required[Iterable[SDKExampleParam]]
+    examples: Required[Iterable[Example]]
     """The examples to train and validate on"""
 
     initial_system_instruction: Required[str]
@@ -23,6 +19,9 @@ class OptimizeStartJobParams(TypedDict, total=False):
 
     model_id: Required[Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"]]
     """The model to use for generating responses"""
+
+    scorer: Required[Scorer]
+    """The contract to optimize"""
 
     tuning_algorithm: Required[Literal["PI", "DSPY"]]
     """The tuning algorithm to use"""
@@ -38,3 +37,11 @@ class OptimizeStartJobParams(TypedDict, total=False):
 
     This only applies for the DSPY. Leave it as None if tuning_algorithm != DSPY.
     """
+
+
+class Example(TypedDict, total=False):
+    llm_input: Required[str]
+    """The input to LLM"""
+
+    llm_output: Required[str]
+    """The output to evaluate"""

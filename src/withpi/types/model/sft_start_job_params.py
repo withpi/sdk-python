@@ -6,21 +6,20 @@ from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 from .rl.lora_config_param import LoraConfigParam
-from ..data.sdk_example_param import SDKExampleParam
-from ..shared_params.sdk_contract import SDKContract
+from ..shared_params.scorer import Scorer
 from .rl.text_generation_base_model import TextGenerationBaseModel
 
-__all__ = ["SftStartJobParams"]
+__all__ = ["SftStartJobParams", "Example"]
 
 
 class SftStartJobParams(TypedDict, total=False):
-    examples: Required[Iterable[SDKExampleParam]]
+    examples: Required[Iterable[Example]]
     """Examples to use in the SFT tuning process.
 
     We split this data into train/eval 90/10.
     """
 
-    scoring_system: Required[SDKContract]
+    scorer: Required[Scorer]
     """The scoring system to use in the SFT tuning process"""
 
     base_sft_model: TextGenerationBaseModel
@@ -37,3 +36,11 @@ class SftStartJobParams(TypedDict, total=False):
 
     system_prompt: Optional[str]
     """A custom system prompt to use during the RL tuning process"""
+
+
+class Example(TypedDict, total=False):
+    llm_input: Required[str]
+    """The input to LLM"""
+
+    llm_output: Required[str]
+    """The output to evaluate"""

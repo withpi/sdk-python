@@ -237,9 +237,9 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -254,9 +254,9 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -304,9 +304,9 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -325,9 +325,9 @@ class TestGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         ) as response:
@@ -602,9 +602,9 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -619,9 +619,9 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={"lora_rank": "R_16"},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -669,9 +669,9 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -690,9 +690,9 @@ class TestAsyncGrpo:
             learning_rate=0.000005,
             lora_config={},
             num_train_epochs=10,
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         ) as response:

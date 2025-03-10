@@ -144,10 +144,6 @@ class TestOptimize:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         optimize = client.prompt.optimize.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -156,6 +152,10 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
@@ -164,9 +164,17 @@ class TestOptimize:
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         optimize = client.prompt.optimize.start_job(
-            contract={
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            initial_system_instruction="Write a great story around the given topic.",
+            model_id="gpt-4o-mini",
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -201,14 +209,6 @@ class TestOptimize:
                     }
                 ],
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            initial_system_instruction="Write a great story around the given topic.",
-            model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             use_chain_of_thought=False,
@@ -219,10 +219,6 @@ class TestOptimize:
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.prompt.optimize.with_raw_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -231,6 +227,10 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         )
 
@@ -243,10 +243,6 @@ class TestOptimize:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.prompt.optimize.with_streaming_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -255,6 +251,10 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         ) as response:
             assert not response.is_closed
@@ -435,10 +435,6 @@ class TestAsyncOptimize:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         optimize = await async_client.prompt.optimize.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -447,6 +443,10 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
@@ -455,9 +455,17 @@ class TestAsyncOptimize:
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         optimize = await async_client.prompt.optimize.start_job(
-            contract={
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            initial_system_instruction="Write a great story around the given topic.",
+            model_id="gpt-4o-mini",
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -492,14 +500,6 @@ class TestAsyncOptimize:
                     }
                 ],
             },
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            initial_system_instruction="Write a great story around the given topic.",
-            model_id="gpt-4o-mini",
             tuning_algorithm="PI",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             use_chain_of_thought=False,
@@ -510,10 +510,6 @@ class TestAsyncOptimize:
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.prompt.optimize.with_raw_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -522,6 +518,10 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         )
 
@@ -534,10 +534,6 @@ class TestAsyncOptimize:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.prompt.optimize.with_streaming_response.start_job(
-            contract={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -546,6 +542,10 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
             tuning_algorithm="PI",
         ) as response:
             assert not response.is_closed

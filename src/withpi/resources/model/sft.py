@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -22,13 +23,12 @@ from ..._response import (
 from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
 from ...types.model.rl import TextGenerationBaseModel
-from ...types.contracts import State
-from ...types.contracts.state import State
-from ...types.model.sft_status import SftStatus
-from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.shared_params.scorer import Scorer
 from ...types.model.sft_list_response import SftListResponse
+from ...types.model.sft_load_response import SftLoadResponse
 from ...types.model.rl.lora_config_param import LoraConfigParam
-from ...types.shared_params.sdk_contract import SDKContract
+from ...types.model.sft_retrieve_response import SftRetrieveResponse
+from ...types.model.sft_start_job_response import SftStartJobResponse
 from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
@@ -64,7 +64,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftRetrieveResponse:
         """
         Checks the status of a SFT job
 
@@ -84,13 +84,13 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftRetrieveResponse,
         )
 
     def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -205,7 +205,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftLoadResponse:
         """
         Loads a SFT model into serving for a limited period of time
 
@@ -225,14 +225,14 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftLoadResponse,
         )
 
     def start_job(
         self,
         *,
-        examples: Iterable[SDKExampleParam],
-        scoring_system: SDKContract,
+        examples: Iterable[sft_start_job_params.Example],
+        scorer: Scorer,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
@@ -244,7 +244,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftStartJobResponse:
         """Launches a SFT job
 
         Args:
@@ -253,7 +253,7 @@ class SftResource(SyncAPIResource):
         We split this data into train/eval
               90/10.
 
-          scoring_system: The scoring system to use in the SFT tuning process
+          scorer: The scoring system to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -278,7 +278,7 @@ class SftResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "examples": examples,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
@@ -290,7 +290,7 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftStartJobResponse,
         )
 
     def stream_messages(
@@ -358,7 +358,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftRetrieveResponse:
         """
         Checks the status of a SFT job
 
@@ -378,13 +378,13 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftRetrieveResponse,
         )
 
     async def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -499,7 +499,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftLoadResponse:
         """
         Loads a SFT model into serving for a limited period of time
 
@@ -519,14 +519,14 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftLoadResponse,
         )
 
     async def start_job(
         self,
         *,
-        examples: Iterable[SDKExampleParam],
-        scoring_system: SDKContract,
+        examples: Iterable[sft_start_job_params.Example],
+        scorer: Scorer,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
@@ -538,7 +538,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatus:
+    ) -> SftStartJobResponse:
         """Launches a SFT job
 
         Args:
@@ -547,7 +547,7 @@ class AsyncSftResource(AsyncAPIResource):
         We split this data into train/eval
               90/10.
 
-          scoring_system: The scoring system to use in the SFT tuning process
+          scorer: The scoring system to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -572,7 +572,7 @@ class AsyncSftResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "examples": examples,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
@@ -584,7 +584,7 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStatus,
+            cast_to=SftStartJobResponse,
         )
 
     async def stream_messages(

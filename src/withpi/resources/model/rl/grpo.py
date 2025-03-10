@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -26,11 +27,9 @@ from ....types.model.rl import (
     grpo_download_params,
     grpo_start_job_params,
 )
-from ....types.contracts import State
-from ....types.contracts.state import State
+from ....types.shared_params.scorer import Scorer
 from ....types.model.rl.rl_grpo_status import RlGrpoStatus
 from ....types.model.rl.lora_config_param import LoraConfigParam
-from ....types.shared_params.sdk_contract import SDKContract
 from ....types.model.rl.grpo_list_response import GrpoListResponse
 from ....types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
@@ -93,7 +92,7 @@ class GrpoResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -239,7 +238,7 @@ class GrpoResource(SyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: SDKContract,
+        scorer: Scorer,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -262,7 +261,7 @@ class GrpoResource(SyncAPIResource):
 
           num_train_epochs: GRPO number of train epochs
 
-          scoring_system: The scoring system to use in the GRPO tuning process
+          scorer: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -283,7 +282,7 @@ class GrpoResource(SyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
@@ -385,7 +384,7 @@ class AsyncGrpoResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -531,7 +530,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: SDKContract,
+        scorer: Scorer,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -554,7 +553,7 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           num_train_epochs: GRPO number of train epochs
 
-          scoring_system: The scoring system to use in the GRPO tuning process
+          scorer: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -575,7 +574,7 @@ class AsyncGrpoResource(AsyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
