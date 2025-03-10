@@ -11,8 +11,10 @@ from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.model import (
     GrpoListResponse,
+    GrpoLoadResponse,
+    GrpoLaunchResponse,
+    GrpoStatusResponse,
 )
-from withpi.types.model.rl import RlGrpoStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -159,7 +161,7 @@ class TestGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -209,7 +211,7 @@ class TestGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -230,7 +232,7 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -251,7 +253,7 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -261,7 +263,7 @@ class TestGrpo:
         grpo = client.model.grpo.load(
             "job_id",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -273,7 +275,7 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -285,7 +287,7 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -345,7 +347,7 @@ class TestGrpo:
         grpo = client.model.grpo.status(
             "job_id",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -357,7 +359,7 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -369,7 +371,7 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -524,7 +526,7 @@ class TestAsyncGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -574,7 +576,7 @@ class TestAsyncGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -595,7 +597,7 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -616,7 +618,7 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -626,7 +628,7 @@ class TestAsyncGrpo:
         grpo = await async_client.model.grpo.load(
             "job_id",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -638,7 +640,7 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -650,7 +652,7 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -710,7 +712,7 @@ class TestAsyncGrpo:
         grpo = await async_client.model.grpo.status(
             "job_id",
         )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -722,7 +724,7 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -734,7 +736,7 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+            assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

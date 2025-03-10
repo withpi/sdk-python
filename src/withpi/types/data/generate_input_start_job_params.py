@@ -7,10 +7,10 @@ from typing_extensions import Required, TypedDict
 
 from ..shared.exploration_mode import ExplorationMode
 
-__all__ = ["GenerateInputCreateParams"]
+__all__ = ["GenerateInputStartJobParams"]
 
 
-class GenerateInputCreateParams(TypedDict, total=False):
+class GenerateInputStartJobParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description for which the inputs would be applicable."""
 

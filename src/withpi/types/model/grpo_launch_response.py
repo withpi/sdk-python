@@ -3,13 +3,13 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from ...._models import BaseModel
-from ...trained_model import TrainedModel
+from ..._models import BaseModel
+from ..shared.trained_model import TrainedModel
 
-__all__ = ["RlGrpoStatus"]
+__all__ = ["GrpoLaunchResponse"]
 
 
-class RlGrpoStatus(BaseModel):
+class GrpoLaunchResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 

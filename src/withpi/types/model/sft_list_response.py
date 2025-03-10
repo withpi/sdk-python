@@ -4,7 +4,7 @@ from typing import List, Optional
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
-from ..trained_model import TrainedModel
+from ..shared.trained_model import TrainedModel
 
 __all__ = ["SftListResponse", "SftListResponseItem"]
 

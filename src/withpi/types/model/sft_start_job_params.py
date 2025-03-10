@@ -3,13 +3,11 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
-from .rl.lora_config_param import LoraConfigParam
 from ..shared_params.scorer import Scorer
-from .rl.text_generation_base_model import TextGenerationBaseModel
 
-__all__ = ["SftStartJobParams", "Example"]
+__all__ = ["SftStartJobParams", "Example", "LoraConfig"]
 
 
 class SftStartJobParams(TypedDict, total=False):
@@ -22,13 +20,13 @@ class SftStartJobParams(TypedDict, total=False):
     scorer: Required[Scorer]
     """The scoring system to use in the SFT tuning process"""
 
-    base_sft_model: TextGenerationBaseModel
+    base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]
     """The base model to start the SFT tuning process."""
 
     learning_rate: float
     """SFT learning rate"""
 
-    lora_config: LoraConfigParam
+    lora_config: LoraConfig
     """The LoRA configuration."""
 
     num_train_epochs: int
@@ -44,3 +42,8 @@ class Example(TypedDict, total=False):
 
     llm_output: Required[str]
     """The output to evaluate"""
+
+
+class LoraConfig(TypedDict, total=False):
+    lora_rank: Literal["R_16", "R_32", "R_64"]
+    """The number of dimensions in the low-rank decomposition of the weight updates."""
