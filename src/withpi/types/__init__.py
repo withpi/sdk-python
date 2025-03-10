@@ -5,6 +5,7 @@ from __future__ import annotations
 from .shared import (
     Scorer as Scorer,
     SftStatus as SftStatus,
+    SDKExample as SDKExample,
     TrainedModel as TrainedModel,
     ExplorationMode as ExplorationMode,
     ScorerDimension as ScorerDimension,

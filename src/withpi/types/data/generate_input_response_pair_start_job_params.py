@@ -6,15 +6,16 @@ from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 from ..shared.exploration_mode import ExplorationMode
+from ..shared_params.sdk_example import SDKExample
 
-__all__ = ["GenerateInputResponsePairStartJobParams", "Seed"]
+__all__ = ["GenerateInputResponsePairStartJobParams"]
 
 
 class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 
-    seeds: Required[Iterable[Seed]]
+    seeds: Required[Iterable[SDKExample]]
     """The list of LLM examples (inputs + outputs) to be used as seeds"""
 
     application_description: Optional[str]
@@ -34,11 +35,3 @@ class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
 
     system_prompt: Optional[str]
     """The system prompt to generate the responses for the application's inputs"""
-
-
-class Seed(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""
