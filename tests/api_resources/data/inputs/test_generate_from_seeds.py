@@ -9,7 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.data.input import (
+from withpi.types.data.inputs import (
     DataGenerationStatus,
     GenerateFromSeedListResponse,
 )
@@ -23,7 +23,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.retrieve(
+        generate_from_seed = client.data.inputs.generate_from_seeds.retrieve(
             "job_id",
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
@@ -31,7 +31,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.retrieve(
+        response = client.data.inputs.generate_from_seeds.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -43,7 +43,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.retrieve(
+        with client.data.inputs.generate_from_seeds.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -58,20 +58,20 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.data.input.generate_from_seeds.with_raw_response.retrieve(
+            client.data.inputs.generate_from_seeds.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.list()
+        generate_from_seed = client.data.inputs.generate_from_seeds.list()
         assert_matches_type(GenerateFromSeedListResponse, generate_from_seed, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.list(
+        generate_from_seed = client.data.inputs.generate_from_seeds.list(
             state="QUEUED",
         )
         assert_matches_type(GenerateFromSeedListResponse, generate_from_seed, path=["response"])
@@ -79,7 +79,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.list()
+        response = client.data.inputs.generate_from_seeds.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -89,7 +89,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.list() as response:
+        with client.data.inputs.generate_from_seeds.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -101,7 +101,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_method_cancel(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.cancel(
+        generate_from_seed = client.data.inputs.generate_from_seeds.cancel(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -109,7 +109,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.cancel(
+        response = client.data.inputs.generate_from_seeds.with_raw_response.cancel(
             "job_id",
         )
 
@@ -121,7 +121,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.cancel(
+        with client.data.inputs.generate_from_seeds.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -136,14 +136,14 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_path_params_cancel(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.data.input.generate_from_seeds.with_raw_response.cancel(
+            client.data.inputs.generate_from_seeds.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.start_job(
+        generate_from_seed = client.data.inputs.generate_from_seeds.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -156,7 +156,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.start_job(
+        generate_from_seed = client.data.inputs.generate_from_seeds.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -172,7 +172,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.start_job(
+        response = client.data.inputs.generate_from_seeds.with_raw_response.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -189,7 +189,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.start_job(
+        with client.data.inputs.generate_from_seeds.with_streaming_response.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -208,7 +208,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_method_stream_data(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.stream_data(
+        generate_from_seed = client.data.inputs.generate_from_seeds.stream_data(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -216,7 +216,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_stream_data(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.stream_data(
+        response = client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
             "job_id",
         )
 
@@ -228,7 +228,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_stream_data(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.stream_data(
+        with client.data.inputs.generate_from_seeds.with_streaming_response.stream_data(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -243,14 +243,14 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_path_params_stream_data(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.data.input.generate_from_seeds.with_raw_response.stream_data(
+            client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_stream_messages(self, client: PiClient) -> None:
-        generate_from_seed = client.data.input.generate_from_seeds.stream_messages(
+        generate_from_seed = client.data.inputs.generate_from_seeds.stream_messages(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -258,7 +258,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_stream_messages(self, client: PiClient) -> None:
-        response = client.data.input.generate_from_seeds.with_raw_response.stream_messages(
+        response = client.data.inputs.generate_from_seeds.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -270,7 +270,7 @@ class TestGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_stream_messages(self, client: PiClient) -> None:
-        with client.data.input.generate_from_seeds.with_streaming_response.stream_messages(
+        with client.data.inputs.generate_from_seeds.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -285,7 +285,7 @@ class TestGenerateFromSeeds:
     @parametrize
     def test_path_params_stream_messages(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.data.input.generate_from_seeds.with_raw_response.stream_messages(
+            client.data.inputs.generate_from_seeds.with_raw_response.stream_messages(
                 "",
             )
 
@@ -296,7 +296,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.retrieve(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.retrieve(
             "job_id",
         )
         assert_matches_type(DataGenerationStatus, generate_from_seed, path=["response"])
@@ -304,7 +304,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.retrieve(
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -316,7 +316,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.retrieve(
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -331,20 +331,20 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.data.input.generate_from_seeds.with_raw_response.retrieve(
+            await async_client.data.inputs.generate_from_seeds.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.list()
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.list()
         assert_matches_type(GenerateFromSeedListResponse, generate_from_seed, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.list(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.list(
             state="QUEUED",
         )
         assert_matches_type(GenerateFromSeedListResponse, generate_from_seed, path=["response"])
@@ -352,7 +352,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.list()
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -362,7 +362,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.list() as response:
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -374,7 +374,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.cancel(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.cancel(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -382,7 +382,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.cancel(
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.cancel(
             "job_id",
         )
 
@@ -394,7 +394,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.cancel(
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -409,14 +409,14 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.data.input.generate_from_seeds.with_raw_response.cancel(
+            await async_client.data.inputs.generate_from_seeds.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.start_job(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -429,7 +429,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.start_job(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -445,7 +445,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.start_job(
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -462,7 +462,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.start_job(
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.start_job(
             application_description="Write a children's story communicating a simple life lesson.",
             num_inputs_to_generate=50,
             seeds=[
@@ -481,7 +481,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_method_stream_data(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.stream_data(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.stream_data(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -489,7 +489,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_stream_data(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.stream_data(
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
             "job_id",
         )
 
@@ -501,7 +501,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_stream_data(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.stream_data(
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.stream_data(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -516,14 +516,14 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_path_params_stream_data(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.data.input.generate_from_seeds.with_raw_response.stream_data(
+            await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_data(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
-        generate_from_seed = await async_client.data.input.generate_from_seeds.stream_messages(
+        generate_from_seed = await async_client.data.inputs.generate_from_seeds.stream_messages(
             "job_id",
         )
         assert_matches_type(str, generate_from_seed, path=["response"])
@@ -531,7 +531,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.generate_from_seeds.with_raw_response.stream_messages(
+        response = await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -543,7 +543,7 @@ class TestAsyncGenerateFromSeeds:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.generate_from_seeds.with_streaming_response.stream_messages(
+        async with async_client.data.inputs.generate_from_seeds.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -558,6 +558,6 @@ class TestAsyncGenerateFromSeeds:
     @parametrize
     async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.data.input.generate_from_seeds.with_raw_response.stream_messages(
+            await async_client.data.inputs.generate_from_seeds.with_raw_response.stream_messages(
                 "",
             )
