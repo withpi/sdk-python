@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["SftStreamMessagesResponse"]
+__all__ = ["ClassifierMessagesResponse"]
 
-SftStreamMessagesResponse: TypeAlias = str
+ClassifierMessagesResponse: TypeAlias = str

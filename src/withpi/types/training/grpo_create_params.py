@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.scorer import Scorer
 
-__all__ = ["GrpoStartJobParams", "Example", "LoraConfig"]
+__all__ = ["GrpoCreateParams", "Example", "LoraConfig"]
 
 
-class GrpoStartJobParams(TypedDict, total=False):
+class GrpoCreateParams(TypedDict, total=False):
     base_rl_model: Required[Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"]]
     """The base model to start the RL tunning process"""
 

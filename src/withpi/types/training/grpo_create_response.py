@@ -6,10 +6,10 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 from ..shared.trained_model import TrainedModel
 
-__all__ = ["SftStartJobResponse"]
+__all__ = ["GrpoCreateResponse"]
 
 
-class SftStartJobResponse(BaseModel):
+class GrpoCreateResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 

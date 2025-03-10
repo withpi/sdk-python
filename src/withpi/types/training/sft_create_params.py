@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.scorer import Scorer
 
-__all__ = ["SftStartJobParams", "Example", "LoraConfig"]
+__all__ = ["SftCreateParams", "Example", "LoraConfig"]
 
 
-class SftStartJobParams(TypedDict, total=False):
+class SftCreateParams(TypedDict, total=False):
     examples: Required[Iterable[Example]]
     """Examples to use in the SFT tuning process.
 

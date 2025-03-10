@@ -71,82 +71,6 @@ Methods:
 - <code title="get /data/generate_examples/{job_id}/data">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_example_stream_data_response.py">GenerateExampleStreamDataResponse</a></code>
 - <code title="get /data/generate_examples/{job_id}/messages">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_messages</a>(job_id) -> str</code>
 
-# Model
-
-## Classifier
-
-Types:
-
-```python
-from withpi.types.model import (
-    ClassifierListResponse,
-    ClassifierCancelResponse,
-    ClassifierDownloadResponse,
-    ClassifierStreamMessagesResponse,
-)
-```
-
-Methods:
-
-- <code title="get /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
-- <code title="get /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">list</a>(\*\*<a href="src/withpi/types/model/classifier_list_params.py">params</a>) -> <a href="./src/withpi/types/model/classifier_list_response.py">ClassifierListResponse</a></code>
-- <code title="delete /model/classifier/{job_id}">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">cancel</a>(job_id) -> str</code>
-- <code title="post /model/classifier/{job_id}/download">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/classifier_download_params.py">params</a>) -> str</code>
-- <code title="post /model/classifier">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">start_job</a>(\*\*<a href="src/withpi/types/model/classifier_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
-- <code title="get /model/classifier/{job_id}/messages">client.model.classifier.<a href="./src/withpi/resources/model/classifier.py">stream_messages</a>(job_id) -> str</code>
-
-## Sft
-
-Types:
-
-```python
-from withpi.types.model import (
-    SftRetrieveResponse,
-    SftListResponse,
-    SftCancelResponse,
-    SftDownloadResponse,
-    SftLoadResponse,
-    SftStartJobResponse,
-    SftStreamMessagesResponse,
-)
-```
-
-Methods:
-
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_retrieve_response.py">SftRetrieveResponse</a></code>
-- <code title="get /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">list</a>(\*\*<a href="src/withpi/types/model/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_list_response.py">SftListResponse</a></code>
-- <code title="delete /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">cancel</a>(job_id) -> str</code>
-- <code title="post /model/sft/{job_id}/download">client.model.sft.<a href="./src/withpi/resources/model/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/sft_download_params.py">params</a>) -> str</code>
-- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_load_response.py">SftLoadResponse</a></code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_start_job_response.py">SftStartJobResponse</a></code>
-- <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
-
-## Grpo
-
-Types:
-
-```python
-from withpi.types.model import (
-    GrpoRetrieveResponse,
-    GrpoListResponse,
-    GrpoCancelResponse,
-    GrpoDownloadResponse,
-    GrpoLoadResponse,
-    GrpoStartJobResponse,
-    GrpoStreamMessagesResponse,
-)
-```
-
-Methods:
-
-- <code title="get /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/grpo_retrieve_response.py">GrpoRetrieveResponse</a></code>
-- <code title="get /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">list</a>(\*\*<a href="src/withpi/types/model/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_list_response.py">GrpoListResponse</a></code>
-- <code title="delete /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">cancel</a>(job_id) -> str</code>
-- <code title="post /model/grpo/{job_id}/download">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/grpo_download_params.py">params</a>) -> str</code>
-- <code title="post /model/grpo/{job_id}/load">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/grpo_load_response.py">GrpoLoadResponse</a></code>
-- <code title="post /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_start_job_response.py">GrpoStartJobResponse</a></code>
-- <code title="get /model/grpo/{job_id}/messages">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">stream_messages</a>(job_id) -> str</code>
-
 # Prompt
 
 ## Optimize
@@ -217,3 +141,79 @@ Methods:
 
 - <code title="post /rag/query_classify">client.rag.<a href="./src/withpi/resources/rag.py">classify_query</a>(\*\*<a href="src/withpi/types/rag_classify_query_params.py">params</a>) -> <a href="./src/withpi/types/rag_classify_query_response.py">RagClassifyQueryResponse</a></code>
 - <code title="post /rag/query_fanout">client.rag.<a href="./src/withpi/resources/rag.py">generate_fanout</a>(\*\*<a href="src/withpi/types/rag_generate_fanout_params.py">params</a>) -> <a href="./src/withpi/types/rag_generate_fanout_response.py">RagGenerateFanoutResponse</a></code>
+
+# Training
+
+## Classifier
+
+Types:
+
+```python
+from withpi.types.training import (
+    ClassifierListResponse,
+    ClassifierCancelResponse,
+    ClassifierDownloadResponse,
+    ClassifierMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /training/classifier">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">create</a>(\*\*<a href="src/withpi/types/training/classifier_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
+- <code title="get /training/classifier/{job_id}">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
+- <code title="get /training/classifier">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">list</a>(\*\*<a href="src/withpi/types/training/classifier_list_params.py">params</a>) -> <a href="./src/withpi/types/training/classifier_list_response.py">ClassifierListResponse</a></code>
+- <code title="delete /training/classifier/{job_id}">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">cancel</a>(job_id) -> str</code>
+- <code title="post /training/classifier/{job_id}/download">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/classifier_download_params.py">params</a>) -> str</code>
+- <code title="get /training/classifier/{job_id}/messages">client.training.classifier.<a href="./src/withpi/resources/training/classifier.py">messages</a>(job_id) -> str</code>
+
+## Grpo
+
+Types:
+
+```python
+from withpi.types.training import (
+    GrpoCreateResponse,
+    GrpoRetrieveResponse,
+    GrpoListResponse,
+    GrpoCancelResponse,
+    GrpoDownloadResponse,
+    GrpoLoadResponse,
+    GrpoMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /training/grpo">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">create</a>(\*\*<a href="src/withpi/types/training/grpo_create_params.py">params</a>) -> <a href="./src/withpi/types/training/grpo_create_response.py">GrpoCreateResponse</a></code>
+- <code title="get /training/grpo/{job_id}">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/training/grpo_retrieve_response.py">GrpoRetrieveResponse</a></code>
+- <code title="get /training/grpo">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">list</a>(\*\*<a href="src/withpi/types/training/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/training/grpo_list_response.py">GrpoListResponse</a></code>
+- <code title="delete /training/grpo/{job_id}">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">cancel</a>(job_id) -> str</code>
+- <code title="post /training/grpo/{job_id}/download">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/grpo_download_params.py">params</a>) -> str</code>
+- <code title="post /training/grpo/{job_id}/load">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/training/grpo_load_response.py">GrpoLoadResponse</a></code>
+- <code title="get /training/grpo/{job_id}/messages">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">messages</a>(job_id) -> str</code>
+
+## Sft
+
+Types:
+
+```python
+from withpi.types.training import (
+    SftCreateResponse,
+    SftRetrieveResponse,
+    SftListResponse,
+    SftCancelResponse,
+    SftDownloadResponse,
+    SftLoadResponse,
+    SftMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">create</a>(\*\*<a href="src/withpi/types/training/sft_create_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_create_response.py">SftCreateResponse</a></code>
+- <code title="get /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/training/sft_retrieve_response.py">SftRetrieveResponse</a></code>
+- <code title="get /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">list</a>(\*\*<a href="src/withpi/types/training/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_list_response.py">SftListResponse</a></code>
+- <code title="delete /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">cancel</a>(job_id) -> str</code>
+- <code title="post /training/sft/{job_id}/download">client.training.sft.<a href="./src/withpi/resources/training/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/sft_download_params.py">params</a>) -> str</code>
+- <code title="post /training/sft/{job_id}/load">client.training.sft.<a href="./src/withpi/resources/training/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/training/sft_load_response.py">SftLoadResponse</a></code>
+- <code title="get /training/sft/{job_id}/messages">client.training.sft.<a href="./src/withpi/resources/training/sft.py">messages</a>(job_id) -> str</code>
