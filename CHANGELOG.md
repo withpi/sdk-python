@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 (2025-03-10)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/withpi/sdk-python/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* **api:** generate rename ([#435](https://github.com/withpi/sdk-python/issues/435)) ([1f5eda3](https://github.com/withpi/sdk-python/commit/1f5eda3a98d78f54b7b77fbe805da6236c43383b))
+
 ## 1.4.0 (2025-03-10)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/withpi/sdk-python/compare/v1.3.0...v1.4.0)
