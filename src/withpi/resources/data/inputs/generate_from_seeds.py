@@ -180,13 +180,13 @@ class GenerateFromSeedsResource(SyncAPIResource):
 
           seeds: The list of LLM inputs to be used as seeds
 
-          batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
+          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
               be same as `num_shots`.
 
           exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
 
-          num_shots: Number of inputs to be included in the prompt for generation. Generally it could
-              be same as `batch_size`.
+          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
+              Generally it could be same as `batch_size`.
 
           extra_headers: Send extra headers
 
@@ -435,13 +435,13 @@ class AsyncGenerateFromSeedsResource(AsyncAPIResource):
 
           seeds: The list of LLM inputs to be used as seeds
 
-          batch_size: Number of inputs to generate in one LLM call. Must be <=10. Generally it could
+          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
               be same as `num_shots`.
 
           exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
 
-          num_shots: Number of inputs to be included in the prompt for generation. Generally it could
-              be same as `batch_size`.
+          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
+              Generally it could be same as `batch_size`.
 
           extra_headers: Send extra headers
 

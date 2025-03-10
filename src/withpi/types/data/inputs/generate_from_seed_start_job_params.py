@@ -23,7 +23,7 @@ class GenerateFromSeedStartJobParams(TypedDict, total=False):
     batch_size: int
     """Number of inputs to generate in one LLM call.
 
-    Must be <=10. Generally it could be same as `num_shots`.
+    Must be <= 10. Generally it could be same as `num_shots`.
     """
 
     exploration_mode: SDKExplorationMode
@@ -32,5 +32,5 @@ class GenerateFromSeedStartJobParams(TypedDict, total=False):
     num_shots: int
     """Number of inputs to be included in the prompt for generation.
 
-    Generally it could be same as `batch_size`.
+    Must be <= 10. Generally it could be same as `batch_size`.
     """

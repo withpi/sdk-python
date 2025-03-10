@@ -23,7 +23,7 @@ class TestInputs:
         input = client.data.inputs.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -36,7 +36,7 @@ class TestInputs:
         input = client.data.inputs.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -50,7 +50,7 @@ class TestInputs:
         response = client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -67,7 +67,7 @@ class TestInputs:
         with client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -90,7 +90,7 @@ class TestAsyncInputs:
         input = await async_client.data.inputs.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -103,7 +103,7 @@ class TestAsyncInputs:
         input = await async_client.data.inputs.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -117,7 +117,7 @@ class TestAsyncInputs:
         response = await async_client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
@@ -134,7 +134,7 @@ class TestAsyncInputs:
         async with async_client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
-                    "identifier": "12345",
+                    "identifier": "abcd12345",
                     "llm_input": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
