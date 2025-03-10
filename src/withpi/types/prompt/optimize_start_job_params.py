@@ -6,12 +6,13 @@ from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.scorer import Scorer
+from ..shared_params.sdk_example import SDKExample
 
-__all__ = ["OptimizeStartJobParams", "Example"]
+__all__ = ["OptimizeStartJobParams"]
 
 
 class OptimizeStartJobParams(TypedDict, total=False):
-    examples: Required[Iterable[Example]]
+    examples: Required[Iterable[SDKExample]]
     """The examples to train and validate on"""
 
     initial_system_instruction: Required[str]
@@ -37,11 +38,3 @@ class OptimizeStartJobParams(TypedDict, total=False):
 
     This only applies for the DSPY. Leave it as None if tuning_algorithm != DSPY.
     """
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""

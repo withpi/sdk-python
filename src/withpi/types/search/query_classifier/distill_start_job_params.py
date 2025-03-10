@@ -5,14 +5,16 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["DistillStartJobParams", "Example"]
+from ...shared_params.sdk_example import SDKExample
+
+__all__ = ["DistillStartJobParams"]
 
 
 class DistillStartJobParams(TypedDict, total=False):
     base_model: Required[Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"]]
     """The base model to start the classification tuning process"""
 
-    examples: Required[Iterable[Example]]
+    examples: Required[Iterable[SDKExample]]
     """Examples to use in the classification tuning process"""
 
     learning_rate: float
@@ -20,11 +22,3 @@ class DistillStartJobParams(TypedDict, total=False):
 
     num_train_epochs: int
     """Classification number of train epochs"""
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""

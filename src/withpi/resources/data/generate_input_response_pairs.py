@@ -23,6 +23,7 @@ from ..._response import (
 from ...types.data import generate_input_response_pair_list_params, generate_input_response_pair_start_job_params
 from ..._base_client import make_request_options
 from ...types.shared.exploration_mode import ExplorationMode
+from ...types.shared_params.sdk_example import SDKExample
 from ...types.shared.synthetic_data_status import SyntheticDataStatus
 from ...types.data.generate_input_response_pair_list_response import GenerateInputResponsePairListResponse
 from ...types.data.generate_input_response_pair_stream_data_response import GenerateInputResponsePairStreamDataResponse
@@ -159,7 +160,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_input_response_pair_start_job_params.Seed],
+        seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
@@ -416,7 +417,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_input_response_pair_start_job_params.Seed],
+        seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,

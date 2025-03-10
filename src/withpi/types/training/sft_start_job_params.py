@@ -6,12 +6,13 @@ from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.scorer import Scorer
+from ..shared_params.sdk_example import SDKExample
 
-__all__ = ["SftStartJobParams", "Example", "LoraConfig"]
+__all__ = ["SftStartJobParams", "LoraConfig"]
 
 
 class SftStartJobParams(TypedDict, total=False):
-    examples: Required[Iterable[Example]]
+    examples: Required[Iterable[SDKExample]]
     """Examples to use in the SFT tuning process.
 
     We split this data into train/eval 90/10.
@@ -34,14 +35,6 @@ class SftStartJobParams(TypedDict, total=False):
 
     system_prompt: Optional[str]
     """A custom system prompt to use during the RL tuning process"""
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input to LLM"""
-
-    llm_output: Required[str]
-    """The output to evaluate"""
 
 
 class LoraConfig(TypedDict, total=False):

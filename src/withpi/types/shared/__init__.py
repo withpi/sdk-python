@@ -2,6 +2,7 @@
 
 from .scorer import Scorer as Scorer
 from .sft_status import SftStatus as SftStatus
+from .sdk_example import SDKExample as SDKExample
 from .trained_model import TrainedModel as TrainedModel
 from .exploration_mode import ExplorationMode as ExplorationMode
 from .scorer_dimension import ScorerDimension as ScorerDimension
