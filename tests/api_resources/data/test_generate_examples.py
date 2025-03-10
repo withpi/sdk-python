@@ -23,77 +23,6 @@ class TestGenerateExamples:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: PiClient) -> None:
-        generate_example = client.data.generate_examples.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: PiClient) -> None:
-        generate_example = client.data.generate_examples.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            application_description="AI application for writing a children's story given topics.",
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-            system_prompt="Write a children's story given a topic from the user.",
-        )
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create(self, client: PiClient) -> None:
-        response = client.data.generate_examples.with_raw_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        generate_example = response.parse()
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create(self, client: PiClient) -> None:
-        with client.data.generate_examples.with_streaming_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            generate_example = response.parse()
-            assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
         generate_example = client.data.generate_examples.retrieve(
             "job_id",
@@ -214,6 +143,77 @@ class TestGenerateExamples:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_start_job(self, client: PiClient) -> None:
+        generate_example = client.data.generate_examples.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
+        generate_example = client.data.generate_examples.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            application_description="AI application for writing a children's story given topics.",
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
+        )
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_start_job(self, client: PiClient) -> None:
+        response = client.data.generate_examples.with_raw_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_example = response.parse()
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_start_job(self, client: PiClient) -> None:
+        with client.data.generate_examples.with_streaming_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_example = response.parse()
+            assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_stream_data(self, client: PiClient) -> None:
         generate_example = client.data.generate_examples.stream_data(
             "job_id",
@@ -299,77 +299,6 @@ class TestGenerateExamples:
 
 class TestAsyncGenerateExamples:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create(self, async_client: AsyncPiClient) -> None:
-        generate_example = await async_client.data.generate_examples.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
-        generate_example = await async_client.data.generate_examples.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            application_description="AI application for writing a children's story given topics.",
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-            system_prompt="Write a children's story given a topic from the user.",
-        )
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.generate_examples.with_raw_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        generate_example = await response.parse()
-        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.generate_examples.with_streaming_response.create(
-            num_examples_to_generate=50,
-            seeds=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            generate_example = await response.parse()
-            assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
@@ -490,6 +419,77 @@ class TestAsyncGenerateExamples:
             await async_client.data.generate_examples.with_raw_response.cancel(
                 "",
             )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
+        generate_example = await async_client.data.generate_examples.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
+        generate_example = await async_client.data.generate_examples.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            application_description="AI application for writing a children's story given topics.",
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+            system_prompt="Write a children's story given a topic from the user.",
+        )
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.data.generate_examples.with_raw_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_example = await response.parse()
+        assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
+        async with async_client.data.generate_examples.with_streaming_response.start_job(
+            num_examples_to_generate=50,
+            seeds=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_example = await response.parse()
+            assert_matches_type(SyntheticDataStatus, generate_example, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
