@@ -11,6 +11,7 @@ from withpi.types import (
     ScorerDimension,
     ScorerSubDimension,
     ScoringSystemMetrics,
+    SDKExample,
     SftStatus,
     SyntheticDataStatus,
     TrainedModel,
