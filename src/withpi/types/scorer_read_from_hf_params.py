@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ContractReadFromHfParams"]
+__all__ = ["ScorerReadFromHfParams"]
 
 
-class ContractReadFromHfParams(TypedDict, total=False):
-    hf_scoring_system_name: Required[str]
+class ScorerReadFromHfParams(TypedDict, total=False):
+    hf_scorer_name: Required[str]
     """Huggingface scoring system name e.g.
 
     withpi/my_scoring_system. You need to provide the hf_token if the scoring system

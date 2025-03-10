@@ -35,8 +35,7 @@ from ._base_client import (
 from .resources.data import data
 from .resources.model import model
 from .resources.prompt import prompt
-from .resources.contracts import contracts
-from .resources.pi_scoring_system import pi_scoring_system
+from .resources.scorer import scorer
 
 __all__ = [
     "Timeout",
@@ -51,12 +50,11 @@ __all__ = [
 
 
 class PiClient(SyncAPIClient):
-    contracts: contracts.ContractsResource
     data: data.DataResource
     model: model.ModelResource
-    pi_scoring_system: pi_scoring_system.PiScoringSystemResource
     prompt: prompt.PromptResource
     queries: queries.QueriesResource
+    scorer: scorer.ScorerResource
     with_raw_response: PiClientWithRawResponse
     with_streaming_response: PiClientWithStreamedResponse
 
@@ -114,12 +112,11 @@ class PiClient(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contracts = contracts.ContractsResource(self)
         self.data = data.DataResource(self)
         self.model = model.ModelResource(self)
-        self.pi_scoring_system = pi_scoring_system.PiScoringSystemResource(self)
         self.prompt = prompt.PromptResource(self)
         self.queries = queries.QueriesResource(self)
+        self.scorer = scorer.ScorerResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
         self.with_streaming_response = PiClientWithStreamedResponse(self)
 
@@ -229,12 +226,11 @@ class PiClient(SyncAPIClient):
 
 
 class AsyncPiClient(AsyncAPIClient):
-    contracts: contracts.AsyncContractsResource
     data: data.AsyncDataResource
     model: model.AsyncModelResource
-    pi_scoring_system: pi_scoring_system.AsyncPiScoringSystemResource
     prompt: prompt.AsyncPromptResource
     queries: queries.AsyncQueriesResource
+    scorer: scorer.AsyncScorerResource
     with_raw_response: AsyncPiClientWithRawResponse
     with_streaming_response: AsyncPiClientWithStreamedResponse
 
@@ -292,12 +288,11 @@ class AsyncPiClient(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.contracts = contracts.AsyncContractsResource(self)
         self.data = data.AsyncDataResource(self)
         self.model = model.AsyncModelResource(self)
-        self.pi_scoring_system = pi_scoring_system.AsyncPiScoringSystemResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
         self.queries = queries.AsyncQueriesResource(self)
+        self.scorer = scorer.AsyncScorerResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
         self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
@@ -408,46 +403,38 @@ class AsyncPiClient(AsyncAPIClient):
 
 class PiClientWithRawResponse:
     def __init__(self, client: PiClient) -> None:
-        self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
         self.data = data.DataResourceWithRawResponse(client.data)
         self.model = model.ModelResourceWithRawResponse(client.model)
-        self.pi_scoring_system = pi_scoring_system.PiScoringSystemResourceWithRawResponse(client.pi_scoring_system)
         self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
+        self.scorer = scorer.ScorerResourceWithRawResponse(client.scorer)
 
 
 class AsyncPiClientWithRawResponse:
     def __init__(self, client: AsyncPiClient) -> None:
-        self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
-        self.pi_scoring_system = pi_scoring_system.AsyncPiScoringSystemResourceWithRawResponse(client.pi_scoring_system)
         self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
+        self.scorer = scorer.AsyncScorerResourceWithRawResponse(client.scorer)
 
 
 class PiClientWithStreamedResponse:
     def __init__(self, client: PiClient) -> None:
-        self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
         self.data = data.DataResourceWithStreamingResponse(client.data)
         self.model = model.ModelResourceWithStreamingResponse(client.model)
-        self.pi_scoring_system = pi_scoring_system.PiScoringSystemResourceWithStreamingResponse(
-            client.pi_scoring_system
-        )
         self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
+        self.scorer = scorer.ScorerResourceWithStreamingResponse(client.scorer)
 
 
 class AsyncPiClientWithStreamedResponse:
     def __init__(self, client: AsyncPiClient) -> None:
-        self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
-        self.pi_scoring_system = pi_scoring_system.AsyncPiScoringSystemResourceWithStreamingResponse(
-            client.pi_scoring_system
-        )
         self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
+        self.scorer = scorer.AsyncScorerResourceWithStreamingResponse(client.scorer)
 
 
 Client = PiClient

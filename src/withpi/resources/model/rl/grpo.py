@@ -31,7 +31,6 @@ from ....types.contracts.state import State
 from ....types.model.rl.rl_grpo_status import RlGrpoStatus
 from ....types.model.rl.lora_config_param import LoraConfigParam
 from ....types.model.rl.grpo_list_response import GrpoListResponse
-from ....types.shared_params.scoring_system import ScoringSystem
 from ....types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
@@ -239,7 +238,7 @@ class GrpoResource(SyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: ScoringSystem,
+        scorer: grpo_start_job_params.Scorer,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -262,7 +261,7 @@ class GrpoResource(SyncAPIResource):
 
           num_train_epochs: GRPO number of train epochs
 
-          scoring_system: The scoring system to use in the GRPO tuning process
+          scorer: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -283,7 +282,7 @@ class GrpoResource(SyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,
@@ -531,7 +530,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         learning_rate: float,
         lora_config: LoraConfigParam,
         num_train_epochs: int,
-        scoring_system: ScoringSystem,
+        scorer: grpo_start_job_params.Scorer,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -554,7 +553,7 @@ class AsyncGrpoResource(AsyncAPIResource):
 
           num_train_epochs: GRPO number of train epochs
 
-          scoring_system: The scoring system to use in the GRPO tuning process
+          scorer: The scoring system to use in the GRPO tuning process
 
           system_prompt: A custom system prompt to use during the RL tuning process
 
@@ -575,7 +574,7 @@ class AsyncGrpoResource(AsyncAPIResource):
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
                     "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
                 grpo_start_job_params.GrpoStartJobParams,

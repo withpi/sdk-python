@@ -6,11 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ...types import (
-    contract_score_params,
-    contract_read_from_hf_params,
-    contract_generate_dimensions_params,
-)
+from ...types import scorer_score_params, scorer_read_from_hf_params, scorer_generate_dimensions_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -33,36 +29,36 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.scoring_system import ScoringSystem as SharedScoringSystem
-from ...types.shared_params.scoring_system import ScoringSystem as SharedParamsScoringSystem
+from ...types.scorer_read_from_hf_response import ScorerReadFromHfResponse
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
+from ...types.scorer_generate_dimensions_response import ScorerGenerateDimensionsResponse
 
-__all__ = ["ContractsResource", "AsyncContractsResource"]
+__all__ = ["ScorerResource", "AsyncScorerResource"]
 
 
-class ContractsResource(SyncAPIResource):
+class ScorerResource(SyncAPIResource):
     @cached_property
     def calibrate(self) -> CalibrateResource:
         return CalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ContractsResourceWithRawResponse:
+    def with_raw_response(self) -> ScorerResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ContractsResourceWithRawResponse(self)
+        return ScorerResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ScorerResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return ContractsResourceWithStreamingResponse(self)
+        return ScorerResourceWithStreamingResponse(self)
 
     def generate_dimensions(
         self,
@@ -75,15 +71,14 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedScoringSystem:
+    ) -> ScorerGenerateDimensionsResponse:
         """
-        Generates dimensions for a contract which will be used to evaluate it
+        Generates dimensions for a scoring system which will be used to evaluate it
 
         Args:
           application_description: The application description to generate a scoring system for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
-              evaluation
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
 
           extra_headers: Send extra headers
 
@@ -94,24 +89,24 @@ class ContractsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/contracts/generate_dimensions",
+            "/scorer/generate_dimensions",
             body=maybe_transform(
                 {
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
+                scorer_generate_dimensions_params.ScorerGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedScoringSystem,
+            cast_to=ScorerGenerateDimensionsResponse,
         )
 
     def read_from_hf(
         self,
         *,
-        hf_scoring_system_name: str,
+        hf_scorer_name: str,
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -119,12 +114,12 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedScoringSystem:
+    ) -> ScorerReadFromHfResponse:
         """
         Read a scoring system from Huggingface dataset
 
         Args:
-          hf_scoring_system_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
+          hf_scorer_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
               provide the hf_token if the scoring system dataset is not public or not own by
               the withpi organization.
 
@@ -139,18 +134,18 @@ class ContractsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/contracts/read_from_hf",
+            "/scorer/read_from_hf",
             body=maybe_transform(
                 {
-                    "hf_scoring_system_name": hf_scoring_system_name,
+                    "hf_scorer_name": hf_scorer_name,
                     "hf_token": hf_token,
                 },
-                contract_read_from_hf_params.ContractReadFromHfParams,
+                scorer_read_from_hf_params.ScorerReadFromHfParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedScoringSystem,
+            cast_to=ScorerReadFromHfResponse,
         )
 
     def score(
@@ -158,7 +153,7 @@ class ContractsResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsScoringSystem,
+        scorer: scorer_score_params.Scorer,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -167,14 +162,14 @@ class ContractsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScoringSystemMetrics:
         """
-        Scores a contract based on the provided input and output
+        Scores a scoring system based on the provided input and output
 
         Args:
           llm_input: The input to score
 
           llm_output: The output to score
 
-          scoring_system: The scoring system to score
+          scorer: The scoring system to score
 
           extra_headers: Send extra headers
 
@@ -185,14 +180,14 @@ class ContractsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/contracts/score",
+            "/scorer/score",
             body=maybe_transform(
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                 },
-                contract_score_params.ContractScoreParams,
+                scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -201,29 +196,29 @@ class ContractsResource(SyncAPIResource):
         )
 
 
-class AsyncContractsResource(AsyncAPIResource):
+class AsyncScorerResource(AsyncAPIResource):
     @cached_property
     def calibrate(self) -> AsyncCalibrateResource:
         return AsyncCalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncContractsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncScorerResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncContractsResourceWithRawResponse(self)
+        return AsyncScorerResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncScorerResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncContractsResourceWithStreamingResponse(self)
+        return AsyncScorerResourceWithStreamingResponse(self)
 
     async def generate_dimensions(
         self,
@@ -236,15 +231,14 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedScoringSystem:
+    ) -> ScorerGenerateDimensionsResponse:
         """
-        Generates dimensions for a contract which will be used to evaluate it
+        Generates dimensions for a scoring system which will be used to evaluate it
 
         Args:
           application_description: The application description to generate a scoring system for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
-              evaluation
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
 
           extra_headers: Send extra headers
 
@@ -255,24 +249,24 @@ class AsyncContractsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/contracts/generate_dimensions",
+            "/scorer/generate_dimensions",
             body=await async_maybe_transform(
                 {
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                contract_generate_dimensions_params.ContractGenerateDimensionsParams,
+                scorer_generate_dimensions_params.ScorerGenerateDimensionsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedScoringSystem,
+            cast_to=ScorerGenerateDimensionsResponse,
         )
 
     async def read_from_hf(
         self,
         *,
-        hf_scoring_system_name: str,
+        hf_scorer_name: str,
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -280,12 +274,12 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedScoringSystem:
+    ) -> ScorerReadFromHfResponse:
         """
         Read a scoring system from Huggingface dataset
 
         Args:
-          hf_scoring_system_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
+          hf_scorer_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
               provide the hf_token if the scoring system dataset is not public or not own by
               the withpi organization.
 
@@ -300,18 +294,18 @@ class AsyncContractsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/contracts/read_from_hf",
+            "/scorer/read_from_hf",
             body=await async_maybe_transform(
                 {
-                    "hf_scoring_system_name": hf_scoring_system_name,
+                    "hf_scorer_name": hf_scorer_name,
                     "hf_token": hf_token,
                 },
-                contract_read_from_hf_params.ContractReadFromHfParams,
+                scorer_read_from_hf_params.ScorerReadFromHfParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedScoringSystem,
+            cast_to=ScorerReadFromHfResponse,
         )
 
     async def score(
@@ -319,7 +313,7 @@ class AsyncContractsResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsScoringSystem,
+        scorer: scorer_score_params.Scorer,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,14 +322,14 @@ class AsyncContractsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScoringSystemMetrics:
         """
-        Scores a contract based on the provided input and output
+        Scores a scoring system based on the provided input and output
 
         Args:
           llm_input: The input to score
 
           llm_output: The output to score
 
-          scoring_system: The scoring system to score
+          scorer: The scoring system to score
 
           extra_headers: Send extra headers
 
@@ -346,14 +340,14 @@ class AsyncContractsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/contracts/score",
+            "/scorer/score",
             body=await async_maybe_transform(
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                 },
-                contract_score_params.ContractScoreParams,
+                scorer_score_params.ScorerScoreParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -362,77 +356,77 @@ class AsyncContractsResource(AsyncAPIResource):
         )
 
 
-class ContractsResourceWithRawResponse:
-    def __init__(self, contracts: ContractsResource) -> None:
-        self._contracts = contracts
+class ScorerResourceWithRawResponse:
+    def __init__(self, scorer: ScorerResource) -> None:
+        self._scorer = scorer
 
         self.generate_dimensions = to_raw_response_wrapper(
-            contracts.generate_dimensions,
+            scorer.generate_dimensions,
         )
         self.read_from_hf = to_raw_response_wrapper(
-            contracts.read_from_hf,
+            scorer.read_from_hf,
         )
         self.score = to_raw_response_wrapper(
-            contracts.score,
+            scorer.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithRawResponse:
-        return CalibrateResourceWithRawResponse(self._contracts.calibrate)
+        return CalibrateResourceWithRawResponse(self._scorer.calibrate)
 
 
-class AsyncContractsResourceWithRawResponse:
-    def __init__(self, contracts: AsyncContractsResource) -> None:
-        self._contracts = contracts
+class AsyncScorerResourceWithRawResponse:
+    def __init__(self, scorer: AsyncScorerResource) -> None:
+        self._scorer = scorer
 
         self.generate_dimensions = async_to_raw_response_wrapper(
-            contracts.generate_dimensions,
+            scorer.generate_dimensions,
         )
         self.read_from_hf = async_to_raw_response_wrapper(
-            contracts.read_from_hf,
+            scorer.read_from_hf,
         )
         self.score = async_to_raw_response_wrapper(
-            contracts.score,
+            scorer.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithRawResponse:
-        return AsyncCalibrateResourceWithRawResponse(self._contracts.calibrate)
+        return AsyncCalibrateResourceWithRawResponse(self._scorer.calibrate)
 
 
-class ContractsResourceWithStreamingResponse:
-    def __init__(self, contracts: ContractsResource) -> None:
-        self._contracts = contracts
+class ScorerResourceWithStreamingResponse:
+    def __init__(self, scorer: ScorerResource) -> None:
+        self._scorer = scorer
 
         self.generate_dimensions = to_streamed_response_wrapper(
-            contracts.generate_dimensions,
+            scorer.generate_dimensions,
         )
         self.read_from_hf = to_streamed_response_wrapper(
-            contracts.read_from_hf,
+            scorer.read_from_hf,
         )
         self.score = to_streamed_response_wrapper(
-            contracts.score,
+            scorer.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithStreamingResponse:
-        return CalibrateResourceWithStreamingResponse(self._contracts.calibrate)
+        return CalibrateResourceWithStreamingResponse(self._scorer.calibrate)
 
 
-class AsyncContractsResourceWithStreamingResponse:
-    def __init__(self, contracts: AsyncContractsResource) -> None:
-        self._contracts = contracts
+class AsyncScorerResourceWithStreamingResponse:
+    def __init__(self, scorer: AsyncScorerResource) -> None:
+        self._scorer = scorer
 
         self.generate_dimensions = async_to_streamed_response_wrapper(
-            contracts.generate_dimensions,
+            scorer.generate_dimensions,
         )
         self.read_from_hf = async_to_streamed_response_wrapper(
-            contracts.read_from_hf,
+            scorer.read_from_hf,
         )
         self.score = async_to_streamed_response_wrapper(
-            contracts.score,
+            scorer.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithStreamingResponse:
-        return AsyncCalibrateResourceWithStreamingResponse(self._contracts.calibrate)
+        return AsyncCalibrateResourceWithStreamingResponse(self._scorer.calibrate)
