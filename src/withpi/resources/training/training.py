@@ -29,138 +29,138 @@ from .classifier import (
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
-__all__ = ["ModelResource", "AsyncModelResource"]
+__all__ = ["TrainingResource", "AsyncTrainingResource"]
 
 
-class ModelResource(SyncAPIResource):
+class TrainingResource(SyncAPIResource):
     @cached_property
     def classifier(self) -> ClassifierResource:
         return ClassifierResource(self._client)
-
-    @cached_property
-    def sft(self) -> SftResource:
-        return SftResource(self._client)
 
     @cached_property
     def grpo(self) -> GrpoResource:
         return GrpoResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ModelResourceWithRawResponse:
+    def sft(self) -> SftResource:
+        return SftResource(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> TrainingResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ModelResourceWithRawResponse(self)
+        return TrainingResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ModelResourceWithStreamingResponse:
+    def with_streaming_response(self) -> TrainingResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return ModelResourceWithStreamingResponse(self)
+        return TrainingResourceWithStreamingResponse(self)
 
 
-class AsyncModelResource(AsyncAPIResource):
+class AsyncTrainingResource(AsyncAPIResource):
     @cached_property
     def classifier(self) -> AsyncClassifierResource:
         return AsyncClassifierResource(self._client)
-
-    @cached_property
-    def sft(self) -> AsyncSftResource:
-        return AsyncSftResource(self._client)
 
     @cached_property
     def grpo(self) -> AsyncGrpoResource:
         return AsyncGrpoResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncModelResourceWithRawResponse:
+    def sft(self) -> AsyncSftResource:
+        return AsyncSftResource(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncTrainingResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncModelResourceWithRawResponse(self)
+        return AsyncTrainingResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncModelResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncTrainingResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncModelResourceWithStreamingResponse(self)
+        return AsyncTrainingResourceWithStreamingResponse(self)
 
 
-class ModelResourceWithRawResponse:
-    def __init__(self, model: ModelResource) -> None:
-        self._model = model
+class TrainingResourceWithRawResponse:
+    def __init__(self, training: TrainingResource) -> None:
+        self._training = training
 
     @cached_property
     def classifier(self) -> ClassifierResourceWithRawResponse:
-        return ClassifierResourceWithRawResponse(self._model.classifier)
-
-    @cached_property
-    def sft(self) -> SftResourceWithRawResponse:
-        return SftResourceWithRawResponse(self._model.sft)
+        return ClassifierResourceWithRawResponse(self._training.classifier)
 
     @cached_property
     def grpo(self) -> GrpoResourceWithRawResponse:
-        return GrpoResourceWithRawResponse(self._model.grpo)
+        return GrpoResourceWithRawResponse(self._training.grpo)
+
+    @cached_property
+    def sft(self) -> SftResourceWithRawResponse:
+        return SftResourceWithRawResponse(self._training.sft)
 
 
-class AsyncModelResourceWithRawResponse:
-    def __init__(self, model: AsyncModelResource) -> None:
-        self._model = model
+class AsyncTrainingResourceWithRawResponse:
+    def __init__(self, training: AsyncTrainingResource) -> None:
+        self._training = training
 
     @cached_property
     def classifier(self) -> AsyncClassifierResourceWithRawResponse:
-        return AsyncClassifierResourceWithRawResponse(self._model.classifier)
-
-    @cached_property
-    def sft(self) -> AsyncSftResourceWithRawResponse:
-        return AsyncSftResourceWithRawResponse(self._model.sft)
+        return AsyncClassifierResourceWithRawResponse(self._training.classifier)
 
     @cached_property
     def grpo(self) -> AsyncGrpoResourceWithRawResponse:
-        return AsyncGrpoResourceWithRawResponse(self._model.grpo)
+        return AsyncGrpoResourceWithRawResponse(self._training.grpo)
+
+    @cached_property
+    def sft(self) -> AsyncSftResourceWithRawResponse:
+        return AsyncSftResourceWithRawResponse(self._training.sft)
 
 
-class ModelResourceWithStreamingResponse:
-    def __init__(self, model: ModelResource) -> None:
-        self._model = model
+class TrainingResourceWithStreamingResponse:
+    def __init__(self, training: TrainingResource) -> None:
+        self._training = training
 
     @cached_property
     def classifier(self) -> ClassifierResourceWithStreamingResponse:
-        return ClassifierResourceWithStreamingResponse(self._model.classifier)
-
-    @cached_property
-    def sft(self) -> SftResourceWithStreamingResponse:
-        return SftResourceWithStreamingResponse(self._model.sft)
+        return ClassifierResourceWithStreamingResponse(self._training.classifier)
 
     @cached_property
     def grpo(self) -> GrpoResourceWithStreamingResponse:
-        return GrpoResourceWithStreamingResponse(self._model.grpo)
+        return GrpoResourceWithStreamingResponse(self._training.grpo)
+
+    @cached_property
+    def sft(self) -> SftResourceWithStreamingResponse:
+        return SftResourceWithStreamingResponse(self._training.sft)
 
 
-class AsyncModelResourceWithStreamingResponse:
-    def __init__(self, model: AsyncModelResource) -> None:
-        self._model = model
+class AsyncTrainingResourceWithStreamingResponse:
+    def __init__(self, training: AsyncTrainingResource) -> None:
+        self._training = training
 
     @cached_property
     def classifier(self) -> AsyncClassifierResourceWithStreamingResponse:
-        return AsyncClassifierResourceWithStreamingResponse(self._model.classifier)
-
-    @cached_property
-    def sft(self) -> AsyncSftResourceWithStreamingResponse:
-        return AsyncSftResourceWithStreamingResponse(self._model.sft)
+        return AsyncClassifierResourceWithStreamingResponse(self._training.classifier)
 
     @cached_property
     def grpo(self) -> AsyncGrpoResourceWithStreamingResponse:
-        return AsyncGrpoResourceWithStreamingResponse(self._model.grpo)
+        return AsyncGrpoResourceWithStreamingResponse(self._training.grpo)
+
+    @cached_property
+    def sft(self) -> AsyncSftResourceWithStreamingResponse:
+        return AsyncSftResourceWithStreamingResponse(self._training.sft)

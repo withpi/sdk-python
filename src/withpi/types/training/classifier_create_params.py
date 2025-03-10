@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ClassifierStartJobParams", "Example"]
+__all__ = ["ClassifierCreateParams", "Example"]
 
 
-class ClassifierStartJobParams(TypedDict, total=False):
+class ClassifierCreateParams(TypedDict, total=False):
     base_model: Required[Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"]]
     """The base model to start the classification tuning process"""
 

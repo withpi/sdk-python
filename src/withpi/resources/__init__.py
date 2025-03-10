@@ -16,14 +16,6 @@ from .data import (
     DataResourceWithStreamingResponse,
     AsyncDataResourceWithStreamingResponse,
 )
-from .model import (
-    ModelResource,
-    AsyncModelResource,
-    ModelResourceWithRawResponse,
-    AsyncModelResourceWithRawResponse,
-    ModelResourceWithStreamingResponse,
-    AsyncModelResourceWithStreamingResponse,
-)
 from .prompt import (
     PromptResource,
     AsyncPromptResource,
@@ -40,6 +32,14 @@ from .scorers import (
     ScorersResourceWithStreamingResponse,
     AsyncScorersResourceWithStreamingResponse,
 )
+from .training import (
+    TrainingResource,
+    AsyncTrainingResource,
+    TrainingResourceWithRawResponse,
+    AsyncTrainingResourceWithRawResponse,
+    TrainingResourceWithStreamingResponse,
+    AsyncTrainingResourceWithStreamingResponse,
+)
 
 __all__ = [
     "DataResource",
@@ -48,12 +48,6 @@ __all__ = [
     "AsyncDataResourceWithRawResponse",
     "DataResourceWithStreamingResponse",
     "AsyncDataResourceWithStreamingResponse",
-    "ModelResource",
-    "AsyncModelResource",
-    "ModelResourceWithRawResponse",
-    "AsyncModelResourceWithRawResponse",
-    "ModelResourceWithStreamingResponse",
-    "AsyncModelResourceWithStreamingResponse",
     "PromptResource",
     "AsyncPromptResource",
     "PromptResourceWithRawResponse",
@@ -72,4 +66,10 @@ __all__ = [
     "AsyncRagResourceWithRawResponse",
     "RagResourceWithStreamingResponse",
     "AsyncRagResourceWithStreamingResponse",
+    "TrainingResource",
+    "AsyncTrainingResource",
+    "TrainingResourceWithRawResponse",
+    "AsyncTrainingResourceWithRawResponse",
+    "TrainingResourceWithStreamingResponse",
+    "AsyncTrainingResourceWithStreamingResponse",
 ]
