@@ -9,11 +9,11 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.model import (
+from withpi.types.training import (
     SftListResponse,
     SftLoadResponse,
+    SftCreateResponse,
     SftRetrieveResponse,
-    SftStartJobResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -24,8 +24,124 @@ class TestSft:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create(self, client: PiClient) -> None:
+        sft = client.training.sft.create(
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        )
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: PiClient) -> None:
+        sft = client.training.sft.create(
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+                "dimensions": [
+                    {
+                        "description": "Relevance of the response",
+                        "label": "Relevance",
+                        "sub_dimensions": [
+                            {
+                                "description": "Is the response relevant to the prompt?",
+                                "label": "Relevance to Prompt",
+                                "scoring_type": "PI_SCORER",
+                                "custom_model_id": "your-model-id",
+                                "parameters": [
+                                    0.14285714285714285,
+                                    0.2857142857142857,
+                                    0.42857142857142855,
+                                    0.5714285714285714,
+                                    0.7142857142857143,
+                                    0.8571428571428571,
+                                ],
+                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                "weight": 1,
+                            }
+                        ],
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
+                        "weight": 1,
+                    }
+                ],
+            },
+            base_sft_model="LLAMA_3.2_3B",
+            learning_rate=0.0002,
+            lora_config={"lora_rank": "R_16"},
+            num_train_epochs=10,
+            system_prompt="An optional system prompt.",
+        )
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_create(self, client: PiClient) -> None:
+        response = client.training.sft.with_raw_response.create(
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sft = response.parse()
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_create(self, client: PiClient) -> None:
+        with client.training.sft.with_streaming_response.create(
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            scorer={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Scoring System",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sft = response.parse()
+            assert_matches_type(SftCreateResponse, sft, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
-        sft = client.model.sft.retrieve(
+        sft = client.training.sft.retrieve(
             "job_id",
         )
         assert_matches_type(SftRetrieveResponse, sft, path=["response"])
@@ -33,7 +149,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.retrieve(
+        response = client.training.sft.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -45,7 +161,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.retrieve(
+        with client.training.sft.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -60,20 +176,20 @@ class TestSft:
     @parametrize
     def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.retrieve(
+            client.training.sft.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: PiClient) -> None:
-        sft = client.model.sft.list()
+        sft = client.training.sft.list()
         assert_matches_type(SftListResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: PiClient) -> None:
-        sft = client.model.sft.list(
+        sft = client.training.sft.list(
             state="QUEUED",
         )
         assert_matches_type(SftListResponse, sft, path=["response"])
@@ -81,7 +197,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.list()
+        response = client.training.sft.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -91,7 +207,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.list() as response:
+        with client.training.sft.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -103,7 +219,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_method_cancel(self, client: PiClient) -> None:
-        sft = client.model.sft.cancel(
+        sft = client.training.sft.cancel(
             "job_id",
         )
         assert_matches_type(str, sft, path=["response"])
@@ -111,7 +227,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.cancel(
+        response = client.training.sft.with_raw_response.cancel(
             "job_id",
         )
 
@@ -123,7 +239,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.cancel(
+        with client.training.sft.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -138,14 +254,14 @@ class TestSft:
     @parametrize
     def test_path_params_cancel(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.cancel(
+            client.training.sft.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_download(self, client: PiClient) -> None:
-        sft = client.model.sft.download(
+        sft = client.training.sft.download(
             job_id="job_id",
             serving_id=0,
         )
@@ -154,7 +270,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_download(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.download(
+        response = client.training.sft.with_raw_response.download(
             job_id="job_id",
             serving_id=0,
         )
@@ -167,7 +283,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_download(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.download(
+        with client.training.sft.with_streaming_response.download(
             job_id="job_id",
             serving_id=0,
         ) as response:
@@ -183,7 +299,7 @@ class TestSft:
     @parametrize
     def test_path_params_download(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.download(
+            client.training.sft.with_raw_response.download(
                 job_id="",
                 serving_id=0,
             )
@@ -191,7 +307,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_method_load(self, client: PiClient) -> None:
-        sft = client.model.sft.load(
+        sft = client.training.sft.load(
             "job_id",
         )
         assert_matches_type(SftLoadResponse, sft, path=["response"])
@@ -199,7 +315,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_load(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.load(
+        response = client.training.sft.with_raw_response.load(
             "job_id",
         )
 
@@ -211,7 +327,7 @@ class TestSft:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_load(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.load(
+        with client.training.sft.with_streaming_response.load(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -226,14 +342,60 @@ class TestSft:
     @parametrize
     def test_path_params_load(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.load(
+            client.training.sft.with_raw_response.load(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_start_job(self, client: PiClient) -> None:
-        sft = client.model.sft.start_job(
+    def test_method_messages(self, client: PiClient) -> None:
+        sft = client.training.sft.messages(
+            "job_id",
+        )
+        assert_matches_type(str, sft, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_messages(self, client: PiClient) -> None:
+        response = client.training.sft.with_raw_response.messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sft = response.parse()
+        assert_matches_type(str, sft, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_messages(self, client: PiClient) -> None:
+        with client.training.sft.with_streaming_response.messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sft = response.parse()
+            assert_matches_type(str, sft, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_messages(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.training.sft.with_raw_response.messages(
+                "",
+            )
+
+
+class TestAsyncSft:
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.training.sft.create(
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -245,12 +407,12 @@ class TestSft:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
-        sft = client.model.sft.start_job(
+    async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.training.sft.create(
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -300,12 +462,12 @@ class TestSft:
             num_train_epochs=10,
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.start_job(
+    async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.sft.with_raw_response.create(
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -320,13 +482,13 @@ class TestSft:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = response.parse()
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
+        sft = await response.parse()
+        assert_matches_type(SftCreateResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_start_job(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.start_job(
+    async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.sft.with_streaming_response.create(
             examples=[
                 {
                     "llm_input": "Tell me something different",
@@ -341,61 +503,15 @@ class TestSft:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            sft = response.parse()
-            assert_matches_type(SftStartJobResponse, sft, path=["response"])
+            sft = await response.parse()
+            assert_matches_type(SftCreateResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_stream_messages(self, client: PiClient) -> None:
-        sft = client.model.sft.stream_messages(
-            "job_id",
-        )
-        assert_matches_type(str, sft, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_stream_messages(self, client: PiClient) -> None:
-        response = client.model.sft.with_raw_response.stream_messages(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = response.parse()
-        assert_matches_type(str, sft, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_stream_messages(self, client: PiClient) -> None:
-        with client.model.sft.with_streaming_response.stream_messages(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = response.parse()
-            assert_matches_type(str, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_stream_messages(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.sft.with_raw_response.stream_messages(
-                "",
-            )
-
-
-class TestAsyncSft:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.retrieve(
+        sft = await async_client.training.sft.retrieve(
             "job_id",
         )
         assert_matches_type(SftRetrieveResponse, sft, path=["response"])
@@ -403,7 +519,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.retrieve(
+        response = await async_client.training.sft.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -415,7 +531,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.retrieve(
+        async with async_client.training.sft.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -430,20 +546,20 @@ class TestAsyncSft:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.retrieve(
+            await async_client.training.sft.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.list()
+        sft = await async_client.training.sft.list()
         assert_matches_type(SftListResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.list(
+        sft = await async_client.training.sft.list(
             state="QUEUED",
         )
         assert_matches_type(SftListResponse, sft, path=["response"])
@@ -451,7 +567,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.list()
+        response = await async_client.training.sft.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -461,7 +577,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.list() as response:
+        async with async_client.training.sft.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -473,7 +589,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.cancel(
+        sft = await async_client.training.sft.cancel(
             "job_id",
         )
         assert_matches_type(str, sft, path=["response"])
@@ -481,7 +597,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.cancel(
+        response = await async_client.training.sft.with_raw_response.cancel(
             "job_id",
         )
 
@@ -493,7 +609,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.cancel(
+        async with async_client.training.sft.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -508,14 +624,14 @@ class TestAsyncSft:
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.cancel(
+            await async_client.training.sft.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_download(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.download(
+        sft = await async_client.training.sft.download(
             job_id="job_id",
             serving_id=0,
         )
@@ -524,7 +640,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_download(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.download(
+        response = await async_client.training.sft.with_raw_response.download(
             job_id="job_id",
             serving_id=0,
         )
@@ -537,7 +653,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_download(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.download(
+        async with async_client.training.sft.with_streaming_response.download(
             job_id="job_id",
             serving_id=0,
         ) as response:
@@ -553,7 +669,7 @@ class TestAsyncSft:
     @parametrize
     async def test_path_params_download(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.download(
+            await async_client.training.sft.with_raw_response.download(
                 job_id="",
                 serving_id=0,
             )
@@ -561,7 +677,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_method_load(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.load(
+        sft = await async_client.training.sft.load(
             "job_id",
         )
         assert_matches_type(SftLoadResponse, sft, path=["response"])
@@ -569,7 +685,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_load(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.load(
+        response = await async_client.training.sft.with_raw_response.load(
             "job_id",
         )
 
@@ -581,7 +697,7 @@ class TestAsyncSft:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_load(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.load(
+        async with async_client.training.sft.with_streaming_response.load(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -596,138 +712,22 @@ class TestAsyncSft:
     @parametrize
     async def test_path_params_load(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.load(
+            await async_client.training.sft.with_raw_response.load(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.start_job(
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            scorer={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        )
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.start_job(
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            scorer={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "custom_model_id": "your-model-id",
-                                "parameters": [
-                                    0.14285714285714285,
-                                    0.2857142857142857,
-                                    0.42857142857142855,
-                                    0.5714285714285714,
-                                    0.7142857142857143,
-                                    0.8571428571428571,
-                                ],
-                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "parameters": [
-                            0.14285714285714285,
-                            0.2857142857142857,
-                            0.42857142857142855,
-                            0.5714285714285714,
-                            0.7142857142857143,
-                            0.8571428571428571,
-                        ],
-                        "weight": 1,
-                    }
-                ],
-            },
-            base_sft_model="LLAMA_3.2_3B",
-            learning_rate=0.0002,
-            lora_config={"lora_rank": "R_16"},
-            num_train_epochs=10,
-            system_prompt="An optional system prompt.",
-        )
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.start_job(
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            scorer={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sft = await response.parse()
-        assert_matches_type(SftStartJobResponse, sft, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.start_job(
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            scorer={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
-            },
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sft = await response.parse()
-            assert_matches_type(SftStartJobResponse, sft, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
-        sft = await async_client.model.sft.stream_messages(
+    async def test_method_messages(self, async_client: AsyncPiClient) -> None:
+        sft = await async_client.training.sft.messages(
             "job_id",
         )
         assert_matches_type(str, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.model.sft.with_raw_response.stream_messages(
+    async def test_raw_response_messages(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.sft.with_raw_response.messages(
             "job_id",
         )
 
@@ -738,8 +738,8 @@ class TestAsyncSft:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.model.sft.with_streaming_response.stream_messages(
+    async def test_streaming_response_messages(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.sft.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -752,8 +752,8 @@ class TestAsyncSft:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
+    async def test_path_params_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.sft.with_raw_response.stream_messages(
+            await async_client.training.sft.with_raw_response.messages(
                 "",
             )

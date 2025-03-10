@@ -33,9 +33,9 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.data import data
-from .resources.model import model
 from .resources.prompt import prompt
 from .resources.scorers import scorers
+from .resources.training import training
 
 __all__ = [
     "Timeout",
@@ -51,10 +51,10 @@ __all__ = [
 
 class PiClient(SyncAPIClient):
     data: data.DataResource
-    model: model.ModelResource
     prompt: prompt.PromptResource
     scorers: scorers.ScorersResource
     rag: rag.RagResource
+    training: training.TrainingResource
     with_raw_response: PiClientWithRawResponse
     with_streaming_response: PiClientWithStreamedResponse
 
@@ -113,10 +113,10 @@ class PiClient(SyncAPIClient):
         )
 
         self.data = data.DataResource(self)
-        self.model = model.ModelResource(self)
         self.prompt = prompt.PromptResource(self)
         self.scorers = scorers.ScorersResource(self)
         self.rag = rag.RagResource(self)
+        self.training = training.TrainingResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
         self.with_streaming_response = PiClientWithStreamedResponse(self)
 
@@ -227,10 +227,10 @@ class PiClient(SyncAPIClient):
 
 class AsyncPiClient(AsyncAPIClient):
     data: data.AsyncDataResource
-    model: model.AsyncModelResource
     prompt: prompt.AsyncPromptResource
     scorers: scorers.AsyncScorersResource
     rag: rag.AsyncRagResource
+    training: training.AsyncTrainingResource
     with_raw_response: AsyncPiClientWithRawResponse
     with_streaming_response: AsyncPiClientWithStreamedResponse
 
@@ -289,10 +289,10 @@ class AsyncPiClient(AsyncAPIClient):
         )
 
         self.data = data.AsyncDataResource(self)
-        self.model = model.AsyncModelResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
         self.scorers = scorers.AsyncScorersResource(self)
         self.rag = rag.AsyncRagResource(self)
+        self.training = training.AsyncTrainingResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
         self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
@@ -404,37 +404,37 @@ class AsyncPiClient(AsyncAPIClient):
 class PiClientWithRawResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithRawResponse(client.data)
-        self.model = model.ModelResourceWithRawResponse(client.model)
         self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.scorers = scorers.ScorersResourceWithRawResponse(client.scorers)
         self.rag = rag.RagResourceWithRawResponse(client.rag)
+        self.training = training.TrainingResourceWithRawResponse(client.training)
 
 
 class AsyncPiClientWithRawResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
-        self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.scorers = scorers.AsyncScorersResourceWithRawResponse(client.scorers)
         self.rag = rag.AsyncRagResourceWithRawResponse(client.rag)
+        self.training = training.AsyncTrainingResourceWithRawResponse(client.training)
 
 
 class PiClientWithStreamedResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithStreamingResponse(client.data)
-        self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.scorers = scorers.ScorersResourceWithStreamingResponse(client.scorers)
         self.rag = rag.RagResourceWithStreamingResponse(client.rag)
+        self.training = training.TrainingResourceWithStreamingResponse(client.training)
 
 
 class AsyncPiClientWithStreamedResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
-        self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.scorers = scorers.AsyncScorersResourceWithStreamingResponse(client.scorers)
         self.rag = rag.AsyncRagResourceWithStreamingResponse(client.rag)
+        self.training = training.AsyncTrainingResourceWithStreamingResponse(client.training)
 
 
 Client = PiClient

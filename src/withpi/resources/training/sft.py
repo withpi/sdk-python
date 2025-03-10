@@ -20,36 +20,101 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.model import grpo_list_params, grpo_download_params, grpo_start_job_params
 from ..._base_client import make_request_options
+from ...types.training import sft_list_params, sft_create_params, sft_download_params
 from ...types.shared_params.scorer import Scorer
-from ...types.model.grpo_list_response import GrpoListResponse
-from ...types.model.grpo_load_response import GrpoLoadResponse
-from ...types.model.grpo_retrieve_response import GrpoRetrieveResponse
-from ...types.model.grpo_start_job_response import GrpoStartJobResponse
+from ...types.training.sft_list_response import SftListResponse
+from ...types.training.sft_load_response import SftLoadResponse
+from ...types.training.sft_create_response import SftCreateResponse
+from ...types.training.sft_retrieve_response import SftRetrieveResponse
 
-__all__ = ["GrpoResource", "AsyncGrpoResource"]
+__all__ = ["SftResource", "AsyncSftResource"]
 
 
-class GrpoResource(SyncAPIResource):
+class SftResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> GrpoResourceWithRawResponse:
+    def with_raw_response(self) -> SftResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return GrpoResourceWithRawResponse(self)
+        return SftResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GrpoResourceWithStreamingResponse:
+    def with_streaming_response(self) -> SftResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return GrpoResourceWithStreamingResponse(self)
+        return SftResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        examples: Iterable[sft_create_params.Example],
+        scorer: Scorer,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: sft_create_params.LoraConfig | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftCreateResponse:
+        """Launches a SFT job
+
+        Args:
+          examples: Examples to use in the SFT tuning process.
+
+        We split this data into train/eval
+              90/10.
+
+          scorer: The scoring system to use in the SFT tuning process
+
+          base_sft_model: The base model to start the SFT tuning process.
+
+          learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: SFT number of train epochs: <= 10.
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/training/sft",
+            body=maybe_transform(
+                {
+                    "examples": examples,
+                    "scorer": scorer,
+                    "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
+                },
+                sft_create_params.SftCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftCreateResponse,
+        )
 
     def retrieve(
         self,
@@ -61,9 +126,9 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoRetrieveResponse:
+    ) -> SftRetrieveResponse:
         """
-        Checks the status of a RL GRPO job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -77,11 +142,11 @@ class GrpoResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            f"/model/grpo/{job_id}",
+            f"/training/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoRetrieveResponse,
+            cast_to=SftRetrieveResponse,
         )
 
     def list(
@@ -94,9 +159,9 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoListResponse:
+    ) -> SftListResponse:
         """
-        Lists the RL GRPO Jobs owned by a user
+        Lists the SFT Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -110,15 +175,15 @@ class GrpoResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/model/grpo",
+            "/training/sft",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+                query=maybe_transform({"state": state}, sft_list_params.SftListParams),
             ),
-            cast_to=GrpoListResponse,
+            cast_to=SftListResponse,
         )
 
     def cancel(
@@ -133,7 +198,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Cancels a RL GRPO job
+        Cancels a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -147,7 +212,7 @@ class GrpoResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._delete(
-            f"/model/grpo/{job_id}",
+            f"/training/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -167,7 +232,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Allows downloading a RL GRPO job
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -181,13 +246,13 @@ class GrpoResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._post(
-            f"/model/grpo/{job_id}/download",
+            f"/training/sft/{job_id}/download",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"serving_id": serving_id}, grpo_download_params.GrpoDownloadParams),
+                query=maybe_transform({"serving_id": serving_id}, sft_download_params.SftDownloadParams),
             ),
             cast_to=str,
         )
@@ -202,9 +267,9 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLoadResponse:
+    ) -> SftLoadResponse:
         """
-        Loads a RL GRPO model into serving for a limited period of time
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -218,77 +283,14 @@ class GrpoResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._post(
-            f"/model/grpo/{job_id}/load",
+            f"/training/sft/{job_id}/load",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoLoadResponse,
+            cast_to=SftLoadResponse,
         )
 
-    def start_job(
-        self,
-        *,
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        examples: Iterable[grpo_start_job_params.Example],
-        learning_rate: float,
-        lora_config: grpo_start_job_params.LoraConfig,
-        num_train_epochs: int,
-        scorer: Scorer,
-        system_prompt: Optional[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoStartJobResponse:
-        """
-        Launches a RL GRPO job
-
-        Args:
-          base_rl_model: The base model to start the RL tunning process
-
-          examples: Examples to use in the RL tuning process
-
-          learning_rate: GRPO learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: GRPO number of train epochs
-
-          scorer: The scoring system to use in the GRPO tuning process
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/model/grpo",
-            body=maybe_transform(
-                {
-                    "base_rl_model": base_rl_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "scorer": scorer,
-                    "system_prompt": system_prompt,
-                },
-                grpo_start_job_params.GrpoStartJobParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoStartJobResponse,
-        )
-
-    def stream_messages(
+    def messages(
         self,
         job_id: str,
         *,
@@ -300,7 +302,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a RL GRPO job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -315,7 +317,7 @@ class GrpoResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/model/grpo/{job_id}/messages",
+            f"/training/sft/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -323,25 +325,90 @@ class GrpoResource(SyncAPIResource):
         )
 
 
-class AsyncGrpoResource(AsyncAPIResource):
+class AsyncSftResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncGrpoResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncSftResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncGrpoResourceWithRawResponse(self)
+        return AsyncSftResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGrpoResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncSftResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncGrpoResourceWithStreamingResponse(self)
+        return AsyncSftResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        examples: Iterable[sft_create_params.Example],
+        scorer: Scorer,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        lora_config: sft_create_params.LoraConfig | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftCreateResponse:
+        """Launches a SFT job
+
+        Args:
+          examples: Examples to use in the SFT tuning process.
+
+        We split this data into train/eval
+              90/10.
+
+          scorer: The scoring system to use in the SFT tuning process
+
+          base_sft_model: The base model to start the SFT tuning process.
+
+          learning_rate: SFT learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: SFT number of train epochs: <= 10.
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/training/sft",
+            body=await async_maybe_transform(
+                {
+                    "examples": examples,
+                    "scorer": scorer,
+                    "base_sft_model": base_sft_model,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "system_prompt": system_prompt,
+                },
+                sft_create_params.SftCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftCreateResponse,
+        )
 
     async def retrieve(
         self,
@@ -353,9 +420,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoRetrieveResponse:
+    ) -> SftRetrieveResponse:
         """
-        Checks the status of a RL GRPO job
+        Checks the status of a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -369,11 +436,11 @@ class AsyncGrpoResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            f"/model/grpo/{job_id}",
+            f"/training/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoRetrieveResponse,
+            cast_to=SftRetrieveResponse,
         )
 
     async def list(
@@ -386,9 +453,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoListResponse:
+    ) -> SftListResponse:
         """
-        Lists the RL GRPO Jobs owned by a user
+        Lists the SFT Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -402,15 +469,15 @@ class AsyncGrpoResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/model/grpo",
+            "/training/sft",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"state": state}, grpo_list_params.GrpoListParams),
+                query=await async_maybe_transform({"state": state}, sft_list_params.SftListParams),
             ),
-            cast_to=GrpoListResponse,
+            cast_to=SftListResponse,
         )
 
     async def cancel(
@@ -425,7 +492,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Cancels a RL GRPO job
+        Cancels a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -439,7 +506,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._delete(
-            f"/model/grpo/{job_id}",
+            f"/training/sft/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -459,7 +526,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Allows downloading a RL GRPO job
+        Allows downloading a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -473,13 +540,13 @@ class AsyncGrpoResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._post(
-            f"/model/grpo/{job_id}/download",
+            f"/training/sft/{job_id}/download",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"serving_id": serving_id}, grpo_download_params.GrpoDownloadParams),
+                query=await async_maybe_transform({"serving_id": serving_id}, sft_download_params.SftDownloadParams),
             ),
             cast_to=str,
         )
@@ -494,9 +561,9 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLoadResponse:
+    ) -> SftLoadResponse:
         """
-        Loads a RL GRPO model into serving for a limited period of time
+        Loads a SFT model into serving for a limited period of time
 
         Args:
           extra_headers: Send extra headers
@@ -510,77 +577,14 @@ class AsyncGrpoResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._post(
-            f"/model/grpo/{job_id}/load",
+            f"/training/sft/{job_id}/load",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoLoadResponse,
+            cast_to=SftLoadResponse,
         )
 
-    async def start_job(
-        self,
-        *,
-        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        examples: Iterable[grpo_start_job_params.Example],
-        learning_rate: float,
-        lora_config: grpo_start_job_params.LoraConfig,
-        num_train_epochs: int,
-        scorer: Scorer,
-        system_prompt: Optional[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoStartJobResponse:
-        """
-        Launches a RL GRPO job
-
-        Args:
-          base_rl_model: The base model to start the RL tunning process
-
-          examples: Examples to use in the RL tuning process
-
-          learning_rate: GRPO learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: GRPO number of train epochs
-
-          scorer: The scoring system to use in the GRPO tuning process
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/model/grpo",
-            body=await async_maybe_transform(
-                {
-                    "base_rl_model": base_rl_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "scorer": scorer,
-                    "system_prompt": system_prompt,
-                },
-                grpo_start_job_params.GrpoStartJobParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoStartJobResponse,
-        )
-
-    async def stream_messages(
+    async def messages(
         self,
         job_id: str,
         *,
@@ -592,7 +596,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a RL GRPO job
+        Opens a message stream about a SFT job
 
         Args:
           extra_headers: Send extra headers
@@ -607,7 +611,7 @@ class AsyncGrpoResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/model/grpo/{job_id}/messages",
+            f"/training/sft/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -615,109 +619,109 @@ class AsyncGrpoResource(AsyncAPIResource):
         )
 
 
-class GrpoResourceWithRawResponse:
-    def __init__(self, grpo: GrpoResource) -> None:
-        self._grpo = grpo
+class SftResourceWithRawResponse:
+    def __init__(self, sft: SftResource) -> None:
+        self._sft = sft
 
+        self.create = to_raw_response_wrapper(
+            sft.create,
+        )
         self.retrieve = to_raw_response_wrapper(
-            grpo.retrieve,
+            sft.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            grpo.list,
+            sft.list,
         )
         self.cancel = to_raw_response_wrapper(
-            grpo.cancel,
+            sft.cancel,
         )
         self.download = to_raw_response_wrapper(
-            grpo.download,
+            sft.download,
         )
         self.load = to_raw_response_wrapper(
-            grpo.load,
+            sft.load,
         )
-        self.start_job = to_raw_response_wrapper(
-            grpo.start_job,
-        )
-        self.stream_messages = to_raw_response_wrapper(
-            grpo.stream_messages,
+        self.messages = to_raw_response_wrapper(
+            sft.messages,
         )
 
 
-class AsyncGrpoResourceWithRawResponse:
-    def __init__(self, grpo: AsyncGrpoResource) -> None:
-        self._grpo = grpo
+class AsyncSftResourceWithRawResponse:
+    def __init__(self, sft: AsyncSftResource) -> None:
+        self._sft = sft
 
+        self.create = async_to_raw_response_wrapper(
+            sft.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
-            grpo.retrieve,
+            sft.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            grpo.list,
+            sft.list,
         )
         self.cancel = async_to_raw_response_wrapper(
-            grpo.cancel,
+            sft.cancel,
         )
         self.download = async_to_raw_response_wrapper(
-            grpo.download,
+            sft.download,
         )
         self.load = async_to_raw_response_wrapper(
-            grpo.load,
+            sft.load,
         )
-        self.start_job = async_to_raw_response_wrapper(
-            grpo.start_job,
-        )
-        self.stream_messages = async_to_raw_response_wrapper(
-            grpo.stream_messages,
+        self.messages = async_to_raw_response_wrapper(
+            sft.messages,
         )
 
 
-class GrpoResourceWithStreamingResponse:
-    def __init__(self, grpo: GrpoResource) -> None:
-        self._grpo = grpo
+class SftResourceWithStreamingResponse:
+    def __init__(self, sft: SftResource) -> None:
+        self._sft = sft
 
+        self.create = to_streamed_response_wrapper(
+            sft.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
-            grpo.retrieve,
+            sft.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            grpo.list,
+            sft.list,
         )
         self.cancel = to_streamed_response_wrapper(
-            grpo.cancel,
+            sft.cancel,
         )
         self.download = to_streamed_response_wrapper(
-            grpo.download,
+            sft.download,
         )
         self.load = to_streamed_response_wrapper(
-            grpo.load,
+            sft.load,
         )
-        self.start_job = to_streamed_response_wrapper(
-            grpo.start_job,
-        )
-        self.stream_messages = to_streamed_response_wrapper(
-            grpo.stream_messages,
+        self.messages = to_streamed_response_wrapper(
+            sft.messages,
         )
 
 
-class AsyncGrpoResourceWithStreamingResponse:
-    def __init__(self, grpo: AsyncGrpoResource) -> None:
-        self._grpo = grpo
+class AsyncSftResourceWithStreamingResponse:
+    def __init__(self, sft: AsyncSftResource) -> None:
+        self._sft = sft
 
+        self.create = async_to_streamed_response_wrapper(
+            sft.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
-            grpo.retrieve,
+            sft.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            grpo.list,
+            sft.list,
         )
         self.cancel = async_to_streamed_response_wrapper(
-            grpo.cancel,
+            sft.cancel,
         )
         self.download = async_to_streamed_response_wrapper(
-            grpo.download,
+            sft.download,
         )
         self.load = async_to_streamed_response_wrapper(
-            grpo.load,
+            sft.load,
         )
-        self.start_job = async_to_streamed_response_wrapper(
-            grpo.start_job,
-        )
-        self.stream_messages = async_to_streamed_response_wrapper(
-            grpo.stream_messages,
+        self.messages = async_to_streamed_response_wrapper(
+            sft.messages,
         )
