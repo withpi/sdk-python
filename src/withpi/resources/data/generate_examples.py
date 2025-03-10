@@ -20,146 +20,41 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import generate_synthetic_data_list_params, generate_synthetic_data_start_job_params
+from ...types.data import generate_example_list_params, generate_example_create_params
 from ..._base_client import make_request_options
 from ...types.shared.exploration_mode import ExplorationMode
 from ...types.shared.synthetic_data_status import SyntheticDataStatus
-from ...types.data.generate_synthetic_data_list_response import GenerateSyntheticDataListResponse
-from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
+from ...types.data.generate_example_list_response import GenerateExampleListResponse
+from ...types.data.generate_example_stream_data_response import GenerateExampleStreamDataResponse
 
-__all__ = ["GenerateSyntheticDataResource", "AsyncGenerateSyntheticDataResource"]
+__all__ = ["GenerateExamplesResource", "AsyncGenerateExamplesResource"]
 
 
-class GenerateSyntheticDataResource(SyncAPIResource):
+class GenerateExamplesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> GenerateSyntheticDataResourceWithRawResponse:
+    def with_raw_response(self) -> GenerateExamplesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return GenerateSyntheticDataResourceWithRawResponse(self)
+        return GenerateExamplesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GenerateSyntheticDataResourceWithStreamingResponse:
+    def with_streaming_response(self) -> GenerateExamplesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return GenerateSyntheticDataResourceWithStreamingResponse(self)
+        return GenerateExamplesResourceWithStreamingResponse(self)
 
-    def retrieve(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyntheticDataStatus:
-        """
-        Checks the status of a Synthetic Data Generation job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/data/generate_synthetic_data/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SyntheticDataStatus,
-        )
-
-    def list(
-        self,
-        *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataListResponse:
-        """
-        Lists the Synthetic Data Generation Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/data/generate_synthetic_data",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"state": state}, generate_synthetic_data_list_params.GenerateSyntheticDataListParams
-                ),
-            ),
-            cast_to=GenerateSyntheticDataListResponse,
-        )
-
-    def cancel(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Cancels a Synthetic Data Generation job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._delete(
-            f"/data/generate_synthetic_data/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
-    def start_job(
+    def create(
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_synthetic_data_start_job_params.Seed],
+        seeds: Iterable[generate_example_create_params.Seed],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
@@ -200,7 +95,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/data/generate_synthetic_data",
+            "/data/generate_examples",
             body=maybe_transform(
                 {
                     "num_examples_to_generate": num_examples_to_generate,
@@ -211,12 +106,115 @@ class GenerateSyntheticDataResource(SyncAPIResource):
                     "num_shots": num_shots,
                     "system_prompt": system_prompt,
                 },
-                generate_synthetic_data_start_job_params.GenerateSyntheticDataStartJobParams,
+                generate_example_create_params.GenerateExampleCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SyntheticDataStatus,
+        )
+
+    def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyntheticDataStatus:
+        """
+        Checks the status of a Synthetic Data Generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/data/generate_examples/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SyntheticDataStatus,
+        )
+
+    def list(
+        self,
+        *,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateExampleListResponse:
+        """
+        Lists the Synthetic Data Generation Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/data/generate_examples",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, generate_example_list_params.GenerateExampleListParams),
+            ),
+            cast_to=GenerateExampleListResponse,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Synthetic Data Generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/data/generate_examples/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
     def stream_data(
@@ -229,7 +227,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataStreamDataResponse:
+    ) -> GenerateExampleStreamDataResponse:
         """
         Streams data from the Synthetic Data Generation job
 
@@ -245,11 +243,11 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            f"/data/generate_synthetic_data/{job_id}/data",
+            f"/data/generate_examples/{job_id}/data",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataStreamDataResponse,
+            cast_to=GenerateExampleStreamDataResponse,
         )
 
     def stream_messages(
@@ -279,7 +277,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/data/generate_synthetic_data/{job_id}/messages",
+            f"/data/generate_examples/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -287,136 +285,31 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         )
 
 
-class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
+class AsyncGenerateExamplesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncGenerateSyntheticDataResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncGenerateExamplesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncGenerateSyntheticDataResourceWithRawResponse(self)
+        return AsyncGenerateExamplesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGenerateSyntheticDataResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncGenerateExamplesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncGenerateSyntheticDataResourceWithStreamingResponse(self)
+        return AsyncGenerateExamplesResourceWithStreamingResponse(self)
 
-    async def retrieve(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyntheticDataStatus:
-        """
-        Checks the status of a Synthetic Data Generation job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/data/generate_synthetic_data/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SyntheticDataStatus,
-        )
-
-    async def list(
-        self,
-        *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataListResponse:
-        """
-        Lists the Synthetic Data Generation Jobs owned by a user
-
-        Args:
-          state: Filter jobs by state
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/data/generate_synthetic_data",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"state": state}, generate_synthetic_data_list_params.GenerateSyntheticDataListParams
-                ),
-            ),
-            cast_to=GenerateSyntheticDataListResponse,
-        )
-
-    async def cancel(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Cancels a Synthetic Data Generation job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._delete(
-            f"/data/generate_synthetic_data/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
-    async def start_job(
+    async def create(
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[generate_synthetic_data_start_job_params.Seed],
+        seeds: Iterable[generate_example_create_params.Seed],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
@@ -457,7 +350,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/data/generate_synthetic_data",
+            "/data/generate_examples",
             body=await async_maybe_transform(
                 {
                     "num_examples_to_generate": num_examples_to_generate,
@@ -468,12 +361,117 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
                     "num_shots": num_shots,
                     "system_prompt": system_prompt,
                 },
-                generate_synthetic_data_start_job_params.GenerateSyntheticDataStartJobParams,
+                generate_example_create_params.GenerateExampleCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SyntheticDataStatus,
+        )
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyntheticDataStatus:
+        """
+        Checks the status of a Synthetic Data Generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/data/generate_examples/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SyntheticDataStatus,
+        )
+
+    async def list(
+        self,
+        *,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GenerateExampleListResponse:
+        """
+        Lists the Synthetic Data Generation Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/data/generate_examples",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, generate_example_list_params.GenerateExampleListParams
+                ),
+            ),
+            cast_to=GenerateExampleListResponse,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Synthetic Data Generation job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/data/generate_examples/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
     async def stream_data(
@@ -486,7 +484,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GenerateSyntheticDataStreamDataResponse:
+    ) -> GenerateExampleStreamDataResponse:
         """
         Streams data from the Synthetic Data Generation job
 
@@ -502,11 +500,11 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            f"/data/generate_synthetic_data/{job_id}/data",
+            f"/data/generate_examples/{job_id}/data",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GenerateSyntheticDataStreamDataResponse,
+            cast_to=GenerateExampleStreamDataResponse,
         )
 
     async def stream_messages(
@@ -536,7 +534,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/data/generate_synthetic_data/{job_id}/messages",
+            f"/data/generate_examples/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -544,97 +542,97 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         )
 
 
-class GenerateSyntheticDataResourceWithRawResponse:
-    def __init__(self, generate_synthetic_data: GenerateSyntheticDataResource) -> None:
-        self._generate_synthetic_data = generate_synthetic_data
+class GenerateExamplesResourceWithRawResponse:
+    def __init__(self, generate_examples: GenerateExamplesResource) -> None:
+        self._generate_examples = generate_examples
 
+        self.create = to_raw_response_wrapper(
+            generate_examples.create,
+        )
         self.retrieve = to_raw_response_wrapper(
-            generate_synthetic_data.retrieve,
+            generate_examples.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            generate_synthetic_data.list,
+            generate_examples.list,
         )
         self.cancel = to_raw_response_wrapper(
-            generate_synthetic_data.cancel,
-        )
-        self.start_job = to_raw_response_wrapper(
-            generate_synthetic_data.start_job,
+            generate_examples.cancel,
         )
         self.stream_data = to_raw_response_wrapper(
-            generate_synthetic_data.stream_data,
+            generate_examples.stream_data,
         )
         self.stream_messages = to_raw_response_wrapper(
-            generate_synthetic_data.stream_messages,
+            generate_examples.stream_messages,
         )
 
 
-class AsyncGenerateSyntheticDataResourceWithRawResponse:
-    def __init__(self, generate_synthetic_data: AsyncGenerateSyntheticDataResource) -> None:
-        self._generate_synthetic_data = generate_synthetic_data
+class AsyncGenerateExamplesResourceWithRawResponse:
+    def __init__(self, generate_examples: AsyncGenerateExamplesResource) -> None:
+        self._generate_examples = generate_examples
 
+        self.create = async_to_raw_response_wrapper(
+            generate_examples.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
-            generate_synthetic_data.retrieve,
+            generate_examples.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            generate_synthetic_data.list,
+            generate_examples.list,
         )
         self.cancel = async_to_raw_response_wrapper(
-            generate_synthetic_data.cancel,
-        )
-        self.start_job = async_to_raw_response_wrapper(
-            generate_synthetic_data.start_job,
+            generate_examples.cancel,
         )
         self.stream_data = async_to_raw_response_wrapper(
-            generate_synthetic_data.stream_data,
+            generate_examples.stream_data,
         )
         self.stream_messages = async_to_raw_response_wrapper(
-            generate_synthetic_data.stream_messages,
+            generate_examples.stream_messages,
         )
 
 
-class GenerateSyntheticDataResourceWithStreamingResponse:
-    def __init__(self, generate_synthetic_data: GenerateSyntheticDataResource) -> None:
-        self._generate_synthetic_data = generate_synthetic_data
+class GenerateExamplesResourceWithStreamingResponse:
+    def __init__(self, generate_examples: GenerateExamplesResource) -> None:
+        self._generate_examples = generate_examples
 
+        self.create = to_streamed_response_wrapper(
+            generate_examples.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
-            generate_synthetic_data.retrieve,
+            generate_examples.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            generate_synthetic_data.list,
+            generate_examples.list,
         )
         self.cancel = to_streamed_response_wrapper(
-            generate_synthetic_data.cancel,
-        )
-        self.start_job = to_streamed_response_wrapper(
-            generate_synthetic_data.start_job,
+            generate_examples.cancel,
         )
         self.stream_data = to_streamed_response_wrapper(
-            generate_synthetic_data.stream_data,
+            generate_examples.stream_data,
         )
         self.stream_messages = to_streamed_response_wrapper(
-            generate_synthetic_data.stream_messages,
+            generate_examples.stream_messages,
         )
 
 
-class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
-    def __init__(self, generate_synthetic_data: AsyncGenerateSyntheticDataResource) -> None:
-        self._generate_synthetic_data = generate_synthetic_data
+class AsyncGenerateExamplesResourceWithStreamingResponse:
+    def __init__(self, generate_examples: AsyncGenerateExamplesResource) -> None:
+        self._generate_examples = generate_examples
 
+        self.create = async_to_streamed_response_wrapper(
+            generate_examples.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
-            generate_synthetic_data.retrieve,
+            generate_examples.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            generate_synthetic_data.list,
+            generate_examples.list,
         )
         self.cancel = async_to_streamed_response_wrapper(
-            generate_synthetic_data.cancel,
-        )
-        self.start_job = async_to_streamed_response_wrapper(
-            generate_synthetic_data.start_job,
+            generate_examples.cancel,
         )
         self.stream_data = async_to_streamed_response_wrapper(
-            generate_synthetic_data.stream_data,
+            generate_examples.stream_data,
         )
         self.stream_messages = async_to_streamed_response_wrapper(
-            generate_synthetic_data.stream_messages,
+            generate_examples.stream_messages,
         )
