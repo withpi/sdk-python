@@ -24,9 +24,9 @@ from ..._base_client import make_request_options
 from ...types.model.rl import TextGenerationBaseModel
 from ...types.contracts import State
 from ...types.contracts.state import State
-from ...types.model.sft_status import SftStatus
-from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.shared.sft_status import SftStatus
 from ...types.model.sft_list_response import SftListResponse
+from ...types.shared_params.sdk_example import SDKExample
 from ...types.model.rl.lora_config_param import LoraConfigParam
 from ...types.shared_params.sdk_contract import SDKContract
 from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
@@ -231,7 +231,7 @@ class SftResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         scoring_system: SDKContract,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
@@ -525,7 +525,7 @@ class AsyncSftResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         scoring_system: SDKContract,
         base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
