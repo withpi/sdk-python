@@ -24,7 +24,7 @@ from ...types.model import classifier_list_params, classifier_download_params, c
 from ..._base_client import make_request_options
 from ...types.contracts import State
 from ...types.contracts.state import State
-from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.shared_params.sdk_example import SDKExample
 from ...types.model.classification_status import ClassificationStatus
 from ...types.model.classifier_list_response import ClassifierListResponse
 
@@ -196,7 +196,7 @@ class ClassifierResource(SyncAPIResource):
         self,
         *,
         base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -445,7 +445,7 @@ class AsyncClassifierResource(AsyncAPIResource):
         self,
         *,
         base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         learning_rate: float | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

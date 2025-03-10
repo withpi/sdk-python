@@ -10,9 +10,9 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.model import (
-    SftStatus,
     SftListResponse,
 )
+from withpi.types.shared import SftStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
