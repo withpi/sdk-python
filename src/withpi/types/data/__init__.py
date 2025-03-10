@@ -2,21 +2,27 @@
 
 from __future__ import annotations
 
-from .generate_input_list_params import GenerateInputListParams as GenerateInputListParams
-from .generate_example_list_params import GenerateExampleListParams as GenerateExampleListParams
-from .generate_input_list_response import GenerateInputListResponse as GenerateInputListResponse
-from .generate_example_list_response import GenerateExampleListResponse as GenerateExampleListResponse
-from .generate_input_cancel_response import GenerateInputCancelResponse as GenerateInputCancelResponse
-from .generate_input_start_job_params import GenerateInputStartJobParams as GenerateInputStartJobParams
-from .generate_example_cancel_response import GenerateExampleCancelResponse as GenerateExampleCancelResponse
-from .generate_example_start_job_params import GenerateExampleStartJobParams as GenerateExampleStartJobParams
-from .generate_input_stream_data_response import GenerateInputStreamDataResponse as GenerateInputStreamDataResponse
-from .generate_example_stream_data_response import (
-    GenerateExampleStreamDataResponse as GenerateExampleStreamDataResponse,
+from .generate_list_params import GenerateListParams as GenerateListParams
+from .generate_create_params import GenerateCreateParams as GenerateCreateParams
+from .generate_list_response import GenerateListResponse as GenerateListResponse
+from .generate_cancel_response import GenerateCancelResponse as GenerateCancelResponse
+from .generate_stream_data_response import GenerateStreamDataResponse as GenerateStreamDataResponse
+from .generate_stream_messages_response import GenerateStreamMessagesResponse as GenerateStreamMessagesResponse
+from .generate_input_response_pair_list_params import (
+    GenerateInputResponsePairListParams as GenerateInputResponsePairListParams,
 )
-from .generate_input_stream_messages_response import (
-    GenerateInputStreamMessagesResponse as GenerateInputStreamMessagesResponse,
+from .generate_input_response_pair_create_params import (
+    GenerateInputResponsePairCreateParams as GenerateInputResponsePairCreateParams,
 )
-from .generate_example_stream_messages_response import (
-    GenerateExampleStreamMessagesResponse as GenerateExampleStreamMessagesResponse,
+from .generate_input_response_pair_list_response import (
+    GenerateInputResponsePairListResponse as GenerateInputResponsePairListResponse,
+)
+from .generate_input_response_pair_cancel_response import (
+    GenerateInputResponsePairCancelResponse as GenerateInputResponsePairCancelResponse,
+)
+from .generate_input_response_pair_stream_data_response import (
+    GenerateInputResponsePairStreamDataResponse as GenerateInputResponsePairStreamDataResponse,
+)
+from .generate_input_response_pair_stream_messages_response import (
+    GenerateInputResponsePairStreamMessagesResponse as GenerateInputResponsePairStreamMessagesResponse,
 )

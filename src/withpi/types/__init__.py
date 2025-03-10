@@ -14,13 +14,11 @@ from .shared import (
     DataGenerationStatus as DataGenerationStatus,
     PromptOptimizationStatus as PromptOptimizationStatus,
 )
-from .scorer_score_params import ScorerScoreParams as ScorerScoreParams
-from .scorer_score_response import ScorerScoreResponse as ScorerScoreResponse
-from .rag_classify_query_params import RagClassifyQueryParams as RagClassifyQueryParams
 from .data_cluster_inputs_params import DataClusterInputsParams as DataClusterInputsParams
-from .rag_generate_fanout_params import RagGenerateFanoutParams as RagGenerateFanoutParams
-from .scorer_read_from_hf_params import ScorerReadFromHfParams as ScorerReadFromHfParams
-from .rag_classify_query_response import RagClassifyQueryResponse as RagClassifyQueryResponse
+from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSystemScoreParams
 from .data_cluster_inputs_response import DataClusterInputsResponse as DataClusterInputsResponse
-from .rag_generate_fanout_response import RagGenerateFanoutResponse as RagGenerateFanoutResponse
-from .scorer_generate_dimensions_params import ScorerGenerateDimensionsParams as ScorerGenerateDimensionsParams
+from .scoring_system_score_response import ScoringSystemScoreResponse as ScoringSystemScoreResponse
+from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams
+from .scoring_system_read_from_huggingface_params import (
+    ScoringSystemReadFromHuggingfaceParams as ScoringSystemReadFromHuggingfaceParams,
+)
