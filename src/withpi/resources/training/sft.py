@@ -21,12 +21,12 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.training import sft_list_params, sft_launch_params, sft_download_params
+from ...types.training import sft_list_params, sft_download_params, sft_start_job_params
 from ...types.shared_params.scorer import Scorer
 from ...types.training.sft_list_response import SftListResponse
 from ...types.training.sft_load_response import SftLoadResponse
-from ...types.training.sft_launch_response import SftLaunchResponse
-from ...types.training.sft_status_response import SftStatusResponse
+from ...types.training.sft_retrieve_response import SftRetrieveResponse
+from ...types.training.sft_start_job_response import SftStartJobResponse
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -50,6 +50,39 @@ class SftResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return SftResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftRetrieveResponse:
+        """
+        Checks the status of a SFT job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/training/sft/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftRetrieveResponse,
+        )
 
     def list(
         self,
@@ -159,14 +192,47 @@ class SftResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def launch(
+    def load(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftLoadResponse:
+        """
+        Loads a SFT model into serving for a limited period of time
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._post(
+            f"/training/sft/{job_id}/load",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftLoadResponse,
+        )
+
+    def start_job(
         self,
         *,
-        examples: Iterable[sft_launch_params.Example],
+        examples: Iterable[sft_start_job_params.Example],
         scorer: Scorer,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_launch_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -175,7 +241,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLaunchResponse:
+    ) -> SftStartJobResponse:
         """Launches a SFT job
 
         Args:
@@ -216,48 +282,15 @@ class SftResource(SyncAPIResource):
                     "num_train_epochs": num_train_epochs,
                     "system_prompt": system_prompt,
                 },
-                sft_launch_params.SftLaunchParams,
+                sft_start_job_params.SftStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftLaunchResponse,
+            cast_to=SftStartJobResponse,
         )
 
-    def load(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLoadResponse:
-        """
-        Loads a SFT model into serving for a limited period of time
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._post(
-            f"/training/sft/{job_id}/load",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftLoadResponse,
-        )
-
-    def messages(
+    def stream_messages(
         self,
         job_id: str,
         *,
@@ -291,39 +324,6 @@ class SftResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatusResponse:
-        """
-        Checks the status of a SFT job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/training/sft/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftStatusResponse,
-        )
-
 
 class AsyncSftResource(AsyncAPIResource):
     @cached_property
@@ -344,6 +344,39 @@ class AsyncSftResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncSftResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftRetrieveResponse:
+        """
+        Checks the status of a SFT job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/training/sft/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftRetrieveResponse,
+        )
 
     async def list(
         self,
@@ -453,14 +486,47 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def launch(
+    async def load(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SftLoadResponse:
+        """
+        Loads a SFT model into serving for a limited period of time
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._post(
+            f"/training/sft/{job_id}/load",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SftLoadResponse,
+        )
+
+    async def start_job(
         self,
         *,
-        examples: Iterable[sft_launch_params.Example],
+        examples: Iterable[sft_start_job_params.Example],
         scorer: Scorer,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: sft_launch_params.LoraConfig | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -469,7 +535,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLaunchResponse:
+    ) -> SftStartJobResponse:
         """Launches a SFT job
 
         Args:
@@ -510,48 +576,15 @@ class AsyncSftResource(AsyncAPIResource):
                     "num_train_epochs": num_train_epochs,
                     "system_prompt": system_prompt,
                 },
-                sft_launch_params.SftLaunchParams,
+                sft_start_job_params.SftStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftLaunchResponse,
+            cast_to=SftStartJobResponse,
         )
 
-    async def load(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLoadResponse:
-        """
-        Loads a SFT model into serving for a limited period of time
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._post(
-            f"/training/sft/{job_id}/load",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftLoadResponse,
-        )
-
-    async def messages(
+    async def stream_messages(
         self,
         job_id: str,
         *,
@@ -585,44 +618,14 @@ class AsyncSftResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStatusResponse:
-        """
-        Checks the status of a SFT job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/training/sft/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SftStatusResponse,
-        )
-
 
 class SftResourceWithRawResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
+        self.retrieve = to_raw_response_wrapper(
+            sft.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             sft.list,
         )
@@ -632,17 +635,14 @@ class SftResourceWithRawResponse:
         self.download = to_raw_response_wrapper(
             sft.download,
         )
-        self.launch = to_raw_response_wrapper(
-            sft.launch,
-        )
         self.load = to_raw_response_wrapper(
             sft.load,
         )
-        self.messages = to_raw_response_wrapper(
-            sft.messages,
+        self.start_job = to_raw_response_wrapper(
+            sft.start_job,
         )
-        self.status = to_raw_response_wrapper(
-            sft.status,
+        self.stream_messages = to_raw_response_wrapper(
+            sft.stream_messages,
         )
 
 
@@ -650,6 +650,9 @@ class AsyncSftResourceWithRawResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
+        self.retrieve = async_to_raw_response_wrapper(
+            sft.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             sft.list,
         )
@@ -659,17 +662,14 @@ class AsyncSftResourceWithRawResponse:
         self.download = async_to_raw_response_wrapper(
             sft.download,
         )
-        self.launch = async_to_raw_response_wrapper(
-            sft.launch,
-        )
         self.load = async_to_raw_response_wrapper(
             sft.load,
         )
-        self.messages = async_to_raw_response_wrapper(
-            sft.messages,
+        self.start_job = async_to_raw_response_wrapper(
+            sft.start_job,
         )
-        self.status = async_to_raw_response_wrapper(
-            sft.status,
+        self.stream_messages = async_to_raw_response_wrapper(
+            sft.stream_messages,
         )
 
 
@@ -677,6 +677,9 @@ class SftResourceWithStreamingResponse:
     def __init__(self, sft: SftResource) -> None:
         self._sft = sft
 
+        self.retrieve = to_streamed_response_wrapper(
+            sft.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             sft.list,
         )
@@ -686,17 +689,14 @@ class SftResourceWithStreamingResponse:
         self.download = to_streamed_response_wrapper(
             sft.download,
         )
-        self.launch = to_streamed_response_wrapper(
-            sft.launch,
-        )
         self.load = to_streamed_response_wrapper(
             sft.load,
         )
-        self.messages = to_streamed_response_wrapper(
-            sft.messages,
+        self.start_job = to_streamed_response_wrapper(
+            sft.start_job,
         )
-        self.status = to_streamed_response_wrapper(
-            sft.status,
+        self.stream_messages = to_streamed_response_wrapper(
+            sft.stream_messages,
         )
 
 
@@ -704,6 +704,9 @@ class AsyncSftResourceWithStreamingResponse:
     def __init__(self, sft: AsyncSftResource) -> None:
         self._sft = sft
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            sft.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             sft.list,
         )
@@ -713,15 +716,12 @@ class AsyncSftResourceWithStreamingResponse:
         self.download = async_to_streamed_response_wrapper(
             sft.download,
         )
-        self.launch = async_to_streamed_response_wrapper(
-            sft.launch,
-        )
         self.load = async_to_streamed_response_wrapper(
             sft.load,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            sft.messages,
+        self.start_job = async_to_streamed_response_wrapper(
+            sft.start_job,
         )
-        self.status = async_to_streamed_response_wrapper(
-            sft.status,
+        self.stream_messages = async_to_streamed_response_wrapper(
+            sft.stream_messages,
         )

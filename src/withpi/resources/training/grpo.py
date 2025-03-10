@@ -21,12 +21,12 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.training import grpo_list_params, grpo_launch_params, grpo_download_params
+from ...types.training import grpo_list_params, grpo_download_params, grpo_start_job_params
 from ...types.shared_params.scorer import Scorer
 from ...types.training.grpo_list_response import GrpoListResponse
 from ...types.training.grpo_load_response import GrpoLoadResponse
-from ...types.training.grpo_launch_response import GrpoLaunchResponse
-from ...types.training.grpo_status_response import GrpoStatusResponse
+from ...types.training.grpo_retrieve_response import GrpoRetrieveResponse
+from ...types.training.grpo_start_job_response import GrpoStartJobResponse
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -50,6 +50,39 @@ class GrpoResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return GrpoResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoRetrieveResponse:
+        """
+        Checks the status of a RL GRPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/training/grpo/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GrpoRetrieveResponse,
+        )
 
     def list(
         self,
@@ -159,13 +192,46 @@ class GrpoResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def launch(
+    def load(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoLoadResponse:
+        """
+        Loads a RL GRPO model into serving for a limited period of time
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._post(
+            f"/training/grpo/{job_id}/load",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GrpoLoadResponse,
+        )
+
+    def start_job(
         self,
         *,
         base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        examples: Iterable[grpo_launch_params.Example],
+        examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,
-        lora_config: grpo_launch_params.LoraConfig,
+        lora_config: grpo_start_job_params.LoraConfig,
         num_train_epochs: int,
         scorer: Scorer,
         system_prompt: Optional[str],
@@ -175,7 +241,7 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLaunchResponse:
+    ) -> GrpoStartJobResponse:
         """
         Launches a RL GRPO job
 
@@ -214,48 +280,15 @@ class GrpoResource(SyncAPIResource):
                     "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
-                grpo_launch_params.GrpoLaunchParams,
+                grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoLaunchResponse,
+            cast_to=GrpoStartJobResponse,
         )
 
-    def load(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLoadResponse:
-        """
-        Loads a RL GRPO model into serving for a limited period of time
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._post(
-            f"/training/grpo/{job_id}/load",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoLoadResponse,
-        )
-
-    def messages(
+    def stream_messages(
         self,
         job_id: str,
         *,
@@ -289,39 +322,6 @@ class GrpoResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoStatusResponse:
-        """
-        Checks the status of a RL GRPO job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/training/grpo/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoStatusResponse,
-        )
-
 
 class AsyncGrpoResource(AsyncAPIResource):
     @cached_property
@@ -342,6 +342,39 @@ class AsyncGrpoResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncGrpoResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoRetrieveResponse:
+        """
+        Checks the status of a RL GRPO job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/training/grpo/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GrpoRetrieveResponse,
+        )
 
     async def list(
         self,
@@ -451,13 +484,46 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def launch(
+    async def load(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GrpoLoadResponse:
+        """
+        Loads a RL GRPO model into serving for a limited period of time
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._post(
+            f"/training/grpo/{job_id}/load",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GrpoLoadResponse,
+        )
+
+    async def start_job(
         self,
         *,
         base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
-        examples: Iterable[grpo_launch_params.Example],
+        examples: Iterable[grpo_start_job_params.Example],
         learning_rate: float,
-        lora_config: grpo_launch_params.LoraConfig,
+        lora_config: grpo_start_job_params.LoraConfig,
         num_train_epochs: int,
         scorer: Scorer,
         system_prompt: Optional[str],
@@ -467,7 +533,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLaunchResponse:
+    ) -> GrpoStartJobResponse:
         """
         Launches a RL GRPO job
 
@@ -506,48 +572,15 @@ class AsyncGrpoResource(AsyncAPIResource):
                     "scorer": scorer,
                     "system_prompt": system_prompt,
                 },
-                grpo_launch_params.GrpoLaunchParams,
+                grpo_start_job_params.GrpoStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=GrpoLaunchResponse,
+            cast_to=GrpoStartJobResponse,
         )
 
-    async def load(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoLoadResponse:
-        """
-        Loads a RL GRPO model into serving for a limited period of time
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._post(
-            f"/training/grpo/{job_id}/load",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoLoadResponse,
-        )
-
-    async def messages(
+    async def stream_messages(
         self,
         job_id: str,
         *,
@@ -581,44 +614,14 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def status(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GrpoStatusResponse:
-        """
-        Checks the status of a RL GRPO job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/training/grpo/{job_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=GrpoStatusResponse,
-        )
-
 
 class GrpoResourceWithRawResponse:
     def __init__(self, grpo: GrpoResource) -> None:
         self._grpo = grpo
 
+        self.retrieve = to_raw_response_wrapper(
+            grpo.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             grpo.list,
         )
@@ -628,17 +631,14 @@ class GrpoResourceWithRawResponse:
         self.download = to_raw_response_wrapper(
             grpo.download,
         )
-        self.launch = to_raw_response_wrapper(
-            grpo.launch,
-        )
         self.load = to_raw_response_wrapper(
             grpo.load,
         )
-        self.messages = to_raw_response_wrapper(
-            grpo.messages,
+        self.start_job = to_raw_response_wrapper(
+            grpo.start_job,
         )
-        self.status = to_raw_response_wrapper(
-            grpo.status,
+        self.stream_messages = to_raw_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -646,6 +646,9 @@ class AsyncGrpoResourceWithRawResponse:
     def __init__(self, grpo: AsyncGrpoResource) -> None:
         self._grpo = grpo
 
+        self.retrieve = async_to_raw_response_wrapper(
+            grpo.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             grpo.list,
         )
@@ -655,17 +658,14 @@ class AsyncGrpoResourceWithRawResponse:
         self.download = async_to_raw_response_wrapper(
             grpo.download,
         )
-        self.launch = async_to_raw_response_wrapper(
-            grpo.launch,
-        )
         self.load = async_to_raw_response_wrapper(
             grpo.load,
         )
-        self.messages = async_to_raw_response_wrapper(
-            grpo.messages,
+        self.start_job = async_to_raw_response_wrapper(
+            grpo.start_job,
         )
-        self.status = async_to_raw_response_wrapper(
-            grpo.status,
+        self.stream_messages = async_to_raw_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -673,6 +673,9 @@ class GrpoResourceWithStreamingResponse:
     def __init__(self, grpo: GrpoResource) -> None:
         self._grpo = grpo
 
+        self.retrieve = to_streamed_response_wrapper(
+            grpo.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             grpo.list,
         )
@@ -682,17 +685,14 @@ class GrpoResourceWithStreamingResponse:
         self.download = to_streamed_response_wrapper(
             grpo.download,
         )
-        self.launch = to_streamed_response_wrapper(
-            grpo.launch,
-        )
         self.load = to_streamed_response_wrapper(
             grpo.load,
         )
-        self.messages = to_streamed_response_wrapper(
-            grpo.messages,
+        self.start_job = to_streamed_response_wrapper(
+            grpo.start_job,
         )
-        self.status = to_streamed_response_wrapper(
-            grpo.status,
+        self.stream_messages = to_streamed_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -700,6 +700,9 @@ class AsyncGrpoResourceWithStreamingResponse:
     def __init__(self, grpo: AsyncGrpoResource) -> None:
         self._grpo = grpo
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            grpo.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             grpo.list,
         )
@@ -709,15 +712,12 @@ class AsyncGrpoResourceWithStreamingResponse:
         self.download = async_to_streamed_response_wrapper(
             grpo.download,
         )
-        self.launch = async_to_streamed_response_wrapper(
-            grpo.launch,
-        )
         self.load = async_to_streamed_response_wrapper(
             grpo.load,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            grpo.messages,
+        self.start_job = async_to_streamed_response_wrapper(
+            grpo.start_job,
         )
-        self.status = async_to_streamed_response_wrapper(
-            grpo.status,
+        self.stream_messages = async_to_streamed_response_wrapper(
+            grpo.stream_messages,
         )

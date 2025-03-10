@@ -7,10 +7,10 @@ from typing_extensions import Required, TypedDict
 
 from ..shared.exploration_mode import ExplorationMode
 
-__all__ = ["GenerateInputResponsePairCreateParams", "Seed"]
+__all__ = ["GenerateInputResponsePairStartJobParams", "Seed"]
 
 
-class GenerateInputResponsePairCreateParams(TypedDict, total=False):
+class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 
