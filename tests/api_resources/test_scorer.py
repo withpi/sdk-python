@@ -10,10 +10,9 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types import (
-    ScorerReadFromHfResponse,
-    ScorerGenerateDimensionsResponse,
+    ScorerScoreResponse,
 )
-from withpi.types.shared import ScoringSystemMetrics
+from withpi.types.shared import Scorer
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +26,7 @@ class TestScorer:
         scorer = client.scorer.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -36,7 +35,7 @@ class TestScorer:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -48,7 +47,7 @@ class TestScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = response.parse()
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -60,7 +59,7 @@ class TestScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = response.parse()
-            assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+            assert_matches_type(Scorer, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -70,7 +69,7 @@ class TestScorer:
         scorer = client.scorer.read_from_hf(
             hf_scorer_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -79,7 +78,7 @@ class TestScorer:
             hf_scorer_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -91,7 +90,7 @@ class TestScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = response.parse()
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -103,7 +102,7 @@ class TestScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = response.parse()
-            assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+            assert_matches_type(Scorer, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -118,7 +117,7 @@ class TestScorer:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -164,7 +163,7 @@ class TestScorer:
                 ],
             },
         )
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -181,7 +180,7 @@ class TestScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = response.parse()
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -198,7 +197,7 @@ class TestScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = response.parse()
-            assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+            assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -212,7 +211,7 @@ class TestAsyncScorer:
         scorer = await async_client.scorer.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -221,7 +220,7 @@ class TestAsyncScorer:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -233,7 +232,7 @@ class TestAsyncScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = await response.parse()
-        assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -245,7 +244,7 @@ class TestAsyncScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = await response.parse()
-            assert_matches_type(ScorerGenerateDimensionsResponse, scorer, path=["response"])
+            assert_matches_type(Scorer, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -255,7 +254,7 @@ class TestAsyncScorer:
         scorer = await async_client.scorer.read_from_hf(
             hf_scorer_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -264,7 +263,7 @@ class TestAsyncScorer:
             hf_scorer_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -276,7 +275,7 @@ class TestAsyncScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = await response.parse()
-        assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+        assert_matches_type(Scorer, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -288,7 +287,7 @@ class TestAsyncScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = await response.parse()
-            assert_matches_type(ScorerReadFromHfResponse, scorer, path=["response"])
+            assert_matches_type(Scorer, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -303,7 +302,7 @@ class TestAsyncScorer:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -349,7 +348,7 @@ class TestAsyncScorer:
                 ],
             },
         )
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -366,7 +365,7 @@ class TestAsyncScorer:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scorer = await response.parse()
-        assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+        assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -383,6 +382,6 @@ class TestAsyncScorer:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scorer = await response.parse()
-            assert_matches_type(ScoringSystemMetrics, scorer, path=["response"])
+            assert_matches_type(ScorerScoreResponse, scorer, path=["response"])
 
         assert cast(Any, response.is_closed) is True

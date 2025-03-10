@@ -6,7 +6,11 @@ from typing import Optional
 
 import httpx
 
-from ...types import scorer_score_params, scorer_read_from_hf_params, scorer_generate_dimensions_params
+from ...types import (
+    scorer_score_params,
+    scorer_read_from_hf_params,
+    scorer_generate_dimensions_params,
+)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -29,9 +33,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.scorer_read_from_hf_response import ScorerReadFromHfResponse
-from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
-from ...types.scorer_generate_dimensions_response import ScorerGenerateDimensionsResponse
+from ...types.shared.scorer import Scorer as SharedScorer
+from ...types.shared_params.scorer import Scorer as SharedParamsScorer
+from ...types.scorer_score_response import ScorerScoreResponse
 
 __all__ = ["ScorerResource", "AsyncScorerResource"]
 
@@ -71,7 +75,7 @@ class ScorerResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScorerGenerateDimensionsResponse:
+    ) -> SharedScorer:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -100,7 +104,7 @@ class ScorerResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScorerGenerateDimensionsResponse,
+            cast_to=SharedScorer,
         )
 
     def read_from_hf(
@@ -114,7 +118,7 @@ class ScorerResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScorerReadFromHfResponse:
+    ) -> SharedScorer:
         """
         Read a scoring system from Huggingface dataset
 
@@ -145,7 +149,7 @@ class ScorerResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScorerReadFromHfResponse,
+            cast_to=SharedScorer,
         )
 
     def score(
@@ -153,14 +157,14 @@ class ScorerResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scorer: scorer_score_params.Scorer,
+        scorer: SharedParamsScorer,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemMetrics:
+    ) -> ScorerScoreResponse:
         """
         Scores a scoring system based on the provided input and output
 
@@ -192,7 +196,7 @@ class ScorerResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemMetrics,
+            cast_to=ScorerScoreResponse,
         )
 
 
@@ -231,7 +235,7 @@ class AsyncScorerResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScorerGenerateDimensionsResponse:
+    ) -> SharedScorer:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -260,7 +264,7 @@ class AsyncScorerResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScorerGenerateDimensionsResponse,
+            cast_to=SharedScorer,
         )
 
     async def read_from_hf(
@@ -274,7 +278,7 @@ class AsyncScorerResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScorerReadFromHfResponse:
+    ) -> SharedScorer:
         """
         Read a scoring system from Huggingface dataset
 
@@ -305,7 +309,7 @@ class AsyncScorerResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScorerReadFromHfResponse,
+            cast_to=SharedScorer,
         )
 
     async def score(
@@ -313,14 +317,14 @@ class AsyncScorerResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scorer: scorer_score_params.Scorer,
+        scorer: SharedParamsScorer,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemMetrics:
+    ) -> ScorerScoreResponse:
         """
         Scores a scoring system based on the provided input and output
 
@@ -352,7 +356,7 @@ class AsyncScorerResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemMetrics,
+            cast_to=ScorerScoreResponse,
         )
 
 
