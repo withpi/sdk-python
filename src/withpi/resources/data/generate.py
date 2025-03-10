@@ -169,7 +169,7 @@ class GenerateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Launches a Generation Data job
+        Starts a Generation Data job
 
         Args:
           application_description: The application description for which the inputs would be applicable.
@@ -422,7 +422,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DataGenerationStatus:
         """
-        Launches a Generation Data job
+        Starts a Generation Data job
 
         Args:
           application_description: The application description for which the inputs would be applicable.

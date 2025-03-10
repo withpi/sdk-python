@@ -174,7 +174,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Launches a Generation Input-Response Pairs job
+        Starts a Generation Input-Response Pairs job
 
         Args:
           num_examples_to_generate: The number of new LLM examples to generate
@@ -431,7 +431,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyntheticDataStatus:
         """
-        Launches a Generation Input-Response Pairs job
+        Starts a Generation Input-Response Pairs job
 
         Args:
           num_examples_to_generate: The number of new LLM examples to generate

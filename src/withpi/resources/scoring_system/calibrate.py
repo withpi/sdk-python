@@ -65,7 +65,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateCreateResponse:
         """
-        Launches a Scorer Calibration job
+        Starts a Scorer Calibration job
 
         Args:
           scorer: The scoring system to calibrate
@@ -277,7 +277,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateCreateResponse:
         """
-        Launches a Scorer Calibration job
+        Starts a Scorer Calibration job
 
         Args:
           scorer: The scoring system to calibrate

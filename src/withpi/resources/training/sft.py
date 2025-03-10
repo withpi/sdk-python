@@ -241,7 +241,7 @@ class SftResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Launches a SFT job
+        """Starts a SFT job
 
         Args:
           examples: Examples to use in the SFT tuning process.
@@ -535,7 +535,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SftStatus:
-        """Launches a SFT job
+        """Starts a SFT job
 
         Args:
           examples: Examples to use in the SFT tuning process.
