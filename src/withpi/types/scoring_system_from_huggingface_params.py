@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ScoringSystemReadFromHuggingfaceParams"]
+__all__ = ["ScoringSystemFromHuggingfaceParams"]
 
 
-class ScoringSystemReadFromHuggingfaceParams(TypedDict, total=False):
+class ScoringSystemFromHuggingfaceParams(TypedDict, total=False):
     hf_scorer_name: Required[str]
     """Huggingface scoring system name e.g.
 

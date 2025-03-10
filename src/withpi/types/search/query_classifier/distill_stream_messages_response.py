@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["SftMessagesResponse"]
+__all__ = ["DistillStreamMessagesResponse"]
 
-SftMessagesResponse: TypeAlias = str
+DistillStreamMessagesResponse: TypeAlias = str
