@@ -3,25 +3,11 @@
 ```python
 from withpi.types import (
     DataGenerationStatus,
-    ScoringSystemMetrics,
-    SDKExample,
-    SftStatus,
+    ExplorationMode,
+    Scorer,
+    ScorerDimension,
+    ScorerSubDimension,
     SyntheticDataStatus,
-)
-```
-
-# Contracts
-
-## Calibrate
-
-Types:
-
-```python
-from withpi.types.contracts import (
-    CalibrationStrategy,
-    SDKLabeledExample,
-    SDKPreferenceExample,
-    State,
 )
 ```
 
@@ -33,7 +19,6 @@ Types:
 
 ```python
 from withpi.types.data import (
-    SDKExplorationMode,
     GenerateSyntheticDataListResponse,
     GenerateSyntheticDataCancelResponse,
     GenerateSyntheticDataStreamDataResponse,
@@ -86,6 +71,12 @@ Methods:
 
 # Model
 
+Types:
+
+```python
+from withpi.types import TrainedModel
+```
+
 ## Classifier
 
 Types:
@@ -93,7 +84,6 @@ Types:
 ```python
 from withpi.types.model import (
     ClassificationStatus,
-    TrainedModel,
     ClassifierListResponse,
     ClassifierCancelResponse,
     ClassifierDownloadResponse,
@@ -144,32 +134,25 @@ Types:
 
 ```python
 from withpi.types.model import (
+    SftRetrieveResponse,
     SftListResponse,
     SftCancelResponse,
     SftDownloadResponse,
+    SftLoadResponse,
+    SftStartJobResponse,
     SftStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_retrieve_response.py">SftRetrieveResponse</a></code>
 - <code title="get /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">list</a>(\*\*<a href="src/withpi/types/model/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_list_response.py">SftListResponse</a></code>
 - <code title="delete /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/sft/{job_id}/download">client.model.sft.<a href="./src/withpi/resources/model/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/sft_download_params.py">params</a>) -> str</code>
-- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_load_response.py">SftLoadResponse</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_start_job_response.py">SftStartJobResponse</a></code>
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
-
-# PiScoringSystem
-
-## Calibrate
-
-Types:
-
-```python
-from withpi.types.pi_scoring_system import ScoringSystemCalibrationStatus
-```
 
 # Prompt
 
@@ -212,14 +195,14 @@ Methods:
 Types:
 
 ```python
-from withpi.types import ScorerGenerateDimensionsResponse, ScorerReadFromHfResponse
+from withpi.types import ScorerScoreResponse
 ```
 
 Methods:
 
-- <code title="post /scorer/generate_dimensions">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/scorer_generate_dimensions_response.py">ScorerGenerateDimensionsResponse</a></code>
-- <code title="post /scorer/read_from_hf">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/scorer_read_from_hf_response.py">ScorerReadFromHfResponse</a></code>
-- <code title="post /scorer/score">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
+- <code title="post /scorer/generate_dimensions">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scorer/read_from_hf">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scorer/score">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/scorer_score_response.py">ScorerScoreResponse</a></code>
 
 ## Calibrate
 
@@ -227,6 +210,8 @@ Types:
 
 ```python
 from withpi.types.scorer import (
+    CalibrateCreateResponse,
+    CalibrateRetrieveResponse,
     CalibrateListResponse,
     CalibrateCancelResponse,
     CalibrateMessagesResponse,
@@ -235,8 +220,8 @@ from withpi.types.scorer import (
 
 Methods:
 
-- <code title="post /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorer/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
-- <code title="get /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
+- <code title="post /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorer/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scorer/calibrate_create_response.py">CalibrateCreateResponse</a></code>
+- <code title="get /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scorer/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
 - <code title="get /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorer/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorer/calibrate_list_response.py">CalibrateListResponse</a></code>
 - <code title="delete /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">cancel</a>(job_id) -> str</code>
 - <code title="get /scorer/calibrate/{job_id}/messages">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">messages</a>(job_id) -> str</code>

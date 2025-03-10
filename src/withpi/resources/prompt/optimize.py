@@ -22,9 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.prompt import optimize_list_params, optimize_start_job_params
-from ...types.contracts import State
-from ...types.contracts.state import State
-from ...types.shared_params.sdk_example import SDKExample
+from ...types.shared_params.scorer import Scorer
 from ...types.prompt.optimize_list_response import OptimizeListResponse
 from ...types.prompt.prompt_optimization_status import PromptOptimizationStatus
 
@@ -87,7 +85,7 @@ class OptimizeResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -157,10 +155,10 @@ class OptimizeResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        examples: Iterable[SDKExample],
+        examples: Iterable[optimize_start_job_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
-        scorer: optimize_start_job_params.Scorer,
+        scorer: Scorer,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
@@ -310,7 +308,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -380,10 +378,10 @@ class AsyncOptimizeResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        examples: Iterable[SDKExample],
+        examples: Iterable[optimize_start_job_params.Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
-        scorer: optimize_start_job_params.Scorer,
+        scorer: Scorer,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,

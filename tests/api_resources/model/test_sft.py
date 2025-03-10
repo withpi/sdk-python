@@ -11,8 +11,10 @@ from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.model import (
     SftListResponse,
+    SftLoadResponse,
+    SftRetrieveResponse,
+    SftStartJobResponse,
 )
-from withpi.types.shared import SftStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +28,7 @@ class TestSft:
         sft = client.model.sft.retrieve(
             "job_id",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -38,7 +40,7 @@ class TestSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -50,7 +52,7 @@ class TestSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -192,7 +194,7 @@ class TestSft:
         sft = client.model.sft.load(
             "job_id",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftLoadResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -204,7 +206,7 @@ class TestSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftLoadResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -216,7 +218,7 @@ class TestSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftLoadResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,7 +245,7 @@ class TestSft:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -298,7 +300,7 @@ class TestSft:
             num_train_epochs=10,
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -319,7 +321,7 @@ class TestSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -340,7 +342,7 @@ class TestSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -396,7 +398,7 @@ class TestAsyncSft:
         sft = await async_client.model.sft.retrieve(
             "job_id",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -408,7 +410,7 @@ class TestAsyncSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = await response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -420,7 +422,7 @@ class TestAsyncSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = await response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftRetrieveResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -562,7 +564,7 @@ class TestAsyncSft:
         sft = await async_client.model.sft.load(
             "job_id",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftLoadResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -574,7 +576,7 @@ class TestAsyncSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = await response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftLoadResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -586,7 +588,7 @@ class TestAsyncSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = await response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftLoadResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -613,7 +615,7 @@ class TestAsyncSft:
                 "name": "Sample Scoring System",
             },
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -668,7 +670,7 @@ class TestAsyncSft:
             num_train_epochs=10,
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -689,7 +691,7 @@ class TestAsyncSft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sft = await response.parse()
-        assert_matches_type(SftStatus, sft, path=["response"])
+        assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -710,7 +712,7 @@ class TestAsyncSft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sft = await response.parse()
-            assert_matches_type(SftStatus, sft, path=["response"])
+            assert_matches_type(SftStartJobResponse, sft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

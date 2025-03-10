@@ -4,12 +4,12 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..trained_model import TrainedModel
+from ..shared.scorer import Scorer
 
-__all__ = ["ClassificationStatus"]
+__all__ = ["CalibrateCreateResponse"]
 
 
-class ClassificationStatus(BaseModel):
+class CalibrateCreateResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -19,5 +19,5 @@ class ClassificationStatus(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    trained_models: Optional[List[TrainedModel]] = None
-    """A list of trained classification models."""
+    calibrated_scoring_system: Optional[Scorer] = None
+    """The calibrated scoring system"""

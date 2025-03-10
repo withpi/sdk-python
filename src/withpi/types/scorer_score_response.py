@@ -2,9 +2,9 @@
 
 from typing import Dict
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["ScoringSystemMetrics", "DimensionScores"]
+__all__ = ["ScorerScoreResponse", "DimensionScores"]
 
 
 class DimensionScores(BaseModel):
@@ -15,7 +15,7 @@ class DimensionScores(BaseModel):
     """The total score of the dimension"""
 
 
-class ScoringSystemMetrics(BaseModel):
+class ScorerScoreResponse(BaseModel):
     dimension_scores: Dict[str, DimensionScores]
     """The score components for each dimension"""
 
