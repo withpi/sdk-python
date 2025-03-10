@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-__all__ = ["QueryFanoutExampleParam"]
+__all__ = ["QueryFanoutExample"]
 
 
-class QueryFanoutExampleParam(TypedDict, total=False):
+class QueryFanoutExample(TypedDict, total=False):
     fanout_queries: Required[List[str]]
     """The list of fanout queries associated with the input"""
 

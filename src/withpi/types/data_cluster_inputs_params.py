@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["DataCreateClusterInputsParams", "Input"]
+__all__ = ["DataClusterInputsParams", "Input"]
 
 
-class DataCreateClusterInputsParams(TypedDict, total=False):
+class DataClusterInputsParams(TypedDict, total=False):
     inputs: Required[Iterable[Input]]
     """The data to create clusters from."""
 

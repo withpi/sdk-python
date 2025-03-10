@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .prompt_optimization_status import PromptOptimizationStatus
+from ..shared.prompt_optimization_status import PromptOptimizationStatus
 
 __all__ = ["OptimizeListResponse"]
 

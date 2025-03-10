@@ -4,12 +4,12 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..shared.trained_model import TrainedModel
+from .trained_model import TrainedModel
 
-__all__ = ["SftLoadResponse"]
+__all__ = ["ClassificationStatus"]
 
 
-class SftLoadResponse(BaseModel):
+class ClassificationStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -20,4 +20,4 @@ class SftLoadResponse(BaseModel):
     """Current state of the job"""
 
     trained_models: Optional[List[TrainedModel]] = None
-    """A list of trained models selected based on the PI Contract score."""
+    """A list of trained classification models."""
