@@ -32,14 +32,6 @@ from .scorers import (
     ScorersResourceWithStreamingResponse,
     AsyncScorersResourceWithStreamingResponse,
 )
-from .training import (
-    TrainingResource,
-    AsyncTrainingResource,
-    TrainingResourceWithRawResponse,
-    AsyncTrainingResourceWithRawResponse,
-    TrainingResourceWithStreamingResponse,
-    AsyncTrainingResourceWithStreamingResponse,
-)
 
 __all__ = [
     "DataResource",
@@ -66,10 +58,4 @@ __all__ = [
     "AsyncRagResourceWithRawResponse",
     "RagResourceWithStreamingResponse",
     "AsyncRagResourceWithStreamingResponse",
-    "TrainingResource",
-    "AsyncTrainingResource",
-    "TrainingResourceWithRawResponse",
-    "AsyncTrainingResourceWithRawResponse",
-    "TrainingResourceWithStreamingResponse",
-    "AsyncTrainingResourceWithStreamingResponse",
 ]
