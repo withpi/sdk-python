@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .input import (
-    InputResource,
-    AsyncInputResource,
-    InputResourceWithRawResponse,
-    AsyncInputResourceWithRawResponse,
-    InputResourceWithStreamingResponse,
-    AsyncInputResourceWithStreamingResponse,
+from .inputs import (
+    InputsResource,
+    AsyncInputsResource,
+    InputsResourceWithRawResponse,
+    AsyncInputsResourceWithRawResponse,
+    InputsResourceWithStreamingResponse,
+    AsyncInputsResourceWithStreamingResponse,
 )
 from .generate_from_seeds import (
     GenerateFromSeedsResource,
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncGenerateFromSeedsResourceWithRawResponse",
     "GenerateFromSeedsResourceWithStreamingResponse",
     "AsyncGenerateFromSeedsResourceWithStreamingResponse",
-    "InputResource",
-    "AsyncInputResource",
-    "InputResourceWithRawResponse",
-    "AsyncInputResourceWithRawResponse",
-    "InputResourceWithStreamingResponse",
-    "AsyncInputResourceWithStreamingResponse",
+    "InputsResource",
+    "AsyncInputsResource",
+    "InputsResourceWithRawResponse",
+    "AsyncInputsResourceWithRawResponse",
+    "InputsResourceWithStreamingResponse",
+    "AsyncInputsResourceWithStreamingResponse",
 ]

@@ -14,13 +14,13 @@ from withpi.types.data import InputClusterResponse
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestInput:
+class TestInputs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_cluster(self, client: PiClient) -> None:
-        input = client.data.input.cluster(
+        input = client.data.inputs.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -33,7 +33,7 @@ class TestInput:
     @pytest.mark.skip()
     @parametrize
     def test_method_cluster_with_all_params(self, client: PiClient) -> None:
-        input = client.data.input.cluster(
+        input = client.data.inputs.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -47,7 +47,7 @@ class TestInput:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_cluster(self, client: PiClient) -> None:
-        response = client.data.input.with_raw_response.cluster(
+        response = client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -64,7 +64,7 @@ class TestInput:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_cluster(self, client: PiClient) -> None:
-        with client.data.input.with_streaming_response.cluster(
+        with client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -81,13 +81,13 @@ class TestInput:
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncInput:
+class TestAsyncInputs:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_cluster(self, async_client: AsyncPiClient) -> None:
-        input = await async_client.data.input.cluster(
+        input = await async_client.data.inputs.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -100,7 +100,7 @@ class TestAsyncInput:
     @pytest.mark.skip()
     @parametrize
     async def test_method_cluster_with_all_params(self, async_client: AsyncPiClient) -> None:
-        input = await async_client.data.input.cluster(
+        input = await async_client.data.inputs.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -114,7 +114,7 @@ class TestAsyncInput:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_cluster(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.input.with_raw_response.cluster(
+        response = await async_client.data.inputs.with_raw_response.cluster(
             inputs=[
                 {
                     "identifier": "12345",
@@ -131,7 +131,7 @@ class TestAsyncInput:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_cluster(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.input.with_streaming_response.cluster(
+        async with async_client.data.inputs.with_streaming_response.cluster(
             inputs=[
                 {
                     "identifier": "12345",
