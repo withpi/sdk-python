@@ -3,22 +3,14 @@
 ```python
 from withpi.types import (
     DataGenerationStatus,
-    ScoringSystem,
     ScoringSystemMetrics,
     SDKExample,
-    SDKSubDimension,
     SftStatus,
     SyntheticDataStatus,
 )
 ```
 
 # Contracts
-
-Methods:
-
-- <code title="post /contracts/generate_dimensions">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/contract_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /contracts/read_from_hf">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">read_from_hf</a>(\*\*<a href="src/withpi/types/contract_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /contracts/score">client.contracts.<a href="./src/withpi/resources/contracts/contracts.py">score</a>(\*\*<a href="src/withpi/types/contract_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
 
 ## Calibrate
 
@@ -27,23 +19,11 @@ Types:
 ```python
 from withpi.types.contracts import (
     CalibrationStrategy,
-    ContractCalibrationStatus,
     SDKLabeledExample,
     SDKPreferenceExample,
     State,
-    CalibrateListResponse,
-    CalibrateCancelResponse,
-    CalibrateStreamMessagesResponse,
 )
 ```
-
-Methods:
-
-- <code title="get /contracts/calibrate/{job_id}">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/contracts/contract_calibration_status.py">ContractCalibrationStatus</a></code>
-- <code title="get /contracts/calibrate">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">list</a>(\*\*<a href="src/withpi/types/contracts/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/contracts/calibrate_list_response.py">CalibrateListResponse</a></code>
-- <code title="delete /contracts/calibrate/{job_id}">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">cancel</a>(job_id) -> str</code>
-- <code title="post /contracts/calibrate">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">start_job</a>(\*\*<a href="src/withpi/types/contracts/calibrate_start_job_params.py">params</a>) -> <a href="./src/withpi/types/contracts/contract_calibration_status.py">ContractCalibrationStatus</a></code>
-- <code title="get /contracts/calibrate/{job_id}/messages">client.contracts.calibrate.<a href="./src/withpi/resources/contracts/calibrate.py">stream_messages</a>(job_id) -> str</code>
 
 # Data
 
@@ -183,32 +163,13 @@ Methods:
 
 # PiScoringSystem
 
-Methods:
-
-- <code title="post /pi_scoring_system/generate_dimensions">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/pi_scoring_system_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /pi_scoring_system/read_from_hf">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">read_from_hf</a>(\*\*<a href="src/withpi/types/pi_scoring_system_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system.py">ScoringSystem</a></code>
-- <code title="post /pi_scoring_system/score">client.pi_scoring_system.<a href="./src/withpi/resources/pi_scoring_system/pi_scoring_system.py">score</a>(\*\*<a href="src/withpi/types/pi_scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
-
 ## Calibrate
 
 Types:
 
 ```python
-from withpi.types.pi_scoring_system import (
-    ScoringSystemCalibrationStatus,
-    CalibrateListResponse,
-    CalibrateCancelResponse,
-    CalibrateStreamMessagesResponse,
-)
+from withpi.types.pi_scoring_system import ScoringSystemCalibrationStatus
 ```
-
-Methods:
-
-- <code title="get /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
-- <code title="get /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
-- <code title="delete /pi_scoring_system/calibrate/{job_id}">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
-- <code title="post /pi_scoring_system/calibrate">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">start_job</a>(\*\*<a href="src/withpi/types/pi_scoring_system/calibrate_start_job_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
-- <code title="get /pi_scoring_system/calibrate/{job_id}/messages">client.pi_scoring_system.calibrate.<a href="./src/withpi/resources/pi_scoring_system/calibrate.py">stream_messages</a>(job_id) -> str</code>
 
 # Prompt
 
@@ -245,3 +206,37 @@ Methods:
 
 - <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classify_response.py">QueryClassifyResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
+
+# Scorer
+
+Types:
+
+```python
+from withpi.types import ScorerGenerateDimensionsResponse, ScorerReadFromHfResponse
+```
+
+Methods:
+
+- <code title="post /scorer/generate_dimensions">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/scorer_generate_dimensions_response.py">ScorerGenerateDimensionsResponse</a></code>
+- <code title="post /scorer/read_from_hf">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/scorer_read_from_hf_response.py">ScorerReadFromHfResponse</a></code>
+- <code title="post /scorer/score">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
+
+## Calibrate
+
+Types:
+
+```python
+from withpi.types.scorer import (
+    CalibrateListResponse,
+    CalibrateCancelResponse,
+    CalibrateMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorer/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
+- <code title="get /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/pi_scoring_system/scoring_system_calibration_status.py">ScoringSystemCalibrationStatus</a></code>
+- <code title="get /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorer/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorer/calibrate_list_response.py">CalibrateListResponse</a></code>
+- <code title="delete /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /scorer/calibrate/{job_id}/messages">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">messages</a>(job_id) -> str</code>

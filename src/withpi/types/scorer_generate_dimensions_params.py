@@ -4,15 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ContractGenerateDimensionsParams"]
+__all__ = ["ScorerGenerateDimensionsParams"]
 
 
-class ContractGenerateDimensionsParams(TypedDict, total=False):
+class ScorerGenerateDimensionsParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description to generate a scoring system for."""
 
     try_auto_generating_python_code: bool
-    """
-    If true, try to generate python code for sub-dimensions with structured
-    evaluation
-    """
+    """If true, try to generate python code for sub-dimensions in the scoring system."""

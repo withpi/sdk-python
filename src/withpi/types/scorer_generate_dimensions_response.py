@@ -3,18 +3,12 @@
 from typing import TYPE_CHECKING, List, Optional
 from typing_extensions import Literal
 
-from ..._models import BaseModel
-from ..contracts.state import State
+from .._models import BaseModel
 
-__all__ = [
-    "ScoringSystemCalibrationStatus",
-    "CalibratedScoringSystem",
-    "CalibratedScoringSystemDimension",
-    "CalibratedScoringSystemDimensionSubDimension",
-]
+__all__ = ["ScorerGenerateDimensionsResponse", "Dimension", "DimensionSubDimension"]
 
 
-class CalibratedScoringSystemDimensionSubDimension(BaseModel):
+class DimensionSubDimension(BaseModel):
     description: str
     """The description of the dimension"""
 
@@ -53,14 +47,14 @@ class CalibratedScoringSystemDimensionSubDimension(BaseModel):
         def __getattr__(self, attr: str) -> object: ...
 
 
-class CalibratedScoringSystemDimension(BaseModel):
+class Dimension(BaseModel):
     description: str
     """The description of the dimension"""
 
     label: str
     """The label of the dimension"""
 
-    sub_dimensions: List[CalibratedScoringSystemDimensionSubDimension]
+    sub_dimensions: List[DimensionSubDimension]
     """The sub dimensions of the dimension"""
 
     parameters: Optional[List[float]] = None
@@ -83,14 +77,14 @@ class CalibratedScoringSystemDimension(BaseModel):
         def __getattr__(self, attr: str) -> object: ...
 
 
-class CalibratedScoringSystem(BaseModel):
+class ScorerGenerateDimensionsResponse(BaseModel):
     description: str
     """The application description"""
 
     name: str
     """The name of the scoring system"""
 
-    dimensions: Optional[List[CalibratedScoringSystemDimension]] = None
+    dimensions: Optional[List[Dimension]] = None
     """The dimensions of the scoring system"""
 
     if TYPE_CHECKING:
@@ -98,17 +92,3 @@ class CalibratedScoringSystem(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
-
-
-class ScoringSystemCalibrationStatus(BaseModel):
-    detailed_status: List[str]
-    """Detailed status of the job"""
-
-    job_id: str
-    """The job id"""
-
-    state: State
-    """Current state of the job"""
-
-    calibrated_scoring_system: Optional[CalibratedScoringSystem] = None
-    """The calibrated scoring system"""

@@ -238,7 +238,7 @@ class TestSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -255,7 +255,7 @@ class TestSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -310,7 +310,7 @@ class TestSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -331,7 +331,7 @@ class TestSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -608,7 +608,7 @@ class TestAsyncSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -625,7 +625,7 @@ class TestAsyncSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -680,7 +680,7 @@ class TestAsyncSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -701,7 +701,7 @@ class TestAsyncSft:
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
                 }
             ],
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
