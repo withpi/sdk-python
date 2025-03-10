@@ -26,7 +26,7 @@ from ._utils import (
 from ._version import __version__
 from .resources import queries
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import WithpiError, APIStatusError
+from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -38,18 +38,27 @@ from .resources.prompt import prompt
 from .resources.contracts import contracts
 from .resources.pi_scoring_system import pi_scoring_system
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Withpi", "AsyncWithpi", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "PiClient",
+    "AsyncPiClient",
+    "Client",
+    "AsyncClient",
+]
 
 
-class Withpi(SyncAPIClient):
+class PiClient(SyncAPIClient):
     contracts: contracts.ContractsResource
     data: data.DataResource
     model: model.ModelResource
     pi_scoring_system: pi_scoring_system.PiScoringSystemResource
     prompt: prompt.PromptResource
     queries: queries.QueriesResource
-    with_raw_response: WithpiWithRawResponse
-    with_streaming_response: WithpiWithStreamedResponse
+    with_raw_response: PiClientWithRawResponse
+    with_streaming_response: PiClientWithStreamedResponse
 
     # client options
     api_key: str
@@ -77,20 +86,20 @@ class Withpi(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Withpi client instance.
+        """Construct a new synchronous PiClient client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("WITHPI_API_KEY")
         if api_key is None:
-            raise WithpiError(
+            raise PiClientError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the WITHPI_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("WITHPI_BASE_URL")
+            base_url = os.environ.get("PI_CLIENT_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -111,8 +120,8 @@ class Withpi(SyncAPIClient):
         self.pi_scoring_system = pi_scoring_system.PiScoringSystemResource(self)
         self.prompt = prompt.PromptResource(self)
         self.queries = queries.QueriesResource(self)
-        self.with_raw_response = WithpiWithRawResponse(self)
-        self.with_streaming_response = WithpiWithStreamedResponse(self)
+        self.with_raw_response = PiClientWithRawResponse(self)
+        self.with_streaming_response = PiClientWithStreamedResponse(self)
 
     @property
     @override
@@ -219,15 +228,15 @@ class Withpi(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncWithpi(AsyncAPIClient):
+class AsyncPiClient(AsyncAPIClient):
     contracts: contracts.AsyncContractsResource
     data: data.AsyncDataResource
     model: model.AsyncModelResource
     pi_scoring_system: pi_scoring_system.AsyncPiScoringSystemResource
     prompt: prompt.AsyncPromptResource
     queries: queries.AsyncQueriesResource
-    with_raw_response: AsyncWithpiWithRawResponse
-    with_streaming_response: AsyncWithpiWithStreamedResponse
+    with_raw_response: AsyncPiClientWithRawResponse
+    with_streaming_response: AsyncPiClientWithStreamedResponse
 
     # client options
     api_key: str
@@ -255,20 +264,20 @@ class AsyncWithpi(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncWithpi client instance.
+        """Construct a new async AsyncPiClient client instance.
 
         This automatically infers the `api_key` argument from the `WITHPI_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("WITHPI_API_KEY")
         if api_key is None:
-            raise WithpiError(
+            raise PiClientError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the WITHPI_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("WITHPI_BASE_URL")
+            base_url = os.environ.get("PI_CLIENT_BASE_URL")
         if base_url is None:
             base_url = f"https://api.withpi.ai/v1"
 
@@ -289,8 +298,8 @@ class AsyncWithpi(AsyncAPIClient):
         self.pi_scoring_system = pi_scoring_system.AsyncPiScoringSystemResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
         self.queries = queries.AsyncQueriesResource(self)
-        self.with_raw_response = AsyncWithpiWithRawResponse(self)
-        self.with_streaming_response = AsyncWithpiWithStreamedResponse(self)
+        self.with_raw_response = AsyncPiClientWithRawResponse(self)
+        self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
     @property
     @override
@@ -397,8 +406,8 @@ class AsyncWithpi(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class WithpiWithRawResponse:
-    def __init__(self, client: Withpi) -> None:
+class PiClientWithRawResponse:
+    def __init__(self, client: PiClient) -> None:
         self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
         self.data = data.DataResourceWithRawResponse(client.data)
         self.model = model.ModelResourceWithRawResponse(client.model)
@@ -407,8 +416,8 @@ class WithpiWithRawResponse:
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
 
 
-class AsyncWithpiWithRawResponse:
-    def __init__(self, client: AsyncWithpi) -> None:
+class AsyncPiClientWithRawResponse:
+    def __init__(self, client: AsyncPiClient) -> None:
         self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
@@ -417,8 +426,8 @@ class AsyncWithpiWithRawResponse:
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
 
 
-class WithpiWithStreamedResponse:
-    def __init__(self, client: Withpi) -> None:
+class PiClientWithStreamedResponse:
+    def __init__(self, client: PiClient) -> None:
         self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
         self.data = data.DataResourceWithStreamingResponse(client.data)
         self.model = model.ModelResourceWithStreamingResponse(client.model)
@@ -429,8 +438,8 @@ class WithpiWithStreamedResponse:
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
 
 
-class AsyncWithpiWithStreamedResponse:
-    def __init__(self, client: AsyncWithpi) -> None:
+class AsyncPiClientWithStreamedResponse:
+    def __init__(self, client: AsyncPiClient) -> None:
         self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
@@ -441,6 +450,6 @@ class AsyncWithpiWithStreamedResponse:
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
 
 
-Client = Withpi
+Client = PiClient
 
-AsyncClient = AsyncWithpi
+AsyncClient = AsyncPiClient

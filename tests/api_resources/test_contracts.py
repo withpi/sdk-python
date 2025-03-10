@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import Withpi, AsyncWithpi
+from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.shared import SDKContract, ScoringSystemMetrics
 
@@ -19,7 +19,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_generate_dimensions(self, client: Withpi) -> None:
+    def test_method_generate_dimensions(self, client: PiClient) -> None:
         contract = client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -27,7 +27,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_generate_dimensions_with_all_params(self, client: Withpi) -> None:
+    def test_method_generate_dimensions_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
@@ -36,7 +36,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_generate_dimensions(self, client: Withpi) -> None:
+    def test_raw_response_generate_dimensions(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -48,7 +48,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_generate_dimensions(self, client: Withpi) -> None:
+    def test_streaming_response_generate_dimensions(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         ) as response:
@@ -62,7 +62,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_read_from_hf(self, client: Withpi) -> None:
+    def test_method_read_from_hf(self, client: PiClient) -> None:
         contract = client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -70,7 +70,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_read_from_hf_with_all_params(self, client: Withpi) -> None:
+    def test_method_read_from_hf_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
@@ -79,7 +79,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_read_from_hf(self, client: Withpi) -> None:
+    def test_raw_response_read_from_hf(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -91,7 +91,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_read_from_hf(self, client: Withpi) -> None:
+    def test_streaming_response_read_from_hf(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         ) as response:
@@ -105,7 +105,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_score(self, client: Withpi) -> None:
+    def test_method_score(self, client: PiClient) -> None:
         contract = client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -118,7 +118,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_score_with_all_params(self, client: Withpi) -> None:
+    def test_method_score_with_all_params(self, client: PiClient) -> None:
         contract = client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -164,7 +164,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_score(self, client: Withpi) -> None:
+    def test_raw_response_score(self, client: PiClient) -> None:
         response = client.contracts.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -181,7 +181,7 @@ class TestContracts:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_score(self, client: Withpi) -> None:
+    def test_streaming_response_score(self, client: PiClient) -> None:
         with client.contracts.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -204,7 +204,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_dimensions(self, async_client: AsyncWithpi) -> None:
+    async def test_method_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -212,7 +212,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_generate_dimensions_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
@@ -221,7 +221,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_generate_dimensions(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
@@ -233,7 +233,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_generate_dimensions(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_generate_dimensions(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         ) as response:
@@ -247,7 +247,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_read_from_hf(self, async_client: AsyncWithpi) -> None:
+    async def test_method_read_from_hf(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -255,7 +255,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_read_from_hf_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
@@ -264,7 +264,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_read_from_hf(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
@@ -276,7 +276,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_read_from_hf(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_read_from_hf(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         ) as response:
@@ -290,7 +290,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_score(self, async_client: AsyncWithpi) -> None:
+    async def test_method_score(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -303,7 +303,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_score_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_score_with_all_params(self, async_client: AsyncPiClient) -> None:
         contract = await async_client.contracts.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -349,7 +349,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_score(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
         response = await async_client.contracts.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
@@ -366,7 +366,7 @@ class TestAsyncContracts:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_score(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
         async with async_client.contracts.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
