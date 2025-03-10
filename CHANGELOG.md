@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 (2025-03-10)
+
+Full Changelog: [v0.1.0-alpha.96...v1.0.0](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.96...v1.0.0)
+
+### Features
+
+* **api:** input to inputs ([#416](https://github.com/withpi/sdk-python/issues/416)) ([07041a3](https://github.com/withpi/sdk-python/commit/07041a35bd18f1a44dfebe58d4c4c92a2dde7717))
+
 ## 0.1.0-alpha.96 (2025-03-10)
 
 Full Changelog: [v0.1.0-alpha.95...v0.1.0-alpha.96](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.95...v0.1.0-alpha.96)

@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from .input.input import (
-    InputResource,
-    AsyncInputResource,
-    InputResourceWithRawResponse,
-    AsyncInputResourceWithRawResponse,
-    InputResourceWithStreamingResponse,
-    AsyncInputResourceWithStreamingResponse,
+from .inputs.inputs import (
+    InputsResource,
+    AsyncInputsResource,
+    InputsResourceWithRawResponse,
+    AsyncInputsResourceWithRawResponse,
+    InputsResourceWithStreamingResponse,
+    AsyncInputsResourceWithStreamingResponse,
 )
 from .generate_synthetic_data import (
     GenerateSyntheticDataResource,
@@ -30,8 +30,8 @@ class DataResource(SyncAPIResource):
         return GenerateSyntheticDataResource(self._client)
 
     @cached_property
-    def input(self) -> InputResource:
-        return InputResource(self._client)
+    def inputs(self) -> InputsResource:
+        return InputsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> DataResourceWithRawResponse:
@@ -59,8 +59,8 @@ class AsyncDataResource(AsyncAPIResource):
         return AsyncGenerateSyntheticDataResource(self._client)
 
     @cached_property
-    def input(self) -> AsyncInputResource:
-        return AsyncInputResource(self._client)
+    def inputs(self) -> AsyncInputsResource:
+        return AsyncInputsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncDataResourceWithRawResponse:
@@ -91,8 +91,8 @@ class DataResourceWithRawResponse:
         return GenerateSyntheticDataResourceWithRawResponse(self._data.generate_synthetic_data)
 
     @cached_property
-    def input(self) -> InputResourceWithRawResponse:
-        return InputResourceWithRawResponse(self._data.input)
+    def inputs(self) -> InputsResourceWithRawResponse:
+        return InputsResourceWithRawResponse(self._data.inputs)
 
 
 class AsyncDataResourceWithRawResponse:
@@ -104,8 +104,8 @@ class AsyncDataResourceWithRawResponse:
         return AsyncGenerateSyntheticDataResourceWithRawResponse(self._data.generate_synthetic_data)
 
     @cached_property
-    def input(self) -> AsyncInputResourceWithRawResponse:
-        return AsyncInputResourceWithRawResponse(self._data.input)
+    def inputs(self) -> AsyncInputsResourceWithRawResponse:
+        return AsyncInputsResourceWithRawResponse(self._data.inputs)
 
 
 class DataResourceWithStreamingResponse:
@@ -117,8 +117,8 @@ class DataResourceWithStreamingResponse:
         return GenerateSyntheticDataResourceWithStreamingResponse(self._data.generate_synthetic_data)
 
     @cached_property
-    def input(self) -> InputResourceWithStreamingResponse:
-        return InputResourceWithStreamingResponse(self._data.input)
+    def inputs(self) -> InputsResourceWithStreamingResponse:
+        return InputsResourceWithStreamingResponse(self._data.inputs)
 
 
 class AsyncDataResourceWithStreamingResponse:
@@ -130,5 +130,5 @@ class AsyncDataResourceWithStreamingResponse:
         return AsyncGenerateSyntheticDataResourceWithStreamingResponse(self._data.generate_synthetic_data)
 
     @cached_property
-    def input(self) -> AsyncInputResourceWithStreamingResponse:
-        return AsyncInputResourceWithStreamingResponse(self._data.input)
+    def inputs(self) -> AsyncInputsResourceWithStreamingResponse:
+        return AsyncInputsResourceWithStreamingResponse(self._data.inputs)

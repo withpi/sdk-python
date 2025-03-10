@@ -31,32 +31,32 @@ from .generate_from_seeds import (
 )
 from ....types.data.input_cluster_response import InputClusterResponse
 
-__all__ = ["InputResource", "AsyncInputResource"]
+__all__ = ["InputsResource", "AsyncInputsResource"]
 
 
-class InputResource(SyncAPIResource):
+class InputsResource(SyncAPIResource):
     @cached_property
     def generate_from_seeds(self) -> GenerateFromSeedsResource:
         return GenerateFromSeedsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> InputResourceWithRawResponse:
+    def with_raw_response(self) -> InputsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return InputResourceWithRawResponse(self)
+        return InputsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> InputResourceWithStreamingResponse:
+    def with_streaming_response(self) -> InputsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return InputResourceWithStreamingResponse(self)
+        return InputsResourceWithStreamingResponse(self)
 
     def cluster(
         self,
@@ -102,29 +102,29 @@ class InputResource(SyncAPIResource):
         )
 
 
-class AsyncInputResource(AsyncAPIResource):
+class AsyncInputsResource(AsyncAPIResource):
     @cached_property
     def generate_from_seeds(self) -> AsyncGenerateFromSeedsResource:
         return AsyncGenerateFromSeedsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncInputResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncInputsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncInputResourceWithRawResponse(self)
+        return AsyncInputsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncInputResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncInputsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncInputResourceWithStreamingResponse(self)
+        return AsyncInputsResourceWithStreamingResponse(self)
 
     async def cluster(
         self,
@@ -170,53 +170,53 @@ class AsyncInputResource(AsyncAPIResource):
         )
 
 
-class InputResourceWithRawResponse:
-    def __init__(self, input: InputResource) -> None:
-        self._input = input
+class InputsResourceWithRawResponse:
+    def __init__(self, inputs: InputsResource) -> None:
+        self._inputs = inputs
 
         self.cluster = to_raw_response_wrapper(
-            input.cluster,
+            inputs.cluster,
         )
 
     @cached_property
     def generate_from_seeds(self) -> GenerateFromSeedsResourceWithRawResponse:
-        return GenerateFromSeedsResourceWithRawResponse(self._input.generate_from_seeds)
+        return GenerateFromSeedsResourceWithRawResponse(self._inputs.generate_from_seeds)
 
 
-class AsyncInputResourceWithRawResponse:
-    def __init__(self, input: AsyncInputResource) -> None:
-        self._input = input
+class AsyncInputsResourceWithRawResponse:
+    def __init__(self, inputs: AsyncInputsResource) -> None:
+        self._inputs = inputs
 
         self.cluster = async_to_raw_response_wrapper(
-            input.cluster,
+            inputs.cluster,
         )
 
     @cached_property
     def generate_from_seeds(self) -> AsyncGenerateFromSeedsResourceWithRawResponse:
-        return AsyncGenerateFromSeedsResourceWithRawResponse(self._input.generate_from_seeds)
+        return AsyncGenerateFromSeedsResourceWithRawResponse(self._inputs.generate_from_seeds)
 
 
-class InputResourceWithStreamingResponse:
-    def __init__(self, input: InputResource) -> None:
-        self._input = input
+class InputsResourceWithStreamingResponse:
+    def __init__(self, inputs: InputsResource) -> None:
+        self._inputs = inputs
 
         self.cluster = to_streamed_response_wrapper(
-            input.cluster,
+            inputs.cluster,
         )
 
     @cached_property
     def generate_from_seeds(self) -> GenerateFromSeedsResourceWithStreamingResponse:
-        return GenerateFromSeedsResourceWithStreamingResponse(self._input.generate_from_seeds)
+        return GenerateFromSeedsResourceWithStreamingResponse(self._inputs.generate_from_seeds)
 
 
-class AsyncInputResourceWithStreamingResponse:
-    def __init__(self, input: AsyncInputResource) -> None:
-        self._input = input
+class AsyncInputsResourceWithStreamingResponse:
+    def __init__(self, inputs: AsyncInputsResource) -> None:
+        self._inputs = inputs
 
         self.cluster = async_to_streamed_response_wrapper(
-            input.cluster,
+            inputs.cluster,
         )
 
     @cached_property
     def generate_from_seeds(self) -> AsyncGenerateFromSeedsResourceWithStreamingResponse:
-        return AsyncGenerateFromSeedsResourceWithStreamingResponse(self._input.generate_from_seeds)
+        return AsyncGenerateFromSeedsResourceWithStreamingResponse(self._inputs.generate_from_seeds)
