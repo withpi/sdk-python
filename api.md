@@ -64,7 +64,7 @@ Methods:
 - <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_stream_data_response.py">GenerateSyntheticDataStreamDataResponse</a></code>
 - <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_messages</a>(job_id) -> str</code>
 
-## Input
+## Inputs
 
 Types:
 
@@ -74,14 +74,14 @@ from withpi.types.data import InputClusterResponse
 
 Methods:
 
-- <code title="post /data/input/cluster">client.data.input.<a href="./src/withpi/resources/data/input/input.py">cluster</a>(\*\*<a href="src/withpi/types/data/input_cluster_params.py">params</a>) -> <a href="./src/withpi/types/data/input_cluster_response.py">InputClusterResponse</a></code>
+- <code title="post /data/input/cluster">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/withpi/types/data/input_cluster_params.py">params</a>) -> <a href="./src/withpi/types/data/input_cluster_response.py">InputClusterResponse</a></code>
 
 ### GenerateFromSeeds
 
 Types:
 
 ```python
-from withpi.types.data.input import (
+from withpi.types.data.inputs import (
     DataGenerationStatus,
     GenerateFromSeedListResponse,
     GenerateFromSeedCancelResponse,
@@ -92,12 +92,12 @@ from withpi.types.data.input import (
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/input/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/generate_from_seeds">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">list</a>(\*\*<a href="src/withpi/types/data/input/generate_from_seed_list_params.py">params</a>) -> <a href="./src/withpi/types/data/input/generate_from_seed_list_response.py">GenerateFromSeedListResponse</a></code>
-- <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/input/generate_from_seeds">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">start_job</a>(\*\*<a href="src/withpi/types/data/input/generate_from_seed_start_job_params.py">params</a>) -> <a href="./src/withpi/types/data/input/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
-- <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.input.generate_from_seeds.<a href="./src/withpi/resources/data/input/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/inputs/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">list</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_list_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_list_response.py">GenerateFromSeedListResponse</a></code>
+- <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
+- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">start_job</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_start_job_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
+- <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
 # Model
 
