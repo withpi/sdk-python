@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.9.0 (2025-03-10)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/withpi/sdk-python/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** api update ([#447](https://github.com/withpi/sdk-python/issues/447)) ([175bf60](https://github.com/withpi/sdk-python/commit/175bf60e17e40939b7b7aeb53aba9383e1849ad3))
+* **api:** model -&gt; training ([#449](https://github.com/withpi/sdk-python/issues/449)) ([3317be2](https://github.com/withpi/sdk-python/commit/3317be26c0598b545769243cd8901b8a72950ea7))
+
 ## 1.8.0 (2025-03-10)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/withpi/sdk-python/compare/v1.7.0...v1.8.0)

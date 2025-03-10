@@ -16,14 +16,6 @@ from .data import (
     DataResourceWithStreamingResponse,
     AsyncDataResourceWithStreamingResponse,
 )
-from .model import (
-    ModelResource,
-    AsyncModelResource,
-    ModelResourceWithRawResponse,
-    AsyncModelResourceWithRawResponse,
-    ModelResourceWithStreamingResponse,
-    AsyncModelResourceWithStreamingResponse,
-)
 from .prompt import (
     PromptResource,
     AsyncPromptResource,
@@ -48,12 +40,6 @@ __all__ = [
     "AsyncDataResourceWithRawResponse",
     "DataResourceWithStreamingResponse",
     "AsyncDataResourceWithStreamingResponse",
-    "ModelResource",
-    "AsyncModelResource",
-    "ModelResourceWithRawResponse",
-    "AsyncModelResourceWithRawResponse",
-    "ModelResourceWithStreamingResponse",
-    "AsyncModelResourceWithStreamingResponse",
     "PromptResource",
     "AsyncPromptResource",
     "PromptResourceWithRawResponse",
