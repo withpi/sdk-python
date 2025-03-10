@@ -35,7 +35,7 @@ from ._base_client import (
 from .resources.data import data
 from .resources.model import model
 from .resources.prompt import prompt
-from .resources.scorer import scorer
+from .resources.scorers import scorers
 
 __all__ = [
     "Timeout",
@@ -54,7 +54,7 @@ class PiClient(SyncAPIClient):
     model: model.ModelResource
     prompt: prompt.PromptResource
     queries: queries.QueriesResource
-    scorer: scorer.ScorerResource
+    scorers: scorers.ScorersResource
     with_raw_response: PiClientWithRawResponse
     with_streaming_response: PiClientWithStreamedResponse
 
@@ -116,7 +116,7 @@ class PiClient(SyncAPIClient):
         self.model = model.ModelResource(self)
         self.prompt = prompt.PromptResource(self)
         self.queries = queries.QueriesResource(self)
-        self.scorer = scorer.ScorerResource(self)
+        self.scorers = scorers.ScorersResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
         self.with_streaming_response = PiClientWithStreamedResponse(self)
 
@@ -230,7 +230,7 @@ class AsyncPiClient(AsyncAPIClient):
     model: model.AsyncModelResource
     prompt: prompt.AsyncPromptResource
     queries: queries.AsyncQueriesResource
-    scorer: scorer.AsyncScorerResource
+    scorers: scorers.AsyncScorersResource
     with_raw_response: AsyncPiClientWithRawResponse
     with_streaming_response: AsyncPiClientWithStreamedResponse
 
@@ -292,7 +292,7 @@ class AsyncPiClient(AsyncAPIClient):
         self.model = model.AsyncModelResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
         self.queries = queries.AsyncQueriesResource(self)
-        self.scorer = scorer.AsyncScorerResource(self)
+        self.scorers = scorers.AsyncScorersResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
         self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
@@ -407,7 +407,7 @@ class PiClientWithRawResponse:
         self.model = model.ModelResourceWithRawResponse(client.model)
         self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.queries = queries.QueriesResourceWithRawResponse(client.queries)
-        self.scorer = scorer.ScorerResourceWithRawResponse(client.scorer)
+        self.scorers = scorers.ScorersResourceWithRawResponse(client.scorers)
 
 
 class AsyncPiClientWithRawResponse:
@@ -416,7 +416,7 @@ class AsyncPiClientWithRawResponse:
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
-        self.scorer = scorer.AsyncScorerResourceWithRawResponse(client.scorer)
+        self.scorers = scorers.AsyncScorersResourceWithRawResponse(client.scorers)
 
 
 class PiClientWithStreamedResponse:
@@ -425,7 +425,7 @@ class PiClientWithStreamedResponse:
         self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
-        self.scorer = scorer.ScorerResourceWithStreamingResponse(client.scorer)
+        self.scorers = scorers.ScorersResourceWithStreamingResponse(client.scorers)
 
 
 class AsyncPiClientWithStreamedResponse:
@@ -434,7 +434,7 @@ class AsyncPiClientWithStreamedResponse:
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
-        self.scorer = scorer.AsyncScorerResourceWithStreamingResponse(client.scorer)
+        self.scorers = scorers.AsyncScorersResourceWithStreamingResponse(client.scorers)
 
 
 Client = PiClient
