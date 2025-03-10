@@ -7,10 +7,10 @@ from typing_extensions import Required, TypedDict
 
 from .shared_params.query_fanout_example import QueryFanoutExample
 
-__all__ = ["QueryGenerateFanoutsParams"]
+__all__ = ["RagGenerateFanoutParams"]
 
 
-class QueryGenerateFanoutsParams(TypedDict, total=False):
+class RagGenerateFanoutParams(TypedDict, total=False):
     queries: Required[List[str]]
     """The list of queries to generate fanouts for"""
 

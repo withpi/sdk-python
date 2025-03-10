@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import queries
+from .resources import rag
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PiClientError, APIStatusError
 from ._base_client import (
@@ -53,8 +53,8 @@ class PiClient(SyncAPIClient):
     data: data.DataResource
     model: model.ModelResource
     prompt: prompt.PromptResource
-    queries: queries.QueriesResource
     scorers: scorers.ScorersResource
+    rag: rag.RagResource
     with_raw_response: PiClientWithRawResponse
     with_streaming_response: PiClientWithStreamedResponse
 
@@ -115,8 +115,8 @@ class PiClient(SyncAPIClient):
         self.data = data.DataResource(self)
         self.model = model.ModelResource(self)
         self.prompt = prompt.PromptResource(self)
-        self.queries = queries.QueriesResource(self)
         self.scorers = scorers.ScorersResource(self)
+        self.rag = rag.RagResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
         self.with_streaming_response = PiClientWithStreamedResponse(self)
 
@@ -229,8 +229,8 @@ class AsyncPiClient(AsyncAPIClient):
     data: data.AsyncDataResource
     model: model.AsyncModelResource
     prompt: prompt.AsyncPromptResource
-    queries: queries.AsyncQueriesResource
     scorers: scorers.AsyncScorersResource
+    rag: rag.AsyncRagResource
     with_raw_response: AsyncPiClientWithRawResponse
     with_streaming_response: AsyncPiClientWithStreamedResponse
 
@@ -291,8 +291,8 @@ class AsyncPiClient(AsyncAPIClient):
         self.data = data.AsyncDataResource(self)
         self.model = model.AsyncModelResource(self)
         self.prompt = prompt.AsyncPromptResource(self)
-        self.queries = queries.AsyncQueriesResource(self)
         self.scorers = scorers.AsyncScorersResource(self)
+        self.rag = rag.AsyncRagResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
         self.with_streaming_response = AsyncPiClientWithStreamedResponse(self)
 
@@ -406,8 +406,8 @@ class PiClientWithRawResponse:
         self.data = data.DataResourceWithRawResponse(client.data)
         self.model = model.ModelResourceWithRawResponse(client.model)
         self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
-        self.queries = queries.QueriesResourceWithRawResponse(client.queries)
         self.scorers = scorers.ScorersResourceWithRawResponse(client.scorers)
+        self.rag = rag.RagResourceWithRawResponse(client.rag)
 
 
 class AsyncPiClientWithRawResponse:
@@ -415,8 +415,8 @@ class AsyncPiClientWithRawResponse:
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
         self.model = model.AsyncModelResourceWithRawResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
-        self.queries = queries.AsyncQueriesResourceWithRawResponse(client.queries)
         self.scorers = scorers.AsyncScorersResourceWithRawResponse(client.scorers)
+        self.rag = rag.AsyncRagResourceWithRawResponse(client.rag)
 
 
 class PiClientWithStreamedResponse:
@@ -424,8 +424,8 @@ class PiClientWithStreamedResponse:
         self.data = data.DataResourceWithStreamingResponse(client.data)
         self.model = model.ModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
-        self.queries = queries.QueriesResourceWithStreamingResponse(client.queries)
         self.scorers = scorers.ScorersResourceWithStreamingResponse(client.scorers)
+        self.rag = rag.RagResourceWithStreamingResponse(client.rag)
 
 
 class AsyncPiClientWithStreamedResponse:
@@ -433,8 +433,8 @@ class AsyncPiClientWithStreamedResponse:
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
         self.model = model.AsyncModelResourceWithStreamingResponse(client.model)
         self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
-        self.queries = queries.AsyncQueriesResourceWithStreamingResponse(client.queries)
         self.scorers = scorers.AsyncScorersResourceWithStreamingResponse(client.scorers)
+        self.rag = rag.AsyncRagResourceWithStreamingResponse(client.rag)
 
 
 Client = PiClient

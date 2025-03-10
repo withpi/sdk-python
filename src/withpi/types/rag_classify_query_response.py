@@ -4,7 +4,7 @@ from typing import List
 
 from .._models import BaseModel
 
-__all__ = ["QueryClassifyResponse", "Result", "ResultProbability"]
+__all__ = ["RagClassifyQueryResponse", "Result", "ResultProbability"]
 
 
 class ResultProbability(BaseModel):
@@ -21,5 +21,5 @@ class Result(BaseModel):
     query: str
 
 
-class QueryClassifyResponse(BaseModel):
+class RagClassifyQueryResponse(BaseModel):
     results: List[Result]

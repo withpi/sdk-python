@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["QueryClassifyParams", "Class", "Example"]
+__all__ = ["RagClassifyQueryParams", "Class", "Example"]
 
 
-class QueryClassifyParams(TypedDict, total=False):
+class RagClassifyQueryParams(TypedDict, total=False):
     classes: Required[Iterable[Class]]
     """The list of class definitions to classify the queries into. Must be <= 20."""
 
