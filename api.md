@@ -64,10 +64,10 @@ from withpi.types.data import (
 
 Methods:
 
-- <code title="post /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">create</a>(\*\*<a href="src/withpi/types/data/generate_example_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">list</a>(\*\*<a href="src/withpi/types/data/generate_example_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_example_list_response.py">GenerateExampleListResponse</a></code>
 - <code title="delete /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">cancel</a>(job_id) -> str</code>
+- <code title="post /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_example_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_examples/{job_id}/data">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_example_stream_data_response.py">GenerateExampleStreamDataResponse</a></code>
 - <code title="get /data/generate_examples/{job_id}/messages">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_messages</a>(job_id) -> str</code>
 
@@ -127,25 +127,25 @@ Types:
 
 ```python
 from withpi.types.model import (
+    GrpoRetrieveResponse,
     GrpoListResponse,
     GrpoCancelResponse,
     GrpoDownloadResponse,
-    GrpoLaunchResponse,
     GrpoLoadResponse,
-    GrpoMessagesResponse,
-    GrpoStatusResponse,
+    GrpoStartJobResponse,
+    GrpoStreamMessagesResponse,
 )
 ```
 
 Methods:
 
+- <code title="get /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/grpo_retrieve_response.py">GrpoRetrieveResponse</a></code>
 - <code title="get /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">list</a>(\*\*<a href="src/withpi/types/model/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_list_response.py">GrpoListResponse</a></code>
 - <code title="delete /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/grpo/{job_id}/download">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/grpo_download_params.py">params</a>) -> str</code>
-- <code title="post /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">launch</a>(\*\*<a href="src/withpi/types/model/grpo_launch_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_launch_response.py">GrpoLaunchResponse</a></code>
 - <code title="post /model/grpo/{job_id}/load">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/grpo_load_response.py">GrpoLoadResponse</a></code>
-- <code title="get /model/grpo/{job_id}/messages">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">messages</a>(job_id) -> str</code>
-- <code title="get /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">status</a>(job_id) -> <a href="./src/withpi/types/model/grpo_status_response.py">GrpoStatusResponse</a></code>
+- <code title="post /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_start_job_response.py">GrpoStartJobResponse</a></code>
+- <code title="get /model/grpo/{job_id}/messages">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">stream_messages</a>(job_id) -> str</code>
 
 # Prompt
 
