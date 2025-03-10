@@ -6,10 +6,10 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 from ..shared.scorer import Scorer
 
-__all__ = ["CalibrateCreateResponse"]
+__all__ = ["CalibrateStartJobResponse"]
 
 
-class CalibrateCreateResponse(BaseModel):
+class CalibrateStartJobResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
