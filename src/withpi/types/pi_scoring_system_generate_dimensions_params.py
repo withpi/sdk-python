@@ -12,7 +12,4 @@ class PiScoringSystemGenerateDimensionsParams(TypedDict, total=False):
     """The application description to generate a scoring system for."""
 
     try_auto_generating_python_code: bool
-    """
-    If true, try to generate python code for sub-dimensions with structured
-    evaluation
-    """
+    """If true, try to generate python code for sub-dimensions in the scoring system."""
