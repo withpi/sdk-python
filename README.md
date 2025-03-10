@@ -16,7 +16,7 @@ The REST API documentation can be found on [code.withpi.ai](https://code.withpi.
 
 ```sh
 # install from PyPI
-pip install --pre withpi
+pip install withpi
 ```
 
 ## Usage
