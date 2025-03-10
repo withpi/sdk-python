@@ -7,7 +7,6 @@ from typing import Optional
 import httpx
 
 from ...types import (
-    ScoringSystem,
     pi_scoring_system_score_params,
     pi_scoring_system_read_from_hf_params,
     pi_scoring_system_generate_dimensions_params,
@@ -34,9 +33,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.scoring_system import ScoringSystem
-from ...types.scoring_system_param import ScoringSystemParam
-from ...types.scoring_system_metrics import ScoringSystemMetrics
+from ...types.shared.scoring_system import ScoringSystem as SharedScoringSystem
+from ...types.shared_params.scoring_system import ScoringSystem as SharedParamsScoringSystem
+from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 
 __all__ = ["PiScoringSystemResource", "AsyncPiScoringSystemResource"]
 
@@ -76,7 +75,7 @@ class PiScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystem:
+    ) -> SharedScoringSystem:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -106,7 +105,7 @@ class PiScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystem,
+            cast_to=SharedScoringSystem,
         )
 
     def read_from_hf(
@@ -120,7 +119,7 @@ class PiScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystem:
+    ) -> SharedScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -151,7 +150,7 @@ class PiScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystem,
+            cast_to=SharedScoringSystem,
         )
 
     def score(
@@ -159,7 +158,7 @@ class PiScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: ScoringSystemParam,
+        scoring_system: SharedParamsScoringSystem,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -237,7 +236,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystem:
+    ) -> SharedScoringSystem:
         """
         Generates dimensions for a scoring system which will be used to evaluate it
 
@@ -267,7 +266,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystem,
+            cast_to=SharedScoringSystem,
         )
 
     async def read_from_hf(
@@ -281,7 +280,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystem:
+    ) -> SharedScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -312,7 +311,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystem,
+            cast_to=SharedScoringSystem,
         )
 
     async def score(
@@ -320,7 +319,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: ScoringSystemParam,
+        scoring_system: SharedParamsScoringSystem,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

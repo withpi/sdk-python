@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .scoring_system_param import ScoringSystemParam
+from .shared_params.scoring_system import ScoringSystem
 
 __all__ = ["PiScoringSystemScoreParams"]
 
@@ -16,5 +16,5 @@ class PiScoringSystemScoreParams(TypedDict, total=False):
     llm_output: Required[str]
     """The output to score"""
 
-    scoring_system: Required[ScoringSystemParam]
+    scoring_system: Required[ScoringSystem]
     """The scoring system to score"""

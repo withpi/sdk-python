@@ -2,7 +2,7 @@
 
 from typing import TYPE_CHECKING, List, Optional
 
-from .._models import BaseModel
+from ..._models import BaseModel
 from .sdk_dimension import SDKDimension
 
 __all__ = ["ScoringSystem"]
