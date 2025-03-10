@@ -25,7 +25,7 @@ from ....types.contracts import State
 from ....types.data.inputs import generate_from_seed_list_params, generate_from_seed_start_job_params
 from ....types.contracts.state import State
 from ....types.data.sdk_exploration_mode import SDKExplorationMode
-from ....types.data.inputs.data_generation_status import DataGenerationStatus
+from ....types.shared.data_generation_status import DataGenerationStatus
 from ....types.data.inputs.generate_from_seed_list_response import GenerateFromSeedListResponse
 
 __all__ = ["GenerateFromSeedsResource", "AsyncGenerateFromSeedsResource"]

@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from .sdk_example_param import SDKExampleParam
 from .sdk_exploration_mode import SDKExplorationMode
+from ..shared_params.sdk_example import SDKExample
 
 __all__ = ["GenerateSyntheticDataStartJobParams"]
 
@@ -15,7 +15,7 @@ class GenerateSyntheticDataStartJobParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 
-    seeds: Required[Iterable[SDKExampleParam]]
+    seeds: Required[Iterable[SDKExample]]
     """The list of LLM examples (inputs + outputs) to be used as seeds"""
 
     application_description: Optional[str]

@@ -1,7 +1,17 @@
 # Shared Types
 
 ```python
-from withpi.types import ScoringSystem, ScoringSystemMetrics, SDKContract, SDKDimension
+from withpi.types import (
+    DataGenerationStatus,
+    ScoringSystem,
+    ScoringSystemMetrics,
+    SDKContract,
+    SDKDimension,
+    SDKExample,
+    SDKSubDimension,
+    SftStatus,
+    SyntheticDataStatus,
+)
 ```
 
 # Contracts
@@ -45,9 +55,7 @@ Types:
 
 ```python
 from withpi.types.data import (
-    SDKExample,
     SDKExplorationMode,
-    SyntheticDataStatus,
     GenerateSyntheticDataListResponse,
     GenerateSyntheticDataCancelResponse,
     GenerateSyntheticDataStreamDataResponse,
@@ -57,10 +65,10 @@ from withpi.types.data import (
 
 Methods:
 
-- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">list</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_list_response.py">GenerateSyntheticDataListResponse</a></code>
 - <code title="delete /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_start_job_params.py">params</a>) -> <a href="./src/withpi/types/data/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
 - <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_stream_data_response.py">GenerateSyntheticDataStreamDataResponse</a></code>
 - <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_messages</a>(job_id) -> str</code>
 
@@ -82,7 +90,6 @@ Types:
 
 ```python
 from withpi.types.data.inputs import (
-    DataGenerationStatus,
     GenerateFromSeedListResponse,
     GenerateFromSeedCancelResponse,
     GenerateFromSeedStreamDataResponse,
@@ -92,10 +99,10 @@ from withpi.types.data.inputs import (
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/data/inputs/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">list</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_list_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_list_response.py">GenerateFromSeedListResponse</a></code>
 - <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">start_job</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_start_job_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">start_job</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
 - <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
 
@@ -159,7 +166,6 @@ Types:
 
 ```python
 from withpi.types.model import (
-    SftStatus,
     SftListResponse,
     SftCancelResponse,
     SftDownloadResponse,
@@ -169,12 +175,12 @@ from withpi.types.model import (
 
 Methods:
 
-- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="get /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
 - <code title="get /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">list</a>(\*\*<a href="src/withpi/types/model/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_list_response.py">SftListResponse</a></code>
 - <code title="delete /model/sft/{job_id}">client.model.sft.<a href="./src/withpi/resources/model/sft.py">cancel</a>(job_id) -> str</code>
 - <code title="post /model/sft/{job_id}/download">client.model.sft.<a href="./src/withpi/resources/model/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/sft_download_params.py">params</a>) -> str</code>
-- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
-- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
+- <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
 
 # PiScoringSystem

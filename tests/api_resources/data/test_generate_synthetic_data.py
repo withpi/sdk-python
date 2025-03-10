@@ -10,10 +10,10 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.data import (
-    SyntheticDataStatus,
     GenerateSyntheticDataListResponse,
     GenerateSyntheticDataStreamDataResponse,
 )
+from withpi.types.shared import SyntheticDataStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

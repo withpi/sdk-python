@@ -2,8 +2,8 @@
 
 from typing import List, Optional
 
-from ...._models import BaseModel
-from ...contracts.state import State
+from ..._models import BaseModel
+from ..contracts.state import State
 
 __all__ = ["DataGenerationStatus"]
 

@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .data_generation_status import DataGenerationStatus
+from ...shared.data_generation_status import DataGenerationStatus
 
 __all__ = ["GenerateFromSeedListResponse"]
 

@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .synthetic_data_status import SyntheticDataStatus
+from ..shared.synthetic_data_status import SyntheticDataStatus
 
 __all__ = ["GenerateSyntheticDataListResponse"]
 
