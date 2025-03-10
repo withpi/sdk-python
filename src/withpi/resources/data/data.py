@@ -12,6 +12,14 @@ from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
+from .generate import (
+    GenerateResource,
+    AsyncGenerateResource,
+    GenerateResourceWithRawResponse,
+    AsyncGenerateResourceWithRawResponse,
+    GenerateResourceWithStreamingResponse,
+    AsyncGenerateResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -21,21 +29,13 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from .generate_inputs import (
-    GenerateInputsResource,
-    AsyncGenerateInputsResource,
-    GenerateInputsResourceWithRawResponse,
-    AsyncGenerateInputsResourceWithRawResponse,
-    GenerateInputsResourceWithStreamingResponse,
-    AsyncGenerateInputsResourceWithStreamingResponse,
-)
-from .generate_examples import (
-    GenerateExamplesResource,
-    AsyncGenerateExamplesResource,
-    GenerateExamplesResourceWithRawResponse,
-    AsyncGenerateExamplesResourceWithRawResponse,
-    GenerateExamplesResourceWithStreamingResponse,
-    AsyncGenerateExamplesResourceWithStreamingResponse,
+from .generate_input_response_pairs import (
+    GenerateInputResponsePairsResource,
+    AsyncGenerateInputResponsePairsResource,
+    GenerateInputResponsePairsResourceWithRawResponse,
+    AsyncGenerateInputResponsePairsResourceWithRawResponse,
+    GenerateInputResponsePairsResourceWithStreamingResponse,
+    AsyncGenerateInputResponsePairsResourceWithStreamingResponse,
 )
 from ...types.data_cluster_inputs_response import DataClusterInputsResponse
 
@@ -44,12 +44,12 @@ __all__ = ["DataResource", "AsyncDataResource"]
 
 class DataResource(SyncAPIResource):
     @cached_property
-    def generate_inputs(self) -> GenerateInputsResource:
-        return GenerateInputsResource(self._client)
+    def generate(self) -> GenerateResource:
+        return GenerateResource(self._client)
 
     @cached_property
-    def generate_examples(self) -> GenerateExamplesResource:
-        return GenerateExamplesResource(self._client)
+    def generate_input_response_pairs(self) -> GenerateInputResponsePairsResource:
+        return GenerateInputResponsePairsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> DataResourceWithRawResponse:
@@ -116,12 +116,12 @@ class DataResource(SyncAPIResource):
 
 class AsyncDataResource(AsyncAPIResource):
     @cached_property
-    def generate_inputs(self) -> AsyncGenerateInputsResource:
-        return AsyncGenerateInputsResource(self._client)
+    def generate(self) -> AsyncGenerateResource:
+        return AsyncGenerateResource(self._client)
 
     @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResource:
-        return AsyncGenerateExamplesResource(self._client)
+    def generate_input_response_pairs(self) -> AsyncGenerateInputResponsePairsResource:
+        return AsyncGenerateInputResponsePairsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncDataResourceWithRawResponse:
@@ -195,12 +195,12 @@ class DataResourceWithRawResponse:
         )
 
     @cached_property
-    def generate_inputs(self) -> GenerateInputsResourceWithRawResponse:
-        return GenerateInputsResourceWithRawResponse(self._data.generate_inputs)
+    def generate(self) -> GenerateResourceWithRawResponse:
+        return GenerateResourceWithRawResponse(self._data.generate)
 
     @cached_property
-    def generate_examples(self) -> GenerateExamplesResourceWithRawResponse:
-        return GenerateExamplesResourceWithRawResponse(self._data.generate_examples)
+    def generate_input_response_pairs(self) -> GenerateInputResponsePairsResourceWithRawResponse:
+        return GenerateInputResponsePairsResourceWithRawResponse(self._data.generate_input_response_pairs)
 
 
 class AsyncDataResourceWithRawResponse:
@@ -212,12 +212,12 @@ class AsyncDataResourceWithRawResponse:
         )
 
     @cached_property
-    def generate_inputs(self) -> AsyncGenerateInputsResourceWithRawResponse:
-        return AsyncGenerateInputsResourceWithRawResponse(self._data.generate_inputs)
+    def generate(self) -> AsyncGenerateResourceWithRawResponse:
+        return AsyncGenerateResourceWithRawResponse(self._data.generate)
 
     @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResourceWithRawResponse:
-        return AsyncGenerateExamplesResourceWithRawResponse(self._data.generate_examples)
+    def generate_input_response_pairs(self) -> AsyncGenerateInputResponsePairsResourceWithRawResponse:
+        return AsyncGenerateInputResponsePairsResourceWithRawResponse(self._data.generate_input_response_pairs)
 
 
 class DataResourceWithStreamingResponse:
@@ -229,12 +229,12 @@ class DataResourceWithStreamingResponse:
         )
 
     @cached_property
-    def generate_inputs(self) -> GenerateInputsResourceWithStreamingResponse:
-        return GenerateInputsResourceWithStreamingResponse(self._data.generate_inputs)
+    def generate(self) -> GenerateResourceWithStreamingResponse:
+        return GenerateResourceWithStreamingResponse(self._data.generate)
 
     @cached_property
-    def generate_examples(self) -> GenerateExamplesResourceWithStreamingResponse:
-        return GenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)
+    def generate_input_response_pairs(self) -> GenerateInputResponsePairsResourceWithStreamingResponse:
+        return GenerateInputResponsePairsResourceWithStreamingResponse(self._data.generate_input_response_pairs)
 
 
 class AsyncDataResourceWithStreamingResponse:
@@ -246,9 +246,9 @@ class AsyncDataResourceWithStreamingResponse:
         )
 
     @cached_property
-    def generate_inputs(self) -> AsyncGenerateInputsResourceWithStreamingResponse:
-        return AsyncGenerateInputsResourceWithStreamingResponse(self._data.generate_inputs)
+    def generate(self) -> AsyncGenerateResourceWithStreamingResponse:
+        return AsyncGenerateResourceWithStreamingResponse(self._data.generate)
 
     @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResourceWithStreamingResponse:
-        return AsyncGenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)
+    def generate_input_response_pairs(self) -> AsyncGenerateInputResponsePairsResourceWithStreamingResponse:
+        return AsyncGenerateInputResponsePairsResourceWithStreamingResponse(self._data.generate_input_response_pairs)
