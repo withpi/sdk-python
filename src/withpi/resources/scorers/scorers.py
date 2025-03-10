@@ -37,32 +37,32 @@ from ...types.shared.scorer import Scorer as SharedScorer
 from ...types.shared_params.scorer import Scorer as SharedParamsScorer
 from ...types.scorer_score_response import ScorerScoreResponse
 
-__all__ = ["ScorerResource", "AsyncScorerResource"]
+__all__ = ["ScorersResource", "AsyncScorersResource"]
 
 
-class ScorerResource(SyncAPIResource):
+class ScorersResource(SyncAPIResource):
     @cached_property
     def calibrate(self) -> CalibrateResource:
         return CalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ScorerResourceWithRawResponse:
+    def with_raw_response(self) -> ScorersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return ScorerResourceWithRawResponse(self)
+        return ScorersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScorerResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ScorersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return ScorerResourceWithStreamingResponse(self)
+        return ScorersResourceWithStreamingResponse(self)
 
     def generate_dimensions(
         self,
@@ -93,7 +93,7 @@ class ScorerResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scorer/generate_dimensions",
+            "/scorers/generate_dimensions",
             body=maybe_transform(
                 {
                     "application_description": application_description,
@@ -138,7 +138,7 @@ class ScorerResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scorer/read_from_hf",
+            "/scorers/read_from_hf",
             body=maybe_transform(
                 {
                     "hf_scorer_name": hf_scorer_name,
@@ -184,7 +184,7 @@ class ScorerResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scorer/score",
+            "/scorers/score",
             body=maybe_transform(
                 {
                     "llm_input": llm_input,
@@ -200,29 +200,29 @@ class ScorerResource(SyncAPIResource):
         )
 
 
-class AsyncScorerResource(AsyncAPIResource):
+class AsyncScorersResource(AsyncAPIResource):
     @cached_property
     def calibrate(self) -> AsyncCalibrateResource:
         return AsyncCalibrateResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncScorerResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncScorersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncScorerResourceWithRawResponse(self)
+        return AsyncScorersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScorerResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncScorersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncScorerResourceWithStreamingResponse(self)
+        return AsyncScorersResourceWithStreamingResponse(self)
 
     async def generate_dimensions(
         self,
@@ -253,7 +253,7 @@ class AsyncScorerResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scorer/generate_dimensions",
+            "/scorers/generate_dimensions",
             body=await async_maybe_transform(
                 {
                     "application_description": application_description,
@@ -298,7 +298,7 @@ class AsyncScorerResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scorer/read_from_hf",
+            "/scorers/read_from_hf",
             body=await async_maybe_transform(
                 {
                     "hf_scorer_name": hf_scorer_name,
@@ -344,7 +344,7 @@ class AsyncScorerResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scorer/score",
+            "/scorers/score",
             body=await async_maybe_transform(
                 {
                     "llm_input": llm_input,
@@ -360,77 +360,77 @@ class AsyncScorerResource(AsyncAPIResource):
         )
 
 
-class ScorerResourceWithRawResponse:
-    def __init__(self, scorer: ScorerResource) -> None:
-        self._scorer = scorer
+class ScorersResourceWithRawResponse:
+    def __init__(self, scorers: ScorersResource) -> None:
+        self._scorers = scorers
 
         self.generate_dimensions = to_raw_response_wrapper(
-            scorer.generate_dimensions,
+            scorers.generate_dimensions,
         )
         self.read_from_hf = to_raw_response_wrapper(
-            scorer.read_from_hf,
+            scorers.read_from_hf,
         )
         self.score = to_raw_response_wrapper(
-            scorer.score,
+            scorers.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithRawResponse:
-        return CalibrateResourceWithRawResponse(self._scorer.calibrate)
+        return CalibrateResourceWithRawResponse(self._scorers.calibrate)
 
 
-class AsyncScorerResourceWithRawResponse:
-    def __init__(self, scorer: AsyncScorerResource) -> None:
-        self._scorer = scorer
+class AsyncScorersResourceWithRawResponse:
+    def __init__(self, scorers: AsyncScorersResource) -> None:
+        self._scorers = scorers
 
         self.generate_dimensions = async_to_raw_response_wrapper(
-            scorer.generate_dimensions,
+            scorers.generate_dimensions,
         )
         self.read_from_hf = async_to_raw_response_wrapper(
-            scorer.read_from_hf,
+            scorers.read_from_hf,
         )
         self.score = async_to_raw_response_wrapper(
-            scorer.score,
+            scorers.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithRawResponse:
-        return AsyncCalibrateResourceWithRawResponse(self._scorer.calibrate)
+        return AsyncCalibrateResourceWithRawResponse(self._scorers.calibrate)
 
 
-class ScorerResourceWithStreamingResponse:
-    def __init__(self, scorer: ScorerResource) -> None:
-        self._scorer = scorer
+class ScorersResourceWithStreamingResponse:
+    def __init__(self, scorers: ScorersResource) -> None:
+        self._scorers = scorers
 
         self.generate_dimensions = to_streamed_response_wrapper(
-            scorer.generate_dimensions,
+            scorers.generate_dimensions,
         )
         self.read_from_hf = to_streamed_response_wrapper(
-            scorer.read_from_hf,
+            scorers.read_from_hf,
         )
         self.score = to_streamed_response_wrapper(
-            scorer.score,
+            scorers.score,
         )
 
     @cached_property
     def calibrate(self) -> CalibrateResourceWithStreamingResponse:
-        return CalibrateResourceWithStreamingResponse(self._scorer.calibrate)
+        return CalibrateResourceWithStreamingResponse(self._scorers.calibrate)
 
 
-class AsyncScorerResourceWithStreamingResponse:
-    def __init__(self, scorer: AsyncScorerResource) -> None:
-        self._scorer = scorer
+class AsyncScorersResourceWithStreamingResponse:
+    def __init__(self, scorers: AsyncScorersResource) -> None:
+        self._scorers = scorers
 
         self.generate_dimensions = async_to_streamed_response_wrapper(
-            scorer.generate_dimensions,
+            scorers.generate_dimensions,
         )
         self.read_from_hf = async_to_streamed_response_wrapper(
-            scorer.read_from_hf,
+            scorers.read_from_hf,
         )
         self.score = async_to_streamed_response_wrapper(
-            scorer.score,
+            scorers.score,
         )
 
     @cached_property
     def calibrate(self) -> AsyncCalibrateResourceWithStreamingResponse:
-        return AsyncCalibrateResourceWithStreamingResponse(self._scorer.calibrate)
+        return AsyncCalibrateResourceWithStreamingResponse(self._scorers.calibrate)

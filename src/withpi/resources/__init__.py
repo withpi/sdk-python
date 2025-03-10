@@ -24,14 +24,6 @@ from .prompt import (
     PromptResourceWithStreamingResponse,
     AsyncPromptResourceWithStreamingResponse,
 )
-from .scorer import (
-    ScorerResource,
-    AsyncScorerResource,
-    ScorerResourceWithRawResponse,
-    AsyncScorerResourceWithRawResponse,
-    ScorerResourceWithStreamingResponse,
-    AsyncScorerResourceWithStreamingResponse,
-)
 from .queries import (
     QueriesResource,
     AsyncQueriesResource,
@@ -39,6 +31,14 @@ from .queries import (
     AsyncQueriesResourceWithRawResponse,
     QueriesResourceWithStreamingResponse,
     AsyncQueriesResourceWithStreamingResponse,
+)
+from .scorers import (
+    ScorersResource,
+    AsyncScorersResource,
+    ScorersResourceWithRawResponse,
+    AsyncScorersResourceWithRawResponse,
+    ScorersResourceWithStreamingResponse,
+    AsyncScorersResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -66,10 +66,10 @@ __all__ = [
     "AsyncQueriesResourceWithRawResponse",
     "QueriesResourceWithStreamingResponse",
     "AsyncQueriesResourceWithStreamingResponse",
-    "ScorerResource",
-    "AsyncScorerResource",
-    "ScorerResourceWithRawResponse",
-    "AsyncScorerResourceWithRawResponse",
-    "ScorerResourceWithStreamingResponse",
-    "AsyncScorerResourceWithStreamingResponse",
+    "ScorersResource",
+    "AsyncScorersResource",
+    "ScorersResourceWithRawResponse",
+    "AsyncScorersResourceWithRawResponse",
+    "ScorersResourceWithStreamingResponse",
+    "AsyncScorersResourceWithStreamingResponse",
 ]

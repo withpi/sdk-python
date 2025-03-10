@@ -21,11 +21,11 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.scorer import calibrate_list_params, calibrate_create_params
+from ...types.scorers import calibrate_list_params, calibrate_create_params
 from ...types.shared_params.scorer import Scorer
-from ...types.scorer.calibrate_list_response import CalibrateListResponse
-from ...types.scorer.calibrate_create_response import CalibrateCreateResponse
-from ...types.scorer.calibrate_retrieve_response import CalibrateRetrieveResponse
+from ...types.scorers.calibrate_list_response import CalibrateListResponse
+from ...types.scorers.calibrate_create_response import CalibrateCreateResponse
+from ...types.scorers.calibrate_retrieve_response import CalibrateRetrieveResponse
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -88,7 +88,7 @@ class CalibrateResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/scorer/calibrate",
+            "/scorers/calibrate",
             body=maybe_transform(
                 {
                     "scorer": scorer,
@@ -130,7 +130,7 @@ class CalibrateResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            f"/scorer/calibrate/{job_id}",
+            f"/scorers/calibrate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -163,7 +163,7 @@ class CalibrateResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/scorer/calibrate",
+            "/scorers/calibrate",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -200,7 +200,7 @@ class CalibrateResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._delete(
-            f"/scorer/calibrate/{job_id}",
+            f"/scorers/calibrate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -234,7 +234,7 @@ class CalibrateResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._get(
-            f"/scorer/calibrate/{job_id}/messages",
+            f"/scorers/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -300,7 +300,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/scorer/calibrate",
+            "/scorers/calibrate",
             body=await async_maybe_transform(
                 {
                     "scorer": scorer,
@@ -342,7 +342,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            f"/scorer/calibrate/{job_id}",
+            f"/scorers/calibrate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -375,7 +375,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/scorer/calibrate",
+            "/scorers/calibrate",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -412,7 +412,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._delete(
-            f"/scorer/calibrate/{job_id}",
+            f"/scorers/calibrate/{job_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -446,7 +446,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._get(
-            f"/scorer/calibrate/{job_id}/messages",
+            f"/scorers/calibrate/{job_id}/messages",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

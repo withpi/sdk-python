@@ -9,7 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.scorer import (
+from withpi.types.scorers import (
     CalibrateListResponse,
     CalibrateCreateResponse,
     CalibrateRetrieveResponse,
@@ -24,7 +24,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.create(
+        calibrate = client.scorers.calibrate.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -35,7 +35,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.create(
+        calibrate = client.scorers.calibrate.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -94,7 +94,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: PiClient) -> None:
-        response = client.scorer.calibrate.with_raw_response.create(
+        response = client.scorers.calibrate.with_raw_response.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -109,7 +109,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: PiClient) -> None:
-        with client.scorer.calibrate.with_streaming_response.create(
+        with client.scorers.calibrate.with_streaming_response.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -126,7 +126,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.retrieve(
+        calibrate = client.scorers.calibrate.retrieve(
             "job_id",
         )
         assert_matches_type(CalibrateRetrieveResponse, calibrate, path=["response"])
@@ -134,7 +134,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
-        response = client.scorer.calibrate.with_raw_response.retrieve(
+        response = client.scorers.calibrate.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -146,7 +146,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
-        with client.scorer.calibrate.with_streaming_response.retrieve(
+        with client.scorers.calibrate.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -161,20 +161,20 @@ class TestCalibrate:
     @parametrize
     def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scorer.calibrate.with_raw_response.retrieve(
+            client.scorers.calibrate.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.list()
+        calibrate = client.scorers.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.list(
+        calibrate = client.scorers.calibrate.list(
             state="QUEUED",
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
@@ -182,7 +182,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: PiClient) -> None:
-        response = client.scorer.calibrate.with_raw_response.list()
+        response = client.scorers.calibrate.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,7 +192,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: PiClient) -> None:
-        with client.scorer.calibrate.with_streaming_response.list() as response:
+        with client.scorers.calibrate.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -204,7 +204,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_method_cancel(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.cancel(
+        calibrate = client.scorers.calibrate.cancel(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -212,7 +212,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
-        response = client.scorer.calibrate.with_raw_response.cancel(
+        response = client.scorers.calibrate.with_raw_response.cancel(
             "job_id",
         )
 
@@ -224,7 +224,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
-        with client.scorer.calibrate.with_streaming_response.cancel(
+        with client.scorers.calibrate.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -239,14 +239,14 @@ class TestCalibrate:
     @parametrize
     def test_path_params_cancel(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scorer.calibrate.with_raw_response.cancel(
+            client.scorers.calibrate.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     def test_method_messages(self, client: PiClient) -> None:
-        calibrate = client.scorer.calibrate.messages(
+        calibrate = client.scorers.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -254,7 +254,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_messages(self, client: PiClient) -> None:
-        response = client.scorer.calibrate.with_raw_response.messages(
+        response = client.scorers.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -266,7 +266,7 @@ class TestCalibrate:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_messages(self, client: PiClient) -> None:
-        with client.scorer.calibrate.with_streaming_response.messages(
+        with client.scorers.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -281,7 +281,7 @@ class TestCalibrate:
     @parametrize
     def test_path_params_messages(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.scorer.calibrate.with_raw_response.messages(
+            client.scorers.calibrate.with_raw_response.messages(
                 "",
             )
 
@@ -292,7 +292,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.create(
+        calibrate = await async_client.scorers.calibrate.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -303,7 +303,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.create(
+        calibrate = await async_client.scorers.calibrate.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -362,7 +362,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scorer.calibrate.with_raw_response.create(
+        response = await async_client.scorers.calibrate.with_raw_response.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -377,7 +377,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scorer.calibrate.with_streaming_response.create(
+        async with async_client.scorers.calibrate.with_streaming_response.create(
             scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
@@ -394,7 +394,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.retrieve(
+        calibrate = await async_client.scorers.calibrate.retrieve(
             "job_id",
         )
         assert_matches_type(CalibrateRetrieveResponse, calibrate, path=["response"])
@@ -402,7 +402,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scorer.calibrate.with_raw_response.retrieve(
+        response = await async_client.scorers.calibrate.with_raw_response.retrieve(
             "job_id",
         )
 
@@ -414,7 +414,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scorer.calibrate.with_streaming_response.retrieve(
+        async with async_client.scorers.calibrate.with_streaming_response.retrieve(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -429,20 +429,20 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scorer.calibrate.with_raw_response.retrieve(
+            await async_client.scorers.calibrate.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.list()
+        calibrate = await async_client.scorers.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.list(
+        calibrate = await async_client.scorers.calibrate.list(
             state="QUEUED",
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
@@ -450,7 +450,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scorer.calibrate.with_raw_response.list()
+        response = await async_client.scorers.calibrate.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -460,7 +460,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scorer.calibrate.with_streaming_response.list() as response:
+        async with async_client.scorers.calibrate.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -472,7 +472,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.cancel(
+        calibrate = await async_client.scorers.calibrate.cancel(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -480,7 +480,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scorer.calibrate.with_raw_response.cancel(
+        response = await async_client.scorers.calibrate.with_raw_response.cancel(
             "job_id",
         )
 
@@ -492,7 +492,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scorer.calibrate.with_streaming_response.cancel(
+        async with async_client.scorers.calibrate.with_streaming_response.cancel(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -507,14 +507,14 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scorer.calibrate.with_raw_response.cancel(
+            await async_client.scorers.calibrate.with_raw_response.cancel(
                 "",
             )
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_messages(self, async_client: AsyncPiClient) -> None:
-        calibrate = await async_client.scorer.calibrate.messages(
+        calibrate = await async_client.scorers.calibrate.messages(
             "job_id",
         )
         assert_matches_type(str, calibrate, path=["response"])
@@ -522,7 +522,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scorer.calibrate.with_raw_response.messages(
+        response = await async_client.scorers.calibrate.with_raw_response.messages(
             "job_id",
         )
 
@@ -534,7 +534,7 @@ class TestAsyncCalibrate:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scorer.calibrate.with_streaming_response.messages(
+        async with async_client.scorers.calibrate.with_streaming_response.messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -549,6 +549,6 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_path_params_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.scorer.calibrate.with_raw_response.messages(
+            await async_client.scorers.calibrate.with_raw_response.messages(
                 "",
             )
