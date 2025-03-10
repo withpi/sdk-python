@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import Withpi, AsyncWithpi
+from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types import (
     QueryClassifyResponse,
@@ -22,7 +22,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_classify(self, client: Withpi) -> None:
+    def test_method_classify(self, client: PiClient) -> None:
         query = client.queries.classify(
             classes=[
                 {
@@ -48,7 +48,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_classify_with_all_params(self, client: Withpi) -> None:
+    def test_method_classify_with_all_params(self, client: PiClient) -> None:
         query = client.queries.classify(
             classes=[
                 {
@@ -90,7 +90,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_classify(self, client: Withpi) -> None:
+    def test_raw_response_classify(self, client: PiClient) -> None:
         response = client.queries.with_raw_response.classify(
             classes=[
                 {
@@ -120,7 +120,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_classify(self, client: Withpi) -> None:
+    def test_streaming_response_classify(self, client: PiClient) -> None:
         with client.queries.with_streaming_response.classify(
             classes=[
                 {
@@ -152,7 +152,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_generate_fanouts(self, client: Withpi) -> None:
+    def test_method_generate_fanouts(self, client: PiClient) -> None:
         query = client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -163,7 +163,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_generate_fanouts_with_all_params(self, client: Withpi) -> None:
+    def test_method_generate_fanouts_with_all_params(self, client: PiClient) -> None:
         query = client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -187,7 +187,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_generate_fanouts(self, client: Withpi) -> None:
+    def test_raw_response_generate_fanouts(self, client: PiClient) -> None:
         response = client.queries.with_raw_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -202,7 +202,7 @@ class TestQueries:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_generate_fanouts(self, client: Withpi) -> None:
+    def test_streaming_response_generate_fanouts(self, client: PiClient) -> None:
         with client.queries.with_streaming_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -223,7 +223,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_classify(self, async_client: AsyncWithpi) -> None:
+    async def test_method_classify(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.classify(
             classes=[
                 {
@@ -249,7 +249,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_classify_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_classify_with_all_params(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.classify(
             classes=[
                 {
@@ -291,7 +291,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_classify(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_classify(self, async_client: AsyncPiClient) -> None:
         response = await async_client.queries.with_raw_response.classify(
             classes=[
                 {
@@ -321,7 +321,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_classify(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_classify(self, async_client: AsyncPiClient) -> None:
         async with async_client.queries.with_streaming_response.classify(
             classes=[
                 {
@@ -353,7 +353,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_fanouts(self, async_client: AsyncWithpi) -> None:
+    async def test_method_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -364,7 +364,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_generate_fanouts_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_generate_fanouts_with_all_params(self, async_client: AsyncPiClient) -> None:
         query = await async_client.queries.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -388,7 +388,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_generate_fanouts(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         response = await async_client.queries.with_raw_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
@@ -403,7 +403,7 @@ class TestAsyncQueries:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_generate_fanouts(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_generate_fanouts(self, async_client: AsyncPiClient) -> None:
         async with async_client.queries.with_streaming_response.generate_fanouts(
             queries=[
                 "Name the four largest fish and what they eat.",
