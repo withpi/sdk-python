@@ -22,74 +22,6 @@ class TestClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: Withpi) -> None:
-        classifier = client.model.classifier.create(
-            base_model="MODERNBERT_BASE",
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-        assert_matches_type(ClassificationStatus, classifier, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: Withpi) -> None:
-        classifier = client.model.classifier.create(
-            base_model="MODERNBERT_BASE",
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-            learning_rate=0.000005,
-            num_train_epochs=5,
-        )
-        assert_matches_type(ClassificationStatus, classifier, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create(self, client: Withpi) -> None:
-        response = client.model.classifier.with_raw_response.create(
-            base_model="MODERNBERT_BASE",
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        classifier = response.parse()
-        assert_matches_type(ClassificationStatus, classifier, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create(self, client: Withpi) -> None:
-        with client.model.classifier.with_streaming_response.create(
-            base_model="MODERNBERT_BASE",
-            examples=[
-                {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            classifier = response.parse()
-            assert_matches_type(ClassificationStatus, classifier, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_retrieve(self, client: Withpi) -> None:
         classifier = client.model.classifier.retrieve(
             "job_id",
@@ -256,54 +188,8 @@ class TestClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_messages(self, client: Withpi) -> None:
-        classifier = client.model.classifier.messages(
-            "job_id",
-        )
-        assert_matches_type(str, classifier, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_messages(self, client: Withpi) -> None:
-        response = client.model.classifier.with_raw_response.messages(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        classifier = response.parse()
-        assert_matches_type(str, classifier, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_messages(self, client: Withpi) -> None:
-        with client.model.classifier.with_streaming_response.messages(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            classifier = response.parse()
-            assert_matches_type(str, classifier, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_messages(self, client: Withpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.classifier.with_raw_response.messages(
-                "",
-            )
-
-
-class TestAsyncClassifier:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create(self, async_client: AsyncWithpi) -> None:
-        classifier = await async_client.model.classifier.create(
+    def test_method_start_job(self, client: Withpi) -> None:
+        classifier = client.model.classifier.start_job(
             base_model="MODERNBERT_BASE",
             examples=[
                 {
@@ -316,8 +202,8 @@ class TestAsyncClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncWithpi) -> None:
-        classifier = await async_client.model.classifier.create(
+    def test_method_start_job_with_all_params(self, client: Withpi) -> None:
+        classifier = client.model.classifier.start_job(
             base_model="MODERNBERT_BASE",
             examples=[
                 {
@@ -332,8 +218,8 @@ class TestAsyncClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.model.classifier.with_raw_response.create(
+    def test_raw_response_start_job(self, client: Withpi) -> None:
+        response = client.model.classifier.with_raw_response.start_job(
             base_model="MODERNBERT_BASE",
             examples=[
                 {
@@ -345,13 +231,13 @@ class TestAsyncClassifier:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        classifier = await response.parse()
+        classifier = response.parse()
         assert_matches_type(ClassificationStatus, classifier, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncWithpi) -> None:
-        async with async_client.model.classifier.with_streaming_response.create(
+    def test_streaming_response_start_job(self, client: Withpi) -> None:
+        with client.model.classifier.with_streaming_response.start_job(
             base_model="MODERNBERT_BASE",
             examples=[
                 {
@@ -363,10 +249,56 @@ class TestAsyncClassifier:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            classifier = await response.parse()
+            classifier = response.parse()
             assert_matches_type(ClassificationStatus, classifier, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_stream_messages(self, client: Withpi) -> None:
+        classifier = client.model.classifier.stream_messages(
+            "job_id",
+        )
+        assert_matches_type(str, classifier, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_stream_messages(self, client: Withpi) -> None:
+        response = client.model.classifier.with_raw_response.stream_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        classifier = response.parse()
+        assert_matches_type(str, classifier, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_stream_messages(self, client: Withpi) -> None:
+        with client.model.classifier.with_streaming_response.stream_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            classifier = response.parse()
+            assert_matches_type(str, classifier, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_stream_messages(self, client: Withpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.model.classifier.with_raw_response.stream_messages(
+                "",
+            )
+
+
+class TestAsyncClassifier:
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
@@ -536,16 +468,84 @@ class TestAsyncClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_messages(self, async_client: AsyncWithpi) -> None:
-        classifier = await async_client.model.classifier.messages(
+    async def test_method_start_job(self, async_client: AsyncWithpi) -> None:
+        classifier = await async_client.model.classifier.start_job(
+            base_model="MODERNBERT_BASE",
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+        assert_matches_type(ClassificationStatus, classifier, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job_with_all_params(self, async_client: AsyncWithpi) -> None:
+        classifier = await async_client.model.classifier.start_job(
+            base_model="MODERNBERT_BASE",
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+            learning_rate=0.000005,
+            num_train_epochs=5,
+        )
+        assert_matches_type(ClassificationStatus, classifier, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.model.classifier.with_raw_response.start_job(
+            base_model="MODERNBERT_BASE",
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        classifier = await response.parse()
+        assert_matches_type(ClassificationStatus, classifier, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_start_job(self, async_client: AsyncWithpi) -> None:
+        async with async_client.model.classifier.with_streaming_response.start_job(
+            base_model="MODERNBERT_BASE",
+            examples=[
+                {
+                    "llm_input": "Tell me something different",
+                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
+                }
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            classifier = await response.parse()
+            assert_matches_type(ClassificationStatus, classifier, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_stream_messages(self, async_client: AsyncWithpi) -> None:
+        classifier = await async_client.model.classifier.stream_messages(
             "job_id",
         )
         assert_matches_type(str, classifier, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_messages(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.model.classifier.with_raw_response.messages(
+    async def test_raw_response_stream_messages(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.model.classifier.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -556,8 +556,8 @@ class TestAsyncClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_messages(self, async_client: AsyncWithpi) -> None:
-        async with async_client.model.classifier.with_streaming_response.messages(
+    async def test_streaming_response_stream_messages(self, async_client: AsyncWithpi) -> None:
+        async with async_client.model.classifier.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -570,8 +570,8 @@ class TestAsyncClassifier:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_messages(self, async_client: AsyncWithpi) -> None:
+    async def test_path_params_stream_messages(self, async_client: AsyncWithpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.classifier.with_raw_response.messages(
+            await async_client.model.classifier.with_raw_response.stream_messages(
                 "",
             )

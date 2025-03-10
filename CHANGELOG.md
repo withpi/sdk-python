@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.93 (2025-03-10)
+
+Full Changelog: [v0.1.0-alpha.92...v0.1.0-alpha.93](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.92...v0.1.0-alpha.93)
+
+### Features
+
+* **api:** api update ([#403](https://github.com/withpi/sdk-python/issues/403)) ([73e3ac2](https://github.com/withpi/sdk-python/commit/73e3ac2c46cf85dbac50473d1b1d56a57e1a4f9e))
+* **api:** manual updates ([f5d50f2](https://github.com/withpi/sdk-python/commit/f5d50f2af2e89bf4843103ce9d963358dd95c5c3))
+* **api:** manual updates ([cbf5f23](https://github.com/withpi/sdk-python/commit/cbf5f233cb2154bb0b1237054e39f005498fb10c))
+* **api:** manual updates ([ba94d78](https://github.com/withpi/sdk-python/commit/ba94d789ea5c47e0b8ebda4e7f62e3796606b59a))
+* **api:** manual updates ([f369634](https://github.com/withpi/sdk-python/commit/f369634251522181b3fe3581709f21cadedec247))
+* **api:** manual updates ([74992fa](https://github.com/withpi/sdk-python/commit/74992fa7363857a09b29c340655e6e1f2426b41b))
+* **api:** manual updates ([#402](https://github.com/withpi/sdk-python/issues/402)) ([82feb2d](https://github.com/withpi/sdk-python/commit/82feb2da93495960818013b6b1d42587f3364ebf))
+* **api:** manual updates ([#404](https://github.com/withpi/sdk-python/issues/404)) ([b32db45](https://github.com/withpi/sdk-python/commit/b32db45c080271fd8a6a2fe1069d4c6bb486b67f))
+
+
+### Chores
+
+* go live ([#400](https://github.com/withpi/sdk-python/issues/400)) ([8ccb5e0](https://github.com/withpi/sdk-python/commit/8ccb5e065cf65738e31561d0cd8aa6f8741ca77f))
+* go live ([#405](https://github.com/withpi/sdk-python/issues/405)) ([422826f](https://github.com/withpi/sdk-python/commit/422826f63eb446bb3394afd5971aa90f51a1882e))
+
 ## 0.1.0-alpha.92 (2025-03-09)
 
 Full Changelog: [v0.1.0-alpha.91...v0.1.0-alpha.92](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.91...v0.1.0-alpha.92)

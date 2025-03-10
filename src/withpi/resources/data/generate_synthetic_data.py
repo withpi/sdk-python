@@ -19,7 +19,11 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import SDKExplorationMode, generate_synthetic_data_list_params, generate_synthetic_data_create_params
+from ...types.data import (
+    SDKExplorationMode,
+    generate_synthetic_data_list_params,
+    generate_synthetic_data_start_job_params,
+)
 from ..._base_client import make_request_options
 from ...types.contracts import State
 from ...types.contracts.state import State
@@ -51,70 +55,6 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return GenerateSyntheticDataResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        num_examples_to_generate: int,
-        seeds: Iterable[SDKExampleParam],
-        application_description: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyntheticDataStatus:
-        """
-        Launches a Synthetic Data Generation job
-
-        Args:
-          num_examples_to_generate: The number of new LLM examples to generate
-
-          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
-
-          application_description: The application description for which the synthetic data would be applicable.
-
-          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
-              be same as `num_shots`.
-
-          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
-
-          num_shots: Number of examples to be included in the prompt for generation
-
-          system_prompt: The system prompt to generate the responses for the application's inputs
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/data/generate_synthetic_data",
-            body=maybe_transform(
-                {
-                    "num_examples_to_generate": num_examples_to_generate,
-                    "seeds": seeds,
-                    "application_description": application_description,
-                    "batch_size": batch_size,
-                    "exploration_mode": exploration_mode,
-                    "num_shots": num_shots,
-                    "system_prompt": system_prompt,
-                },
-                generate_synthetic_data_create_params.GenerateSyntheticDataCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SyntheticDataStatus,
-        )
 
     def retrieve(
         self,
@@ -221,6 +161,70 @@ class GenerateSyntheticDataResource(SyncAPIResource):
             cast_to=str,
         )
 
+    def start_job(
+        self,
+        *,
+        num_examples_to_generate: int,
+        seeds: Iterable[SDKExampleParam],
+        application_description: Optional[str] | NotGiven = NOT_GIVEN,
+        batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyntheticDataStatus:
+        """
+        Launches a Synthetic Data Generation job
+
+        Args:
+          num_examples_to_generate: The number of new LLM examples to generate
+
+          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
+
+          application_description: The application description for which the synthetic data would be applicable.
+
+          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
+              be same as `num_shots`.
+
+          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
+
+          num_shots: Number of examples to be included in the prompt for generation
+
+          system_prompt: The system prompt to generate the responses for the application's inputs
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/data/generate_synthetic_data",
+            body=maybe_transform(
+                {
+                    "num_examples_to_generate": num_examples_to_generate,
+                    "seeds": seeds,
+                    "application_description": application_description,
+                    "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
+                    "num_shots": num_shots,
+                    "system_prompt": system_prompt,
+                },
+                generate_synthetic_data_start_job_params.GenerateSyntheticDataStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SyntheticDataStatus,
+        )
+
     def stream_data(
         self,
         job_id: str,
@@ -308,70 +312,6 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncGenerateSyntheticDataResourceWithStreamingResponse(self)
-
-    async def create(
-        self,
-        *,
-        num_examples_to_generate: int,
-        seeds: Iterable[SDKExampleParam],
-        application_description: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyntheticDataStatus:
-        """
-        Launches a Synthetic Data Generation job
-
-        Args:
-          num_examples_to_generate: The number of new LLM examples to generate
-
-          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
-
-          application_description: The application description for which the synthetic data would be applicable.
-
-          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
-              be same as `num_shots`.
-
-          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
-
-          num_shots: Number of examples to be included in the prompt for generation
-
-          system_prompt: The system prompt to generate the responses for the application's inputs
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/data/generate_synthetic_data",
-            body=await async_maybe_transform(
-                {
-                    "num_examples_to_generate": num_examples_to_generate,
-                    "seeds": seeds,
-                    "application_description": application_description,
-                    "batch_size": batch_size,
-                    "exploration_mode": exploration_mode,
-                    "num_shots": num_shots,
-                    "system_prompt": system_prompt,
-                },
-                generate_synthetic_data_create_params.GenerateSyntheticDataCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SyntheticDataStatus,
-        )
 
     async def retrieve(
         self,
@@ -478,6 +418,70 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def start_job(
+        self,
+        *,
+        num_examples_to_generate: int,
+        seeds: Iterable[SDKExampleParam],
+        application_description: Optional[str] | NotGiven = NOT_GIVEN,
+        batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SyntheticDataStatus:
+        """
+        Launches a Synthetic Data Generation job
+
+        Args:
+          num_examples_to_generate: The number of new LLM examples to generate
+
+          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
+
+          application_description: The application description for which the synthetic data would be applicable.
+
+          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
+              be same as `num_shots`.
+
+          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
+
+          num_shots: Number of examples to be included in the prompt for generation
+
+          system_prompt: The system prompt to generate the responses for the application's inputs
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/data/generate_synthetic_data",
+            body=await async_maybe_transform(
+                {
+                    "num_examples_to_generate": num_examples_to_generate,
+                    "seeds": seeds,
+                    "application_description": application_description,
+                    "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
+                    "num_shots": num_shots,
+                    "system_prompt": system_prompt,
+                },
+                generate_synthetic_data_start_job_params.GenerateSyntheticDataStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SyntheticDataStatus,
+        )
+
     async def stream_data(
         self,
         job_id: str,
@@ -550,9 +554,6 @@ class GenerateSyntheticDataResourceWithRawResponse:
     def __init__(self, generate_synthetic_data: GenerateSyntheticDataResource) -> None:
         self._generate_synthetic_data = generate_synthetic_data
 
-        self.create = to_raw_response_wrapper(
-            generate_synthetic_data.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
@@ -561,6 +562,9 @@ class GenerateSyntheticDataResourceWithRawResponse:
         )
         self.cancel = to_raw_response_wrapper(
             generate_synthetic_data.cancel,
+        )
+        self.start_job = to_raw_response_wrapper(
+            generate_synthetic_data.start_job,
         )
         self.stream_data = to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -574,9 +578,6 @@ class AsyncGenerateSyntheticDataResourceWithRawResponse:
     def __init__(self, generate_synthetic_data: AsyncGenerateSyntheticDataResource) -> None:
         self._generate_synthetic_data = generate_synthetic_data
 
-        self.create = async_to_raw_response_wrapper(
-            generate_synthetic_data.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             generate_synthetic_data.retrieve,
         )
@@ -585,6 +586,9 @@ class AsyncGenerateSyntheticDataResourceWithRawResponse:
         )
         self.cancel = async_to_raw_response_wrapper(
             generate_synthetic_data.cancel,
+        )
+        self.start_job = async_to_raw_response_wrapper(
+            generate_synthetic_data.start_job,
         )
         self.stream_data = async_to_raw_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -598,9 +602,6 @@ class GenerateSyntheticDataResourceWithStreamingResponse:
     def __init__(self, generate_synthetic_data: GenerateSyntheticDataResource) -> None:
         self._generate_synthetic_data = generate_synthetic_data
 
-        self.create = to_streamed_response_wrapper(
-            generate_synthetic_data.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
@@ -609,6 +610,9 @@ class GenerateSyntheticDataResourceWithStreamingResponse:
         )
         self.cancel = to_streamed_response_wrapper(
             generate_synthetic_data.cancel,
+        )
+        self.start_job = to_streamed_response_wrapper(
+            generate_synthetic_data.start_job,
         )
         self.stream_data = to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,
@@ -622,9 +626,6 @@ class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
     def __init__(self, generate_synthetic_data: AsyncGenerateSyntheticDataResource) -> None:
         self._generate_synthetic_data = generate_synthetic_data
 
-        self.create = async_to_streamed_response_wrapper(
-            generate_synthetic_data.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             generate_synthetic_data.retrieve,
         )
@@ -633,6 +634,9 @@ class AsyncGenerateSyntheticDataResourceWithStreamingResponse:
         )
         self.cancel = async_to_streamed_response_wrapper(
             generate_synthetic_data.cancel,
+        )
+        self.start_job = async_to_streamed_response_wrapper(
+            generate_synthetic_data.start_job,
         )
         self.stream_data = async_to_streamed_response_wrapper(
             generate_synthetic_data.stream_data,

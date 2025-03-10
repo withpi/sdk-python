@@ -22,117 +22,6 @@ class TestGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: Withpi) -> None:
-        grpo = client.model.rl.grpo.create(
-            base_rl_model="LLAMA_3.2_3B",
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={},
-            num_train_epochs=10,
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            system_prompt="An optional system prompt.",
-        )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: Withpi) -> None:
-        grpo = client.model.rl.grpo.create(
-            base_rl_model="LLAMA_3.2_3B",
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={"lora_rank": "R_16"},
-            num_train_epochs=10,
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-                "dimensions": [
-                    {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
-                        "sub_dimensions": [
-                            {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
-                                "scoring_type": "PI_SCORER",
-                                "custom_model_id": "your-model-id",
-                                "parameters": [
-                                    0.14285714285714285,
-                                    0.2857142857142857,
-                                    0.42857142857142855,
-                                    0.5714285714285714,
-                                    0.7142857142857143,
-                                    0.8571428571428571,
-                                ],
-                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                                "weight": 1,
-                            }
-                        ],
-                        "parameters": [
-                            0.14285714285714285,
-                            0.2857142857142857,
-                            0.42857142857142855,
-                            0.5714285714285714,
-                            0.7142857142857143,
-                            0.8571428571428571,
-                        ],
-                        "weight": 1,
-                    }
-                ],
-            },
-            system_prompt="An optional system prompt.",
-        )
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create(self, client: Withpi) -> None:
-        response = client.model.rl.grpo.with_raw_response.create(
-            base_rl_model="LLAMA_3.2_3B",
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={},
-            num_train_epochs=10,
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            system_prompt="An optional system prompt.",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = response.parse()
-        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create(self, client: Withpi) -> None:
-        with client.model.rl.grpo.with_streaming_response.create(
-            base_rl_model="LLAMA_3.2_3B",
-            examples=[{"llm_input": "Tell me something different"}],
-            learning_rate=0.000005,
-            lora_config={},
-            num_train_epochs=10,
-            scoring_system={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
-            },
-            system_prompt="An optional system prompt.",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = response.parse()
-            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_retrieve(self, client: Withpi) -> None:
         grpo = client.model.rl.grpo.retrieve(
             "job_id",
@@ -341,54 +230,8 @@ class TestGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_messages(self, client: Withpi) -> None:
-        grpo = client.model.rl.grpo.messages(
-            "job_id",
-        )
-        assert_matches_type(str, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_messages(self, client: Withpi) -> None:
-        response = client.model.rl.grpo.with_raw_response.messages(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = response.parse()
-        assert_matches_type(str, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_messages(self, client: Withpi) -> None:
-        with client.model.rl.grpo.with_streaming_response.messages(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = response.parse()
-            assert_matches_type(str, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_messages(self, client: Withpi) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.model.rl.grpo.with_raw_response.messages(
-                "",
-            )
-
-
-class TestAsyncGrpo:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create(self, async_client: AsyncWithpi) -> None:
-        grpo = await async_client.model.rl.grpo.create(
+    def test_method_start_job(self, client: Withpi) -> None:
+        grpo = client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -404,8 +247,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncWithpi) -> None:
-        grpo = await async_client.model.rl.grpo.create(
+    def test_method_start_job_with_all_params(self, client: Withpi) -> None:
+        grpo = client.model.rl.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -454,8 +297,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.model.rl.grpo.with_raw_response.create(
+    def test_raw_response_start_job(self, client: Withpi) -> None:
+        response = client.model.rl.grpo.with_raw_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -470,13 +313,13 @@ class TestAsyncGrpo:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = await response.parse()
+        grpo = response.parse()
         assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncWithpi) -> None:
-        async with async_client.model.rl.grpo.with_streaming_response.create(
+    def test_streaming_response_start_job(self, client: Withpi) -> None:
+        with client.model.rl.grpo.with_streaming_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -491,10 +334,56 @@ class TestAsyncGrpo:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            grpo = await response.parse()
+            grpo = response.parse()
             assert_matches_type(RlGrpoStatus, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_stream_messages(self, client: Withpi) -> None:
+        grpo = client.model.rl.grpo.stream_messages(
+            "job_id",
+        )
+        assert_matches_type(str, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_stream_messages(self, client: Withpi) -> None:
+        response = client.model.rl.grpo.with_raw_response.stream_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = response.parse()
+        assert_matches_type(str, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_stream_messages(self, client: Withpi) -> None:
+        with client.model.rl.grpo.with_streaming_response.stream_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = response.parse()
+            assert_matches_type(str, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_stream_messages(self, client: Withpi) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.model.rl.grpo.with_raw_response.stream_messages(
+                "",
+            )
+
+
+class TestAsyncGrpo:
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
@@ -706,16 +595,127 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_messages(self, async_client: AsyncWithpi) -> None:
-        grpo = await async_client.model.rl.grpo.messages(
+    async def test_method_start_job(self, async_client: AsyncWithpi) -> None:
+        grpo = await async_client.model.rl.grpo.start_job(
+            base_rl_model="LLAMA_3.2_3B",
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={},
+            num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
+            system_prompt="An optional system prompt.",
+        )
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job_with_all_params(self, async_client: AsyncWithpi) -> None:
+        grpo = await async_client.model.rl.grpo.start_job(
+            base_rl_model="LLAMA_3.2_3B",
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={"lora_rank": "R_16"},
+            num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+                "dimensions": [
+                    {
+                        "description": "Relevance of the response",
+                        "label": "Relevance",
+                        "sub_dimensions": [
+                            {
+                                "description": "Is the response relevant to the prompt?",
+                                "label": "Relevance to Prompt",
+                                "scoring_type": "PI_SCORER",
+                                "custom_model_id": "your-model-id",
+                                "parameters": [
+                                    0.14285714285714285,
+                                    0.2857142857142857,
+                                    0.42857142857142855,
+                                    0.5714285714285714,
+                                    0.7142857142857143,
+                                    0.8571428571428571,
+                                ],
+                                "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                                "weight": 1,
+                            }
+                        ],
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
+                        "weight": 1,
+                    }
+                ],
+            },
+            system_prompt="An optional system prompt.",
+        )
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.model.rl.grpo.with_raw_response.start_job(
+            base_rl_model="LLAMA_3.2_3B",
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={},
+            num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
+            system_prompt="An optional system prompt.",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = await response.parse()
+        assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_start_job(self, async_client: AsyncWithpi) -> None:
+        async with async_client.model.rl.grpo.with_streaming_response.start_job(
+            base_rl_model="LLAMA_3.2_3B",
+            examples=[{"llm_input": "Tell me something different"}],
+            learning_rate=0.000005,
+            lora_config={},
+            num_train_epochs=10,
+            scoring_system={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "name": "Sample Contract",
+            },
+            system_prompt="An optional system prompt.",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = await response.parse()
+            assert_matches_type(RlGrpoStatus, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_stream_messages(self, async_client: AsyncWithpi) -> None:
+        grpo = await async_client.model.rl.grpo.stream_messages(
             "job_id",
         )
         assert_matches_type(str, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_messages(self, async_client: AsyncWithpi) -> None:
-        response = await async_client.model.rl.grpo.with_raw_response.messages(
+    async def test_raw_response_stream_messages(self, async_client: AsyncWithpi) -> None:
+        response = await async_client.model.rl.grpo.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -726,8 +726,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_messages(self, async_client: AsyncWithpi) -> None:
-        async with async_client.model.rl.grpo.with_streaming_response.messages(
+    async def test_streaming_response_stream_messages(self, async_client: AsyncWithpi) -> None:
+        async with async_client.model.rl.grpo.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -740,8 +740,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_messages(self, async_client: AsyncWithpi) -> None:
+    async def test_path_params_stream_messages(self, async_client: AsyncWithpi) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.model.rl.grpo.with_raw_response.messages(
+            await async_client.model.rl.grpo.with_raw_response.stream_messages(
                 "",
             )

@@ -40,13 +40,13 @@ from .contracts import (
     ContractsResourceWithStreamingResponse,
     AsyncContractsResourceWithStreamingResponse,
 )
-from .scoring_system import (
-    ScoringSystemResource,
-    AsyncScoringSystemResource,
-    ScoringSystemResourceWithRawResponse,
-    AsyncScoringSystemResourceWithRawResponse,
-    ScoringSystemResourceWithStreamingResponse,
-    AsyncScoringSystemResourceWithStreamingResponse,
+from .pi_scoring_system import (
+    PiScoringSystemResource,
+    AsyncPiScoringSystemResource,
+    PiScoringSystemResourceWithRawResponse,
+    AsyncPiScoringSystemResourceWithRawResponse,
+    PiScoringSystemResourceWithStreamingResponse,
+    AsyncPiScoringSystemResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -68,6 +68,12 @@ __all__ = [
     "AsyncModelResourceWithRawResponse",
     "ModelResourceWithStreamingResponse",
     "AsyncModelResourceWithStreamingResponse",
+    "PiScoringSystemResource",
+    "AsyncPiScoringSystemResource",
+    "PiScoringSystemResourceWithRawResponse",
+    "AsyncPiScoringSystemResourceWithRawResponse",
+    "PiScoringSystemResourceWithStreamingResponse",
+    "AsyncPiScoringSystemResourceWithStreamingResponse",
     "PromptResource",
     "AsyncPromptResource",
     "PromptResourceWithRawResponse",
@@ -80,10 +86,4 @@ __all__ = [
     "AsyncQueriesResourceWithRawResponse",
     "QueriesResourceWithStreamingResponse",
     "AsyncQueriesResourceWithStreamingResponse",
-    "ScoringSystemResource",
-    "AsyncScoringSystemResource",
-    "ScoringSystemResourceWithRawResponse",
-    "AsyncScoringSystemResourceWithRawResponse",
-    "ScoringSystemResourceWithStreamingResponse",
-    "AsyncScoringSystemResourceWithStreamingResponse",
 ]

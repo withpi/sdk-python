@@ -23,8 +23,8 @@ from ...._base_client import make_request_options
 from ....types.model.rl import (
     TextGenerationBaseModel,
     grpo_list_params,
-    grpo_create_params,
     grpo_download_params,
+    grpo_start_job_params,
 )
 from ....types.contracts import State
 from ....types.contracts.state import State
@@ -56,69 +56,6 @@ class GrpoResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return GrpoResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        base_rl_model: TextGenerationBaseModel,
-        examples: Iterable[grpo_create_params.Example],
-        learning_rate: float,
-        lora_config: LoraConfigParam,
-        num_train_epochs: int,
-        scoring_system: SDKContractParam,
-        system_prompt: Optional[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
-        """
-        Launches a RL GRPO job
-
-        Args:
-          base_rl_model: The base model to start the RL tunning process
-
-          examples: Examples to use in the RL tuning process
-
-          learning_rate: GRPO learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: GRPO number of train epochs
-
-          scoring_system: The scoring system to use in the GRPO tuning process
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/model/rl/grpo",
-            body=maybe_transform(
-                {
-                    "base_rl_model": base_rl_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
-                    "system_prompt": system_prompt,
-                },
-                grpo_create_params.GrpoCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=RlGrpoStatus,
-        )
 
     def retrieve(
         self,
@@ -294,7 +231,70 @@ class GrpoResource(SyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
-    def messages(
+    def start_job(
+        self,
+        *,
+        base_rl_model: TextGenerationBaseModel,
+        examples: Iterable[grpo_start_job_params.Example],
+        learning_rate: float,
+        lora_config: LoraConfigParam,
+        num_train_epochs: int,
+        scoring_system: SDKContractParam,
+        system_prompt: Optional[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RlGrpoStatus:
+        """
+        Launches a RL GRPO job
+
+        Args:
+          base_rl_model: The base model to start the RL tunning process
+
+          examples: Examples to use in the RL tuning process
+
+          learning_rate: GRPO learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: GRPO number of train epochs
+
+          scoring_system: The scoring system to use in the GRPO tuning process
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/model/rl/grpo",
+            body=maybe_transform(
+                {
+                    "base_rl_model": base_rl_model,
+                    "examples": examples,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "scoring_system": scoring_system,
+                    "system_prompt": system_prompt,
+                },
+                grpo_start_job_params.GrpoStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RlGrpoStatus,
+        )
+
+    def stream_messages(
         self,
         job_id: str,
         *,
@@ -348,69 +348,6 @@ class AsyncGrpoResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncGrpoResourceWithStreamingResponse(self)
-
-    async def create(
-        self,
-        *,
-        base_rl_model: TextGenerationBaseModel,
-        examples: Iterable[grpo_create_params.Example],
-        learning_rate: float,
-        lora_config: LoraConfigParam,
-        num_train_epochs: int,
-        scoring_system: SDKContractParam,
-        system_prompt: Optional[str],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
-        """
-        Launches a RL GRPO job
-
-        Args:
-          base_rl_model: The base model to start the RL tunning process
-
-          examples: Examples to use in the RL tuning process
-
-          learning_rate: GRPO learning rate
-
-          lora_config: The LoRA configuration.
-
-          num_train_epochs: GRPO number of train epochs
-
-          scoring_system: The scoring system to use in the GRPO tuning process
-
-          system_prompt: A custom system prompt to use during the RL tuning process
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/model/rl/grpo",
-            body=await async_maybe_transform(
-                {
-                    "base_rl_model": base_rl_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "lora_config": lora_config,
-                    "num_train_epochs": num_train_epochs,
-                    "scoring_system": scoring_system,
-                    "system_prompt": system_prompt,
-                },
-                grpo_create_params.GrpoCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=RlGrpoStatus,
-        )
 
     async def retrieve(
         self,
@@ -586,7 +523,70 @@ class AsyncGrpoResource(AsyncAPIResource):
             cast_to=RlGrpoStatus,
         )
 
-    async def messages(
+    async def start_job(
+        self,
+        *,
+        base_rl_model: TextGenerationBaseModel,
+        examples: Iterable[grpo_start_job_params.Example],
+        learning_rate: float,
+        lora_config: LoraConfigParam,
+        num_train_epochs: int,
+        scoring_system: SDKContractParam,
+        system_prompt: Optional[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RlGrpoStatus:
+        """
+        Launches a RL GRPO job
+
+        Args:
+          base_rl_model: The base model to start the RL tunning process
+
+          examples: Examples to use in the RL tuning process
+
+          learning_rate: GRPO learning rate
+
+          lora_config: The LoRA configuration.
+
+          num_train_epochs: GRPO number of train epochs
+
+          scoring_system: The scoring system to use in the GRPO tuning process
+
+          system_prompt: A custom system prompt to use during the RL tuning process
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/model/rl/grpo",
+            body=await async_maybe_transform(
+                {
+                    "base_rl_model": base_rl_model,
+                    "examples": examples,
+                    "learning_rate": learning_rate,
+                    "lora_config": lora_config,
+                    "num_train_epochs": num_train_epochs,
+                    "scoring_system": scoring_system,
+                    "system_prompt": system_prompt,
+                },
+                grpo_start_job_params.GrpoStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RlGrpoStatus,
+        )
+
+    async def stream_messages(
         self,
         job_id: str,
         *,
@@ -625,9 +625,6 @@ class GrpoResourceWithRawResponse:
     def __init__(self, grpo: GrpoResource) -> None:
         self._grpo = grpo
 
-        self.create = to_raw_response_wrapper(
-            grpo.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             grpo.retrieve,
         )
@@ -643,8 +640,11 @@ class GrpoResourceWithRawResponse:
         self.load = to_raw_response_wrapper(
             grpo.load,
         )
-        self.messages = to_raw_response_wrapper(
-            grpo.messages,
+        self.start_job = to_raw_response_wrapper(
+            grpo.start_job,
+        )
+        self.stream_messages = to_raw_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -652,9 +652,6 @@ class AsyncGrpoResourceWithRawResponse:
     def __init__(self, grpo: AsyncGrpoResource) -> None:
         self._grpo = grpo
 
-        self.create = async_to_raw_response_wrapper(
-            grpo.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             grpo.retrieve,
         )
@@ -670,8 +667,11 @@ class AsyncGrpoResourceWithRawResponse:
         self.load = async_to_raw_response_wrapper(
             grpo.load,
         )
-        self.messages = async_to_raw_response_wrapper(
-            grpo.messages,
+        self.start_job = async_to_raw_response_wrapper(
+            grpo.start_job,
+        )
+        self.stream_messages = async_to_raw_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -679,9 +679,6 @@ class GrpoResourceWithStreamingResponse:
     def __init__(self, grpo: GrpoResource) -> None:
         self._grpo = grpo
 
-        self.create = to_streamed_response_wrapper(
-            grpo.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             grpo.retrieve,
         )
@@ -697,8 +694,11 @@ class GrpoResourceWithStreamingResponse:
         self.load = to_streamed_response_wrapper(
             grpo.load,
         )
-        self.messages = to_streamed_response_wrapper(
-            grpo.messages,
+        self.start_job = to_streamed_response_wrapper(
+            grpo.start_job,
+        )
+        self.stream_messages = to_streamed_response_wrapper(
+            grpo.stream_messages,
         )
 
 
@@ -706,9 +706,6 @@ class AsyncGrpoResourceWithStreamingResponse:
     def __init__(self, grpo: AsyncGrpoResource) -> None:
         self._grpo = grpo
 
-        self.create = async_to_streamed_response_wrapper(
-            grpo.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             grpo.retrieve,
         )
@@ -724,6 +721,9 @@ class AsyncGrpoResourceWithStreamingResponse:
         self.load = async_to_streamed_response_wrapper(
             grpo.load,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            grpo.messages,
+        self.start_job = async_to_streamed_response_wrapper(
+            grpo.start_job,
+        )
+        self.stream_messages = async_to_streamed_response_wrapper(
+            grpo.stream_messages,
         )
