@@ -10,6 +10,7 @@ from withpi.types import (
     Scorer,
     ScorerDimension,
     ScorerSubDimension,
+    ScoringSystemMetrics,
     SftStatus,
     SyntheticDataStatus,
     TrainedModel,
@@ -147,17 +148,11 @@ Methods:
 
 # ScoringSystem
 
-Types:
-
-```python
-from withpi.types import ScoringSystemScoreResponse
-```
-
 Methods:
 
 - <code title="post /scoring_system/from_huggingface">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">from_huggingface</a>(\*\*<a href="src/withpi/types/scoring_system_from_huggingface_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
 - <code title="post /scoring_system/generate">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">generate</a>(\*\*<a href="src/withpi/types/scoring_system_generate_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
-- <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_score_response.py">ScoringSystemScoreResponse</a></code>
+- <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
 
 ## Calibrate
 
