@@ -82,8 +82,7 @@ class PiScoringSystemResource(SyncAPIResource):
         Args:
           application_description: The application description to generate a scoring system for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
-              evaluation
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
 
           extra_headers: Send extra headers
 
@@ -243,8 +242,7 @@ class AsyncPiScoringSystemResource(AsyncAPIResource):
         Args:
           application_description: The application description to generate a scoring system for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions with structured
-              evaluation
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
 
           extra_headers: Send extra headers
 
