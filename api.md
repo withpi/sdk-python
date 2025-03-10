@@ -169,19 +169,6 @@ Methods:
 - <code title="post /prompt/optimize">client.prompt.optimize.<a href="./src/withpi/resources/prompt/optimize.py">start_job</a>(\*\*<a href="src/withpi/types/prompt/optimize_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 - <code title="get /prompt/optimize/{job_id}/messages">client.prompt.optimize.<a href="./src/withpi/resources/prompt/optimize.py">stream_messages</a>(job_id) -> str</code>
 
-# Queries
-
-Types:
-
-```python
-from withpi.types import QueryClassifyResponse, QueryGenerateFanoutsResponse
-```
-
-Methods:
-
-- <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classify_response.py">QueryClassifyResponse</a></code>
-- <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
-
 # Scorers
 
 Types:
@@ -217,3 +204,16 @@ Methods:
 - <code title="get /scorers/calibrate">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorers/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorers/calibrate_list_response.py">CalibrateListResponse</a></code>
 - <code title="delete /scorers/calibrate/{job_id}">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">cancel</a>(job_id) -> str</code>
 - <code title="get /scorers/calibrate/{job_id}/messages">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">messages</a>(job_id) -> str</code>
+
+# Rag
+
+Types:
+
+```python
+from withpi.types import RagClassifyQueryResponse, RagGenerateFanoutResponse
+```
+
+Methods:
+
+- <code title="post /rag/query_classify">client.rag.<a href="./src/withpi/resources/rag.py">classify_query</a>(\*\*<a href="src/withpi/types/rag_classify_query_params.py">params</a>) -> <a href="./src/withpi/types/rag_classify_query_response.py">RagClassifyQueryResponse</a></code>
+- <code title="post /rag/query_fanout">client.rag.<a href="./src/withpi/resources/rag.py">generate_fanout</a>(\*\*<a href="src/withpi/types/rag_generate_fanout_params.py">params</a>) -> <a href="./src/withpi/types/rag_generate_fanout_response.py">RagGenerateFanoutResponse</a></code>
