@@ -5,8 +5,6 @@ from __future__ import annotations
 from .shared import (
     SftStatus as SftStatus,
     SDKExample as SDKExample,
-    SDKContract as SDKContract,
-    SDKDimension as SDKDimension,
     ScoringSystem as ScoringSystem,
     SDKSubDimension as SDKSubDimension,
     SyntheticDataStatus as SyntheticDataStatus,

@@ -33,8 +33,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.sdk_contract import SDKContract as SharedSDKContract
-from ...types.shared_params.sdk_contract import SDKContract as SharedParamsSDKContract
+from ...types.shared.scoring_system import ScoringSystem as SharedScoringSystem
+from ...types.shared_params.scoring_system import ScoringSystem as SharedParamsScoringSystem
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 
 __all__ = ["ContractsResource", "AsyncContractsResource"]
@@ -75,7 +75,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedSDKContract:
+    ) -> SharedScoringSystem:
         """
         Generates dimensions for a contract which will be used to evaluate it
 
@@ -105,7 +105,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedSDKContract,
+            cast_to=SharedScoringSystem,
         )
 
     def read_from_hf(
@@ -119,7 +119,7 @@ class ContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedSDKContract:
+    ) -> SharedScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -150,7 +150,7 @@ class ContractsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedSDKContract,
+            cast_to=SharedScoringSystem,
         )
 
     def score(
@@ -158,7 +158,7 @@ class ContractsResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsSDKContract,
+        scoring_system: SharedParamsScoringSystem,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -236,7 +236,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedSDKContract:
+    ) -> SharedScoringSystem:
         """
         Generates dimensions for a contract which will be used to evaluate it
 
@@ -266,7 +266,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedSDKContract,
+            cast_to=SharedScoringSystem,
         )
 
     async def read_from_hf(
@@ -280,7 +280,7 @@ class AsyncContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SharedSDKContract:
+    ) -> SharedScoringSystem:
         """
         Read a scoring system from Huggingface dataset
 
@@ -311,7 +311,7 @@ class AsyncContractsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SharedSDKContract,
+            cast_to=SharedScoringSystem,
         )
 
     async def score(
@@ -319,7 +319,7 @@ class AsyncContractsResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_system: SharedParamsSDKContract,
+        scoring_system: SharedParamsScoringSystem,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

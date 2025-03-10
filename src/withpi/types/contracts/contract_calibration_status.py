@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .state import State
 from ..._models import BaseModel
-from ..shared.sdk_contract import SDKContract
+from ..shared.scoring_system import ScoringSystem
 
 __all__ = ["ContractCalibrationStatus"]
 
@@ -19,5 +19,5 @@ class ContractCalibrationStatus(BaseModel):
     state: State
     """Current state of the job"""
 
-    calibrated_contract: Optional[SDKContract] = None
+    calibrated_contract: Optional[ScoringSystem] = None
     """The calibrated contract"""

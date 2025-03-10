@@ -9,7 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.shared import SDKContract, ScoringSystemMetrics
+from withpi.types.shared import ScoringSystem, ScoringSystemMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestContracts:
         contract = client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -32,7 +32,7 @@ class TestContracts:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -44,7 +44,7 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -56,7 +56,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(SDKContract, contract, path=["response"])
+            assert_matches_type(ScoringSystem, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -66,7 +66,7 @@ class TestContracts:
         contract = client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -75,7 +75,7 @@ class TestContracts:
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -87,7 +87,7 @@ class TestContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = response.parse()
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -99,7 +99,7 @@ class TestContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = response.parse()
-            assert_matches_type(SDKContract, contract, path=["response"])
+            assert_matches_type(ScoringSystem, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -111,7 +111,7 @@ class TestContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
@@ -124,7 +124,7 @@ class TestContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -170,7 +170,7 @@ class TestContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -187,7 +187,7 @@ class TestContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed
@@ -208,7 +208,7 @@ class TestAsyncContracts:
         contract = await async_client.contracts.generate_dimensions(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -217,7 +217,7 @@ class TestAsyncContracts:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -229,7 +229,7 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -241,7 +241,7 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(SDKContract, contract, path=["response"])
+            assert_matches_type(ScoringSystem, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -251,7 +251,7 @@ class TestAsyncContracts:
         contract = await async_client.contracts.read_from_hf(
             hf_scoring_system_name="withpi/tldr_scoring_system",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -260,7 +260,7 @@ class TestAsyncContracts:
             hf_scoring_system_name="withpi/tldr_scoring_system",
             hf_token="hf_token",
         )
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -272,7 +272,7 @@ class TestAsyncContracts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contract = await response.parse()
-        assert_matches_type(SDKContract, contract, path=["response"])
+        assert_matches_type(ScoringSystem, contract, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -284,7 +284,7 @@ class TestAsyncContracts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contract = await response.parse()
-            assert_matches_type(SDKContract, contract, path=["response"])
+            assert_matches_type(ScoringSystem, contract, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -296,7 +296,7 @@ class TestAsyncContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(ScoringSystemMetrics, contract, path=["response"])
@@ -309,7 +309,7 @@ class TestAsyncContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -355,7 +355,7 @@ class TestAsyncContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -372,7 +372,7 @@ class TestAsyncContracts:
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed
