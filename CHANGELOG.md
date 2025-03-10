@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.0 (2025-03-10)
+
+Full Changelog: [v1.11.0...v1.12.0](https://github.com/withpi/sdk-python/compare/v1.11.0...v1.12.0)
+
+### Features
+
+* **api:** add sft_status to shared ([#457](https://github.com/withpi/sdk-python/issues/457)) ([7ae0043](https://github.com/withpi/sdk-python/commit/7ae00430fc19afdfb958f10de5af494d3f2fcce0))
+
 ## 1.11.0 (2025-03-10)
 
 Full Changelog: [v1.10.0...v1.11.0](https://github.com/withpi/sdk-python/compare/v1.10.0...v1.11.0)

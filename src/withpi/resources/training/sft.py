@@ -22,11 +22,9 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.training import sft_list_params, sft_download_params, sft_start_job_params
+from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.scorer import Scorer
 from ...types.training.sft_list_response import SftListResponse
-from ...types.training.sft_load_response import SftLoadResponse
-from ...types.training.sft_retrieve_response import SftRetrieveResponse
-from ...types.training.sft_start_job_response import SftStartJobResponse
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -61,7 +59,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftRetrieveResponse:
+    ) -> SftStatus:
         """
         Checks the status of a SFT job
 
@@ -81,7 +79,7 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftRetrieveResponse,
+            cast_to=SftStatus,
         )
 
     def list(
@@ -202,7 +200,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLoadResponse:
+    ) -> SftStatus:
         """
         Loads a SFT model into serving for a limited period of time
 
@@ -222,7 +220,7 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftLoadResponse,
+            cast_to=SftStatus,
         )
 
     def start_job(
@@ -241,7 +239,7 @@ class SftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStartJobResponse:
+    ) -> SftStatus:
         """Launches a SFT job
 
         Args:
@@ -287,7 +285,7 @@ class SftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStartJobResponse,
+            cast_to=SftStatus,
         )
 
     def stream_messages(
@@ -355,7 +353,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftRetrieveResponse:
+    ) -> SftStatus:
         """
         Checks the status of a SFT job
 
@@ -375,7 +373,7 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftRetrieveResponse,
+            cast_to=SftStatus,
         )
 
     async def list(
@@ -496,7 +494,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftLoadResponse:
+    ) -> SftStatus:
         """
         Loads a SFT model into serving for a limited period of time
 
@@ -516,7 +514,7 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftLoadResponse,
+            cast_to=SftStatus,
         )
 
     async def start_job(
@@ -535,7 +533,7 @@ class AsyncSftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SftStartJobResponse:
+    ) -> SftStatus:
         """Launches a SFT job
 
         Args:
@@ -581,7 +579,7 @@ class AsyncSftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SftStartJobResponse,
+            cast_to=SftStatus,
         )
 
     async def stream_messages(
