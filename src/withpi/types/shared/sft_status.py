@@ -3,8 +3,8 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .trained_model import TrainedModel
 from ..contracts.state import State
+from ..model.trained_model import TrainedModel
 
 __all__ = ["SftStatus"]
 

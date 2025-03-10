@@ -24,7 +24,7 @@ from ..._base_client import make_request_options
 from ...types.prompt import optimize_list_params, optimize_start_job_params
 from ...types.contracts import State
 from ...types.contracts.state import State
-from ...types.data.sdk_example_param import SDKExampleParam
+from ...types.shared_params.sdk_example import SDKExample
 from ...types.shared_params.sdk_contract import SDKContract
 from ...types.prompt.optimize_list_response import OptimizeListResponse
 from ...types.prompt.prompt_optimization_status import PromptOptimizationStatus
@@ -159,7 +159,7 @@ class OptimizeResource(SyncAPIResource):
         self,
         *,
         contract: SDKContract,
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],
@@ -382,7 +382,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
         self,
         *,
         contract: SDKContract,
-        examples: Iterable[SDKExampleParam],
+        examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         tuning_algorithm: Literal["PI", "DSPY"],

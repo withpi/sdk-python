@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .sft_status import SftStatus as SftStatus
 from .trained_model import TrainedModel as TrainedModel
 from .sft_list_params import SftListParams as SftListParams
 from .sft_list_response import SftListResponse as SftListResponse

@@ -27,9 +27,9 @@ from ...types.data import (
 from ..._base_client import make_request_options
 from ...types.contracts import State
 from ...types.contracts.state import State
-from ...types.data.sdk_example_param import SDKExampleParam
 from ...types.data.sdk_exploration_mode import SDKExplorationMode
-from ...types.data.synthetic_data_status import SyntheticDataStatus
+from ...types.shared_params.sdk_example import SDKExample
+from ...types.shared.synthetic_data_status import SyntheticDataStatus
 from ...types.data.generate_synthetic_data_list_response import GenerateSyntheticDataListResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
 
@@ -165,7 +165,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[SDKExampleParam],
+        seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
@@ -422,7 +422,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[SDKExampleParam],
+        seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
