@@ -107,26 +107,8 @@ Methods:
 Types:
 
 ```python
-from withpi.types.model.rl import (
-    LoraConfig,
-    RlGrpoStatus,
-    TextGenerationBaseModel,
-    GrpoListResponse,
-    GrpoCancelResponse,
-    GrpoDownloadResponse,
-    GrpoStreamMessagesResponse,
-)
+from withpi.types.model.rl import LoraConfig, RlGrpoStatus, TextGenerationBaseModel
 ```
-
-Methods:
-
-- <code title="get /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">list</a>(\*\*<a href="src/withpi/types/model/rl/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/grpo_list_response.py">GrpoListResponse</a></code>
-- <code title="delete /model/rl/grpo/{job_id}">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">cancel</a>(job_id) -> str</code>
-- <code title="post /model/rl/grpo/{job_id}/download">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/rl/grpo_download_params.py">params</a>) -> str</code>
-- <code title="post /model/rl/grpo/{job_id}/load">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="post /model/rl/grpo">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">start_job</a>(\*\*<a href="src/withpi/types/model/rl/grpo_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
-- <code title="get /model/rl/grpo/{job_id}/messages">client.model.rl.grpo.<a href="./src/withpi/resources/model/rl/grpo.py">stream_messages</a>(job_id) -> str</code>
 
 ## Sft
 
@@ -153,6 +135,29 @@ Methods:
 - <code title="post /model/sft/{job_id}/load">client.model.sft.<a href="./src/withpi/resources/model/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/model/sft_load_response.py">SftLoadResponse</a></code>
 - <code title="post /model/sft">client.model.sft.<a href="./src/withpi/resources/model/sft.py">start_job</a>(\*\*<a href="src/withpi/types/model/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/model/sft_start_job_response.py">SftStartJobResponse</a></code>
 - <code title="get /model/sft/{job_id}/messages">client.model.sft.<a href="./src/withpi/resources/model/sft.py">stream_messages</a>(job_id) -> str</code>
+
+## Grpo
+
+Types:
+
+```python
+from withpi.types.model import (
+    GrpoListResponse,
+    GrpoCancelResponse,
+    GrpoDownloadResponse,
+    GrpoMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">list</a>(\*\*<a href="src/withpi/types/model/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/model/grpo_list_response.py">GrpoListResponse</a></code>
+- <code title="delete /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">cancel</a>(job_id) -> str</code>
+- <code title="post /model/grpo/{job_id}/download">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/model/grpo_download_params.py">params</a>) -> str</code>
+- <code title="post /model/grpo">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">launch</a>(\*\*<a href="src/withpi/types/model/grpo_launch_params.py">params</a>) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="post /model/grpo/{job_id}/load">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
+- <code title="get /model/grpo/{job_id}/messages">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">messages</a>(job_id) -> str</code>
+- <code title="get /model/grpo/{job_id}">client.model.grpo.<a href="./src/withpi/resources/model/grpo.py">status</a>(job_id) -> <a href="./src/withpi/types/model/rl/rl_grpo_status.py">RlGrpoStatus</a></code>
 
 # Prompt
 
