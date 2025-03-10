@@ -12,8 +12,8 @@ from tests.utils import assert_matches_type
 from withpi.types.training import (
     GrpoListResponse,
     GrpoLoadResponse,
-    GrpoLaunchResponse,
-    GrpoStatusResponse,
+    GrpoRetrieveResponse,
+    GrpoStartJobResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -21,6 +21,48 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestGrpo:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve(self, client: PiClient) -> None:
+        grpo = client.training.grpo.retrieve(
+            "job_id",
+        )
+        assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_retrieve(self, client: PiClient) -> None:
+        response = client.training.grpo.with_raw_response.retrieve(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = response.parse()
+        assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_retrieve(self, client: PiClient) -> None:
+        with client.training.grpo.with_streaming_response.retrieve(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = response.parse()
+            assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_retrieve(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.training.grpo.with_raw_response.retrieve(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -148,8 +190,50 @@ class TestGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_launch(self, client: PiClient) -> None:
-        grpo = client.training.grpo.launch(
+    def test_method_load(self, client: PiClient) -> None:
+        grpo = client.training.grpo.load(
+            "job_id",
+        )
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_load(self, client: PiClient) -> None:
+        response = client.training.grpo.with_raw_response.load(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = response.parse()
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_load(self, client: PiClient) -> None:
+        with client.training.grpo.with_streaming_response.load(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = response.parse()
+            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_load(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.training.grpo.with_raw_response.load(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_start_job(self, client: PiClient) -> None:
+        grpo = client.training.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -161,12 +245,12 @@ class TestGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_launch_with_all_params(self, client: PiClient) -> None:
-        grpo = client.training.grpo.launch(
+    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
+        grpo = client.training.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -211,12 +295,12 @@ class TestGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_launch(self, client: PiClient) -> None:
-        response = client.training.grpo.with_raw_response.launch(
+    def test_raw_response_start_job(self, client: PiClient) -> None:
+        response = client.training.grpo.with_raw_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -232,12 +316,12 @@ class TestGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = response.parse()
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_launch(self, client: PiClient) -> None:
-        with client.training.grpo.with_streaming_response.launch(
+    def test_streaming_response_start_job(self, client: PiClient) -> None:
+        with client.training.grpo.with_streaming_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -253,64 +337,22 @@ class TestGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = response.parse()
-            assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+            assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_load(self, client: PiClient) -> None:
-        grpo = client.training.grpo.load(
-            "job_id",
-        )
-        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_load(self, client: PiClient) -> None:
-        response = client.training.grpo.with_raw_response.load(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = response.parse()
-        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_load(self, client: PiClient) -> None:
-        with client.training.grpo.with_streaming_response.load(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = response.parse()
-            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_load(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.training.grpo.with_raw_response.load(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_messages(self, client: PiClient) -> None:
-        grpo = client.training.grpo.messages(
+    def test_method_stream_messages(self, client: PiClient) -> None:
+        grpo = client.training.grpo.stream_messages(
             "job_id",
         )
         assert_matches_type(str, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_messages(self, client: PiClient) -> None:
-        response = client.training.grpo.with_raw_response.messages(
+    def test_raw_response_stream_messages(self, client: PiClient) -> None:
+        response = client.training.grpo.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -321,8 +363,8 @@ class TestGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_messages(self, client: PiClient) -> None:
-        with client.training.grpo.with_streaming_response.messages(
+    def test_streaming_response_stream_messages(self, client: PiClient) -> None:
+        with client.training.grpo.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -335,57 +377,57 @@ class TestGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_messages(self, client: PiClient) -> None:
+    def test_path_params_stream_messages(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.training.grpo.with_raw_response.messages(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_status(self, client: PiClient) -> None:
-        grpo = client.training.grpo.status(
-            "job_id",
-        )
-        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_status(self, client: PiClient) -> None:
-        response = client.training.grpo.with_raw_response.status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = response.parse()
-        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_status(self, client: PiClient) -> None:
-        with client.training.grpo.with_streaming_response.status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = response.parse()
-            assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_status(self, client: PiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.training.grpo.with_raw_response.status(
+            client.training.grpo.with_raw_response.stream_messages(
                 "",
             )
 
 
 class TestAsyncGrpo:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.training.grpo.retrieve(
+            "job_id",
+        )
+        assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.grpo.with_raw_response.retrieve(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = await response.parse()
+        assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.grpo.with_streaming_response.retrieve(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = await response.parse()
+            assert_matches_type(GrpoRetrieveResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.training.grpo.with_raw_response.retrieve(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -513,8 +555,50 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_launch(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.training.grpo.launch(
+    async def test_method_load(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.training.grpo.load(
+            "job_id",
+        )
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_load(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.grpo.with_raw_response.load(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        grpo = await response.parse()
+        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_load(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.grpo.with_streaming_response.load(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            grpo = await response.parse()
+            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_load(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.training.grpo.with_raw_response.load(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.training.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -526,12 +610,12 @@ class TestAsyncGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_launch_with_all_params(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.training.grpo.launch(
+    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.training.grpo.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -576,12 +660,12 @@ class TestAsyncGrpo:
             },
             system_prompt="An optional system prompt.",
         )
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_launch(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.training.grpo.with_raw_response.launch(
+    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.grpo.with_raw_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -597,12 +681,12 @@ class TestAsyncGrpo:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         grpo = await response.parse()
-        assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+        assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_launch(self, async_client: AsyncPiClient) -> None:
-        async with async_client.training.grpo.with_streaming_response.launch(
+    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.grpo.with_streaming_response.start_job(
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
@@ -618,64 +702,22 @@ class TestAsyncGrpo:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             grpo = await response.parse()
-            assert_matches_type(GrpoLaunchResponse, grpo, path=["response"])
+            assert_matches_type(GrpoStartJobResponse, grpo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_load(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.training.grpo.load(
-            "job_id",
-        )
-        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_load(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.training.grpo.with_raw_response.load(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = await response.parse()
-        assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_load(self, async_client: AsyncPiClient) -> None:
-        async with async_client.training.grpo.with_streaming_response.load(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = await response.parse()
-            assert_matches_type(GrpoLoadResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_load(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.training.grpo.with_raw_response.load(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_messages(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.training.grpo.messages(
+    async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
+        grpo = await async_client.training.grpo.stream_messages(
             "job_id",
         )
         assert_matches_type(str, grpo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_messages(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.training.grpo.with_raw_response.messages(
+    async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.training.grpo.with_raw_response.stream_messages(
             "job_id",
         )
 
@@ -686,8 +728,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_messages(self, async_client: AsyncPiClient) -> None:
-        async with async_client.training.grpo.with_streaming_response.messages(
+    async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
+        async with async_client.training.grpo.with_streaming_response.stream_messages(
             "job_id",
         ) as response:
             assert not response.is_closed
@@ -700,50 +742,8 @@ class TestAsyncGrpo:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_messages(self, async_client: AsyncPiClient) -> None:
+    async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.training.grpo.with_raw_response.messages(
-                "",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_status(self, async_client: AsyncPiClient) -> None:
-        grpo = await async_client.training.grpo.status(
-            "job_id",
-        )
-        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_status(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.training.grpo.with_raw_response.status(
-            "job_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        grpo = await response.parse()
-        assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_status(self, async_client: AsyncPiClient) -> None:
-        async with async_client.training.grpo.with_streaming_response.status(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            grpo = await response.parse()
-            assert_matches_type(GrpoStatusResponse, grpo, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_status(self, async_client: AsyncPiClient) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.training.grpo.with_raw_response.status(
+            await async_client.training.grpo.with_raw_response.stream_messages(
                 "",
             )

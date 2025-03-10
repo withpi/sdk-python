@@ -19,6 +19,6 @@ from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSyst
 from .data_cluster_inputs_response import DataClusterInputsResponse as DataClusterInputsResponse
 from .scoring_system_score_response import ScoringSystemScoreResponse as ScoringSystemScoreResponse
 from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams
-from .scoring_system_read_from_huggingface_params import (
-    ScoringSystemReadFromHuggingfaceParams as ScoringSystemReadFromHuggingfaceParams,
+from .scoring_system_from_huggingface_params import (
+    ScoringSystemFromHuggingfaceParams as ScoringSystemFromHuggingfaceParams,
 )
