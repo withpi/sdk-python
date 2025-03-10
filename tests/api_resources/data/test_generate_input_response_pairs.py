@@ -145,7 +145,7 @@ class TestGenerateInputResponsePairs:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         generate_input_response_pair = client.data.generate_input_response_pairs.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -159,7 +159,7 @@ class TestGenerateInputResponsePairs:
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         generate_input_response_pair = client.data.generate_input_response_pairs.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -178,7 +178,7 @@ class TestGenerateInputResponsePairs:
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.data.generate_input_response_pairs.with_raw_response.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -196,7 +196,7 @@ class TestGenerateInputResponsePairs:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.data.generate_input_response_pairs.with_streaming_response.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -430,7 +430,7 @@ class TestAsyncGenerateInputResponsePairs:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         generate_input_response_pair = await async_client.data.generate_input_response_pairs.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -444,7 +444,7 @@ class TestAsyncGenerateInputResponsePairs:
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         generate_input_response_pair = await async_client.data.generate_input_response_pairs.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -463,7 +463,7 @@ class TestAsyncGenerateInputResponsePairs:
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.generate_input_response_pairs.with_raw_response.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",
@@ -481,7 +481,7 @@ class TestAsyncGenerateInputResponsePairs:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.generate_input_response_pairs.with_streaming_response.start_job(
-            num_examples_to_generate=50,
+            num_pairs_to_generate=50,
             seeds=[
                 {
                     "llm_input": "Tell me something different",

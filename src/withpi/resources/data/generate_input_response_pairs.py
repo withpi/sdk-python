@@ -159,7 +159,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        num_examples_to_generate: int,
+        num_pairs_to_generate: int,
         seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
@@ -177,18 +177,18 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         Starts a Generation Input-Response Pairs job
 
         Args:
-          num_examples_to_generate: The number of new LLM examples to generate
+          num_pairs_to_generate: The number of new LLM input-response pairs to generate
 
-          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
+          seeds: The list of LLM input response-pairs to be used as seeds
 
           application_description: The application description for which the synthetic data would be applicable.
 
-          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
-              be same as `num_shots`.
+          batch_size: Number of input-response pairs to generate in one LLM call. Must be <=10.
+              Generally it could be same as `num_shots`.
 
-          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
+          exploration_mode: The exploration mode for input-response pairs generation. Defaults to `BALANCED`
 
-          num_shots: Number of examples to be included in the prompt for generation
+          num_shots: Number of input-response pairs to be included in the prompt for generation
 
           system_prompt: The system prompt to generate the responses for the application's inputs
 
@@ -204,7 +204,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
             "/data/generate_input_response_pairs",
             body=maybe_transform(
                 {
-                    "num_examples_to_generate": num_examples_to_generate,
+                    "num_pairs_to_generate": num_pairs_to_generate,
                     "seeds": seeds,
                     "application_description": application_description,
                     "batch_size": batch_size,
@@ -416,7 +416,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        num_examples_to_generate: int,
+        num_pairs_to_generate: int,
         seeds: Iterable[SDKExample],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
@@ -434,18 +434,18 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         Starts a Generation Input-Response Pairs job
 
         Args:
-          num_examples_to_generate: The number of new LLM examples to generate
+          num_pairs_to_generate: The number of new LLM input-response pairs to generate
 
-          seeds: The list of LLM examples (inputs + outputs) to be used as seeds
+          seeds: The list of LLM input response-pairs to be used as seeds
 
           application_description: The application description for which the synthetic data would be applicable.
 
-          batch_size: Number of examples to generate in one LLM call. Must be <=10. Generally it could
-              be same as `num_shots`.
+          batch_size: Number of input-response pairs to generate in one LLM call. Must be <=10.
+              Generally it could be same as `num_shots`.
 
-          exploration_mode: The exploration mode for examples generation. Defaults to `BALANCED`
+          exploration_mode: The exploration mode for input-response pairs generation. Defaults to `BALANCED`
 
-          num_shots: Number of examples to be included in the prompt for generation
+          num_shots: Number of input-response pairs to be included in the prompt for generation
 
           system_prompt: The system prompt to generate the responses for the application's inputs
 
@@ -461,7 +461,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
             "/data/generate_input_response_pairs",
             body=await async_maybe_transform(
                 {
-                    "num_examples_to_generate": num_examples_to_generate,
+                    "num_pairs_to_generate": num_pairs_to_generate,
                     "seeds": seeds,
                     "application_description": application_description,
                     "batch_size": batch_size,

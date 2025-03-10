@@ -12,26 +12,29 @@ __all__ = ["GenerateInputResponsePairStartJobParams"]
 
 
 class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
-    num_examples_to_generate: Required[int]
-    """The number of new LLM examples to generate"""
+    num_pairs_to_generate: Required[int]
+    """The number of new LLM input-response pairs to generate"""
 
     seeds: Required[Iterable[SDKExample]]
-    """The list of LLM examples (inputs + outputs) to be used as seeds"""
+    """The list of LLM input response-pairs to be used as seeds"""
 
     application_description: Optional[str]
     """The application description for which the synthetic data would be applicable."""
 
     batch_size: int
-    """Number of examples to generate in one LLM call.
+    """Number of input-response pairs to generate in one LLM call.
 
     Must be <=10. Generally it could be same as `num_shots`.
     """
 
     exploration_mode: ExplorationMode
-    """The exploration mode for examples generation. Defaults to `BALANCED`"""
+    """The exploration mode for input-response pairs generation.
+
+    Defaults to `BALANCED`
+    """
 
     num_shots: int
-    """Number of examples to be included in the prompt for generation"""
+    """Number of input-response pairs to be included in the prompt for generation"""
 
     system_prompt: Optional[str]
     """The system prompt to generate the responses for the application's inputs"""
