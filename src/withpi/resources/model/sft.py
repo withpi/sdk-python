@@ -22,14 +22,11 @@ from ..._response import (
 )
 from ...types.model import sft_list_params, sft_download_params, sft_start_job_params
 from ..._base_client import make_request_options
-from ...types.model.rl import TextGenerationBaseModel
 from ...types.shared_params.scorer import Scorer
 from ...types.model.sft_list_response import SftListResponse
 from ...types.model.sft_load_response import SftLoadResponse
-from ...types.model.rl.lora_config_param import LoraConfigParam
 from ...types.model.sft_retrieve_response import SftRetrieveResponse
 from ...types.model.sft_start_job_response import SftStartJobResponse
-from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
 
 __all__ = ["SftResource", "AsyncSftResource"]
 
@@ -233,9 +230,9 @@ class SftResource(SyncAPIResource):
         *,
         examples: Iterable[sft_start_job_params.Example],
         scorer: Scorer,
-        base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -527,9 +524,9 @@ class AsyncSftResource(AsyncAPIResource):
         *,
         examples: Iterable[sft_start_job_params.Example],
         scorer: Scorer,
-        base_sft_model: TextGenerationBaseModel | NotGiven = NOT_GIVEN,
+        base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
-        lora_config: LoraConfigParam | NotGiven = NOT_GIVEN,
+        lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
         num_train_epochs: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

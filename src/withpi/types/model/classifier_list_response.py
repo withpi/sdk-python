@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .classification_status import ClassificationStatus
+from ..shared.classification_status import ClassificationStatus
 
 __all__ = ["ClassifierListResponse"]
 

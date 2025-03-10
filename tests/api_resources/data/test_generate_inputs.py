@@ -22,71 +22,6 @@ class TestGenerateInputs:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: PiClient) -> None:
-        generate_input = client.data.generate_inputs.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: PiClient) -> None:
-        generate_input = client.data.generate_inputs.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-        )
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create(self, client: PiClient) -> None:
-        response = client.data.generate_inputs.with_raw_response.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        generate_input = response.parse()
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create(self, client: PiClient) -> None:
-        with client.data.generate_inputs.with_streaming_response.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            generate_input = response.parse()
-            assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
         generate_input = client.data.generate_inputs.retrieve(
             "job_id",
@@ -207,6 +142,71 @@ class TestGenerateInputs:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_start_job(self, client: PiClient) -> None:
+        generate_input = client.data.generate_inputs.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        )
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_start_job_with_all_params(self, client: PiClient) -> None:
+        generate_input = client.data.generate_inputs.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+        )
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_start_job(self, client: PiClient) -> None:
+        response = client.data.generate_inputs.with_raw_response.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_input = response.parse()
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_start_job(self, client: PiClient) -> None:
+        with client.data.generate_inputs.with_streaming_response.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_input = response.parse()
+            assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_stream_data(self, client: PiClient) -> None:
         generate_input = client.data.generate_inputs.stream_data(
             "job_id",
@@ -292,71 +292,6 @@ class TestGenerateInputs:
 
 class TestAsyncGenerateInputs:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create(self, async_client: AsyncPiClient) -> None:
-        generate_input = await async_client.data.generate_inputs.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncPiClient) -> None:
-        generate_input = await async_client.data.generate_inputs.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-            batch_size=5,
-            exploration_mode="CONSERVATIVE",
-            num_shots=5,
-        )
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.generate_inputs.with_raw_response.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        generate_input = await response.parse()
-        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.generate_inputs.with_streaming_response.create(
-            application_description="Write a children's story communicating a simple life lesson.",
-            num_inputs_to_generate=50,
-            seeds=[
-                "The quick brown fox jumped over the lazy dog",
-                "The lazy dog was jumped over by the quick brown fox",
-            ],
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            generate_input = await response.parse()
-            assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
@@ -477,6 +412,71 @@ class TestAsyncGenerateInputs:
             await async_client.data.generate_inputs.with_raw_response.cancel(
                 "",
             )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
+        generate_input = await async_client.data.generate_inputs.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        )
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
+        generate_input = await async_client.data.generate_inputs.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+            batch_size=5,
+            exploration_mode="CONSERVATIVE",
+            num_shots=5,
+        )
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.data.generate_inputs.with_raw_response.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        generate_input = await response.parse()
+        assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
+        async with async_client.data.generate_inputs.with_streaming_response.start_job(
+            application_description="Write a children's story communicating a simple life lesson.",
+            num_inputs_to_generate=50,
+            seeds=[
+                "The quick brown fox jumped over the lazy dog",
+                "The lazy dog was jumped over by the quick brown fox",
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            generate_input = await response.parse()
+            assert_matches_type(DataGenerationStatus, generate_input, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize

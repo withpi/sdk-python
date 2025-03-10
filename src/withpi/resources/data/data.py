@@ -6,7 +6,7 @@ from typing import Iterable, Optional
 
 import httpx
 
-from ...types import data_create_cluster_inputs_params
+from ...types import data_cluster_inputs_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -37,19 +37,19 @@ from .generate_examples import (
     GenerateExamplesResourceWithStreamingResponse,
     AsyncGenerateExamplesResourceWithStreamingResponse,
 )
-from ...types.data_create_cluster_inputs_response import DataCreateClusterInputsResponse
+from ...types.data_cluster_inputs_response import DataClusterInputsResponse
 
 __all__ = ["DataResource", "AsyncDataResource"]
 
 
 class DataResource(SyncAPIResource):
     @cached_property
-    def generate_examples(self) -> GenerateExamplesResource:
-        return GenerateExamplesResource(self._client)
-
-    @cached_property
     def generate_inputs(self) -> GenerateInputsResource:
         return GenerateInputsResource(self._client)
+
+    @cached_property
+    def generate_examples(self) -> GenerateExamplesResource:
+        return GenerateExamplesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> DataResourceWithRawResponse:
@@ -70,10 +70,10 @@ class DataResource(SyncAPIResource):
         """
         return DataResourceWithStreamingResponse(self)
 
-    def create_cluster_inputs(
+    def cluster_inputs(
         self,
         *,
-        inputs: Iterable[data_create_cluster_inputs_params.Input],
+        inputs: Iterable[data_cluster_inputs_params.Input],
         num_clusters: Optional[int] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -81,7 +81,7 @@ class DataResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataCreateClusterInputsResponse:
+    ) -> DataClusterInputsResponse:
         """
         Clusters inputs into groups with counts
 
@@ -105,23 +105,23 @@ class DataResource(SyncAPIResource):
                     "inputs": inputs,
                     "num_clusters": num_clusters,
                 },
-                data_create_cluster_inputs_params.DataCreateClusterInputsParams,
+                data_cluster_inputs_params.DataClusterInputsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataCreateClusterInputsResponse,
+            cast_to=DataClusterInputsResponse,
         )
 
 
 class AsyncDataResource(AsyncAPIResource):
     @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResource:
-        return AsyncGenerateExamplesResource(self._client)
-
-    @cached_property
     def generate_inputs(self) -> AsyncGenerateInputsResource:
         return AsyncGenerateInputsResource(self._client)
+
+    @cached_property
+    def generate_examples(self) -> AsyncGenerateExamplesResource:
+        return AsyncGenerateExamplesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncDataResourceWithRawResponse:
@@ -142,10 +142,10 @@ class AsyncDataResource(AsyncAPIResource):
         """
         return AsyncDataResourceWithStreamingResponse(self)
 
-    async def create_cluster_inputs(
+    async def cluster_inputs(
         self,
         *,
-        inputs: Iterable[data_create_cluster_inputs_params.Input],
+        inputs: Iterable[data_cluster_inputs_params.Input],
         num_clusters: Optional[int] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -153,7 +153,7 @@ class AsyncDataResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataCreateClusterInputsResponse:
+    ) -> DataClusterInputsResponse:
         """
         Clusters inputs into groups with counts
 
@@ -177,12 +177,12 @@ class AsyncDataResource(AsyncAPIResource):
                     "inputs": inputs,
                     "num_clusters": num_clusters,
                 },
-                data_create_cluster_inputs_params.DataCreateClusterInputsParams,
+                data_cluster_inputs_params.DataClusterInputsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DataCreateClusterInputsResponse,
+            cast_to=DataClusterInputsResponse,
         )
 
 
@@ -190,65 +190,65 @@ class DataResourceWithRawResponse:
     def __init__(self, data: DataResource) -> None:
         self._data = data
 
-        self.create_cluster_inputs = to_raw_response_wrapper(
-            data.create_cluster_inputs,
+        self.cluster_inputs = to_raw_response_wrapper(
+            data.cluster_inputs,
         )
-
-    @cached_property
-    def generate_examples(self) -> GenerateExamplesResourceWithRawResponse:
-        return GenerateExamplesResourceWithRawResponse(self._data.generate_examples)
 
     @cached_property
     def generate_inputs(self) -> GenerateInputsResourceWithRawResponse:
         return GenerateInputsResourceWithRawResponse(self._data.generate_inputs)
+
+    @cached_property
+    def generate_examples(self) -> GenerateExamplesResourceWithRawResponse:
+        return GenerateExamplesResourceWithRawResponse(self._data.generate_examples)
 
 
 class AsyncDataResourceWithRawResponse:
     def __init__(self, data: AsyncDataResource) -> None:
         self._data = data
 
-        self.create_cluster_inputs = async_to_raw_response_wrapper(
-            data.create_cluster_inputs,
+        self.cluster_inputs = async_to_raw_response_wrapper(
+            data.cluster_inputs,
         )
-
-    @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResourceWithRawResponse:
-        return AsyncGenerateExamplesResourceWithRawResponse(self._data.generate_examples)
 
     @cached_property
     def generate_inputs(self) -> AsyncGenerateInputsResourceWithRawResponse:
         return AsyncGenerateInputsResourceWithRawResponse(self._data.generate_inputs)
+
+    @cached_property
+    def generate_examples(self) -> AsyncGenerateExamplesResourceWithRawResponse:
+        return AsyncGenerateExamplesResourceWithRawResponse(self._data.generate_examples)
 
 
 class DataResourceWithStreamingResponse:
     def __init__(self, data: DataResource) -> None:
         self._data = data
 
-        self.create_cluster_inputs = to_streamed_response_wrapper(
-            data.create_cluster_inputs,
+        self.cluster_inputs = to_streamed_response_wrapper(
+            data.cluster_inputs,
         )
-
-    @cached_property
-    def generate_examples(self) -> GenerateExamplesResourceWithStreamingResponse:
-        return GenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)
 
     @cached_property
     def generate_inputs(self) -> GenerateInputsResourceWithStreamingResponse:
         return GenerateInputsResourceWithStreamingResponse(self._data.generate_inputs)
+
+    @cached_property
+    def generate_examples(self) -> GenerateExamplesResourceWithStreamingResponse:
+        return GenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)
 
 
 class AsyncDataResourceWithStreamingResponse:
     def __init__(self, data: AsyncDataResource) -> None:
         self._data = data
 
-        self.create_cluster_inputs = async_to_streamed_response_wrapper(
-            data.create_cluster_inputs,
+        self.cluster_inputs = async_to_streamed_response_wrapper(
+            data.cluster_inputs,
         )
-
-    @cached_property
-    def generate_examples(self) -> AsyncGenerateExamplesResourceWithStreamingResponse:
-        return AsyncGenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)
 
     @cached_property
     def generate_inputs(self) -> AsyncGenerateInputsResourceWithStreamingResponse:
         return AsyncGenerateInputsResourceWithStreamingResponse(self._data.generate_inputs)
+
+    @cached_property
+    def generate_examples(self) -> AsyncGenerateExamplesResourceWithStreamingResponse:
+        return AsyncGenerateExamplesResourceWithStreamingResponse(self._data.generate_examples)

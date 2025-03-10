@@ -28,7 +28,7 @@ from withpi._models import BaseModel, FinalRequestOptions
 from withpi._constants import RAW_RESPONSE_HEADER
 from withpi._exceptions import PiClientError, APIStatusError, APITimeoutError, APIResponseValidationError
 from withpi._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
-from withpi.types.data_create_cluster_inputs_params import DataCreateClusterInputsParams
+from withpi.types.data_cluster_inputs_params import DataClusterInputsParams
 
 from .utils import update_env
 
@@ -725,7 +725,7 @@ class TestPiClient:
                                 }
                             ]
                         ),
-                        DataCreateClusterInputsParams,
+                        DataClusterInputsParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -753,7 +753,7 @@ class TestPiClient:
                                 }
                             ]
                         ),
-                        DataCreateClusterInputsParams,
+                        DataClusterInputsParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -788,7 +788,7 @@ class TestPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.create_cluster_inputs(
+        response = client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -819,7 +819,7 @@ class TestPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.create_cluster_inputs(
+        response = client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -850,7 +850,7 @@ class TestPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.create_cluster_inputs(
+        response = client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -1550,7 +1550,7 @@ class TestAsyncPiClient:
                                 }
                             ]
                         ),
-                        DataCreateClusterInputsParams,
+                        DataClusterInputsParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1578,7 +1578,7 @@ class TestAsyncPiClient:
                                 }
                             ]
                         ),
-                        DataCreateClusterInputsParams,
+                        DataClusterInputsParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1614,7 +1614,7 @@ class TestAsyncPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.create_cluster_inputs(
+        response = await client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -1646,7 +1646,7 @@ class TestAsyncPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.create_cluster_inputs(
+        response = await client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -1678,7 +1678,7 @@ class TestAsyncPiClient:
 
         respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.create_cluster_inputs(
+        response = await client.data.with_raw_response.cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",

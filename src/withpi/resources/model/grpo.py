@@ -22,12 +22,11 @@ from ..._response import (
 )
 from ...types.model import grpo_list_params, grpo_launch_params, grpo_download_params
 from ..._base_client import make_request_options
-from ...types.model.rl import TextGenerationBaseModel
 from ...types.shared_params.scorer import Scorer
-from ...types.model.rl.rl_grpo_status import RlGrpoStatus
 from ...types.model.grpo_list_response import GrpoListResponse
-from ...types.model.rl.lora_config_param import LoraConfigParam
-from ...types.model.rl.text_generation_base_model import TextGenerationBaseModel
+from ...types.model.grpo_load_response import GrpoLoadResponse
+from ...types.model.grpo_launch_response import GrpoLaunchResponse
+from ...types.model.grpo_status_response import GrpoStatusResponse
 
 __all__ = ["GrpoResource", "AsyncGrpoResource"]
 
@@ -163,10 +162,10 @@ class GrpoResource(SyncAPIResource):
     def launch(
         self,
         *,
-        base_rl_model: TextGenerationBaseModel,
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
         examples: Iterable[grpo_launch_params.Example],
         learning_rate: float,
-        lora_config: LoraConfigParam,
+        lora_config: grpo_launch_params.LoraConfig,
         num_train_epochs: int,
         scorer: Scorer,
         system_prompt: Optional[str],
@@ -176,7 +175,7 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoLaunchResponse:
         """
         Launches a RL GRPO job
 
@@ -220,7 +219,7 @@ class GrpoResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoLaunchResponse,
         )
 
     def load(
@@ -233,7 +232,7 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoLoadResponse:
         """
         Loads a RL GRPO model into serving for a limited period of time
 
@@ -253,7 +252,7 @@ class GrpoResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoLoadResponse,
         )
 
     def messages(
@@ -300,7 +299,7 @@ class GrpoResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoStatusResponse:
         """
         Checks the status of a RL GRPO job
 
@@ -320,7 +319,7 @@ class GrpoResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoStatusResponse,
         )
 
 
@@ -455,10 +454,10 @@ class AsyncGrpoResource(AsyncAPIResource):
     async def launch(
         self,
         *,
-        base_rl_model: TextGenerationBaseModel,
+        base_rl_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"],
         examples: Iterable[grpo_launch_params.Example],
         learning_rate: float,
-        lora_config: LoraConfigParam,
+        lora_config: grpo_launch_params.LoraConfig,
         num_train_epochs: int,
         scorer: Scorer,
         system_prompt: Optional[str],
@@ -468,7 +467,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoLaunchResponse:
         """
         Launches a RL GRPO job
 
@@ -512,7 +511,7 @@ class AsyncGrpoResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoLaunchResponse,
         )
 
     async def load(
@@ -525,7 +524,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoLoadResponse:
         """
         Loads a RL GRPO model into serving for a limited period of time
 
@@ -545,7 +544,7 @@ class AsyncGrpoResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoLoadResponse,
         )
 
     async def messages(
@@ -592,7 +591,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RlGrpoStatus:
+    ) -> GrpoStatusResponse:
         """
         Checks the status of a RL GRPO job
 
@@ -612,7 +611,7 @@ class AsyncGrpoResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RlGrpoStatus,
+            cast_to=GrpoStatusResponse,
         )
 
 
