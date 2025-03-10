@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.19.0 (2025-03-10)
+
+Full Changelog: [v1.18.0...v1.19.0](https://github.com/withpi/sdk-python/compare/v1.18.0...v1.19.0)
+
+### Features
+
+* **api:** calibrate stream_messages ([#478](https://github.com/withpi/sdk-python/issues/478)) ([c3dfef4](https://github.com/withpi/sdk-python/commit/c3dfef4b5d168e56b4bd08c47d513bc7e0c29dd2))
+
 ## 1.18.0 (2025-03-10)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/withpi/sdk-python/compare/v1.17.0...v1.18.0)
