@@ -146,7 +146,7 @@ class TestCalibrate:
         calibrate = client.contracts.calibrate.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
@@ -157,7 +157,7 @@ class TestCalibrate:
         calibrate = client.contracts.calibrate.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -216,7 +216,7 @@ class TestCalibrate:
         response = client.contracts.calibrate.with_raw_response.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -231,7 +231,7 @@ class TestCalibrate:
         with client.contracts.calibrate.with_streaming_response.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed
@@ -414,7 +414,7 @@ class TestAsyncCalibrate:
         calibrate = await async_client.contracts.calibrate.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(ContractCalibrationStatus, calibrate, path=["response"])
@@ -425,7 +425,7 @@ class TestAsyncCalibrate:
         calibrate = await async_client.contracts.calibrate.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -484,7 +484,7 @@ class TestAsyncCalibrate:
         response = await async_client.contracts.calibrate.with_raw_response.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -499,7 +499,7 @@ class TestAsyncCalibrate:
         async with async_client.contracts.calibrate.with_streaming_response.start_job(
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed

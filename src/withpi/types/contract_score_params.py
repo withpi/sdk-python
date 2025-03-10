@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .shared_params.sdk_contract import SDKContract
+from .shared_params.scoring_system import ScoringSystem
 
 __all__ = ["ContractScoreParams"]
 
@@ -16,5 +16,5 @@ class ContractScoreParams(TypedDict, total=False):
     llm_output: Required[str]
     """The output to score"""
 
-    scoring_system: Required[SDKContract]
+    scoring_system: Required[ScoringSystem]
     """The scoring system to score"""

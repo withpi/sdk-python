@@ -25,7 +25,7 @@ from ...types.prompt import optimize_list_params, optimize_start_job_params
 from ...types.contracts import State
 from ...types.contracts.state import State
 from ...types.shared_params.sdk_example import SDKExample
-from ...types.shared_params.sdk_contract import SDKContract
+from ...types.shared_params.scoring_system import ScoringSystem
 from ...types.prompt.optimize_list_response import OptimizeListResponse
 from ...types.prompt.prompt_optimization_status import PromptOptimizationStatus
 
@@ -158,10 +158,10 @@ class OptimizeResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        contract: SDKContract,
         examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
+        scoring_system: ScoringSystem,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
@@ -176,13 +176,13 @@ class OptimizeResource(SyncAPIResource):
         Launches a Prompt Optimization job
 
         Args:
-          contract: The contract to optimize
-
           examples: The examples to train and validate on
 
           initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
+
+          scoring_system: The contract to optimize
 
           tuning_algorithm: The tuning algorithm to use
 
@@ -204,10 +204,10 @@ class OptimizeResource(SyncAPIResource):
             "/prompt/optimize",
             body=maybe_transform(
                 {
-                    "contract": contract,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
+                    "scoring_system": scoring_system,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
                     "use_chain_of_thought": use_chain_of_thought,
@@ -381,10 +381,10 @@ class AsyncOptimizeResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        contract: SDKContract,
         examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
+        scoring_system: ScoringSystem,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
@@ -399,13 +399,13 @@ class AsyncOptimizeResource(AsyncAPIResource):
         Launches a Prompt Optimization job
 
         Args:
-          contract: The contract to optimize
-
           examples: The examples to train and validate on
 
           initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
+
+          scoring_system: The contract to optimize
 
           tuning_algorithm: The tuning algorithm to use
 
@@ -427,10 +427,10 @@ class AsyncOptimizeResource(AsyncAPIResource):
             "/prompt/optimize",
             body=await async_maybe_transform(
                 {
-                    "contract": contract,
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
+                    "scoring_system": scoring_system,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
                     "use_chain_of_thought": use_chain_of_thought,

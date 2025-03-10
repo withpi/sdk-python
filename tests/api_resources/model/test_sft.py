@@ -240,7 +240,7 @@ class TestSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
@@ -257,7 +257,7 @@ class TestSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -312,7 +312,7 @@ class TestSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -333,7 +333,7 @@ class TestSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed
@@ -610,7 +610,7 @@ class TestAsyncSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
@@ -627,7 +627,7 @@ class TestAsyncSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "Relevance of the response",
@@ -682,7 +682,7 @@ class TestAsyncSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         )
 
@@ -703,7 +703,7 @@ class TestAsyncSft:
             ],
             scoring_system={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Contract",
+                "name": "Sample Scoring System",
             },
         ) as response:
             assert not response.is_closed
