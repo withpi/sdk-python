@@ -27,49 +27,103 @@ Methods:
 
 - <code title="post /data/cluster_inputs">client.data.<a href="./src/withpi/resources/data/data.py">cluster_inputs</a>(\*\*<a href="src/withpi/types/data_cluster_inputs_params.py">params</a>) -> <a href="./src/withpi/types/data_cluster_inputs_response.py">DataClusterInputsResponse</a></code>
 
-## GenerateInputs
+## Generate
 
 Types:
 
 ```python
 from withpi.types.data import (
-    GenerateInputListResponse,
-    GenerateInputCancelResponse,
-    GenerateInputStreamDataResponse,
-    GenerateInputStreamMessagesResponse,
+    GenerateListResponse,
+    GenerateCancelResponse,
+    GenerateStreamDataResponse,
+    GenerateStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /data/generate_inputs/{job_id}">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/generate_inputs">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">list</a>(\*\*<a href="src/withpi/types/data/generate_input_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_input_list_response.py">GenerateInputListResponse</a></code>
-- <code title="delete /data/generate_inputs/{job_id}">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/generate_inputs">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_input_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/generate_inputs/{job_id}/data">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">stream_data</a>(job_id) -> str</code>
-- <code title="get /data/generate_inputs/{job_id}/messages">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">stream_messages</a>(job_id) -> str</code>
+- <code title="post /data/generate">client.data.generate.<a href="./src/withpi/resources/data/generate.py">create</a>(\*\*<a href="src/withpi/types/data/generate_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/generate/{job_id}">client.data.generate.<a href="./src/withpi/resources/data/generate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/generate">client.data.generate.<a href="./src/withpi/resources/data/generate.py">list</a>(\*\*<a href="src/withpi/types/data/generate_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_list_response.py">GenerateListResponse</a></code>
+- <code title="delete /data/generate/{job_id}">client.data.generate.<a href="./src/withpi/resources/data/generate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/generate/{job_id}/data">client.data.generate.<a href="./src/withpi/resources/data/generate.py">stream_data</a>(job_id) -> str</code>
+- <code title="get /data/generate/{job_id}/messages">client.data.generate.<a href="./src/withpi/resources/data/generate.py">stream_messages</a>(job_id) -> str</code>
 
-## GenerateExamples
+## GenerateInputResponsePairs
 
 Types:
 
 ```python
 from withpi.types.data import (
-    GenerateExampleListResponse,
-    GenerateExampleCancelResponse,
-    GenerateExampleStreamDataResponse,
-    GenerateExampleStreamMessagesResponse,
+    GenerateInputResponsePairListResponse,
+    GenerateInputResponsePairCancelResponse,
+    GenerateInputResponsePairStreamDataResponse,
+    GenerateInputResponsePairStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
-- <code title="get /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">list</a>(\*\*<a href="src/withpi/types/data/generate_example_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_example_list_response.py">GenerateExampleListResponse</a></code>
-- <code title="delete /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_example_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
-- <code title="get /data/generate_examples/{job_id}/data">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_example_stream_data_response.py">GenerateExampleStreamDataResponse</a></code>
-- <code title="get /data/generate_examples/{job_id}/messages">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_messages</a>(job_id) -> str</code>
+- <code title="post /data/generate_input_response_pairs">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">create</a>(\*\*<a href="src/withpi/types/data/generate_input_response_pair_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="get /data/generate_input_response_pairs/{job_id}">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="get /data/generate_input_response_pairs">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">list</a>(\*\*<a href="src/withpi/types/data/generate_input_response_pair_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_input_response_pair_list_response.py">GenerateInputResponsePairListResponse</a></code>
+- <code title="delete /data/generate_input_response_pairs/{job_id}">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/generate_input_response_pairs/{job_id}/data">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_input_response_pair_stream_data_response.py">GenerateInputResponsePairStreamDataResponse</a></code>
+- <code title="get /data/generate_input_response_pairs/{job_id}/messages">client.data.generate_input_response_pairs.<a href="./src/withpi/resources/data/generate_input_response_pairs.py">stream_messages</a>(job_id) -> str</code>
+
+# Training
+
+## Sft
+
+Types:
+
+```python
+from withpi.types.training import (
+    SftListResponse,
+    SftCancelResponse,
+    SftDownloadResponse,
+    SftLaunchResponse,
+    SftLoadResponse,
+    SftMessagesResponse,
+    SftStatusResponse,
+)
+```
+
+Methods:
+
+- <code title="get /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">list</a>(\*\*<a href="src/withpi/types/training/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_list_response.py">SftListResponse</a></code>
+- <code title="delete /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">cancel</a>(job_id) -> str</code>
+- <code title="post /training/sft/{job_id}/download">client.training.sft.<a href="./src/withpi/resources/training/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/sft_download_params.py">params</a>) -> str</code>
+- <code title="post /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">launch</a>(\*\*<a href="src/withpi/types/training/sft_launch_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_launch_response.py">SftLaunchResponse</a></code>
+- <code title="post /training/sft/{job_id}/load">client.training.sft.<a href="./src/withpi/resources/training/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/training/sft_load_response.py">SftLoadResponse</a></code>
+- <code title="get /training/sft/{job_id}/messages">client.training.sft.<a href="./src/withpi/resources/training/sft.py">messages</a>(job_id) -> str</code>
+- <code title="get /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">status</a>(job_id) -> <a href="./src/withpi/types/training/sft_status_response.py">SftStatusResponse</a></code>
+
+## Grpo
+
+Types:
+
+```python
+from withpi.types.training import (
+    GrpoListResponse,
+    GrpoCancelResponse,
+    GrpoDownloadResponse,
+    GrpoLaunchResponse,
+    GrpoLoadResponse,
+    GrpoMessagesResponse,
+    GrpoStatusResponse,
+)
+```
+
+Methods:
+
+- <code title="get /training/grpo">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">list</a>(\*\*<a href="src/withpi/types/training/grpo_list_params.py">params</a>) -> <a href="./src/withpi/types/training/grpo_list_response.py">GrpoListResponse</a></code>
+- <code title="delete /training/grpo/{job_id}">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">cancel</a>(job_id) -> str</code>
+- <code title="post /training/grpo/{job_id}/download">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/grpo_download_params.py">params</a>) -> str</code>
+- <code title="post /training/grpo">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">launch</a>(\*\*<a href="src/withpi/types/training/grpo_launch_params.py">params</a>) -> <a href="./src/withpi/types/training/grpo_launch_response.py">GrpoLaunchResponse</a></code>
+- <code title="post /training/grpo/{job_id}/load">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">load</a>(job_id) -> <a href="./src/withpi/types/training/grpo_load_response.py">GrpoLoadResponse</a></code>
+- <code title="get /training/grpo/{job_id}/messages">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">messages</a>(job_id) -> str</code>
+- <code title="get /training/grpo/{job_id}">client.training.grpo.<a href="./src/withpi/resources/training/grpo.py">status</a>(job_id) -> <a href="./src/withpi/types/training/grpo_status_response.py">GrpoStatusResponse</a></code>
 
 # Prompt
 
@@ -93,26 +147,26 @@ Methods:
 - <code title="post /prompt/optimize">client.prompt.optimize.<a href="./src/withpi/resources/prompt/optimize.py">start_job</a>(\*\*<a href="src/withpi/types/prompt/optimize_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/prompt_optimization_status.py">PromptOptimizationStatus</a></code>
 - <code title="get /prompt/optimize/{job_id}/messages">client.prompt.optimize.<a href="./src/withpi/resources/prompt/optimize.py">stream_messages</a>(job_id) -> str</code>
 
-# Scorers
+# ScoringSystem
 
 Types:
 
 ```python
-from withpi.types import ScorerScoreResponse
+from withpi.types import ScoringSystemScoreResponse
 ```
 
 Methods:
 
-- <code title="post /scorers/generate_dimensions">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
-- <code title="post /scorers/read_from_hf">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
-- <code title="post /scorers/score">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/scorer_score_response.py">ScorerScoreResponse</a></code>
+- <code title="post /scoring_system/generate">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">generate</a>(\*\*<a href="src/withpi/types/scoring_system_generate_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scoring_system/from_huggingface">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">read_from_huggingface</a>(\*\*<a href="src/withpi/types/scoring_system_read_from_huggingface_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_score_response.py">ScoringSystemScoreResponse</a></code>
 
 ## Calibrate
 
 Types:
 
 ```python
-from withpi.types.scorers import (
+from withpi.types.scoring_system import (
     CalibrateCreateResponse,
     CalibrateRetrieveResponse,
     CalibrateListResponse,
@@ -123,21 +177,56 @@ from withpi.types.scorers import (
 
 Methods:
 
-- <code title="post /scorers/calibrate">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorers/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scorers/calibrate_create_response.py">CalibrateCreateResponse</a></code>
-- <code title="get /scorers/calibrate/{job_id}">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scorers/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
-- <code title="get /scorers/calibrate">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorers/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorers/calibrate_list_response.py">CalibrateListResponse</a></code>
-- <code title="delete /scorers/calibrate/{job_id}">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">cancel</a>(job_id) -> str</code>
-- <code title="get /scorers/calibrate/{job_id}/messages">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">messages</a>(job_id) -> str</code>
+- <code title="post /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_create_response.py">CalibrateCreateResponse</a></code>
+- <code title="get /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scoring_system/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
+- <code title="get /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
+- <code title="delete /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /scoring_system/calibrate/{job_id}/messages">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">messages</a>(job_id) -> str</code>
 
-# Rag
+# Search
+
+## QueryClassifier
 
 Types:
 
 ```python
-from withpi.types import RagClassifyQueryResponse, RagGenerateFanoutResponse
+from withpi.types.search import QueryClassifierClassifyResponse
 ```
 
 Methods:
 
-- <code title="post /rag/query_classify">client.rag.<a href="./src/withpi/resources/rag.py">classify_query</a>(\*\*<a href="src/withpi/types/rag_classify_query_params.py">params</a>) -> <a href="./src/withpi/types/rag_classify_query_response.py">RagClassifyQueryResponse</a></code>
-- <code title="post /rag/query_fanout">client.rag.<a href="./src/withpi/resources/rag.py">generate_fanout</a>(\*\*<a href="src/withpi/types/rag_generate_fanout_params.py">params</a>) -> <a href="./src/withpi/types/rag_generate_fanout_response.py">RagGenerateFanoutResponse</a></code>
+- <code title="post /search/query_classifier/classify">client.search.query_classifier.<a href="./src/withpi/resources/search/query_classifier/query_classifier.py">classify</a>(\*\*<a href="src/withpi/types/search/query_classifier_classify_params.py">params</a>) -> <a href="./src/withpi/types/search/query_classifier_classify_response.py">QueryClassifierClassifyResponse</a></code>
+
+### Distill
+
+Types:
+
+```python
+from withpi.types.search.query_classifier import (
+    DistillListResponse,
+    DistillCancelResponse,
+    DistillDownloadResponse,
+    DistillMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /search/query_classifier/distill">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">create</a>(\*\*<a href="src/withpi/types/search/query_classifier/distill_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
+- <code title="get /search/query_classifier/distill/{job_id}">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/classification_status.py">ClassificationStatus</a></code>
+- <code title="get /search/query_classifier/distill">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">list</a>(\*\*<a href="src/withpi/types/search/query_classifier/distill_list_params.py">params</a>) -> <a href="./src/withpi/types/search/query_classifier/distill_list_response.py">DistillListResponse</a></code>
+- <code title="delete /search/query_classifier/distill/{job_id}">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">cancel</a>(job_id) -> str</code>
+- <code title="post /search/query_classifier/distill/{job_id}/download">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">download</a>(job_id, \*\*<a href="src/withpi/types/search/query_classifier/distill_download_params.py">params</a>) -> str</code>
+- <code title="get /search/query_classifier/distill/{job_id}/messages">client.search.query_classifier.distill.<a href="./src/withpi/resources/search/query_classifier/distill.py">messages</a>(job_id) -> str</code>
+
+## QueryFanout
+
+Types:
+
+```python
+from withpi.types.search import QueryFanoutGenerateResponse
+```
+
+Methods:
+
+- <code title="post /search/query_fanout/generate">client.search.query_fanout.<a href="./src/withpi/resources/search/query_fanout.py">generate</a>(\*\*<a href="src/withpi/types/search/query_fanout_generate_params.py">params</a>) -> <a href="./src/withpi/types/search/query_fanout_generate_response.py">QueryFanoutGenerateResponse</a></code>
