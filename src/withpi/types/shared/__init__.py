@@ -10,4 +10,5 @@ from .scorer_sub_dimension import ScorerSubDimension as ScorerSubDimension
 from .classification_status import ClassificationStatus as ClassificationStatus
 from .synthetic_data_status import SyntheticDataStatus as SyntheticDataStatus
 from .data_generation_status import DataGenerationStatus as DataGenerationStatus
+from .scoring_system_metrics import ScoringSystemMetrics as ScoringSystemMetrics
 from .prompt_optimization_status import PromptOptimizationStatus as PromptOptimizationStatus
