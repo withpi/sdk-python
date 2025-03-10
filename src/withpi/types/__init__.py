@@ -15,12 +15,12 @@ from .shared import (
     PromptOptimizationStatus as PromptOptimizationStatus,
 )
 from .scorer_score_params import ScorerScoreParams as ScorerScoreParams
-from .query_classify_params import QueryClassifyParams as QueryClassifyParams
 from .scorer_score_response import ScorerScoreResponse as ScorerScoreResponse
-from .query_classify_response import QueryClassifyResponse as QueryClassifyResponse
+from .rag_classify_query_params import RagClassifyQueryParams as RagClassifyQueryParams
 from .data_cluster_inputs_params import DataClusterInputsParams as DataClusterInputsParams
+from .rag_generate_fanout_params import RagGenerateFanoutParams as RagGenerateFanoutParams
 from .scorer_read_from_hf_params import ScorerReadFromHfParams as ScorerReadFromHfParams
+from .rag_classify_query_response import RagClassifyQueryResponse as RagClassifyQueryResponse
 from .data_cluster_inputs_response import DataClusterInputsResponse as DataClusterInputsResponse
-from .query_generate_fanouts_params import QueryGenerateFanoutsParams as QueryGenerateFanoutsParams
-from .query_generate_fanouts_response import QueryGenerateFanoutsResponse as QueryGenerateFanoutsResponse
+from .rag_generate_fanout_response import RagGenerateFanoutResponse as RagGenerateFanoutResponse
 from .scorer_generate_dimensions_params import ScorerGenerateDimensionsParams as ScorerGenerateDimensionsParams

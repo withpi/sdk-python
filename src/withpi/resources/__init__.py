@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .rag import (
+    RagResource,
+    AsyncRagResource,
+    RagResourceWithRawResponse,
+    AsyncRagResourceWithRawResponse,
+    RagResourceWithStreamingResponse,
+    AsyncRagResourceWithStreamingResponse,
+)
 from .data import (
     DataResource,
     AsyncDataResource,
@@ -23,14 +31,6 @@ from .prompt import (
     AsyncPromptResourceWithRawResponse,
     PromptResourceWithStreamingResponse,
     AsyncPromptResourceWithStreamingResponse,
-)
-from .queries import (
-    QueriesResource,
-    AsyncQueriesResource,
-    QueriesResourceWithRawResponse,
-    AsyncQueriesResourceWithRawResponse,
-    QueriesResourceWithStreamingResponse,
-    AsyncQueriesResourceWithStreamingResponse,
 )
 from .scorers import (
     ScorersResource,
@@ -60,16 +60,16 @@ __all__ = [
     "AsyncPromptResourceWithRawResponse",
     "PromptResourceWithStreamingResponse",
     "AsyncPromptResourceWithStreamingResponse",
-    "QueriesResource",
-    "AsyncQueriesResource",
-    "QueriesResourceWithRawResponse",
-    "AsyncQueriesResourceWithRawResponse",
-    "QueriesResourceWithStreamingResponse",
-    "AsyncQueriesResourceWithStreamingResponse",
     "ScorersResource",
     "AsyncScorersResource",
     "ScorersResourceWithRawResponse",
     "AsyncScorersResourceWithRawResponse",
     "ScorersResourceWithStreamingResponse",
     "AsyncScorersResourceWithStreamingResponse",
+    "RagResource",
+    "AsyncRagResource",
+    "RagResourceWithRawResponse",
+    "AsyncRagResourceWithRawResponse",
+    "RagResourceWithStreamingResponse",
+    "AsyncRagResourceWithStreamingResponse",
 ]

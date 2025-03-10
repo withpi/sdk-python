@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import query_classify_params, query_generate_fanouts_params
+from ..types import rag_classify_query_params, rag_generate_fanout_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -22,40 +22,40 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.query_classify_response import QueryClassifyResponse
-from ..types.query_generate_fanouts_response import QueryGenerateFanoutsResponse
+from ..types.rag_classify_query_response import RagClassifyQueryResponse
+from ..types.rag_generate_fanout_response import RagGenerateFanoutResponse
 from ..types.shared_params.query_fanout_example import QueryFanoutExample
 
-__all__ = ["QueriesResource", "AsyncQueriesResource"]
+__all__ = ["RagResource", "AsyncRagResource"]
 
 
-class QueriesResource(SyncAPIResource):
+class RagResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> QueriesResourceWithRawResponse:
+    def with_raw_response(self) -> RagResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return QueriesResourceWithRawResponse(self)
+        return RagResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> QueriesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> RagResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return QueriesResourceWithStreamingResponse(self)
+        return RagResourceWithStreamingResponse(self)
 
-    def classify(
+    def classify_query(
         self,
         *,
-        classes: Iterable[query_classify_params.Class],
+        classes: Iterable[rag_classify_query_params.Class],
         queries: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
-        examples: Optional[Iterable[query_classify_params.Example]] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[rag_classify_query_params.Example]] | NotGiven = NOT_GIVEN,
         mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -63,7 +63,7 @@ class QueriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryClassifyResponse:
+    ) -> RagClassifyQueryResponse:
         """
         Classifies queries into provided classes based on a custom taxonomy.
 
@@ -89,7 +89,7 @@ class QueriesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/queries/classify",
+            "/rag/query_classify",
             body=maybe_transform(
                 {
                     "classes": classes,
@@ -98,15 +98,15 @@ class QueriesResource(SyncAPIResource):
                     "examples": examples,
                     "mode": mode,
                 },
-                query_classify_params.QueryClassifyParams,
+                rag_classify_query_params.RagClassifyQueryParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryClassifyResponse,
+            cast_to=RagClassifyQueryResponse,
         )
 
-    def generate_fanouts(
+    def generate_fanout(
         self,
         *,
         queries: List[str],
@@ -118,7 +118,7 @@ class QueriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryGenerateFanoutsResponse:
+    ) -> RagGenerateFanoutResponse:
         """
         Generates query fanouts for an input query.
 
@@ -138,49 +138,49 @@ class QueriesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/queries/generate_fanouts",
+            "/rag/query_fanout",
             body=maybe_transform(
                 {
                     "queries": queries,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
                 },
-                query_generate_fanouts_params.QueryGenerateFanoutsParams,
+                rag_generate_fanout_params.RagGenerateFanoutParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryGenerateFanoutsResponse,
+            cast_to=RagGenerateFanoutResponse,
         )
 
 
-class AsyncQueriesResource(AsyncAPIResource):
+class AsyncRagResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncQueriesResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncRagResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncQueriesResourceWithRawResponse(self)
+        return AsyncRagResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncQueriesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncRagResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
-        return AsyncQueriesResourceWithStreamingResponse(self)
+        return AsyncRagResourceWithStreamingResponse(self)
 
-    async def classify(
+    async def classify_query(
         self,
         *,
-        classes: Iterable[query_classify_params.Class],
+        classes: Iterable[rag_classify_query_params.Class],
         queries: List[str],
         batch_size: int | NotGiven = NOT_GIVEN,
-        examples: Optional[Iterable[query_classify_params.Example]] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[rag_classify_query_params.Example]] | NotGiven = NOT_GIVEN,
         mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -188,7 +188,7 @@ class AsyncQueriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryClassifyResponse:
+    ) -> RagClassifyQueryResponse:
         """
         Classifies queries into provided classes based on a custom taxonomy.
 
@@ -214,7 +214,7 @@ class AsyncQueriesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/queries/classify",
+            "/rag/query_classify",
             body=await async_maybe_transform(
                 {
                     "classes": classes,
@@ -223,15 +223,15 @@ class AsyncQueriesResource(AsyncAPIResource):
                     "examples": examples,
                     "mode": mode,
                 },
-                query_classify_params.QueryClassifyParams,
+                rag_classify_query_params.RagClassifyQueryParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryClassifyResponse,
+            cast_to=RagClassifyQueryResponse,
         )
 
-    async def generate_fanouts(
+    async def generate_fanout(
         self,
         *,
         queries: List[str],
@@ -243,7 +243,7 @@ class AsyncQueriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryGenerateFanoutsResponse:
+    ) -> RagGenerateFanoutResponse:
         """
         Generates query fanouts for an input query.
 
@@ -263,65 +263,65 @@ class AsyncQueriesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/queries/generate_fanouts",
+            "/rag/query_fanout",
             body=await async_maybe_transform(
                 {
                     "queries": queries,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
                 },
-                query_generate_fanouts_params.QueryGenerateFanoutsParams,
+                rag_generate_fanout_params.RagGenerateFanoutParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryGenerateFanoutsResponse,
+            cast_to=RagGenerateFanoutResponse,
         )
 
 
-class QueriesResourceWithRawResponse:
-    def __init__(self, queries: QueriesResource) -> None:
-        self._queries = queries
+class RagResourceWithRawResponse:
+    def __init__(self, rag: RagResource) -> None:
+        self._rag = rag
 
-        self.classify = to_raw_response_wrapper(
-            queries.classify,
+        self.classify_query = to_raw_response_wrapper(
+            rag.classify_query,
         )
-        self.generate_fanouts = to_raw_response_wrapper(
-            queries.generate_fanouts,
-        )
-
-
-class AsyncQueriesResourceWithRawResponse:
-    def __init__(self, queries: AsyncQueriesResource) -> None:
-        self._queries = queries
-
-        self.classify = async_to_raw_response_wrapper(
-            queries.classify,
-        )
-        self.generate_fanouts = async_to_raw_response_wrapper(
-            queries.generate_fanouts,
+        self.generate_fanout = to_raw_response_wrapper(
+            rag.generate_fanout,
         )
 
 
-class QueriesResourceWithStreamingResponse:
-    def __init__(self, queries: QueriesResource) -> None:
-        self._queries = queries
+class AsyncRagResourceWithRawResponse:
+    def __init__(self, rag: AsyncRagResource) -> None:
+        self._rag = rag
 
-        self.classify = to_streamed_response_wrapper(
-            queries.classify,
+        self.classify_query = async_to_raw_response_wrapper(
+            rag.classify_query,
         )
-        self.generate_fanouts = to_streamed_response_wrapper(
-            queries.generate_fanouts,
+        self.generate_fanout = async_to_raw_response_wrapper(
+            rag.generate_fanout,
         )
 
 
-class AsyncQueriesResourceWithStreamingResponse:
-    def __init__(self, queries: AsyncQueriesResource) -> None:
-        self._queries = queries
+class RagResourceWithStreamingResponse:
+    def __init__(self, rag: RagResource) -> None:
+        self._rag = rag
 
-        self.classify = async_to_streamed_response_wrapper(
-            queries.classify,
+        self.classify_query = to_streamed_response_wrapper(
+            rag.classify_query,
         )
-        self.generate_fanouts = async_to_streamed_response_wrapper(
-            queries.generate_fanouts,
+        self.generate_fanout = to_streamed_response_wrapper(
+            rag.generate_fanout,
+        )
+
+
+class AsyncRagResourceWithStreamingResponse:
+    def __init__(self, rag: AsyncRagResource) -> None:
+        self._rag = rag
+
+        self.classify_query = async_to_streamed_response_wrapper(
+            rag.classify_query,
+        )
+        self.generate_fanout = async_to_streamed_response_wrapper(
+            rag.generate_fanout,
         )
