@@ -182,7 +182,7 @@ Methods:
 - <code title="post /queries/classify">client.queries.<a href="./src/withpi/resources/queries.py">classify</a>(\*\*<a href="src/withpi/types/query_classify_params.py">params</a>) -> <a href="./src/withpi/types/query_classify_response.py">QueryClassifyResponse</a></code>
 - <code title="post /queries/generate_fanouts">client.queries.<a href="./src/withpi/resources/queries.py">generate_fanouts</a>(\*\*<a href="src/withpi/types/query_generate_fanouts_params.py">params</a>) -> <a href="./src/withpi/types/query_generate_fanouts_response.py">QueryGenerateFanoutsResponse</a></code>
 
-# Scorer
+# Scorers
 
 Types:
 
@@ -192,16 +192,16 @@ from withpi.types import ScorerScoreResponse
 
 Methods:
 
-- <code title="post /scorer/generate_dimensions">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
-- <code title="post /scorer/read_from_hf">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
-- <code title="post /scorer/score">client.scorer.<a href="./src/withpi/resources/scorer/scorer.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/scorer_score_response.py">ScorerScoreResponse</a></code>
+- <code title="post /scorers/generate_dimensions">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">generate_dimensions</a>(\*\*<a href="src/withpi/types/scorer_generate_dimensions_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scorers/read_from_hf">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">read_from_hf</a>(\*\*<a href="src/withpi/types/scorer_read_from_hf_params.py">params</a>) -> <a href="./src/withpi/types/shared/scorer.py">Scorer</a></code>
+- <code title="post /scorers/score">client.scorers.<a href="./src/withpi/resources/scorers/scorers.py">score</a>(\*\*<a href="src/withpi/types/scorer_score_params.py">params</a>) -> <a href="./src/withpi/types/scorer_score_response.py">ScorerScoreResponse</a></code>
 
 ## Calibrate
 
 Types:
 
 ```python
-from withpi.types.scorer import (
+from withpi.types.scorers import (
     CalibrateCreateResponse,
     CalibrateRetrieveResponse,
     CalibrateListResponse,
@@ -212,8 +212,8 @@ from withpi.types.scorer import (
 
 Methods:
 
-- <code title="post /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorer/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scorer/calibrate_create_response.py">CalibrateCreateResponse</a></code>
-- <code title="get /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scorer/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
-- <code title="get /scorer/calibrate">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorer/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorer/calibrate_list_response.py">CalibrateListResponse</a></code>
-- <code title="delete /scorer/calibrate/{job_id}">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">cancel</a>(job_id) -> str</code>
-- <code title="get /scorer/calibrate/{job_id}/messages">client.scorer.calibrate.<a href="./src/withpi/resources/scorer/calibrate.py">messages</a>(job_id) -> str</code>
+- <code title="post /scorers/calibrate">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scorers/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scorers/calibrate_create_response.py">CalibrateCreateResponse</a></code>
+- <code title="get /scorers/calibrate/{job_id}">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scorers/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
+- <code title="get /scorers/calibrate">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scorers/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scorers/calibrate_list_response.py">CalibrateListResponse</a></code>
+- <code title="delete /scorers/calibrate/{job_id}">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">cancel</a>(job_id) -> str</code>
+- <code title="get /scorers/calibrate/{job_id}/messages">client.scorers.calibrate.<a href="./src/withpi/resources/scorers/calibrate.py">messages</a>(job_id) -> str</code>

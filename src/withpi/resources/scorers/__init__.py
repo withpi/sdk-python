@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .scorer import (
-    ScorerResource,
-    AsyncScorerResource,
-    ScorerResourceWithRawResponse,
-    AsyncScorerResourceWithRawResponse,
-    ScorerResourceWithStreamingResponse,
-    AsyncScorerResourceWithStreamingResponse,
+from .scorers import (
+    ScorersResource,
+    AsyncScorersResource,
+    ScorersResourceWithRawResponse,
+    AsyncScorersResourceWithRawResponse,
+    ScorersResourceWithStreamingResponse,
+    AsyncScorersResourceWithStreamingResponse,
 )
 from .calibrate import (
     CalibrateResource,
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncCalibrateResourceWithRawResponse",
     "CalibrateResourceWithStreamingResponse",
     "AsyncCalibrateResourceWithStreamingResponse",
-    "ScorerResource",
-    "AsyncScorerResource",
-    "ScorerResourceWithRawResponse",
-    "AsyncScorerResourceWithRawResponse",
-    "ScorerResourceWithStreamingResponse",
-    "AsyncScorerResourceWithStreamingResponse",
+    "ScorersResource",
+    "AsyncScorersResource",
+    "ScorersResourceWithRawResponse",
+    "AsyncScorersResourceWithRawResponse",
+    "ScorersResourceWithStreamingResponse",
+    "AsyncScorersResourceWithStreamingResponse",
 ]
