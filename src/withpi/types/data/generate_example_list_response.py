@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from ..shared.synthetic_data_status import SyntheticDataStatus
 
-__all__ = ["GenerateSyntheticDataListResponse"]
+__all__ = ["GenerateExampleListResponse"]
 
-GenerateSyntheticDataListResponse: TypeAlias = List[SyntheticDataStatus]
+GenerateExampleListResponse: TypeAlias = List[SyntheticDataStatus]

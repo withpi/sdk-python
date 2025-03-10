@@ -2,21 +2,21 @@
 
 from __future__ import annotations
 
-from .input_cluster_params import InputClusterParams as InputClusterParams
-from .input_cluster_response import InputClusterResponse as InputClusterResponse
-from .generate_synthetic_data_list_params import GenerateSyntheticDataListParams as GenerateSyntheticDataListParams
-from .generate_synthetic_data_list_response import (
-    GenerateSyntheticDataListResponse as GenerateSyntheticDataListResponse,
+from .generate_input_list_params import GenerateInputListParams as GenerateInputListParams
+from .generate_example_list_params import GenerateExampleListParams as GenerateExampleListParams
+from .generate_input_create_params import GenerateInputCreateParams as GenerateInputCreateParams
+from .generate_input_list_response import GenerateInputListResponse as GenerateInputListResponse
+from .generate_example_create_params import GenerateExampleCreateParams as GenerateExampleCreateParams
+from .generate_example_list_response import GenerateExampleListResponse as GenerateExampleListResponse
+from .generate_input_cancel_response import GenerateInputCancelResponse as GenerateInputCancelResponse
+from .generate_example_cancel_response import GenerateExampleCancelResponse as GenerateExampleCancelResponse
+from .generate_input_stream_data_response import GenerateInputStreamDataResponse as GenerateInputStreamDataResponse
+from .generate_example_stream_data_response import (
+    GenerateExampleStreamDataResponse as GenerateExampleStreamDataResponse,
 )
-from .generate_synthetic_data_cancel_response import (
-    GenerateSyntheticDataCancelResponse as GenerateSyntheticDataCancelResponse,
+from .generate_input_stream_messages_response import (
+    GenerateInputStreamMessagesResponse as GenerateInputStreamMessagesResponse,
 )
-from .generate_synthetic_data_start_job_params import (
-    GenerateSyntheticDataStartJobParams as GenerateSyntheticDataStartJobParams,
-)
-from .generate_synthetic_data_stream_data_response import (
-    GenerateSyntheticDataStreamDataResponse as GenerateSyntheticDataStreamDataResponse,
-)
-from .generate_synthetic_data_stream_messages_response import (
-    GenerateSyntheticDataStreamMessagesResponse as GenerateSyntheticDataStreamMessagesResponse,
+from .generate_example_stream_messages_response import (
+    GenerateExampleStreamMessagesResponse as GenerateExampleStreamMessagesResponse,
 )
