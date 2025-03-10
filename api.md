@@ -13,61 +13,59 @@ from withpi.types import (
 
 # Data
 
-## GenerateSyntheticData
+Types:
+
+```python
+from withpi.types import DataCreateClusterInputsResponse
+```
+
+Methods:
+
+- <code title="post /data/cluster_inputs">client.data.<a href="./src/withpi/resources/data/data.py">create_cluster_inputs</a>(\*\*<a href="src/withpi/types/data_create_cluster_inputs_params.py">params</a>) -> <a href="./src/withpi/types/data_create_cluster_inputs_response.py">DataCreateClusterInputsResponse</a></code>
+
+## GenerateExamples
 
 Types:
 
 ```python
 from withpi.types.data import (
-    GenerateSyntheticDataListResponse,
-    GenerateSyntheticDataCancelResponse,
-    GenerateSyntheticDataStreamDataResponse,
-    GenerateSyntheticDataStreamMessagesResponse,
+    GenerateExampleListResponse,
+    GenerateExampleCancelResponse,
+    GenerateExampleStreamDataResponse,
+    GenerateExampleStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
-- <code title="get /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">list</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_synthetic_data_list_response.py">GenerateSyntheticDataListResponse</a></code>
-- <code title="delete /data/generate_synthetic_data/{job_id}">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/generate_synthetic_data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">start_job</a>(\*\*<a href="src/withpi/types/data/generate_synthetic_data_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
-- <code title="get /data/generate_synthetic_data/{job_id}/data">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_synthetic_data_stream_data_response.py">GenerateSyntheticDataStreamDataResponse</a></code>
-- <code title="get /data/generate_synthetic_data/{job_id}/messages">client.data.generate_synthetic_data.<a href="./src/withpi/resources/data/generate_synthetic_data.py">stream_messages</a>(job_id) -> str</code>
+- <code title="post /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">create</a>(\*\*<a href="src/withpi/types/data/generate_example_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="get /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/synthetic_data_status.py">SyntheticDataStatus</a></code>
+- <code title="get /data/generate_examples">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">list</a>(\*\*<a href="src/withpi/types/data/generate_example_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_example_list_response.py">GenerateExampleListResponse</a></code>
+- <code title="delete /data/generate_examples/{job_id}">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/generate_examples/{job_id}/data">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_data</a>(job_id) -> <a href="./src/withpi/types/data/generate_example_stream_data_response.py">GenerateExampleStreamDataResponse</a></code>
+- <code title="get /data/generate_examples/{job_id}/messages">client.data.generate_examples.<a href="./src/withpi/resources/data/generate_examples.py">stream_messages</a>(job_id) -> str</code>
 
-## Inputs
-
-Types:
-
-```python
-from withpi.types.data import InputClusterResponse
-```
-
-Methods:
-
-- <code title="post /data/input/cluster">client.data.inputs.<a href="./src/withpi/resources/data/inputs/inputs.py">cluster</a>(\*\*<a href="src/withpi/types/data/input_cluster_params.py">params</a>) -> <a href="./src/withpi/types/data/input_cluster_response.py">InputClusterResponse</a></code>
-
-### GenerateFromSeeds
+## GenerateInputs
 
 Types:
 
 ```python
-from withpi.types.data.inputs import (
-    GenerateFromSeedListResponse,
-    GenerateFromSeedCancelResponse,
-    GenerateFromSeedStreamDataResponse,
-    GenerateFromSeedStreamMessagesResponse,
+from withpi.types.data import (
+    GenerateInputListResponse,
+    GenerateInputCancelResponse,
+    GenerateInputStreamDataResponse,
+    GenerateInputStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">list</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_list_params.py">params</a>) -> <a href="./src/withpi/types/data/inputs/generate_from_seed_list_response.py">GenerateFromSeedListResponse</a></code>
-- <code title="delete /data/input/generate_from_seeds/{job_id}">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">cancel</a>(job_id) -> str</code>
-- <code title="post /data/input/generate_from_seeds">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">start_job</a>(\*\*<a href="src/withpi/types/data/inputs/generate_from_seed_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
-- <code title="get /data/input/generate_from_seeds/{job_id}/data">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_data</a>(job_id) -> str</code>
-- <code title="get /data/input/generate_from_seeds/{job_id}/messages">client.data.inputs.generate_from_seeds.<a href="./src/withpi/resources/data/inputs/generate_from_seeds.py">stream_messages</a>(job_id) -> str</code>
+- <code title="post /data/generate_inputs">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">create</a>(\*\*<a href="src/withpi/types/data/generate_input_create_params.py">params</a>) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/generate_inputs/{job_id}">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/data_generation_status.py">DataGenerationStatus</a></code>
+- <code title="get /data/generate_inputs">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">list</a>(\*\*<a href="src/withpi/types/data/generate_input_list_params.py">params</a>) -> <a href="./src/withpi/types/data/generate_input_list_response.py">GenerateInputListResponse</a></code>
+- <code title="delete /data/generate_inputs/{job_id}">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">cancel</a>(job_id) -> str</code>
+- <code title="get /data/generate_inputs/{job_id}/data">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">stream_data</a>(job_id) -> str</code>
+- <code title="get /data/generate_inputs/{job_id}/messages">client.data.generate_inputs.<a href="./src/withpi/resources/data/generate_inputs.py">stream_messages</a>(job_id) -> str</code>
 
 # Model
 

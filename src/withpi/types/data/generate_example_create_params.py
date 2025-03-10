@@ -7,10 +7,10 @@ from typing_extensions import Required, TypedDict
 
 from ..shared.exploration_mode import ExplorationMode
 
-__all__ = ["GenerateSyntheticDataStartJobParams", "Seed"]
+__all__ = ["GenerateExampleCreateParams", "Seed"]
 
 
-class GenerateSyntheticDataStartJobParams(TypedDict, total=False):
+class GenerateExampleCreateParams(TypedDict, total=False):
     num_examples_to_generate: Required[int]
     """The number of new LLM examples to generate"""
 

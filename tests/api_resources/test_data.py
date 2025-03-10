@@ -9,18 +9,18 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types.data import InputClusterResponse
+from withpi.types import DataCreateClusterInputsResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestInputs:
+class TestData:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_cluster(self, client: PiClient) -> None:
-        input = client.data.inputs.cluster(
+    def test_method_create_cluster_inputs(self, client: PiClient) -> None:
+        data = client.data.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -28,12 +28,12 @@ class TestInputs:
                 }
             ],
         )
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_cluster_with_all_params(self, client: PiClient) -> None:
-        input = client.data.inputs.cluster(
+    def test_method_create_cluster_inputs_with_all_params(self, client: PiClient) -> None:
+        data = client.data.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -42,12 +42,12 @@ class TestInputs:
             ],
             num_clusters=5,
         )
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_cluster(self, client: PiClient) -> None:
-        response = client.data.inputs.with_raw_response.cluster(
+    def test_raw_response_create_cluster_inputs(self, client: PiClient) -> None:
+        response = client.data.with_raw_response.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -58,13 +58,13 @@ class TestInputs:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        input = response.parse()
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        data = response.parse()
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_cluster(self, client: PiClient) -> None:
-        with client.data.inputs.with_streaming_response.cluster(
+    def test_streaming_response_create_cluster_inputs(self, client: PiClient) -> None:
+        with client.data.with_streaming_response.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -75,19 +75,19 @@ class TestInputs:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            input = response.parse()
-            assert_matches_type(InputClusterResponse, input, path=["response"])
+            data = response.parse()
+            assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncInputs:
+class TestAsyncData:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_cluster(self, async_client: AsyncPiClient) -> None:
-        input = await async_client.data.inputs.cluster(
+    async def test_method_create_cluster_inputs(self, async_client: AsyncPiClient) -> None:
+        data = await async_client.data.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -95,12 +95,12 @@ class TestAsyncInputs:
                 }
             ],
         )
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_cluster_with_all_params(self, async_client: AsyncPiClient) -> None:
-        input = await async_client.data.inputs.cluster(
+    async def test_method_create_cluster_inputs_with_all_params(self, async_client: AsyncPiClient) -> None:
+        data = await async_client.data.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -109,12 +109,12 @@ class TestAsyncInputs:
             ],
             num_clusters=5,
         )
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_cluster(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.data.inputs.with_raw_response.cluster(
+    async def test_raw_response_create_cluster_inputs(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.data.with_raw_response.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -125,13 +125,13 @@ class TestAsyncInputs:
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        input = await response.parse()
-        assert_matches_type(InputClusterResponse, input, path=["response"])
+        data = await response.parse()
+        assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_cluster(self, async_client: AsyncPiClient) -> None:
-        async with async_client.data.inputs.with_streaming_response.cluster(
+    async def test_streaming_response_create_cluster_inputs(self, async_client: AsyncPiClient) -> None:
+        async with async_client.data.with_streaming_response.create_cluster_inputs(
             inputs=[
                 {
                     "identifier": "abcd12345",
@@ -142,7 +142,7 @@ class TestAsyncInputs:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            input = await response.parse()
-            assert_matches_type(InputClusterResponse, input, path=["response"])
+            data = await response.parse()
+            assert_matches_type(DataCreateClusterInputsResponse, data, path=["response"])
 
         assert cast(Any, response.is_closed) is True

@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["GenerateSyntheticDataStreamMessagesResponse"]
+__all__ = ["GenerateInputCancelResponse"]
 
-GenerateSyntheticDataStreamMessagesResponse: TypeAlias = str
+GenerateInputCancelResponse: TypeAlias = str

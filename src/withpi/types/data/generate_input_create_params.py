@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-from ...shared.exploration_mode import ExplorationMode
+from ..shared.exploration_mode import ExplorationMode
 
-__all__ = ["GenerateFromSeedStartJobParams"]
+__all__ = ["GenerateInputCreateParams"]
 
 
-class GenerateFromSeedStartJobParams(TypedDict, total=False):
+class GenerateInputCreateParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description for which the inputs would be applicable."""
 
