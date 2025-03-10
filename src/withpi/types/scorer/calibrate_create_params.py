@@ -2,111 +2,54 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
-from ..contracts.calibration_strategy import CalibrationStrategy
-from ..contracts.sdk_labeled_example_param import SDKLabeledExampleParam
-from ..contracts.sdk_preference_example_param import SDKPreferenceExampleParam
+from ..shared_params.scorer import Scorer
 
-__all__ = ["CalibrateCreateParams", "Scorer", "ScorerDimension", "ScorerDimensionSubDimension"]
+__all__ = ["CalibrateCreateParams", "Example", "PreferenceExample"]
 
 
 class CalibrateCreateParams(TypedDict, total=False):
     scorer: Required[Scorer]
     """The scoring system to calibrate"""
 
-    examples: Optional[Iterable[SDKLabeledExampleParam]]
+    examples: Optional[Iterable[Example]]
     """Rated examples to use when calibrating the scoring system.
 
     Must specify either the examples or the preference examples
     """
 
-    preference_examples: Optional[Iterable[SDKPreferenceExampleParam]]
+    preference_examples: Optional[Iterable[PreferenceExample]]
     """Preference examples to use when calibrating the scoring system.
 
     Must specify either the examples or preference examples
     """
 
-    strategy: CalibrationStrategy
+    strategy: Literal["LITE", "FULL"]
     """The strategy to use to calibrate the scoring system.
 
     FULL would take longer than LITE but may result in better result.
     """
 
 
-class ScorerDimensionSubDimensionTyped(TypedDict, total=False):
-    description: Required[str]
-    """The description of the dimension"""
+class Example(TypedDict, total=False):
+    llm_input: Required[str]
+    """The input to LLM"""
 
-    label: Required[str]
-    """The label of the dimension"""
+    llm_output: Required[str]
+    """The output to evaluate"""
 
-    scoring_type: Required[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
-    """The type of scoring performed for this dimension"""
-
-    custom_model_id: Optional[str]
-    """
-    The ID of the custom model to use for scoring. Only relevant for scoring_type of
-    CUSTOM_MODEL_SCORER
-    """
-
-    parameters: Optional[Iterable[float]]
-    """The learned parameters for the scoring method.
-
-    This represents piecewise linear interpolation between [0, 1].
-    """
-
-    python_code: Optional[str]
-    """The PYTHON code associated the PYTHON_CODE DimensionScoringType."""
-
-    weight: Optional[float]
-    """The weight of the subdimension.
-
-    The sum of subdimension weights will be normalized to one internally.  A higher weight counts
-            for more when aggregating this subdimension into the parent dimension.
-    """
+    rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
+    """The rating of the llm_output given the llm_input"""
 
 
-ScorerDimensionSubDimension: TypeAlias = Union[ScorerDimensionSubDimensionTyped, Dict[str, object]]
+class PreferenceExample(TypedDict, total=False):
+    chosen: Required[str]
+    """The chosen output in corresponding to the llm_input."""
 
+    llm_input: Required[str]
+    """The input to LLM"""
 
-class ScorerDimensionTyped(TypedDict, total=False):
-    description: Required[str]
-    """The description of the dimension"""
-
-    label: Required[str]
-    """The label of the dimension"""
-
-    sub_dimensions: Required[Iterable[ScorerDimensionSubDimension]]
-    """The sub dimensions of the dimension"""
-
-    parameters: Optional[Iterable[float]]
-    """The learned parameters for the scoring method.
-
-    This represents piecewise linear interpolation between [0, 1].
-    """
-
-    weight: Optional[float]
-    """
-    The weight of the dimension The sum of dimension weights will be normalized to
-    one internally. A higher weight counts for more when aggregating this dimension
-    is aggregated into the final score.
-    """
-
-
-ScorerDimension: TypeAlias = Union[ScorerDimensionTyped, Dict[str, object]]
-
-
-class ScorerTyped(TypedDict, total=False):
-    description: Required[str]
-    """The application description"""
-
-    name: Required[str]
-    """The name of the scoring system"""
-
-    dimensions: Iterable[ScorerDimension]
-    """The dimensions of the scoring system"""
-
-
-Scorer: TypeAlias = Union[ScorerTyped, Dict[str, object]]
+    rejected: Required[str]
+    """The rejected output in corresponding to the llm_input."""

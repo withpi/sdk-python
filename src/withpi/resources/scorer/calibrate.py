@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -21,13 +22,10 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scorer import calibrate_list_params, calibrate_create_params
-from ...types.contracts import State, CalibrationStrategy
-from ...types.contracts.state import State
-from ...types.contracts.calibration_strategy import CalibrationStrategy
+from ...types.shared_params.scorer import Scorer
 from ...types.scorer.calibrate_list_response import CalibrateListResponse
-from ...types.contracts.sdk_labeled_example_param import SDKLabeledExampleParam
-from ...types.contracts.sdk_preference_example_param import SDKPreferenceExampleParam
-from ...types.pi_scoring_system.scoring_system_calibration_status import ScoringSystemCalibrationStatus
+from ...types.scorer.calibrate_create_response import CalibrateCreateResponse
+from ...types.scorer.calibrate_retrieve_response import CalibrateRetrieveResponse
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -55,17 +53,17 @@ class CalibrateResource(SyncAPIResource):
     def create(
         self,
         *,
-        scorer: calibrate_create_params.Scorer,
-        examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
-        strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
+        scorer: Scorer,
+        examples: Optional[Iterable[calibrate_create_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_create_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemCalibrationStatus:
+    ) -> CalibrateCreateResponse:
         """
         Launches a Scoring System Calibration job
 
@@ -103,7 +101,7 @@ class CalibrateResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemCalibrationStatus,
+            cast_to=CalibrateCreateResponse,
         )
 
     def retrieve(
@@ -116,7 +114,7 @@ class CalibrateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemCalibrationStatus:
+    ) -> CalibrateRetrieveResponse:
         """
         Checks the status of a Scoring System Calibration job
 
@@ -136,13 +134,13 @@ class CalibrateResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemCalibrationStatus,
+            cast_to=CalibrateRetrieveResponse,
         )
 
     def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -267,17 +265,17 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        scorer: calibrate_create_params.Scorer,
-        examples: Optional[Iterable[SDKLabeledExampleParam]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[SDKPreferenceExampleParam]] | NotGiven = NOT_GIVEN,
-        strategy: CalibrationStrategy | NotGiven = NOT_GIVEN,
+        scorer: Scorer,
+        examples: Optional[Iterable[calibrate_create_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_create_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemCalibrationStatus:
+    ) -> CalibrateCreateResponse:
         """
         Launches a Scoring System Calibration job
 
@@ -315,7 +313,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemCalibrationStatus,
+            cast_to=CalibrateCreateResponse,
         )
 
     async def retrieve(
@@ -328,7 +326,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemCalibrationStatus:
+    ) -> CalibrateRetrieveResponse:
         """
         Checks the status of a Scoring System Calibration job
 
@@ -348,13 +346,13 @@ class AsyncCalibrateResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemCalibrationStatus,
+            cast_to=CalibrateRetrieveResponse,
         )
 
     async def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

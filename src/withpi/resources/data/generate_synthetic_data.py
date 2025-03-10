@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -19,16 +20,9 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import (
-    SDKExplorationMode,
-    generate_synthetic_data_list_params,
-    generate_synthetic_data_start_job_params,
-)
+from ...types.data import generate_synthetic_data_list_params, generate_synthetic_data_start_job_params
 from ..._base_client import make_request_options
-from ...types.contracts import State
-from ...types.contracts.state import State
-from ...types.data.sdk_exploration_mode import SDKExplorationMode
-from ...types.shared_params.sdk_example import SDKExample
+from ...types.shared.exploration_mode import ExplorationMode
 from ...types.shared.synthetic_data_status import SyntheticDataStatus
 from ...types.data.generate_synthetic_data_list_response import GenerateSyntheticDataListResponse
 from ...types.data.generate_synthetic_data_stream_data_response import GenerateSyntheticDataStreamDataResponse
@@ -92,7 +86,7 @@ class GenerateSyntheticDataResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -165,10 +159,10 @@ class GenerateSyntheticDataResource(SyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[SDKExample],
+        seeds: Iterable[generate_synthetic_data_start_job_params.Seed],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -349,7 +343,7 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[State] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -422,10 +416,10 @@ class AsyncGenerateSyntheticDataResource(AsyncAPIResource):
         self,
         *,
         num_examples_to_generate: int,
-        seeds: Iterable[SDKExample],
+        seeds: Iterable[generate_synthetic_data_start_job_params.Seed],
         application_description: Optional[str] | NotGiven = NOT_GIVEN,
         batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: SDKExplorationMode | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

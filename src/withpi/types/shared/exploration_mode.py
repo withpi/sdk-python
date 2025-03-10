@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["CalibrationStrategy"]
+__all__ = ["ExplorationMode"]
 
-CalibrationStrategy: TypeAlias = Literal["LITE", "FULL"]
+ExplorationMode: TypeAlias = Literal["CONSERVATIVE", "BALANCED", "CREATIVE", "ADVENTUROUS"]
