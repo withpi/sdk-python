@@ -5,38 +5,34 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from .lora_config_param import LoraConfigParam
-from .text_generation_base_model import TextGenerationBaseModel
+from ..contracts.calibration_strategy import CalibrationStrategy
+from ..contracts.sdk_labeled_example_param import SDKLabeledExampleParam
+from ..contracts.sdk_preference_example_param import SDKPreferenceExampleParam
 
-__all__ = ["GrpoStartJobParams", "Example", "Scorer", "ScorerDimension", "ScorerDimensionSubDimension"]
+__all__ = ["CalibrateCreateParams", "Scorer", "ScorerDimension", "ScorerDimensionSubDimension"]
 
 
-class GrpoStartJobParams(TypedDict, total=False):
-    base_rl_model: Required[TextGenerationBaseModel]
-    """The base model to start the RL tunning process"""
-
-    examples: Required[Iterable[Example]]
-    """Examples to use in the RL tuning process"""
-
-    learning_rate: Required[float]
-    """GRPO learning rate"""
-
-    lora_config: Required[LoraConfigParam]
-    """The LoRA configuration."""
-
-    num_train_epochs: Required[int]
-    """GRPO number of train epochs"""
-
+class CalibrateCreateParams(TypedDict, total=False):
     scorer: Required[Scorer]
-    """The scoring system to use in the GRPO tuning process"""
+    """The scoring system to calibrate"""
 
-    system_prompt: Required[Optional[str]]
-    """A custom system prompt to use during the RL tuning process"""
+    examples: Optional[Iterable[SDKLabeledExampleParam]]
+    """Rated examples to use when calibrating the scoring system.
 
+    Must specify either the examples or the preference examples
+    """
 
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input prompt to LLM for the RL training process"""
+    preference_examples: Optional[Iterable[SDKPreferenceExampleParam]]
+    """Preference examples to use when calibrating the scoring system.
+
+    Must specify either the examples or preference examples
+    """
+
+    strategy: CalibrationStrategy
+    """The strategy to use to calibrate the scoring system.
+
+    FULL would take longer than LITE but may result in better result.
+    """
 
 
 class ScorerDimensionSubDimensionTyped(TypedDict, total=False):

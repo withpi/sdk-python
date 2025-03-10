@@ -25,7 +25,6 @@ from ...types.prompt import optimize_list_params, optimize_start_job_params
 from ...types.contracts import State
 from ...types.contracts.state import State
 from ...types.shared_params.sdk_example import SDKExample
-from ...types.shared_params.scoring_system import ScoringSystem
 from ...types.prompt.optimize_list_response import OptimizeListResponse
 from ...types.prompt.prompt_optimization_status import PromptOptimizationStatus
 
@@ -161,7 +160,7 @@ class OptimizeResource(SyncAPIResource):
         examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
-        scoring_system: ScoringSystem,
+        scorer: optimize_start_job_params.Scorer,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
@@ -182,7 +181,7 @@ class OptimizeResource(SyncAPIResource):
 
           model_id: The model to use for generating responses
 
-          scoring_system: The contract to optimize
+          scorer: The contract to optimize
 
           tuning_algorithm: The tuning algorithm to use
 
@@ -207,7 +206,7 @@ class OptimizeResource(SyncAPIResource):
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
                     "use_chain_of_thought": use_chain_of_thought,
@@ -384,7 +383,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
         examples: Iterable[SDKExample],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
-        scoring_system: ScoringSystem,
+        scorer: optimize_start_job_params.Scorer,
         tuning_algorithm: Literal["PI", "DSPY"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
@@ -405,7 +404,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
 
           model_id: The model to use for generating responses
 
-          scoring_system: The contract to optimize
+          scorer: The contract to optimize
 
           tuning_algorithm: The tuning algorithm to use
 
@@ -430,7 +429,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
                     "examples": examples,
                     "initial_system_instruction": initial_system_instruction,
                     "model_id": model_id,
-                    "scoring_system": scoring_system,
+                    "scorer": scorer,
                     "tuning_algorithm": tuning_algorithm,
                     "dspy_optimization_type": dspy_optimization_type,
                     "use_chain_of_thought": use_chain_of_thought,

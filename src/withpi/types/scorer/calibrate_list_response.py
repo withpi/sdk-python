@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .scoring_system_calibration_status import ScoringSystemCalibrationStatus
+from ..pi_scoring_system.scoring_system_calibration_status import ScoringSystemCalibrationStatus
 
 __all__ = ["CalibrateListResponse"]
 

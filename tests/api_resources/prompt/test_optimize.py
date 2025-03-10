@@ -152,7 +152,7 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -172,7 +172,7 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -227,7 +227,7 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -251,7 +251,7 @@ class TestOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -443,7 +443,7 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -463,7 +463,7 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -518,7 +518,7 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -542,7 +542,7 @@ class TestAsyncOptimize:
             ],
             initial_system_instruction="Write a great story around the given topic.",
             model_id="gpt-4o-mini",
-            scoring_system={
+            scorer={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },

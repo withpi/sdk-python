@@ -24,6 +24,14 @@ from .prompt import (
     PromptResourceWithStreamingResponse,
     AsyncPromptResourceWithStreamingResponse,
 )
+from .scorer import (
+    ScorerResource,
+    AsyncScorerResource,
+    ScorerResourceWithRawResponse,
+    AsyncScorerResourceWithRawResponse,
+    ScorerResourceWithStreamingResponse,
+    AsyncScorerResourceWithStreamingResponse,
+)
 from .queries import (
     QueriesResource,
     AsyncQueriesResource,
@@ -32,30 +40,8 @@ from .queries import (
     QueriesResourceWithStreamingResponse,
     AsyncQueriesResourceWithStreamingResponse,
 )
-from .contracts import (
-    ContractsResource,
-    AsyncContractsResource,
-    ContractsResourceWithRawResponse,
-    AsyncContractsResourceWithRawResponse,
-    ContractsResourceWithStreamingResponse,
-    AsyncContractsResourceWithStreamingResponse,
-)
-from .pi_scoring_system import (
-    PiScoringSystemResource,
-    AsyncPiScoringSystemResource,
-    PiScoringSystemResourceWithRawResponse,
-    AsyncPiScoringSystemResourceWithRawResponse,
-    PiScoringSystemResourceWithStreamingResponse,
-    AsyncPiScoringSystemResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "ContractsResource",
-    "AsyncContractsResource",
-    "ContractsResourceWithRawResponse",
-    "AsyncContractsResourceWithRawResponse",
-    "ContractsResourceWithStreamingResponse",
-    "AsyncContractsResourceWithStreamingResponse",
     "DataResource",
     "AsyncDataResource",
     "DataResourceWithRawResponse",
@@ -68,12 +54,6 @@ __all__ = [
     "AsyncModelResourceWithRawResponse",
     "ModelResourceWithStreamingResponse",
     "AsyncModelResourceWithStreamingResponse",
-    "PiScoringSystemResource",
-    "AsyncPiScoringSystemResource",
-    "PiScoringSystemResourceWithRawResponse",
-    "AsyncPiScoringSystemResourceWithRawResponse",
-    "PiScoringSystemResourceWithStreamingResponse",
-    "AsyncPiScoringSystemResourceWithStreamingResponse",
     "PromptResource",
     "AsyncPromptResource",
     "PromptResourceWithRawResponse",
@@ -86,4 +66,10 @@ __all__ = [
     "AsyncQueriesResourceWithRawResponse",
     "QueriesResourceWithStreamingResponse",
     "AsyncQueriesResourceWithStreamingResponse",
+    "ScorerResource",
+    "AsyncScorerResource",
+    "ScorerResourceWithRawResponse",
+    "AsyncScorerResourceWithRawResponse",
+    "ScorerResourceWithStreamingResponse",
+    "AsyncScorerResourceWithStreamingResponse",
 ]

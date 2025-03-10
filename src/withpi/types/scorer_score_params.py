@@ -5,38 +5,18 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from .lora_config_param import LoraConfigParam
-from .text_generation_base_model import TextGenerationBaseModel
-
-__all__ = ["GrpoStartJobParams", "Example", "Scorer", "ScorerDimension", "ScorerDimensionSubDimension"]
+__all__ = ["ScorerScoreParams", "Scorer", "ScorerDimension", "ScorerDimensionSubDimension"]
 
 
-class GrpoStartJobParams(TypedDict, total=False):
-    base_rl_model: Required[TextGenerationBaseModel]
-    """The base model to start the RL tunning process"""
+class ScorerScoreParams(TypedDict, total=False):
+    llm_input: Required[str]
+    """The input to score"""
 
-    examples: Required[Iterable[Example]]
-    """Examples to use in the RL tuning process"""
-
-    learning_rate: Required[float]
-    """GRPO learning rate"""
-
-    lora_config: Required[LoraConfigParam]
-    """The LoRA configuration."""
-
-    num_train_epochs: Required[int]
-    """GRPO number of train epochs"""
+    llm_output: Required[str]
+    """The output to score"""
 
     scorer: Required[Scorer]
-    """The scoring system to use in the GRPO tuning process"""
-
-    system_prompt: Required[Optional[str]]
-    """A custom system prompt to use during the RL tuning process"""
-
-
-class Example(TypedDict, total=False):
-    llm_input: Required[str]
-    """The input prompt to LLM for the RL training process"""
+    """The scoring system to score"""
 
 
 class ScorerDimensionSubDimensionTyped(TypedDict, total=False):

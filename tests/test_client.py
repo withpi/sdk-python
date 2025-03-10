@@ -707,11 +707,15 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/contracts/calibrate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
             self.client.get(
-                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/data/generate_synthetic_data/job_id",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -719,11 +723,13 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/contracts/calibrate").mock(return_value=httpx.Response(500))
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.get(
-                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/data/generate_synthetic_data/job_id",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -752,9 +758,9 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = client.contracts.calibrate.with_raw_response.list()
+        response = client.data.generate_synthetic_data.with_raw_response.retrieve("job_id")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -776,9 +782,11 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = client.contracts.calibrate.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id", extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -799,9 +807,11 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = client.contracts.calibrate.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id", extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1477,11 +1487,15 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/contracts/calibrate").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
             await self.client.get(
-                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/data/generate_synthetic_data/job_id",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1489,11 +1503,13 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/contracts/calibrate").mock(return_value=httpx.Response(500))
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.get(
-                "/contracts/calibrate", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/data/generate_synthetic_data/job_id",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1523,9 +1539,9 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = await client.contracts.calibrate.with_raw_response.list()
+        response = await client.data.generate_synthetic_data.with_raw_response.retrieve("job_id")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1548,10 +1564,10 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = await client.contracts.calibrate.with_raw_response.list(
-            extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1574,10 +1590,10 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/contracts/calibrate").mock(side_effect=retry_handler)
+        respx_mock.get("/data/generate_synthetic_data/job_id").mock(side_effect=retry_handler)
 
-        response = await client.contracts.calibrate.with_raw_response.list(
-            extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.data.generate_synthetic_data.with_raw_response.retrieve(
+            "job_id", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
