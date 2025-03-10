@@ -21,7 +21,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.search.query_classifier import distill_list_params, distill_create_params, distill_download_params
+from ....types.search.query_classifier import distill_list_params, distill_download_params, distill_start_job_params
 from ....types.shared.classification_status import ClassificationStatus
 from ....types.search.query_classifier.distill_list_response import DistillListResponse
 
@@ -47,57 +47,6 @@ class DistillResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return DistillResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[distill_create_params.Example],
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassificationStatus:
-        """
-        Launches a Query Classifier Distillation job
-
-        Args:
-          base_model: The base model to start the classification tuning process
-
-          examples: Examples to use in the classification tuning process
-
-          learning_rate: Classification learning rate
-
-          num_train_epochs: Classification number of train epochs
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/search/query_classifier/distill",
-            body=maybe_transform(
-                {
-                    "base_model": base_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "num_train_epochs": num_train_epochs,
-                },
-                distill_create_params.DistillCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClassificationStatus,
-        )
 
     def retrieve(
         self,
@@ -240,7 +189,58 @@ class DistillResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def messages(
+    def start_job(
+        self,
+        *,
+        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
+        examples: Iterable[distill_start_job_params.Example],
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ClassificationStatus:
+        """
+        Launches a Query Classifier Distillation job
+
+        Args:
+          base_model: The base model to start the classification tuning process
+
+          examples: Examples to use in the classification tuning process
+
+          learning_rate: Classification learning rate
+
+          num_train_epochs: Classification number of train epochs
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/search/query_classifier/distill",
+            body=maybe_transform(
+                {
+                    "base_model": base_model,
+                    "examples": examples,
+                    "learning_rate": learning_rate,
+                    "num_train_epochs": num_train_epochs,
+                },
+                distill_start_job_params.DistillStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ClassificationStatus,
+        )
+
+    def stream_messages(
         self,
         job_id: str,
         *,
@@ -294,57 +294,6 @@ class AsyncDistillResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncDistillResourceWithStreamingResponse(self)
-
-    async def create(
-        self,
-        *,
-        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
-        examples: Iterable[distill_create_params.Example],
-        learning_rate: float | NotGiven = NOT_GIVEN,
-        num_train_epochs: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassificationStatus:
-        """
-        Launches a Query Classifier Distillation job
-
-        Args:
-          base_model: The base model to start the classification tuning process
-
-          examples: Examples to use in the classification tuning process
-
-          learning_rate: Classification learning rate
-
-          num_train_epochs: Classification number of train epochs
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/search/query_classifier/distill",
-            body=await async_maybe_transform(
-                {
-                    "base_model": base_model,
-                    "examples": examples,
-                    "learning_rate": learning_rate,
-                    "num_train_epochs": num_train_epochs,
-                },
-                distill_create_params.DistillCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ClassificationStatus,
-        )
 
     async def retrieve(
         self,
@@ -489,7 +438,58 @@ class AsyncDistillResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def messages(
+    async def start_job(
+        self,
+        *,
+        base_model: Literal["MODERNBERT_BASE", "MODERNBERT_LARGE"],
+        examples: Iterable[distill_start_job_params.Example],
+        learning_rate: float | NotGiven = NOT_GIVEN,
+        num_train_epochs: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ClassificationStatus:
+        """
+        Launches a Query Classifier Distillation job
+
+        Args:
+          base_model: The base model to start the classification tuning process
+
+          examples: Examples to use in the classification tuning process
+
+          learning_rate: Classification learning rate
+
+          num_train_epochs: Classification number of train epochs
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/search/query_classifier/distill",
+            body=await async_maybe_transform(
+                {
+                    "base_model": base_model,
+                    "examples": examples,
+                    "learning_rate": learning_rate,
+                    "num_train_epochs": num_train_epochs,
+                },
+                distill_start_job_params.DistillStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ClassificationStatus,
+        )
+
+    async def stream_messages(
         self,
         job_id: str,
         *,
@@ -528,9 +528,6 @@ class DistillResourceWithRawResponse:
     def __init__(self, distill: DistillResource) -> None:
         self._distill = distill
 
-        self.create = to_raw_response_wrapper(
-            distill.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             distill.retrieve,
         )
@@ -543,8 +540,11 @@ class DistillResourceWithRawResponse:
         self.download = to_raw_response_wrapper(
             distill.download,
         )
-        self.messages = to_raw_response_wrapper(
-            distill.messages,
+        self.start_job = to_raw_response_wrapper(
+            distill.start_job,
+        )
+        self.stream_messages = to_raw_response_wrapper(
+            distill.stream_messages,
         )
 
 
@@ -552,9 +552,6 @@ class AsyncDistillResourceWithRawResponse:
     def __init__(self, distill: AsyncDistillResource) -> None:
         self._distill = distill
 
-        self.create = async_to_raw_response_wrapper(
-            distill.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             distill.retrieve,
         )
@@ -567,8 +564,11 @@ class AsyncDistillResourceWithRawResponse:
         self.download = async_to_raw_response_wrapper(
             distill.download,
         )
-        self.messages = async_to_raw_response_wrapper(
-            distill.messages,
+        self.start_job = async_to_raw_response_wrapper(
+            distill.start_job,
+        )
+        self.stream_messages = async_to_raw_response_wrapper(
+            distill.stream_messages,
         )
 
 
@@ -576,9 +576,6 @@ class DistillResourceWithStreamingResponse:
     def __init__(self, distill: DistillResource) -> None:
         self._distill = distill
 
-        self.create = to_streamed_response_wrapper(
-            distill.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             distill.retrieve,
         )
@@ -591,8 +588,11 @@ class DistillResourceWithStreamingResponse:
         self.download = to_streamed_response_wrapper(
             distill.download,
         )
-        self.messages = to_streamed_response_wrapper(
-            distill.messages,
+        self.start_job = to_streamed_response_wrapper(
+            distill.start_job,
+        )
+        self.stream_messages = to_streamed_response_wrapper(
+            distill.stream_messages,
         )
 
 
@@ -600,9 +600,6 @@ class AsyncDistillResourceWithStreamingResponse:
     def __init__(self, distill: AsyncDistillResource) -> None:
         self._distill = distill
 
-        self.create = async_to_streamed_response_wrapper(
-            distill.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             distill.retrieve,
         )
@@ -615,6 +612,9 @@ class AsyncDistillResourceWithStreamingResponse:
         self.download = async_to_streamed_response_wrapper(
             distill.download,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            distill.messages,
+        self.start_job = async_to_streamed_response_wrapper(
+            distill.start_job,
+        )
+        self.stream_messages = async_to_streamed_response_wrapper(
+            distill.stream_messages,
         )

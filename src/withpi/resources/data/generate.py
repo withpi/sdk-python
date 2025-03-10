@@ -20,7 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.data import generate_list_params, generate_create_params
+from ...types.data import generate_list_params, generate_start_job_params
 from ..._base_client import make_request_options
 from ...types.shared.exploration_mode import ExplorationMode
 from ...types.data.generate_list_response import GenerateListResponse
@@ -48,67 +48,6 @@ class GenerateResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return GenerateResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        application_description: str,
-        num_inputs_to_generate: int,
-        seeds: List[str],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
-        """
-        Launches a Generation Data job
-
-        Args:
-          application_description: The application description for which the inputs would be applicable.
-
-          num_inputs_to_generate: The number of new LLM inputs to generate
-
-          seeds: The list of LLM inputs to be used as seeds
-
-          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
-              be same as `num_shots`.
-
-          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
-
-          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
-              Generally it could be same as `batch_size`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/data/generate",
-            body=maybe_transform(
-                {
-                    "application_description": application_description,
-                    "num_inputs_to_generate": num_inputs_to_generate,
-                    "seeds": seeds,
-                    "batch_size": batch_size,
-                    "exploration_mode": exploration_mode,
-                    "num_shots": num_shots,
-                },
-                generate_create_params.GenerateCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DataGenerationStatus,
-        )
 
     def retrieve(
         self,
@@ -213,6 +152,67 @@ class GenerateResource(SyncAPIResource):
             cast_to=str,
         )
 
+    def start_job(
+        self,
+        *,
+        application_description: str,
+        num_inputs_to_generate: int,
+        seeds: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataGenerationStatus:
+        """
+        Launches a Generation Data job
+
+        Args:
+          application_description: The application description for which the inputs would be applicable.
+
+          num_inputs_to_generate: The number of new LLM inputs to generate
+
+          seeds: The list of LLM inputs to be used as seeds
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
+              be same as `num_shots`.
+
+          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
+
+          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
+              Generally it could be same as `batch_size`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/data/generate",
+            body=maybe_transform(
+                {
+                    "application_description": application_description,
+                    "num_inputs_to_generate": num_inputs_to_generate,
+                    "seeds": seeds,
+                    "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
+                    "num_shots": num_shots,
+                },
+                generate_start_job_params.GenerateStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DataGenerationStatus,
+        )
+
     def stream_data(
         self,
         job_id: str,
@@ -301,67 +301,6 @@ class AsyncGenerateResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncGenerateResourceWithStreamingResponse(self)
-
-    async def create(
-        self,
-        *,
-        application_description: str,
-        num_inputs_to_generate: int,
-        seeds: List[str],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DataGenerationStatus:
-        """
-        Launches a Generation Data job
-
-        Args:
-          application_description: The application description for which the inputs would be applicable.
-
-          num_inputs_to_generate: The number of new LLM inputs to generate
-
-          seeds: The list of LLM inputs to be used as seeds
-
-          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
-              be same as `num_shots`.
-
-          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
-
-          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
-              Generally it could be same as `batch_size`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/data/generate",
-            body=await async_maybe_transform(
-                {
-                    "application_description": application_description,
-                    "num_inputs_to_generate": num_inputs_to_generate,
-                    "seeds": seeds,
-                    "batch_size": batch_size,
-                    "exploration_mode": exploration_mode,
-                    "num_shots": num_shots,
-                },
-                generate_create_params.GenerateCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DataGenerationStatus,
-        )
 
     async def retrieve(
         self,
@@ -466,6 +405,67 @@ class AsyncGenerateResource(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def start_job(
+        self,
+        *,
+        application_description: str,
+        num_inputs_to_generate: int,
+        seeds: List[str],
+        batch_size: int | NotGiven = NOT_GIVEN,
+        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
+        num_shots: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DataGenerationStatus:
+        """
+        Launches a Generation Data job
+
+        Args:
+          application_description: The application description for which the inputs would be applicable.
+
+          num_inputs_to_generate: The number of new LLM inputs to generate
+
+          seeds: The list of LLM inputs to be used as seeds
+
+          batch_size: Number of inputs to generate in one LLM call. Must be <= 10. Generally it could
+              be same as `num_shots`.
+
+          exploration_mode: The exloration mode for input generation. Defaults to `BALANCED`
+
+          num_shots: Number of inputs to be included in the prompt for generation. Must be <= 10.
+              Generally it could be same as `batch_size`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/data/generate",
+            body=await async_maybe_transform(
+                {
+                    "application_description": application_description,
+                    "num_inputs_to_generate": num_inputs_to_generate,
+                    "seeds": seeds,
+                    "batch_size": batch_size,
+                    "exploration_mode": exploration_mode,
+                    "num_shots": num_shots,
+                },
+                generate_start_job_params.GenerateStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DataGenerationStatus,
+        )
+
     async def stream_data(
         self,
         job_id: str,
@@ -539,9 +539,6 @@ class GenerateResourceWithRawResponse:
     def __init__(self, generate: GenerateResource) -> None:
         self._generate = generate
 
-        self.create = to_raw_response_wrapper(
-            generate.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             generate.retrieve,
         )
@@ -550,6 +547,9 @@ class GenerateResourceWithRawResponse:
         )
         self.cancel = to_raw_response_wrapper(
             generate.cancel,
+        )
+        self.start_job = to_raw_response_wrapper(
+            generate.start_job,
         )
         self.stream_data = to_raw_response_wrapper(
             generate.stream_data,
@@ -563,9 +563,6 @@ class AsyncGenerateResourceWithRawResponse:
     def __init__(self, generate: AsyncGenerateResource) -> None:
         self._generate = generate
 
-        self.create = async_to_raw_response_wrapper(
-            generate.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             generate.retrieve,
         )
@@ -574,6 +571,9 @@ class AsyncGenerateResourceWithRawResponse:
         )
         self.cancel = async_to_raw_response_wrapper(
             generate.cancel,
+        )
+        self.start_job = async_to_raw_response_wrapper(
+            generate.start_job,
         )
         self.stream_data = async_to_raw_response_wrapper(
             generate.stream_data,
@@ -587,9 +587,6 @@ class GenerateResourceWithStreamingResponse:
     def __init__(self, generate: GenerateResource) -> None:
         self._generate = generate
 
-        self.create = to_streamed_response_wrapper(
-            generate.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             generate.retrieve,
         )
@@ -598,6 +595,9 @@ class GenerateResourceWithStreamingResponse:
         )
         self.cancel = to_streamed_response_wrapper(
             generate.cancel,
+        )
+        self.start_job = to_streamed_response_wrapper(
+            generate.start_job,
         )
         self.stream_data = to_streamed_response_wrapper(
             generate.stream_data,
@@ -611,9 +611,6 @@ class AsyncGenerateResourceWithStreamingResponse:
     def __init__(self, generate: AsyncGenerateResource) -> None:
         self._generate = generate
 
-        self.create = async_to_streamed_response_wrapper(
-            generate.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             generate.retrieve,
         )
@@ -622,6 +619,9 @@ class AsyncGenerateResourceWithStreamingResponse:
         )
         self.cancel = async_to_streamed_response_wrapper(
             generate.cancel,
+        )
+        self.start_job = async_to_streamed_response_wrapper(
+            generate.start_job,
         )
         self.stream_data = async_to_streamed_response_wrapper(
             generate.stream_data,

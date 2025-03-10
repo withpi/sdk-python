@@ -22,6 +22,49 @@ class TestScoringSystem:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_from_huggingface(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        )
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_from_huggingface_with_all_params(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+            hf_token="hf_token",
+        )
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_from_huggingface(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_from_huggingface(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(Scorer, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_generate(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
@@ -54,49 +97,6 @@ class TestScoringSystem:
     def test_streaming_response_generate(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scoring_system = response.parse()
-            assert_matches_type(Scorer, scoring_system, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_read_from_huggingface(self, client: PiClient) -> None:
-        scoring_system = client.scoring_system.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-        )
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_read_from_huggingface_with_all_params(self, client: PiClient) -> None:
-        scoring_system = client.scoring_system.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-            hf_token="hf_token",
-        )
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_read_from_huggingface(self, client: PiClient) -> None:
-        response = client.scoring_system.with_raw_response.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scoring_system = response.parse()
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_read_from_huggingface(self, client: PiClient) -> None:
-        with client.scoring_system.with_streaming_response.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -207,6 +207,49 @@ class TestAsyncScoringSystem:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_from_huggingface(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        )
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_from_huggingface_with_all_params(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+            hf_token="hf_token",
+        )
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_from_huggingface(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(Scorer, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_from_huggingface(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.from_huggingface(
+            hf_scorer_name="withpi/tldr_scoring_system",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(Scorer, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_generate(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
@@ -239,49 +282,6 @@ class TestAsyncScoringSystem:
     async def test_streaming_response_generate(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scoring_system = await response.parse()
-            assert_matches_type(Scorer, scoring_system, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_read_from_huggingface(self, async_client: AsyncPiClient) -> None:
-        scoring_system = await async_client.scoring_system.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-        )
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_read_from_huggingface_with_all_params(self, async_client: AsyncPiClient) -> None:
-        scoring_system = await async_client.scoring_system.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-            hf_token="hf_token",
-        )
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_read_from_huggingface(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scoring_system.with_raw_response.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scoring_system = await response.parse()
-        assert_matches_type(Scorer, scoring_system, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_read_from_huggingface(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scoring_system.with_streaming_response.read_from_huggingface(
-            hf_scorer_name="withpi/tldr_scoring_system",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
