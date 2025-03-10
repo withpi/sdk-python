@@ -10,6 +10,7 @@ from withpi.types import (
     Scorer,
     ScorerDimension,
     ScorerSubDimension,
+    SftStatus,
     SyntheticDataStatus,
     TrainedModel,
 )
@@ -79,24 +80,21 @@ Types:
 
 ```python
 from withpi.types.training import (
-    SftRetrieveResponse,
     SftListResponse,
     SftCancelResponse,
     SftDownloadResponse,
-    SftLoadResponse,
-    SftStartJobResponse,
     SftStreamMessagesResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/training/sft_retrieve_response.py">SftRetrieveResponse</a></code>
+- <code title="get /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
 - <code title="get /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">list</a>(\*\*<a href="src/withpi/types/training/sft_list_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_list_response.py">SftListResponse</a></code>
 - <code title="delete /training/sft/{job_id}">client.training.sft.<a href="./src/withpi/resources/training/sft.py">cancel</a>(job_id) -> str</code>
 - <code title="post /training/sft/{job_id}/download">client.training.sft.<a href="./src/withpi/resources/training/sft.py">download</a>(job_id, \*\*<a href="src/withpi/types/training/sft_download_params.py">params</a>) -> str</code>
-- <code title="post /training/sft/{job_id}/load">client.training.sft.<a href="./src/withpi/resources/training/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/training/sft_load_response.py">SftLoadResponse</a></code>
-- <code title="post /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">start_job</a>(\*\*<a href="src/withpi/types/training/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/training/sft_start_job_response.py">SftStartJobResponse</a></code>
+- <code title="post /training/sft/{job_id}/load">client.training.sft.<a href="./src/withpi/resources/training/sft.py">load</a>(job_id) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
+- <code title="post /training/sft">client.training.sft.<a href="./src/withpi/resources/training/sft.py">start_job</a>(\*\*<a href="src/withpi/types/training/sft_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/sft_status.py">SftStatus</a></code>
 - <code title="get /training/sft/{job_id}/messages">client.training.sft.<a href="./src/withpi/resources/training/sft.py">stream_messages</a>(job_id) -> str</code>
 
 ## Grpo
