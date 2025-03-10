@@ -5,14 +5,14 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..sdk_contract_param import SDKContractParam
 from ..data.sdk_example_param import SDKExampleParam
+from ..shared_params.sdk_contract import SDKContract
 
 __all__ = ["OptimizeStartJobParams"]
 
 
 class OptimizeStartJobParams(TypedDict, total=False):
-    contract: Required[SDKContractParam]
+    contract: Required[SDKContract]
     """The contract to optimize"""
 
     examples: Required[Iterable[SDKExampleParam]]

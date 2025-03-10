@@ -9,10 +9,7 @@ import pytest
 
 from withpi import Withpi, AsyncWithpi
 from tests.utils import assert_matches_type
-from withpi.types import (
-    ScoringSystem,
-    ScoringSystemMetrics,
-)
+from withpi.types.shared import ScoringSystem, ScoringSystemMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
