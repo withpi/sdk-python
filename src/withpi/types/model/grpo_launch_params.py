@@ -5,14 +5,14 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from .lora_config_param import LoraConfigParam
-from ...shared_params.scorer import Scorer
-from .text_generation_base_model import TextGenerationBaseModel
+from .rl.lora_config_param import LoraConfigParam
+from ..shared_params.scorer import Scorer
+from .rl.text_generation_base_model import TextGenerationBaseModel
 
-__all__ = ["GrpoStartJobParams", "Example"]
+__all__ = ["GrpoLaunchParams", "Example"]
 
 
-class GrpoStartJobParams(TypedDict, total=False):
+class GrpoLaunchParams(TypedDict, total=False):
     base_rl_model: Required[TextGenerationBaseModel]
     """The base model to start the RL tunning process"""
 

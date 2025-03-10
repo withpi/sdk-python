@@ -10,13 +10,13 @@ from .sft import (
     SftResourceWithStreamingResponse,
     AsyncSftResourceWithStreamingResponse,
 )
-from .rl.rl import (
-    RlResource,
-    AsyncRlResource,
-    RlResourceWithRawResponse,
-    AsyncRlResourceWithRawResponse,
-    RlResourceWithStreamingResponse,
-    AsyncRlResourceWithStreamingResponse,
+from .grpo import (
+    GrpoResource,
+    AsyncGrpoResource,
+    GrpoResourceWithRawResponse,
+    AsyncGrpoResourceWithRawResponse,
+    GrpoResourceWithStreamingResponse,
+    AsyncGrpoResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
 from .classifier import (
@@ -38,12 +38,12 @@ class ModelResource(SyncAPIResource):
         return ClassifierResource(self._client)
 
     @cached_property
-    def rl(self) -> RlResource:
-        return RlResource(self._client)
-
-    @cached_property
     def sft(self) -> SftResource:
         return SftResource(self._client)
+
+    @cached_property
+    def grpo(self) -> GrpoResource:
+        return GrpoResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ModelResourceWithRawResponse:
@@ -71,12 +71,12 @@ class AsyncModelResource(AsyncAPIResource):
         return AsyncClassifierResource(self._client)
 
     @cached_property
-    def rl(self) -> AsyncRlResource:
-        return AsyncRlResource(self._client)
-
-    @cached_property
     def sft(self) -> AsyncSftResource:
         return AsyncSftResource(self._client)
+
+    @cached_property
+    def grpo(self) -> AsyncGrpoResource:
+        return AsyncGrpoResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncModelResourceWithRawResponse:
@@ -107,12 +107,12 @@ class ModelResourceWithRawResponse:
         return ClassifierResourceWithRawResponse(self._model.classifier)
 
     @cached_property
-    def rl(self) -> RlResourceWithRawResponse:
-        return RlResourceWithRawResponse(self._model.rl)
-
-    @cached_property
     def sft(self) -> SftResourceWithRawResponse:
         return SftResourceWithRawResponse(self._model.sft)
+
+    @cached_property
+    def grpo(self) -> GrpoResourceWithRawResponse:
+        return GrpoResourceWithRawResponse(self._model.grpo)
 
 
 class AsyncModelResourceWithRawResponse:
@@ -124,12 +124,12 @@ class AsyncModelResourceWithRawResponse:
         return AsyncClassifierResourceWithRawResponse(self._model.classifier)
 
     @cached_property
-    def rl(self) -> AsyncRlResourceWithRawResponse:
-        return AsyncRlResourceWithRawResponse(self._model.rl)
-
-    @cached_property
     def sft(self) -> AsyncSftResourceWithRawResponse:
         return AsyncSftResourceWithRawResponse(self._model.sft)
+
+    @cached_property
+    def grpo(self) -> AsyncGrpoResourceWithRawResponse:
+        return AsyncGrpoResourceWithRawResponse(self._model.grpo)
 
 
 class ModelResourceWithStreamingResponse:
@@ -141,12 +141,12 @@ class ModelResourceWithStreamingResponse:
         return ClassifierResourceWithStreamingResponse(self._model.classifier)
 
     @cached_property
-    def rl(self) -> RlResourceWithStreamingResponse:
-        return RlResourceWithStreamingResponse(self._model.rl)
-
-    @cached_property
     def sft(self) -> SftResourceWithStreamingResponse:
         return SftResourceWithStreamingResponse(self._model.sft)
+
+    @cached_property
+    def grpo(self) -> GrpoResourceWithStreamingResponse:
+        return GrpoResourceWithStreamingResponse(self._model.grpo)
 
 
 class AsyncModelResourceWithStreamingResponse:
@@ -158,9 +158,9 @@ class AsyncModelResourceWithStreamingResponse:
         return AsyncClassifierResourceWithStreamingResponse(self._model.classifier)
 
     @cached_property
-    def rl(self) -> AsyncRlResourceWithStreamingResponse:
-        return AsyncRlResourceWithStreamingResponse(self._model.rl)
-
-    @cached_property
     def sft(self) -> AsyncSftResourceWithStreamingResponse:
         return AsyncSftResourceWithStreamingResponse(self._model.sft)
+
+    @cached_property
+    def grpo(self) -> AsyncGrpoResourceWithStreamingResponse:
+        return AsyncGrpoResourceWithStreamingResponse(self._model.grpo)
