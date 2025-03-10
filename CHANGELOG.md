@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.13.0 (2025-03-10)
+
+Full Changelog: [v1.12.0...v1.13.0](https://github.com/withpi/sdk-python/compare/v1.12.0...v1.13.0)
+
+### Features
+
+* **api:** scoring_system_metrics ([#460](https://github.com/withpi/sdk-python/issues/460)) ([b055c0a](https://github.com/withpi/sdk-python/commit/b055c0aeba42435d6a71e6d29dd7d4a6808be623))
+
 ## 1.12.0 (2025-03-10)
 
 Full Changelog: [v1.11.0...v1.12.0](https://github.com/withpi/sdk-python/compare/v1.11.0...v1.12.0)
