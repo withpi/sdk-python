@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0 (2025-03-10)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/withpi/sdk-python/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** api update ([#424](https://github.com/withpi/sdk-python/issues/424)) ([37acd98](https://github.com/withpi/sdk-python/commit/37acd980d20c28a9bda6cf6e1be6304f6533bfc7))
+* **api:** api update ([#425](https://github.com/withpi/sdk-python/issues/425)) ([4ffaff8](https://github.com/withpi/sdk-python/commit/4ffaff80683ebf859697c11df3d21882673be732))
+* **api:** api update ([#426](https://github.com/withpi/sdk-python/issues/426)) ([d08dc40](https://github.com/withpi/sdk-python/commit/d08dc40c579e474fa23758a58453bcd64e98bfc5))
+* **api:** move to shared models. ([#422](https://github.com/withpi/sdk-python/issues/422)) ([8e6e7b2](https://github.com/withpi/sdk-python/commit/8e6e7b2e5425828e0538359936ff14f9be07896d))
+* next round of renaming ([#427](https://github.com/withpi/sdk-python/issues/427)) ([6495ba8](https://github.com/withpi/sdk-python/commit/6495ba8624aa2e2ed9ffb9d2d2d62324e0c515cd))
+
 ## 1.1.0 (2025-03-10)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/withpi/sdk-python/compare/v1.0.0...v1.1.0)
