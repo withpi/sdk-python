@@ -153,40 +153,6 @@ class CalibrateResource(SyncAPIResource):
             cast_to=str,
         )
 
-    def messages(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Opens a message stream about a Scorer Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
-        return self._get(
-            f"/scoring_system/calibrate/{job_id}/messages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
     def start_job(
         self,
         *,
@@ -239,6 +205,40 @@ class CalibrateResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CalibrateStartJobResponse,
+        )
+
+    def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Opens a message stream about a Scorer Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/scoring_system/calibrate/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
 
@@ -365,40 +365,6 @@ class AsyncCalibrateResource(AsyncAPIResource):
             cast_to=str,
         )
 
-    async def messages(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
-        """
-        Opens a message stream about a Scorer Calibration job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
-        return await self._get(
-            f"/scoring_system/calibrate/{job_id}/messages",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
     async def start_job(
         self,
         *,
@@ -453,6 +419,40 @@ class AsyncCalibrateResource(AsyncAPIResource):
             cast_to=CalibrateStartJobResponse,
         )
 
+    async def stream_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Opens a message stream about a Scorer Calibration job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/scoring_system/calibrate/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
 
 class CalibrateResourceWithRawResponse:
     def __init__(self, calibrate: CalibrateResource) -> None:
@@ -467,11 +467,11 @@ class CalibrateResourceWithRawResponse:
         self.cancel = to_raw_response_wrapper(
             calibrate.cancel,
         )
-        self.messages = to_raw_response_wrapper(
-            calibrate.messages,
-        )
         self.start_job = to_raw_response_wrapper(
             calibrate.start_job,
+        )
+        self.stream_messages = to_raw_response_wrapper(
+            calibrate.stream_messages,
         )
 
 
@@ -488,11 +488,11 @@ class AsyncCalibrateResourceWithRawResponse:
         self.cancel = async_to_raw_response_wrapper(
             calibrate.cancel,
         )
-        self.messages = async_to_raw_response_wrapper(
-            calibrate.messages,
-        )
         self.start_job = async_to_raw_response_wrapper(
             calibrate.start_job,
+        )
+        self.stream_messages = async_to_raw_response_wrapper(
+            calibrate.stream_messages,
         )
 
 
@@ -509,11 +509,11 @@ class CalibrateResourceWithStreamingResponse:
         self.cancel = to_streamed_response_wrapper(
             calibrate.cancel,
         )
-        self.messages = to_streamed_response_wrapper(
-            calibrate.messages,
-        )
         self.start_job = to_streamed_response_wrapper(
             calibrate.start_job,
+        )
+        self.stream_messages = to_streamed_response_wrapper(
+            calibrate.stream_messages,
         )
 
 
@@ -530,9 +530,9 @@ class AsyncCalibrateResourceWithStreamingResponse:
         self.cancel = async_to_streamed_response_wrapper(
             calibrate.cancel,
         )
-        self.messages = async_to_streamed_response_wrapper(
-            calibrate.messages,
-        )
         self.start_job = async_to_streamed_response_wrapper(
             calibrate.start_job,
+        )
+        self.stream_messages = async_to_streamed_response_wrapper(
+            calibrate.stream_messages,
         )

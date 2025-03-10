@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["CalibrateMessagesResponse"]
+__all__ = ["CalibrateStreamMessagesResponse"]
 
-CalibrateMessagesResponse: TypeAlias = str
+CalibrateStreamMessagesResponse: TypeAlias = str
