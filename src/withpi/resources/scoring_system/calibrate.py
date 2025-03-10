@@ -21,11 +21,11 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.scoring_system import calibrate_list_params, calibrate_create_params
+from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
 from ...types.shared_params.scorer import Scorer
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
-from ...types.scoring_system.calibrate_create_response import CalibrateCreateResponse
 from ...types.scoring_system.calibrate_retrieve_response import CalibrateRetrieveResponse
+from ...types.scoring_system.calibrate_start_job_response import CalibrateStartJobResponse
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -49,60 +49,6 @@ class CalibrateResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return CalibrateResourceWithStreamingResponse(self)
-
-    def create(
-        self,
-        *,
-        scorer: Scorer,
-        examples: Optional[Iterable[calibrate_create_params.Example]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[calibrate_create_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
-        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateCreateResponse:
-        """
-        Starts a Scorer Calibration job
-
-        Args:
-          scorer: The scoring system to calibrate
-
-          examples: Rated examples to use when calibrating the scoring system. Must specify either
-              the examples or the preference examples
-
-          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
-              either the examples or preference examples
-
-          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
-              LITE but may result in better result.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/scoring_system/calibrate",
-            body=maybe_transform(
-                {
-                    "scorer": scorer,
-                    "examples": examples,
-                    "preference_examples": preference_examples,
-                    "strategy": strategy,
-                },
-                calibrate_create_params.CalibrateCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CalibrateCreateResponse,
-        )
 
     def retrieve(
         self,
@@ -241,33 +187,12 @@ class CalibrateResource(SyncAPIResource):
             cast_to=str,
         )
 
-
-class AsyncCalibrateResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncCalibrateResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncCalibrateResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncCalibrateResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
-        """
-        return AsyncCalibrateResourceWithStreamingResponse(self)
-
-    async def create(
+    def start_job(
         self,
         *,
         scorer: Scorer,
-        examples: Optional[Iterable[calibrate_create_params.Example]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[calibrate_create_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -275,7 +200,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateCreateResponse:
+    ) -> CalibrateStartJobResponse:
         """
         Starts a Scorer Calibration job
 
@@ -299,22 +224,43 @@ class AsyncCalibrateResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._post(
             "/scoring_system/calibrate",
-            body=await async_maybe_transform(
+            body=maybe_transform(
                 {
                     "scorer": scorer,
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "strategy": strategy,
                 },
-                calibrate_create_params.CalibrateCreateParams,
+                calibrate_start_job_params.CalibrateStartJobParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CalibrateCreateResponse,
+            cast_to=CalibrateStartJobResponse,
         )
+
+
+class AsyncCalibrateResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncCalibrateResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/withpi/sdk-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncCalibrateResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncCalibrateResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
+        """
+        return AsyncCalibrateResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -453,14 +399,65 @@ class AsyncCalibrateResource(AsyncAPIResource):
             cast_to=str,
         )
 
+    async def start_job(
+        self,
+        *,
+        scorer: Scorer,
+        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
+        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> CalibrateStartJobResponse:
+        """
+        Starts a Scorer Calibration job
+
+        Args:
+          scorer: The scoring system to calibrate
+
+          examples: Rated examples to use when calibrating the scoring system. Must specify either
+              the examples or the preference examples
+
+          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
+              either the examples or preference examples
+
+          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
+              LITE but may result in better result.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/scoring_system/calibrate",
+            body=await async_maybe_transform(
+                {
+                    "scorer": scorer,
+                    "examples": examples,
+                    "preference_examples": preference_examples,
+                    "strategy": strategy,
+                },
+                calibrate_start_job_params.CalibrateStartJobParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CalibrateStartJobResponse,
+        )
+
 
 class CalibrateResourceWithRawResponse:
     def __init__(self, calibrate: CalibrateResource) -> None:
         self._calibrate = calibrate
 
-        self.create = to_raw_response_wrapper(
-            calibrate.create,
-        )
         self.retrieve = to_raw_response_wrapper(
             calibrate.retrieve,
         )
@@ -473,15 +470,15 @@ class CalibrateResourceWithRawResponse:
         self.messages = to_raw_response_wrapper(
             calibrate.messages,
         )
+        self.start_job = to_raw_response_wrapper(
+            calibrate.start_job,
+        )
 
 
 class AsyncCalibrateResourceWithRawResponse:
     def __init__(self, calibrate: AsyncCalibrateResource) -> None:
         self._calibrate = calibrate
 
-        self.create = async_to_raw_response_wrapper(
-            calibrate.create,
-        )
         self.retrieve = async_to_raw_response_wrapper(
             calibrate.retrieve,
         )
@@ -494,15 +491,15 @@ class AsyncCalibrateResourceWithRawResponse:
         self.messages = async_to_raw_response_wrapper(
             calibrate.messages,
         )
+        self.start_job = async_to_raw_response_wrapper(
+            calibrate.start_job,
+        )
 
 
 class CalibrateResourceWithStreamingResponse:
     def __init__(self, calibrate: CalibrateResource) -> None:
         self._calibrate = calibrate
 
-        self.create = to_streamed_response_wrapper(
-            calibrate.create,
-        )
         self.retrieve = to_streamed_response_wrapper(
             calibrate.retrieve,
         )
@@ -515,15 +512,15 @@ class CalibrateResourceWithStreamingResponse:
         self.messages = to_streamed_response_wrapper(
             calibrate.messages,
         )
+        self.start_job = to_streamed_response_wrapper(
+            calibrate.start_job,
+        )
 
 
 class AsyncCalibrateResourceWithStreamingResponse:
     def __init__(self, calibrate: AsyncCalibrateResource) -> None:
         self._calibrate = calibrate
 
-        self.create = async_to_streamed_response_wrapper(
-            calibrate.create,
-        )
         self.retrieve = async_to_streamed_response_wrapper(
             calibrate.retrieve,
         )
@@ -535,4 +532,7 @@ class AsyncCalibrateResourceWithStreamingResponse:
         )
         self.messages = async_to_streamed_response_wrapper(
             calibrate.messages,
+        )
+        self.start_job = async_to_streamed_response_wrapper(
+            calibrate.start_job,
         )
