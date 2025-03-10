@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.96 (2025-03-10)
+
+Full Changelog: [v0.1.0-alpha.95...v0.1.0-alpha.96](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.95...v0.1.0-alpha.96)
+
+### Features
+
+* **api:** rename clients ([#413](https://github.com/withpi/sdk-python/issues/413)) ([9caded7](https://github.com/withpi/sdk-python/commit/9caded749c7afc21834fd0c9a5c8ea2fe96d6078))
+
 ## 0.1.0-alpha.95 (2025-03-10)
 
 Full Changelog: [v0.1.0-alpha.94...v0.1.0-alpha.95](https://github.com/withpi/sdk-python/compare/v0.1.0-alpha.94...v0.1.0-alpha.95)

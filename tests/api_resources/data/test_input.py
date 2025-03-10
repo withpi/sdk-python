@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from withpi import Withpi, AsyncWithpi
+from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types.data import InputClusterResponse
 
@@ -19,7 +19,7 @@ class TestInput:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_cluster(self, client: Withpi) -> None:
+    def test_method_cluster(self, client: PiClient) -> None:
         input = client.data.input.cluster(
             inputs=[
                 {
@@ -32,7 +32,7 @@ class TestInput:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_cluster_with_all_params(self, client: Withpi) -> None:
+    def test_method_cluster_with_all_params(self, client: PiClient) -> None:
         input = client.data.input.cluster(
             inputs=[
                 {
@@ -46,7 +46,7 @@ class TestInput:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_cluster(self, client: Withpi) -> None:
+    def test_raw_response_cluster(self, client: PiClient) -> None:
         response = client.data.input.with_raw_response.cluster(
             inputs=[
                 {
@@ -63,7 +63,7 @@ class TestInput:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_cluster(self, client: Withpi) -> None:
+    def test_streaming_response_cluster(self, client: PiClient) -> None:
         with client.data.input.with_streaming_response.cluster(
             inputs=[
                 {
@@ -86,7 +86,7 @@ class TestAsyncInput:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_cluster(self, async_client: AsyncWithpi) -> None:
+    async def test_method_cluster(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.input.cluster(
             inputs=[
                 {
@@ -99,7 +99,7 @@ class TestAsyncInput:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_cluster_with_all_params(self, async_client: AsyncWithpi) -> None:
+    async def test_method_cluster_with_all_params(self, async_client: AsyncPiClient) -> None:
         input = await async_client.data.input.cluster(
             inputs=[
                 {
@@ -113,7 +113,7 @@ class TestAsyncInput:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_cluster(self, async_client: AsyncWithpi) -> None:
+    async def test_raw_response_cluster(self, async_client: AsyncPiClient) -> None:
         response = await async_client.data.input.with_raw_response.cluster(
             inputs=[
                 {
@@ -130,7 +130,7 @@ class TestAsyncInput:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_cluster(self, async_client: AsyncWithpi) -> None:
+    async def test_streaming_response_cluster(self, async_client: AsyncPiClient) -> None:
         async with async_client.data.input.with_streaming_response.cluster(
             inputs=[
                 {
