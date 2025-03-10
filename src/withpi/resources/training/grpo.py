@@ -243,7 +243,7 @@ class GrpoResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GrpoStartJobResponse:
         """
-        Launches a RL GRPO job
+        Starts a RL GRPO job
 
         Args:
           base_rl_model: The base model to start the RL tunning process
@@ -535,7 +535,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> GrpoStartJobResponse:
         """
-        Launches a RL GRPO job
+        Starts a RL GRPO job
 
         Args:
           base_rl_model: The base model to start the RL tunning process

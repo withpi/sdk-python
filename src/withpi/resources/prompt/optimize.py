@@ -171,7 +171,7 @@ class OptimizeResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptOptimizationStatus:
         """
-        Launches a Prompt Optimization job
+        Starts a Prompt Optimization job
 
         Args:
           examples: The examples to train and validate on
@@ -394,7 +394,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PromptOptimizationStatus:
         """
-        Launches a Prompt Optimization job
+        Starts a Prompt Optimization job
 
         Args:
           examples: The examples to train and validate on

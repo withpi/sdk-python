@@ -205,7 +205,7 @@ class DistillResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ClassificationStatus:
         """
-        Launches a Query Classifier Distillation job
+        Starts a Query Classifier Distillation job
 
         Args:
           base_model: The base model to start the classification tuning process
@@ -454,7 +454,7 @@ class AsyncDistillResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ClassificationStatus:
         """
-        Launches a Query Classifier Distillation job
+        Starts a Query Classifier Distillation job
 
         Args:
           base_model: The base model to start the classification tuning process
