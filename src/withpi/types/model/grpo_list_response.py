@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .rl_grpo_status import RlGrpoStatus
+from .rl.rl_grpo_status import RlGrpoStatus
 
 __all__ = ["GrpoListResponse"]
 
