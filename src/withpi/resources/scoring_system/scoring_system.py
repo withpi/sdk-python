@@ -35,7 +35,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.shared.scorer import Scorer as SharedScorer
 from ...types.shared_params.scorer import Scorer as SharedParamsScorer
-from ...types.scoring_system_score_response import ScoringSystemScoreResponse
+from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -164,7 +164,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores the provided input and output based on the given scorer
 
@@ -196,7 +196,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 
@@ -324,7 +324,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
         """
         Scores the provided input and output based on the given scorer
 
@@ -356,7 +356,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemMetrics,
         )
 
 
