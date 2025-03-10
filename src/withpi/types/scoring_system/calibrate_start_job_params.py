@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.scorer import Scorer
 
-__all__ = ["CalibrateCreateParams", "Example", "PreferenceExample"]
+__all__ = ["CalibrateStartJobParams", "Example", "PreferenceExample"]
 
 
-class CalibrateCreateParams(TypedDict, total=False):
+class CalibrateStartJobParams(TypedDict, total=False):
     scorer: Required[Scorer]
     """The scoring system to calibrate"""
 

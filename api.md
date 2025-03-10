@@ -161,21 +161,21 @@ Types:
 
 ```python
 from withpi.types.scoring_system import (
-    CalibrateCreateResponse,
     CalibrateRetrieveResponse,
     CalibrateListResponse,
     CalibrateCancelResponse,
     CalibrateMessagesResponse,
+    CalibrateStartJobResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">create</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_create_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_create_response.py">CalibrateCreateResponse</a></code>
 - <code title="get /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scoring_system/calibrate_retrieve_response.py">CalibrateRetrieveResponse</a></code>
 - <code title="get /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">list</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_list_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_list_response.py">CalibrateListResponse</a></code>
 - <code title="delete /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
 - <code title="get /scoring_system/calibrate/{job_id}/messages">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">messages</a>(job_id) -> str</code>
+- <code title="post /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">start_job</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_start_job_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/calibrate_start_job_response.py">CalibrateStartJobResponse</a></code>
 
 # Search
 
