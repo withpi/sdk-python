@@ -241,6 +241,19 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
@@ -258,7 +271,6 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -292,6 +304,7 @@ class TestGrpo:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -308,6 +321,19 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
@@ -329,6 +355,19 @@ class TestGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
@@ -606,6 +645,19 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
@@ -623,7 +675,6 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -657,6 +708,7 @@ class TestAsyncGrpo:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
         )
@@ -673,6 +725,19 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",
@@ -694,6 +759,19 @@ class TestAsyncGrpo:
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             system_prompt="An optional system prompt.",

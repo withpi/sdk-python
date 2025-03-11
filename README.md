@@ -36,6 +36,19 @@ scoring_system_metrics = client.scoring_system.score(
     llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
         "name": "Sample Scoring System",
     },
 )
@@ -67,6 +80,19 @@ async def main() -> None:
         llm_output="The lazy dog was jumped over by the quick brown fox",
         scoring_spec={
             "description": "Write a children's story communicating a simple life lesson.",
+            "dimensions": [
+                {
+                    "description": "dimension1 description",
+                    "label": "dimension1",
+                    "sub_dimensions": [
+                        {
+                            "description": "subdimension1 description",
+                            "label": "subdimension1",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
+                }
+            ],
             "name": "Sample Scoring System",
         },
     )
@@ -105,7 +131,6 @@ sft_status = client.training.sft.start_job(
     ],
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
-        "name": "Sample Scoring System",
         "dimensions": [
             {
                 "description": "dimension1 description",
@@ -139,6 +164,7 @@ sft_status = client.training.sft.start_job(
                 "weight": 1,
             }
         ],
+        "name": "Sample Scoring System",
     },
 )
 print(sft_status.scoring_spec)
@@ -165,6 +191,19 @@ try:
         llm_output="The lazy dog was jumped over by the quick brown fox",
         scoring_spec={
             "description": "Write a children's story communicating a simple life lesson.",
+            "dimensions": [
+                {
+                    "description": "dimension1 description",
+                    "label": "dimension1",
+                    "sub_dimensions": [
+                        {
+                            "description": "subdimension1 description",
+                            "label": "subdimension1",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
+                }
+            ],
             "name": "Sample Scoring System",
         },
     )
@@ -215,6 +254,19 @@ client.with_options(max_retries=5).scoring_system.score(
     llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
         "name": "Sample Scoring System",
     },
 )
@@ -245,6 +297,19 @@ client.with_options(timeout=5.0).scoring_system.score(
     llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
         "name": "Sample Scoring System",
     },
 )
@@ -293,6 +358,15 @@ response = client.scoring_system.with_raw_response.score(
     llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [{
+            "description": "dimension1 description",
+            "label": "dimension1",
+            "sub_dimensions": [{
+                "description": "subdimension1 description",
+                "label": "subdimension1",
+                "scoring_type": "PI_SCORER",
+            }],
+        }],
         "name": "Sample Scoring System",
     },
 )
@@ -318,6 +392,19 @@ with client.scoring_system.with_streaming_response.score(
     llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
         "name": "Sample Scoring System",
     },
 ) as response:
