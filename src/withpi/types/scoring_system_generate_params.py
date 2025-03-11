@@ -9,7 +9,7 @@ __all__ = ["ScoringSystemGenerateParams"]
 
 class ScoringSystemGenerateParams(TypedDict, total=False):
     application_description: Required[str]
-    """The application description to generate a scorer for."""
+    """The application description to generate a scoring spec for."""
 
     try_auto_generating_python_code: bool
-    """If true, try to generate python code for sub-dimensions in the scorer."""
+    """If true, try to generate python code for sub-dimensions in the scoring spec."""
