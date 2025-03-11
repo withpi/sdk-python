@@ -20,4 +20,4 @@ class ScoringSystemMetrics(BaseModel):
     """The score components for each dimension"""
 
     total_score: float
-    """The total score of the scoring system"""
+    """The total score of the scoring spec"""

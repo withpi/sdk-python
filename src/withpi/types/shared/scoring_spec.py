@@ -13,10 +13,10 @@ class ScoringSpec(BaseModel):
     """The application description"""
 
     dimensions: List[ScoringDimension]
-    """The dimensions of the scoring system"""
+    """The dimensions of the scoring spec"""
 
     name: str
-    """The name of the scoring system"""
+    """The name of the scoring spec"""
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.
