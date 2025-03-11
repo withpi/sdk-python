@@ -13,7 +13,7 @@ __all__ = ["OptimizeStartJobParams"]
 
 class OptimizeStartJobParams(TypedDict, total=False):
     examples: Required[Iterable[SDKExample]]
-    """The examples to train and validate on"""
+    """The examples (input-response pairs) to train and validate on"""
 
     initial_system_instruction: Required[str]
     """The initial system instruction"""
@@ -22,7 +22,7 @@ class OptimizeStartJobParams(TypedDict, total=False):
     """The model to use for generating responses"""
 
     scorer: Required[Scorer]
-    """The contract to optimize"""
+    """The scorer to optimize"""
 
     tuning_algorithm: Required[Literal["PI", "DSPY"]]
     """The tuning algorithm to use"""

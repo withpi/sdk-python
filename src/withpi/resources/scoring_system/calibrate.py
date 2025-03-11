@@ -171,16 +171,16 @@ class CalibrateResource(SyncAPIResource):
         Starts a Scorer Calibration job
 
         Args:
-          scorer: The scoring system to calibrate
+          scorer: The scorer to calibrate
 
-          examples: Rated examples to use when calibrating the scoring system. Must specify either
-              the examples or the preference examples
+          examples: Rated examples to use when calibrating the scorer. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
-              either the examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scorer. Must specify either the
+              examples or preference examples
 
-          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
-              LITE but may result in better result.
+          strategy: The strategy to use to calibrate the scorer. FULL would take longer than LITE
+              but may result in better result.
 
           extra_headers: Send extra headers
 
@@ -383,16 +383,16 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Starts a Scorer Calibration job
 
         Args:
-          scorer: The scoring system to calibrate
+          scorer: The scorer to calibrate
 
-          examples: Rated examples to use when calibrating the scoring system. Must specify either
-              the examples or the preference examples
+          examples: Rated examples to use when calibrating the scorer. Must specify either the
+              examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the scoring system. Must specify
-              either the examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scorer. Must specify either the
+              examples or preference examples
 
-          strategy: The strategy to use to calibrate the scoring system. FULL would take longer than
-              LITE but may result in better result.
+          strategy: The strategy to use to calibrate the scorer. FULL would take longer than LITE
+              but may result in better result.
 
           extra_headers: Send extra headers
 
