@@ -10,10 +10,10 @@ __all__ = ["ScoringSystemFromHuggingfaceParams"]
 
 class ScoringSystemFromHuggingfaceParams(TypedDict, total=False):
     hf_scorer_name: Required[str]
-    """Huggingface scoring system name e.g.
+    """Huggingface scorer name e.g.
 
-    withpi/my_scoring_system. You need to provide the hf_token if the scoring system
-    dataset is not public or not own by the withpi organization.
+    withpi/my_scoring_system. You need to provide the hf_token if the scorer dataset
+    is not public or not own by the withpi organization.
     """
 
     hf_token: Optional[str]

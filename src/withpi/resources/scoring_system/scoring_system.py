@@ -77,12 +77,12 @@ class ScoringSystemResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedScorer:
         """
-        Read a scoring system from Huggingface dataset
+        Read a scorer from Huggingface dataset
 
         Args:
-          hf_scorer_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
-              provide the hf_token if the scoring system dataset is not public or not own by
-              the withpi organization.
+          hf_scorer_name: Huggingface scorer name e.g. withpi/my_scoring_system. You need to provide the
+              hf_token if the scorer dataset is not public or not own by the withpi
+              organization.
 
           hf_token: Huggingface token to use if you want to read to your own HF organization
 
@@ -125,9 +125,9 @@ class ScoringSystemResource(SyncAPIResource):
         Generates a scorer
 
         Args:
-          application_description: The application description to generate a scoring system for.
+          application_description: The application description to generate a scorer for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scorer.
 
           extra_headers: Send extra headers
 
@@ -173,7 +173,7 @@ class ScoringSystemResource(SyncAPIResource):
 
           llm_output: The output to score
 
-          scorer: The scoring system to score
+          scorer: The scorer to score
 
           extra_headers: Send extra headers
 
@@ -237,12 +237,12 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SharedScorer:
         """
-        Read a scoring system from Huggingface dataset
+        Read a scorer from Huggingface dataset
 
         Args:
-          hf_scorer_name: Huggingface scoring system name e.g. withpi/my_scoring_system. You need to
-              provide the hf_token if the scoring system dataset is not public or not own by
-              the withpi organization.
+          hf_scorer_name: Huggingface scorer name e.g. withpi/my_scoring_system. You need to provide the
+              hf_token if the scorer dataset is not public or not own by the withpi
+              organization.
 
           hf_token: Huggingface token to use if you want to read to your own HF organization
 
@@ -285,9 +285,9 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         Generates a scorer
 
         Args:
-          application_description: The application description to generate a scoring system for.
+          application_description: The application description to generate a scorer for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring system.
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scorer.
 
           extra_headers: Send extra headers
 
@@ -333,7 +333,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           llm_output: The output to score
 
-          scorer: The scoring system to score
+          scorer: The scorer to score
 
           extra_headers: Send extra headers
 
