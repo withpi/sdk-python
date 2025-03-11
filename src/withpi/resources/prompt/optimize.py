@@ -174,13 +174,13 @@ class OptimizeResource(SyncAPIResource):
         Starts a Prompt Optimization job
 
         Args:
-          examples: The examples to train and validate on
+          examples: The examples (input-response pairs) to train and validate on
 
           initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
 
-          scorer: The contract to optimize
+          scorer: The scorer to optimize
 
           tuning_algorithm: The tuning algorithm to use
 
@@ -397,13 +397,13 @@ class AsyncOptimizeResource(AsyncAPIResource):
         Starts a Prompt Optimization job
 
         Args:
-          examples: The examples to train and validate on
+          examples: The examples (input-response pairs) to train and validate on
 
           initial_system_instruction: The initial system instruction
 
           model_id: The model to use for generating responses
 
-          scorer: The contract to optimize
+          scorer: The scorer to optimize
 
           tuning_algorithm: The tuning algorithm to use
 

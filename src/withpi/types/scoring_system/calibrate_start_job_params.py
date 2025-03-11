@@ -12,22 +12,22 @@ __all__ = ["CalibrateStartJobParams", "Example", "PreferenceExample"]
 
 class CalibrateStartJobParams(TypedDict, total=False):
     scorer: Required[Scorer]
-    """The scoring system to calibrate"""
+    """The scorer to calibrate"""
 
     examples: Optional[Iterable[Example]]
-    """Rated examples to use when calibrating the scoring system.
+    """Rated examples to use when calibrating the scorer.
 
     Must specify either the examples or the preference examples
     """
 
     preference_examples: Optional[Iterable[PreferenceExample]]
-    """Preference examples to use when calibrating the scoring system.
+    """Preference examples to use when calibrating the scorer.
 
     Must specify either the examples or preference examples
     """
 
     strategy: Literal["LITE", "FULL"]
-    """The strategy to use to calibrate the scoring system.
+    """The strategy to use to calibrate the scorer.
 
     FULL would take longer than LITE but may result in better result.
     """
