@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.24.0 (2025-03-11)
+
+Full Changelog: [v1.23.0...v1.24.0](https://github.com/withpi/sdk-python/compare/v1.23.0...v1.24.0)
+
+### Features
+
+* **api:** scorer-&gt;scoring_spec ([#495](https://github.com/withpi/sdk-python/issues/495)) ([e19618f](https://github.com/withpi/sdk-python/commit/e19618f553b2d56350ef85bef87ad2c27016ce62))
+
 ## 1.23.0 (2025-03-11)
 
 Full Changelog: [v1.22.0...v1.23.0](https://github.com/withpi/sdk-python/compare/v1.22.0...v1.23.0)
