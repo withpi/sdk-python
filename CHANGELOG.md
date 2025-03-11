@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.21.0 (2025-03-11)
+
+Full Changelog: [v1.20.0...v1.21.0](https://github.com/withpi/sdk-python/compare/v1.20.0...v1.21.0)
+
+### Features
+
+* **api:** api update ([#487](https://github.com/withpi/sdk-python/issues/487)) ([149cc58](https://github.com/withpi/sdk-python/commit/149cc580e0a24ddb0ec816696722fb7b45a51d15))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#484](https://github.com/withpi/sdk-python/issues/484)) ([ae586e4](https://github.com/withpi/sdk-python/commit/ae586e41f75ff01f58c93a09d12f10104a4546c4))
+
 ## 1.20.0 (2025-03-10)
 
 Full Changelog: [v1.19.0...v1.20.0](https://github.com/withpi/sdk-python/compare/v1.19.0...v1.20.0)
