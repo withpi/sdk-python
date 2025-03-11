@@ -34,9 +34,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.shared.scoring_spec import ScoringSpec as SharedScoringSpec
+from ...types.shared_params.scoring_spec import ScoringSpec as SharedParamsScoringSpec
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
-from ...types.scoring_system_generate_response import ScoringSystemGenerateResponse
-from ...types.scoring_system_import_spec_response import ScoringSystemImportSpecResponse
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -76,7 +76,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateResponse:
+    ) -> SharedScoringSpec:
         """
         Generates a scoring spec
 
@@ -105,7 +105,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateResponse,
+            cast_to=SharedScoringSpec,
         )
 
     def import_spec(
@@ -120,7 +120,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemImportSpecResponse:
+    ) -> SharedScoringSpec:
         """
         Import a scoring spec from various sources
 
@@ -154,7 +154,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemImportSpecResponse,
+            cast_to=SharedScoringSpec,
         )
 
     def score(
@@ -162,7 +162,7 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: SharedParamsScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -240,7 +240,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateResponse:
+    ) -> SharedScoringSpec:
         """
         Generates a scoring spec
 
@@ -269,7 +269,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateResponse,
+            cast_to=SharedScoringSpec,
         )
 
     async def import_spec(
@@ -284,7 +284,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemImportSpecResponse:
+    ) -> SharedScoringSpec:
         """
         Import a scoring spec from various sources
 
@@ -318,7 +318,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemImportSpecResponse,
+            cast_to=SharedScoringSpec,
         )
 
     async def score(
@@ -326,7 +326,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: SharedParamsScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

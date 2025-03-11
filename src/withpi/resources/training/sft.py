@@ -24,6 +24,7 @@ from ..._base_client import make_request_options
 from ...types.training import sft_list_params, sft_download_params, sft_start_job_params
 from ...types.shared.sft_status import SftStatus
 from ...types.shared_params.sdk_example import SDKExample
+from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.training.sft_list_response import SftListResponse
 
 __all__ = ["SftResource", "AsyncSftResource"]
@@ -227,7 +228,7 @@ class SftResource(SyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scoring_spec: sft_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
@@ -521,7 +522,7 @@ class AsyncSftResource(AsyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scoring_spec: sft_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
