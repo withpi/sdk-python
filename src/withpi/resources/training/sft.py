@@ -23,7 +23,6 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.training import sft_list_params, sft_download_params, sft_start_job_params
 from ...types.shared.sft_status import SftStatus
-from ...types.shared_params.scorer import Scorer
 from ...types.shared_params.sdk_example import SDKExample
 from ...types.training.sft_list_response import SftListResponse
 
@@ -228,7 +227,7 @@ class SftResource(SyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scorer: Scorer,
+        scoring_spec: sft_start_job_params.ScoringSpec,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
@@ -249,7 +248,7 @@ class SftResource(SyncAPIResource):
         We split this data into train/eval
               90/10.
 
-          scorer: The scoring system to use in the SFT tuning process
+          scoring_spec: The scoring spec to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -274,7 +273,7 @@ class SftResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "examples": examples,
-                    "scorer": scorer,
+                    "scoring_spec": scoring_spec,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,
@@ -522,7 +521,7 @@ class AsyncSftResource(AsyncAPIResource):
         self,
         *,
         examples: Iterable[SDKExample],
-        scorer: Scorer,
+        scoring_spec: sft_start_job_params.ScoringSpec,
         base_sft_model: Literal["LLAMA_3.2_3B", "LLAMA_3.1_8B"] | NotGiven = NOT_GIVEN,
         learning_rate: float | NotGiven = NOT_GIVEN,
         lora_config: sft_start_job_params.LoraConfig | NotGiven = NOT_GIVEN,
@@ -543,7 +542,7 @@ class AsyncSftResource(AsyncAPIResource):
         We split this data into train/eval
               90/10.
 
-          scorer: The scoring system to use in the SFT tuning process
+          scoring_spec: The scoring spec to use in the SFT tuning process
 
           base_sft_model: The base model to start the SFT tuning process.
 
@@ -568,7 +567,7 @@ class AsyncSftResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "examples": examples,
-                    "scorer": scorer,
+                    "scoring_spec": scoring_spec,
                     "base_sft_model": base_sft_model,
                     "learning_rate": learning_rate,
                     "lora_config": lora_config,

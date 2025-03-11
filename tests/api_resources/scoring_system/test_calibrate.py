@@ -145,7 +145,7 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -156,7 +156,7 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -215,7 +215,7 @@ class TestCalibrate:
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -230,7 +230,7 @@ class TestCalibrate:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -413,7 +413,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -424,7 +424,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
                 "dimensions": [
@@ -483,7 +483,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -498,7 +498,7 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.start_job(
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
