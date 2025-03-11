@@ -19,8 +19,8 @@ class CalibrateListResponseItem(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    calibrated_scoring_system: Optional[Scorer] = None
-    """The calibrated scoring system"""
+    calibrated_scorer: Optional[Scorer] = None
+    """The calibrated scorer"""
 
 
 CalibrateListResponse: TypeAlias = List[CalibrateListResponseItem]
