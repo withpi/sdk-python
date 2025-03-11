@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.training import grpo_list_params, grpo_download_params, grpo_start_job_params
+from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.training.grpo_list_response import GrpoListResponse
 from ...types.training.grpo_load_response import GrpoLoadResponse
 from ...types.training.grpo_retrieve_response import GrpoRetrieveResponse
@@ -232,7 +233,7 @@ class GrpoResource(SyncAPIResource):
         learning_rate: float,
         lora_config: grpo_start_job_params.LoraConfig,
         num_train_epochs: int,
-        scoring_spec: grpo_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -524,7 +525,7 @@ class AsyncGrpoResource(AsyncAPIResource):
         learning_rate: float,
         lora_config: grpo_start_job_params.LoraConfig,
         num_train_epochs: int,
-        scoring_spec: grpo_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         system_prompt: Optional[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
