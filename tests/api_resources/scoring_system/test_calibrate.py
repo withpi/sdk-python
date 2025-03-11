@@ -160,7 +160,7 @@ class TestCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(CalibrateStartJobResponse, calibrate, path=["response"])
@@ -204,7 +204,7 @@ class TestCalibrate:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             examples=[
                 {
@@ -243,7 +243,7 @@ class TestCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -271,7 +271,7 @@ class TestCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed
@@ -467,7 +467,7 @@ class TestAsyncCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(CalibrateStartJobResponse, calibrate, path=["response"])
@@ -511,7 +511,7 @@ class TestAsyncCalibrate:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             examples=[
                 {
@@ -550,7 +550,7 @@ class TestAsyncCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -578,7 +578,7 @@ class TestAsyncCalibrate:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed

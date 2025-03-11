@@ -253,7 +253,7 @@ class TestSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
@@ -303,7 +303,7 @@ class TestSft:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
@@ -338,7 +338,7 @@ class TestSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -372,7 +372,7 @@ class TestSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed
@@ -662,7 +662,7 @@ class TestAsyncSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(SftStatus, sft, path=["response"])
@@ -712,7 +712,7 @@ class TestAsyncSft:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
@@ -747,7 +747,7 @@ class TestAsyncSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -781,7 +781,7 @@ class TestAsyncSft:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed
