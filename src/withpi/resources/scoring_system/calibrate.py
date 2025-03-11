@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
+from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
 from ...types.scoring_system.calibrate_retrieve_response import CalibrateRetrieveResponse
 from ...types.scoring_system.calibrate_start_job_response import CalibrateStartJobResponse
@@ -155,7 +156,7 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        scoring_spec: calibrate_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -367,7 +368,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        scoring_spec: calibrate_start_job_params.ScoringSpec,
+        scoring_spec: ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
