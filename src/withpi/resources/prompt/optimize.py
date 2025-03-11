@@ -160,7 +160,7 @@ class OptimizeResource(SyncAPIResource):
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         scorer: Scorer,
-        tuning_algorithm: Literal["PI", "DSPY"],
+        tuning_algorithm: Literal["DSPY", "PI"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -383,7 +383,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         scorer: Scorer,
-        tuning_algorithm: Literal["PI", "DSPY"],
+        tuning_algorithm: Literal["DSPY", "PI"],
         dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]] | NotGiven = NOT_GIVEN,
         use_chain_of_thought: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

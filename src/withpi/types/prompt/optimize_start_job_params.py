@@ -24,7 +24,7 @@ class OptimizeStartJobParams(TypedDict, total=False):
     scorer: Required[Scorer]
     """The scorer to optimize"""
 
-    tuning_algorithm: Required[Literal["PI", "DSPY"]]
+    tuning_algorithm: Required[Literal["DSPY", "PI"]]
     """The tuning algorithm to use"""
 
     dspy_optimization_type: Optional[Literal["BOOTSTRAP_FEW_SHOT", "COPRO", "MIPROv2"]]
