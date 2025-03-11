@@ -156,7 +156,7 @@ class TestOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
 
@@ -209,7 +209,7 @@ class TestOptimize:
                     }
                 ],
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             use_chain_of_thought=False,
         )
@@ -231,7 +231,7 @@ class TestOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         )
 
         assert response.is_closed is True
@@ -255,7 +255,7 @@ class TestOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -447,7 +447,7 @@ class TestAsyncOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
 
@@ -500,7 +500,7 @@ class TestAsyncOptimize:
                     }
                 ],
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
             use_chain_of_thought=False,
         )
@@ -522,7 +522,7 @@ class TestAsyncOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         )
 
         assert response.is_closed is True
@@ -546,7 +546,7 @@ class TestAsyncOptimize:
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
-            tuning_algorithm="PI",
+            tuning_algorithm="DSPY",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
