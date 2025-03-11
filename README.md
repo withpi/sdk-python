@@ -87,6 +87,63 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from withpi import PiClient
+
+client = PiClient()
+
+sft_status = client.training.sft.start_job(
+    examples=[
+        {
+            "llm_input": "Tell me something different",
+            "llm_output": "The lazy dog was jumped over by the quick brown fox",
+        }
+    ],
+    scorer={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "name": "Sample Scoring System",
+        "dimensions": [
+            {
+                "description": "Relevance of the response",
+                "label": "Relevance",
+                "sub_dimensions": [
+                    {
+                        "description": "Is the response relevant to the prompt?",
+                        "label": "Relevance to Prompt",
+                        "scoring_type": "PI_SCORER",
+                        "custom_model_id": "your-model-id",
+                        "parameters": [
+                            0.14285714285714285,
+                            0.2857142857142857,
+                            0.42857142857142855,
+                            0.5714285714285714,
+                            0.7142857142857143,
+                            0.8571428571428571,
+                        ],
+                        "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                        "weight": 1,
+                    }
+                ],
+                "parameters": [
+                    0.14285714285714285,
+                    0.2857142857142857,
+                    0.42857142857142855,
+                    0.5714285714285714,
+                    0.7142857142857143,
+                    0.8571428571428571,
+                ],
+                "weight": 1,
+            }
+        ],
+    },
+)
+print(sft_status.scorer)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `withpi.APIConnectionError` is raised.
