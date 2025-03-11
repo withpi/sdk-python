@@ -49,7 +49,7 @@ scoring_system_metrics = client.scoring_system.score(
                 ],
             }
         ],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 )
 print(scoring_system_metrics.dimension_scores)
@@ -93,7 +93,7 @@ async def main() -> None:
                     ],
                 }
             ],
-            "name": "Sample Scoring System",
+            "name": "Sample Scoring Spec",
         },
     )
     print(scoring_system_metrics.dimension_scores)
@@ -164,7 +164,7 @@ sft_status = client.training.sft.start_job(
                 "weight": 1,
             }
         ],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 )
 print(sft_status.scoring_spec)
@@ -204,7 +204,7 @@ try:
                     ],
                 }
             ],
-            "name": "Sample Scoring System",
+            "name": "Sample Scoring Spec",
         },
     )
 except withpi.APIConnectionError as e:
@@ -267,7 +267,7 @@ client.with_options(max_retries=5).scoring_system.score(
                 ],
             }
         ],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 )
 ```
@@ -310,7 +310,7 @@ client.with_options(timeout=5.0).scoring_system.score(
                 ],
             }
         ],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 )
 ```
@@ -367,7 +367,7 @@ response = client.scoring_system.with_raw_response.score(
                 "scoring_type": "PI_SCORER",
             }],
         }],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 )
 print(response.headers.get('X-My-Header'))
@@ -405,7 +405,7 @@ with client.scoring_system.with_streaming_response.score(
                 ],
             }
         ],
-        "name": "Sample Scoring System",
+        "name": "Sample Scoring Spec",
     },
 ) as response:
     print(response.headers.get("X-My-Header"))

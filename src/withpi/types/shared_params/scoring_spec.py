@@ -15,10 +15,10 @@ class ScoringSpecTyped(TypedDict, total=False):
     """The application description"""
 
     dimensions: Required[Iterable[ScoringDimension]]
-    """The dimensions of the scoring system"""
+    """The dimensions of the scoring spec"""
 
     name: Required[str]
-    """The name of the scoring system"""
+    """The name of the scoring spec"""
 
 
 ScoringSpec: TypeAlias = Union[ScoringSpecTyped, Dict[str, object]]

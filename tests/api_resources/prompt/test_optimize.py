@@ -167,7 +167,7 @@ class TestOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         )
@@ -220,7 +220,7 @@ class TestOptimize:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
@@ -255,7 +255,7 @@ class TestOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         )
@@ -292,7 +292,7 @@ class TestOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         ) as response:
@@ -497,7 +497,7 @@ class TestAsyncOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         )
@@ -550,7 +550,7 @@ class TestAsyncOptimize:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
@@ -585,7 +585,7 @@ class TestAsyncOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         )
@@ -622,7 +622,7 @@ class TestAsyncOptimize:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
         ) as response:
