@@ -154,6 +154,19 @@ class TestOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
@@ -174,7 +187,6 @@ class TestOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -208,6 +220,7 @@ class TestOptimize:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
@@ -229,6 +242,19 @@ class TestOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
@@ -253,6 +279,19 @@ class TestOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
@@ -445,6 +484,19 @@ class TestAsyncOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
@@ -465,7 +517,6 @@ class TestAsyncOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -499,6 +550,7 @@ class TestAsyncOptimize:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
             dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
@@ -520,6 +572,19 @@ class TestAsyncOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
@@ -544,6 +609,19 @@ class TestAsyncOptimize:
             model_id="gpt-4o-mini",
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
             tuning_algorithm="DSPY",
