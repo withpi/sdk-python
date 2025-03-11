@@ -161,12 +161,12 @@ class TestCalibrate:
                 "name": "Sample Scoring System",
                 "dimensions": [
                     {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
+                        "description": "dimension1 description",
+                        "label": "dimension1",
                         "sub_dimensions": [
                             {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
                                 "scoring_type": "PI_SCORER",
                                 "custom_model_id": "your-model-id",
                                 "parameters": [
@@ -429,12 +429,12 @@ class TestAsyncCalibrate:
                 "name": "Sample Scoring System",
                 "dimensions": [
                     {
-                        "description": "Relevance of the response",
-                        "label": "Relevance",
+                        "description": "dimension1 description",
+                        "label": "dimension1",
                         "sub_dimensions": [
                             {
-                                "description": "Is the response relevant to the prompt?",
-                                "label": "Relevance to Prompt",
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
                                 "scoring_type": "PI_SCORER",
                                 "custom_model_id": "your-model-id",
                                 "parameters": [
