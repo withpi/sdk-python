@@ -240,6 +240,19 @@ class TestSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -257,7 +270,6 @@ class TestSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -291,6 +303,7 @@ class TestSft:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
@@ -312,6 +325,19 @@ class TestSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -333,6 +359,19 @@ class TestSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         ) as response:
@@ -610,6 +649,19 @@ class TestAsyncSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -627,7 +679,6 @@ class TestAsyncSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -661,6 +712,7 @@ class TestAsyncSft:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             base_sft_model="LLAMA_3.2_3B",
             learning_rate=0.0002,
@@ -682,6 +734,19 @@ class TestAsyncSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -703,6 +768,19 @@ class TestAsyncSft:
             ],
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         ) as response:

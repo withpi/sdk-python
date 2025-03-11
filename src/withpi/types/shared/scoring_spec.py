@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from ..._models import BaseModel
 from .scoring_dimension import ScoringDimension
@@ -12,11 +12,11 @@ class ScoringSpec(BaseModel):
     description: str
     """The application description"""
 
+    dimensions: List[ScoringDimension]
+    """The dimensions of the scoring system"""
+
     name: str
     """The name of the scoring system"""
-
-    dimensions: Optional[List[ScoringDimension]] = None
-    """The dimensions of the scoring system"""
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.
