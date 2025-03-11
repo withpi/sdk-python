@@ -735,7 +735,7 @@ class TestPiClient:
                                         ],
                                     }
                                 ],
-                                "name": "Sample Scoring System",
+                                "name": "Sample Scoring Spec",
                             },
                         ),
                         ScoringSystemScoreParams,
@@ -776,7 +776,7 @@ class TestPiClient:
                                         ],
                                     }
                                 ],
-                                "name": "Sample Scoring System",
+                                "name": "Sample Scoring Spec",
                             },
                         ),
                         ScoringSystemScoreParams,
@@ -832,7 +832,7 @@ class TestPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -876,7 +876,7 @@ class TestPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -920,7 +920,7 @@ class TestPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             extra_headers={"x-stainless-retry-count": "42"},
         )
@@ -1625,7 +1625,7 @@ class TestAsyncPiClient:
                                         ],
                                     }
                                 ],
-                                "name": "Sample Scoring System",
+                                "name": "Sample Scoring Spec",
                             },
                         ),
                         ScoringSystemScoreParams,
@@ -1666,7 +1666,7 @@ class TestAsyncPiClient:
                                         ],
                                     }
                                 ],
-                                "name": "Sample Scoring System",
+                                "name": "Sample Scoring Spec",
                             },
                         ),
                         ScoringSystemScoreParams,
@@ -1723,7 +1723,7 @@ class TestAsyncPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -1768,7 +1768,7 @@ class TestAsyncPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -1813,7 +1813,7 @@ class TestAsyncPiClient:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             extra_headers={"x-stainless-retry-count": "42"},
         )

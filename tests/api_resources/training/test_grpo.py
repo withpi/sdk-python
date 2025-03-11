@@ -254,7 +254,7 @@ class TestGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -304,7 +304,7 @@ class TestGrpo:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -334,7 +334,7 @@ class TestGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -368,7 +368,7 @@ class TestGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         ) as response:
@@ -658,7 +658,7 @@ class TestAsyncGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -708,7 +708,7 @@ class TestAsyncGrpo:
                         "weight": 1,
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -738,7 +738,7 @@ class TestAsyncGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         )
@@ -772,7 +772,7 @@ class TestAsyncGrpo:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
             system_prompt="An optional system prompt.",
         ) as response:

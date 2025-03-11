@@ -125,7 +125,7 @@ class TestScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
@@ -151,7 +151,7 @@ class TestScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -181,7 +181,7 @@ class TestScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed
@@ -304,7 +304,7 @@ class TestAsyncScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
@@ -330,7 +330,7 @@ class TestAsyncScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         )
 
@@ -360,7 +360,7 @@ class TestAsyncScoringSystem:
                         ],
                     }
                 ],
-                "name": "Sample Scoring System",
+                "name": "Sample Scoring Spec",
             },
         ) as response:
             assert not response.is_closed
