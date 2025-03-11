@@ -17,4 +17,4 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     """The output to score"""
 
     scorer: Required[Scorer]
-    """The scoring system to score"""
+    """The scorer to score"""
