@@ -147,6 +147,19 @@ class TestCalibrate:
         calibrate = client.scoring_system.calibrate.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -158,7 +171,6 @@ class TestCalibrate:
         calibrate = client.scoring_system.calibrate.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -192,6 +204,7 @@ class TestCalibrate:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             examples=[
                 {
@@ -217,6 +230,19 @@ class TestCalibrate:
         response = client.scoring_system.calibrate.with_raw_response.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -232,6 +258,19 @@ class TestCalibrate:
         with client.scoring_system.calibrate.with_streaming_response.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         ) as response:
@@ -415,6 +454,19 @@ class TestAsyncCalibrate:
         calibrate = await async_client.scoring_system.calibrate.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -426,7 +478,6 @@ class TestAsyncCalibrate:
         calibrate = await async_client.scoring_system.calibrate.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
-                "name": "Sample Scoring System",
                 "dimensions": [
                     {
                         "description": "dimension1 description",
@@ -460,6 +511,7 @@ class TestAsyncCalibrate:
                         "weight": 1,
                     }
                 ],
+                "name": "Sample Scoring System",
             },
             examples=[
                 {
@@ -485,6 +537,19 @@ class TestAsyncCalibrate:
         response = await async_client.scoring_system.calibrate.with_raw_response.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         )
@@ -500,6 +565,19 @@ class TestAsyncCalibrate:
         async with async_client.scoring_system.calibrate.with_streaming_response.start_job(
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
                 "name": "Sample Scoring System",
             },
         ) as response:
