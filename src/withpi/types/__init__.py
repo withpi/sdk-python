@@ -3,14 +3,11 @@
 from __future__ import annotations
 
 from .shared import (
-    Scorer as Scorer,
     SftStatus as SftStatus,
     SDKExample as SDKExample,
     TrainedModel as TrainedModel,
     ExplorationMode as ExplorationMode,
-    ScorerDimension as ScorerDimension,
     QueryFanoutExample as QueryFanoutExample,
-    ScorerSubDimension as ScorerSubDimension,
     SyntheticDataStatus as SyntheticDataStatus,
     ClassificationStatus as ClassificationStatus,
     DataGenerationStatus as DataGenerationStatus,
@@ -21,6 +18,6 @@ from .data_cluster_inputs_params import DataClusterInputsParams as DataClusterIn
 from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSystemScoreParams
 from .data_cluster_inputs_response import DataClusterInputsResponse as DataClusterInputsResponse
 from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams
-from .scoring_system_from_huggingface_params import (
-    ScoringSystemFromHuggingfaceParams as ScoringSystemFromHuggingfaceParams,
-)
+from .scoring_system_generate_response import ScoringSystemGenerateResponse as ScoringSystemGenerateResponse
+from .scoring_system_import_spec_params import ScoringSystemImportSpecParams as ScoringSystemImportSpecParams
+from .scoring_system_import_spec_response import ScoringSystemImportSpecResponse as ScoringSystemImportSpecResponse

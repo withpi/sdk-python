@@ -22,7 +22,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
-from ...types.shared_params.scorer import Scorer
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
 from ...types.scoring_system.calibrate_retrieve_response import CalibrateRetrieveResponse
 from ...types.scoring_system.calibrate_start_job_response import CalibrateStartJobResponse
@@ -62,7 +61,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateRetrieveResponse:
         """
-        Checks the status of a Scorer Calibration job
+        Checks the status of a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -95,7 +94,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateListResponse:
         """
-        Lists the Scorer Calibration Jobs owned by a user
+        Lists the Scoring Spec Calibration Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -132,7 +131,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Cancels a Scorer Calibration job
+        Cancels a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -156,7 +155,7 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        scorer: Scorer,
+        scoring_spec: calibrate_start_job_params.ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -168,19 +167,19 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateStartJobResponse:
         """
-        Starts a Scorer Calibration job
+        Starts a Scoring Spec Calibration job
 
         Args:
-          scorer: The scorer to calibrate
+          scoring_spec: The scoring spec to calibrate
 
-          examples: Rated examples to use when calibrating the scorer. Must specify either the
+          examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the scorer. Must specify either the
-              examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scoring spec. Must specify
+              either the examples or preference examples
 
-          strategy: The strategy to use to calibrate the scorer. FULL would take longer than LITE
-              but may result in better result.
+          strategy: The strategy to use to calibrate the scoring spec. FULL would take longer than
+              LITE but may result in better result.
 
           extra_headers: Send extra headers
 
@@ -194,7 +193,7 @@ class CalibrateResource(SyncAPIResource):
             "/scoring_system/calibrate",
             body=maybe_transform(
                 {
-                    "scorer": scorer,
+                    "scoring_spec": scoring_spec,
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "strategy": strategy,
@@ -219,7 +218,7 @@ class CalibrateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a Scorer Calibration job
+        Opens a message stream about a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -274,7 +273,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateRetrieveResponse:
         """
-        Checks the status of a Scorer Calibration job
+        Checks the status of a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -307,7 +306,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateListResponse:
         """
-        Lists the Scorer Calibration Jobs owned by a user
+        Lists the Scoring Spec Calibration Jobs owned by a user
 
         Args:
           state: Filter jobs by state
@@ -344,7 +343,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Cancels a Scorer Calibration job
+        Cancels a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers
@@ -368,7 +367,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        scorer: Scorer,
+        scoring_spec: calibrate_start_job_params.ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -380,19 +379,19 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> CalibrateStartJobResponse:
         """
-        Starts a Scorer Calibration job
+        Starts a Scoring Spec Calibration job
 
         Args:
-          scorer: The scorer to calibrate
+          scoring_spec: The scoring spec to calibrate
 
-          examples: Rated examples to use when calibrating the scorer. Must specify either the
+          examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
 
-          preference_examples: Preference examples to use when calibrating the scorer. Must specify either the
-              examples or preference examples
+          preference_examples: Preference examples to use when calibrating the scoring spec. Must specify
+              either the examples or preference examples
 
-          strategy: The strategy to use to calibrate the scorer. FULL would take longer than LITE
-              but may result in better result.
+          strategy: The strategy to use to calibrate the scoring spec. FULL would take longer than
+              LITE but may result in better result.
 
           extra_headers: Send extra headers
 
@@ -406,7 +405,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             "/scoring_system/calibrate",
             body=await async_maybe_transform(
                 {
-                    "scorer": scorer,
+                    "scoring_spec": scoring_spec,
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "strategy": strategy,
@@ -431,7 +430,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> str:
         """
-        Opens a message stream about a Scorer Calibration job
+        Opens a message stream about a Scoring Spec Calibration job
 
         Args:
           extra_headers: Send extra headers

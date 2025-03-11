@@ -34,7 +34,7 @@ client = PiClient(
 scoring_system_metrics = client.scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
     },
@@ -65,7 +65,7 @@ async def main() -> None:
     scoring_system_metrics = await client.scoring_system.score(
         llm_input="Tell me something different",
         llm_output="The lazy dog was jumped over by the quick brown fox",
-        scorer={
+        scoring_spec={
             "description": "Write a children's story communicating a simple life lesson.",
             "name": "Sample Scoring System",
         },
@@ -103,7 +103,7 @@ sft_status = client.training.sft.start_job(
             "llm_output": "The lazy dog was jumped over by the quick brown fox",
         }
     ],
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
         "dimensions": [
@@ -141,7 +141,7 @@ sft_status = client.training.sft.start_job(
         ],
     },
 )
-print(sft_status.scorer)
+print(sft_status.scoring_spec)
 ```
 
 ## Handling errors
@@ -163,7 +163,7 @@ try:
     client.scoring_system.score(
         llm_input="Tell me something different",
         llm_output="The lazy dog was jumped over by the quick brown fox",
-        scorer={
+        scoring_spec={
             "description": "Write a children's story communicating a simple life lesson.",
             "name": "Sample Scoring System",
         },
@@ -213,7 +213,7 @@ client = PiClient(
 client.with_options(max_retries=5).scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
     },
@@ -243,7 +243,7 @@ client = PiClient(
 client.with_options(timeout=5.0).scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
     },
@@ -291,7 +291,7 @@ client = PiClient()
 response = client.scoring_system.with_raw_response.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
     },
@@ -316,7 +316,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.scoring_system.with_streaming_response.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scorer={
+    scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "name": "Sample Scoring System",
     },
