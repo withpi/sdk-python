@@ -720,7 +720,7 @@ class TestPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scorer={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "name": "Sample Scoring System",
                             },
@@ -748,7 +748,7 @@ class TestPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scorer={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "name": "Sample Scoring System",
                             },
@@ -791,7 +791,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -822,7 +822,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -853,7 +853,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -1545,7 +1545,7 @@ class TestAsyncPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scorer={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "name": "Sample Scoring System",
                             },
@@ -1573,7 +1573,7 @@ class TestAsyncPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scorer={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "name": "Sample Scoring System",
                             },
@@ -1617,7 +1617,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -1649,7 +1649,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
@@ -1681,7 +1681,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scorer={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "name": "Sample Scoring System",
             },
