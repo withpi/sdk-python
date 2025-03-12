@@ -20,4 +20,4 @@ class GrpoStartJobResponse(BaseModel):
     """Current state of the job"""
 
     trained_models: Optional[List[TrainedModel]] = None
-    """A list of trained models selected based on the PI Contract score."""
+    """A list of trained models selected based on the PI score."""
