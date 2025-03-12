@@ -30,7 +30,7 @@ class TestQueryFanout:
     def test_method_generate_with_all_params(self, client: PiClient) -> None:
         query_fanout = client.search.query_fanout.generate(
             query="Name the four largest fish and what they eat.",
-            example_fanout_queries=[
+            few_shot_examples=[
                 {
                     "fanout_queries": [
                         "Genus of the cheetah",
@@ -89,7 +89,7 @@ class TestAsyncQueryFanout:
     async def test_method_generate_with_all_params(self, async_client: AsyncPiClient) -> None:
         query_fanout = await async_client.search.query_fanout.generate(
             query="Name the four largest fish and what they eat.",
-            example_fanout_queries=[
+            few_shot_examples=[
                 {
                     "fanout_queries": [
                         "Genus of the cheetah",
