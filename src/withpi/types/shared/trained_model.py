@@ -8,14 +8,14 @@ __all__ = ["TrainedModel"]
 
 
 class TrainedModel(BaseModel):
-    contract_score: float
-    """The PI contract score of the eval set what isn't used in training"""
-
     epoch: float
     """The training epoch"""
 
     eval_loss: float
     """The evaluation loss"""
+
+    pi_score: float
+    """The PI score of the eval set what isn't used in training"""
 
     serving_id: int
     """The serving id of the trained model within this Job"""
