@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 
 import httpx
 
@@ -50,7 +50,7 @@ class QueryFanoutResource(SyncAPIResource):
     def generate(
         self,
         *,
-        queries: List[str],
+        query: str,
         example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -64,7 +64,7 @@ class QueryFanoutResource(SyncAPIResource):
         Generates query fanout for an input query.
 
         Args:
-          queries: The list of queries to generate fanouts for
+          query: The list of queries to generate fanouts for
 
           example_fanout_queries: The list of queries to use as few-shot examples for the fanout generation
 
@@ -82,7 +82,7 @@ class QueryFanoutResource(SyncAPIResource):
             "/search/query_fanout/generate",
             body=maybe_transform(
                 {
-                    "queries": queries,
+                    "query": query,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
                 },
@@ -118,7 +118,7 @@ class AsyncQueryFanoutResource(AsyncAPIResource):
     async def generate(
         self,
         *,
-        queries: List[str],
+        query: str,
         example_fanout_queries: Iterable[QueryFanoutExample] | NotGiven = NOT_GIVEN,
         num_fanout_queries: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -132,7 +132,7 @@ class AsyncQueryFanoutResource(AsyncAPIResource):
         Generates query fanout for an input query.
 
         Args:
-          queries: The list of queries to generate fanouts for
+          query: The list of queries to generate fanouts for
 
           example_fanout_queries: The list of queries to use as few-shot examples for the fanout generation
 
@@ -150,7 +150,7 @@ class AsyncQueryFanoutResource(AsyncAPIResource):
             "/search/query_fanout/generate",
             body=await async_maybe_transform(
                 {
-                    "queries": queries,
+                    "query": query,
                     "example_fanout_queries": example_fanout_queries,
                     "num_fanout_queries": num_fanout_queries,
                 },

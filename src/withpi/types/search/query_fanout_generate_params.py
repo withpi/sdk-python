@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
 from ..shared_params.query_fanout_example import QueryFanoutExample
@@ -11,7 +11,7 @@ __all__ = ["QueryFanoutGenerateParams"]
 
 
 class QueryFanoutGenerateParams(TypedDict, total=False):
-    queries: Required[List[str]]
+    query: Required[str]
     """The list of queries to generate fanouts for"""
 
     example_fanout_queries: Iterable[QueryFanoutExample]

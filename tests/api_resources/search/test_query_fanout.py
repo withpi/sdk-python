@@ -21,10 +21,7 @@ class TestQueryFanout:
     @parametrize
     def test_method_generate(self, client: PiClient) -> None:
         query_fanout = client.search.query_fanout.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         )
         assert_matches_type(QueryFanoutGenerateResponse, query_fanout, path=["response"])
 
@@ -32,10 +29,7 @@ class TestQueryFanout:
     @parametrize
     def test_method_generate_with_all_params(self, client: PiClient) -> None:
         query_fanout = client.search.query_fanout.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
             example_fanout_queries=[
                 {
                     "fanout_queries": [
@@ -56,10 +50,7 @@ class TestQueryFanout:
     @parametrize
     def test_raw_response_generate(self, client: PiClient) -> None:
         response = client.search.query_fanout.with_raw_response.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         )
 
         assert response.is_closed is True
@@ -71,10 +62,7 @@ class TestQueryFanout:
     @parametrize
     def test_streaming_response_generate(self, client: PiClient) -> None:
         with client.search.query_fanout.with_streaming_response.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -92,10 +80,7 @@ class TestAsyncQueryFanout:
     @parametrize
     async def test_method_generate(self, async_client: AsyncPiClient) -> None:
         query_fanout = await async_client.search.query_fanout.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         )
         assert_matches_type(QueryFanoutGenerateResponse, query_fanout, path=["response"])
 
@@ -103,10 +88,7 @@ class TestAsyncQueryFanout:
     @parametrize
     async def test_method_generate_with_all_params(self, async_client: AsyncPiClient) -> None:
         query_fanout = await async_client.search.query_fanout.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
             example_fanout_queries=[
                 {
                     "fanout_queries": [
@@ -127,10 +109,7 @@ class TestAsyncQueryFanout:
     @parametrize
     async def test_raw_response_generate(self, async_client: AsyncPiClient) -> None:
         response = await async_client.search.query_fanout.with_raw_response.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         )
 
         assert response.is_closed is True
@@ -142,10 +121,7 @@ class TestAsyncQueryFanout:
     @parametrize
     async def test_streaming_response_generate(self, async_client: AsyncPiClient) -> None:
         async with async_client.search.query_fanout.with_streaming_response.generate(
-            queries=[
-                "Name the four largest fish and what they eat.",
-                "What was the profession of both Ellery Queen and John Fowles?",
-            ],
+            query="Name the four largest fish and what they eat.",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

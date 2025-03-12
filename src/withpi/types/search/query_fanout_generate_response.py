@@ -3,8 +3,6 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..shared.query_fanout_example import QueryFanoutExample
-
 __all__ = ["QueryFanoutGenerateResponse"]
 
-QueryFanoutGenerateResponse: TypeAlias = List[QueryFanoutExample]
+QueryFanoutGenerateResponse: TypeAlias = List[str]
