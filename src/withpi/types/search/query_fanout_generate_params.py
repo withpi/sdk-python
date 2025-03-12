@@ -12,10 +12,13 @@ __all__ = ["QueryFanoutGenerateParams"]
 
 class QueryFanoutGenerateParams(TypedDict, total=False):
     query: Required[str]
-    """The list of queries to generate fanouts for"""
+    """The query to generate fanouts for"""
 
-    example_fanout_queries: Iterable[QueryFanoutExample]
-    """The list of queries to use as few-shot examples for the fanout generation"""
+    few_shot_examples: Iterable[QueryFanoutExample]
+    """The list of few-shot examples for the fanout generation.
+
+    Only needed if the default fanouts are not working well.
+    """
 
     num_fanout_queries: int
-    """The number of fanout queries to generate for each input query"""
+    """The number of fanout queries to generate"""
