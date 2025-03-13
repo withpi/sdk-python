@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .sdk_example import SDKExample as SDKExample
+from .example import Example as Example
 from .scoring_spec import ScoringSpec as ScoringSpec
 from .exploration_mode import ExplorationMode as ExplorationMode
 from .scoring_dimension import ScoringDimension as ScoringDimension

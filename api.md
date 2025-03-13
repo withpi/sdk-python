@@ -4,6 +4,7 @@
 from withpi.types import (
     ClassificationStatus,
     DataGenerationStatus,
+    Example,
     ExplorationMode,
     PromptOptimizationStatus,
     QueryFanoutExample,
@@ -11,7 +12,6 @@ from withpi.types import (
     ScoringSpec,
     ScoringSubDimension,
     ScoringSystemMetrics,
-    SDKExample,
     SftStatus,
     SyntheticDataStatus,
     TrainedModel,
