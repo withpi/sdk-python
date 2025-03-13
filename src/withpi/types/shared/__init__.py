@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .example import Example as Example
 from .sft_status import SftStatus as SftStatus
-from .sdk_example import SDKExample as SDKExample
 from .scoring_spec import ScoringSpec as ScoringSpec
 from .trained_model import TrainedModel as TrainedModel
 from .exploration_mode import ExplorationMode as ExplorationMode

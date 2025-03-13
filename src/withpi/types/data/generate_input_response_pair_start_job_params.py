@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
+from ..shared_params.example import Example
 from ..shared.exploration_mode import ExplorationMode
-from ..shared_params.sdk_example import SDKExample
 
 __all__ = ["GenerateInputResponsePairStartJobParams"]
 
@@ -15,7 +15,7 @@ class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
     num_pairs_to_generate: Required[int]
     """The number of new LLM input-response pairs to generate"""
 
-    seeds: Required[Iterable[SDKExample]]
+    seeds: Required[Iterable[Example]]
     """The list of LLM input response-pairs to be used as seeds"""
 
     application_description: Optional[str]

@@ -3,8 +3,8 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from .example import Example
 from ..._models import BaseModel
-from .sdk_example import SDKExample
 
 __all__ = ["SyntheticDataStatus"]
 
@@ -19,7 +19,7 @@ class SyntheticDataStatus(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    data: Optional[List[SDKExample]] = None
+    data: Optional[List[Example]] = None
     """The generated synthetic data.
 
     Can be present even if the state is not done/error as it is streamed.
