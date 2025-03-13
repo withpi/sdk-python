@@ -22,7 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.prompt import optimize_list_params, optimize_start_job_params
-from ...types.shared_params.sdk_example import SDKExample
+from ...types.shared_params.example import Example
 from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.prompt.optimize_list_response import OptimizeListResponse
 from ...types.shared.prompt_optimization_status import PromptOptimizationStatus
@@ -156,7 +156,7 @@ class OptimizeResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        examples: Iterable[SDKExample],
+        examples: Iterable[Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         scoring_spec: ScoringSpec,
@@ -379,7 +379,7 @@ class AsyncOptimizeResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        examples: Iterable[SDKExample],
+        examples: Iterable[Example],
         initial_system_instruction: str,
         model_id: Literal["gpt-4o-mini", "llama-3.1-8b", "mock-llm"],
         scoring_spec: ScoringSpec,

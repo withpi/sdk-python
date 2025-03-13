@@ -3,10 +3,10 @@
 
 from ..._models import BaseModel
 
-__all__ = ["SDKExample"]
+__all__ = ["Example"]
 
 
-class SDKExample(BaseModel):
+class Example(BaseModel):
     llm_input: str
     """The input to LLM"""
 
