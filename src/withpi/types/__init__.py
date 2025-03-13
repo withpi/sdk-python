@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from .shared import (
+    Example as Example,
     SftStatus as SftStatus,
-    SDKExample as SDKExample,
     ScoringSpec as ScoringSpec,
     TrainedModel as TrainedModel,
     ExplorationMode as ExplorationMode,

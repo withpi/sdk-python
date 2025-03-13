@@ -5,14 +5,14 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..shared_params.sdk_example import SDKExample
+from ..shared_params.example import Example
 from ..shared_params.scoring_spec import ScoringSpec
 
 __all__ = ["OptimizeStartJobParams"]
 
 
 class OptimizeStartJobParams(TypedDict, total=False):
-    examples: Required[Iterable[SDKExample]]
+    examples: Required[Iterable[Example]]
     """The examples (input-response pairs) to train and validate on"""
 
     initial_system_instruction: Required[str]

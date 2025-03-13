@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["SDKExample"]
+__all__ = ["Example"]
 
 
-class SDKExample(TypedDict, total=False):
+class Example(TypedDict, total=False):
     llm_input: Required[str]
     """The input to LLM"""
 
