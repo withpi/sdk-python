@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.32.1 (2025-03-15)
+
+Full Changelog: [v1.32.0...v1.32.1](https://github.com/withpi/sdk-python/compare/v1.32.0...v1.32.1)
+
+### Bug Fixes
+
+* **types:** handle more discriminated union shapes ([#526](https://github.com/withpi/sdk-python/issues/526)) ([aaf8397](https://github.com/withpi/sdk-python/commit/aaf8397529cab0b228360b258ea5ad53434621fb))
+
+
+### Chores
+
+* **internal:** bump rye to 0.44.0 ([#525](https://github.com/withpi/sdk-python/issues/525)) ([427a33a](https://github.com/withpi/sdk-python/commit/427a33a7fd04c79c47b6f61d2408b30860d76675))
+* **internal:** codegen related update ([#524](https://github.com/withpi/sdk-python/issues/524)) ([f769dd6](https://github.com/withpi/sdk-python/commit/f769dd667242d0b5977406f4d823088827ea12a3))
+* **internal:** remove extra empty newlines ([#522](https://github.com/withpi/sdk-python/issues/522)) ([8104296](https://github.com/withpi/sdk-python/commit/810429622be15b102980d0a0ec277691bb1ac2bd))
+
 ## 1.32.0 (2025-03-13)
 
 Full Changelog: [v1.31.0...v1.32.0](https://github.com/withpi/sdk-python/compare/v1.31.0...v1.32.0)
