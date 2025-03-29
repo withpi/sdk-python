@@ -23,7 +23,7 @@ class GenerateStartJobParams(TypedDict, total=False):
     batch_size: int
     """Number of inputs to generate in one LLM call.
 
-    Must be <= 10. Generally it could be same as `num_shots`.
+    Must be <= 125. Generally it could be same as `num_shots`.
     """
 
     exploration_mode: ExplorationMode
@@ -32,5 +32,5 @@ class GenerateStartJobParams(TypedDict, total=False):
     num_shots: int
     """Number of inputs to be included in the prompt for generation.
 
-    Must be <= 10. Generally it could be same as `batch_size`.
+    Must be <= 50. Generally it could be same as `batch_size`.
     """
