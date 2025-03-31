@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.33.0 (2025-03-31)
+
+Full Changelog: [v1.32.1...v1.33.0](https://github.com/withpi/sdk-python/compare/v1.32.1...v1.33.0)
+
+### Features
+
+* **api:** api update ([#532](https://github.com/withpi/sdk-python/issues/532)) ([436661a](https://github.com/withpi/sdk-python/commit/436661a7be300153125079600c67accf6f82c220))
+* **api:** api update ([#533](https://github.com/withpi/sdk-python/issues/533)) ([f7cdd73](https://github.com/withpi/sdk-python/commit/f7cdd732a6df12c0fe3ed55c18e07527dcfd70ea))
+
+
+### Chores
+
+* fix typos ([#530](https://github.com/withpi/sdk-python/issues/530)) ([61cfc80](https://github.com/withpi/sdk-python/commit/61cfc80c951fbd93588f5ae05e0d723d03f770e4))
+
 ## 1.32.1 (2025-03-17)
 
 Full Changelog: [v1.32.0...v1.32.1](https://github.com/withpi/sdk-python/compare/v1.32.0...v1.32.1)
