@@ -161,6 +161,7 @@ class GenerateResource(SyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -186,6 +187,8 @@ class GenerateResource(SyncAPIResource):
           num_shots: Number of inputs to be included in the prompt for generation. Must be <= 50.
               Generally it could be same as `batch_size`.
 
+          run_parallel_batches: If true, multiple batches of generation and critique run concurrently.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -204,6 +207,7 @@ class GenerateResource(SyncAPIResource):
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "run_parallel_batches": run_parallel_batches,
                 },
                 generate_start_job_params.GenerateStartJobParams,
             ),
@@ -414,6 +418,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -439,6 +444,8 @@ class AsyncGenerateResource(AsyncAPIResource):
           num_shots: Number of inputs to be included in the prompt for generation. Must be <= 50.
               Generally it could be same as `batch_size`.
 
+          run_parallel_batches: If true, multiple batches of generation and critique run concurrently.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -457,6 +464,7 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "run_parallel_batches": run_parallel_batches,
                 },
                 generate_start_job_params.GenerateStartJobParams,
             ),

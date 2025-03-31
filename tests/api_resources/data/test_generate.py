@@ -166,6 +166,7 @@ class TestGenerate:
             batch_size=5,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
+            run_parallel_batches=False,
         )
         assert_matches_type(DataGenerationStatus, generate, path=["response"])
 
@@ -439,6 +440,7 @@ class TestAsyncGenerate:
             batch_size=5,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
+            run_parallel_batches=False,
         )
         assert_matches_type(DataGenerationStatus, generate, path=["response"])
 
