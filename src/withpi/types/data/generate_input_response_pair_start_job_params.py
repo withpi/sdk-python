@@ -36,5 +36,8 @@ class GenerateInputResponsePairStartJobParams(TypedDict, total=False):
     num_shots: int
     """Number of input-response pairs to be included in the prompt for generation"""
 
+    run_parallel_batches: bool
+    """If true, multiple batches of generation and critique run concurrently."""
+
     system_prompt: Optional[str]
     """The system prompt to generate the responses for the application's inputs"""

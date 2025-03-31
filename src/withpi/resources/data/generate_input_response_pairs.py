@@ -165,6 +165,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -190,6 +191,8 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
 
           num_shots: Number of input-response pairs to be included in the prompt for generation
 
+          run_parallel_batches: If true, multiple batches of generation and critique run concurrently.
+
           system_prompt: The system prompt to generate the responses for the application's inputs
 
           extra_headers: Send extra headers
@@ -210,6 +213,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "run_parallel_batches": run_parallel_batches,
                     "system_prompt": system_prompt,
                 },
                 generate_input_response_pair_start_job_params.GenerateInputResponsePairStartJobParams,
@@ -422,6 +426,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
         num_shots: int | NotGiven = NOT_GIVEN,
+        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
         system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -447,6 +452,8 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
 
           num_shots: Number of input-response pairs to be included in the prompt for generation
 
+          run_parallel_batches: If true, multiple batches of generation and critique run concurrently.
+
           system_prompt: The system prompt to generate the responses for the application's inputs
 
           extra_headers: Send extra headers
@@ -467,6 +474,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
                     "batch_size": batch_size,
                     "exploration_mode": exploration_mode,
                     "num_shots": num_shots,
+                    "run_parallel_batches": run_parallel_batches,
                     "system_prompt": system_prompt,
                 },
                 generate_input_response_pair_start_job_params.GenerateInputResponsePairStartJobParams,

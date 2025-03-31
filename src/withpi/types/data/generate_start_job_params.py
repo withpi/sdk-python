@@ -34,3 +34,6 @@ class GenerateStartJobParams(TypedDict, total=False):
 
     Must be <= 50. Generally it could be same as `batch_size`.
     """
+
+    run_parallel_batches: bool
+    """If true, multiple batches of generation and critique run concurrently."""
