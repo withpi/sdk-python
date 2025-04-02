@@ -170,7 +170,7 @@ class TestGenerateInputResponsePairs:
             batch_size=10,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
-            run_parallel_batches=False,
+            run_parallel_batches=True,
             system_prompt="Write a children's story given a topic from the user.",
         )
         assert_matches_type(SyntheticDataStatus, generate_input_response_pair, path=["response"])
@@ -456,7 +456,7 @@ class TestAsyncGenerateInputResponsePairs:
             batch_size=10,
             exploration_mode="CONSERVATIVE",
             num_shots=5,
-            run_parallel_batches=False,
+            run_parallel_batches=True,
             system_prompt="Write a children's story given a topic from the user.",
         )
         assert_matches_type(SyntheticDataStatus, generate_input_response_pair, path=["response"])
