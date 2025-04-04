@@ -1832,7 +1832,7 @@ class TestAsyncPiClient:
         import threading
 
         from withpi._utils import asyncify
-        from withpi._base_client import get_platform 
+        from withpi._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
