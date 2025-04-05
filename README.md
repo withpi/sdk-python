@@ -122,13 +122,9 @@ from withpi import PiClient
 
 client = PiClient()
 
-sft_status = client.training.sft.start_job(
-    examples=[
-        {
-            "llm_input": "Tell me something different",
-            "llm_output": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+scoring_system_metrics = client.scoring_system.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "dimensions": [
@@ -167,7 +163,7 @@ sft_status = client.training.sft.start_job(
         "name": "Sample Scoring Spec",
     },
 )
-print(sft_status.scoring_spec)
+print(scoring_system_metrics.scoring_spec)
 ```
 
 ## Handling errors
