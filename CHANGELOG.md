@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.35.0 (2025-04-05)
+
+Full Changelog: [v1.34.0...v1.35.0](https://github.com/withpi/sdk-python/compare/v1.34.0...v1.35.0)
+
+### Features
+
+* **api:** api update ([#538](https://github.com/withpi/sdk-python/issues/538)) ([f21753a](https://github.com/withpi/sdk-python/commit/f21753affc47c4a4c3414c35e2433a9bfe979fb7))
+
+
+### Chores
+
+* **internal:** remove trailing character ([#540](https://github.com/withpi/sdk-python/issues/540)) ([bf1621b](https://github.com/withpi/sdk-python/commit/bf1621b12be2a74a3079b1378ca973c1837a4626))
+
+
+### Documentation
+
+* swap examples used in readme ([#541](https://github.com/withpi/sdk-python/issues/541)) ([5699c99](https://github.com/withpi/sdk-python/commit/5699c99a97c691ab65afada7f53104ca4e951f67))
+
 ## 1.34.0 (2025-04-01)
 
 Full Changelog: [v1.33.0...v1.34.0](https://github.com/withpi/sdk-python/compare/v1.33.0...v1.34.0)
