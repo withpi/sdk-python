@@ -223,7 +223,7 @@ class TestOptimize:
                 "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            dspy_optimization_type="COPRO",
             use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
@@ -553,7 +553,7 @@ class TestAsyncOptimize:
                 "name": "Sample Scoring Spec",
             },
             tuning_algorithm="DSPY",
-            dspy_optimization_type="BOOTSTRAP_FEW_SHOT",
+            dspy_optimization_type="COPRO",
             use_chain_of_thought=False,
         )
         assert_matches_type(PromptOptimizationStatus, optimize, path=["response"])
