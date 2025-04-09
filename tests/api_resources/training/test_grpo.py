@@ -267,7 +267,7 @@ class TestGrpo:
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
-            lora_config={"lora_rank": "R_16"},
+            lora_config={"lora_rank": "R_64"},
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
@@ -671,7 +671,7 @@ class TestAsyncGrpo:
             base_rl_model="LLAMA_3.2_3B",
             examples=[{"llm_input": "Tell me something different"}],
             learning_rate=0.000005,
-            lora_config={"lora_rank": "R_16"},
+            lora_config={"lora_rank": "R_64"},
             num_train_epochs=10,
             scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",

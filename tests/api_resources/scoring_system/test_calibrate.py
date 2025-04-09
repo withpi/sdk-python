@@ -210,7 +210,7 @@ class TestCalibrate:
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
+                    "rating": "Disagree",
                 }
             ],
             preference_examples=[
@@ -517,7 +517,7 @@ class TestAsyncCalibrate:
                 {
                     "llm_input": "Tell me something different",
                     "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Strongly Agree",
+                    "rating": "Disagree",
                 }
             ],
             preference_examples=[
