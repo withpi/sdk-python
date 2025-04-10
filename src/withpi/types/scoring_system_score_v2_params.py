@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ScoringSystemScoreV2Params", "ScoringSpec", "ScoringSpecDimension"]
+__all__ = ["ScoringSystemScoreV2Params", "ScoringSpecV2", "ScoringSpecV2DimensionsV2"]
 
 
 class ScoringSystemScoreV2Params(TypedDict, total=False):
@@ -15,11 +15,11 @@ class ScoringSystemScoreV2Params(TypedDict, total=False):
     llm_output: Required[str]
     """The output to score"""
 
-    scoring_spec: Required[ScoringSpec]
+    scoring_spec_v2: Required[ScoringSpecV2]
     """The scoring spec to score"""
 
 
-class ScoringSpecDimension(TypedDict, total=False):
+class ScoringSpecV2DimensionsV2(TypedDict, total=False):
     question: Required[str]
     """The description of the dimension"""
 
@@ -49,6 +49,6 @@ class ScoringSpecDimension(TypedDict, total=False):
     """
 
 
-class ScoringSpec(TypedDict, total=False):
-    dimensions: Required[Iterable[ScoringSpecDimension]]
+class ScoringSpecV2(TypedDict, total=False):
+    dimensions_v2: Required[Iterable[ScoringSpecV2DimensionsV2]]
     """The dimensions of the scoring spec"""

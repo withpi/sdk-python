@@ -245,7 +245,7 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         )
         assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
@@ -255,7 +255,7 @@ class TestScoringSystem:
         response = client.scoring_system.with_raw_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         )
 
         assert response.is_closed is True
@@ -269,7 +269,7 @@ class TestScoringSystem:
         with client.scoring_system.with_streaming_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -507,7 +507,7 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         )
         assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
@@ -517,7 +517,7 @@ class TestAsyncScoringSystem:
         response = await async_client.scoring_system.with_raw_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         )
 
         assert response.is_closed is True
@@ -531,7 +531,7 @@ class TestAsyncScoringSystem:
         async with async_client.scoring_system.with_streaming_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec_v2={"dimensions_v2": [{"question": "Is the response relevant to the prompt?"}]},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
