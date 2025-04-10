@@ -10,10 +10,10 @@ import pytest
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types import (
-    ScoringSystemScoreResponse,
-    ScoringSystemGenerateResponse,
+    ScoringSystemScoreV2Response,
+    ScoringSystemGenerateV2Response,
 )
-from withpi.types.shared import ScoringSpec
+from withpi.types.shared import ScoringSpec, ScoringSystemMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +27,7 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -36,7 +36,7 @@ class TestScoringSystem:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -48,7 +48,7 @@ class TestScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = response.parse()
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -60,7 +60,50 @@ class TestScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = response.parse()
-            assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+            assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_generate_v2(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        )
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_generate_v2_with_all_params(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+            try_auto_generating_python_code=False,
+        )
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_generate_v2(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_generate_v2(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -114,14 +157,102 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
         )
-        assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_score(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_score(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_score_v2(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.score_v2(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+        )
+        assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_score_v2(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
@@ -130,12 +261,12 @@ class TestScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = response.parse()
-        assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_score(self, client: PiClient) -> None:
-        with client.scoring_system.with_streaming_response.score(
+    def test_streaming_response_score_v2(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
@@ -144,7 +275,7 @@ class TestScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = response.parse()
-            assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+            assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -158,7 +289,7 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -167,7 +298,7 @@ class TestAsyncScoringSystem:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -179,7 +310,7 @@ class TestAsyncScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = await response.parse()
-        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -191,7 +322,50 @@ class TestAsyncScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = await response.parse()
-            assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
+            assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_generate_v2(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        )
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_generate_v2_with_all_params(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+            try_auto_generating_python_code=False,
+        )
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_generate_v2(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_generate_v2(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.generate_v2(
+            application_description="Write a children's story communicating a simple life lesson.",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(ScoringSystemGenerateV2Response, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -245,14 +419,102 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
         )
-        assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_score_v2(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.score_v2(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
+        )
+        assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_score_v2(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
@@ -261,12 +523,12 @@ class TestAsyncScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = await response.parse()
-        assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
-        async with async_client.scoring_system.with_streaming_response.score(
+    async def test_streaming_response_score_v2(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.score_v2(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
             scoring_spec={"dimensions": [{"question": "Is the response relevant to the prompt?"}]},
@@ -275,6 +537,6 @@ class TestAsyncScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = await response.parse()
-            assert_matches_type(ScoringSystemScoreResponse, scoring_system, path=["response"])
+            assert_matches_type(ScoringSystemScoreV2Response, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True

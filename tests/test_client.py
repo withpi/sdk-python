@@ -28,7 +28,7 @@ from withpi._models import BaseModel, FinalRequestOptions
 from withpi._constants import RAW_RESPONSE_HEADER
 from withpi._exceptions import PiClientError, APIStatusError, APITimeoutError, APIResponseValidationError
 from withpi._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
-from withpi.types.data_cluster_inputs_params import DataClusterInputsParams
+from withpi.types.scoring_system_score_params import ScoringSystemScoreParams
 
 from .utils import update_env
 
@@ -709,23 +709,36 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/scoring_system/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/data/cluster_inputs",
+                "/scoring_system/score",
                 body=cast(
                     object,
                     maybe_transform(
                         dict(
-                            inputs=[
-                                {
-                                    "identifier": "abcd12345",
-                                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                                }
-                            ]
+                            llm_input="Tell me something different",
+                            llm_output="The lazy dog was jumped over by the quick brown fox",
+                            scoring_spec={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "dimensions": [
+                                    {
+                                        "description": "dimension1 description",
+                                        "label": "dimension1",
+                                        "sub_dimensions": [
+                                            {
+                                                "description": "subdimension1 description",
+                                                "label": "subdimension1",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    }
+                                ],
+                                "name": "Sample Scoring Spec",
+                            },
                         ),
-                        DataClusterInputsParams,
+                        ScoringSystemScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -737,23 +750,36 @@ class TestPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/data/cluster_inputs").mock(return_value=httpx.Response(500))
+        respx_mock.post("/scoring_system/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/data/cluster_inputs",
+                "/scoring_system/score",
                 body=cast(
                     object,
                     maybe_transform(
                         dict(
-                            inputs=[
-                                {
-                                    "identifier": "abcd12345",
-                                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                                }
-                            ]
+                            llm_input="Tell me something different",
+                            llm_output="The lazy dog was jumped over by the quick brown fox",
+                            scoring_spec={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "dimensions": [
+                                    {
+                                        "description": "dimension1 description",
+                                        "label": "dimension1",
+                                        "sub_dimensions": [
+                                            {
+                                                "description": "subdimension1 description",
+                                                "label": "subdimension1",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    }
+                                ],
+                                "name": "Sample Scoring Spec",
+                            },
                         ),
-                        DataClusterInputsParams,
+                        ScoringSystemScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -786,15 +812,28 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ]
+        response = client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
         )
 
         assert response.retries_taken == failures_before_success
@@ -817,15 +856,28 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+        response = client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -848,15 +900,28 @@ class TestPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+        response = client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1534,23 +1599,36 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/scoring_system/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/data/cluster_inputs",
+                "/scoring_system/score",
                 body=cast(
                     object,
                     maybe_transform(
                         dict(
-                            inputs=[
-                                {
-                                    "identifier": "abcd12345",
-                                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                                }
-                            ]
+                            llm_input="Tell me something different",
+                            llm_output="The lazy dog was jumped over by the quick brown fox",
+                            scoring_spec={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "dimensions": [
+                                    {
+                                        "description": "dimension1 description",
+                                        "label": "dimension1",
+                                        "sub_dimensions": [
+                                            {
+                                                "description": "subdimension1 description",
+                                                "label": "subdimension1",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    }
+                                ],
+                                "name": "Sample Scoring Spec",
+                            },
                         ),
-                        DataClusterInputsParams,
+                        ScoringSystemScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1562,23 +1640,36 @@ class TestAsyncPiClient:
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/data/cluster_inputs").mock(return_value=httpx.Response(500))
+        respx_mock.post("/scoring_system/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/data/cluster_inputs",
+                "/scoring_system/score",
                 body=cast(
                     object,
                     maybe_transform(
                         dict(
-                            inputs=[
-                                {
-                                    "identifier": "abcd12345",
-                                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                                }
-                            ]
+                            llm_input="Tell me something different",
+                            llm_output="The lazy dog was jumped over by the quick brown fox",
+                            scoring_spec={
+                                "description": "Write a children's story communicating a simple life lesson.",
+                                "dimensions": [
+                                    {
+                                        "description": "dimension1 description",
+                                        "label": "dimension1",
+                                        "sub_dimensions": [
+                                            {
+                                                "description": "subdimension1 description",
+                                                "label": "subdimension1",
+                                                "scoring_type": "PI_SCORER",
+                                            }
+                                        ],
+                                    }
+                                ],
+                                "name": "Sample Scoring Spec",
+                            },
                         ),
-                        DataClusterInputsParams,
+                        ScoringSystemScoreParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1612,15 +1703,28 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ]
+        response = await client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
         )
 
         assert response.retries_taken == failures_before_success
@@ -1644,15 +1748,28 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+        response = await client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1676,15 +1793,28 @@ class TestAsyncPiClient:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/data/cluster_inputs").mock(side_effect=retry_handler)
+        respx_mock.post("/scoring_system/score").mock(side_effect=retry_handler)
 
-        response = await client.data.with_raw_response.cluster_inputs(
-            inputs=[
-                {
-                    "identifier": "abcd12345",
-                    "llm_input": "The lazy dog was jumped over by the quick brown fox",
-                }
-            ],
+        response = await client.scoring_system.with_raw_response.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec={
+                "description": "Write a children's story communicating a simple life lesson.",
+                "dimensions": [
+                    {
+                        "description": "dimension1 description",
+                        "label": "dimension1",
+                        "sub_dimensions": [
+                            {
+                                "description": "subdimension1 description",
+                                "label": "subdimension1",
+                                "scoring_type": "PI_SCORER",
+                            }
+                        ],
+                    }
+                ],
+                "name": "Sample Scoring Spec",
+            },
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
