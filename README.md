@@ -31,14 +31,28 @@ client = PiClient(
     api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.data.cluster_inputs(
-    inputs=[
-        {
-            "identifier": "abcd12345",
-            "llm_input": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+scoring_system_metrics = client.scoring_system.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
+    scoring_spec={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
+        "name": "Sample Scoring Spec",
+    },
 )
+print(scoring_system_metrics.dimension_scores)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -61,14 +75,28 @@ client = AsyncPiClient(
 
 
 async def main() -> None:
-    response = await client.data.cluster_inputs(
-        inputs=[
-            {
-                "identifier": "abcd12345",
-                "llm_input": "The lazy dog was jumped over by the quick brown fox",
-            }
-        ],
+    scoring_system_metrics = await client.scoring_system.score(
+        llm_input="Tell me something different",
+        llm_output="The lazy dog was jumped over by the quick brown fox",
+        scoring_spec={
+            "description": "Write a children's story communicating a simple life lesson.",
+            "dimensions": [
+                {
+                    "description": "dimension1 description",
+                    "label": "dimension1",
+                    "sub_dimensions": [
+                        {
+                            "description": "subdimension1 description",
+                            "label": "subdimension1",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
+                }
+            ],
+            "name": "Sample Scoring Spec",
+        },
     )
+    print(scoring_system_metrics.dimension_scores)
 
 
 asyncio.run(main())
@@ -94,13 +122,9 @@ from withpi import PiClient
 
 client = PiClient()
 
-sft_status = client.training.sft.start_job(
-    examples=[
-        {
-            "llm_input": "Tell me something different",
-            "llm_output": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+scoring_system_metrics = client.scoring_system.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "dimensions": [
@@ -139,7 +163,7 @@ sft_status = client.training.sft.start_job(
         "name": "Sample Scoring Spec",
     },
 )
-print(sft_status.scoring_spec)
+print(scoring_system_metrics.scoring_spec)
 ```
 
 ## Handling errors
@@ -158,13 +182,26 @@ from withpi import PiClient
 client = PiClient()
 
 try:
-    client.data.cluster_inputs(
-        inputs=[
-            {
-                "identifier": "abcd12345",
-                "llm_input": "The lazy dog was jumped over by the quick brown fox",
-            }
-        ],
+    client.scoring_system.score(
+        llm_input="Tell me something different",
+        llm_output="The lazy dog was jumped over by the quick brown fox",
+        scoring_spec={
+            "description": "Write a children's story communicating a simple life lesson.",
+            "dimensions": [
+                {
+                    "description": "dimension1 description",
+                    "label": "dimension1",
+                    "sub_dimensions": [
+                        {
+                            "description": "subdimension1 description",
+                            "label": "subdimension1",
+                            "scoring_type": "PI_SCORER",
+                        }
+                    ],
+                }
+            ],
+            "name": "Sample Scoring Spec",
+        },
     )
 except withpi.APIConnectionError as e:
     print("The server could not be reached")
@@ -208,13 +245,26 @@ client = PiClient(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).data.cluster_inputs(
-    inputs=[
-        {
-            "identifier": "abcd12345",
-            "llm_input": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+client.with_options(max_retries=5).scoring_system.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
+    scoring_spec={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
+        "name": "Sample Scoring Spec",
+    },
 )
 ```
 
@@ -238,13 +288,26 @@ client = PiClient(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).data.cluster_inputs(
-    inputs=[
-        {
-            "identifier": "abcd12345",
-            "llm_input": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+client.with_options(timeout=5.0).scoring_system.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
+    scoring_spec={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
+        "name": "Sample Scoring Spec",
+    },
 )
 ```
 
@@ -286,16 +349,27 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from withpi import PiClient
 
 client = PiClient()
-response = client.data.with_raw_response.cluster_inputs(
-    inputs=[{
-        "identifier": "abcd12345",
-        "llm_input": "The lazy dog was jumped over by the quick brown fox",
-    }],
+response = client.scoring_system.with_raw_response.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
+    scoring_spec={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [{
+            "description": "dimension1 description",
+            "label": "dimension1",
+            "sub_dimensions": [{
+                "description": "subdimension1 description",
+                "label": "subdimension1",
+                "scoring_type": "PI_SCORER",
+            }],
+        }],
+        "name": "Sample Scoring Spec",
+    },
 )
 print(response.headers.get('X-My-Header'))
 
-data = response.parse()  # get the object that `data.cluster_inputs()` would have returned
-print(data)
+scoring_system = response.parse()  # get the object that `scoring_system.score()` would have returned
+print(scoring_system.dimension_scores)
 ```
 
 These methods return an [`APIResponse`](https://github.com/withpi/sdk-python/tree/main/src/withpi/_response.py) object.
@@ -309,13 +383,26 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.data.with_streaming_response.cluster_inputs(
-    inputs=[
-        {
-            "identifier": "abcd12345",
-            "llm_input": "The lazy dog was jumped over by the quick brown fox",
-        }
-    ],
+with client.scoring_system.with_streaming_response.score(
+    llm_input="Tell me something different",
+    llm_output="The lazy dog was jumped over by the quick brown fox",
+    scoring_spec={
+        "description": "Write a children's story communicating a simple life lesson.",
+        "dimensions": [
+            {
+                "description": "dimension1 description",
+                "label": "dimension1",
+                "sub_dimensions": [
+                    {
+                        "description": "subdimension1 description",
+                        "label": "subdimension1",
+                        "scoring_type": "PI_SCORER",
+                    }
+                ],
+            }
+        ],
+        "name": "Sample Scoring Spec",
+    },
 ) as response:
     print(response.headers.get("X-My-Header"))
 
