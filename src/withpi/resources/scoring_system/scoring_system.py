@@ -256,7 +256,7 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_v2_params.ScoringSpec,
+        scoring_spec_v2: scoring_system_score_v2_params.ScoringSpecV2,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -272,7 +272,7 @@ class ScoringSystemResource(SyncAPIResource):
 
           llm_output: The output to score
 
-          scoring_spec: The scoring spec to score
+          scoring_spec_v2: The scoring spec to score
 
           extra_headers: Send extra headers
 
@@ -288,7 +288,7 @@ class ScoringSystemResource(SyncAPIResource):
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_spec": scoring_spec,
+                    "scoring_spec_v2": scoring_spec_v2,
                 },
                 scoring_system_score_v2_params.ScoringSystemScoreV2Params,
             ),
@@ -510,7 +510,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_v2_params.ScoringSpec,
+        scoring_spec_v2: scoring_system_score_v2_params.ScoringSpecV2,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -526,7 +526,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           llm_output: The output to score
 
-          scoring_spec: The scoring spec to score
+          scoring_spec_v2: The scoring spec to score
 
           extra_headers: Send extra headers
 
@@ -542,7 +542,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_spec": scoring_spec,
+                    "scoring_spec_v2": scoring_spec_v2,
                 },
                 scoring_system_score_v2_params.ScoringSystemScoreV2Params,
             ),
