@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.35.0 (2025-04-10)
+
+Full Changelog: [v1.34.0...v1.35.0](https://github.com/withpi/sdk-python/compare/v1.34.0...v1.35.0)
+
+### Features
+
+* **api:** api update ([5c208ca](https://github.com/withpi/sdk-python/commit/5c208ca8a4e8e33e0668fc3e7358994d876e06a3))
+* **api:** api update ([03e6b20](https://github.com/withpi/sdk-python/commit/03e6b2003d5e832f155f4e0475b054375f28a6f0))
+* **api:** api update ([fab4e4f](https://github.com/withpi/sdk-python/commit/fab4e4f618170816ebc29cbad919a4596cbdaa42))
+* **api:** api update ([a35be07](https://github.com/withpi/sdk-python/commit/a35be07696598b2a68a90d7a130521f7ec1affef))
+* **api:** api update ([1b44d38](https://github.com/withpi/sdk-python/commit/1b44d38c20d0c3790813fc500ab672b83f380648))
+* **api:** api update ([7ded670](https://github.com/withpi/sdk-python/commit/7ded6704b111326f486789b6df352a5467a61e3e))
+* **api:** api update ([#538](https://github.com/withpi/sdk-python/issues/538)) ([f21753a](https://github.com/withpi/sdk-python/commit/f21753affc47c4a4c3414c35e2433a9bfe979fb7))
+
+
+### Chores
+
+* **internal:** expand CI branch coverage ([c83ffd2](https://github.com/withpi/sdk-python/commit/c83ffd29732a42eb1a881a056d698f34272722a9))
+* **internal:** reduce CI branch coverage ([c1f8dc3](https://github.com/withpi/sdk-python/commit/c1f8dc356943340a4b09aed421a43f8c0d5d3a97))
+* **internal:** remove trailing character ([#540](https://github.com/withpi/sdk-python/issues/540)) ([bf1621b](https://github.com/withpi/sdk-python/commit/bf1621b12be2a74a3079b1378ca973c1837a4626))
+* **internal:** slight transform perf improvement ([#542](https://github.com/withpi/sdk-python/issues/542)) ([8d3913f](https://github.com/withpi/sdk-python/commit/8d3913f8c946a59e0d8f0ccd316c5ea90fb71d79))
+* **tests:** improve enum examples ([#543](https://github.com/withpi/sdk-python/issues/543)) ([a3a300d](https://github.com/withpi/sdk-python/commit/a3a300d3ea5b28e53c2e78462b82003fe145ed99))
+
+
+### Documentation
+
+* swap examples used in readme ([#541](https://github.com/withpi/sdk-python/issues/541)) ([5699c99](https://github.com/withpi/sdk-python/commit/5699c99a97c691ab65afada7f53104ca4e951f67))
+
 ## 1.34.0 (2025-04-01)
 
 Full Changelog: [v1.33.0...v1.34.0](https://github.com/withpi/sdk-python/compare/v1.33.0...v1.34.0)
