@@ -10,6 +10,8 @@ import httpx
 from ...types import (
     scoring_system_score_params,
     scoring_system_generate_params,
+    scoring_system_score_v2_params,
+    scoring_system_generate_v2_params,
     scoring_system_import_spec_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -34,9 +36,11 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.scoring_spec import ScoringSpec
-from ...types.scoring_system_score_response import ScoringSystemScoreResponse
-from ...types.scoring_system_generate_response import ScoringSystemGenerateResponse
+from ...types.shared.scoring_spec import ScoringSpec as SharedScoringSpec
+from ...types.shared_params.scoring_spec import ScoringSpec as SharedParamsScoringSpec
+from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
+from ...types.scoring_system_score_v2_response import ScoringSystemScoreV2Response
+from ...types.scoring_system_generate_v2_response import ScoringSystemGenerateV2Response
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -76,7 +80,50 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateResponse:
+    ) -> SharedScoringSpec:
+        """
+        Generates a scoring spec
+
+        Args:
+          application_description: The application description to generate a scoring spec for.
+
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring spec.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/scoring_system/generate",
+            body=maybe_transform(
+                {
+                    "application_description": application_description,
+                    "try_auto_generating_python_code": try_auto_generating_python_code,
+                },
+                scoring_system_generate_params.ScoringSystemGenerateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SharedScoringSpec,
+        )
+
+    def generate_v2(
+        self,
+        *,
+        application_description: str,
+        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemGenerateV2Response:
         """
         Generates a scoring spec v2
 
@@ -100,12 +147,12 @@ class ScoringSystemResource(SyncAPIResource):
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                scoring_system_generate_params.ScoringSystemGenerateParams,
+                scoring_system_generate_v2_params.ScoringSystemGenerateV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateResponse,
+            cast_to=ScoringSystemGenerateV2Response,
         )
 
     def import_spec(
@@ -120,7 +167,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSpec:
+    ) -> SharedScoringSpec:
         """
         Import a scoring spec from various sources
 
@@ -154,7 +201,7 @@ class ScoringSystemResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSpec,
+            cast_to=SharedScoringSpec,
         )
 
     def score(
@@ -162,14 +209,61 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: SharedParamsScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
+        """
+        Scores the provided input and output based on the given scoring spec
+
+        Args:
+          llm_input: The input to score
+
+          llm_output: The output to score
+
+          scoring_spec: The scoring spec to score
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/scoring_system/score",
+            body=maybe_transform(
+                {
+                    "llm_input": llm_input,
+                    "llm_output": llm_output,
+                    "scoring_spec": scoring_spec,
+                },
+                scoring_system_score_params.ScoringSystemScoreParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemMetrics,
+        )
+
+    def score_v2(
+        self,
+        *,
+        llm_input: str,
+        llm_output: str,
+        scoring_spec: scoring_system_score_v2_params.ScoringSpec,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemScoreV2Response:
         """
         Scores the provided input and output based on the given scoring spec
 
@@ -196,12 +290,12 @@ class ScoringSystemResource(SyncAPIResource):
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
                 },
-                scoring_system_score_params.ScoringSystemScoreParams,
+                scoring_system_score_v2_params.ScoringSystemScoreV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemScoreV2Response,
         )
 
 
@@ -240,7 +334,50 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemGenerateResponse:
+    ) -> SharedScoringSpec:
+        """
+        Generates a scoring spec
+
+        Args:
+          application_description: The application description to generate a scoring spec for.
+
+          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring spec.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/scoring_system/generate",
+            body=await async_maybe_transform(
+                {
+                    "application_description": application_description,
+                    "try_auto_generating_python_code": try_auto_generating_python_code,
+                },
+                scoring_system_generate_params.ScoringSystemGenerateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SharedScoringSpec,
+        )
+
+    async def generate_v2(
+        self,
+        *,
+        application_description: str,
+        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemGenerateV2Response:
         """
         Generates a scoring spec v2
 
@@ -264,12 +401,12 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                     "application_description": application_description,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
-                scoring_system_generate_params.ScoringSystemGenerateParams,
+                scoring_system_generate_v2_params.ScoringSystemGenerateV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemGenerateResponse,
+            cast_to=ScoringSystemGenerateV2Response,
         )
 
     async def import_spec(
@@ -284,7 +421,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSpec:
+    ) -> SharedScoringSpec:
         """
         Import a scoring spec from various sources
 
@@ -318,7 +455,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSpec,
+            cast_to=SharedScoringSpec,
         )
 
     async def score(
@@ -326,14 +463,61 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: SharedParamsScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSystemScoreResponse:
+    ) -> ScoringSystemMetrics:
+        """
+        Scores the provided input and output based on the given scoring spec
+
+        Args:
+          llm_input: The input to score
+
+          llm_output: The output to score
+
+          scoring_spec: The scoring spec to score
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/scoring_system/score",
+            body=await async_maybe_transform(
+                {
+                    "llm_input": llm_input,
+                    "llm_output": llm_output,
+                    "scoring_spec": scoring_spec,
+                },
+                scoring_system_score_params.ScoringSystemScoreParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemMetrics,
+        )
+
+    async def score_v2(
+        self,
+        *,
+        llm_input: str,
+        llm_output: str,
+        scoring_spec: scoring_system_score_v2_params.ScoringSpec,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemScoreV2Response:
         """
         Scores the provided input and output based on the given scoring spec
 
@@ -360,12 +544,12 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
                 },
-                scoring_system_score_params.ScoringSystemScoreParams,
+                scoring_system_score_v2_params.ScoringSystemScoreV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ScoringSystemScoreResponse,
+            cast_to=ScoringSystemScoreV2Response,
         )
 
 
@@ -376,11 +560,17 @@ class ScoringSystemResourceWithRawResponse:
         self.generate = to_raw_response_wrapper(
             scoring_system.generate,
         )
+        self.generate_v2 = to_raw_response_wrapper(
+            scoring_system.generate_v2,
+        )
         self.import_spec = to_raw_response_wrapper(
             scoring_system.import_spec,
         )
         self.score = to_raw_response_wrapper(
             scoring_system.score,
+        )
+        self.score_v2 = to_raw_response_wrapper(
+            scoring_system.score_v2,
         )
 
     @cached_property
@@ -395,11 +585,17 @@ class AsyncScoringSystemResourceWithRawResponse:
         self.generate = async_to_raw_response_wrapper(
             scoring_system.generate,
         )
+        self.generate_v2 = async_to_raw_response_wrapper(
+            scoring_system.generate_v2,
+        )
         self.import_spec = async_to_raw_response_wrapper(
             scoring_system.import_spec,
         )
         self.score = async_to_raw_response_wrapper(
             scoring_system.score,
+        )
+        self.score_v2 = async_to_raw_response_wrapper(
+            scoring_system.score_v2,
         )
 
     @cached_property
@@ -414,11 +610,17 @@ class ScoringSystemResourceWithStreamingResponse:
         self.generate = to_streamed_response_wrapper(
             scoring_system.generate,
         )
+        self.generate_v2 = to_streamed_response_wrapper(
+            scoring_system.generate_v2,
+        )
         self.import_spec = to_streamed_response_wrapper(
             scoring_system.import_spec,
         )
         self.score = to_streamed_response_wrapper(
             scoring_system.score,
+        )
+        self.score_v2 = to_streamed_response_wrapper(
+            scoring_system.score_v2,
         )
 
     @cached_property
@@ -433,11 +635,17 @@ class AsyncScoringSystemResourceWithStreamingResponse:
         self.generate = async_to_streamed_response_wrapper(
             scoring_system.generate,
         )
+        self.generate_v2 = async_to_streamed_response_wrapper(
+            scoring_system.generate_v2,
+        )
         self.import_spec = async_to_streamed_response_wrapper(
             scoring_system.import_spec,
         )
         self.score = async_to_streamed_response_wrapper(
             scoring_system.score,
+        )
+        self.score_v2 = async_to_streamed_response_wrapper(
+            scoring_system.score_v2,
         )
 
     @cached_property

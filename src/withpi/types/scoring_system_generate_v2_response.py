@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["ScoringSystemGenerateResponse", "Dimension"]
+__all__ = ["ScoringSystemGenerateV2Response", "Dimension"]
 
 
 class Dimension(BaseModel):
@@ -38,6 +38,6 @@ class Dimension(BaseModel):
     """
 
 
-class ScoringSystemGenerateResponse(BaseModel):
+class ScoringSystemGenerateV2Response(BaseModel):
     dimensions: List[Dimension]
     """The dimensions of the scoring spec"""
