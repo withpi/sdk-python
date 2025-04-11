@@ -720,7 +720,7 @@ class TestPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_input={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "dimensions": [
                                     {
@@ -761,7 +761,7 @@ class TestPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_input={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "dimensions": [
                                     {
@@ -817,7 +817,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -861,7 +861,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -905,7 +905,7 @@ class TestPiClient:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -1610,7 +1610,7 @@ class TestAsyncPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_input={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "dimensions": [
                                     {
@@ -1651,7 +1651,7 @@ class TestAsyncPiClient:
                         dict(
                             llm_input="Tell me something different",
                             llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_input={
+                            scoring_spec={
                                 "description": "Write a children's story communicating a simple life lesson.",
                                 "dimensions": [
                                     {
@@ -1708,7 +1708,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -1753,7 +1753,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -1798,7 +1798,7 @@ class TestAsyncPiClient:
         response = await client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {

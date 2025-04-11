@@ -113,7 +113,7 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -139,7 +139,7 @@ class TestScoringSystem:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -169,7 +169,7 @@ class TestScoringSystem:
         with client.scoring_system.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -292,7 +292,7 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -318,7 +318,7 @@ class TestAsyncScoringSystem:
         response = await async_client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
@@ -348,7 +348,7 @@ class TestAsyncScoringSystem:
         async with async_client.scoring_system.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_input={
+            scoring_spec={
                 "description": "Write a children's story communicating a simple life lesson.",
                 "dimensions": [
                     {
