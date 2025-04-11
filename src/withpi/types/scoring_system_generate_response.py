@@ -34,7 +34,7 @@ class ScoringSystemGenerateResponseItem(BaseModel):
     """The type of scoring performed for this dimension"""
 
     tag: Optional[str] = None
-    """The tag or the group to which"""
+    """The tag or the group to which this question belongs."""
 
     weight: Optional[float] = None
     """The weight of the dimension.

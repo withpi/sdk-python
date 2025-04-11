@@ -47,7 +47,7 @@ class ScoringSpecUnionMember1(TypedDict, total=False):
     """The type of scoring performed for this dimension"""
 
     tag: Optional[str]
-    """The tag or the group to which"""
+    """The tag or the group to which this question belongs."""
 
     weight: Optional[float]
     """The weight of the dimension.
