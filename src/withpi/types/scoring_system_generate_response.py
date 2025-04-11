@@ -1,16 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["ScoringSystemGenerateV2Response", "DimensionsV2"]
+__all__ = ["ScoringSystemGenerateResponse", "ScoringSystemGenerateResponseItem"]
 
 
-class DimensionsV2(BaseModel):
+class ScoringSystemGenerateResponseItem(BaseModel):
     question: str
     """The description of the dimension"""
+
+    tag: Optional[str] = None
+    """The tag or the group to which"""
 
     custom_model_id: Optional[str] = None
     """
@@ -38,6 +41,4 @@ class DimensionsV2(BaseModel):
     """
 
 
-class ScoringSystemGenerateV2Response(BaseModel):
-    dimensions_v2: List[DimensionsV2]
-    """The dimensions of the scoring spec"""
+ScoringSystemGenerateResponse: TypeAlias = List[ScoringSystemGenerateResponseItem]
