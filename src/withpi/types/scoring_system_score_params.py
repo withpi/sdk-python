@@ -25,14 +25,14 @@ class ScoringSpecUnionMember1(TypedDict, total=False):
     question: Required[str]
     """The description of the dimension"""
 
-    tag: Required[Optional[str]]
-    """The tag or the group to which"""
-
     custom_model_id: Optional[str]
     """
     The ID of the custom model to use for scoring. Only relevant for scoring_type of
     CUSTOM_MODEL_SCORER
     """
+
+    label: Optional[str]
+    """The label of the question"""
 
     parameters: Optional[Iterable[float]]
     """The learned parameters for the scoring method.
@@ -45,6 +45,9 @@ class ScoringSpecUnionMember1(TypedDict, total=False):
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
     """The type of scoring performed for this dimension"""
+
+    tag: Optional[str]
+    """The tag or the group to which"""
 
     weight: Optional[float]
     """The weight of the dimension.

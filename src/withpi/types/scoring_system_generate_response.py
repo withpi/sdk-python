@@ -12,14 +12,14 @@ class ScoringSystemGenerateResponseItem(BaseModel):
     question: str
     """The description of the dimension"""
 
-    tag: Optional[str] = None
-    """The tag or the group to which"""
-
     custom_model_id: Optional[str] = None
     """
     The ID of the custom model to use for scoring. Only relevant for scoring_type of
     CUSTOM_MODEL_SCORER
     """
+
+    label: Optional[str] = None
+    """The label of the question"""
 
     parameters: Optional[List[float]] = None
     """The learned parameters for the scoring method.
@@ -32,6 +32,9 @@ class ScoringSystemGenerateResponseItem(BaseModel):
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]] = None
     """The type of scoring performed for this dimension"""
+
+    tag: Optional[str] = None
+    """The tag or the group to which"""
 
     weight: Optional[float] = None
     """The weight of the dimension.
