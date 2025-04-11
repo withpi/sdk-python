@@ -12,7 +12,7 @@ from .query_fanout import (
     QueryFanoutResourceWithStreamingResponse,
     AsyncQueryFanoutResourceWithStreamingResponse,
 )
-from .query_classifier.query_classifier import (
+from .query_classifier import (
     QueryClassifierResource,
     AsyncQueryClassifierResource,
     QueryClassifierResourceWithRawResponse,

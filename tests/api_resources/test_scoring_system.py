@@ -9,6 +9,9 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
+from withpi.types import (
+    ScoringSystemGenerateResponse,
+)
 from withpi.types.shared import ScoringSpec, ScoringSystemMetrics
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -23,7 +26,7 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -32,7 +35,7 @@ class TestScoringSystem:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -44,7 +47,7 @@ class TestScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = response.parse()
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -56,7 +59,7 @@ class TestScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = response.parse()
-            assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+            assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -202,7 +205,7 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
         )
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -211,7 +214,7 @@ class TestAsyncScoringSystem:
             application_description="Write a children's story communicating a simple life lesson.",
             try_auto_generating_python_code=False,
         )
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -223,7 +226,7 @@ class TestAsyncScoringSystem:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scoring_system = await response.parse()
-        assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+        assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -235,7 +238,7 @@ class TestAsyncScoringSystem:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scoring_system = await response.parse()
-            assert_matches_type(ScoringSpec, scoring_system, path=["response"])
+            assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

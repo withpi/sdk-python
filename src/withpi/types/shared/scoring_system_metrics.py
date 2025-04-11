@@ -19,5 +19,8 @@ class ScoringSystemMetrics(BaseModel):
     dimension_scores: Dict[str, DimensionScores]
     """The score components for each dimension"""
 
+    question_scores: Dict[str, float]
+    """The score components for each question"""
+
     total_score: float
     """The total score of the scoring spec"""
