@@ -7,14 +7,6 @@ from typing_extensions import Literal
 
 import httpx
 
-from .distill import (
-    DistillResource,
-    AsyncDistillResource,
-    DistillResourceWithRawResponse,
-    AsyncDistillResourceWithRawResponse,
-    DistillResourceWithStreamingResponse,
-    AsyncDistillResourceWithStreamingResponse,
-)
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
     maybe_transform,
@@ -36,10 +28,6 @@ __all__ = ["QueryClassifierResource", "AsyncQueryClassifierResource"]
 
 
 class QueryClassifierResource(SyncAPIResource):
-    @cached_property
-    def distill(self) -> DistillResource:
-        return DistillResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> QueryClassifierResourceWithRawResponse:
         """
@@ -118,10 +106,6 @@ class QueryClassifierResource(SyncAPIResource):
 
 
 class AsyncQueryClassifierResource(AsyncAPIResource):
-    @cached_property
-    def distill(self) -> AsyncDistillResource:
-        return AsyncDistillResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncQueryClassifierResourceWithRawResponse:
         """
@@ -207,10 +191,6 @@ class QueryClassifierResourceWithRawResponse:
             query_classifier.classify,
         )
 
-    @cached_property
-    def distill(self) -> DistillResourceWithRawResponse:
-        return DistillResourceWithRawResponse(self._query_classifier.distill)
-
 
 class AsyncQueryClassifierResourceWithRawResponse:
     def __init__(self, query_classifier: AsyncQueryClassifierResource) -> None:
@@ -219,10 +199,6 @@ class AsyncQueryClassifierResourceWithRawResponse:
         self.classify = async_to_raw_response_wrapper(
             query_classifier.classify,
         )
-
-    @cached_property
-    def distill(self) -> AsyncDistillResourceWithRawResponse:
-        return AsyncDistillResourceWithRawResponse(self._query_classifier.distill)
 
 
 class QueryClassifierResourceWithStreamingResponse:
@@ -233,10 +209,6 @@ class QueryClassifierResourceWithStreamingResponse:
             query_classifier.classify,
         )
 
-    @cached_property
-    def distill(self) -> DistillResourceWithStreamingResponse:
-        return DistillResourceWithStreamingResponse(self._query_classifier.distill)
-
 
 class AsyncQueryClassifierResourceWithStreamingResponse:
     def __init__(self, query_classifier: AsyncQueryClassifierResource) -> None:
@@ -245,7 +217,3 @@ class AsyncQueryClassifierResourceWithStreamingResponse:
         self.classify = async_to_streamed_response_wrapper(
             query_classifier.classify,
         )
-
-    @cached_property
-    def distill(self) -> AsyncDistillResourceWithStreamingResponse:
-        return AsyncDistillResourceWithStreamingResponse(self._query_classifier.distill)

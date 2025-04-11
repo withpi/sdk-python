@@ -32,9 +32,7 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.data import data
-from .resources.prompt import prompt
 from .resources.search import search
-from .resources.training import training
 from .resources.scoring_system import scoring_system
 
 __all__ = [
@@ -51,8 +49,6 @@ __all__ = [
 
 class PiClient(SyncAPIClient):
     data: data.DataResource
-    training: training.TrainingResource
-    prompt: prompt.PromptResource
     scoring_system: scoring_system.ScoringSystemResource
     search: search.SearchResource
     with_raw_response: PiClientWithRawResponse
@@ -113,8 +109,6 @@ class PiClient(SyncAPIClient):
         )
 
         self.data = data.DataResource(self)
-        self.training = training.TrainingResource(self)
-        self.prompt = prompt.PromptResource(self)
         self.scoring_system = scoring_system.ScoringSystemResource(self)
         self.search = search.SearchResource(self)
         self.with_raw_response = PiClientWithRawResponse(self)
@@ -227,8 +221,6 @@ class PiClient(SyncAPIClient):
 
 class AsyncPiClient(AsyncAPIClient):
     data: data.AsyncDataResource
-    training: training.AsyncTrainingResource
-    prompt: prompt.AsyncPromptResource
     scoring_system: scoring_system.AsyncScoringSystemResource
     search: search.AsyncSearchResource
     with_raw_response: AsyncPiClientWithRawResponse
@@ -289,8 +281,6 @@ class AsyncPiClient(AsyncAPIClient):
         )
 
         self.data = data.AsyncDataResource(self)
-        self.training = training.AsyncTrainingResource(self)
-        self.prompt = prompt.AsyncPromptResource(self)
         self.scoring_system = scoring_system.AsyncScoringSystemResource(self)
         self.search = search.AsyncSearchResource(self)
         self.with_raw_response = AsyncPiClientWithRawResponse(self)
@@ -404,8 +394,6 @@ class AsyncPiClient(AsyncAPIClient):
 class PiClientWithRawResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithRawResponse(client.data)
-        self.training = training.TrainingResourceWithRawResponse(client.training)
-        self.prompt = prompt.PromptResourceWithRawResponse(client.prompt)
         self.scoring_system = scoring_system.ScoringSystemResourceWithRawResponse(client.scoring_system)
         self.search = search.SearchResourceWithRawResponse(client.search)
 
@@ -413,8 +401,6 @@ class PiClientWithRawResponse:
 class AsyncPiClientWithRawResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithRawResponse(client.data)
-        self.training = training.AsyncTrainingResourceWithRawResponse(client.training)
-        self.prompt = prompt.AsyncPromptResourceWithRawResponse(client.prompt)
         self.scoring_system = scoring_system.AsyncScoringSystemResourceWithRawResponse(client.scoring_system)
         self.search = search.AsyncSearchResourceWithRawResponse(client.search)
 
@@ -422,8 +408,6 @@ class AsyncPiClientWithRawResponse:
 class PiClientWithStreamedResponse:
     def __init__(self, client: PiClient) -> None:
         self.data = data.DataResourceWithStreamingResponse(client.data)
-        self.training = training.TrainingResourceWithStreamingResponse(client.training)
-        self.prompt = prompt.PromptResourceWithStreamingResponse(client.prompt)
         self.scoring_system = scoring_system.ScoringSystemResourceWithStreamingResponse(client.scoring_system)
         self.search = search.SearchResourceWithStreamingResponse(client.search)
 
@@ -431,8 +415,6 @@ class PiClientWithStreamedResponse:
 class AsyncPiClientWithStreamedResponse:
     def __init__(self, client: AsyncPiClient) -> None:
         self.data = data.AsyncDataResourceWithStreamingResponse(client.data)
-        self.training = training.AsyncTrainingResourceWithStreamingResponse(client.training)
-        self.prompt = prompt.AsyncPromptResourceWithStreamingResponse(client.prompt)
         self.scoring_system = scoring_system.AsyncScoringSystemResourceWithStreamingResponse(client.scoring_system)
         self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
 
