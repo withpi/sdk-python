@@ -16,3 +16,4 @@ from .shared import (
 from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSystemScoreParams
 from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams
 from .scoring_system_generate_response import ScoringSystemGenerateResponse as ScoringSystemGenerateResponse
+from .scoring_system_import_spec_params import ScoringSystemImportSpecParams as ScoringSystemImportSpecParams
