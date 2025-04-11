@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from .shared_params.scoring_spec import ScoringSpec
+from .shared_params import scoring_spec
 
-__all__ = ["ScoringSystemScoreParams", "ScoringInput", "ScoringInputUnionMember1"]
+__all__ = ["ScoringSystemScoreParams", "ScoringSpec", "ScoringSpecUnionMember1"]
 
 
 class ScoringSystemScoreParams(TypedDict, total=False):
@@ -17,11 +17,11 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     llm_output: Required[str]
     """The output to score"""
 
-    scoring_input: Required[ScoringInput]
+    scoring_spec: Required[ScoringSpec]
     """Either a scoring spec or a list of questions to score"""
 
 
-class ScoringInputUnionMember1(TypedDict, total=False):
+class ScoringSpecUnionMember1(TypedDict, total=False):
     question: Required[str]
     """The description of the dimension"""
 
@@ -54,4 +54,4 @@ class ScoringInputUnionMember1(TypedDict, total=False):
     """
 
 
-ScoringInput: TypeAlias = Union[ScoringSpec, Iterable[ScoringInputUnionMember1]]
+ScoringSpec: TypeAlias = Union[scoring_spec.ScoringSpec, Iterable[ScoringSpecUnionMember1]]

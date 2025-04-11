@@ -162,7 +162,7 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_input: scoring_system_score_params.ScoringInput,
+        scoring_spec: scoring_system_score_params.ScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -179,7 +179,7 @@ class ScoringSystemResource(SyncAPIResource):
 
           llm_output: The output to score
 
-          scoring_input: Either a scoring spec or a list of questions to score
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           extra_headers: Send extra headers
 
@@ -195,7 +195,7 @@ class ScoringSystemResource(SyncAPIResource):
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_input": scoring_input,
+                    "scoring_spec": scoring_spec,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,
             ),
@@ -327,7 +327,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_input: scoring_system_score_params.ScoringInput,
+        scoring_spec: scoring_system_score_params.ScoringSpec,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -344,7 +344,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           llm_output: The output to score
 
-          scoring_input: Either a scoring spec or a list of questions to score
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           extra_headers: Send extra headers
 
@@ -360,7 +360,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                 {
                     "llm_input": llm_input,
                     "llm_output": llm_output,
-                    "scoring_input": scoring_input,
+                    "scoring_spec": scoring_spec,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,
             ),
