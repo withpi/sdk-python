@@ -113,23 +113,7 @@ class TestScoringSystem:
         scoring_system = client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
@@ -139,23 +123,7 @@ class TestScoringSystem:
         response = client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
         assert response.is_closed is True
@@ -169,23 +137,7 @@ class TestScoringSystem:
         with client.scoring_system.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -292,23 +244,7 @@ class TestAsyncScoringSystem:
         scoring_system = await async_client.scoring_system.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
@@ -318,23 +254,7 @@ class TestAsyncScoringSystem:
         response = await async_client.scoring_system.with_raw_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
         assert response.is_closed is True
@@ -348,23 +268,7 @@ class TestAsyncScoringSystem:
         async with async_client.scoring_system.with_streaming_response.score(
             llm_input="Tell me something different",
             llm_output="The lazy dog was jumped over by the quick brown fox",
-            scoring_spec={
-                "description": "Write a children's story communicating a simple life lesson.",
-                "dimensions": [
-                    {
-                        "description": "dimension1 description",
-                        "label": "dimension1",
-                        "sub_dimensions": [
-                            {
-                                "description": "subdimension1 description",
-                                "label": "subdimension1",
-                                "scoring_type": "PI_SCORER",
-                            }
-                        ],
-                    }
-                ],
-                "name": "Sample Scoring Spec",
-            },
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

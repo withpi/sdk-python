@@ -34,23 +34,10 @@ client = PiClient(
 scoring_system_metrics = client.scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scoring_spec={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "dimensions": [
-            {
-                "description": "dimension1 description",
-                "label": "dimension1",
-                "sub_dimensions": [
-                    {
-                        "description": "subdimension1 description",
-                        "label": "subdimension1",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            }
-        ],
-        "name": "Sample Scoring Spec",
-    },
+    scoring_spec=[
+        {"question": "Is this response truthful?"},
+        {"question": "Is this response relevant?"},
+    ],
 )
 print(scoring_system_metrics.dimension_scores)
 ```
@@ -78,23 +65,10 @@ async def main() -> None:
     scoring_system_metrics = await client.scoring_system.score(
         llm_input="Tell me something different",
         llm_output="The lazy dog was jumped over by the quick brown fox",
-        scoring_spec={
-            "description": "Write a children's story communicating a simple life lesson.",
-            "dimensions": [
-                {
-                    "description": "dimension1 description",
-                    "label": "dimension1",
-                    "sub_dimensions": [
-                        {
-                            "description": "subdimension1 description",
-                            "label": "subdimension1",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                }
-            ],
-            "name": "Sample Scoring Spec",
-        },
+        scoring_spec=[
+            {"question": "Is this response truthful?"},
+            {"question": "Is this response relevant?"},
+        ],
     )
     print(scoring_system_metrics.dimension_scores)
 
@@ -183,23 +157,10 @@ try:
     client.scoring_system.score(
         llm_input="Tell me something different",
         llm_output="The lazy dog was jumped over by the quick brown fox",
-        scoring_spec={
-            "description": "Write a children's story communicating a simple life lesson.",
-            "dimensions": [
-                {
-                    "description": "dimension1 description",
-                    "label": "dimension1",
-                    "sub_dimensions": [
-                        {
-                            "description": "subdimension1 description",
-                            "label": "subdimension1",
-                            "scoring_type": "PI_SCORER",
-                        }
-                    ],
-                }
-            ],
-            "name": "Sample Scoring Spec",
-        },
+        scoring_spec=[
+            {"question": "Is this response truthful?"},
+            {"question": "Is this response relevant?"},
+        ],
     )
 except withpi.APIConnectionError as e:
     print("The server could not be reached")
@@ -246,23 +207,10 @@ client = PiClient(
 client.with_options(max_retries=5).scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scoring_spec={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "dimensions": [
-            {
-                "description": "dimension1 description",
-                "label": "dimension1",
-                "sub_dimensions": [
-                    {
-                        "description": "subdimension1 description",
-                        "label": "subdimension1",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            }
-        ],
-        "name": "Sample Scoring Spec",
-    },
+    scoring_spec=[
+        {"question": "Is this response truthful?"},
+        {"question": "Is this response relevant?"},
+    ],
 )
 ```
 
@@ -289,23 +237,10 @@ client = PiClient(
 client.with_options(timeout=5.0).scoring_system.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scoring_spec={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "dimensions": [
-            {
-                "description": "dimension1 description",
-                "label": "dimension1",
-                "sub_dimensions": [
-                    {
-                        "description": "subdimension1 description",
-                        "label": "subdimension1",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            }
-        ],
-        "name": "Sample Scoring Spec",
-    },
+    scoring_spec=[
+        {"question": "Is this response truthful?"},
+        {"question": "Is this response relevant?"},
+    ],
 )
 ```
 
@@ -350,19 +285,11 @@ client = PiClient()
 response = client.scoring_system.with_raw_response.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scoring_spec={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "dimensions": [{
-            "description": "dimension1 description",
-            "label": "dimension1",
-            "sub_dimensions": [{
-                "description": "subdimension1 description",
-                "label": "subdimension1",
-                "scoring_type": "PI_SCORER",
-            }],
-        }],
-        "name": "Sample Scoring Spec",
-    },
+    scoring_spec=[{
+        "question": "Is this response truthful?"
+    }, {
+        "question": "Is this response relevant?"
+    }],
 )
 print(response.headers.get('X-My-Header'))
 
@@ -384,23 +311,10 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.scoring_system.with_streaming_response.score(
     llm_input="Tell me something different",
     llm_output="The lazy dog was jumped over by the quick brown fox",
-    scoring_spec={
-        "description": "Write a children's story communicating a simple life lesson.",
-        "dimensions": [
-            {
-                "description": "dimension1 description",
-                "label": "dimension1",
-                "sub_dimensions": [
-                    {
-                        "description": "subdimension1 description",
-                        "label": "subdimension1",
-                        "scoring_type": "PI_SCORER",
-                    }
-                ],
-            }
-        ],
-        "name": "Sample Scoring Spec",
-    },
+    scoring_spec=[
+        {"question": "Is this response truthful?"},
+        {"question": "Is this response relevant?"},
+    ],
 ) as response:
     print(response.headers.get("X-My-Header"))
 
