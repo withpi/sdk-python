@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .shared import (
     Example as Example,
+    Question as Question,
     ScoringSpec as ScoringSpec,
     ExplorationMode as ExplorationMode,
     ScoringDimension as ScoringDimension,
@@ -12,6 +13,8 @@ from .shared import (
     SyntheticDataStatus as SyntheticDataStatus,
     DataGenerationStatus as DataGenerationStatus,
     ScoringSystemMetrics as ScoringSystemMetrics,
+    QueryClassifierResult as QueryClassifierResult,
+    ScoringSpecCalibrationStatus as ScoringSpecCalibrationStatus,
 )
 from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSystemScoreParams
 from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams

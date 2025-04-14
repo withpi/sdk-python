@@ -122,7 +122,7 @@ from withpi import PiClient
 
 client = PiClient()
 
-response = client.scoring_system.calibrate.start_job(
+scoring_spec_calibration_status = client.scoring_system.calibrate.start_job(
     scoring_spec={
         "description": "Write a children's story communicating a simple life lesson.",
         "dimensions": [
@@ -161,7 +161,7 @@ response = client.scoring_system.calibrate.start_job(
         "name": "Sample Scoring Spec",
     },
 )
-print(response.scoring_spec)
+print(scoring_spec_calibration_status.scoring_spec)
 ```
 
 ## Handling errors

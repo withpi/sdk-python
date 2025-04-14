@@ -3,23 +3,10 @@
 from typing import List
 
 from ..._models import BaseModel
+from ..shared.query_classifier_result import QueryClassifierResult
 
-__all__ = ["QueryClassifierClassifyResponse", "Result", "ResultProbability"]
-
-
-class ResultProbability(BaseModel):
-    label: str
-
-    score: float
-
-
-class Result(BaseModel):
-    prediction: str
-
-    probabilities: List[ResultProbability]
-
-    query: str
+__all__ = ["QueryClassifierClassifyResponse"]
 
 
 class QueryClassifierClassifyResponse(BaseModel):
-    results: List[Result]
+    results: List[QueryClassifierResult]
