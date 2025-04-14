@@ -4,12 +4,12 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..shared.scoring_spec import ScoringSpec
+from .scoring_spec import ScoringSpec
 
-__all__ = ["CalibrateRetrieveResponse"]
+__all__ = ["ScoringSpecCalibrationStatus"]
 
 
-class CalibrateRetrieveResponse(BaseModel):
+class ScoringSpecCalibrationStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
