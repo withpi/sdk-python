@@ -24,8 +24,7 @@ from ..._base_client import make_request_options
 from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
 from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
-from ...types.scoring_system.calibrate_retrieve_response import CalibrateRetrieveResponse
-from ...types.scoring_system.calibrate_start_job_response import CalibrateStartJobResponse
+from ...types.shared.scoring_spec_calibration_status import ScoringSpecCalibrationStatus
 
 __all__ = ["CalibrateResource", "AsyncCalibrateResource"]
 
@@ -60,7 +59,7 @@ class CalibrateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateRetrieveResponse:
+    ) -> ScoringSpecCalibrationStatus:
         """
         Checks the status of a Scoring Spec Calibration job
 
@@ -80,7 +79,7 @@ class CalibrateResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CalibrateRetrieveResponse,
+            cast_to=ScoringSpecCalibrationStatus,
         )
 
     def list(
@@ -166,7 +165,7 @@ class CalibrateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateStartJobResponse:
+    ) -> ScoringSpecCalibrationStatus:
         """
         Starts a Scoring Spec Calibration job
 
@@ -204,7 +203,7 @@ class CalibrateResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CalibrateStartJobResponse,
+            cast_to=ScoringSpecCalibrationStatus,
         )
 
     def stream_messages(
@@ -272,7 +271,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateRetrieveResponse:
+    ) -> ScoringSpecCalibrationStatus:
         """
         Checks the status of a Scoring Spec Calibration job
 
@@ -292,7 +291,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CalibrateRetrieveResponse,
+            cast_to=ScoringSpecCalibrationStatus,
         )
 
     async def list(
@@ -378,7 +377,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CalibrateStartJobResponse:
+    ) -> ScoringSpecCalibrationStatus:
         """
         Starts a Scoring Spec Calibration job
 
@@ -416,7 +415,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CalibrateStartJobResponse,
+            cast_to=ScoringSpecCalibrationStatus,
         )
 
     async def stream_messages(

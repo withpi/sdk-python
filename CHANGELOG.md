@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.36.0 (2025-04-14)
+
+Full Changelog: [v1.35.0...v1.36.0](https://github.com/withpi/sdk-python/compare/v1.35.0...v1.36.0)
+
+### Features
+
+* **api:** api update ([f5e5c44](https://github.com/withpi/sdk-python/commit/f5e5c440380b8ac9259c95a97a03123656875ad3))
+* **api:** api update ([4d20ed1](https://github.com/withpi/sdk-python/commit/4d20ed155499f26e06facfec7bb8597a9dad0678))
+* **api:** api update ([4874f38](https://github.com/withpi/sdk-python/commit/4874f380c9d9516aeb4f9ebce9cced37fb61c81b))
+* **api:** api update ([1160290](https://github.com/withpi/sdk-python/commit/11602901a9114a774012643e98f97854c7659217))
+* **api:** api update ([531f494](https://github.com/withpi/sdk-python/commit/531f494206c98e81200c3567a29d7ad82a00f0fb))
+* **api:** api update ([113f66f](https://github.com/withpi/sdk-python/commit/113f66f526eac3ac47d3ca986489a68a1b1c2fd5))
+* **api:** api update ([9ea1ca2](https://github.com/withpi/sdk-python/commit/9ea1ca2163ff7f2375b0b8aef632699c2f02689b))
+* **api:** api update ([9104823](https://github.com/withpi/sdk-python/commit/9104823c4ec6b261c6bb9d6e9e3b8ab21deb4687))
+* **api:** api update ([629cb7e](https://github.com/withpi/sdk-python/commit/629cb7e19c77e95109bc9851a02f1ca92b8d244d))
+* **api:** Duplicate score_v2 and generate_v2 ([17be096](https://github.com/withpi/sdk-python/commit/17be096ca5da725c9113e7cce3e2d0e04d6dd91a))
+* **api:** highlight classifier rather than calibrate ([dc9b3f8](https://github.com/withpi/sdk-python/commit/dc9b3f84da2a833b0c844f0111e6512211889a08))
+* **api:** name the types ([7ae6a75](https://github.com/withpi/sdk-python/commit/7ae6a754ffff5ca68ed944337ce78a40d7a1110f))
+* **api:** Prune excess endpoints ([67a836b](https://github.com/withpi/sdk-python/commit/67a836babfd8effff7eb0da40c7fae41b0c8e8ea))
+* **api:** revert to default nested params ([ebf2eb7](https://github.com/withpi/sdk-python/commit/ebf2eb759e5f959cfc79978be87c891c0c5a46b3))
+
+
+### Bug Fixes
+
+* **perf:** optimize some hot paths ([1743de7](https://github.com/withpi/sdk-python/commit/1743de74e8066dbe4d72511565f1c481cee22d59))
+* **perf:** skip traversing types for NotGiven values ([e8bfaf5](https://github.com/withpi/sdk-python/commit/e8bfaf5de32906e28f2b8aae9a3d31ce163d102b))
+
 ## 1.35.0 (2025-04-10)
 
 Full Changelog: [v1.34.0...v1.35.0](https://github.com/withpi/sdk-python/compare/v1.34.0...v1.35.0)

@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..shared.sft_status import SftStatus
+from .shared.question import Question
 
-__all__ = ["SftListResponse"]
+__all__ = ["ScoringSystemGenerateResponse"]
 
-SftListResponse: TypeAlias = List[SftStatus]
+ScoringSystemGenerateResponse: TypeAlias = List[Question]

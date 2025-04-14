@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Required, TypeAlias, TypedDict
 
-from .shared_params.scoring_spec import ScoringSpec
+from .shared_params import scoring_spec as _scoring_spec
+from .shared_params.question import Question
 
-__all__ = ["ScoringSystemScoreParams"]
+__all__ = ["ScoringSystemScoreParams", "ScoringSpec"]
 
 
 class ScoringSystemScoreParams(TypedDict, total=False):
@@ -17,4 +19,7 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     """The output to score"""
 
     scoring_spec: Required[ScoringSpec]
-    """The scoring spec to score"""
+    """Either a scoring spec or a list of questions to score"""
+
+
+ScoringSpec: TypeAlias = Union[_scoring_spec.ScoringSpec, Iterable[Question]]

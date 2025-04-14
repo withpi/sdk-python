@@ -4,12 +4,12 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..shared.trained_model import TrainedModel
+from .scoring_spec import ScoringSpec
 
-__all__ = ["GrpoStartJobResponse"]
+__all__ = ["ScoringSpecCalibrationStatus"]
 
 
-class GrpoStartJobResponse(BaseModel):
+class ScoringSpecCalibrationStatus(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -19,5 +19,5 @@ class GrpoStartJobResponse(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    trained_models: Optional[List[TrainedModel]] = None
-    """A list of trained models selected based on the PI score."""
+    calibrated_scoring_spec: Optional[ScoringSpec] = None
+    """The calibrated scoring spec"""
