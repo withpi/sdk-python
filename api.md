@@ -68,7 +68,11 @@ Methods:
 Types:
 
 ```python
-from withpi.types import ScoringSystemGenerateResponse, ScoringSystemImportSpecResponse
+from withpi.types import (
+    ScoringSystemGenerateResponse,
+    ScoringSystemImportSpecResponse,
+    ScoringSystemUploadToHuggingfaceResponse,
+)
 ```
 
 Methods:
@@ -76,6 +80,7 @@ Methods:
 - <code title="post /scoring_system/generate">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">generate</a>(\*\*<a href="src/withpi/types/scoring_system_generate_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_generate_response.py">ScoringSystemGenerateResponse</a></code>
 - <code title="post /scoring_system/import_spec">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">import_spec</a>(\*\*<a href="src/withpi/types/scoring_system_import_spec_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_import_spec_response.py">ScoringSystemImportSpecResponse</a></code>
 - <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
+- <code title="post /scoring_system/to_huggingface">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">upload_to_huggingface</a>(\*\*<a href="src/withpi/types/scoring_system_upload_to_huggingface_params.py">params</a>) -> str</code>
 
 ## Calibrate
 
