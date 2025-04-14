@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -34,9 +34,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.scoring_spec import ScoringSpec
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system_generate_response import ScoringSystemGenerateResponse
+from ...types.scoring_system_import_spec_response import ScoringSystemImportSpecResponse
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -120,7 +120,7 @@ class ScoringSystemResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSpec:
+    ) -> ScoringSystemImportSpecResponse:
         """
         Import a scoring spec from various sources
 
@@ -141,20 +141,25 @@ class ScoringSystemResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
-            "/scoring_system/import_spec",
-            body=maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "hf_token": hf_token,
-                    "source": source,
-                },
-                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
+        return cast(
+            ScoringSystemImportSpecResponse,
+            self._post(
+                "/scoring_system/import_spec",
+                body=maybe_transform(
+                    {
+                        "hf_scoring_spec_name": hf_scoring_spec_name,
+                        "hf_token": hf_token,
+                        "source": source,
+                    },
+                    scoring_system_import_spec_params.ScoringSystemImportSpecParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ScoringSystemImportSpecResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ScoringSpec,
         )
 
     def score(
@@ -285,7 +290,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ScoringSpec:
+    ) -> ScoringSystemImportSpecResponse:
         """
         Import a scoring spec from various sources
 
@@ -306,20 +311,25 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
-            "/scoring_system/import_spec",
-            body=await async_maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "hf_token": hf_token,
-                    "source": source,
-                },
-                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
+        return cast(
+            ScoringSystemImportSpecResponse,
+            await self._post(
+                "/scoring_system/import_spec",
+                body=await async_maybe_transform(
+                    {
+                        "hf_scoring_spec_name": hf_scoring_spec_name,
+                        "hf_token": hf_token,
+                        "source": source,
+                    },
+                    scoring_system_import_spec_params.ScoringSystemImportSpecParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, ScoringSystemImportSpecResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ScoringSpec,
         )
 
     async def score(
