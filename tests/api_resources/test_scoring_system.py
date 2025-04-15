@@ -199,7 +199,7 @@ class TestScoringSystem:
     def test_method_upload_to_huggingface(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
@@ -210,7 +210,7 @@ class TestScoringSystem:
             hf_scoring_spec_name="withpi/tldr_scoring_system",
             scoring_spec=[
                 {
-                    "question": "Is the response relevant to the prompt?",
+                    "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
                     "label": "Relevance to Prompt",
                     "parameters": [
@@ -225,7 +225,24 @@ class TestScoringSystem:
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
-                }
+                },
+                {
+                    "question": "Is this response relevant?",
+                    "custom_model_id": "your-model-id",
+                    "label": "Relevance to Prompt",
+                    "parameters": [
+                        0.14285714285714285,
+                        0.2857142857142857,
+                        0.42857142857142855,
+                        0.5714285714285714,
+                        0.7142857142857143,
+                        0.8571428571428571,
+                    ],
+                    "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                    "scoring_type": "PI_SCORER",
+                    "tag": "Legal Formatting",
+                    "weight": 1,
+                },
             ],
             hf_token="hf_token",
         )
@@ -236,7 +253,7 @@ class TestScoringSystem:
     def test_raw_response_upload_to_huggingface(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
         assert response.is_closed is True
@@ -249,7 +266,7 @@ class TestScoringSystem:
     def test_streaming_response_upload_to_huggingface(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -441,7 +458,7 @@ class TestAsyncScoringSystem:
     async def test_method_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
@@ -452,7 +469,7 @@ class TestAsyncScoringSystem:
             hf_scoring_spec_name="withpi/tldr_scoring_system",
             scoring_spec=[
                 {
-                    "question": "Is the response relevant to the prompt?",
+                    "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
                     "label": "Relevance to Prompt",
                     "parameters": [
@@ -467,7 +484,24 @@ class TestAsyncScoringSystem:
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
-                }
+                },
+                {
+                    "question": "Is this response relevant?",
+                    "custom_model_id": "your-model-id",
+                    "label": "Relevance to Prompt",
+                    "parameters": [
+                        0.14285714285714285,
+                        0.2857142857142857,
+                        0.42857142857142855,
+                        0.5714285714285714,
+                        0.7142857142857143,
+                        0.8571428571428571,
+                    ],
+                    "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
+                    "scoring_type": "PI_SCORER",
+                    "tag": "Legal Formatting",
+                    "weight": 1,
+                },
             ],
             hf_token="hf_token",
         )
@@ -478,7 +512,7 @@ class TestAsyncScoringSystem:
     async def test_raw_response_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
         assert response.is_closed is True
@@ -491,7 +525,7 @@ class TestAsyncScoringSystem:
     async def test_streaming_response_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.upload_to_huggingface(
             hf_scoring_spec_name="withpi/tldr_scoring_system",
-            scoring_spec=[{"question": "Is the response relevant to the prompt?"}],
+            scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

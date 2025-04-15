@@ -236,7 +236,7 @@ class ScoringSystemResource(SyncAPIResource):
               export to the withpi organization. If you want to use your own organization, we
               provide the hf_token.
 
-          scoring_spec: The scoring spec or the list of questions to write to Huggingface
+          scoring_spec: The list of questions or the scoring spec to write to Huggingface
 
           hf_token: Huggingface token to use if you want to write to your own HF organization
 
@@ -459,7 +459,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
               export to the withpi organization. If you want to use your own organization, we
               provide the hf_token.
 
-          scoring_spec: The scoring spec or the list of questions to write to Huggingface
+          scoring_spec: The list of questions or the scoring spec to write to Huggingface
 
           hf_token: Huggingface token to use if you want to write to your own HF organization
 
