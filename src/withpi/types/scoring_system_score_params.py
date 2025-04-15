@@ -22,4 +22,4 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     """Either a scoring spec or a list of questions to score"""
 
 
-ScoringSpec: TypeAlias = Union[_scoring_spec.ScoringSpec, Iterable[Question]]
+ScoringSpec: TypeAlias = Union[Iterable[Question], _scoring_spec.ScoringSpec]
