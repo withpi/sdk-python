@@ -8,4 +8,4 @@ from .shared.scoring_spec import ScoringSpec
 
 __all__ = ["ScoringSystemImportSpecResponse"]
 
-ScoringSystemImportSpecResponse: TypeAlias = Union[ScoringSpec, List[Question]]
+ScoringSystemImportSpecResponse: TypeAlias = Union[List[Question], ScoringSpec]

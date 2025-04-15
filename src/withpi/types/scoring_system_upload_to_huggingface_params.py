@@ -26,4 +26,4 @@ class ScoringSystemUploadToHuggingfaceParams(TypedDict, total=False):
     """Huggingface token to use if you want to write to your own HF organization"""
 
 
-ScoringSpec: TypeAlias = Union[_scoring_spec.ScoringSpec, Iterable[Question]]
+ScoringSpec: TypeAlias = Union[Iterable[Question], _scoring_spec.ScoringSpec]
