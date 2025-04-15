@@ -20,7 +20,7 @@ class ScoringSystemUploadToHuggingfaceParams(TypedDict, total=False):
     """
 
     scoring_spec: Required[ScoringSpec]
-    """The scoring spec or the list of questions to write to Huggingface"""
+    """The list of questions or the scoring spec to write to Huggingface"""
 
     hf_token: Optional[str]
     """Huggingface token to use if you want to write to your own HF organization"""
