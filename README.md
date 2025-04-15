@@ -39,7 +39,7 @@ scoring_system_metrics = client.scoring_system.score(
         {"question": "Is this response relevant?"},
     ],
 )
-print(scoring_system_metrics.dimension_scores)
+print(scoring_system_metrics.total_score)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -70,7 +70,7 @@ async def main() -> None:
             {"question": "Is this response relevant?"},
         ],
     )
-    print(scoring_system_metrics.dimension_scores)
+    print(scoring_system_metrics.total_score)
 
 
 asyncio.run(main())
@@ -294,7 +294,7 @@ response = client.scoring_system.with_raw_response.score(
 print(response.headers.get('X-My-Header'))
 
 scoring_system = response.parse()  # get the object that `scoring_system.score()` would have returned
-print(scoring_system.dimension_scores)
+print(scoring_system.total_score)
 ```
 
 These methods return an [`APIResponse`](https://github.com/withpi/sdk-python/tree/main/src/withpi/_response.py) object.
