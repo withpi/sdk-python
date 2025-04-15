@@ -21,5 +21,8 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     scoring_spec: Required[ScoringSpec]
     """Either a scoring spec or a list of questions to score"""
 
+    kwargs: object
+    """Optional additional parameters (keyword arguments)"""
+
 
 ScoringSpec: TypeAlias = Union[Iterable[Question], _scoring_spec.ScoringSpec]

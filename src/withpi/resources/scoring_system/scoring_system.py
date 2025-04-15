@@ -169,6 +169,7 @@ class ScoringSystemResource(SyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: scoring_system_score_params.ScoringSpec,
+        kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -187,6 +188,8 @@ class ScoringSystemResource(SyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
+          kwargs: Optional additional parameters (keyword arguments)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -202,6 +205,7 @@ class ScoringSystemResource(SyncAPIResource):
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
+                    "kwargs": kwargs,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,
             ),
@@ -388,6 +392,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: scoring_system_score_params.ScoringSpec,
+        kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -406,6 +411,8 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
+          kwargs: Optional additional parameters (keyword arguments)
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -421,6 +428,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
+                    "kwargs": kwargs,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,
             ),
