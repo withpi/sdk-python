@@ -160,7 +160,7 @@ class TestScoringSystem:
                     "weight": 1,
                 },
             ],
-            kwargs={"any_param": "any value"},
+            kwargs={"any_param": "any_value"},
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
@@ -419,7 +419,7 @@ class TestAsyncScoringSystem:
                     "weight": 1,
                 },
             ],
-            kwargs={"any_param": "any value"},
+            kwargs={"any_param": "any_value"},
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
