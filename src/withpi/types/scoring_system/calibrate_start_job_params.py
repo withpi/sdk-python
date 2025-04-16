@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing import Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from ..shared_params import scoring_spec as _scoring_spec
@@ -15,13 +15,13 @@ class CalibrateStartJobParams(TypedDict, total=False):
     scoring_spec: Required[ScoringSpec]
     """Either a scoring spec or a list of questions to score"""
 
-    examples: Optional[Iterable[Example]]
+    examples: Iterable[Example]
     """Rated examples to use when calibrating the scoring spec.
 
     Must specify either the examples or the preference examples
     """
 
-    preference_examples: Optional[Iterable[PreferenceExample]]
+    preference_examples: Iterable[PreferenceExample]
     """Preference examples to use when calibrating the scoring spec.
 
     Must specify either the examples or preference examples
