@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.37.0 (2025-04-16)
+
+Full Changelog: [v1.36.0...v1.37.0](https://github.com/withpi/sdk-python/compare/v1.36.0...v1.37.0)
+
+### Features
+
+* **api:** api update ([961bb88](https://github.com/withpi/sdk-python/commit/961bb88f3f7cfa1ebf08e89ca414ae45eb387677))
+* **api:** api update ([953fd01](https://github.com/withpi/sdk-python/commit/953fd01270f09fdf933a7c1f09262933622ee420))
+* **api:** api update ([80d7e13](https://github.com/withpi/sdk-python/commit/80d7e1339920560f285acf918a0ddb646350b12b))
+* **api:** api update ([80b68ba](https://github.com/withpi/sdk-python/commit/80b68ba8aa91a2ca7d73cbc0fb6d5ef330b56982))
+* **api:** api update ([1b301be](https://github.com/withpi/sdk-python/commit/1b301bede820abd208eea23b714afcce468e8586))
+* **api:** api update ([cd676fb](https://github.com/withpi/sdk-python/commit/cd676fbb651f89434d82f77849bd012a15d4d125))
+* **api:** api update ([e24fc55](https://github.com/withpi/sdk-python/commit/e24fc5541c3941ae2684bc498b8fd83f32792278))
+* **api:** emphasize the total score ([d0ae66f](https://github.com/withpi/sdk-python/commit/d0ae66f5a8a2cbfe8d4e8cc3b646818981837999))
+* **api:** force push because GH is stuck ([b71666f](https://github.com/withpi/sdk-python/commit/b71666fb5d607bff0a9496f190a115af722e6ea3))
+
+
+### Chores
+
+* **client:** minor internal fixes ([8a73cea](https://github.com/withpi/sdk-python/commit/8a73ceadc831cc51d07cb23769a8f4af7b099c24))
+* **internal:** update pyright settings ([aed3b74](https://github.com/withpi/sdk-python/commit/aed3b7433aae50239f5987cfd19fdfafc33a0f5b))
+
 ## 1.36.0 (2025-04-14)
 
 Full Changelog: [v1.35.0...v1.36.0](https://github.com/withpi/sdk-python/compare/v1.35.0...v1.36.0)

@@ -20,3 +20,10 @@ from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSyst
 from .scoring_system_generate_params import ScoringSystemGenerateParams as ScoringSystemGenerateParams
 from .scoring_system_generate_response import ScoringSystemGenerateResponse as ScoringSystemGenerateResponse
 from .scoring_system_import_spec_params import ScoringSystemImportSpecParams as ScoringSystemImportSpecParams
+from .scoring_system_import_spec_response import ScoringSystemImportSpecResponse as ScoringSystemImportSpecResponse
+from .scoring_system_upload_to_huggingface_params import (
+    ScoringSystemUploadToHuggingfaceParams as ScoringSystemUploadToHuggingfaceParams,
+)
+from .scoring_system_upload_to_huggingface_response import (
+    ScoringSystemUploadToHuggingfaceResponse as ScoringSystemUploadToHuggingfaceResponse,
+)

@@ -22,7 +22,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
-from ...types.shared_params.scoring_spec import ScoringSpec
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
 from ...types.shared.scoring_spec_calibration_status import ScoringSpecCalibrationStatus
 
@@ -155,7 +154,7 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
-        scoring_spec: ScoringSpec,
+        scoring_spec: calibrate_start_job_params.ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -170,7 +169,7 @@ class CalibrateResource(SyncAPIResource):
         Starts a Scoring Spec Calibration job
 
         Args:
-          scoring_spec: The scoring spec to calibrate
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
@@ -367,7 +366,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
-        scoring_spec: ScoringSpec,
+        scoring_spec: calibrate_start_job_params.ScoringSpec,
         examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
         preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
@@ -382,7 +381,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Starts a Scoring Spec Calibration job
 
         Args:
-          scoring_spec: The scoring spec to calibrate
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
