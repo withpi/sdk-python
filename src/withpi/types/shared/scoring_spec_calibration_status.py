@@ -3,8 +3,8 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from .question import Question
 from ..._models import BaseModel
-from .scoring_spec import ScoringSpec
 
 __all__ = ["ScoringSpecCalibrationStatus"]
 
@@ -19,5 +19,5 @@ class ScoringSpecCalibrationStatus(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    calibrated_scoring_spec: Optional[ScoringSpec] = None
+    calibrated_scoring_spec: Optional[List[Question]] = None
     """The calibrated scoring spec"""
