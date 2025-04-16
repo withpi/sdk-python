@@ -144,6 +144,25 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
@@ -152,6 +171,25 @@ class TestCalibrate:
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[
                 {
                     "question": "Is this response truthful?",
@@ -188,6 +226,14 @@ class TestCalibrate:
                     "weight": 1,
                 },
             ],
+            strategy="LITE",
+        )
+        assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_start_job(self, client: PiClient) -> None:
+        response = client.scoring_system.calibrate.with_raw_response.start_job(
             examples=[
                 {
                     "llm_input": "good input",
@@ -207,14 +253,6 @@ class TestCalibrate:
                     "rejected": "rejected response",
                 }
             ],
-            strategy="LITE",
-        )
-        assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_start_job(self, client: PiClient) -> None:
-        response = client.scoring_system.calibrate.with_raw_response.start_job(
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
@@ -227,6 +265,25 @@ class TestCalibrate:
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
@@ -407,6 +464,25 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
@@ -415,6 +491,25 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[
                 {
                     "question": "Is this response truthful?",
@@ -451,6 +546,14 @@ class TestAsyncCalibrate:
                     "weight": 1,
                 },
             ],
+            strategy="LITE",
+        )
+        assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.calibrate.with_raw_response.start_job(
             examples=[
                 {
                     "llm_input": "good input",
@@ -470,14 +573,6 @@ class TestAsyncCalibrate:
                     "rejected": "rejected response",
                 }
             ],
-            strategy="LITE",
-        )
-        assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.scoring_system.calibrate.with_raw_response.start_job(
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         )
 
@@ -490,6 +585,25 @@ class TestAsyncCalibrate:
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.start_job(
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
             scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
         ) as response:
             assert not response.is_closed
