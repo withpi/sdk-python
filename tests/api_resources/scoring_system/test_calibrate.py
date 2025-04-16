@@ -190,16 +190,21 @@ class TestCalibrate:
             ],
             examples=[
                 {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Disagree",
-                }
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
             ],
             preference_examples=[
                 {
-                    "chosen": "The lazy dog was jumped over by the quick brown fox",
-                    "llm_input": "Tell me something different",
-                    "rejected": "The lazy dog was flied over by the quick brown fox",
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
                 }
             ],
             strategy="LITE",
@@ -448,16 +453,21 @@ class TestAsyncCalibrate:
             ],
             examples=[
                 {
-                    "llm_input": "Tell me something different",
-                    "llm_output": "The lazy dog was jumped over by the quick brown fox",
-                    "rating": "Disagree",
-                }
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Strongly Agree",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Neutral",
+                },
             ],
             preference_examples=[
                 {
-                    "chosen": "The lazy dog was jumped over by the quick brown fox",
-                    "llm_input": "Tell me something different",
-                    "rejected": "The lazy dog was flied over by the quick brown fox",
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
                 }
             ],
             strategy="LITE",
