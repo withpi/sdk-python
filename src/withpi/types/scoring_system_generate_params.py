@@ -12,4 +12,4 @@ class ScoringSystemGenerateParams(TypedDict, total=False):
     """The application description to generate a scoring spec for."""
 
     try_auto_generating_python_code: bool
-    """If true, try to generate python code for sub-dimensions in the scoring spec."""
+    """If true, try to generate python code for the generated questions."""
