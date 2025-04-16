@@ -84,7 +84,7 @@ class ScoringSystemResource(SyncAPIResource):
         Args:
           application_description: The application description to generate a scoring spec for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring spec.
+          try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
           extra_headers: Send extra headers
 
@@ -307,7 +307,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         Args:
           application_description: The application description to generate a scoring spec for.
 
-          try_auto_generating_python_code: If true, try to generate python code for sub-dimensions in the scoring spec.
+          try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
           extra_headers: Send extra headers
 
