@@ -154,9 +154,9 @@ class CalibrateResource(SyncAPIResource):
     def start_job(
         self,
         *,
+        examples: Iterable[calibrate_start_job_params.Example],
+        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
         scoring_spec: calibrate_start_job_params.ScoringSpec,
-        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -169,13 +169,13 @@ class CalibrateResource(SyncAPIResource):
         Starts a Scoring Spec Calibration job
 
         Args:
-          scoring_spec: Either a scoring spec or a list of questions to score
-
           examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
 
           preference_examples: Preference examples to use when calibrating the scoring spec. Must specify
               either the examples or preference examples
+
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           strategy: The strategy to use to calibrate the scoring spec. FULL would take longer than
               LITE but may result in better result.
@@ -192,9 +192,9 @@ class CalibrateResource(SyncAPIResource):
             "/scoring_system/calibrate",
             body=maybe_transform(
                 {
-                    "scoring_spec": scoring_spec,
                     "examples": examples,
                     "preference_examples": preference_examples,
+                    "scoring_spec": scoring_spec,
                     "strategy": strategy,
                 },
                 calibrate_start_job_params.CalibrateStartJobParams,
@@ -366,9 +366,9 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def start_job(
         self,
         *,
+        examples: Iterable[calibrate_start_job_params.Example],
+        preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
         scoring_spec: calibrate_start_job_params.ScoringSpec,
-        examples: Optional[Iterable[calibrate_start_job_params.Example]] | NotGiven = NOT_GIVEN,
-        preference_examples: Optional[Iterable[calibrate_start_job_params.PreferenceExample]] | NotGiven = NOT_GIVEN,
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -381,13 +381,13 @@ class AsyncCalibrateResource(AsyncAPIResource):
         Starts a Scoring Spec Calibration job
 
         Args:
-          scoring_spec: Either a scoring spec or a list of questions to score
-
           examples: Rated examples to use when calibrating the scoring spec. Must specify either the
               examples or the preference examples
 
           preference_examples: Preference examples to use when calibrating the scoring spec. Must specify
               either the examples or preference examples
+
+          scoring_spec: Either a scoring spec or a list of questions to score
 
           strategy: The strategy to use to calibrate the scoring spec. FULL would take longer than
               LITE but may result in better result.
@@ -404,9 +404,9 @@ class AsyncCalibrateResource(AsyncAPIResource):
             "/scoring_system/calibrate",
             body=await async_maybe_transform(
                 {
-                    "scoring_spec": scoring_spec,
                     "examples": examples,
                     "preference_examples": preference_examples,
+                    "scoring_spec": scoring_spec,
                     "strategy": strategy,
                 },
                 calibrate_start_job_params.CalibrateStartJobParams,

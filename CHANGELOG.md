@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.38.0 (2025-04-17)
+
+Full Changelog: [v1.37.0...v1.38.0](https://github.com/withpi/sdk-python/compare/v1.37.0...v1.38.0)
+
+### Features
+
+* **api:** api update ([00b1807](https://github.com/withpi/sdk-python/commit/00b18078b525f4041b5255fb9d9580cdf9e85a6f))
+* **api:** api update ([8b3e572](https://github.com/withpi/sdk-python/commit/8b3e5722a7b06e8b0ed6631c587a155a8902f4fd))
+* **api:** api update ([1b358be](https://github.com/withpi/sdk-python/commit/1b358be5797606ab14ab4c20e354803ca460163d))
+
+
+### Chores
+
+* **internal:** base client updates ([51a9567](https://github.com/withpi/sdk-python/commit/51a9567233c604197821253fa5554af62677ac0f))
+* **internal:** bump pyright version ([01f17eb](https://github.com/withpi/sdk-python/commit/01f17eb30099cb81a31841a12fc0b68d2feefff3))
+
 ## 1.37.0 (2025-04-16)
 
 Full Changelog: [v1.36.0...v1.37.0](https://github.com/withpi/sdk-python/compare/v1.36.0...v1.37.0)
