@@ -32,7 +32,7 @@ class Question(TypedDict, total=False):
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
-    """The type of scoring performed for this question."""
+    """The type of scoring performed for this question. Default: PI_SCORER."""
 
     tag: Optional[str]
     """The tag or the group to which this question belongs."""
