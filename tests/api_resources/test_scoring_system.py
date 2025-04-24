@@ -34,6 +34,7 @@ class TestScoringSystem:
     def test_method_generate_with_all_params(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            num_questions=0,
             try_auto_generating_python_code=False,
         )
         assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
@@ -128,6 +129,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -145,6 +147,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -212,6 +215,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -229,6 +233,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -293,6 +298,7 @@ class TestAsyncScoringSystem:
     async def test_method_generate_with_all_params(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            num_questions=0,
             try_auto_generating_python_code=False,
         )
         assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
@@ -387,6 +393,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -404,6 +411,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -471,6 +479,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -488,6 +497,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
+                    "is_lower_score_better": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,

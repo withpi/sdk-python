@@ -17,6 +17,12 @@ class Question(TypedDict, total=False):
     The ID of the custom model associated with the CUSTOM_MODEL_SCORER scoring_type.
     """
 
+    is_lower_score_better: bool
+    """
+    Indicates whether a lower score represents a better outcome (e.g., fewer errors,
+    less toxicity)
+    """
+
     label: Optional[str]
     """The label of the question."""
 

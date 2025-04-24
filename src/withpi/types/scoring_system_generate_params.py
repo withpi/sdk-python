@@ -11,5 +11,11 @@ class ScoringSystemGenerateParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description to generate a scoring spec for."""
 
+    num_questions: int
+    """The number of questions that the scoring system should contain.
+
+    If <= 0, then the number is auto selected.
+    """
+
     try_auto_generating_python_code: bool
     """If true, try to generate python code for the generated questions."""
