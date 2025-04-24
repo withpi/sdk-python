@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.40.1 (2025-04-24)
+
+Full Changelog: [v1.40.0...v1.40.1](https://github.com/withpi/sdk-python/compare/v1.40.0...v1.40.1)
+
+### Bug Fixes
+
+* **pydantic v1:** more robust ModelField.annotation check ([506858e](https://github.com/withpi/sdk-python/commit/506858ecea73620737110b90bebd313a01baabe5))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([8f5a39c](https://github.com/withpi/sdk-python/commit/8f5a39c14d0b37c31803d2a89d271728dac70f02))
+* **ci:** add timeout thresholds for CI jobs ([f10118f](https://github.com/withpi/sdk-python/commit/f10118fd7ee9ae4215ff2562d9c4c8b9b9448c80))
+* **ci:** only use depot for staging repos ([323a2a9](https://github.com/withpi/sdk-python/commit/323a2a94e17b2e36b8a2c272a1cec03571b056ea))
+* **internal:** codegen related update ([9453564](https://github.com/withpi/sdk-python/commit/94535643b7bb0bf82934d9fa1aa0377a250f3390))
+* **internal:** fix list file params ([0e3c649](https://github.com/withpi/sdk-python/commit/0e3c6492d8a9e0203b8ca12c8432aebbdcf3e5a3))
+* **internal:** import reformatting ([58d5552](https://github.com/withpi/sdk-python/commit/58d5552d62bbfb84152a54e03c987f52cf65c6dd))
+* **internal:** minor formatting changes ([8fb1344](https://github.com/withpi/sdk-python/commit/8fb134408c4146201ab0828ecb8eccc7ea4e4109))
+* **internal:** refactor retries to not use recursion ([1eb3528](https://github.com/withpi/sdk-python/commit/1eb35284b44a8cfd16b20d3a54263c732182cd69))
+
 ## 1.40.0 (2025-04-19)
 
 Full Changelog: [v1.39.0...v1.40.0](https://github.com/withpi/sdk-python/compare/v1.39.0...v1.40.0)
