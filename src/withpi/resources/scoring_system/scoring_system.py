@@ -67,6 +67,7 @@ class ScoringSystemResource(SyncAPIResource):
         self,
         *,
         application_description: str,
+        num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -80,6 +81,9 @@ class ScoringSystemResource(SyncAPIResource):
 
         Args:
           application_description: The application description to generate a scoring spec for.
+
+          num_questions: The number of questions that the scoring system should contain. If <= 0, then
+              the number is auto selected.
 
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
@@ -96,6 +100,7 @@ class ScoringSystemResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "application_description": application_description,
+                    "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 scoring_system_generate_params.ScoringSystemGenerateParams,
@@ -290,6 +295,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         self,
         *,
         application_description: str,
+        num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -303,6 +309,9 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
         Args:
           application_description: The application description to generate a scoring spec for.
+
+          num_questions: The number of questions that the scoring system should contain. If <= 0, then
+              the number is auto selected.
 
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
@@ -319,6 +328,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "application_description": application_description,
+                    "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 scoring_system_generate_params.ScoringSystemGenerateParams,
