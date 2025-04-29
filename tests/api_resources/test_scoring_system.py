@@ -129,7 +129,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -147,7 +147,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -215,7 +215,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -233,7 +233,7 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -393,7 +393,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -411,7 +411,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -479,7 +479,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -497,7 +497,7 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_better": False,
+                    "is_lower_score_desirable": False,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
