@@ -12,7 +12,7 @@ class ScoringSystemGenerateParams(TypedDict, total=False):
     """The application description to generate a scoring spec for."""
 
     num_questions: int
-    """The number of questions that the scoring system should contain.
+    """The number of questions that the generated scoring system should contain.
 
     If <= 0, then the number is auto selected.
     """
