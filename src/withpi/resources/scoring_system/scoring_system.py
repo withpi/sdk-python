@@ -82,8 +82,8 @@ class ScoringSystemResource(SyncAPIResource):
         Args:
           application_description: The application description to generate a scoring spec for.
 
-          num_questions: The number of questions that the scoring system should contain. If <= 0, then
-              the number is auto selected.
+          num_questions: The number of questions that the generated scoring system should contain. If <=
+              0, then the number is auto selected.
 
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
@@ -310,8 +310,8 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         Args:
           application_description: The application description to generate a scoring spec for.
 
-          num_questions: The number of questions that the scoring system should contain. If <= 0, then
-              the number is auto selected.
+          num_questions: The number of questions that the generated scoring system should contain. If <=
+              0, then the number is auto selected.
 
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
