@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.43.1 (2025-05-10)
+
+Full Changelog: [v1.43.0...v1.43.1](https://github.com/withpi/sdk-python/compare/v1.43.0...v1.43.1)
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([1dd29ac](https://github.com/withpi/sdk-python/commit/1dd29aca499121d5a8f076a1fc419607b4ca5b3d))
+
+
+### Chores
+
+* **internal:** avoid errors for isinstance checks on proxies ([7e50de2](https://github.com/withpi/sdk-python/commit/7e50de21370c61c6bb6959067ef610db6ac919ae))
+
 ## 1.43.0 (2025-04-29)
 
 Full Changelog: [v1.42.0...v1.43.0](https://github.com/withpi/sdk-python/compare/v1.42.0...v1.43.0)
