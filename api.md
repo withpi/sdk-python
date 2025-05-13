@@ -127,3 +127,15 @@ from withpi.types.search import QueryClassifierClassifyResponse
 Methods:
 
 - <code title="post /search/query_classifier/classify">client.search.query_classifier.<a href="./src/withpi/resources/search/query_classifier.py">classify</a>(\*\*<a href="src/withpi/types/search/query_classifier_classify_params.py">params</a>) -> <a href="./src/withpi/types/search/query_classifier_classify_response.py">QueryClassifierClassifyResponse</a></code>
+
+## Groundedness
+
+Types:
+
+```python
+from withpi.types.search import GroundednessCheckResponse
+```
+
+Methods:
+
+- <code title="post /search/groundedness/check">client.search.groundedness.<a href="./src/withpi/resources/search/groundedness.py">check</a>(\*\*<a href="src/withpi/types/search/groundedness_check_params.py">params</a>) -> <a href="./src/withpi/types/search/groundedness_check_response.py">GroundednessCheckResponse</a></code>
