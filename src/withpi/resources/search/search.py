@@ -4,6 +4,14 @@ from __future__ import annotations
 
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .groundedness import (
+    GroundednessResource,
+    AsyncGroundednessResource,
+    GroundednessResourceWithRawResponse,
+    AsyncGroundednessResourceWithRawResponse,
+    GroundednessResourceWithStreamingResponse,
+    AsyncGroundednessResourceWithStreamingResponse,
+)
 from .query_fanout import (
     QueryFanoutResource,
     AsyncQueryFanoutResource,
@@ -34,6 +42,10 @@ class SearchResource(SyncAPIResource):
         return QueryClassifierResource(self._client)
 
     @cached_property
+    def groundedness(self) -> GroundednessResource:
+        return GroundednessResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> SearchResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -61,6 +73,10 @@ class AsyncSearchResource(AsyncAPIResource):
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResource:
         return AsyncQueryClassifierResource(self._client)
+
+    @cached_property
+    def groundedness(self) -> AsyncGroundednessResource:
+        return AsyncGroundednessResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSearchResourceWithRawResponse:
@@ -94,6 +110,10 @@ class SearchResourceWithRawResponse:
     def query_classifier(self) -> QueryClassifierResourceWithRawResponse:
         return QueryClassifierResourceWithRawResponse(self._search.query_classifier)
 
+    @cached_property
+    def groundedness(self) -> GroundednessResourceWithRawResponse:
+        return GroundednessResourceWithRawResponse(self._search.groundedness)
+
 
 class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
@@ -106,6 +126,10 @@ class AsyncSearchResourceWithRawResponse:
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResourceWithRawResponse:
         return AsyncQueryClassifierResourceWithRawResponse(self._search.query_classifier)
+
+    @cached_property
+    def groundedness(self) -> AsyncGroundednessResourceWithRawResponse:
+        return AsyncGroundednessResourceWithRawResponse(self._search.groundedness)
 
 
 class SearchResourceWithStreamingResponse:
@@ -120,6 +144,10 @@ class SearchResourceWithStreamingResponse:
     def query_classifier(self) -> QueryClassifierResourceWithStreamingResponse:
         return QueryClassifierResourceWithStreamingResponse(self._search.query_classifier)
 
+    @cached_property
+    def groundedness(self) -> GroundednessResourceWithStreamingResponse:
+        return GroundednessResourceWithStreamingResponse(self._search.groundedness)
+
 
 class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
@@ -132,3 +160,7 @@ class AsyncSearchResourceWithStreamingResponse:
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResourceWithStreamingResponse:
         return AsyncQueryClassifierResourceWithStreamingResponse(self._search.query_classifier)
+
+    @cached_property
+    def groundedness(self) -> AsyncGroundednessResourceWithStreamingResponse:
+        return AsyncGroundednessResourceWithStreamingResponse(self._search.groundedness)

@@ -8,6 +8,14 @@ from .search import (
     SearchResourceWithStreamingResponse,
     AsyncSearchResourceWithStreamingResponse,
 )
+from .groundedness import (
+    GroundednessResource,
+    AsyncGroundednessResource,
+    GroundednessResourceWithRawResponse,
+    AsyncGroundednessResourceWithRawResponse,
+    GroundednessResourceWithStreamingResponse,
+    AsyncGroundednessResourceWithStreamingResponse,
+)
 from .query_fanout import (
     QueryFanoutResource,
     AsyncQueryFanoutResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncQueryClassifierResourceWithRawResponse",
     "QueryClassifierResourceWithStreamingResponse",
     "AsyncQueryClassifierResourceWithStreamingResponse",
+    "GroundednessResource",
+    "AsyncGroundednessResource",
+    "GroundednessResourceWithRawResponse",
+    "AsyncGroundednessResourceWithRawResponse",
+    "GroundednessResourceWithStreamingResponse",
+    "AsyncGroundednessResourceWithStreamingResponse",
     "SearchResource",
     "AsyncSearchResource",
     "SearchResourceWithRawResponse",
