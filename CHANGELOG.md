@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.45.0 (2025-05-19)
+
+Full Changelog: [v1.44.0...v1.45.0](https://github.com/withpi/sdk-python/compare/v1.44.0...v1.45.0)
+
+### Features
+
+* **api:** api update ([e590888](https://github.com/withpi/sdk-python/commit/e590888b23254a28d464382485b88804166aeb4d))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([5b7233b](https://github.com/withpi/sdk-python/commit/5b7233bf06905b91e986e1d506fdb86f63f3fed6))
+* **ci:** upload sdks to package manager ([acb1839](https://github.com/withpi/sdk-python/commit/acb18395a6dd20e0ee33d42847839ff865e206df))
+
 ## 1.44.0 (2025-05-13)
 
 Full Changelog: [v1.43.1...v1.44.0](https://github.com/withpi/sdk-python/compare/v1.43.1...v1.44.0)
