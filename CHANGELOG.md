@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.45.1 (2025-05-22)
+
+Full Changelog: [v1.45.0...v1.45.1](https://github.com/withpi/sdk-python/compare/v1.45.0...v1.45.1)
+
+### Chores
+
+* **docs:** grammar improvements ([340b9c8](https://github.com/withpi/sdk-python/commit/340b9c8aa1cb5ebf1f4ee0575c18f6a27431cc8b))
+
 ## 1.45.0 (2025-05-19)
 
 Full Changelog: [v1.44.0...v1.45.0](https://github.com/withpi/sdk-python/compare/v1.44.0...v1.45.0)
