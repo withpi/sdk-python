@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["Question"]
@@ -36,6 +36,9 @@ class Question(TypedDict, total=False):
 
     python_code: Optional[str]
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
+
+    remap_spec: Union[Literal["NEUTRAL", "STRICT", "LENIENT"], Dict[str, float], None]
+    """Remapping spec to modulate the scores returned by Pi Scorer"""
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
     """The type of scoring performed for this question. Default: PI_SCORER."""
