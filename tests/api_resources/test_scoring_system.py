@@ -165,7 +165,7 @@ class TestScoringSystem:
                     "weight": 1,
                 },
             ],
-            aggregtion_method="ARITHMETIC_MEAN",
+            aggregation_method="ARITHMETIC_MEAN",
             kwargs={"any_param": "any_value"},
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
@@ -434,7 +434,7 @@ class TestAsyncScoringSystem:
                     "weight": 1,
                 },
             ],
-            aggregtion_method="ARITHMETIC_MEAN",
+            aggregation_method="ARITHMETIC_MEAN",
             kwargs={"any_param": "any_value"},
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
