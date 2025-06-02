@@ -191,8 +191,8 @@ class ScoringSystemResource(SyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
-          aggregtion_method: The strategy to use to calibrate the scoring spec. FULL would take longer than
-              LITE but may result in better result.
+          aggregtion_method: The strategy to combine the individual question scores to get the total score.
+              Defaults to HARMONIC_MEAN.
 
           kwargs: Optional additional parameters (keyword arguments)
 
@@ -424,8 +424,8 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
-          aggregtion_method: The strategy to use to calibrate the scoring spec. FULL would take longer than
-              LITE but may result in better result.
+          aggregtion_method: The strategy to combine the individual question scores to get the total score.
+              Defaults to HARMONIC_MEAN.
 
           kwargs: Optional additional parameters (keyword arguments)
 
