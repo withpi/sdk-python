@@ -171,6 +171,7 @@ class ScoringSystemResource(SyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: scoring_system_score_params.ScoringSpec,
+        aggregtion_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
         kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -190,6 +191,9 @@ class ScoringSystemResource(SyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
+          aggregtion_method: The strategy to combine the individual question scores to get the total score.
+              Defaults to HARMONIC_MEAN.
+
           kwargs: Optional additional parameters (keyword arguments)
 
           extra_headers: Send extra headers
@@ -207,6 +211,7 @@ class ScoringSystemResource(SyncAPIResource):
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
+                    "aggregtion_method": aggregtion_method,
                     "kwargs": kwargs,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,
@@ -399,6 +404,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: scoring_system_score_params.ScoringSpec,
+        aggregtion_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
         kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -418,6 +424,9 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           scoring_spec: Either a scoring spec or a list of questions to score
 
+          aggregtion_method: The strategy to combine the individual question scores to get the total score.
+              Defaults to HARMONIC_MEAN.
+
           kwargs: Optional additional parameters (keyword arguments)
 
           extra_headers: Send extra headers
@@ -435,6 +444,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
                     "llm_input": llm_input,
                     "llm_output": llm_output,
                     "scoring_spec": scoring_spec,
+                    "aggregtion_method": aggregtion_method,
                     "kwargs": kwargs,
                 },
                 scoring_system_score_params.ScoringSystemScoreParams,

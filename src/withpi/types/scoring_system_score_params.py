@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union, Iterable
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .shared_params import scoring_spec as _scoring_spec
 from .shared_params.question import Question
@@ -20,6 +20,12 @@ class ScoringSystemScoreParams(TypedDict, total=False):
 
     scoring_spec: Required[ScoringSpec]
     """Either a scoring spec or a list of questions to score"""
+
+    aggregtion_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"]
+    """The strategy to combine the individual question scores to get the total score.
+
+    Defaults to HARMONIC_MEAN.
+    """
 
     kwargs: object
     """Optional additional parameters (keyword arguments)"""
