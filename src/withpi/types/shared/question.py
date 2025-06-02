@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Union, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -36,6 +36,9 @@ class Question(BaseModel):
 
     python_code: Optional[str] = None
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
+
+    remap_spec: Union[Literal["NEUTRAL", "STRICT", "LENIENT"], Dict[str, float], None] = None
+    """Remapping spec to modulate the scores returned by Pi Scorer"""
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]] = None
     """The type of scoring performed for this question. Default: PI_SCORER."""
