@@ -22,9 +22,9 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     """Either a scoring spec or a list of questions to score"""
 
     aggregtion_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"]
-    """The strategy to use to calibrate the scoring spec.
+    """The strategy to combine the individual question scores to get the total score.
 
-    FULL would take longer than LITE but may result in better result.
+    Defaults to HARMONIC_MEAN.
     """
 
     kwargs: object
