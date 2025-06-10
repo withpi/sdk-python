@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.49.0 (2025-06-10)
+
+Full Changelog: [v1.48.0...v1.49.0](https://github.com/withpi/sdk-python/compare/v1.48.0...v1.49.0)
+
+### Features
+
+* **api:** api update ([7c6203c](https://github.com/withpi/sdk-python/commit/7c6203c7d03f5883982432bc78ca4e783c2dbd1b))
+* **client:** add follow_redirects request option ([2c6f275](https://github.com/withpi/sdk-python/commit/2c6f275704d9d899206b422a167b576ee0bf072e))
+
+
+### Chores
+
+* **docs:** remove reference to rye shell ([256b68f](https://github.com/withpi/sdk-python/commit/256b68f4f54621fb100a21c53708b17c65bfb98d))
+
 ## 1.48.0 (2025-06-02)
 
 Full Changelog: [v1.47.0...v1.48.0](https://github.com/withpi/sdk-python/compare/v1.47.0...v1.48.0)
