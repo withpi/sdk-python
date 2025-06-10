@@ -148,12 +148,10 @@ class TestCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
@@ -175,12 +173,14 @@ class TestCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
+                    "rating": "Disagree",
+                    "score": 0.9,
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
+                    "rating": "Disagree",
+                    "score": 0.5,
                 },
             ],
             preference_examples=[
@@ -242,12 +242,10 @@ class TestCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
@@ -273,12 +271,10 @@ class TestCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
@@ -472,12 +468,10 @@ class TestAsyncCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
@@ -499,12 +493,14 @@ class TestAsyncCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
+                    "rating": "Disagree",
+                    "score": 0.9,
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
+                    "rating": "Disagree",
+                    "score": 0.5,
                 },
             ],
             preference_examples=[
@@ -566,12 +562,10 @@ class TestAsyncCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
@@ -597,12 +591,10 @@ class TestAsyncCalibrate:
                 {
                     "llm_input": "good input",
                     "llm_output": "good response",
-                    "rating": "Strongly Agree",
                 },
                 {
                     "llm_input": "neutral input",
                     "llm_output": "neutral response",
-                    "rating": "Neutral",
                 },
             ],
             preference_examples=[
