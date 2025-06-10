@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from ..shared_params import scoring_spec
@@ -41,8 +41,11 @@ class Example(TypedDict, total=False):
     llm_output: Required[str]
     """The output to evaluate"""
 
-    rating: Required[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
-    """The rating of the llm_output given the llm_input"""
+    rating: Optional[Literal["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"]]
+    """DEPRECATED: Instead fill the desired score to the 'score' field."""
+
+    score: float
+    """The target score of the example, between 0 and 1."""
 
 
 class PreferenceExample(TypedDict, total=False):
