@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.49.1 (2025-06-13)
+
+Full Changelog: [v1.49.0...v1.49.1](https://github.com/withpi/sdk-python/compare/v1.49.0...v1.49.1)
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([7ac1820](https://github.com/withpi/sdk-python/commit/7ac18206854b13ed97696655e8f8ae657865e361))
+
+
+### Chores
+
+* **tests:** run tests in parallel ([0461d75](https://github.com/withpi/sdk-python/commit/0461d7512b5f343ce0873b3980954588637ca661))
+
 ## 1.49.0 (2025-06-10)
 
 Full Changelog: [v1.48.0...v1.49.0](https://github.com/withpi/sdk-python/compare/v1.48.0...v1.49.0)
