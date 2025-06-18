@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from withpi import PiClient, AsyncPiClient, APIResponseValidationError
 from withpi._types import Omit
-from withpi._utils import maybe_transform
 from withpi._models import BaseModel, FinalRequestOptions
-from withpi._constants import RAW_RESPONSE_HEADER
 from withpi._exceptions import PiClientError, APIStatusError, APITimeoutError, APIResponseValidationError
 from withpi._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from withpi._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from withpi.types.scoring_system_score_params import ScoringSystemScoreParams
 
 from .utils import update_env
 
@@ -715,58 +712,29 @@ class TestPiClient:
 
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: PiClient) -> None:
         respx_mock.post("/scoring_system/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/scoring_system/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Tell me something different",
-                            llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_spec=[
-                                {"question": "Is this response truthful?"},
-                                {"question": "Is this response relevant?"},
-                            ],
-                        ),
-                        ScoringSystemScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.scoring_system.with_streaming_response.score(
+                llm_input="Tell me something different",
+                llm_output="The lazy dog was jumped over by the quick brown fox",
+                scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
+            ).__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: PiClient) -> None:
         respx_mock.post("/scoring_system/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/scoring_system/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Tell me something different",
-                            llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_spec=[
-                                {"question": "Is this response truthful?"},
-                                {"question": "Is this response relevant?"},
-                            ],
-                        ),
-                        ScoringSystemScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.scoring_system.with_streaming_response.score(
+                llm_input="Tell me something different",
+                llm_output="The lazy dog was jumped over by the quick brown fox",
+                scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
+            ).__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1580,58 +1548,33 @@ class TestAsyncPiClient:
 
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncPiClient
+    ) -> None:
         respx_mock.post("/scoring_system/score").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/scoring_system/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Tell me something different",
-                            llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_spec=[
-                                {"question": "Is this response truthful?"},
-                                {"question": "Is this response relevant?"},
-                            ],
-                        ),
-                        ScoringSystemScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.scoring_system.with_streaming_response.score(
+                llm_input="Tell me something different",
+                llm_output="The lazy dog was jumped over by the quick brown fox",
+                scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
+            ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("withpi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncPiClient
+    ) -> None:
         respx_mock.post("/scoring_system/score").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/scoring_system/score",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            llm_input="Tell me something different",
-                            llm_output="The lazy dog was jumped over by the quick brown fox",
-                            scoring_spec=[
-                                {"question": "Is this response truthful?"},
-                                {"question": "Is this response relevant?"},
-                            ],
-                        ),
-                        ScoringSystemScoreParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.scoring_system.with_streaming_response.score(
+                llm_input="Tell me something different",
+                llm_output="The lazy dog was jumped over by the quick brown fox",
+                scoring_spec=[{"question": "Is this response truthful?"}, {"question": "Is this response relevant?"}],
+            ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
