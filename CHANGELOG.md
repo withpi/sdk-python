@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.49.2 (2025-06-18)
+
+Full Changelog: [v1.49.1...v1.49.2](https://github.com/withpi/sdk-python/compare/v1.49.1...v1.49.2)
+
+### Bug Fixes
+
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([070e33e](https://github.com/withpi/sdk-python/commit/070e33e872534112cc8d48f033217e812b4386f7))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([e11a4e6](https://github.com/withpi/sdk-python/commit/e11a4e645dd95e6ebc9a3c9840a037c3edf11427))
+* **internal:** update conftest.py ([6902d08](https://github.com/withpi/sdk-python/commit/6902d08a6433c9aef4011d06ca934d1af1ac6502))
+* **readme:** update badges ([ade0ec5](https://github.com/withpi/sdk-python/commit/ade0ec53bb071f493fa8f11962abd6dfe76b177e))
+* **tests:** add tests for httpx client instantiation & proxies ([a66913e](https://github.com/withpi/sdk-python/commit/a66913ed8f7e813aa34aa45678007d52ae9f00a2))
+
 ## 1.49.1 (2025-06-13)
 
 Full Changelog: [v1.49.0...v1.49.1](https://github.com/withpi/sdk-python/compare/v1.49.0...v1.49.1)
