@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.49.4 (2025-06-18)
+
+Full Changelog: [v1.49.3...v1.49.4](https://github.com/withpi/sdk-python/compare/v1.49.3...v1.49.4)
+
 ## 1.49.3 (2025-06-18)
 
 Full Changelog: [v1.49.2...v1.49.3](https://github.com/withpi/sdk-python/compare/v1.49.2...v1.49.3)
