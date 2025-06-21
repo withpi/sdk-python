@@ -78,6 +78,45 @@ asyncio.run(main())
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
 
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install withpi[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from withpi import DefaultAioHttpClient
+from withpi import AsyncPiClient
+
+
+async def main() -> None:
+    async with AsyncPiClient(
+        api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        scoring_system_metrics = await client.scoring_system.score(
+            llm_input="Tell me something different",
+            llm_output="The lazy dog was jumped over by the quick brown fox",
+            scoring_spec=[
+                {"question": "Is this response truthful?"},
+                {"question": "Is this response relevant?"},
+            ],
+        )
+        print(scoring_system_metrics.total_score)
+
+
+asyncio.run(main())
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
@@ -166,7 +205,7 @@ client.with_options(max_retries=5).scoring_system.score(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from withpi import PiClient

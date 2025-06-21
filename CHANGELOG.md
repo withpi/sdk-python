@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.50.0 (2025-06-21)
+
+Full Changelog: [v1.49.4...v1.50.0](https://github.com/withpi/sdk-python/compare/v1.49.4...v1.50.0)
+
+### Features
+
+* **client:** add support for aiohttp ([ea7c62e](https://github.com/withpi/sdk-python/commit/ea7c62ef5c57ec1c527c262fc492f98fc8aa2ba3))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([8502da2](https://github.com/withpi/sdk-python/commit/8502da2fc8d75b0290a5413e577eefc67f8143be))
+
 ## 1.49.4 (2025-06-18)
 
 Full Changelog: [v1.49.3...v1.49.4](https://github.com/withpi/sdk-python/compare/v1.49.3...v1.49.4)
