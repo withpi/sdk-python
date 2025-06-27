@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.50.0 (2025-06-27)
+
+Full Changelog: [v1.49.4...v1.50.0](https://github.com/withpi/sdk-python/compare/v1.49.4...v1.50.0)
+
+### Features
+
+* **client:** add support for aiohttp ([ea7c62e](https://github.com/withpi/sdk-python/commit/ea7c62ef5c57ec1c527c262fc492f98fc8aa2ba3))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([d35d1b5](https://github.com/withpi/sdk-python/commit/d35d1b517993be060d986ed73954f266db4d432e))
+
+
+### Chores
+
+* **tests:** skip some failing tests on the latest python versions ([ee9c569](https://github.com/withpi/sdk-python/commit/ee9c569b036fca8543caceab9e25b7724e833bd6))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([8502da2](https://github.com/withpi/sdk-python/commit/8502da2fc8d75b0290a5413e577eefc67f8143be))
+
 ## 1.49.4 (2025-06-18)
 
 Full Changelog: [v1.49.3...v1.49.4](https://github.com/withpi/sdk-python/compare/v1.49.3...v1.49.4)
