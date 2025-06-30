@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.50.1 (2025-06-30)
+
+Full Changelog: [v1.50.0...v1.50.1](https://github.com/withpi/sdk-python/compare/v1.50.0...v1.50.1)
+
+### Bug Fixes
+
+* **ci:** correct conditional ([f9086cf](https://github.com/withpi/sdk-python/commit/f9086cf7a1ccf33b8bde5f657002eb2a76ba69e5))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([7bbfbf4](https://github.com/withpi/sdk-python/commit/7bbfbf4adca193b84126003d16210b459a79ea8e))
+
 ## 1.50.0 (2025-06-27)
 
 Full Changelog: [v1.49.4...v1.50.0](https://github.com/withpi/sdk-python/compare/v1.49.4...v1.50.0)
