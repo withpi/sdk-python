@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.50.5 (2025-07-02)
+
+Full Changelog: [v1.50.4...v1.50.5](https://github.com/withpi/sdk-python/compare/v1.50.4...v1.50.5)
+
+### Bug Fixes
+
+* **ci:** correct conditional ([72b8dc2](https://github.com/withpi/sdk-python/commit/72b8dc2a303e206f5f8fd2e722276f5480adcead))
+
+
+### Chores
+
+* **ci:** change upload type ([e9f18a5](https://github.com/withpi/sdk-python/commit/e9f18a50202c5e7e1b3fd38eae5ebb17f160811d))
+* **ci:** only run for pushes and fork pull requests ([ac75479](https://github.com/withpi/sdk-python/commit/ac75479c2b93a460092d6a69cb4d4f5ddaf32d74))
+
 ## 1.50.4 (2025-07-01)
 
 Full Changelog: [v1.50.3...v1.50.4](https://github.com/withpi/sdk-python/compare/v1.50.3...v1.50.4)
