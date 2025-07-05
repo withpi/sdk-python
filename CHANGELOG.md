@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.50.9 (2025-07-05)
+
+Full Changelog: [v1.50.8...v1.50.9](https://github.com/withpi/sdk-python/compare/v1.50.8...v1.50.9)
+
+### Chores
+
+* **internal:** version bump ([67ba87b](https://github.com/withpi/sdk-python/commit/67ba87b6a8ea96e169254ce48540a65edc62d48f))
+
 ## 1.50.8 (2025-07-04)
 
 Full Changelog: [v1.50.7...v1.50.8](https://github.com/withpi/sdk-python/compare/v1.50.7...v1.50.8)
