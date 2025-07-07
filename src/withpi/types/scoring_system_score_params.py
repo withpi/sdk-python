@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Iterable
+from typing_extensions import Literal, Required, TypedDict
 
-from .shared_params import scoring_spec as _scoring_spec
 from .shared_params.question import Question
 
-__all__ = ["ScoringSystemScoreParams", "ScoringSpec"]
+__all__ = ["ScoringSystemScoreParams"]
 
 
 class ScoringSystemScoreParams(TypedDict, total=False):
@@ -18,7 +17,7 @@ class ScoringSystemScoreParams(TypedDict, total=False):
     llm_output: Required[str]
     """The output to score"""
 
-    scoring_spec: Required[ScoringSpec]
+    scoring_spec: Required[Iterable[Question]]
     """Either a scoring spec or a list of questions to score"""
 
     aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"]
@@ -29,6 +28,3 @@ class ScoringSystemScoreParams(TypedDict, total=False):
 
     kwargs: object
     """Optional additional parameters (keyword arguments)"""
-
-
-ScoringSpec: TypeAlias = Union[Iterable[Question], _scoring_spec.ScoringSpec]

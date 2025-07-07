@@ -5,11 +5,8 @@ from __future__ import annotations
 from .shared import (
     Example as Example,
     Question as Question,
-    ScoringSpec as ScoringSpec,
     ExplorationMode as ExplorationMode,
-    ScoringDimension as ScoringDimension,
     QueryFanoutExample as QueryFanoutExample,
-    ScoringSubDimension as ScoringSubDimension,
     SyntheticDataStatus as SyntheticDataStatus,
     DataGenerationStatus as DataGenerationStatus,
     ScoringSystemMetrics as ScoringSystemMetrics,

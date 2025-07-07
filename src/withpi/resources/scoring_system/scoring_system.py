@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -32,6 +32,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.shared_params.question import Question
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system_generate_response import ScoringSystemGenerateResponse
 from ...types.scoring_system_import_spec_response import ScoringSystemImportSpecResponse
@@ -144,25 +145,20 @@ class ScoringSystemResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            ScoringSystemImportSpecResponse,
-            self._post(
-                "/scoring_system/import_spec",
-                body=maybe_transform(
-                    {
-                        "hf_scoring_spec_name": hf_scoring_spec_name,
-                        "hf_token": hf_token,
-                        "source": source,
-                    },
-                    scoring_system_import_spec_params.ScoringSystemImportSpecParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ScoringSystemImportSpecResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            "/scoring_system/import_spec",
+            body=maybe_transform(
+                {
+                    "hf_scoring_spec_name": hf_scoring_spec_name,
+                    "hf_token": hf_token,
+                    "source": source,
+                },
+                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemImportSpecResponse,
         )
 
     def score(
@@ -170,7 +166,7 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
         kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -226,7 +222,7 @@ class ScoringSystemResource(SyncAPIResource):
         self,
         *,
         hf_scoring_spec_name: str,
-        scoring_spec: scoring_system_upload_to_huggingface_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -377,25 +373,20 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            ScoringSystemImportSpecResponse,
-            await self._post(
-                "/scoring_system/import_spec",
-                body=await async_maybe_transform(
-                    {
-                        "hf_scoring_spec_name": hf_scoring_spec_name,
-                        "hf_token": hf_token,
-                        "source": source,
-                    },
-                    scoring_system_import_spec_params.ScoringSystemImportSpecParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ScoringSystemImportSpecResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            "/scoring_system/import_spec",
+            body=await async_maybe_transform(
+                {
+                    "hf_scoring_spec_name": hf_scoring_spec_name,
+                    "hf_token": hf_token,
+                    "source": source,
+                },
+                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemImportSpecResponse,
         )
 
     async def score(
@@ -403,7 +394,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         llm_input: str,
         llm_output: str,
-        scoring_spec: scoring_system_score_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
         kwargs: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -459,7 +450,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         self,
         *,
         hf_scoring_spec_name: str,
-        scoring_spec: scoring_system_upload_to_huggingface_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         hf_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
