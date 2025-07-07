@@ -19,6 +19,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import calibrate_list_params, calibrate_start_job_params
+from ...types.shared_params.question import Question
 from ...types.scoring_system.calibrate_list_response import CalibrateListResponse
 from ...types.shared.scoring_spec_calibration_status import ScoringSpecCalibrationStatus
 
@@ -153,7 +154,7 @@ class CalibrateResource(SyncAPIResource):
         *,
         examples: Iterable[calibrate_start_job_params.Example],
         preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
-        scoring_spec: calibrate_start_job_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -365,7 +366,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         *,
         examples: Iterable[calibrate_start_job_params.Example],
         preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
-        scoring_spec: calibrate_start_job_params.ScoringSpec,
+        scoring_spec: Iterable[Question],
         strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

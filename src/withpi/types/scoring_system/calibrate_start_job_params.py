@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
-from ..shared_params import scoring_spec
 from ..shared_params.question import Question
 
-__all__ = ["CalibrateStartJobParams", "Example", "PreferenceExample", "ScoringSpec"]
+__all__ = ["CalibrateStartJobParams", "Example", "PreferenceExample"]
 
 
 class CalibrateStartJobParams(TypedDict, total=False):
@@ -24,7 +23,7 @@ class CalibrateStartJobParams(TypedDict, total=False):
     Must specify either the examples or preference examples
     """
 
-    scoring_spec: Required[ScoringSpec]
+    scoring_spec: Required[Iterable[Question]]
     """Either a scoring spec or a list of questions to score"""
 
     strategy: Literal["LITE", "FULL"]
@@ -57,6 +56,3 @@ class PreferenceExample(TypedDict, total=False):
 
     rejected: Required[str]
     """The rejected output in corresponding to the llm_input."""
-
-
-ScoringSpec: TypeAlias = Union[Iterable[Question], scoring_spec.ScoringSpec]

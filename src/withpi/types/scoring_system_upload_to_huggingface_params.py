@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Required, TypedDict
 
-from .shared_params import scoring_spec as _scoring_spec
 from .shared_params.question import Question
 
-__all__ = ["ScoringSystemUploadToHuggingfaceParams", "ScoringSpec"]
+__all__ = ["ScoringSystemUploadToHuggingfaceParams"]
 
 
 class ScoringSystemUploadToHuggingfaceParams(TypedDict, total=False):
@@ -19,11 +18,8 @@ class ScoringSystemUploadToHuggingfaceParams(TypedDict, total=False):
     you want to use your own organization, we provide the hf_token.
     """
 
-    scoring_spec: Required[ScoringSpec]
+    scoring_spec: Required[Iterable[Question]]
     """The list of questions or the scoring spec to write to Huggingface"""
 
     hf_token: Optional[str]
     """Huggingface token to use if you want to write to your own HF organization"""
-
-
-ScoringSpec: TypeAlias = Union[Iterable[Question], _scoring_spec.ScoringSpec]

@@ -8,10 +8,7 @@ from withpi.types import (
     QueryClassifierResult,
     QueryFanoutExample,
     Question,
-    ScoringDimension,
-    ScoringSpec,
     ScoringSpecCalibrationStatus,
-    ScoringSubDimension,
     ScoringSystemMetrics,
     SyntheticDataStatus,
 )
