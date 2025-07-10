@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.51.1 (2025-07-10)
+
+Full Changelog: [v1.51.0...v1.51.1](https://github.com/withpi/sdk-python/compare/v1.51.0...v1.51.1)
+
+### Bug Fixes
+
+* **parsing:** correctly handle nested discriminated unions ([1a7c0a9](https://github.com/withpi/sdk-python/commit/1a7c0a9ba80e4bad112cc12ebead7444d9aa71fd))
+
+
+### Chores
+
+* **internal:** bump pinned h11 dep ([7ded57a](https://github.com/withpi/sdk-python/commit/7ded57ab64d85e9640c178d8ab6ee0e186bd6427))
+* **package:** mark python 3.13 as supported ([d33e267](https://github.com/withpi/sdk-python/commit/d33e26731280c47d6cbbadf2d7d9e15afaccc19f))
+
 ## 1.51.0 (2025-07-07)
 
 Full Changelog: [v1.50.8...v1.51.0](https://github.com/withpi/sdk-python/compare/v1.50.8...v1.51.0)
