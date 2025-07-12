@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.51.2 (2025-07-12)
+
+Full Changelog: [v1.51.1...v1.51.2](https://github.com/withpi/sdk-python/compare/v1.51.1...v1.51.2)
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([b2095c8](https://github.com/withpi/sdk-python/commit/b2095c8987800b68b8a123bb5564bac19778a27d))
+
+
+### Chores
+
+* **readme:** fix version rendering on pypi ([b0c884c](https://github.com/withpi/sdk-python/commit/b0c884cec829770ba53a4481bc8b59d6896097ce))
+
 ## 1.51.1 (2025-07-10)
 
 Full Changelog: [v1.51.0...v1.51.1](https://github.com/withpi/sdk-python/compare/v1.51.0...v1.51.1)
