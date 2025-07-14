@@ -68,6 +68,9 @@ class ScoringSystemResource(SyncAPIResource):
         self,
         *,
         application_description: str,
+        examples: Iterable[scoring_system_generate_params.Example],
+        preference_examples: Iterable[scoring_system_generate_params.PreferenceExample],
+        batch_size: int | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -82,6 +85,14 @@ class ScoringSystemResource(SyncAPIResource):
 
         Args:
           application_description: The application description to generate a scoring spec for.
+
+          examples: Rated examples to use for generating the discriminating questions. The scores
+              can be class labels or actual scores (but must be between 0 and 1)
+
+          preference_examples: Preference examples to use for generating the discriminating questions. Must
+              specify either the examples or preference examples
+
+          batch_size: Number of examples to use in one batch to generate the questions.
 
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
@@ -101,6 +112,9 @@ class ScoringSystemResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "application_description": application_description,
+                    "examples": examples,
+                    "preference_examples": preference_examples,
+                    "batch_size": batch_size,
                     "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
@@ -296,6 +310,9 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         self,
         *,
         application_description: str,
+        examples: Iterable[scoring_system_generate_params.Example],
+        preference_examples: Iterable[scoring_system_generate_params.PreferenceExample],
+        batch_size: int | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -310,6 +327,14 @@ class AsyncScoringSystemResource(AsyncAPIResource):
 
         Args:
           application_description: The application description to generate a scoring spec for.
+
+          examples: Rated examples to use for generating the discriminating questions. The scores
+              can be class labels or actual scores (but must be between 0 and 1)
+
+          preference_examples: Preference examples to use for generating the discriminating questions. Must
+              specify either the examples or preference examples
+
+          batch_size: Number of examples to use in one batch to generate the questions.
 
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
@@ -329,6 +354,9 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "application_description": application_description,
+                    "examples": examples,
+                    "preference_examples": preference_examples,
+                    "batch_size": batch_size,
                     "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
