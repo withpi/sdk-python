@@ -26,6 +26,23 @@ class TestScoringSystem:
     def test_method_generate(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         )
         assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
@@ -34,6 +51,28 @@ class TestScoringSystem:
     def test_method_generate_with_all_params(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Disagree",
+                    "score": 0.9,
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Disagree",
+                    "score": 0.5,
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
+            batch_size=0,
             num_questions=0,
             try_auto_generating_python_code=False,
         )
@@ -44,6 +83,23 @@ class TestScoringSystem:
     def test_raw_response_generate(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -56,6 +112,23 @@ class TestScoringSystem:
     def test_streaming_response_generate(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -297,6 +370,23 @@ class TestAsyncScoringSystem:
     async def test_method_generate(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         )
         assert_matches_type(ScoringSystemGenerateResponse, scoring_system, path=["response"])
 
@@ -305,6 +395,28 @@ class TestAsyncScoringSystem:
     async def test_method_generate_with_all_params(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                    "rating": "Disagree",
+                    "score": 0.9,
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                    "rating": "Disagree",
+                    "score": 0.5,
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
+            batch_size=0,
             num_questions=0,
             try_auto_generating_python_code=False,
         )
@@ -315,6 +427,23 @@ class TestAsyncScoringSystem:
     async def test_raw_response_generate(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -327,6 +456,23 @@ class TestAsyncScoringSystem:
     async def test_streaming_response_generate(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.generate(
             application_description="Write a children's story communicating a simple life lesson.",
+            examples=[
+                {
+                    "llm_input": "good input",
+                    "llm_output": "good response",
+                },
+                {
+                    "llm_input": "neutral input",
+                    "llm_output": "neutral response",
+                },
+            ],
+            preference_examples=[
+                {
+                    "chosen": "chosen response",
+                    "llm_input": "some input",
+                    "rejected": "rejected response",
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
