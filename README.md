@@ -93,7 +93,6 @@ pip install withpi[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from withpi import DefaultAioHttpClient
 from withpi import AsyncPiClient
@@ -101,7 +100,7 @@ from withpi import AsyncPiClient
 
 async def main() -> None:
     async with AsyncPiClient(
-        api_key=os.environ.get("WITHPI_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         scoring_system_metrics = await client.scoring_system.score(
