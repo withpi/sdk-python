@@ -3,7 +3,6 @@
 from .example import Example as Example
 from .question import Question as Question
 from .exploration_mode import ExplorationMode as ExplorationMode
-from .query_fanout_example import QueryFanoutExample as QueryFanoutExample
 from .synthetic_data_status import SyntheticDataStatus as SyntheticDataStatus
 from .data_generation_status import DataGenerationStatus as DataGenerationStatus
 from .scoring_system_metrics import ScoringSystemMetrics as ScoringSystemMetrics

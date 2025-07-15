@@ -16,14 +16,6 @@ from .groundedness import (
     GroundednessResourceWithStreamingResponse,
     AsyncGroundednessResourceWithStreamingResponse,
 )
-from .query_fanout import (
-    QueryFanoutResource,
-    AsyncQueryFanoutResource,
-    QueryFanoutResourceWithRawResponse,
-    AsyncQueryFanoutResourceWithRawResponse,
-    QueryFanoutResourceWithStreamingResponse,
-    AsyncQueryFanoutResourceWithStreamingResponse,
-)
 from .query_classifier import (
     QueryClassifierResource,
     AsyncQueryClassifierResource,
@@ -34,12 +26,6 @@ from .query_classifier import (
 )
 
 __all__ = [
-    "QueryFanoutResource",
-    "AsyncQueryFanoutResource",
-    "QueryFanoutResourceWithRawResponse",
-    "AsyncQueryFanoutResourceWithRawResponse",
-    "QueryFanoutResourceWithStreamingResponse",
-    "AsyncQueryFanoutResourceWithStreamingResponse",
     "QueryClassifierResource",
     "AsyncQueryClassifierResource",
     "QueryClassifierResourceWithRawResponse",
