@@ -12,14 +12,6 @@ from .groundedness import (
     GroundednessResourceWithStreamingResponse,
     AsyncGroundednessResourceWithStreamingResponse,
 )
-from .query_fanout import (
-    QueryFanoutResource,
-    AsyncQueryFanoutResource,
-    QueryFanoutResourceWithRawResponse,
-    AsyncQueryFanoutResourceWithRawResponse,
-    QueryFanoutResourceWithStreamingResponse,
-    AsyncQueryFanoutResourceWithStreamingResponse,
-)
 from .query_classifier import (
     QueryClassifierResource,
     AsyncQueryClassifierResource,
@@ -33,10 +25,6 @@ __all__ = ["SearchResource", "AsyncSearchResource"]
 
 
 class SearchResource(SyncAPIResource):
-    @cached_property
-    def query_fanout(self) -> QueryFanoutResource:
-        return QueryFanoutResource(self._client)
-
     @cached_property
     def query_classifier(self) -> QueryClassifierResource:
         return QueryClassifierResource(self._client)
@@ -66,10 +54,6 @@ class SearchResource(SyncAPIResource):
 
 
 class AsyncSearchResource(AsyncAPIResource):
-    @cached_property
-    def query_fanout(self) -> AsyncQueryFanoutResource:
-        return AsyncQueryFanoutResource(self._client)
-
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResource:
         return AsyncQueryClassifierResource(self._client)
@@ -103,10 +87,6 @@ class SearchResourceWithRawResponse:
         self._search = search
 
     @cached_property
-    def query_fanout(self) -> QueryFanoutResourceWithRawResponse:
-        return QueryFanoutResourceWithRawResponse(self._search.query_fanout)
-
-    @cached_property
     def query_classifier(self) -> QueryClassifierResourceWithRawResponse:
         return QueryClassifierResourceWithRawResponse(self._search.query_classifier)
 
@@ -118,10 +98,6 @@ class SearchResourceWithRawResponse:
 class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
-
-    @cached_property
-    def query_fanout(self) -> AsyncQueryFanoutResourceWithRawResponse:
-        return AsyncQueryFanoutResourceWithRawResponse(self._search.query_fanout)
 
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResourceWithRawResponse:
@@ -137,10 +113,6 @@ class SearchResourceWithStreamingResponse:
         self._search = search
 
     @cached_property
-    def query_fanout(self) -> QueryFanoutResourceWithStreamingResponse:
-        return QueryFanoutResourceWithStreamingResponse(self._search.query_fanout)
-
-    @cached_property
     def query_classifier(self) -> QueryClassifierResourceWithStreamingResponse:
         return QueryClassifierResourceWithStreamingResponse(self._search.query_classifier)
 
@@ -152,10 +124,6 @@ class SearchResourceWithStreamingResponse:
 class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
-
-    @cached_property
-    def query_fanout(self) -> AsyncQueryFanoutResourceWithStreamingResponse:
-        return AsyncQueryFanoutResourceWithStreamingResponse(self._search.query_fanout)
 
     @cached_property
     def query_classifier(self) -> AsyncQueryClassifierResourceWithStreamingResponse:

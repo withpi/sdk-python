@@ -6,7 +6,6 @@ from withpi.types import (
     Example,
     ExplorationMode,
     QueryClassifierResult,
-    QueryFanoutExample,
     Question,
     ScoringSpecCalibrationStatus,
     ScoringSystemMetrics,
@@ -100,18 +99,6 @@ Methods:
 - <code title="get /scoring_system/calibrate/{job_id}/messages">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">stream_messages</a>(job_id) -> str</code>
 
 # Search
-
-## QueryFanout
-
-Types:
-
-```python
-from withpi.types.search import QueryFanoutGenerateResponse
-```
-
-Methods:
-
-- <code title="post /search/query_fanout/generate">client.search.query_fanout.<a href="./src/withpi/resources/search/query_fanout.py">generate</a>(\*\*<a href="src/withpi/types/search/query_fanout_generate_params.py">params</a>) -> <a href="./src/withpi/types/search/query_fanout_generate_response.py">QueryFanoutGenerateResponse</a></code>
 
 ## QueryClassifier
 

@@ -6,7 +6,6 @@ from .shared import (
     Example as Example,
     Question as Question,
     ExplorationMode as ExplorationMode,
-    QueryFanoutExample as QueryFanoutExample,
     SyntheticDataStatus as SyntheticDataStatus,
     DataGenerationStatus as DataGenerationStatus,
     ScoringSystemMetrics as ScoringSystemMetrics,
