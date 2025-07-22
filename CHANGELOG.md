@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.53.1 (2025-07-22)
+
+Full Changelog: [v1.53.0...v1.53.1](https://github.com/withpi/sdk-python/compare/v1.53.0...v1.53.1)
+
+### Bug Fixes
+
+* **parsing:** ignore empty metadata ([bfd70aa](https://github.com/withpi/sdk-python/commit/bfd70aa3913551435d64c902717a0f61ef8c2ade))
+
 ## 1.53.0 (2025-07-15)
 
 Full Changelog: [v1.52.0...v1.53.0](https://github.com/withpi/sdk-python/compare/v1.52.0...v1.53.0)
