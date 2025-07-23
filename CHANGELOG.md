@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.53.2 (2025-07-23)
+
+Full Changelog: [v1.53.1...v1.53.2](https://github.com/withpi/sdk-python/compare/v1.53.1...v1.53.2)
+
+### Bug Fixes
+
+* **parsing:** parse extra field types ([243895f](https://github.com/withpi/sdk-python/commit/243895f55eee4e5bc302801d8919fc11c3d8c87c))
+
 ## 1.53.1 (2025-07-22)
 
 Full Changelog: [v1.53.0...v1.53.1](https://github.com/withpi/sdk-python/compare/v1.53.0...v1.53.1)
