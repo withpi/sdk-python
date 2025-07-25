@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.53.3 (2025-07-25)
+
+Full Changelog: [v1.53.2...v1.53.3](https://github.com/withpi/sdk-python/compare/v1.53.2...v1.53.3)
+
+### Chores
+
+* **project:** add settings file for vscode ([5179acd](https://github.com/withpi/sdk-python/commit/5179acdaa1f832d3e9f781252e013bbbaed45235))
+
 ## 1.53.2 (2025-07-23)
 
 Full Changelog: [v1.53.1...v1.53.2](https://github.com/withpi/sdk-python/compare/v1.53.1...v1.53.2)
