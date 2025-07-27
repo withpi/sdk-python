@@ -117,7 +117,7 @@ class ScoringSystemResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScoringSystemGenerateResponse:
         """
-        Generates a scoring spec
+        Starts a Generate Scoring Spec job
 
         Args:
           application_description: The application description to generate a scoring spec for.
@@ -496,7 +496,7 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScoringSystemGenerateResponse:
         """
-        Generates a scoring spec
+        Starts a Generate Scoring Spec job
 
         Args:
           application_description: The application description to generate a scoring spec for.
