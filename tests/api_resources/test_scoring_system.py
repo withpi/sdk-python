@@ -11,7 +11,9 @@ from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
 from withpi.types import (
     ScoringSystemGenerateResponse,
+    ScoringSystemListJobsResponse,
     ScoringSystemImportSpecResponse,
+    ScoringSystemRetrieveJobResponse,
 )
 from withpi.types.shared import ScoringSystemMetrics
 
@@ -20,6 +22,48 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestScoringSystem:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_cancel_job(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.cancel_job(
+            "job_id",
+        )
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_cancel_job(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.cancel_job(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_cancel_job(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.cancel_job(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(str, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_cancel_job(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.scoring_system.with_raw_response.cancel_job(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -184,6 +228,84 @@ class TestScoringSystem:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_list_jobs(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.list_jobs()
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_jobs_with_all_params(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.list_jobs(
+            state="QUEUED",
+        )
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_list_jobs(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.list_jobs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_list_jobs(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.list_jobs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_job(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.retrieve_job(
+            "job_id",
+        )
+        assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_retrieve_job(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.retrieve_job(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_retrieve_job(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.retrieve_job(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_retrieve_job(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.scoring_system.with_raw_response.retrieve_job(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_score(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.score(
             llm_input="Tell me something different",
@@ -272,6 +394,48 @@ class TestScoringSystem:
             assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_stream_job_messages(self, client: PiClient) -> None:
+        scoring_system = client.scoring_system.stream_job_messages(
+            "job_id",
+        )
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_stream_job_messages(self, client: PiClient) -> None:
+        response = client.scoring_system.with_raw_response.stream_job_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = response.parse()
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_stream_job_messages(self, client: PiClient) -> None:
+        with client.scoring_system.with_streaming_response.stream_job_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = response.parse()
+            assert_matches_type(str, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_stream_job_messages(self, client: PiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            client.scoring_system.with_raw_response.stream_job_messages(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -364,6 +528,48 @@ class TestAsyncScoringSystem:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_cancel_job(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.cancel_job(
+            "job_id",
+        )
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_cancel_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.cancel_job(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_cancel_job(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.cancel_job(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(str, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_cancel_job(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.scoring_system.with_raw_response.cancel_job(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -528,6 +734,84 @@ class TestAsyncScoringSystem:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_list_jobs(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.list_jobs()
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_jobs_with_all_params(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.list_jobs(
+            state="QUEUED",
+        )
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_list_jobs(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.list_jobs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_list_jobs(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.list_jobs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(ScoringSystemListJobsResponse, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_job(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.retrieve_job(
+            "job_id",
+        )
+        assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_retrieve_job(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.retrieve_job(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_retrieve_job(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.retrieve_job(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(ScoringSystemRetrieveJobResponse, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_retrieve_job(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.scoring_system.with_raw_response.retrieve_job(
+                "",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_score(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.score(
             llm_input="Tell me something different",
@@ -616,6 +900,48 @@ class TestAsyncScoringSystem:
             assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_stream_job_messages(self, async_client: AsyncPiClient) -> None:
+        scoring_system = await async_client.scoring_system.stream_job_messages(
+            "job_id",
+        )
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_stream_job_messages(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.scoring_system.with_raw_response.stream_job_messages(
+            "job_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scoring_system = await response.parse()
+        assert_matches_type(str, scoring_system, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_stream_job_messages(self, async_client: AsyncPiClient) -> None:
+        async with async_client.scoring_system.with_streaming_response.stream_job_messages(
+            "job_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scoring_system = await response.parse()
+            assert_matches_type(str, scoring_system, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_stream_job_messages(self, async_client: AsyncPiClient) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+            await async_client.scoring_system.with_raw_response.stream_job_messages(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize

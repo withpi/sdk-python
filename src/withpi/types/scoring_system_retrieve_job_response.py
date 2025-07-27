@@ -6,10 +6,10 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .shared.question import Question
 
-__all__ = ["ScoringSystemGenerateResponse"]
+__all__ = ["ScoringSystemRetrieveJobResponse"]
 
 
-class ScoringSystemGenerateResponse(BaseModel):
+class ScoringSystemRetrieveJobResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 

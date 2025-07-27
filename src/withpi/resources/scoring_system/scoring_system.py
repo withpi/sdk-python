@@ -10,6 +10,7 @@ import httpx
 from ...types import (
     scoring_system_score_params,
     scoring_system_generate_params,
+    scoring_system_list_jobs_params,
     scoring_system_import_spec_params,
     scoring_system_upload_to_huggingface_params,
 )
@@ -35,7 +36,9 @@ from ..._base_client import make_request_options
 from ...types.shared_params.question import Question
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
 from ...types.scoring_system_generate_response import ScoringSystemGenerateResponse
+from ...types.scoring_system_list_jobs_response import ScoringSystemListJobsResponse
 from ...types.scoring_system_import_spec_response import ScoringSystemImportSpecResponse
+from ...types.scoring_system_retrieve_job_response import ScoringSystemRetrieveJobResponse
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -63,6 +66,39 @@ class ScoringSystemResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return ScoringSystemResourceWithStreamingResponse(self)
+
+    def cancel_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._delete(
+            f"/scoring_system/generate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     def generate(
         self,
@@ -175,6 +211,76 @@ class ScoringSystemResource(SyncAPIResource):
             cast_to=ScoringSystemImportSpecResponse,
         )
 
+    def list_jobs(
+        self,
+        *,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemListJobsResponse:
+        """
+        Lists the Generate Scoring Spec Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/scoring_system/generate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"state": state}, scoring_system_list_jobs_params.ScoringSystemListJobsParams),
+            ),
+            cast_to=ScoringSystemListJobsResponse,
+        )
+
+    def retrieve_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemRetrieveJobResponse:
+        """
+        Checks the status of a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/scoring_system/generate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemRetrieveJobResponse,
+        )
+
     def score(
         self,
         *,
@@ -230,6 +336,40 @@ class ScoringSystemResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ScoringSystemMetrics,
+        )
+
+    def stream_job_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Opens a message stream about a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return self._get(
+            f"/scoring_system/generate/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
         )
 
     def upload_to_huggingface(
@@ -305,6 +445,39 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncScoringSystemResourceWithStreamingResponse(self)
+
+    async def cancel_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Cancels a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._delete(
+            f"/scoring_system/generate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
 
     async def generate(
         self,
@@ -417,6 +590,78 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             cast_to=ScoringSystemImportSpecResponse,
         )
 
+    async def list_jobs(
+        self,
+        *,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemListJobsResponse:
+        """
+        Lists the Generate Scoring Spec Jobs owned by a user
+
+        Args:
+          state: Filter jobs by state
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/scoring_system/generate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"state": state}, scoring_system_list_jobs_params.ScoringSystemListJobsParams
+                ),
+            ),
+            cast_to=ScoringSystemListJobsResponse,
+        )
+
+    async def retrieve_job(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ScoringSystemRetrieveJobResponse:
+        """
+        Checks the status of a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/scoring_system/generate/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScoringSystemRetrieveJobResponse,
+        )
+
     async def score(
         self,
         *,
@@ -474,6 +719,40 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             cast_to=ScoringSystemMetrics,
         )
 
+    async def stream_job_messages(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> str:
+        """
+        Opens a message stream about a Generate Scoring Spec job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        return await self._get(
+            f"/scoring_system/generate/{job_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=str,
+        )
+
     async def upload_to_huggingface(
         self,
         *,
@@ -528,14 +807,26 @@ class ScoringSystemResourceWithRawResponse:
     def __init__(self, scoring_system: ScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
+        self.cancel_job = to_raw_response_wrapper(
+            scoring_system.cancel_job,
+        )
         self.generate = to_raw_response_wrapper(
             scoring_system.generate,
         )
         self.import_spec = to_raw_response_wrapper(
             scoring_system.import_spec,
         )
+        self.list_jobs = to_raw_response_wrapper(
+            scoring_system.list_jobs,
+        )
+        self.retrieve_job = to_raw_response_wrapper(
+            scoring_system.retrieve_job,
+        )
         self.score = to_raw_response_wrapper(
             scoring_system.score,
+        )
+        self.stream_job_messages = to_raw_response_wrapper(
+            scoring_system.stream_job_messages,
         )
         self.upload_to_huggingface = to_raw_response_wrapper(
             scoring_system.upload_to_huggingface,
@@ -550,14 +841,26 @@ class AsyncScoringSystemResourceWithRawResponse:
     def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
+        self.cancel_job = async_to_raw_response_wrapper(
+            scoring_system.cancel_job,
+        )
         self.generate = async_to_raw_response_wrapper(
             scoring_system.generate,
         )
         self.import_spec = async_to_raw_response_wrapper(
             scoring_system.import_spec,
         )
+        self.list_jobs = async_to_raw_response_wrapper(
+            scoring_system.list_jobs,
+        )
+        self.retrieve_job = async_to_raw_response_wrapper(
+            scoring_system.retrieve_job,
+        )
         self.score = async_to_raw_response_wrapper(
             scoring_system.score,
+        )
+        self.stream_job_messages = async_to_raw_response_wrapper(
+            scoring_system.stream_job_messages,
         )
         self.upload_to_huggingface = async_to_raw_response_wrapper(
             scoring_system.upload_to_huggingface,
@@ -572,14 +875,26 @@ class ScoringSystemResourceWithStreamingResponse:
     def __init__(self, scoring_system: ScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
+        self.cancel_job = to_streamed_response_wrapper(
+            scoring_system.cancel_job,
+        )
         self.generate = to_streamed_response_wrapper(
             scoring_system.generate,
         )
         self.import_spec = to_streamed_response_wrapper(
             scoring_system.import_spec,
         )
+        self.list_jobs = to_streamed_response_wrapper(
+            scoring_system.list_jobs,
+        )
+        self.retrieve_job = to_streamed_response_wrapper(
+            scoring_system.retrieve_job,
+        )
         self.score = to_streamed_response_wrapper(
             scoring_system.score,
+        )
+        self.stream_job_messages = to_streamed_response_wrapper(
+            scoring_system.stream_job_messages,
         )
         self.upload_to_huggingface = to_streamed_response_wrapper(
             scoring_system.upload_to_huggingface,
@@ -594,14 +909,26 @@ class AsyncScoringSystemResourceWithStreamingResponse:
     def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
+        self.cancel_job = async_to_streamed_response_wrapper(
+            scoring_system.cancel_job,
+        )
         self.generate = async_to_streamed_response_wrapper(
             scoring_system.generate,
         )
         self.import_spec = async_to_streamed_response_wrapper(
             scoring_system.import_spec,
         )
+        self.list_jobs = async_to_streamed_response_wrapper(
+            scoring_system.list_jobs,
+        )
+        self.retrieve_job = async_to_streamed_response_wrapper(
+            scoring_system.retrieve_job,
+        )
         self.score = async_to_streamed_response_wrapper(
             scoring_system.score,
+        )
+        self.stream_job_messages = async_to_streamed_response_wrapper(
+            scoring_system.stream_job_messages,
         )
         self.upload_to_huggingface = async_to_streamed_response_wrapper(
             scoring_system.upload_to_huggingface,
