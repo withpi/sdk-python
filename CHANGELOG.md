@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.56.0 (2025-07-27)
+
+Full Changelog: [v1.55.0...v1.56.0](https://github.com/withpi/sdk-python/compare/v1.55.0...v1.56.0)
+
+### Features
+
+* **api:** api update ([e2dbc64](https://github.com/withpi/sdk-python/commit/e2dbc6479ee576cb0922cb7924605d4ffba995a2))
+
 ## 1.55.0 (2025-07-27)
 
 Full Changelog: [v1.54.0...v1.55.0](https://github.com/withpi/sdk-python/compare/v1.54.0...v1.55.0)
