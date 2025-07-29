@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .generate import (
+    GenerateResource,
+    AsyncGenerateResource,
+    GenerateResourceWithRawResponse,
+    AsyncGenerateResourceWithRawResponse,
+    GenerateResourceWithStreamingResponse,
+    AsyncGenerateResourceWithStreamingResponse,
+)
 from .calibrate import (
     CalibrateResource,
     AsyncCalibrateResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncCalibrateResourceWithRawResponse",
     "CalibrateResourceWithStreamingResponse",
     "AsyncCalibrateResourceWithStreamingResponse",
+    "GenerateResource",
+    "AsyncGenerateResource",
+    "GenerateResourceWithRawResponse",
+    "AsyncGenerateResourceWithRawResponse",
+    "GenerateResourceWithStreamingResponse",
+    "AsyncGenerateResourceWithStreamingResponse",
     "ScoringSystemResource",
     "AsyncScoringSystemResource",
     "ScoringSystemResourceWithRawResponse",

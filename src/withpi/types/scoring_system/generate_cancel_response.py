@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["ScoringSystemCancelJobResponse"]
+__all__ = ["GenerateCancelResponse"]
 
-ScoringSystemCancelJobResponse: TypeAlias = str
+GenerateCancelResponse: TypeAlias = str

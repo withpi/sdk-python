@@ -2,6 +2,6 @@
 
 from typing_extensions import TypeAlias
 
-__all__ = ["ScoringSystemStreamJobMessagesResponse"]
+__all__ = ["GenerateStreamMessagesResponse"]
 
-ScoringSystemStreamJobMessagesResponse: TypeAlias = str
+GenerateStreamMessagesResponse: TypeAlias = str
