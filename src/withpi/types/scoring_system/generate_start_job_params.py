@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ScoringSystemGenerateParams", "Example", "PreferenceExample"]
+__all__ = ["GenerateStartJobParams", "Example", "PreferenceExample"]
 
 
-class ScoringSystemGenerateParams(TypedDict, total=False):
+class GenerateStartJobParams(TypedDict, total=False):
     application_description: Required[str]
     """The application description to generate a scoring spec for."""
 

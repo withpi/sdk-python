@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.58.0 (2025-07-29)
+
+Full Changelog: [v1.57.0...v1.58.0](https://github.com/withpi/sdk-python/compare/v1.57.0...v1.58.0)
+
+### Features
+
+* **api:** manual updates to nest generate scoring spec methods ([fd26067](https://github.com/withpi/sdk-python/commit/fd260673fc74ef9321b6ebd40913deee1b31d1e0))
+* **api:** manual updates to nest generate scoring spec methods ([fd26067](https://github.com/withpi/sdk-python/commit/fd260673fc74ef9321b6ebd40913deee1b31d1e0))
+
 ## 1.57.0 (2025-07-27)
 
 Full Changelog: [v1.56.0...v1.57.0](https://github.com/withpi/sdk-python/compare/v1.56.0...v1.57.0)

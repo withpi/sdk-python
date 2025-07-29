@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["ScoringSystemListJobsParams"]
+__all__ = ["GenerateListParams"]
 
 
-class ScoringSystemListJobsParams(TypedDict, total=False):
+class GenerateListParams(TypedDict, total=False):
     state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]]
     """Filter jobs by state"""
