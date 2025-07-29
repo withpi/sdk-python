@@ -64,26 +64,13 @@ Methods:
 Types:
 
 ```python
-from withpi.types import (
-    ScoringSystemCancelJobResponse,
-    ScoringSystemGenerateResponse,
-    ScoringSystemImportSpecResponse,
-    ScoringSystemListJobsResponse,
-    ScoringSystemRetrieveJobResponse,
-    ScoringSystemStreamJobMessagesResponse,
-    ScoringSystemUploadToHuggingfaceResponse,
-)
+from withpi.types import ScoringSystemImportSpecResponse, ScoringSystemUploadToHuggingfaceResponse
 ```
 
 Methods:
 
-- <code title="delete /scoring_system/generate/{job_id}">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">cancel_job</a>(job_id) -> str</code>
-- <code title="post /scoring_system/generate">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">generate</a>(\*\*<a href="src/withpi/types/scoring_system_generate_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_generate_response.py">ScoringSystemGenerateResponse</a></code>
 - <code title="post /scoring_system/import_spec">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">import_spec</a>(\*\*<a href="src/withpi/types/scoring_system_import_spec_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_import_spec_response.py">ScoringSystemImportSpecResponse</a></code>
-- <code title="get /scoring_system/generate">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">list_jobs</a>(\*\*<a href="src/withpi/types/scoring_system_list_jobs_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system_list_jobs_response.py">ScoringSystemListJobsResponse</a></code>
-- <code title="get /scoring_system/generate/{job_id}">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">retrieve_job</a>(job_id) -> <a href="./src/withpi/types/scoring_system_retrieve_job_response.py">ScoringSystemRetrieveJobResponse</a></code>
 - <code title="post /scoring_system/score">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">score</a>(\*\*<a href="src/withpi/types/scoring_system_score_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_system_metrics.py">ScoringSystemMetrics</a></code>
-- <code title="get /scoring_system/generate/{job_id}/messages">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">stream_job_messages</a>(job_id) -> str</code>
 - <code title="post /scoring_system/to_huggingface">client.scoring_system.<a href="./src/withpi/resources/scoring_system/scoring_system.py">upload_to_huggingface</a>(\*\*<a href="src/withpi/types/scoring_system_upload_to_huggingface_params.py">params</a>) -> str</code>
 
 ## Calibrate
@@ -105,6 +92,28 @@ Methods:
 - <code title="delete /scoring_system/calibrate/{job_id}">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">cancel</a>(job_id) -> str</code>
 - <code title="post /scoring_system/calibrate">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">start_job</a>(\*\*<a href="src/withpi/types/scoring_system/calibrate_start_job_params.py">params</a>) -> <a href="./src/withpi/types/shared/scoring_spec_calibration_status.py">ScoringSpecCalibrationStatus</a></code>
 - <code title="get /scoring_system/calibrate/{job_id}/messages">client.scoring_system.calibrate.<a href="./src/withpi/resources/scoring_system/calibrate.py">stream_messages</a>(job_id) -> str</code>
+
+## Generate
+
+Types:
+
+```python
+from withpi.types.scoring_system import (
+    GenerateRetrieveResponse,
+    GenerateListResponse,
+    GenerateCancelResponse,
+    GenerateStartJobResponse,
+    GenerateStreamMessagesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /scoring_system/generate/{job_id}">client.scoring_system.generate.<a href="./src/withpi/resources/scoring_system/generate.py">retrieve</a>(job_id) -> <a href="./src/withpi/types/scoring_system/generate_retrieve_response.py">GenerateRetrieveResponse</a></code>
+- <code title="get /scoring_system/generate">client.scoring_system.generate.<a href="./src/withpi/resources/scoring_system/generate.py">list</a>(\*\*<a href="src/withpi/types/scoring_system/generate_list_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/generate_list_response.py">GenerateListResponse</a></code>
+- <code title="delete /scoring_system/generate/{job_id}">client.scoring_system.generate.<a href="./src/withpi/resources/scoring_system/generate.py">cancel</a>(job_id) -> str</code>
+- <code title="post /scoring_system/generate">client.scoring_system.generate.<a href="./src/withpi/resources/scoring_system/generate.py">start_job</a>(\*\*<a href="src/withpi/types/scoring_system/generate_start_job_params.py">params</a>) -> <a href="./src/withpi/types/scoring_system/generate_start_job_response.py">GenerateStartJobResponse</a></code>
+- <code title="get /scoring_system/generate/{job_id}/messages">client.scoring_system.generate.<a href="./src/withpi/resources/scoring_system/generate.py">stream_messages</a>(job_id) -> str</code>
 
 # Search
 

@@ -3,13 +3,13 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
-from .shared.question import Question
+from ..._models import BaseModel
+from ..shared.question import Question
 
-__all__ = ["ScoringSystemGenerateResponse"]
+__all__ = ["GenerateRetrieveResponse"]
 
 
-class ScoringSystemGenerateResponse(BaseModel):
+class GenerateRetrieveResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 

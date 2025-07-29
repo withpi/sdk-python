@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
-from .._models import BaseModel
-from .shared.question import Question
+from ..._models import BaseModel
+from ..shared.question import Question
 
-__all__ = ["ScoringSystemListJobsResponse", "ScoringSystemListJobsResponseItem"]
+__all__ = ["GenerateStartJobResponse"]
 
 
-class ScoringSystemListJobsResponseItem(BaseModel):
+class GenerateStartJobResponse(BaseModel):
     detailed_status: List[str]
     """Detailed status of the job"""
 
@@ -21,6 +21,3 @@ class ScoringSystemListJobsResponseItem(BaseModel):
 
     scoring_spec: Optional[List[Question]] = None
     """The generated scoring spec"""
-
-
-ScoringSystemListJobsResponse: TypeAlias = List[ScoringSystemListJobsResponseItem]
