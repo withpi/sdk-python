@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.59.0 (2025-07-31)
+
+Full Changelog: [v1.58.0...v1.59.0](https://github.com/withpi/sdk-python/compare/v1.58.0...v1.59.0)
+
+### Features
+
+* **client:** support file upload requests ([0940023](https://github.com/withpi/sdk-python/commit/0940023d1a24cf7ee5651523d5564454285d8386))
+
 ## 1.58.0 (2025-07-29)
 
 Full Changelog: [v1.57.0...v1.58.0](https://github.com/withpi/sdk-python/compare/v1.57.0...v1.58.0)
