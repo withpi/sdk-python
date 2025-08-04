@@ -61,13 +61,13 @@ class GroundednessResource(SyncAPIResource):
         Checks if the generated output is grounded in the provided context.
 
         Args:
-          context: The context to check groundedness against. Must be < 15,000 characters.
+          context: The context to check groundedness against.
 
-          output: The generated output to check for groundedness. Must be < 15,000 characters.
+          output: The generated output to check for groundedness.
 
           processing_strategy: The processing strategy to use for the groundedness check.
 
-          query: The optional query that generated the output. Must be < 2,000 characters.
+          query: The optional query that generated the output.
 
           extra_headers: Send extra headers
 
@@ -133,13 +133,13 @@ class AsyncGroundednessResource(AsyncAPIResource):
         Checks if the generated output is grounded in the provided context.
 
         Args:
-          context: The context to check groundedness against. Must be < 15,000 characters.
+          context: The context to check groundedness against.
 
-          output: The generated output to check for groundedness. Must be < 15,000 characters.
+          output: The generated output to check for groundedness.
 
           processing_strategy: The processing strategy to use for the groundedness check.
 
-          query: The optional query that generated the output. Must be < 2,000 characters.
+          query: The optional query that generated the output.
 
           extra_headers: Send extra headers
 
