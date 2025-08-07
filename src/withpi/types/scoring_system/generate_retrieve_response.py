@@ -19,5 +19,8 @@ class GenerateRetrieveResponse(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
+    info: Optional[object] = None
+    """The supplementary information regarding the generation of scoring spec"""
+
     scoring_spec: Optional[List[Question]] = None
     """The generated scoring spec"""
