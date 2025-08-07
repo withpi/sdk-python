@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.60.1 (2025-08-07)
+
+Full Changelog: [v1.60.0...v1.60.1](https://github.com/withpi/sdk-python/compare/v1.60.0...v1.60.1)
+
+### Features
+
+* **api:** api update ([61b7d58](https://github.com/withpi/sdk-python/commit/61b7d58115584bda88394a975c8d9daf99eaa8d3))
+
+
+### Chores
+
+* **internal:** fix ruff target version ([489f2ec](https://github.com/withpi/sdk-python/commit/489f2eca208768a8d98dc55960cfef1625e013fe))
+
 ## 1.60.0 (2025-08-04)
 
 Full Changelog: [v1.59.0...v1.60.0](https://github.com/withpi/sdk-python/compare/v1.59.0...v1.60.0)
