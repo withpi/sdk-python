@@ -19,11 +19,11 @@ class GenerateListResponseItem(BaseModel):
     state: Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]
     """Current state of the job"""
 
-    info: Optional[object] = None
-    """The supplementary information regarding the generation of scoring spec"""
-
     scoring_spec: Optional[List[Question]] = None
     """The generated scoring spec"""
+
+    threshold: Optional[float] = None
+    """Threshold to use to separate 0 and 1 labels in the case of classification."""
 
 
 GenerateListResponse: TypeAlias = List[GenerateListResponseItem]
