@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.61.1 (2025-08-09)
+
+Full Changelog: [v1.61.0...v1.61.1](https://github.com/withpi/sdk-python/compare/v1.61.0...v1.61.1)
+
+### Chores
+
+* update @stainless-api/prism-cli to v5.15.0 ([956ed4a](https://github.com/withpi/sdk-python/commit/956ed4ace55d71c018b03a946a379d658d84f15b))
+
 ## 1.61.0 (2025-08-08)
 
 Full Changelog: [v1.60.1...v1.61.0](https://github.com/withpi/sdk-python/compare/v1.60.1...v1.61.0)
