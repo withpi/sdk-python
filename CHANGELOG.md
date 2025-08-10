@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.61.1 (2025-08-10)
+
+Full Changelog: [v1.61.0...v1.61.1](https://github.com/withpi/sdk-python/compare/v1.61.0...v1.61.1)
+
+### Features
+
+* **api:** api update ([aca7136](https://github.com/withpi/sdk-python/commit/aca71363fceb7418708b339d0aa340121d8107b7))
+
+
+### Chores
+
+* **internal:** update comment in script ([44b8d5f](https://github.com/withpi/sdk-python/commit/44b8d5f263c64b84c923982dd37ca536269a20ac))
+* update @stainless-api/prism-cli to v5.15.0 ([956ed4a](https://github.com/withpi/sdk-python/commit/956ed4ace55d71c018b03a946a379d658d84f15b))
+
 ## 1.61.0 (2025-08-08)
 
 Full Changelog: [v1.60.1...v1.61.0](https://github.com/withpi/sdk-python/compare/v1.60.1...v1.61.0)
