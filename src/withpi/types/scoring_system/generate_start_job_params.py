@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
+from ..shared_params.question import Question
+
 __all__ = ["GenerateStartJobParams", "Example", "PreferenceExample"]
 
 
@@ -26,6 +28,12 @@ class GenerateStartJobParams(TypedDict, total=False):
 
     batch_size: int
     """Number of examples to use in one batch to generate the questions."""
+
+    existing_questions: Iterable[Question]
+    """
+    Existing questions for the applications, these may or may not be retained in the
+    output depending on their performance
+    """
 
     num_questions: int
     """The number of questions that the generated scoring system should contain.
