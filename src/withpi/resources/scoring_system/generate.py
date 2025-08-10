@@ -19,6 +19,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.scoring_system import generate_list_params, generate_start_job_params
+from ...types.shared_params.question import Question
 from ...types.scoring_system.generate_list_response import GenerateListResponse
 from ...types.scoring_system.generate_retrieve_response import GenerateRetrieveResponse
 from ...types.scoring_system.generate_start_job_response import GenerateStartJobResponse
@@ -156,6 +157,7 @@ class GenerateResource(SyncAPIResource):
         examples: Iterable[generate_start_job_params.Example],
         preference_examples: Iterable[generate_start_job_params.PreferenceExample],
         batch_size: int | NotGiven = NOT_GIVEN,
+        existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -179,6 +181,9 @@ class GenerateResource(SyncAPIResource):
 
           batch_size: Number of examples to use in one batch to generate the questions.
 
+          existing_questions: Existing questions for the applications, these may or may not be retained in the
+              output depending on their performance
+
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
 
@@ -200,6 +205,7 @@ class GenerateResource(SyncAPIResource):
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "batch_size": batch_size,
+                    "existing_questions": existing_questions,
                     "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
@@ -376,6 +382,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         examples: Iterable[generate_start_job_params.Example],
         preference_examples: Iterable[generate_start_job_params.PreferenceExample],
         batch_size: int | NotGiven = NOT_GIVEN,
+        existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -399,6 +406,9 @@ class AsyncGenerateResource(AsyncAPIResource):
 
           batch_size: Number of examples to use in one batch to generate the questions.
 
+          existing_questions: Existing questions for the applications, these may or may not be retained in the
+              output depending on their performance
+
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
 
@@ -420,6 +430,7 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "examples": examples,
                     "preference_examples": preference_examples,
                     "batch_size": batch_size,
+                    "existing_questions": existing_questions,
                     "num_questions": num_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
