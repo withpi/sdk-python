@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestQueryClassifier:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_classify(self, client: PiClient) -> None:
         query_classifier = client.search.query_classifier.classify(
@@ -43,7 +43,7 @@ class TestQueryClassifier:
         )
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_classify_with_all_params(self, client: PiClient) -> None:
         query_classifier = client.search.query_classifier.classify(
@@ -85,7 +85,7 @@ class TestQueryClassifier:
         )
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_classify(self, client: PiClient) -> None:
         response = client.search.query_classifier.with_raw_response.classify(
@@ -115,7 +115,7 @@ class TestQueryClassifier:
         query_classifier = response.parse()
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_classify(self, client: PiClient) -> None:
         with client.search.query_classifier.with_streaming_response.classify(
@@ -153,7 +153,7 @@ class TestAsyncQueryClassifier:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_classify(self, async_client: AsyncPiClient) -> None:
         query_classifier = await async_client.search.query_classifier.classify(
@@ -179,7 +179,7 @@ class TestAsyncQueryClassifier:
         )
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_classify_with_all_params(self, async_client: AsyncPiClient) -> None:
         query_classifier = await async_client.search.query_classifier.classify(
@@ -221,7 +221,7 @@ class TestAsyncQueryClassifier:
         )
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_classify(self, async_client: AsyncPiClient) -> None:
         response = await async_client.search.query_classifier.with_raw_response.classify(
@@ -251,7 +251,7 @@ class TestAsyncQueryClassifier:
         query_classifier = await response.parse()
         assert_matches_type(QueryClassifierClassifyResponse, query_classifier, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_classify(self, async_client: AsyncPiClient) -> None:
         async with async_client.search.query_classifier.with_streaming_response.classify(

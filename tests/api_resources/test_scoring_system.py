@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestScoringSystem:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_import_spec(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.import_spec(
@@ -28,7 +28,7 @@ class TestScoringSystem:
         )
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_import_spec_with_all_params(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.import_spec(
@@ -38,7 +38,7 @@ class TestScoringSystem:
         )
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_import_spec(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.import_spec(
@@ -50,7 +50,7 @@ class TestScoringSystem:
         scoring_system = response.parse()
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_import_spec(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.import_spec(
@@ -64,7 +64,7 @@ class TestScoringSystem:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_score(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.score(
@@ -74,7 +74,7 @@ class TestScoringSystem:
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_score_with_all_params(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.score(
@@ -125,7 +125,7 @@ class TestScoringSystem:
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_score(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.score(
@@ -139,7 +139,7 @@ class TestScoringSystem:
         scoring_system = response.parse()
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_score(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.score(
@@ -155,7 +155,7 @@ class TestScoringSystem:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_upload_to_huggingface(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.upload_to_huggingface(
@@ -164,7 +164,7 @@ class TestScoringSystem:
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_upload_to_huggingface_with_all_params(self, client: PiClient) -> None:
         scoring_system = client.scoring_system.upload_to_huggingface(
@@ -213,7 +213,7 @@ class TestScoringSystem:
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_upload_to_huggingface(self, client: PiClient) -> None:
         response = client.scoring_system.with_raw_response.upload_to_huggingface(
@@ -226,7 +226,7 @@ class TestScoringSystem:
         scoring_system = response.parse()
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_upload_to_huggingface(self, client: PiClient) -> None:
         with client.scoring_system.with_streaming_response.upload_to_huggingface(
@@ -247,7 +247,7 @@ class TestAsyncScoringSystem:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_import_spec(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.import_spec(
@@ -255,7 +255,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_import_spec_with_all_params(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.import_spec(
@@ -265,7 +265,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_import_spec(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.import_spec(
@@ -277,7 +277,7 @@ class TestAsyncScoringSystem:
         scoring_system = await response.parse()
         assert_matches_type(ScoringSystemImportSpecResponse, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_import_spec(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.import_spec(
@@ -291,7 +291,7 @@ class TestAsyncScoringSystem:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_score(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.score(
@@ -301,7 +301,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_score_with_all_params(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.score(
@@ -352,7 +352,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_score(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.score(
@@ -366,7 +366,7 @@ class TestAsyncScoringSystem:
         scoring_system = await response.parse()
         assert_matches_type(ScoringSystemMetrics, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_score(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.score(
@@ -382,7 +382,7 @@ class TestAsyncScoringSystem:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.upload_to_huggingface(
@@ -391,7 +391,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_upload_to_huggingface_with_all_params(self, async_client: AsyncPiClient) -> None:
         scoring_system = await async_client.scoring_system.upload_to_huggingface(
@@ -440,7 +440,7 @@ class TestAsyncScoringSystem:
         )
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.with_raw_response.upload_to_huggingface(
@@ -453,7 +453,7 @@ class TestAsyncScoringSystem:
         scoring_system = await response.parse()
         assert_matches_type(str, scoring_system, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_upload_to_huggingface(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.with_streaming_response.upload_to_huggingface(

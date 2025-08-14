@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCalibrate:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.retrieve(
@@ -28,7 +28,7 @@ class TestCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.retrieve(
@@ -40,7 +40,7 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.retrieve(
@@ -54,7 +54,7 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -62,13 +62,13 @@ class TestCalibrate:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.list(
@@ -76,7 +76,7 @@ class TestCalibrate:
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.list()
@@ -86,7 +86,7 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.list() as response:
@@ -98,7 +98,7 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_cancel(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.cancel(
@@ -106,7 +106,7 @@ class TestCalibrate:
         )
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_cancel(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.cancel(
@@ -118,7 +118,7 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_cancel(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.cancel(
@@ -132,7 +132,7 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_cancel(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -140,7 +140,7 @@ class TestCalibrate:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_start_job(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
@@ -165,7 +165,7 @@ class TestCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_start_job_with_all_params(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.start_job(
@@ -234,7 +234,7 @@ class TestCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_start_job(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.start_job(
@@ -263,7 +263,7 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_start_job(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.start_job(
@@ -294,7 +294,7 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_stream_messages(self, client: PiClient) -> None:
         calibrate = client.scoring_system.calibrate.stream_messages(
@@ -302,7 +302,7 @@ class TestCalibrate:
         )
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_stream_messages(self, client: PiClient) -> None:
         response = client.scoring_system.calibrate.with_raw_response.stream_messages(
@@ -314,7 +314,7 @@ class TestCalibrate:
         calibrate = response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_stream_messages(self, client: PiClient) -> None:
         with client.scoring_system.calibrate.with_streaming_response.stream_messages(
@@ -328,7 +328,7 @@ class TestCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_stream_messages(self, client: PiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -342,7 +342,7 @@ class TestAsyncCalibrate:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.retrieve(
@@ -350,7 +350,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.retrieve(
@@ -362,7 +362,7 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.retrieve(
@@ -376,7 +376,7 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -384,13 +384,13 @@ class TestAsyncCalibrate:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.list()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.list(
@@ -398,7 +398,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.list()
@@ -408,7 +408,7 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(CalibrateListResponse, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.list() as response:
@@ -420,7 +420,7 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_cancel(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.cancel(
@@ -428,7 +428,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.cancel(
@@ -440,7 +440,7 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.cancel(
@@ -454,7 +454,7 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -462,7 +462,7 @@ class TestAsyncCalibrate:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_start_job(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
@@ -487,7 +487,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_start_job_with_all_params(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.start_job(
@@ -556,7 +556,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_start_job(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.start_job(
@@ -585,7 +585,7 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(ScoringSpecCalibrationStatus, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_start_job(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.start_job(
@@ -616,7 +616,7 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_stream_messages(self, async_client: AsyncPiClient) -> None:
         calibrate = await async_client.scoring_system.calibrate.stream_messages(
@@ -624,7 +624,7 @@ class TestAsyncCalibrate:
         )
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_stream_messages(self, async_client: AsyncPiClient) -> None:
         response = await async_client.scoring_system.calibrate.with_raw_response.stream_messages(
@@ -636,7 +636,7 @@ class TestAsyncCalibrate:
         calibrate = await response.parse()
         assert_matches_type(str, calibrate, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_stream_messages(self, async_client: AsyncPiClient) -> None:
         async with async_client.scoring_system.calibrate.with_streaming_response.stream_messages(
@@ -650,7 +650,7 @@ class TestAsyncCalibrate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_stream_messages(self, async_client: AsyncPiClient) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
