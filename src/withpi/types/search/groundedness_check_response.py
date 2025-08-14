@@ -12,6 +12,9 @@ class Hallucination(BaseModel):
     claim: str
     """What claim is being made in the text that is incorrect"""
 
+    explanation: str
+    """Explanation regarding why the claim is incorrect"""
+
     hallucination_type: Literal[
         "Evident conflict",
         "Subtle conflict",
@@ -19,17 +22,14 @@ class Hallucination(BaseModel):
         "Subtle introduction of baseless information",
     ]
 
+    output_text: str
+    """
+    A quote of the answer or output text that is not supported by the context
+    (select the minimal text that is hallucinated)
+    """
+
     reasoning: str
     """The reasoning for the hallucination"""
-
-    text: str
-    """
-    A quote of the text that is not supported by the context (select the minimal
-    text that is hallucinated)
-    """
-
-    why_incorrect: str
-    """Why is the claim incorrect?"""
 
 
 class GroundednessCheckResponse(BaseModel):
