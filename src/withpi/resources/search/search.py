@@ -80,9 +80,9 @@ class SearchResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SearchEmbedResponse:
-        """Embeds documents or passages for Search applications.
+        """Creates embeddings of provided text input for Search applications.
 
-        This will return 256
+        Returns 256
         dimensional embeddings with the same length as the input query parameter.
 
         Args:
@@ -126,11 +126,11 @@ class SearchResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SearchRankResponse:
-        """Ranks documents based on their relevance to the query.
+        """Rank passages based on their relevance to a query.
 
-        This will return a score
-        for each passage indicating its relevance to the query. Scores are returned in
-        the same order as the input passages.
+        This will return a score for
+        each passage indicating its relevance to the query. Scores are returned in the
+        same order as the input passages.
 
         Args:
           passages: The passages to rank
@@ -201,9 +201,9 @@ class AsyncSearchResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SearchEmbedResponse:
-        """Embeds documents or passages for Search applications.
+        """Creates embeddings of provided text input for Search applications.
 
-        This will return 256
+        Returns 256
         dimensional embeddings with the same length as the input query parameter.
 
         Args:
@@ -247,11 +247,11 @@ class AsyncSearchResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SearchRankResponse:
-        """Ranks documents based on their relevance to the query.
+        """Rank passages based on their relevance to a query.
 
-        This will return a score
-        for each passage indicating its relevance to the query. Scores are returned in
-        the same order as the input passages.
+        This will return a score for
+        each passage indicating its relevance to the query. Scores are returned in the
+        same order as the input passages.
 
         Args:
           passages: The passages to rank
