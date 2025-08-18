@@ -3,6 +3,6 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-__all__ = ["QueryToPassageRankDocumentsResponse"]
+__all__ = ["SearchRankResponse"]
 
-QueryToPassageRankDocumentsResponse: TypeAlias = List[float]
+SearchRankResponse: TypeAlias = List[float]

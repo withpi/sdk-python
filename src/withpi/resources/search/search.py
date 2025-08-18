@@ -6,7 +6,7 @@ from typing import List
 
 import httpx
 
-from ...types import search_embed_documents_params
+from ...types import search_rank_params, search_embed_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -34,15 +34,8 @@ from .query_classifier import (
     QueryClassifierResourceWithStreamingResponse,
     AsyncQueryClassifierResourceWithStreamingResponse,
 )
-from .query_to_passage import (
-    QueryToPassageResource,
-    AsyncQueryToPassageResource,
-    QueryToPassageResourceWithRawResponse,
-    AsyncQueryToPassageResourceWithRawResponse,
-    QueryToPassageResourceWithStreamingResponse,
-    AsyncQueryToPassageResourceWithStreamingResponse,
-)
-from ...types.search_embed_documents_response import SearchEmbedDocumentsResponse
+from ...types.search_rank_response import SearchRankResponse
+from ...types.search_embed_response import SearchEmbedResponse
 
 __all__ = ["SearchResource", "AsyncSearchResource"]
 
@@ -55,10 +48,6 @@ class SearchResource(SyncAPIResource):
     @cached_property
     def groundedness(self) -> GroundednessResource:
         return GroundednessResource(self._client)
-
-    @cached_property
-    def query_to_passage(self) -> QueryToPassageResource:
-        return QueryToPassageResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SearchResourceWithRawResponse:
@@ -79,7 +68,7 @@ class SearchResource(SyncAPIResource):
         """
         return SearchResourceWithStreamingResponse(self)
 
-    def embed_documents(
+    def embed(
         self,
         *,
         batch: List[str],
@@ -90,7 +79,7 @@ class SearchResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SearchEmbedDocumentsResponse:
+    ) -> SearchEmbedResponse:
         """Embeds documents or passages for Search applications.
 
         This will return 256
@@ -117,12 +106,58 @@ class SearchResource(SyncAPIResource):
                     "batch": batch,
                     "query": query,
                 },
-                search_embed_documents_params.SearchEmbedDocumentsParams,
+                search_embed_params.SearchEmbedParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchEmbedDocumentsResponse,
+            cast_to=SearchEmbedResponse,
+        )
+
+    def rank(
+        self,
+        *,
+        passages: List[str],
+        query: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SearchRankResponse:
+        """Ranks documents based on their relevance to the query.
+
+        This will return a score
+        for each passage indicating its relevance to the query. Scores are returned in
+        the same order as the input passages.
+
+        Args:
+          passages: The passages to rank
+
+          query: The query to compare against
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/search/query_to_passage/score",
+            body=maybe_transform(
+                {
+                    "passages": passages,
+                    "query": query,
+                },
+                search_rank_params.SearchRankParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchRankResponse,
         )
 
 
@@ -134,10 +169,6 @@ class AsyncSearchResource(AsyncAPIResource):
     @cached_property
     def groundedness(self) -> AsyncGroundednessResource:
         return AsyncGroundednessResource(self._client)
-
-    @cached_property
-    def query_to_passage(self) -> AsyncQueryToPassageResource:
-        return AsyncQueryToPassageResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSearchResourceWithRawResponse:
@@ -158,7 +189,7 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return AsyncSearchResourceWithStreamingResponse(self)
 
-    async def embed_documents(
+    async def embed(
         self,
         *,
         batch: List[str],
@@ -169,7 +200,7 @@ class AsyncSearchResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SearchEmbedDocumentsResponse:
+    ) -> SearchEmbedResponse:
         """Embeds documents or passages for Search applications.
 
         This will return 256
@@ -196,12 +227,58 @@ class AsyncSearchResource(AsyncAPIResource):
                     "batch": batch,
                     "query": query,
                 },
-                search_embed_documents_params.SearchEmbedDocumentsParams,
+                search_embed_params.SearchEmbedParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchEmbedDocumentsResponse,
+            cast_to=SearchEmbedResponse,
+        )
+
+    async def rank(
+        self,
+        *,
+        passages: List[str],
+        query: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SearchRankResponse:
+        """Ranks documents based on their relevance to the query.
+
+        This will return a score
+        for each passage indicating its relevance to the query. Scores are returned in
+        the same order as the input passages.
+
+        Args:
+          passages: The passages to rank
+
+          query: The query to compare against
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/search/query_to_passage/score",
+            body=await async_maybe_transform(
+                {
+                    "passages": passages,
+                    "query": query,
+                },
+                search_rank_params.SearchRankParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchRankResponse,
         )
 
 
@@ -209,8 +286,11 @@ class SearchResourceWithRawResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.embed_documents = to_raw_response_wrapper(
-            search.embed_documents,
+        self.embed = to_raw_response_wrapper(
+            search.embed,
+        )
+        self.rank = to_raw_response_wrapper(
+            search.rank,
         )
 
     @cached_property
@@ -221,17 +301,16 @@ class SearchResourceWithRawResponse:
     def groundedness(self) -> GroundednessResourceWithRawResponse:
         return GroundednessResourceWithRawResponse(self._search.groundedness)
 
-    @cached_property
-    def query_to_passage(self) -> QueryToPassageResourceWithRawResponse:
-        return QueryToPassageResourceWithRawResponse(self._search.query_to_passage)
-
 
 class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.embed_documents = async_to_raw_response_wrapper(
-            search.embed_documents,
+        self.embed = async_to_raw_response_wrapper(
+            search.embed,
+        )
+        self.rank = async_to_raw_response_wrapper(
+            search.rank,
         )
 
     @cached_property
@@ -242,17 +321,16 @@ class AsyncSearchResourceWithRawResponse:
     def groundedness(self) -> AsyncGroundednessResourceWithRawResponse:
         return AsyncGroundednessResourceWithRawResponse(self._search.groundedness)
 
-    @cached_property
-    def query_to_passage(self) -> AsyncQueryToPassageResourceWithRawResponse:
-        return AsyncQueryToPassageResourceWithRawResponse(self._search.query_to_passage)
-
 
 class SearchResourceWithStreamingResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.embed_documents = to_streamed_response_wrapper(
-            search.embed_documents,
+        self.embed = to_streamed_response_wrapper(
+            search.embed,
+        )
+        self.rank = to_streamed_response_wrapper(
+            search.rank,
         )
 
     @cached_property
@@ -263,17 +341,16 @@ class SearchResourceWithStreamingResponse:
     def groundedness(self) -> GroundednessResourceWithStreamingResponse:
         return GroundednessResourceWithStreamingResponse(self._search.groundedness)
 
-    @cached_property
-    def query_to_passage(self) -> QueryToPassageResourceWithStreamingResponse:
-        return QueryToPassageResourceWithStreamingResponse(self._search.query_to_passage)
-
 
 class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.embed_documents = async_to_streamed_response_wrapper(
-            search.embed_documents,
+        self.embed = async_to_streamed_response_wrapper(
+            search.embed,
+        )
+        self.rank = async_to_streamed_response_wrapper(
+            search.rank,
         )
 
     @cached_property
@@ -283,7 +360,3 @@ class AsyncSearchResourceWithStreamingResponse:
     @cached_property
     def groundedness(self) -> AsyncGroundednessResourceWithStreamingResponse:
         return AsyncGroundednessResourceWithStreamingResponse(self._search.groundedness)
-
-    @cached_property
-    def query_to_passage(self) -> AsyncQueryToPassageResourceWithStreamingResponse:
-        return AsyncQueryToPassageResourceWithStreamingResponse(self._search.query_to_passage)

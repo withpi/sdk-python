@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-__all__ = ["QueryToPassageRankDocumentsParams"]
+__all__ = ["SearchRankParams"]
 
 
-class QueryToPassageRankDocumentsParams(TypedDict, total=False):
+class SearchRankParams(TypedDict, total=False):
     passages: Required[List[str]]
     """The passages to rank"""
 

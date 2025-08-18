@@ -6,9 +6,3 @@ from .groundedness_check_params import GroundednessCheckParams as GroundednessCh
 from .groundedness_check_response import GroundednessCheckResponse as GroundednessCheckResponse
 from .query_classifier_classify_params import QueryClassifierClassifyParams as QueryClassifierClassifyParams
 from .query_classifier_classify_response import QueryClassifierClassifyResponse as QueryClassifierClassifyResponse
-from .query_to_passage_rank_documents_params import (
-    QueryToPassageRankDocumentsParams as QueryToPassageRankDocumentsParams,
-)
-from .query_to_passage_rank_documents_response import (
-    QueryToPassageRankDocumentsResponse as QueryToPassageRankDocumentsResponse,
-)
