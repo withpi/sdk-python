@@ -21,7 +21,7 @@ class TestSearch:
     @parametrize
     def test_method_embed(self, client: PiClient) -> None:
         search = client.search.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         )
         assert_matches_type(SearchEmbedResponse, search, path=["response"])
@@ -30,7 +30,7 @@ class TestSearch:
     @parametrize
     def test_raw_response_embed(self, client: PiClient) -> None:
         response = client.search.with_raw_response.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         )
 
@@ -43,7 +43,7 @@ class TestSearch:
     @parametrize
     def test_streaming_response_embed(self, client: PiClient) -> None:
         with client.search.with_streaming_response.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         ) as response:
             assert not response.is_closed
@@ -101,7 +101,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_embed(self, async_client: AsyncPiClient) -> None:
         search = await async_client.search.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         )
         assert_matches_type(SearchEmbedResponse, search, path=["response"])
@@ -110,7 +110,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_raw_response_embed(self, async_client: AsyncPiClient) -> None:
         response = await async_client.search.with_raw_response.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         )
 
@@ -123,7 +123,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_streaming_response_embed(self, async_client: AsyncPiClient) -> None:
         async with async_client.search.with_streaming_response.embed(
-            batch=["string"],
+            batch=True,
             query=["string"],
         ) as response:
             assert not response.is_closed

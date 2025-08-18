@@ -9,7 +9,7 @@ __all__ = ["SearchEmbedParams"]
 
 
 class SearchEmbedParams(TypedDict, total=False):
-    batch: Required[List[str]]
+    batch: Required[bool]
     """Set to false for realtime usage, such as embedding queries.
 
     Set to true for batch usage, such as for embedding documents as part of
