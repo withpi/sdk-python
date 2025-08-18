@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.65.0 (2025-08-18)
+
+Full Changelog: [v1.64.0...v1.65.0](https://github.com/withpi/sdk-python/compare/v1.64.0...v1.65.0)
+
+### Features
+
+* **api:** add embedding and ranking methods ([68a5ae1](https://github.com/withpi/sdk-python/commit/68a5ae1f1278851cc0dfd0ab7f66897a1fc001df))
+
 ## 1.64.0 (2025-08-18)
 
 Full Changelog: [v1.63.0...v1.64.0](https://github.com/withpi/sdk-python/compare/v1.63.0...v1.64.0)

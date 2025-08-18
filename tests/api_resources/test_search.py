@@ -9,7 +9,7 @@ import pytest
 
 from withpi import PiClient, AsyncPiClient
 from tests.utils import assert_matches_type
-from withpi.types import SearchEmbedDocumentsResponse
+from withpi.types import SearchRankResponse, SearchEmbedResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,17 +19,17 @@ class TestSearch:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_embed_documents(self, client: PiClient) -> None:
-        search = client.search.embed_documents(
+    def test_method_embed(self, client: PiClient) -> None:
+        search = client.search.embed(
             batch=["string"],
             query=["string"],
         )
-        assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+        assert_matches_type(SearchEmbedResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_embed_documents(self, client: PiClient) -> None:
-        response = client.search.with_raw_response.embed_documents(
+    def test_raw_response_embed(self, client: PiClient) -> None:
+        response = client.search.with_raw_response.embed(
             batch=["string"],
             query=["string"],
         )
@@ -37,12 +37,12 @@ class TestSearch:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         search = response.parse()
-        assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+        assert_matches_type(SearchEmbedResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_embed_documents(self, client: PiClient) -> None:
-        with client.search.with_streaming_response.embed_documents(
+    def test_streaming_response_embed(self, client: PiClient) -> None:
+        with client.search.with_streaming_response.embed(
             batch=["string"],
             query=["string"],
         ) as response:
@@ -50,7 +50,44 @@ class TestSearch:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             search = response.parse()
-            assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+            assert_matches_type(SearchEmbedResponse, search, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_rank(self, client: PiClient) -> None:
+        search = client.search.rank(
+            passages=["string"],
+            query="query",
+        )
+        assert_matches_type(SearchRankResponse, search, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_rank(self, client: PiClient) -> None:
+        response = client.search.with_raw_response.rank(
+            passages=["string"],
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        search = response.parse()
+        assert_matches_type(SearchRankResponse, search, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_rank(self, client: PiClient) -> None:
+        with client.search.with_streaming_response.rank(
+            passages=["string"],
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            search = response.parse()
+            assert_matches_type(SearchRankResponse, search, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -62,17 +99,17 @@ class TestAsyncSearch:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_embed_documents(self, async_client: AsyncPiClient) -> None:
-        search = await async_client.search.embed_documents(
+    async def test_method_embed(self, async_client: AsyncPiClient) -> None:
+        search = await async_client.search.embed(
             batch=["string"],
             query=["string"],
         )
-        assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+        assert_matches_type(SearchEmbedResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_embed_documents(self, async_client: AsyncPiClient) -> None:
-        response = await async_client.search.with_raw_response.embed_documents(
+    async def test_raw_response_embed(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.search.with_raw_response.embed(
             batch=["string"],
             query=["string"],
         )
@@ -80,12 +117,12 @@ class TestAsyncSearch:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         search = await response.parse()
-        assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+        assert_matches_type(SearchEmbedResponse, search, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_embed_documents(self, async_client: AsyncPiClient) -> None:
-        async with async_client.search.with_streaming_response.embed_documents(
+    async def test_streaming_response_embed(self, async_client: AsyncPiClient) -> None:
+        async with async_client.search.with_streaming_response.embed(
             batch=["string"],
             query=["string"],
         ) as response:
@@ -93,6 +130,43 @@ class TestAsyncSearch:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             search = await response.parse()
-            assert_matches_type(SearchEmbedDocumentsResponse, search, path=["response"])
+            assert_matches_type(SearchEmbedResponse, search, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_rank(self, async_client: AsyncPiClient) -> None:
+        search = await async_client.search.rank(
+            passages=["string"],
+            query="query",
+        )
+        assert_matches_type(SearchRankResponse, search, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_rank(self, async_client: AsyncPiClient) -> None:
+        response = await async_client.search.with_raw_response.rank(
+            passages=["string"],
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        search = await response.parse()
+        assert_matches_type(SearchRankResponse, search, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_rank(self, async_client: AsyncPiClient) -> None:
+        async with async_client.search.with_streaming_response.rank(
+            passages=["string"],
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            search = await response.parse()
+            assert_matches_type(SearchRankResponse, search, path=["response"])
 
         assert cast(Any, response.is_closed) is True
