@@ -13,6 +13,8 @@ from .shared import (
     ScoringSpecCalibrationStatus as ScoringSpecCalibrationStatus,
 )
 from .scoring_system_score_params import ScoringSystemScoreParams as ScoringSystemScoreParams
+from .search_embed_documents_params import SearchEmbedDocumentsParams as SearchEmbedDocumentsParams
+from .search_embed_documents_response import SearchEmbedDocumentsResponse as SearchEmbedDocumentsResponse
 from .scoring_system_import_spec_params import ScoringSystemImportSpecParams as ScoringSystemImportSpecParams
 from .scoring_system_import_spec_response import ScoringSystemImportSpecResponse as ScoringSystemImportSpecResponse
 from .scoring_system_upload_to_huggingface_params import (
