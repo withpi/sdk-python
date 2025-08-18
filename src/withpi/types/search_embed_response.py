@@ -3,6 +3,6 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-__all__ = ["SearchEmbedDocumentsResponse"]
+__all__ = ["SearchEmbedResponse"]
 
-SearchEmbedDocumentsResponse: TypeAlias = List[List[float]]
+SearchEmbedResponse: TypeAlias = List[List[float]]

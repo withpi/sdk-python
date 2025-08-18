@@ -24,14 +24,6 @@ from .query_classifier import (
     QueryClassifierResourceWithStreamingResponse,
     AsyncQueryClassifierResourceWithStreamingResponse,
 )
-from .query_to_passage import (
-    QueryToPassageResource,
-    AsyncQueryToPassageResource,
-    QueryToPassageResourceWithRawResponse,
-    AsyncQueryToPassageResourceWithRawResponse,
-    QueryToPassageResourceWithStreamingResponse,
-    AsyncQueryToPassageResourceWithStreamingResponse,
-)
 
 __all__ = [
     "QueryClassifierResource",
@@ -46,12 +38,6 @@ __all__ = [
     "AsyncGroundednessResourceWithRawResponse",
     "GroundednessResourceWithStreamingResponse",
     "AsyncGroundednessResourceWithStreamingResponse",
-    "QueryToPassageResource",
-    "AsyncQueryToPassageResource",
-    "QueryToPassageResourceWithRawResponse",
-    "AsyncQueryToPassageResourceWithRawResponse",
-    "QueryToPassageResourceWithStreamingResponse",
-    "AsyncQueryToPassageResourceWithStreamingResponse",
     "SearchResource",
     "AsyncSearchResource",
     "SearchResourceWithRawResponse",

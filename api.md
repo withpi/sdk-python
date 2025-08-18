@@ -120,12 +120,13 @@ Methods:
 Types:
 
 ```python
-from withpi.types import SearchEmbedDocumentsResponse
+from withpi.types import SearchEmbedResponse, SearchRankResponse
 ```
 
 Methods:
 
-- <code title="post /search/embed">client.search.<a href="./src/withpi/resources/search/search.py">embed_documents</a>(\*\*<a href="src/withpi/types/search_embed_documents_params.py">params</a>) -> <a href="./src/withpi/types/search_embed_documents_response.py">SearchEmbedDocumentsResponse</a></code>
+- <code title="post /search/embed">client.search.<a href="./src/withpi/resources/search/search.py">embed</a>(\*\*<a href="src/withpi/types/search_embed_params.py">params</a>) -> <a href="./src/withpi/types/search_embed_response.py">SearchEmbedResponse</a></code>
+- <code title="post /search/query_to_passage/score">client.search.<a href="./src/withpi/resources/search/search.py">rank</a>(\*\*<a href="src/withpi/types/search_rank_params.py">params</a>) -> <a href="./src/withpi/types/search_rank_response.py">SearchRankResponse</a></code>
 
 ## QueryClassifier
 
@@ -150,15 +151,3 @@ from withpi.types.search import GroundednessCheckResponse
 Methods:
 
 - <code title="post /search/groundedness/check">client.search.groundedness.<a href="./src/withpi/resources/search/groundedness.py">check</a>(\*\*<a href="src/withpi/types/search/groundedness_check_params.py">params</a>) -> <a href="./src/withpi/types/search/groundedness_check_response.py">GroundednessCheckResponse</a></code>
-
-## QueryToPassage
-
-Types:
-
-```python
-from withpi.types.search import QueryToPassageRankDocumentsResponse
-```
-
-Methods:
-
-- <code title="post /search/query_to_passage/score">client.search.query_to_passage.<a href="./src/withpi/resources/search/query_to_passage.py">rank_documents</a>(\*\*<a href="src/withpi/types/search/query_to_passage_rank_documents_params.py">params</a>) -> <a href="./src/withpi/types/search/query_to_passage_rank_documents_response.py">QueryToPassageRankDocumentsResponse</a></code>

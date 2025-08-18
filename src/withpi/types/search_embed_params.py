@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-__all__ = ["SearchEmbedDocumentsParams"]
+__all__ = ["SearchEmbedParams"]
 
 
-class SearchEmbedDocumentsParams(TypedDict, total=False):
+class SearchEmbedParams(TypedDict, total=False):
     batch: Required[List[str]]
     """Set to false for realtime usage, such as embedding queries.
 
