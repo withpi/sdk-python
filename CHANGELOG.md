@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.67.1 (2025-08-22)
+
+Full Changelog: [v1.67.0...v1.67.1](https://github.com/withpi/sdk-python/compare/v1.67.0...v1.67.1)
+
+### Chores
+
+* update github action ([66f7e53](https://github.com/withpi/sdk-python/commit/66f7e530463157aa5eb9ef13f25698c3b3952212))
+
 ## 1.67.0 (2025-08-18)
 
 Full Changelog: [v1.66.0...v1.67.0](https://github.com/withpi/sdk-python/compare/v1.66.0...v1.67.0)
