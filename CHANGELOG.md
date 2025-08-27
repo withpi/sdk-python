@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.68.0 (2025-08-27)
+
+Full Changelog: [v1.67.0...v1.68.0](https://github.com/withpi/sdk-python/compare/v1.67.0...v1.68.0)
+
+### Features
+
+* **api:** api update ([6f40704](https://github.com/withpi/sdk-python/commit/6f407040d78ee63ccef16abe0ba7de5c297876f0))
+
+
+### Chores
+
+* **internal:** change ci workflow machines ([12007f1](https://github.com/withpi/sdk-python/commit/12007f1b0ef1e55a0f0036fa0abdb73b7cfa35ef))
+* update github action ([66f7e53](https://github.com/withpi/sdk-python/commit/66f7e530463157aa5eb9ef13f25698c3b3952212))
+
 ## 1.67.0 (2025-08-18)
 
 Full Changelog: [v1.66.0...v1.67.0](https://github.com/withpi/sdk-python/compare/v1.66.0...v1.67.0)
