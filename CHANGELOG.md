@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.68.1 (2025-08-27)
+
+Full Changelog: [v1.68.0...v1.68.1](https://github.com/withpi/sdk-python/compare/v1.68.0...v1.68.1)
+
+### Bug Fixes
+
+* avoid newer type syntax ([c66cd8e](https://github.com/withpi/sdk-python/commit/c66cd8e15be664786b5c97df5501341b59b4ccad))
+
 ## 1.68.0 (2025-08-27)
 
 Full Changelog: [v1.67.0...v1.68.0](https://github.com/withpi/sdk-python/compare/v1.67.0...v1.68.0)
