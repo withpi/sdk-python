@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.68.2 (2025-08-29)
+
+Full Changelog: [v1.68.1...v1.68.2](https://github.com/withpi/sdk-python/compare/v1.68.1...v1.68.2)
+
+### Chores
+
+* **internal:** update pyright exclude list ([0654982](https://github.com/withpi/sdk-python/commit/06549822d252d23868355e79eadc7620aac8e23e))
+
 ## 1.68.1 (2025-08-27)
 
 Full Changelog: [v1.68.0...v1.68.1](https://github.com/withpi/sdk-python/compare/v1.68.0...v1.68.1)
