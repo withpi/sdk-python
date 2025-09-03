@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Required, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["SearchRankParams"]
 
 
 class SearchRankParams(TypedDict, total=False):
-    passages: Required[List[str]]
+    passages: Required[SequenceNotStr[str]]
     """The passages to rank"""
 
     query: Required[str]
