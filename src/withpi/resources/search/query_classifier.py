@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -48,7 +48,7 @@ class QueryClassifierResource(SyncAPIResource):
         self,
         *,
         classes: Iterable[query_classifier_classify_params.Class],
-        queries: List[str],
+        queries: SequenceNotStr[str],
         batch_size: int | NotGiven = NOT_GIVEN,
         examples: Optional[Iterable[query_classifier_classify_params.Example]] | NotGiven = NOT_GIVEN,
         mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,
@@ -126,7 +126,7 @@ class AsyncQueryClassifierResource(AsyncAPIResource):
         self,
         *,
         classes: Iterable[query_classifier_classify_params.Class],
-        queries: List[str],
+        queries: SequenceNotStr[str],
         batch_size: int | NotGiven = NOT_GIVEN,
         examples: Optional[Iterable[query_classifier_classify_params.Example]] | NotGiven = NOT_GIVEN,
         mode: Literal["generative", "probabilistic"] | NotGiven = NOT_GIVEN,

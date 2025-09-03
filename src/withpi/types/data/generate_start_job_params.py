@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Required, TypedDict
 
+from ..._types import SequenceNotStr
 from ..shared.exploration_mode import ExplorationMode
 
 __all__ = ["GenerateStartJobParams"]
@@ -17,7 +17,7 @@ class GenerateStartJobParams(TypedDict, total=False):
     num_inputs_to_generate: Required[int]
     """The number of new LLM inputs to generate"""
 
-    seeds: Required[List[str]]
+    seeds: Required[SequenceNotStr[str]]
     """The list of LLM inputs to be used as seeds"""
 
     batch_size: int
