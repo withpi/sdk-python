@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Required, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["SearchEmbedParams"]
 
@@ -16,5 +17,5 @@ class SearchEmbedParams(TypedDict, total=False):
     indexing.
     """
 
-    query: Required[List[str]]
+    query: Required[SequenceNotStr[str]]
     """List of queries or documents to embed"""

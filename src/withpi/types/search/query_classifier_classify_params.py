@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = ["QueryClassifierClassifyParams", "Class", "Example"]
 
@@ -12,7 +14,7 @@ class QueryClassifierClassifyParams(TypedDict, total=False):
     classes: Required[Iterable[Class]]
     """The list of class definitions to classify the queries into. Must be <= 20."""
 
-    queries: Required[List[str]]
+    queries: Required[SequenceNotStr[str]]
     """The list of queries to classify. Must be <= 10."""
 
     batch_size: int

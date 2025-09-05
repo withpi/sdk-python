@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.70.0 (2025-09-05)
+
+Full Changelog: [v1.69.0...v1.70.0](https://github.com/withpi/sdk-python/compare/v1.69.0...v1.70.0)
+
+### Features
+
+* **api:** api update ([871da41](https://github.com/withpi/sdk-python/commit/871da415c3449d3f6ecdde6f05194f58bee192c2))
+* improve future compat with pydantic v3 ([12535df](https://github.com/withpi/sdk-python/commit/12535dfcf43fb210db51e2a3442e8642030f80f0))
+* **types:** replace List[str] with SequenceNotStr in params ([f035197](https://github.com/withpi/sdk-python/commit/f0351976f3489da332df301e0c45e5c01d834f0a))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([57bc5bf](https://github.com/withpi/sdk-python/commit/57bc5bffd44466f58a6492bfa2833e7cced40a06))
+* **internal:** move mypy configurations to `pyproject.toml` file ([cff1354](https://github.com/withpi/sdk-python/commit/cff13541cfdf020cca8370276cfa5792808a2e68))
+
 ## 1.69.0 (2025-08-29)
 
 Full Changelog: [v1.68.2...v1.69.0](https://github.com/withpi/sdk-python/compare/v1.68.2...v1.69.0)
