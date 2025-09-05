@@ -19,8 +19,8 @@ class Question(BaseModel):
 
     is_lower_score_desirable: Optional[bool] = None
     """
-    Indicates whether a lower score represents a better outcome (e.g., fewer errors,
-    less toxicity)
+    [DEPRECATED] Indicates whether a lower score represents a better outcome (e.g.,
+    fewer errors, less toxicity)
     """
 
     label: Optional[str] = None
@@ -38,7 +38,7 @@ class Question(BaseModel):
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
 
     remap_spec: Union[Literal["NEUTRAL", "STRICT", "LENIENT"], Dict[str, float], None] = None
-    """Remapping spec to modulate the scores returned by Pi Scorer"""
+    """[DEPRECATED] Remapping spec to modulate the scores returned by Pi Scorer"""
 
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]] = None
     """The type of scoring performed for this question. Default: PI_SCORER."""
