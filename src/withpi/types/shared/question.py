@@ -1,7 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Union, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional
 from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
@@ -15,12 +17,6 @@ class Question(BaseModel):
     custom_model_id: Optional[str] = None
     """
     The ID of the custom model associated with the CUSTOM_MODEL_SCORER scoring_type.
-    """
-
-    is_lower_score_desirable: Optional[bool] = None
-    """
-    [DEPRECATED] Indicates whether a lower score represents a better outcome (e.g.,
-    fewer errors, less toxicity)
     """
 
     label: Optional[str] = None
@@ -37,9 +33,6 @@ class Question(BaseModel):
     python_code: Optional[str] = None
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
 
-    remap_spec: Union[Literal["NEUTRAL", "STRICT", "LENIENT"], Dict[str, float], None] = None
-    """[DEPRECATED] Remapping spec to modulate the scores returned by Pi Scorer"""
-
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]] = None
     """The type of scoring performed for this question. Default: PI_SCORER."""
 
@@ -52,3 +45,10 @@ class Question(BaseModel):
     question weights will be normalized to one internally. A higher weight counts
     for more when aggregating this subdimension into the parent dimension.
     """
+
+    __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...

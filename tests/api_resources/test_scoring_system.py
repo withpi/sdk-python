@@ -84,7 +84,6 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -95,7 +94,6 @@ class TestScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -103,7 +101,6 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -114,7 +111,6 @@ class TestScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -173,7 +169,6 @@ class TestScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -184,7 +179,6 @@ class TestScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -192,7 +186,6 @@ class TestScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -203,7 +196,6 @@ class TestScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -311,7 +303,6 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -322,7 +313,6 @@ class TestAsyncScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -330,7 +320,6 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -341,7 +330,6 @@ class TestAsyncScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -400,7 +388,6 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response truthful?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -411,7 +398,6 @@ class TestAsyncScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
@@ -419,7 +405,6 @@ class TestAsyncScoringSystem:
                 {
                     "question": "Is this response relevant?",
                     "custom_model_id": "your-model-id",
-                    "is_lower_score_desirable": True,
                     "label": "Relevance to Prompt",
                     "parameters": [
                         0.14285714285714285,
@@ -430,7 +415,6 @@ class TestAsyncScoringSystem:
                         0.8571428571428571,
                     ],
                     "python_code": '\ndef score(response_text: str, input_text: str, kwargs: dict) -> dict:\n    word_count = len(response_text.split())\n    if word_count > 10:\n        return {"score": 0.2, "explanation": "Response has more than 10 words"}\n    elif word_count > 5:\n        return{"score": 0.6, "explanation": "Response has more than 5 words"}\n    else:\n        return {"score": 1, "explanation": "Response has 5 or fewer words"}\n',
-                    "remap_spec": "NEUTRAL",
                     "scoring_type": "PI_SCORER",
                     "tag": "Legal Formatting",
                     "weight": 1,
