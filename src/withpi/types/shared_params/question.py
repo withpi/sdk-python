@@ -3,24 +3,18 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = ["Question"]
 
 
-class Question(TypedDict, total=False):
+class QuestionTyped(TypedDict, total=False):
     question: Required[str]
     """The yes/no question to ask Pi Scoring System."""
 
     custom_model_id: Optional[str]
     """
     The ID of the custom model associated with the CUSTOM_MODEL_SCORER scoring_type.
-    """
-
-    is_lower_score_desirable: Optional[bool]
-    """
-    [DEPRECATED] Indicates whether a lower score represents a better outcome (e.g.,
-    fewer errors, less toxicity)
     """
 
     label: Optional[str]
@@ -37,9 +31,6 @@ class Question(TypedDict, total=False):
     python_code: Optional[str]
     """The PYTHON code associated with the PYTHON_CODE scoring_type."""
 
-    remap_spec: Union[Literal["NEUTRAL", "STRICT", "LENIENT"], Dict[str, float], None]
-    """[DEPRECATED] Remapping spec to modulate the scores returned by Pi Scorer"""
-
     scoring_type: Optional[Literal["PI_SCORER", "PYTHON_CODE", "CUSTOM_MODEL_SCORER"]]
     """The type of scoring performed for this question. Default: PI_SCORER."""
 
@@ -52,3 +43,6 @@ class Question(TypedDict, total=False):
     question weights will be normalized to one internally. A higher weight counts
     for more when aggregating this subdimension into the parent dimension.
     """
+
+
+Question: TypeAlias = Union[QuestionTyped, Dict[str, object]]
