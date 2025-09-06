@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.71.1 (2025-09-06)
+
+Full Changelog: [v1.71.0...v1.71.1](https://github.com/withpi/sdk-python/compare/v1.71.0...v1.71.1)
+
+### Chores
+
+* **tests:** simplify `get_platform` test ([1a2b7cc](https://github.com/withpi/sdk-python/commit/1a2b7ccfa518f7da3df796943a3d395fe2f4ea63))
+
 ## 1.71.0 (2025-09-05)
 
 Full Changelog: [v1.70.0...v1.71.0](https://github.com/withpi/sdk-python/compare/v1.70.0...v1.71.0)
