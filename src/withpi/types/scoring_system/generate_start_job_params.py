@@ -41,6 +41,9 @@ class GenerateStartJobParams(TypedDict, total=False):
     If <= 0, then the number is auto selected.
     """
 
+    retain_existing_questions: bool
+    """If true, only generate new questions that improve the accuracy."""
+
     try_auto_generating_python_code: bool
     """If true, try to generate python code for the generated questions."""
 
