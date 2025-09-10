@@ -213,6 +213,7 @@ class TestGenerate:
                 }
             ],
             num_questions=0,
+            retain_existing_questions=False,
             try_auto_generating_python_code=False,
         )
         assert_matches_type(GenerateStartJobResponse, generate, path=["response"])
@@ -517,6 +518,7 @@ class TestAsyncGenerate:
                 }
             ],
             num_questions=0,
+            retain_existing_questions=False,
             try_auto_generating_python_code=False,
         )
         assert_matches_type(GenerateStartJobResponse, generate, path=["response"])

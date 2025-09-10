@@ -159,6 +159,7 @@ class GenerateResource(SyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
+        retain_existing_questions: bool | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -187,6 +188,8 @@ class GenerateResource(SyncAPIResource):
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
 
+          retain_existing_questions: If true, only generate new questions that improve the accuracy.
+
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
           extra_headers: Send extra headers
@@ -207,6 +210,7 @@ class GenerateResource(SyncAPIResource):
                     "batch_size": batch_size,
                     "existing_questions": existing_questions,
                     "num_questions": num_questions,
+                    "retain_existing_questions": retain_existing_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 generate_start_job_params.GenerateStartJobParams,
@@ -384,6 +388,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         batch_size: int | NotGiven = NOT_GIVEN,
         existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
         num_questions: int | NotGiven = NOT_GIVEN,
+        retain_existing_questions: bool | NotGiven = NOT_GIVEN,
         try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -412,6 +417,8 @@ class AsyncGenerateResource(AsyncAPIResource):
           num_questions: The number of questions that the generated scoring system should contain. If <=
               0, then the number is auto selected.
 
+          retain_existing_questions: If true, only generate new questions that improve the accuracy.
+
           try_auto_generating_python_code: If true, try to generate python code for the generated questions.
 
           extra_headers: Send extra headers
@@ -432,6 +439,7 @@ class AsyncGenerateResource(AsyncAPIResource):
                     "batch_size": batch_size,
                     "existing_questions": existing_questions,
                     "num_questions": num_questions,
+                    "retain_existing_questions": retain_existing_questions,
                     "try_auto_generating_python_code": try_auto_generating_python_code,
                 },
                 generate_start_job_params.GenerateStartJobParams,
