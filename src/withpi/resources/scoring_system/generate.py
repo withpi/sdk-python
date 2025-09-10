@@ -185,8 +185,8 @@ class GenerateResource(SyncAPIResource):
           existing_questions: Existing questions for the applications, these may or may not be retained in the
               output depending on their performance
 
-          num_questions: The number of questions that the generated scoring system should contain. If <=
-              0, then the number is auto selected.
+          num_questions: The maximum number of new questions that the generated scoring system should
+              contain. If <= 0, then the number is auto selected.
 
           retain_existing_questions: If true, only generate new questions that improve the accuracy.
 
@@ -414,8 +414,8 @@ class AsyncGenerateResource(AsyncAPIResource):
           existing_questions: Existing questions for the applications, these may or may not be retained in the
               output depending on their performance
 
-          num_questions: The number of questions that the generated scoring system should contain. If <=
-              0, then the number is auto selected.
+          num_questions: The maximum number of new questions that the generated scoring system should
+              contain. If <= 0, then the number is auto selected.
 
           retain_existing_questions: If true, only generate new questions that improve the accuracy.
 
