@@ -16,22 +16,8 @@ from .groundedness import (
     GroundednessResourceWithStreamingResponse,
     AsyncGroundednessResourceWithStreamingResponse,
 )
-from .query_classifier import (
-    QueryClassifierResource,
-    AsyncQueryClassifierResource,
-    QueryClassifierResourceWithRawResponse,
-    AsyncQueryClassifierResourceWithRawResponse,
-    QueryClassifierResourceWithStreamingResponse,
-    AsyncQueryClassifierResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "QueryClassifierResource",
-    "AsyncQueryClassifierResource",
-    "QueryClassifierResourceWithRawResponse",
-    "AsyncQueryClassifierResourceWithRawResponse",
-    "QueryClassifierResourceWithStreamingResponse",
-    "AsyncQueryClassifierResourceWithStreamingResponse",
     "GroundednessResource",
     "AsyncGroundednessResource",
     "GroundednessResourceWithRawResponse",
