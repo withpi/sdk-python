@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.74.0 (2025-09-18)
+
+Full Changelog: [v1.73.0...v1.74.0](https://github.com/withpi/sdk-python/compare/v1.73.0...v1.74.0)
+
+### Features
+
+* **api:** api update ([985599e](https://github.com/withpi/sdk-python/commit/985599ee7b0ae2a7a02819332f2d1f42194e5821))
+
+
+### Chores
+
+* **internal:** update pydantic dependency ([854b393](https://github.com/withpi/sdk-python/commit/854b3930cac89de3ba0c361e5d53fcd44f076758))
+
 ## 1.73.0 (2025-09-10)
 
 Full Changelog: [v1.72.0...v1.73.0](https://github.com/withpi/sdk-python/compare/v1.72.0...v1.73.0)
