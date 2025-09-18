@@ -5,7 +5,6 @@ from withpi.types import (
     DataGenerationStatus,
     Example,
     ExplorationMode,
-    QueryClassifierResult,
     Question,
     ScoringSpecCalibrationStatus,
     ScoringSystemMetrics,
@@ -127,18 +126,6 @@ Methods:
 
 - <code title="post /search/embed">client.search.<a href="./src/withpi/resources/search/search.py">embed</a>(\*\*<a href="src/withpi/types/search_embed_params.py">params</a>) -> <a href="./src/withpi/types/search_embed_response.py">SearchEmbedResponse</a></code>
 - <code title="post /search/query_to_passage/score">client.search.<a href="./src/withpi/resources/search/search.py">rank</a>(\*\*<a href="src/withpi/types/search_rank_params.py">params</a>) -> <a href="./src/withpi/types/search_rank_response.py">SearchRankResponse</a></code>
-
-## QueryClassifier
-
-Types:
-
-```python
-from withpi.types.search import QueryClassifierClassifyResponse
-```
-
-Methods:
-
-- <code title="post /search/query_classifier/classify">client.search.query_classifier.<a href="./src/withpi/resources/search/query_classifier.py">classify</a>(\*\*<a href="src/withpi/types/search/query_classifier_classify_params.py">params</a>) -> <a href="./src/withpi/types/search/query_classifier_classify_response.py">QueryClassifierClassifyResponse</a></code>
 
 ## Groundedness
 

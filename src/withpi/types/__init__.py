@@ -9,7 +9,6 @@ from .shared import (
     SyntheticDataStatus as SyntheticDataStatus,
     DataGenerationStatus as DataGenerationStatus,
     ScoringSystemMetrics as ScoringSystemMetrics,
-    QueryClassifierResult as QueryClassifierResult,
     ScoringSpecCalibrationStatus as ScoringSpecCalibrationStatus,
 )
 from .search_rank_params import SearchRankParams as SearchRankParams
