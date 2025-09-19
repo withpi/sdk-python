@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -55,7 +55,7 @@ class CalibrateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSpecCalibrationStatus:
         """
         Checks the status of a Scoring Spec Calibration job
@@ -82,13 +82,13 @@ class CalibrateResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrateListResponse:
         """
         Lists the Scoring Spec Calibration Jobs owned by a user
@@ -125,7 +125,7 @@ class CalibrateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Scoring Spec Calibration job
@@ -155,13 +155,13 @@ class CalibrateResource(SyncAPIResource):
         examples: Iterable[calibrate_start_job_params.Example],
         preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
         scoring_spec: Iterable[Question],
-        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSpecCalibrationStatus:
         """
         Starts a Scoring Spec Calibration job
@@ -212,7 +212,7 @@ class CalibrateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Scoring Spec Calibration job
@@ -267,7 +267,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSpecCalibrationStatus:
         """
         Checks the status of a Scoring Spec Calibration job
@@ -294,13 +294,13 @@ class AsyncCalibrateResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CalibrateListResponse:
         """
         Lists the Scoring Spec Calibration Jobs owned by a user
@@ -337,7 +337,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Scoring Spec Calibration job
@@ -367,13 +367,13 @@ class AsyncCalibrateResource(AsyncAPIResource):
         examples: Iterable[calibrate_start_job_params.Example],
         preference_examples: Iterable[calibrate_start_job_params.PreferenceExample],
         scoring_spec: Iterable[Question],
-        strategy: Literal["LITE", "FULL"] | NotGiven = NOT_GIVEN,
+        strategy: Literal["LITE", "FULL"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSpecCalibrationStatus:
         """
         Starts a Scoring Spec Calibration job
@@ -424,7 +424,7 @@ class AsyncCalibrateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Scoring Spec Calibration job

@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.75.0 (2025-09-19)
+
+Full Changelog: [v1.74.0...v1.75.0](https://github.com/withpi/sdk-python/compare/v1.74.0...v1.75.0)
+
+### Features
+
+* **api:** api update ([cb57673](https://github.com/withpi/sdk-python/commit/cb576734e5bddad620688415e4b7fc1ed081fd95))
+
+
+### Chores
+
+* **types:** change optional parameter type from NotGiven to Omit ([34e56f8](https://github.com/withpi/sdk-python/commit/34e56f82bba2cec22fd71244e0dd58ad77127732))
+
 ## 1.74.0 (2025-09-18)
 
 Full Changelog: [v1.73.0...v1.74.0](https://github.com/withpi/sdk-python/compare/v1.73.0...v1.74.0)

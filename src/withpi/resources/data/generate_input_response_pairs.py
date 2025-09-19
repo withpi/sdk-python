@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -57,7 +57,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyntheticDataStatus:
         """
         Checks the status of a Generation Input-Response Pairs job
@@ -84,13 +84,13 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateInputResponsePairListResponse:
         """
         Lists the Generation Input-Response Pairs Jobs owned by a user
@@ -129,7 +129,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generation Input-Response Pairs job
@@ -158,18 +158,18 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         *,
         num_pairs_to_generate: int,
         seeds: Iterable[Example],
-        application_description: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        application_description: Optional[str] | Omit = omit,
+        batch_size: int | Omit = omit,
+        exploration_mode: ExplorationMode | Omit = omit,
+        num_shots: int | Omit = omit,
+        run_parallel_batches: bool | Omit = omit,
+        system_prompt: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyntheticDataStatus:
         """
         Starts a Generation Input-Response Pairs job
@@ -230,7 +230,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateInputResponsePairStreamDataResponse:
         """
         Streams data from the Generation Input-Response Pairs job
@@ -263,7 +263,7 @@ class GenerateInputResponsePairsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generation Input-Response Pairs job
@@ -318,7 +318,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyntheticDataStatus:
         """
         Checks the status of a Generation Input-Response Pairs job
@@ -345,13 +345,13 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateInputResponsePairListResponse:
         """
         Lists the Generation Input-Response Pairs Jobs owned by a user
@@ -390,7 +390,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generation Input-Response Pairs job
@@ -419,18 +419,18 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         *,
         num_pairs_to_generate: int,
         seeds: Iterable[Example],
-        application_description: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
-        system_prompt: Optional[str] | NotGiven = NOT_GIVEN,
+        application_description: Optional[str] | Omit = omit,
+        batch_size: int | Omit = omit,
+        exploration_mode: ExplorationMode | Omit = omit,
+        num_shots: int | Omit = omit,
+        run_parallel_batches: bool | Omit = omit,
+        system_prompt: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyntheticDataStatus:
         """
         Starts a Generation Input-Response Pairs job
@@ -491,7 +491,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateInputResponsePairStreamDataResponse:
         """
         Streams data from the Generation Input-Response Pairs job
@@ -524,7 +524,7 @@ class AsyncGenerateInputResponsePairsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generation Input-Response Pairs job
