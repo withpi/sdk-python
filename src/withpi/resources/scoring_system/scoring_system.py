@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
 
-from ...types import (
-    scoring_system_score_params,
-    scoring_system_import_spec_params,
-    scoring_system_upload_to_huggingface_params,
-)
+from ...types import scoring_system_score_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .generate import (
@@ -41,7 +37,6 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.shared_params.question import Question
 from ...types.shared.scoring_system_metrics import ScoringSystemMetrics
-from ...types.scoring_system_import_spec_response import ScoringSystemImportSpecResponse
 
 __all__ = ["ScoringSystemResource", "AsyncScoringSystemResource"]
 
@@ -73,55 +68,6 @@ class ScoringSystemResource(SyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return ScoringSystemResourceWithStreamingResponse(self)
-
-    def import_spec(
-        self,
-        *,
-        hf_scoring_spec_name: str,
-        hf_token: Optional[str] | Omit = omit,
-        source: Literal["HUGGINGFACE"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ScoringSystemImportSpecResponse:
-        """
-        Import a scoring spec from various sources
-
-        Args:
-          hf_scoring_spec_name: Huggingface dataset e.g. withpi/my_scoring_system containing the Scoring spec.
-              This is only needed for the source=HUGGINGFACE.
-
-          hf_token: Huggingface token to use if you want to read to your own HF organization. This
-              is only needed for the source=HUGGINGFACE.
-
-          source: Source of where to get the Scoring spec
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/scoring_system/import_spec",
-            body=maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "hf_token": hf_token,
-                    "source": source,
-                },
-                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ScoringSystemImportSpecResponse,
-        )
 
     def score(
         self,
@@ -180,55 +126,6 @@ class ScoringSystemResource(SyncAPIResource):
             cast_to=ScoringSystemMetrics,
         )
 
-    def upload_to_huggingface(
-        self,
-        *,
-        hf_scoring_spec_name: str,
-        scoring_spec: Iterable[Question],
-        hf_token: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """
-        Write a scoring spec to Huggingface dataset
-
-        Args:
-          hf_scoring_spec_name: Huggingface scoring spec name e.g. withpi/my_scoring_system. By default we
-              export to the withpi organization. If you want to use your own organization, we
-              provide the hf_token.
-
-          scoring_spec: The list of questions or the scoring spec to write to Huggingface
-
-          hf_token: Huggingface token to use if you want to write to your own HF organization
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/scoring_system/to_huggingface",
-            body=maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "scoring_spec": scoring_spec,
-                    "hf_token": hf_token,
-                },
-                scoring_system_upload_to_huggingface_params.ScoringSystemUploadToHuggingfaceParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
 
 class AsyncScoringSystemResource(AsyncAPIResource):
     @cached_property
@@ -257,55 +154,6 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         For more information, see https://www.github.com/withpi/sdk-python#with_streaming_response
         """
         return AsyncScoringSystemResourceWithStreamingResponse(self)
-
-    async def import_spec(
-        self,
-        *,
-        hf_scoring_spec_name: str,
-        hf_token: Optional[str] | Omit = omit,
-        source: Literal["HUGGINGFACE"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ScoringSystemImportSpecResponse:
-        """
-        Import a scoring spec from various sources
-
-        Args:
-          hf_scoring_spec_name: Huggingface dataset e.g. withpi/my_scoring_system containing the Scoring spec.
-              This is only needed for the source=HUGGINGFACE.
-
-          hf_token: Huggingface token to use if you want to read to your own HF organization. This
-              is only needed for the source=HUGGINGFACE.
-
-          source: Source of where to get the Scoring spec
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/scoring_system/import_spec",
-            body=await async_maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "hf_token": hf_token,
-                    "source": source,
-                },
-                scoring_system_import_spec_params.ScoringSystemImportSpecParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ScoringSystemImportSpecResponse,
-        )
 
     async def score(
         self,
@@ -364,68 +212,13 @@ class AsyncScoringSystemResource(AsyncAPIResource):
             cast_to=ScoringSystemMetrics,
         )
 
-    async def upload_to_huggingface(
-        self,
-        *,
-        hf_scoring_spec_name: str,
-        scoring_spec: Iterable[Question],
-        hf_token: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str:
-        """
-        Write a scoring spec to Huggingface dataset
-
-        Args:
-          hf_scoring_spec_name: Huggingface scoring spec name e.g. withpi/my_scoring_system. By default we
-              export to the withpi organization. If you want to use your own organization, we
-              provide the hf_token.
-
-          scoring_spec: The list of questions or the scoring spec to write to Huggingface
-
-          hf_token: Huggingface token to use if you want to write to your own HF organization
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/scoring_system/to_huggingface",
-            body=await async_maybe_transform(
-                {
-                    "hf_scoring_spec_name": hf_scoring_spec_name,
-                    "scoring_spec": scoring_spec,
-                    "hf_token": hf_token,
-                },
-                scoring_system_upload_to_huggingface_params.ScoringSystemUploadToHuggingfaceParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=str,
-        )
-
 
 class ScoringSystemResourceWithRawResponse:
     def __init__(self, scoring_system: ScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
-        self.import_spec = to_raw_response_wrapper(
-            scoring_system.import_spec,
-        )
         self.score = to_raw_response_wrapper(
             scoring_system.score,
-        )
-        self.upload_to_huggingface = to_raw_response_wrapper(
-            scoring_system.upload_to_huggingface,
         )
 
     @cached_property
@@ -441,14 +234,8 @@ class AsyncScoringSystemResourceWithRawResponse:
     def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
-        self.import_spec = async_to_raw_response_wrapper(
-            scoring_system.import_spec,
-        )
         self.score = async_to_raw_response_wrapper(
             scoring_system.score,
-        )
-        self.upload_to_huggingface = async_to_raw_response_wrapper(
-            scoring_system.upload_to_huggingface,
         )
 
     @cached_property
@@ -464,14 +251,8 @@ class ScoringSystemResourceWithStreamingResponse:
     def __init__(self, scoring_system: ScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
-        self.import_spec = to_streamed_response_wrapper(
-            scoring_system.import_spec,
-        )
         self.score = to_streamed_response_wrapper(
             scoring_system.score,
-        )
-        self.upload_to_huggingface = to_streamed_response_wrapper(
-            scoring_system.upload_to_huggingface,
         )
 
     @cached_property
@@ -487,14 +268,8 @@ class AsyncScoringSystemResourceWithStreamingResponse:
     def __init__(self, scoring_system: AsyncScoringSystemResource) -> None:
         self._scoring_system = scoring_system
 
-        self.import_spec = async_to_streamed_response_wrapper(
-            scoring_system.import_spec,
-        )
         self.score = async_to_streamed_response_wrapper(
             scoring_system.score,
-        )
-        self.upload_to_huggingface = async_to_streamed_response_wrapper(
-            scoring_system.upload_to_huggingface,
         )
 
     @cached_property
