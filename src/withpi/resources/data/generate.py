@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -55,7 +55,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DataGenerationStatus:
         """
         Checks the status of a Generation Data job
@@ -82,13 +82,13 @@ class GenerateResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateListResponse:
         """
         Lists the Generation Data Jobs owned by a user
@@ -125,7 +125,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generation Data job
@@ -155,16 +155,16 @@ class GenerateResource(SyncAPIResource):
         application_description: str,
         num_inputs_to_generate: int,
         seeds: SequenceNotStr[str],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
+        batch_size: int | Omit = omit,
+        exploration_mode: ExplorationMode | Omit = omit,
+        num_shots: int | Omit = omit,
+        run_parallel_batches: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DataGenerationStatus:
         """
         Starts a Generation Data job
@@ -223,7 +223,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Streams data from the Generation Data job
@@ -257,7 +257,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generation Data job
@@ -312,7 +312,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DataGenerationStatus:
         """
         Checks the status of a Generation Data job
@@ -339,13 +339,13 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateListResponse:
         """
         Lists the Generation Data Jobs owned by a user
@@ -382,7 +382,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generation Data job
@@ -412,16 +412,16 @@ class AsyncGenerateResource(AsyncAPIResource):
         application_description: str,
         num_inputs_to_generate: int,
         seeds: SequenceNotStr[str],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        exploration_mode: ExplorationMode | NotGiven = NOT_GIVEN,
-        num_shots: int | NotGiven = NOT_GIVEN,
-        run_parallel_batches: bool | NotGiven = NOT_GIVEN,
+        batch_size: int | Omit = omit,
+        exploration_mode: ExplorationMode | Omit = omit,
+        num_shots: int | Omit = omit,
+        run_parallel_batches: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DataGenerationStatus:
         """
         Starts a Generation Data job
@@ -480,7 +480,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Streams data from the Generation Data job
@@ -514,7 +514,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generation Data job
