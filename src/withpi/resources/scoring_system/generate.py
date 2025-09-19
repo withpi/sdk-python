@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -56,7 +56,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateRetrieveResponse:
         """
         Checks the status of a Generate Scoring Spec job
@@ -83,13 +83,13 @@ class GenerateResource(SyncAPIResource):
     def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateListResponse:
         """
         Lists the Generate Scoring Spec Jobs owned by a user
@@ -126,7 +126,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generate Scoring Spec job
@@ -156,17 +156,17 @@ class GenerateResource(SyncAPIResource):
         application_description: str,
         examples: Iterable[generate_start_job_params.Example],
         preference_examples: Iterable[generate_start_job_params.PreferenceExample],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
-        num_questions: int | NotGiven = NOT_GIVEN,
-        retain_existing_questions: bool | NotGiven = NOT_GIVEN,
-        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
+        batch_size: int | Omit = omit,
+        existing_questions: Iterable[Question] | Omit = omit,
+        num_questions: int | Omit = omit,
+        retain_existing_questions: bool | Omit = omit,
+        try_auto_generating_python_code: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateStartJobResponse:
         """
         Starts a Generate Scoring Spec job
@@ -230,7 +230,7 @@ class GenerateResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generate Scoring Spec job
@@ -285,7 +285,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateRetrieveResponse:
         """
         Checks the status of a Generate Scoring Spec job
@@ -312,13 +312,13 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | NotGiven = NOT_GIVEN,
+        state: Optional[Literal["QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateListResponse:
         """
         Lists the Generate Scoring Spec Jobs owned by a user
@@ -355,7 +355,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Cancels a Generate Scoring Spec job
@@ -385,17 +385,17 @@ class AsyncGenerateResource(AsyncAPIResource):
         application_description: str,
         examples: Iterable[generate_start_job_params.Example],
         preference_examples: Iterable[generate_start_job_params.PreferenceExample],
-        batch_size: int | NotGiven = NOT_GIVEN,
-        existing_questions: Iterable[Question] | NotGiven = NOT_GIVEN,
-        num_questions: int | NotGiven = NOT_GIVEN,
-        retain_existing_questions: bool | NotGiven = NOT_GIVEN,
-        try_auto_generating_python_code: bool | NotGiven = NOT_GIVEN,
+        batch_size: int | Omit = omit,
+        existing_questions: Iterable[Question] | Omit = omit,
+        num_questions: int | Omit = omit,
+        retain_existing_questions: bool | Omit = omit,
+        try_auto_generating_python_code: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GenerateStartJobResponse:
         """
         Starts a Generate Scoring Spec job
@@ -459,7 +459,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Opens a message stream about a Generate Scoring Spec job

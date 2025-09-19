@@ -12,7 +12,7 @@ from ...types import (
     scoring_system_import_spec_params,
     scoring_system_upload_to_huggingface_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .generate import (
     GenerateResource,
@@ -78,14 +78,14 @@ class ScoringSystemResource(SyncAPIResource):
         self,
         *,
         hf_scoring_spec_name: str,
-        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
-        source: Literal["HUGGINGFACE"] | NotGiven = NOT_GIVEN,
+        hf_token: Optional[str] | Omit = omit,
+        source: Literal["HUGGINGFACE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSystemImportSpecResponse:
         """
         Import a scoring spec from various sources
@@ -129,14 +129,14 @@ class ScoringSystemResource(SyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: Iterable[Question],
-        aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
-        kwargs: object | NotGiven = NOT_GIVEN,
+        aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | Omit = omit,
+        kwargs: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSystemMetrics:
         """
         Scores the provided input and output based on the given scoring spec or a list
@@ -185,13 +185,13 @@ class ScoringSystemResource(SyncAPIResource):
         *,
         hf_scoring_spec_name: str,
         scoring_spec: Iterable[Question],
-        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
+        hf_token: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Write a scoring spec to Huggingface dataset
@@ -262,14 +262,14 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         self,
         *,
         hf_scoring_spec_name: str,
-        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
-        source: Literal["HUGGINGFACE"] | NotGiven = NOT_GIVEN,
+        hf_token: Optional[str] | Omit = omit,
+        source: Literal["HUGGINGFACE"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSystemImportSpecResponse:
         """
         Import a scoring spec from various sources
@@ -313,14 +313,14 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         llm_input: str,
         llm_output: str,
         scoring_spec: Iterable[Question],
-        aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | NotGiven = NOT_GIVEN,
-        kwargs: object | NotGiven = NOT_GIVEN,
+        aggregation_method: Literal["ARITHMETIC_MEAN", "GEOMETRIC_MEAN", "HARMONIC_MEAN"] | Omit = omit,
+        kwargs: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScoringSystemMetrics:
         """
         Scores the provided input and output based on the given scoring spec or a list
@@ -369,13 +369,13 @@ class AsyncScoringSystemResource(AsyncAPIResource):
         *,
         hf_scoring_spec_name: str,
         scoring_spec: Iterable[Question],
-        hf_token: Optional[str] | NotGiven = NOT_GIVEN,
+        hf_token: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Write a scoring spec to Huggingface dataset
