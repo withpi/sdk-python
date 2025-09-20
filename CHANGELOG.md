@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.75.1 (2025-09-20)
+
+Full Changelog: [v1.75.0...v1.75.1](https://github.com/withpi/sdk-python/compare/v1.75.0...v1.75.1)
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([d62718b](https://github.com/withpi/sdk-python/commit/d62718b1b2b2507083535531127bf7f1189d557b))
+
 ## 1.75.0 (2025-09-19)
 
 Full Changelog: [v1.74.0...v1.75.0](https://github.com/withpi/sdk-python/compare/v1.74.0...v1.75.0)
