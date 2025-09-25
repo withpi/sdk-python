@@ -57,7 +57,6 @@ class SearchResource(SyncAPIResource):
     def embed(
         self,
         *,
-        batch: bool,
         query: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -72,9 +71,6 @@ class SearchResource(SyncAPIResource):
         dimensional embeddings with the same length as the input query parameter.
 
         Args:
-          batch: Set to false for realtime usage, such as embedding queries. Set to true for
-              batch usage, such as for embedding documents as part of indexing.
-
           query: List of queries or documents to embed
 
           extra_headers: Send extra headers
@@ -87,13 +83,7 @@ class SearchResource(SyncAPIResource):
         """
         return self._post(
             "/search/embed",
-            body=maybe_transform(
-                {
-                    "batch": batch,
-                    "query": query,
-                },
-                search_embed_params.SearchEmbedParams,
-            ),
+            body=maybe_transform({"query": query}, search_embed_params.SearchEmbedParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -174,7 +164,6 @@ class AsyncSearchResource(AsyncAPIResource):
     async def embed(
         self,
         *,
-        batch: bool,
         query: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -189,9 +178,6 @@ class AsyncSearchResource(AsyncAPIResource):
         dimensional embeddings with the same length as the input query parameter.
 
         Args:
-          batch: Set to false for realtime usage, such as embedding queries. Set to true for
-              batch usage, such as for embedding documents as part of indexing.
-
           query: List of queries or documents to embed
 
           extra_headers: Send extra headers
@@ -204,13 +190,7 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return await self._post(
             "/search/embed",
-            body=await async_maybe_transform(
-                {
-                    "batch": batch,
-                    "query": query,
-                },
-                search_embed_params.SearchEmbedParams,
-            ),
+            body=await async_maybe_transform({"query": query}, search_embed_params.SearchEmbedParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
