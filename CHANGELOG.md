@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.76.1 (2025-09-25)
+
+Full Changelog: [v1.76.0...v1.76.1](https://github.com/withpi/sdk-python/compare/v1.76.0...v1.76.1)
+
+### Bug Fixes
+
+* **compat:** compat with `pydantic&lt;2.8.0` when using additional fields ([27c6b97](https://github.com/withpi/sdk-python/commit/27c6b9739be2de4de43e69f8a8b4933a04c3e45b))
+
 ## 1.76.0 (2025-09-25)
 
 Full Changelog: [v1.75.0...v1.76.0](https://github.com/withpi/sdk-python/compare/v1.75.0...v1.76.0)
