@@ -1,4 +1,4 @@
 configured_endpoints: 26
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/pi-labs%2Fwithpi-5b3ff6b5a8e4ac4c271b6bd0c63b1a1163f0f87f369cc41dacb12be6713688a2.yml
-openapi_spec_hash: 2fb81d6334e35d32ad09b3a5ca166be4
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/pi-labs%2Fwithpi-d1b497dd21adf36d21d3e0613ba305844a2d625e1c1034e858fd1d151d7a6b81.yml
+openapi_spec_hash: 55ea7a8aa698eb390e555893328686a4
 config_hash: fd3e1149c629c2972c54a66a88fd4fab
