@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.76.0 (2025-09-25)
+
+Full Changelog: [v1.75.0...v1.76.0](https://github.com/withpi/sdk-python/compare/v1.75.0...v1.76.0)
+
+### Features
+
+* **api:** api update ([480f38d](https://github.com/withpi/sdk-python/commit/480f38d7fa2881f8b0a35982fa8fc6444014cb83))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([d62718b](https://github.com/withpi/sdk-python/commit/d62718b1b2b2507083535531127bf7f1189d557b))
+
 ## 1.75.0 (2025-09-19)
 
 Full Changelog: [v1.74.0...v1.75.0](https://github.com/withpi/sdk-python/compare/v1.74.0...v1.75.0)
