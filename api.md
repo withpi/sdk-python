@@ -130,3 +130,15 @@ from withpi.types.search import GroundednessCheckResponse
 Methods:
 
 - <code title="post /search/groundedness/check">client.search.groundedness.<a href="./src/withpi/resources/search/groundedness.py">check</a>(\*\*<a href="src/withpi/types/search/groundedness_check_params.py">params</a>) -> <a href="./src/withpi/types/search/groundedness_check_response.py">GroundednessCheckResponse</a></code>
+
+## Consistency
+
+Types:
+
+```python
+from withpi.types.search import ConsistencyCheckResponse
+```
+
+Methods:
+
+- <code title="post /search/consistency/check">client.search.consistency.<a href="./src/withpi/resources/search/consistency.py">check</a>(\*\*<a href="src/withpi/types/search/consistency_check_params.py">params</a>) -> <a href="./src/withpi/types/search/consistency_check_response.py">ConsistencyCheckResponse</a></code>

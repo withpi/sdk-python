@@ -15,6 +15,14 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .consistency import (
+    ConsistencyResource,
+    AsyncConsistencyResource,
+    ConsistencyResourceWithRawResponse,
+    AsyncConsistencyResourceWithRawResponse,
+    ConsistencyResourceWithStreamingResponse,
+    AsyncConsistencyResourceWithStreamingResponse,
+)
 from .groundedness import (
     GroundednessResource,
     AsyncGroundednessResource,
@@ -34,6 +42,10 @@ class SearchResource(SyncAPIResource):
     @cached_property
     def groundedness(self) -> GroundednessResource:
         return GroundednessResource(self._client)
+
+    @cached_property
+    def consistency(self) -> ConsistencyResource:
+        return ConsistencyResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SearchResourceWithRawResponse:
@@ -141,6 +153,10 @@ class AsyncSearchResource(AsyncAPIResource):
     @cached_property
     def groundedness(self) -> AsyncGroundednessResource:
         return AsyncGroundednessResource(self._client)
+
+    @cached_property
+    def consistency(self) -> AsyncConsistencyResource:
+        return AsyncConsistencyResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSearchResourceWithRawResponse:
@@ -259,6 +275,10 @@ class SearchResourceWithRawResponse:
     def groundedness(self) -> GroundednessResourceWithRawResponse:
         return GroundednessResourceWithRawResponse(self._search.groundedness)
 
+    @cached_property
+    def consistency(self) -> ConsistencyResourceWithRawResponse:
+        return ConsistencyResourceWithRawResponse(self._search.consistency)
+
 
 class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
@@ -274,6 +294,10 @@ class AsyncSearchResourceWithRawResponse:
     @cached_property
     def groundedness(self) -> AsyncGroundednessResourceWithRawResponse:
         return AsyncGroundednessResourceWithRawResponse(self._search.groundedness)
+
+    @cached_property
+    def consistency(self) -> AsyncConsistencyResourceWithRawResponse:
+        return AsyncConsistencyResourceWithRawResponse(self._search.consistency)
 
 
 class SearchResourceWithStreamingResponse:
@@ -291,6 +315,10 @@ class SearchResourceWithStreamingResponse:
     def groundedness(self) -> GroundednessResourceWithStreamingResponse:
         return GroundednessResourceWithStreamingResponse(self._search.groundedness)
 
+    @cached_property
+    def consistency(self) -> ConsistencyResourceWithStreamingResponse:
+        return ConsistencyResourceWithStreamingResponse(self._search.consistency)
+
 
 class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
@@ -306,3 +334,7 @@ class AsyncSearchResourceWithStreamingResponse:
     @cached_property
     def groundedness(self) -> AsyncGroundednessResourceWithStreamingResponse:
         return AsyncGroundednessResourceWithStreamingResponse(self._search.groundedness)
+
+    @cached_property
+    def consistency(self) -> AsyncConsistencyResourceWithStreamingResponse:
+        return AsyncConsistencyResourceWithStreamingResponse(self._search.consistency)
