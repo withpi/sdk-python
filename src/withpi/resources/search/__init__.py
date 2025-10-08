@@ -8,6 +8,14 @@ from .search import (
     SearchResourceWithStreamingResponse,
     AsyncSearchResourceWithStreamingResponse,
 )
+from .consistency import (
+    ConsistencyResource,
+    AsyncConsistencyResource,
+    ConsistencyResourceWithRawResponse,
+    AsyncConsistencyResourceWithRawResponse,
+    ConsistencyResourceWithStreamingResponse,
+    AsyncConsistencyResourceWithStreamingResponse,
+)
 from .groundedness import (
     GroundednessResource,
     AsyncGroundednessResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncGroundednessResourceWithRawResponse",
     "GroundednessResourceWithStreamingResponse",
     "AsyncGroundednessResourceWithStreamingResponse",
+    "ConsistencyResource",
+    "AsyncConsistencyResource",
+    "ConsistencyResourceWithRawResponse",
+    "AsyncConsistencyResourceWithRawResponse",
+    "ConsistencyResourceWithStreamingResponse",
+    "AsyncConsistencyResourceWithStreamingResponse",
     "SearchResource",
     "AsyncSearchResource",
     "SearchResourceWithRawResponse",
