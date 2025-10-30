@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.78.1 (2025-10-30)
+
+Full Changelog: [v1.78.0...v1.78.1](https://github.com/withpi/sdk-python/compare/v1.78.0...v1.78.1)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([cd28da8](https://github.com/withpi/sdk-python/commit/cd28da82374fa88765849c388427d55928cfb0e7))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([4532d8d](https://github.com/withpi/sdk-python/commit/4532d8d3298eea82f21827cddb5abb5ed77999d7))
+* **internal:** detect missing future annotations with ruff ([1387771](https://github.com/withpi/sdk-python/commit/13877712379e8669b93d0ee4b3095ca834a171d2))
+
 ## 1.78.0 (2025-10-08)
 
 Full Changelog: [v1.77.0...v1.78.0](https://github.com/withpi/sdk-python/compare/v1.77.0...v1.78.0)
