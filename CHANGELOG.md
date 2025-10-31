@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.78.2 (2025-10-31)
+
+Full Changelog: [v1.78.1...v1.78.2](https://github.com/withpi/sdk-python/compare/v1.78.1...v1.78.2)
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([96328d6](https://github.com/withpi/sdk-python/commit/96328d69a9e30933db14a1863569c7b8bac26204))
+
 ## 1.78.1 (2025-10-30)
 
 Full Changelog: [v1.78.0...v1.78.1](https://github.com/withpi/sdk-python/compare/v1.78.0...v1.78.1)
